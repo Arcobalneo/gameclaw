@@ -34,6 +34,7 @@ class Player:
     depth: int = 0
     cycle: int = 1
     pressure: int = 0
+    tide: int = 0
     upgrades: list[str] = field(default_factory=list)
 
 
@@ -71,7 +72,7 @@ class Outcome:
 
 @dataclass
 class SettlementReport:
-    won: bool
+    ending: str
     title: str
     seed: int
     lineage_name: str
@@ -100,8 +101,13 @@ class Encounter:
     actions: tuple[Action, ...]
 
 
+class InputExhausted(RuntimeError):
+    pass
+
+
 class InputProvider:
     def __init__(self, scripted: Sequence[str] | None = None) -> None:
+        self.scripted_mode = scripted is not None
         self.scripted = [item.strip() for item in (scripted or []) if item.strip()]
 
     def get(self, prompt: str) -> str:
@@ -109,7 +115,12 @@ class InputProvider:
             value = self.scripted.pop(0)
             print(f"{prompt}{value} [script]")
             return value
-        return input(prompt).strip()
+        if self.scripted_mode:
+            raise InputExhausted("脚本化输入已耗尽。")
+        try:
+            return input(prompt).strip()
+        except EOFError as exc:
+            raise InputExhausted("标准输入已结束。") from exc
 
 
 def wrap(text: str) -> str:
@@ -184,6 +195,7 @@ STAT_LABELS = {
     "molts": "蜕壳次数",
     "dash": "侧向冲刺",
     "camouflage": "伪装",
+    "tide": "潮势",
     "score": "龙虾名声",
 }
 
@@ -191,15 +203,29 @@ STAT_LABELS = {
 def action_bonus(player: Player, tags: Sequence[str]) -> int:
     bonus = 0
     if "crusher" in player.traits and "crush" in tags:
+        bonus += 2
+    if "oracle" in player.traits and any(tag in tags for tag in ("sense", "stealth")):
         bonus += 1
-    if "oracle" in player.traits and any(tag in tags for tag in ("sense", "stealth", "dash")):
+    if "oracle" in player.traits and "dash" in tags and (player.sense >= 5 or player.dash > 0):
         bonus += 1
     if "gambler" in player.traits and "molt" in tags:
+        bonus += 2
+    if "gambler" in player.traits and player.molts <= 1 and any(tag in tags for tag in ("dash", "stealth")):
+        bonus += 1
+    if any(tag in tags for tag in ("crush", "cut")) and player.tide > 0:
+        bonus += player.tide
+    if "molt" in tags and player.tide > 0:
         bonus += 1
     if "dash" in tags:
         bonus += player.dash
     if "stealth" in tags:
         bonus += player.camouflage
+    if "crush" in tags and player.left_claw >= 6:
+        bonus += 1
+    if "cut" in tags and player.right_claw >= 5:
+        bonus += 1
+    if any(tag in tags for tag in ("dash", "stealth")) and player.dash > 0 and player.camouflage > 0:
+        bonus += 1
     return bonus
 
 
@@ -230,12 +256,17 @@ def contest(
         roll += 1
 
     success = roll >= scaled_difficulty
-    deltas = dict(success_deltas if success else fail_deltas or {})
+    chosen_deltas = success_deltas if success else fail_deltas
+    deltas = dict(chosen_deltas or {})
 
     if consume_molt:
         deltas["molts"] = deltas.get("molts", 0) - 1
         if "gambler" in player.traits:
             deltas["energy"] = deltas.get("energy", 0) + 1
+
+    tide_delta = next_tide_delta(player, tags, success)
+    if tide_delta:
+        deltas["tide"] = deltas.get("tide", 0) + tide_delta
 
     return Outcome(
         success=success,
@@ -244,6 +275,17 @@ def contest(
         roll=roll,
         difficulty=scaled_difficulty,
     )
+
+
+def next_tide_delta(player: Player, tags: Sequence[str], success: bool) -> int:
+    builds_tide = any(tag in tags for tag in ("sense", "dash", "stealth"))
+    spends_tide = any(tag in tags for tag in ("crush", "cut", "molt"))
+    delta = 0
+    if builds_tide and success and player.tide < 2:
+        delta += 1
+    if spends_tide and player.tide > 0:
+        delta -= 1
+    return delta
 
 
 MUTATIONS = [
@@ -391,12 +433,12 @@ NET = Encounter(
                 player,
                 rng,
                 base=4 + player.sense,
-                difficulty=7,
+                difficulty=11,
                 tags=("molt", "sense"),
-                success_text="旧壳留在网里当纪念品，你本人则以一种不太得体的方式滑了出去。",
-                fail_text="壳是脱了，但还是被网边挂到一截。逃出来时你整只虾都在骂。",
-                success_deltas={"score": 2},
-                fail_deltas={"shell": -1, "salinity": -1},
+                success_text="你舍得丢壳，也舍得丢脸，终于从网眼最坏的缝里挤了出去。",
+                fail_text="你壳是脱了，但脱得还不够果断。最后自由没拿到，狼狈倒是完整保留。",
+                success_deltas={"energy": -1, "score": 2},
+                fail_deltas={"shell": -1, "salinity": -1, "energy": -1},
                 consume_molt=True,
             ),
         ),
@@ -436,7 +478,7 @@ EEL = Encounter(
                 tags=("crush", "sense"),
                 success_text="你在电弧亮起前先把对方夹懵了，周围海水都替你松了口气。",
                 fail_text="你出手慢了一拍，电流穿壳而过，整只虾闻起来像轻微焦糖。",
-                success_deltas={"energy": -1, "score": 2},
+                success_deltas={"energy": -1, "score": 3},
                 fail_deltas={"shell": -2, "energy": -1},
             ),
         ),
@@ -448,7 +490,7 @@ EEL = Encounter(
                 player,
                 rng,
                 base=player.right_claw + player.sense // 2,
-                difficulty=9,
+                difficulty=8,
                 tags=("dash", "cut"),
                 success_text="你成功绕后，留下电鳗独自在原地思考安保漏洞。",
                 fail_text="你刚绕到一半，对方就用全身电学告诉你计划失败。",
@@ -464,11 +506,11 @@ EEL = Encounter(
                 player,
                 rng,
                 base=player.shell + player.salinity // 2,
-                difficulty=8,
+                difficulty=9,
                 tags=("stealth",),
                 success_text="陶罐替你吃下大部分电流。你出来时更懂得感恩垃圾。",
                 fail_text="罐子没完全挡住，麻得你差点忘了自己该横着走。",
-                success_deltas={"shell": -1, "score": 1},
+                success_deltas={"shell": -1},
                 fail_deltas={"shell": -2, "salinity": -1},
             ),
         ),
@@ -488,8 +530,8 @@ PLASTIC = Encounter(
                 player,
                 rng,
                 base=player.right_claw + player.sense,
-                difficulty=8,
-                tags=("cut", "sense"),
+                difficulty=9,
+                tags=("cut",),
                 success_text="你从垃圾里抠出一顿小零食，顺便重新认识了资本主义的味道。",
                 fail_text="吃是吃到了，但顺手把几口塑料也吞下去了。鳃很不满意。",
                 success_deltas={"energy": 2, "salinity": -1, "score": 1},
@@ -503,12 +545,12 @@ PLASTIC = Encounter(
             resolver=lambda player, rng: contest(
                 player,
                 rng,
-                base=player.salinity + player.shell // 2,
-                difficulty=8,
-                tags=("sense",),
-                success_text="你憋着鳃硬撑过去，只留下几句不适合幼虾听的心里话。",
+                base=player.shell + player.salinity // 2,
+                difficulty=11,
+                tags=("dash",),
+                success_text="你硬把整股脏流顶成两半，自己过去了，但甲壳也被磨掉一层脾气。",
                 fail_text="塑料丝缠上了触须，水质也开始对你发表负面评价。",
-                success_deltas={"energy": -1, "score": 1},
+                success_deltas={"shell": -1, "score": 1},
                 fail_deltas={"salinity": -2, "shell": -1},
             ),
         ),
@@ -524,7 +566,7 @@ PLASTIC = Encounter(
                 tags=("stealth", "sense"),
                 success_text="你优雅地把塑料团推向一条倒霉鱼，自己干干净净地离开现场。",
                 fail_text="鱼跑了，塑料没跑。报应落回你自己触须上。",
-                success_deltas={"energy": 1, "score": 2},
+                success_deltas={"salinity": 1, "score": 2},
                 fail_deltas={"energy": -1, "shell": -1},
             ),
         ),
@@ -656,11 +698,11 @@ FINALE = Encounter(
                 player,
                 rng,
                 base=player.shell + player.energy // 2,
-                difficulty=11,
-                tags=("dash",),
-                success_text="你顶着逆流冲破闸缝，海盐重新包住身体。海更深了，但你也更老练了。",
+                difficulty=13,
+                tags=("crush", "dash"),
+                success_text="你几乎是拿壳去撞开这道逆流。海盐重新包住身体时，你也少了一层温柔。",
                 fail_text="逆流把你拍回了金属壁上。世界提醒你：锅还没走远。",
-                success_deltas={"energy": -1, "score": 4},
+                success_deltas={"shell": -1, "energy": -1, "score": 4},
                 fail_deltas={"shell": -3, "energy": -2},
             ),
         ),
@@ -672,7 +714,7 @@ FINALE = Encounter(
                 player,
                 rng,
                 base=player.right_claw + player.sense + player.left_claw // 2,
-                difficulty=11,
+                difficulty=12,
                 tags=("cut", "sense"),
                 success_text="塑料环啪地断开，你顺着缺口滑回海里，体面得像一场小型复仇。",
                 fail_text="你只剪开了一半。另一半把你留在原地，场面非常人类。",
@@ -687,12 +729,12 @@ FINALE = Encounter(
             resolver=lambda player, rng: contest(
                 player,
                 rng,
-                base=player.sense + player.salinity + 3,
-                difficulty=10,
-                tags=("molt", "sense"),
+                base=player.sense + player.salinity // 2 + 1,
+                difficulty=12,
+                tags=("molt",),
                 success_text="旧壳卡在闸缝里做了替罪羊，你本人回到了真正咸、真正冷的自由里。",
                 fail_text="闸缝太窄，旧壳也没能替你说服这个世界。",
-                success_deltas={"score": 5},
+                success_deltas={"energy": -1, "score": 5},
                 fail_deltas={"shell": -2, "salinity": -2},
                 consume_molt=True,
             ),
@@ -701,7 +743,12 @@ FINALE = Encounter(
 )
 
 
-def choose_encounter(depth: int, rng: random.Random, cycle: int = 1) -> Encounter:
+def choose_encounter(
+    depth: int,
+    rng: random.Random,
+    cycle: int = 1,
+    recent_keys: Sequence[str] | None = None,
+) -> Encounter:
     if cycle <= 1:
         if depth <= 3:
             pool = [FEEDING, PLASTIC, EEL, OCTOPUS]
@@ -716,14 +763,36 @@ def choose_encounter(depth: int, rng: random.Random, cycle: int = 1) -> Encounte
             pool = [PLASTIC, EEL, OCTOPUS, NET, CHEF]
     else:
         pool = [FEEDING, PLASTIC, EEL, OCTOPUS, NET, CHEF]
+    if recent_keys:
+        filtered = [item for item in pool if item.key != recent_keys[-1]]
+        if len(filtered) >= 3 and len(recent_keys) >= 2:
+            recent_pair = set(recent_keys[-2:])
+            widened = [item for item in filtered if item.key not in recent_pair]
+            if widened:
+                filtered = widened
+        if filtered:
+            pool = filtered
     return rng.choice(pool)
 
 
 def format_status(player: Player) -> str:
     return (
         f"壳 {player.shell} | 能 {player.energy} | 盐 {player.salinity} | "
-        f"左 {player.left_claw} | 右 {player.right_claw} | 须 {player.sense} | 蜕 {player.molts}"
+        f"左 {player.left_claw} | 右 {player.right_claw} | 须 {player.sense} | 蜕 {player.molts} | 势 {player.tide}"
     )
+
+
+def format_build_summary(player: Player) -> str:
+    if not player.upgrades:
+        return "暂时没有关键突变"
+    recent = player.upgrades[-2:]
+    summary: list[str] = []
+    for title in recent:
+        if title in {item.split(" x", 1)[0] for item in summary}:
+            continue
+        count = recent.count(title)
+        summary.append(f"{title} x{count}" if count > 1 else title)
+    return " / ".join(summary)
 
 
 def describe_deltas(deltas: dict[str, int]) -> str:
@@ -738,7 +807,10 @@ def describe_deltas(deltas: dict[str, int]) -> str:
 
 def apply_deltas(player: Player, deltas: dict[str, int]) -> None:
     for key, value in deltas.items():
-        setattr(player, key, getattr(player, key) + value)
+        next_value = getattr(player, key) + value
+        if key == "tide":
+            next_value = max(0, min(2, next_value))
+        setattr(player, key, next_value)
 
 
 def cycle_rest(player: Player) -> dict[str, int]:
@@ -771,20 +843,31 @@ def settlement_reports_dir() -> Path:
     return Path.cwd() / "settlement_reports"
 
 
-def settlement_report_path(player: Player, seed: int, *, won: bool) -> Path:
+def settlement_report_path(player: Player, seed: int, *, ending: str) -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-    outcome = "escaped" if won else "sunk"
+    outcome = {
+        "won": "escaped",
+        "lost": "sunk",
+        "aborted": "interrupted",
+    }[ending]
     lineage = slugify_text(player.lineage_key)
     filename = f"lobster-{lineage}-seed{seed}-cycle{player.cycle}-{outcome}-{stamp}.html"
     return settlement_reports_dir() / filename
 
 
 def render_settlement_html(report: SettlementReport) -> str:
-    badge = "成功回海" if report.won else "本轮阵亡"
-    accent = "#4ecdc4" if report.won else "#ff6b6b"
+    if report.ending == "won":
+        badge = "成功回海"
+        accent = "#4ecdc4"
+    elif report.ending == "aborted":
+        badge = "中止收壳"
+        accent = "#ffd166"
+    else:
+        badge = "本轮阵亡"
+        accent = "#ff6b6b"
     note_items = "".join(
         f"<li>{html.escape(note)}</li>" for note in report.final_notes
-    ) or "<li>这轮没有提炼出具体策略，但你仍然可以回顾最伤的一步。</li>"
+    ) or "<li>这轮没有提炼出具体观察，但你仍然可以回顾最伤的一步。</li>"
     return f"""<!DOCTYPE html>
 <html lang=\"zh-CN\">
 <head>
@@ -855,7 +938,7 @@ def render_settlement_html(report: SettlementReport) -> str:
     </section>
 
     <section class=\"panel\">
-      <h2>本局策略摘记</h2>
+      <h2>本局观察摘记</h2>
       <ul>{note_items}</ul>
     </section>
 
@@ -877,13 +960,17 @@ def finalize_run_report(
     seed: int,
     run_notes: list[str],
     *,
-    won: bool,
+    ending: str,
     cause: str,
 ) -> SettlementReport:
-    path = settlement_report_path(player, seed, won=won)
-    title = "龙虾成功回海结算" if won else "龙虾阵亡结算"
+    path = settlement_report_path(player, seed, ending=ending)
+    title = {
+        "won": "龙虾成功回海结算",
+        "lost": "龙虾阵亡结算",
+        "aborted": "龙虾中止结算",
+    }[ending]
     report = SettlementReport(
-        won=won,
+        ending=ending,
         title=title,
         seed=seed,
         lineage_name=player.lineage_name,
@@ -937,6 +1024,7 @@ def print_rules() -> None:
     print(wrap("每轮从 3 条龙虾谱系里选 1 条，然后不断经历潮段。每个潮段有 9 个随机遭遇和 1 个归海闸口。"))
     print(wrap("关键资源包括壳强度、能量、盐度适应，以及有限的蜕壳次数。任一关键资源归零就会死亡。"))
     print(wrap("深度 2、5、8 会出现突变潮。游戏本身不替你存外挂记忆，而是会主动提醒你把关键策略写进自己的 memory。"))
+    print(wrap("感知、横移、伪装类动作成功会积攒一点‘潮势’；后续强攻、剪切或脱壳会更吃这个节奏。"))
     print(wrap("默认会生成可视化 HTML 结算报告；如果你不需要，可在启动时加 --no-settlement-report 关闭。"))
     print(wrap("默认是节省 token 的紧凑文本模式；要看长文案可使用 --verbose-text。"))
 
@@ -964,7 +1052,14 @@ def choose_lineage(provider: InputProvider, scripted_index: int | None = None, *
     return build_player(lineage)
 
 
-def offer_mutation(player: Player, rng: random.Random, provider: InputProvider, *, verbose_text: bool = False) -> None:
+def offer_mutation(
+    player: Player,
+    rng: random.Random,
+    provider: InputProvider,
+    run_notes: list[str] | None = None,
+    *,
+    verbose_text: bool = False,
+) -> None:
     choices = pick_mutations(rng)
     print("\n~~~ 突变潮 ~~~")
     for index, mutation in enumerate(choices, start=1):
@@ -975,12 +1070,24 @@ def offer_mutation(player: Player, rng: random.Random, provider: InputProvider, 
     choice = prompt_choice(provider, "突变> ", ["1", "2", "3"])
     mutation = choices[int(choice) - 1]
     result = apply_mutation(player, mutation)
+    note = build_mutation_note(mutation, result)
+    if run_notes is not None:
+        push_run_note(run_notes, note)
     if verbose_text:
         print(wrap(f"你接受了【{mutation.title}】。{result}"))
+        print(wrap(note))
     else:
         print(f"突变完成：{mutation.title}。")
-        print(f"这条也值得记进 memory：{result}")
+        print(f"build 提示：{note}")
     print(f"当前状态：{format_status(player)}")
+
+
+def print_phase_shift(player: Player, local_depth: int) -> None:
+    if local_depth == 4:
+        print(wrap("\n潮段中盘：乱流开始收口。先读潮攒势，后面的硬解和细解会更有差异。"))
+    elif local_depth == 7:
+        pressure_text = f"海压 +{player.pressure}" if player.pressure else "海压开始上嘴"
+        print(wrap(f"\n潮段后盘：{pressure_text}。别指望同一套按钮一路按到海里。"))
 
 
 def print_encounter_header(player: Player, encounter: Encounter, *, verbose_text: bool) -> None:
@@ -1001,9 +1108,14 @@ def print_action_menu(encounter: Encounter, *, verbose_text: bool) -> None:
 
 
 def build_memory_note(encounter: Encounter, action: Action, outcome: Outcome) -> str:
-    tone = "更稳" if outcome.success else "容易翻车"
+    tone = "成了" if outcome.success else "没成"
     result = describe_deltas(outcome.deltas)
-    return f"把【{encounter.title}】里 {action.key}号{action.title} 记进 memory：{tone}，结果 {result}。"
+    return f"记进 memory 的本局观察：在【{encounter.title}】里试了 {action.key}号{action.title}，这次{tone}，结果 {result}；下局最好再验证一次。"
+
+
+def build_mutation_note(mutation: Mutation, result: str) -> str:
+    summary = result.rstrip("。")
+    return f"记进 memory 的 build 观察：拿到【{mutation.title}】后，{summary}；下局继续验证它更适合哪类动作。"
 
 
 def push_run_note(notes: list[str], note: str, *, limit: int = 5) -> None:
@@ -1053,24 +1165,26 @@ def handle_cycle_success(player: Player, run_notes: list[str], *, verbose_text: 
         print(f"\n潮段 {player.cycle} 已穿过，继续深潜。")
     print(f"潮间休整：{describe_deltas(rest)}")
     if run_notes:
-        print("建议写入 memory 的近况：")
+        print("建议写入 memory 的近况（都只代表这一局）：")
         for note in run_notes[-2:]:
             print(f"- {note}")
 
 
-def print_settlement_memory_prompt(player: Player, run_notes: list[str], *, won: bool) -> None:
+def print_settlement_memory_prompt(player: Player, run_notes: list[str], *, ending: str) -> None:
     print("\n=== 记忆结算提示 ===")
-    if won:
-        print("这轮不是白活：请把最稳的 1-3 条策略写进你自己的 memory。")
+    if ending == "won":
+        print("这轮不是白活：请把 1-3 条‘本局有效’的做法写进你自己的 memory，并标明下局继续验证。")
+    elif ending == "lost":
+        print("这轮不是白死：请把 1-3 条‘本局最伤’的教训写进你自己的 memory，并标明下局继续验证。")
     else:
-        print("这轮不是白死：请把最亏的 1-3 条策略写进你自己的 memory。")
-    print(f"推荐记录字段：谱系={player.lineage_name}，潮段={player.cycle}，总深度={player.depth}。")
+        print("这轮先收壳：输入在这里用完了。请把 1-3 条已经冒头的观察写进 memory，并注明这是一次中止结算。")
+    print(f"推荐记录字段：谱系={player.lineage_name}，build={format_build_summary(player)}，潮段={player.cycle}，总深度={player.depth}。")
     if run_notes:
-        print("本轮可抄走的策略草稿：")
+        print("本轮可抄走的观察草稿（都只代表这一局）：")
         for note in run_notes[-3:]:
             print(f"- {note}")
     else:
-        print("本轮没有提炼出策略草稿，但你仍然可以总结哪个场景最致命。")
+        print("本轮没有提炼出观察草稿，但你仍然可以总结哪个场景最致命。")
 
 
 def conclude_run(
@@ -1078,16 +1192,33 @@ def conclude_run(
     seed: int,
     run_notes: list[str],
     *,
-    won: bool,
+    ending: str,
     cause: str,
     settlement_report: bool,
 ) -> SettlementReport | None:
-    print_settlement_memory_prompt(player, run_notes, won=won)
+    print_settlement_memory_prompt(player, run_notes, ending=ending)
     if not settlement_report:
         return None
-    report = finalize_run_report(player, seed, run_notes, won=won, cause=cause)
+    report = finalize_run_report(player, seed, run_notes, ending=ending, cause=cause)
     print_settlement_report_notice(report)
     return report
+
+
+def conclude_input_exhaustion(
+    player: Player | None,
+    seed: int,
+    run_notes: list[str],
+    *,
+    reason: str,
+    settlement_report: bool,
+) -> SettlementReport | None:
+    cause = f"{reason} 本轮先在这里收壳：这不算胜利，也不假装你已经死了。"
+    print(wrap(f"\n{cause}"))
+    if player is None:
+        print("这次还没正式进局，不生成结算。")
+        return None
+    print(f"收尾状态：{format_status(player)}")
+    return conclude_run(player, seed, run_notes, ending="aborted", cause=cause, settlement_report=settlement_report)
 
 
 def play_run(
@@ -1103,23 +1234,49 @@ def play_run(
     actual_seed = seed if seed is not None else random.SystemRandom().randrange(1, 10**9)
     rng = random.Random(actual_seed)
     run_notes: list[str] = []
+    recent_encounters: list[str] = []
+    player: Player | None = None
 
-    print_title(verbose_text=verbose_text)
-    print(f"本轮种子：{actual_seed}")
-    print("开局提醒：这游戏不替你存外挂记忆；如果你是会写 memory 的龙虾，请自己记。")
-    player = choose_lineage(provider, scripted_lineage, verbose_text=verbose_text)
-    print(f"\n你是【{player.lineage_name}】。初始状态：{format_status(player)}")
+    try:
+        print_title(verbose_text=verbose_text)
+        print(f"本轮种子：{actual_seed}")
+        print("开局提醒：这游戏不替你存外挂记忆；如果你是会写 memory 的龙虾，请把它写成‘本局观察’，别急着当铁律。")
+        player = choose_lineage(provider, scripted_lineage, verbose_text=verbose_text)
+        print(f"\n你是【{player.lineage_name}】。初始状态：{format_status(player)}")
 
-    cycle = 1
-    while True:
-        player.cycle = cycle
-        player.pressure = max(0, cycle - 1)
-        for local_depth in range(1, CYCLE_DEPTHS + 1):
+        cycle = 1
+        while True:
+            player.cycle = cycle
+            player.pressure = max(0, cycle - 1)
+            for local_depth in range(1, CYCLE_DEPTHS + 1):
+                if local_depth in {4, 7}:
+                    print_phase_shift(player, local_depth)
+                player.depth += 1
+                encounter = choose_encounter(local_depth, rng, cycle=cycle, recent_keys=recent_encounters)
+                recent_encounters.append(encounter.key)
+                if len(recent_encounters) > 2:
+                    del recent_encounters[0]
+                resolve_encounter(
+                    player,
+                    encounter,
+                    rng,
+                    provider,
+                    run_notes,
+                    debug_rolls=debug_rolls,
+                    verbose_text=verbose_text,
+                )
+                failure = check_failure(player)
+                if failure:
+                    cause = f"你倒在【{encounter.title}】后。{failure}"
+                    print(wrap(f"\n{cause}"))
+                    return conclude_run(player, actual_seed, run_notes, ending="lost", cause=cause, settlement_report=settlement_report)
+                if local_depth in UPGRADE_DEPTHS:
+                    offer_mutation(player, rng, provider, run_notes, verbose_text=verbose_text)
+
             player.depth += 1
-            encounter = choose_encounter(local_depth, rng, cycle=cycle)
-            resolve_encounter(
+            outcome = resolve_encounter(
                 player,
-                encounter,
+                FINALE,
                 rng,
                 provider,
                 run_notes,
@@ -1128,39 +1285,23 @@ def play_run(
             )
             failure = check_failure(player)
             if failure:
-                cause = f"你死了。{failure}"
+                cause = f"你在【{FINALE.title}】门前把最后一点资源也耗光了。{failure}"
                 print(wrap(f"\n{cause}"))
-                return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
-            if local_depth in UPGRADE_DEPTHS:
-                offer_mutation(player, rng, provider, verbose_text=verbose_text)
+                return conclude_run(player, actual_seed, run_notes, ending="lost", cause=cause, settlement_report=settlement_report)
+            if not outcome.success:
+                cause = "你在【归海闸口】押错了最后一步。逆流把你拍回厨房边缘，这轮的出口只差半个身位。"
+                print(wrap(f"\n{cause}"))
+                return conclude_run(player, actual_seed, run_notes, ending="lost", cause=cause, settlement_report=settlement_report)
 
-        player.depth += 1
-        outcome = resolve_encounter(
-            player,
-            FINALE,
-            rng,
-            provider,
-            run_notes,
-            debug_rolls=debug_rolls,
-            verbose_text=verbose_text,
-        )
-        failure = check_failure(player)
-        if failure:
-            cause = f"你没能回海。{failure}"
-            print(wrap(f"\n{cause}"))
-            return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
-        if not outcome.success:
-            cause = "最后一步失败了。你被逆流拍回厨房边缘，成为菜单和海洋悲剧之间的一次小型误会。"
-            print(wrap(f"\n{cause}"))
-            return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
-
-        handle_cycle_success(player, run_notes, verbose_text=verbose_text)
-        if max_cycles is not None and cycle >= max_cycles:
-            cause = f"你在约定的 {max_cycles} 个潮段后收壳记事。"
-            print(wrap(f"\n{cause}"))
-            print(f"本轮总深度：{player.depth}，龙虾名声 {player.score}。")
-            return conclude_run(player, actual_seed, run_notes, won=True, cause=cause, settlement_report=settlement_report)
-        cycle += 1
+            handle_cycle_success(player, run_notes, verbose_text=verbose_text)
+            if max_cycles is not None and cycle >= max_cycles:
+                cause = f"你在约定的 {max_cycles} 个潮段后收壳记事。"
+                print(wrap(f"\n{cause}"))
+                print(f"本轮总深度：{player.depth}，龙虾名声 {player.score}。")
+                return conclude_run(player, actual_seed, run_notes, ending="won", cause=cause, settlement_report=settlement_report)
+            cycle += 1
+    except InputExhausted as exc:
+        return conclude_input_exhaustion(player, actual_seed, run_notes, reason=str(exc), settlement_report=settlement_report)
 
 
 def menu_loop(args: argparse.Namespace) -> int:
@@ -1182,7 +1323,11 @@ def menu_loop(args: argparse.Namespace) -> int:
         print("1. 开始一轮")
         print("2. 查看规则")
         print("3. 退出")
-        choice = prompt_choice(provider, "菜单> ", ["1", "2", "3"])
+        try:
+            choice = prompt_choice(provider, "菜单> ", ["1", "2", "3"])
+        except InputExhausted as exc:
+            print(wrap(f"\n{exc} 菜单没有更多输入了，这次就先收壳退出。"))
+            return 0
         if choice == "1":
             play_run(
                 args.seed,
@@ -1218,7 +1363,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, help="固定随机种子，方便 agent / 人类复现同一轮。")
     parser.add_argument("--quick-start", action="store_true", help="直接开始一轮，跳过额外解释，适合脚本化游玩或 agent 自动开玩。")
     parser.add_argument("--lineage", type=int, choices=[1, 2, 3], help="在 quick-start 中预选谱系：1~3 分别对应 3 条龙虾谱系。")
-    parser.add_argument("--script", help="逗号分隔的脚本化输入，例如 1,2,1,3；适合测试、回放和 agent 控制。")
+    parser.add_argument("--script", help="逗号分隔的脚本化输入，例如 1,2,1,3；适合测试、回放和 agent 控制。脚本耗尽时会按中止结算收尾，而不是抛 EOFError。")
     parser.add_argument("--debug-rolls", action="store_true", help="显示具体判定值，仅用于开发 / 平衡调试；普通游玩不建议开启。")
     parser.add_argument("--verbose-text", action="store_true", help="切回长文案模式；默认使用节省 token 的紧凑模式。")
     parser.add_argument("--max-cycles", type=int, help="限制潮段数，便于测试或做短局验收；默认无限继续直到死亡。")

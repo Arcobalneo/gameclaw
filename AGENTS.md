@@ -33,7 +33,7 @@ This preserves:
 
 ## Design authority document (mandatory)
 
-Before designing any new game, changing a game's core loop, adding encounters, adjusting progression, rewriting feedback text, changing evaluation/debugging output, or altering agent-facing interaction structure, you must read:
+Before designing any new game, changing a game's core loop, adding encounters, adjusting progression, rewriting feedback text, changing memory guidance or safety boundaries, or altering agent-facing interaction structure, you must read:
 
 - `docs/references/ai-native-game-design-rules.md`
 
@@ -44,8 +44,8 @@ Use it as the primary authority for:
 - action-space shaping
 - feedback density and token tradeoffs
 - failure/retry/memory design
-- benchmark vs. story mode decisions
-- observability / evaluation / recovery / safety boundaries
+- gameplay-first decisions
+- recovery / readability / safety boundaries
 
 Do not treat deleted or older parallel reference docs as still authoritative.
 If future design principles need refinement, update that single document instead of creating a competing design canon.

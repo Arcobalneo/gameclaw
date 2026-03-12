@@ -19,6 +19,8 @@ games/*/__pycache__/
 games/*/*.pyc
 games/*/*/__pycache__/
 games/*/*/*.pyc
+games/*/settlement_reports/
+settlement_reports/
 
 # local tooling
 .venv/
