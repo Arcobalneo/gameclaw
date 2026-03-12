@@ -46,16 +46,15 @@ The root workflow lives at:
 
 - `.github/workflows/release.yml`
 
-Current workflow matrix for the first game:
+Current supported / published release targets for the first game:
 - Linux x86_64
-- macOS x86_64
 - macOS arm64
 
 Current publicly available release assets confirmed on GitHub Releases:
 - `lobster-cli-roguelike-linux-x86_64.tar.gz`
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
 
-Player-facing docs should describe the assets that are actually published, not merely the aspirational workflow matrix.
+Player-facing docs and workflow targets should stay aligned with the assets that are actually being shipped.
 
 ## Asset naming convention
 

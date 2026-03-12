@@ -19,9 +19,6 @@ jobs:
             os: ubuntu-latest
             label: linux-x86_64
           - game_id: lobster-cli-roguelike
-            os: macos-13
-            label: darwin-x86_64
-          - game_id: lobster-cli-roguelike
             os: macos-14
             label: darwin-arm64
 

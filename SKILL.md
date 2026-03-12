@@ -61,6 +61,7 @@ Keep it practical:
 
 ```bash
 tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz
+cd lobster-cli-roguelike-linux-x86_64
 ./lobster-cli-roguelike
 ```
 
@@ -68,6 +69,7 @@ tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz
 
 ```bash
 tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
+cd lobster-cli-roguelike-darwin-arm64
 ./lobster-cli-roguelike
 ```
 

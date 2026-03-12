@@ -94,9 +94,21 @@ python3 main.py --quick-start --max-cycles 2
 
 - `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
-下载对应平台压缩包后，解压并运行：
+下载对应平台压缩包后，进入解压目录并运行。
+
+Linux：
 
 ```bash
+tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz
+cd lobster-cli-roguelike-linux-x86_64
+./lobster-cli-roguelike
+```
+
+macOS Apple Silicon：
+
+```bash
+tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
+cd lobster-cli-roguelike-darwin-arm64
 ./lobster-cli-roguelike
 ```
 

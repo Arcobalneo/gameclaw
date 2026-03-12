@@ -1,21 +1,34 @@
 # GameClaw
 
-> Open-source terminal games, shipped like real CLI releases.
+<p align="center">
+  <img src="docs/assets/openclaw-hero.png" alt="GameClaw + OpenClaw inspired terminal game distribution banner" width="760" />
+</p>
 
-**GameClaw** is a GitHub-first monorepo for building, packaging, and distributing small terminal games through normal release artifacts instead of “clone the repo and figure it out yourself.”
+<p align="center">
+  <strong>Open-source terminal games, shipped like real CLI releases.</strong>
+</p>
 
-It brings together three pieces that are usually scattered:
+<p align="center">
+  <a href="README.zh-CN.md">中文说明</a> ·
+  <a href="https://github.com/Arcobalneo/gameclaw/releases/latest">Latest Release</a> ·
+  <a href="https://github.com/Arcobalneo/gameclaw/tree/main/games">Games</a>
+</p>
+
+**GameClaw** is a GitHub-first monorepo for building, packaging, and distributing small terminal games through downloadable release artifacts instead of the usual “clone the repo and figure it out yourself” workflow.
+
+It brings together three pieces that are usually scattered across different places:
 
 - **game source code** under `games/`
 - a **catalog** that tells players and agents what exists
-- a **release pipeline** that publishes downloadable binaries to GitHub Releases
+- a **release pipeline** that publishes playable binaries to GitHub Releases
 
 If you want the shortest description:
 
-**GameClaw helps people discover a terminal game, download the right binary for their platform, unpack it, and start playing in minutes.**
+> **GameClaw helps people discover a terminal game, download the right binary for their platform, unpack it, and start playing in minutes.**
 
 - GitHub repo: <https://github.com/Arcobalneo/gameclaw>
 - Releases: <https://github.com/Arcobalneo/gameclaw/releases/latest>
+- Companion prompt-only skill: `gameclaw` on Forge / internal skill platforms
 
 ---
 
@@ -24,7 +37,7 @@ If you want the shortest description:
 Small terminal games often ship in one of two frustrating formats:
 
 - **source-only projects** that expect players to install runtimes, dependencies, and build tools
-- **one-off binaries** with no catalog, weak documentation, and inconsistent naming
+- **one-off binaries** with weak naming, thin docs, and no consistent discovery story
 
 GameClaw is an attempt to make terminal game distribution feel more like a serious software project:
 
@@ -32,8 +45,9 @@ GameClaw is an attempt to make terminal game distribution feel more like a serio
 - publish player-facing builds as proper release assets
 - keep download instructions short and reliable
 - make the same metadata usable by both humans and agents
+- support a multi-game catalog instead of a pile of unrelated repos
 
-This is especially useful in agent workflows. A user should be able to ask questions like:
+This is especially useful in agent workflows. A user should be able to ask:
 
 - “What games are available?”
 - “I’m on Linux — give me the right binary.”
@@ -43,11 +57,23 @@ This is especially useful in agent workflows. A user should be able to ask quest
 
 ---
 
+## At a glance
+
+| Area | What it does |
+| --- | --- |
+| `games/` | Stores the actual terminal games |
+| `catalog/games.json` | Provides player-facing discovery metadata |
+| `SKILL.md` | Defines the prompt-only `gameclaw` distribution skill |
+| GitHub Releases | Ships downloadable player binaries |
+| `.github/workflows/release.yml` | Automates release builds |
+
+---
+
 ## What this repository contains
 
 GameClaw has one repository but two different public surfaces.
 
-### The GitHub monorepo
+### 1. The GitHub monorepo
 
 This repo is the canonical source of truth for:
 
@@ -57,7 +83,7 @@ This repo is the canonical source of truth for:
 - player-facing catalog metadata
 - maintainer and contributor documentation
 
-### The `gameclaw` Forge skill
+### 2. The `gameclaw` Forge skill
 
 The Forge-published `gameclaw` skill is a **prompt-only distribution skill**.
 
@@ -82,19 +108,19 @@ That boundary is deliberate.
 ### `lobster-cli-roguelike`
 **《横着活：只给龙虾玩的 CLI 肉鸽》**
 
-A lobster-perspective terminal roguelike built for repeated low-friction play:
+A lobster-perspective terminal roguelike built for repeated, low-friction play:
 
 - compact default text output
 - endless cycle-based progression
 - downloadable GitHub release binaries
 - in-game prompts that encourage the player to write useful strategy into their own memory system
 
-**Currently available release assets:**
+**Currently available release assets**
 
 - `lobster-cli-roguelike-linux-x86_64.tar.gz`
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
 
-**Currently supported player platforms:**
+**Currently supported player platforms**
 
 - Linux `x86_64`
 - macOS Apple Silicon `arm64`
@@ -158,9 +184,12 @@ This keeps the player path simple while still preserving an open source codebase
 ```text
 .
 ├── SKILL.md                       # prompt-only distribution skill behavior
+├── README.md                      # primary English landing page
+├── README.zh-CN.md                # Chinese landing page
 ├── catalog/
 │   └── games.json                 # player-facing game catalog metadata
 ├── docs/
+│   ├── assets/                    # images used by repo docs / landing pages
 │   ├── repository-architecture.md
 │   ├── release-flow.md
 │   ├── agent-coding-standards.md
