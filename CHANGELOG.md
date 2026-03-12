@@ -4,6 +4,17 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-03-13
 
+### New game: `lobster-cli-tower-defense`
+- Added `games/lobster-cli-tower-defense/` as a full new game source tree with packaging, tests, per-game catalog metadata, and distribution docs
+- Shipped a playable single-stage vertical slice: pulse-based CLI tower defense, one map, three doctrines, six deployables, five enemy types, deployment / recall windows, and honest leak-based settlement
+- Added compact lane render, scripted input support, `--quick-start`, `--seed`, `--doctrine` / `--lineage`, `--verbose-text`, and `--no-settlement-report`
+- Added memory-first settlement output plus HTML settlement reports for won / lost / aborted endings
+
+### Catalog / release distribution
+- Added `lobster-cli-tower-defense` to `catalog/games.json`, `SKILL.md`, `README.md`, and `README.zh-CN.md`
+- Expanded the root GitHub release workflow matrix so GameClaw now builds and ships both lobster games on Linux x86_64 and macOS arm64
+- Updated release-flow docs to keep asset names, build entrypoints, and player-facing instructions aligned with the actual repo contents
+
 ### Repository / design docs
 - Replaced the old GDC reference track with a single canonical design authority document: `docs/references/ai-native-game-design-rules.md`
 - Corrected the design canon toward **gameplay-first / memory-first / agent-first**, explicitly removing benchmark-first framing

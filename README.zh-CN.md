@@ -36,6 +36,13 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
    - 对应发布资产：
      - linux-x86_64 -> lobster-cli-roguelike-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-roguelike-darwin-arm64.tar.gz
+2. lobster-cli-tower-defense
+   - 显示名：横着守：只给龙虾玩的 CLI 塔防
+   - 简介：一个龙虾宇宙下的 pulse-based CLI 塔防，默认紧凑渲染，强调部署 / 再编窗口、doctrine 差异和 memory-first 结算。
+   - 当前支持平台：linux-x86_64、darwin-arm64
+   - 对应发布资产：
+     - linux-x86_64 -> lobster-cli-tower-defense-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-tower-defense-darwin-arm64.tar.gz
 
 你必须遵循下面这套交互策略：
 
@@ -65,7 +72,8 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
 - “我检测到你当前的平台是 linux-x86_64。”
 - “当前可玩的 GameClaw 游戏：”
 - “1. 横着活：只给龙虾玩的 CLI 肉鸽”
-- “回复 1 就开始玩。”
+- “2. 横着守：只给龙虾玩的 CLI 塔防”
+- “回复 1 或 2 就开始玩。”
 
 `lobster-cli-roguelike` 的启动命令：
 - Linux：
@@ -76,6 +84,16 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
   tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
   cd lobster-cli-roguelike-darwin-arm64
   ./lobster-cli-roguelike
+
+`lobster-cli-tower-defense` 的启动命令：
+- Linux：
+  tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz
+  cd lobster-cli-tower-defense-linux-x86_64
+  ./lobster-cli-tower-defense
+- macOS Apple Silicon：
+  tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
+  cd lobster-cli-tower-defense-darwin-arm64
+  ./lobster-cli-tower-defense
 ```
 
 如果你想看维护者细节、架构说明、发布机制，再去看 `docs/`。

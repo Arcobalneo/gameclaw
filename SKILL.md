@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: Tell users what terminal games exist in GameClaw and how to download the released CLI binaries from GitHub. Use this when users ask what games are available, want a GameClaw game, need Linux/macOS download links, or want quick run instructions for a released game.
-version: 0.2.0
+version: 0.4.0
 ---
 
 # GameClaw
@@ -36,6 +36,19 @@ Do **not** assume local source files from the monorepo are present when this ski
 - **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
 - **Source location:** `games/lobster-cli-roguelike` in the GitHub repo
 
+### 2. lobster-cli-tower-defense
+
+- **Name:** 《横着守：只给龙虾玩的 CLI 塔防》
+- **Summary:** 龙虾宇宙下的 pulse-based CLI 塔防，默认紧凑渲染，强调部署 / 再编窗口、doctrine 差异和 memory-first 结算。
+- **Supported platforms:**
+  - `linux-x86_64`
+  - `darwin-arm64`
+- **Release assets:**
+  - `lobster-cli-tower-defense-linux-x86_64.tar.gz`
+  - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
+- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- **Source location:** `games/lobster-cli-tower-defense` in the GitHub repo
+
 ## How to help a player
 
 When a user wants a game:
@@ -65,12 +78,24 @@ cd lobster-cli-roguelike-linux-x86_64
 ./lobster-cli-roguelike
 ```
 
+```bash
+tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz
+cd lobster-cli-tower-defense-linux-x86_64
+./lobster-cli-tower-defense
+```
+
 ### macOS Apple Silicon (`darwin-arm64`)
 
 ```bash
 tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
 cd lobster-cli-roguelike-darwin-arm64
 ./lobster-cli-roguelike
+```
+
+```bash
+tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
+cd lobster-cli-tower-defense-darwin-arm64
+./lobster-cli-tower-defense
 ```
 
 ## Safety / accuracy rules

@@ -20,6 +20,7 @@ Example:
 
 ```bash
 ./scripts/test-game.sh lobster-cli-roguelike
+./scripts/test-game.sh lobster-cli-tower-defense
 ```
 
 ### Build a game locally
@@ -32,6 +33,7 @@ Example:
 
 ```bash
 ./scripts/build-game.sh lobster-cli-roguelike
+./scripts/build-game.sh lobster-cli-tower-defense
 ```
 
 This will:
@@ -46,22 +48,26 @@ The root workflow lives at:
 
 - `.github/workflows/release.yml`
 
-Current supported / published release targets for the first game:
+Current supported / published release targets for shipped games:
 - Linux x86_64
 - macOS arm64
 
 Current publicly available release assets confirmed on GitHub Releases:
 - `lobster-cli-roguelike-linux-x86_64.tar.gz`
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
+- `lobster-cli-tower-defense-linux-x86_64.tar.gz`
+- `lobster-cli-tower-defense-darwin-arm64.tar.gz`
 
 Player-facing docs and workflow targets should stay aligned with the assets that are actually being shipped.
 
 ## Asset naming convention
 
-Each game is responsible for producing stable asset names. For `lobster-cli-roguelike`, the current naming set in repo metadata is:
+Each game is responsible for producing stable asset names. The current naming sets in repo metadata are:
 
 - `lobster-cli-roguelike-linux-x86_64.tar.gz`
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
+- `lobster-cli-tower-defense-linux-x86_64.tar.gz`
+- `lobster-cli-tower-defense-darwin-arm64.tar.gz`
 
 ## Publishing model
 

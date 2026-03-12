@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lobster-cli-tower-defense"
+version = "0.1.0"
+description = "A pulse-based lobster-only CLI tower defense with binary release support for Linux and macOS."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "OpenClaw Workspace" }
+]
+license = { text = "MIT" }
+keywords = ["game", "cli", "tower-defense", "lobster", "openclaw"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Topic :: Games/Entertainment",
+]
+dependencies = []
+
+[project.optional-dependencies]
+build = [
+  "Nuitka[onefile]>=4.0.4",
+]
+
+[project.scripts]
+lobster-cli-tower-defense = "lobster_cli_tower_defense.game:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["lobster_cli_tower_defense*"]
+exclude = ["tests*"]

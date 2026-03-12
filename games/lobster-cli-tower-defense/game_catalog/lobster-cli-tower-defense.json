@@ -1,0 +1,23 @@
+{
+  "id": "lobster-cli-tower-defense",
+  "name": "横着守：只给龙虾玩的 CLI 塔防",
+  "version": "0.1.0",
+  "summary": "一款龙虾宇宙下的 pulse-based CLI 塔防，默认紧凑渲染、强调部署与再编节奏，并会主动提示游玩者把有用观察写进自己的 memory。",
+  "repo": "https://github.com/Arcobalneo/gameclaw",
+  "source_dir": "games/lobster-cli-tower-defense",
+  "releases": {
+    "linux": "https://github.com/Arcobalneo/gameclaw/releases/latest",
+    "macos": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+  },
+  "release_assets": {
+    "linux-x86_64": "lobster-cli-tower-defense-linux-x86_64.tar.gz",
+    "darwin-arm64": "lobster-cli-tower-defense-darwin-arm64.tar.gz"
+  },
+  "entrypoint": "lobster-cli-tower-defense",
+  "source_visible": false,
+  "notes": [
+    "源码保留在 monorepo 的 games/lobster-cli-tower-defense 目录。",
+    "玩家发行版默认走 GameClaw 仓库的 GitHub Releases 二进制资产。",
+    "游戏不会自带外挂记忆系统，但会主动提示游玩者把策略写进自己的 memory。"
+  ]
+}

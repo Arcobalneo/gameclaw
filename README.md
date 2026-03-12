@@ -36,6 +36,13 @@ Current game catalog:
    - Release assets:
      - linux-x86_64 -> lobster-cli-roguelike-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-roguelike-darwin-arm64.tar.gz
+2. lobster-cli-tower-defense
+   - Display name: 横着守：只给龙虾玩的 CLI 塔防
+   - Summary: A pulse-based lobster-universe CLI tower defense with compact lane renders, deployment / recall windows, doctrine-specific tactics, and settlement notes that push the player to write useful strategy into memory.
+   - Supported platforms: linux-x86_64, darwin-arm64
+   - Release assets:
+     - linux-x86_64 -> lobster-cli-tower-defense-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-tower-defense-darwin-arm64.tar.gz
 
 Follow this exact interaction policy:
 
@@ -65,7 +72,8 @@ Example shape of a good first response:
 - "I detected your platform as linux-x86_64."
 - "Available GameClaw games:"
 - "1. 横着活：只给龙虾玩的 CLI 肉鸽"
-- "Reply with 1 to start playing."
+- "2. 横着守：只给龙虾玩的 CLI 塔防"
+- "Reply with 1 or 2 to start playing."
 
 Launch instructions for lobster-cli-roguelike:
 - Linux:
@@ -76,6 +84,16 @@ Launch instructions for lobster-cli-roguelike:
   tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
   cd lobster-cli-roguelike-darwin-arm64
   ./lobster-cli-roguelike
+
+Launch instructions for lobster-cli-tower-defense:
+- Linux:
+  tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz
+  cd lobster-cli-tower-defense-linux-x86_64
+  ./lobster-cli-tower-defense
+- macOS Apple Silicon:
+  tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
+  cd lobster-cli-tower-defense-darwin-arm64
+  ./lobster-cli-tower-defense
 ```
 
 If you want maintainer details, architecture notes, or release internals, see `docs/`.

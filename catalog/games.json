@@ -33,6 +33,35 @@
         "玩家发行版默认走 GitHub Releases 二进制资产。",
         "只有开发 / 调试时才建议直接运行源码。"
       ]
+    },
+    {
+      "id": "lobster-cli-tower-defense",
+      "name": "横着守：只给龙虾玩的 CLI 塔防",
+      "summary": "一款龙虾宇宙下的 pulse-based CLI 塔防，支持紧凑 lane 渲染、部署 / 再编窗口，并会主动提示游玩者把防线经验写进自己的 memory；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
+      "source_dir": "games/lobster-cli-tower-defense",
+      "platforms": ["linux-x86_64", "darwin-arm64"],
+      "release_assets": {
+        "linux-x86_64": "lobster-cli-tower-defense-linux-x86_64.tar.gz",
+        "darwin-arm64": "lobster-cli-tower-defense-darwin-arm64.tar.gz"
+      },
+      "releases": {
+        "latest": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+      },
+      "run": {
+        "linux": [
+          "tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz",
+          "./lobster-cli-tower-defense"
+        ],
+        "macos": [
+          "tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz",
+          "./lobster-cli-tower-defense"
+        ]
+      },
+      "notes": [
+        "源码保存在 monorepo 内的 games/lobster-cli-tower-defense。",
+        "玩家发行版默认走 GitHub Releases 二进制资产。",
+        "只有开发 / 调试时才建议直接运行源码。"
+      ]
     }
   ]
 }
