@@ -37,13 +37,13 @@ Correct the `gameclaw` distribution model so it matches the intended boundary:
 
 ## Checklist
 
-- [ ] Inspect current repo state, current `SKILL.md`, and the mistaken Forge packaging shape
-- [ ] Rewrite `SKILL.md` so it works as a standalone prompt-only skill
-- [ ] Update repo docs / maintainer rules to clarify monorepo vs prompt-only skill packaging
-- [ ] Align tracked platform metadata with the assets actually available from GitHub Releases
-- [ ] Validate the repo diff for the corrected boundary model
-- [ ] Commit the corrected repo state locally
-- [ ] Push the correction commit to GitHub
-- [ ] Publish an updated prompt-only `gameclaw` skill version to Forge
-- [ ] Download / inspect the Forge artifact or otherwise validate it only contains the intended prompt payload
-- [ ] Summarize the final boundary model and any remaining follow-up
+- [x] Inspect current repo state, current `SKILL.md`, and the mistaken Forge packaging shape
+- [x] Rewrite `SKILL.md` so it works as a standalone prompt-only skill
+- [x] Update repo docs / maintainer rules to clarify monorepo vs prompt-only skill packaging
+- [x] Align tracked platform metadata with the assets actually available from GitHub Releases
+- [x] Validate the repo diff for the corrected boundary model
+- [x] Commit the corrected repo state locally
+- [x] Push the correction commit to GitHub
+- [x] Publish an updated prompt-only `gameclaw` skill version to Forge
+- [x] Download / inspect the Forge artifact or otherwise validate it only contains the intended prompt payload
+- [x] Summarize the final boundary model and any remaining follow-up
