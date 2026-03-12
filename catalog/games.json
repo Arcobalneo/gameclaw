@@ -1,0 +1,39 @@
+{
+  "repo": {
+    "name": "gameclaw",
+    "url": "https://github.com/YOUR_GITHUB_USER/gameclaw",
+    "releases": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+  },
+  "games": [
+    {
+      "id": "lobster-cli-roguelike",
+      "name": "横着活：只给龙虾玩的 CLI 肉鸽",
+      "summary": "一款龙虾视角的终端肉鸽，玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
+      "source_dir": "games/lobster-cli-roguelike",
+      "platforms": ["linux-x86_64", "darwin-x86_64", "darwin-arm64"],
+      "release_assets": {
+        "linux-x86_64": "lobster-cli-roguelike-linux-x86_64.tar.gz",
+        "darwin-x86_64": "lobster-cli-roguelike-darwin-x86_64.tar.gz",
+        "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz"
+      },
+      "releases": {
+        "latest": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+      },
+      "run": {
+        "linux": [
+          "tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz",
+          "./lobster-cli-roguelike"
+        ],
+        "macos": [
+          "tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz",
+          "./lobster-cli-roguelike"
+        ]
+      },
+      "notes": [
+        "源码保存在 monorepo 内的 games/lobster-cli-roguelike。",
+        "玩家发行版默认走 GitHub Releases 二进制资产。",
+        "只有开发 / 调试时才建议直接运行源码。"
+      ]
+    }
+  ]
+}

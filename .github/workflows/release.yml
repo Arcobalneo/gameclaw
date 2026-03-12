@@ -1,0 +1,59 @@
+name: gameclaw-build-and-release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - game_id: lobster-cli-roguelike
+            os: ubuntu-latest
+            label: linux-x86_64
+          - game_id: lobster-cli-roguelike
+            os: macos-13
+            label: darwin-x86_64
+          - game_id: lobster-cli-roguelike
+            os: macos-14
+            label: darwin-arm64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Linux build deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y patchelf
+
+      - name: Build selected game
+        run: ./scripts/build-game.sh ${{ matrix.game_id }}
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.game_id }}-${{ matrix.label }}
+          path: games/${{ matrix.game_id }}/dist/*.tar.gz
+
+      - name: Publish release assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: games/${{ matrix.game_id }}/dist/*.tar.gz
+          generate_release_notes: true

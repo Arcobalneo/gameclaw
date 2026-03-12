@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.DS_Store
+
+# game build outputs
+build/
+dist/
+*.build/
+*.dist/
+
+# nested game envs / artifacts
+games/*/.venv-build/
+games/*/build/
+games/*/dist/
+games/*/*.egg-info/
+games/*/__pycache__/
+games/*/*.pyc
+games/*/*/__pycache__/
+games/*/*/*.pyc
+
+# local tooling
+.venv/

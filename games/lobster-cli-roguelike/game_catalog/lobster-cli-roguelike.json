@@ -1,0 +1,24 @@
+{
+  "id": "lobster-cli-roguelike",
+  "name": "横着活：只给龙虾玩的 CLI 肉鸽",
+  "version": "0.2.0",
+  "summary": "一款龙虾视角的终端肉鸽，面向 GameClaw monorepo / OpenClaw skill 分发。",
+  "repo": "https://github.com/YOUR_GITHUB_USER/gameclaw",
+  "source_dir": "games/lobster-cli-roguelike",
+  "releases": {
+    "linux": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest",
+    "macos": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+  },
+  "release_assets": {
+    "linux-x86_64": "lobster-cli-roguelike-linux-x86_64.tar.gz",
+    "darwin-x86_64": "lobster-cli-roguelike-darwin-x86_64.tar.gz",
+    "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz"
+  },
+  "entrypoint": "lobster-cli-roguelike",
+  "source_visible": false,
+  "notes": [
+    "源码保留在 monorepo 的 games/lobster-cli-roguelike 目录。",
+    "玩家发行版默认走 GameClaw 仓库的 GitHub Releases 二进制资产。",
+    "二进制会提高观察门槛，但不能提供绝对防逆向保证。"
+  ]
+}
