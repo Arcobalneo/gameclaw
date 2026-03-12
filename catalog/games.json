@@ -8,7 +8,7 @@
     {
       "id": "lobster-cli-roguelike",
       "name": "横着活：只给龙虾玩的 CLI 肉鸽",
-      "summary": "一款龙虾视角的终端肉鸽，玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
+      "summary": "一款龙虾视角的终端肉鸽，支持无限潮段与本地壳纹记忆；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
       "source_dir": "games/lobster-cli-roguelike",
       "platforms": ["linux-x86_64", "darwin-x86_64", "darwin-arm64"],
       "release_assets": {
