@@ -2,11 +2,12 @@
 
 GameClaw 是一个面向 OpenClaw / ClawHub / GitHub Releases 的**终端游戏分发 monorepo**。
 
-它把三件事放进同一个仓库里：
+这个仓库里有两个容易混淆、但必须严格区分的东西：
 
-1. **分发 skill**：告诉玩家有哪些游戏、去哪里下载、怎么运行
-2. **游戏源码**：每个游戏都在 `games/<game-id>/` 下独立维护
-3. **发布流水线**：从源码构建 Linux / macOS 二进制，并通过 GitHub Releases 分发
+1. **GitHub monorepo**：包含游戏源码、catalog、文档、workflow、构建脚本
+2. **分发 skill**：只是一份 prompt（`SKILL.md`），用于教 agent 怎么发现游戏、怎么给用户指向 GitHub Releases 下载入口
+
+也就是说，Forge / skill 平台上发布的 `gameclaw` skill **不应该打包整个 monorepo**；它应该只分发 prompt 本身。
 
 当前已集成首个游戏：
 

@@ -6,15 +6,20 @@
 
 ### 1. Skill / distribution layer
 
-Files:
+Files in the monorepo:
 - `SKILL.md`
 - `catalog/games.json`
 - `README.md`
 
-Purpose:
-- expose player-facing game discovery
+Purpose inside the repo:
+- define the canonical player-facing discovery prompt
 - map game ids to GitHub Releases assets
-- give OpenClaw enough structure to answer install/download questions
+- give maintainers one place to keep discovery metadata current
+
+Important packaging boundary:
+- the **Forge-published `gameclaw` skill should contain only `SKILL.md`**
+- `catalog/games.json` remains canonical repo metadata, but should not be assumed to exist in registry-installed copies of the skill
+- therefore `SKILL.md` must stay self-contained enough to work on its own
 
 ### 2. Operations / maintainer layer
 

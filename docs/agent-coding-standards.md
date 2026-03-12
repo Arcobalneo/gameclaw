@@ -21,6 +21,8 @@ Do not skip or reorder this without an explicit reason documented in the plan.
 - Player-facing answers should point to release binaries.
 - Maintainer-facing docs should point to source folders and build scripts.
 - Do not blur the two in ways that make releases ambiguous.
+- When publishing the `gameclaw` skill to a registry / Forge, package **only `SKILL.md`** unless the user explicitly wants a different distribution shape.
+- Keep `SKILL.md` self-contained so registry-installed copies do not depend on monorepo-local files like `catalog/games.json`.
 
 ### 2. Prefer one stable entrypoint per concern
 

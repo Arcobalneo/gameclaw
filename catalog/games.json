@@ -10,10 +10,9 @@
       "name": "横着活：只给龙虾玩的 CLI 肉鸽",
       "summary": "一款龙虾视角的终端肉鸽，支持无限潮段，并会主动提示游玩者把策略写进自己的 memory；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
       "source_dir": "games/lobster-cli-roguelike",
-      "platforms": ["linux-x86_64", "darwin-x86_64", "darwin-arm64"],
+      "platforms": ["linux-x86_64", "darwin-arm64"],
       "release_assets": {
         "linux-x86_64": "lobster-cli-roguelike-linux-x86_64.tar.gz",
-        "darwin-x86_64": "lobster-cli-roguelike-darwin-x86_64.tar.gz",
         "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz"
       },
       "releases": {

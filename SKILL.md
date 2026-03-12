@@ -1,38 +1,52 @@
 ---
 name: gameclaw
-description: Discover and distribute binary CLI games from the GameClaw monorepo. Use this whenever a user asks what games are available, wants to download or install a GameClaw game, asks for Linux/macOS game binaries, asks where a game's source lives, or wants a GitHub Releases link instead of a source checkout. Prefer release binaries over source checkouts, ask the user's platform if unknown, and explain how to run the downloaded CLI.
+description: Tell users what terminal games exist in GameClaw and how to download the released CLI binaries from GitHub. Use this when users ask what games are available, want a GameClaw game, need Linux/macOS download links, or want quick run instructions for a released game.
+version: 0.2.0
 ---
 
 # GameClaw
 
-Use this skill to help users discover terminal games that are shipped as normal binary releases.
+This skill is **prompt-only**. It is not the GameClaw monorepo itself.
 
-## What this repo contains
+Its job is simple:
+- tell the agent which GameClaw games currently exist
+- tell the agent which platforms are actually supported
+- point users to the correct GitHub Releases download
+- explain how to unpack and run the binary
 
-- a player-facing game catalog in `catalog/games.json`
-- game source code in `games/<game-id>/`
-- release automation that builds binaries from those game folders
+Do **not** assume local source files from the monorepo are present when this skill is installed from a registry.
 
-## Core behavior
+## Canonical repository
 
-Prioritize **binary releases** over source-code checkouts when helping players.
+- Repo: `https://github.com/Arcobalneo/gameclaw`
+- Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
-### When helping a player
+## Current games
 
-1. Read `catalog/games.json`.
-2. Identify the requested game, or list available games if the user is browsing.
-3. Ask which platform they use if it matters and is not already known.
-4. Point them to the correct GitHub Releases URL.
-5. Give short run instructions after download and extraction.
+### 1. lobster-cli-roguelike
 
-### When helping a maintainer
+- **Name:** 《横着活：只给龙虾玩的 CLI 肉鸽》
+- **Summary:** 龙虾视角的终端肉鸽，默认紧凑文本，支持无限潮段，并会主动提示游玩者把策略写进自己的 memory。
+- **Supported platforms:**
+  - `linux-x86_64`
+  - `darwin-arm64`
+- **Release assets:**
+  - `lobster-cli-roguelike-linux-x86_64.tar.gz`
+  - `lobster-cli-roguelike-darwin-arm64.tar.gz`
+- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- **Source location:** `games/lobster-cli-roguelike` in the GitHub repo
 
-1. Update the corresponding game entry in `catalog/games.json`.
-2. Keep the game's source under `games/<game-id>/`.
-3. Prefer stable GitHub Release URLs.
-4. Keep summaries concise and player-facing.
+## How to help a player
 
-## Response shape
+When a user wants a game:
+
+1. identify the game they want, or list available games
+2. ask their platform if unknown
+3. point them to the GitHub Releases page or the exact release asset name
+4. give the shortest useful unpack/run instructions
+5. mention source location only if they ask to inspect or contribute
+
+## Recommended response shape
 
 Keep it practical:
 - game name
@@ -40,12 +54,28 @@ Keep it practical:
 - supported platforms
 - GitHub release link
 - 1-2 commands to unpack / run
-- mention source location only if the user wants to inspect or contribute
 
-## Safety / accuracy
+## Run instructions
 
-- Do not say the binaries are impossible to reverse engineer.
-- Say they are **binary releases that reduce casual source visibility**.
-- If a platform is unsupported, say so plainly.
-- If URLs are placeholders or not yet published, say that directly.
-- Do not imply the player must clone the repo unless they explicitly want source access.
+### Linux (`linux-x86_64`)
+
+```bash
+tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz
+./lobster-cli-roguelike
+```
+
+### macOS Apple Silicon (`darwin-arm64`)
+
+```bash
+tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
+./lobster-cli-roguelike
+```
+
+## Safety / accuracy rules
+
+- Prefer **released binaries** over source checkouts.
+- Do not claim unsupported platforms are supported.
+- Do not say binaries are impossible to reverse engineer.
+- Say binaries **reduce casual source visibility**.
+- If a release asset is missing, say so plainly.
+- Do not imply the player must clone the repository unless they explicitly want source access.
