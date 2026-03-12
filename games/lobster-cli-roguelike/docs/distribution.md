@@ -13,7 +13,7 @@ It serves two audiences:
 - Ship player-facing builds as normal native binaries for Linux and macOS.
 - Reduce casual source inspection in the player release channel.
 - Keep the game easy to reference from the root `gameclaw` skill and catalog.
-- Preserve local persistent memory so the same lobster can improve over many runs.
+- Preserve the design where the game nudges the player / OpenClaw to write strategy into their own memory system.
 
 ## Runtime design notes
 
@@ -21,9 +21,8 @@ Current gameplay-oriented release assumptions:
 
 - default output is **compact / token-saving**
 - runs are **effectively endless** unless the player dies or a test cap is provided
-- local file-based shell-memory persists across runs and can influence future success
-
-This means the binary is not just a one-shot toy; it carries forward a local learning loop.
+- the game itself does **not** own a persistent外挂 memory database
+- instead, it actively encourages the player / agent to write strategy into their own memory system
 
 ## Build strategy
 
@@ -73,4 +72,4 @@ Together they let the `gameclaw` skill tell players:
 - what this game is
 - where the latest GitHub release lives
 - how to download and run the appropriate binary for macOS / Linux
-- that the same local lobster can retain shell-memory across runs
+- that the game will encourage them to record useful strategy into their own memory system

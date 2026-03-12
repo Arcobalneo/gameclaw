@@ -1,12 +1,9 @@
 from __future__ import annotations
 
 import argparse
-import json
-import os
 import random
 import textwrap
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Callable, Sequence
 
 from lobster_cli_roguelike import __version__
@@ -14,7 +11,6 @@ from lobster_cli_roguelike import __version__
 WRAP = 78
 UPGRADE_DEPTHS = {2, 5, 8}
 CYCLE_DEPTHS = 9
-DEFAULT_MEMORY_PROFILE = "default"
 
 
 @dataclass
@@ -35,7 +31,6 @@ class Player:
     depth: int = 0
     cycle: int = 1
     pressure: int = 0
-    memory_bonus: int = 0
     upgrades: list[str] = field(default_factory=list)
 
 
@@ -101,167 +96,6 @@ class InputProvider:
 
 def wrap(text: str) -> str:
     return textwrap.fill(" ".join(text.split()), width=WRAP)
-
-
-def default_memory_path() -> Path:
-    return Path.home() / ".gameclaw" / "lobster-cli-roguelike" / "shell-memory.json"
-
-
-def load_memory_store(path: Path) -> dict:
-    if not path.exists():
-        return {"version": 1, "profiles": {}}
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return {"version": 1, "profiles": {}}
-    if not isinstance(data, dict):
-        return {"version": 1, "profiles": {}}
-    data.setdefault("version", 1)
-    data.setdefault("profiles", {})
-    return data
-
-
-def save_memory_store(path: Path, store: dict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
-def ensure_memory_profile(store: dict, profile_name: str) -> dict:
-    profiles = store.setdefault("profiles", {})
-    profile = profiles.setdefault(
-        profile_name,
-        {
-            "runs": 0,
-            "wins": 0,
-            "best_depth": 0,
-            "best_cycle": 0,
-            "encounters": {},
-            "lineages": {},
-            "notes_saved": 0,
-        },
-    )
-    profile.setdefault("runs", 0)
-    profile.setdefault("wins", 0)
-    profile.setdefault("best_depth", 0)
-    profile.setdefault("best_cycle", 0)
-    profile.setdefault("encounters", {})
-    profile.setdefault("lineages", {})
-    profile.setdefault("notes_saved", 0)
-    return profile
-
-
-def begin_memory_run(profile: dict, lineage_key: str) -> None:
-    profile["runs"] = profile.get("runs", 0) + 1
-    lineage = profile.setdefault("lineages", {}).setdefault(
-        lineage_key,
-        {"runs": 0, "wins": 0, "best_depth": 0},
-    )
-    lineage["runs"] += 1
-
-
-def record_memory_outcome(
-    profile: dict,
-    *,
-    encounter_key: str,
-    action_key: str,
-    success: bool,
-    depth: int,
-    cycle: int,
-) -> None:
-    encounters = profile.setdefault("encounters", {})
-    encounter = encounters.setdefault(encounter_key, {"seen": 0, "actions": {}})
-    encounter["seen"] += 1
-    action = encounter.setdefault("actions", {}).setdefault(
-        action_key,
-        {"attempts": 0, "successes": 0, "fails": 0, "last_success": False},
-    )
-    action["attempts"] += 1
-    if success:
-        action["successes"] += 1
-    else:
-        action["fails"] += 1
-    action["last_success"] = success
-    profile["best_depth"] = max(profile.get("best_depth", 0), depth)
-    profile["best_cycle"] = max(profile.get("best_cycle", 0), cycle)
-    profile["notes_saved"] = profile.get("notes_saved", 0) + 1
-
-
-def finish_memory_run(profile: dict, *, lineage_key: str, won: bool, depth: int, cycle: int) -> None:
-    profile["best_depth"] = max(profile.get("best_depth", 0), depth)
-    profile["best_cycle"] = max(profile.get("best_cycle", 0), cycle)
-    lineage = profile.setdefault("lineages", {}).setdefault(
-        lineage_key,
-        {"runs": 0, "wins": 0, "best_depth": 0},
-    )
-    lineage["best_depth"] = max(lineage.get("best_depth", 0), depth)
-    if won:
-        profile["wins"] = profile.get("wins", 0) + 1
-        lineage["wins"] = lineage.get("wins", 0) + 1
-
-
-def memory_bonus_for_action(profile: dict, encounter_key: str, action_key: str) -> int:
-    encounter = profile.get("encounters", {}).get(encounter_key, {})
-    action = encounter.get("actions", {}).get(action_key, {})
-    attempts = action.get("attempts", 0)
-    successes = action.get("successes", 0)
-    if attempts < 2 or successes == 0:
-        return 0
-    rate = successes / attempts
-    bonus = 0
-    if rate >= 0.5:
-        bonus += 1
-    if attempts >= 5 and rate >= 0.6:
-        bonus += 1
-    if successes >= 8 and rate >= 0.65:
-        bonus += 1
-    return min(3, bonus)
-
-
-def best_memory_action(profile: dict, encounter_key: str) -> tuple[str, dict] | None:
-    encounter = profile.get("encounters", {}).get(encounter_key)
-    if not encounter:
-        return None
-    best_key = None
-    best_stats = None
-    best_score = -1.0
-    for action_key, stats in encounter.get("actions", {}).items():
-        attempts = stats.get("attempts", 0)
-        if attempts < 2:
-            continue
-        successes = stats.get("successes", 0)
-        score = successes / attempts
-        if score > best_score or (score == best_score and successes > (best_stats or {}).get("successes", -1)):
-            best_key = action_key
-            best_stats = stats
-            best_score = score
-    if best_key is None or best_stats is None:
-        return None
-    return best_key, best_stats
-
-
-def build_memory_hint(profile: dict, encounter: Encounter) -> str | None:
-    memory = best_memory_action(profile, encounter.key)
-    if memory:
-        action_key, stats = memory
-        return (
-            f"壳纹提醒：这个场景里，{action_key}号曾活下 "
-            f"{stats.get('successes', 0)}/{stats.get('attempts', 0)} 次。"
-        )
-    seen = profile.get("encounters", {}).get(encounter.key, {}).get("seen", 0)
-    if seen >= 3:
-        return f"壳纹发痒：你以前已经在【{encounter.title}】里试过 {seen} 次了。"
-    return None
-
-
-def format_memory_summary(profile: dict, profile_name: str) -> str:
-    runs = profile.get("runs", 0)
-    wins = profile.get("wins", 0)
-    if runs == 0:
-        return f"旧壳记忆（{profile_name}）：还很空。今天每次试错都会被记下来。"
-    return (
-        f"旧壳记忆（{profile_name}）：已记 {runs} 轮、回海 {wins} 次、"
-        f"最好总深 {profile.get('best_depth', 0)}、潮段 {profile.get('best_cycle', 0)}。"
-    )
 
 
 LINEAGES = [
@@ -348,7 +182,6 @@ def action_bonus(player: Player, tags: Sequence[str]) -> int:
         bonus += player.dash
     if "stealth" in tags:
         bonus += player.camouflage
-    bonus += player.memory_bonus
     return bonus
 
 
@@ -925,14 +758,14 @@ def print_title(verbose_text: bool = False) -> None:
     if verbose_text:
         print(wrap(intro))
     else:
-        print("低 token 模式：正文压缩，壳纹记忆持续累积。")
+        print("低 token 模式：正文压缩，但会不断提醒你把策略写进自己的 memory。")
 
 
 def print_rules() -> None:
     print("\n--- 玩法 ---")
     print(wrap("每轮从 3 条龙虾谱系里选 1 条，然后不断经历潮段。每个潮段有 9 个随机遭遇和 1 个归海闸口。"))
     print(wrap("关键资源包括壳强度、能量、盐度适应，以及有限的蜕壳次数。任一关键资源归零就会死亡。"))
-    print(wrap("深度 2、5、8 会出现突变潮。游戏会把你的每次试错写进本地壳纹记忆，同一只龙虾越玩越聪明。"))
+    print(wrap("深度 2、5、8 会出现突变潮。游戏本身不替你存外挂记忆，而是会主动提醒你把关键策略写进自己的 memory。"))
     print(wrap("默认是节省 token 的紧凑文本模式；要看长文案可使用 --verbose-text。"))
 
 
@@ -974,7 +807,7 @@ def offer_mutation(player: Player, rng: random.Random, provider: InputProvider, 
         print(wrap(f"你接受了【{mutation.title}】。{result}"))
     else:
         print(f"突变完成：{mutation.title}。")
-        print(f"壳纹备注：{result}")
+        print(f"这条也值得记进 memory：{result}")
     print(f"当前状态：{format_status(player)}")
 
 
@@ -995,73 +828,82 @@ def print_action_menu(encounter: Encounter, *, verbose_text: bool) -> None:
             print(f"{action.key}. {action.title}")
 
 
+def build_memory_note(encounter: Encounter, action: Action, outcome: Outcome) -> str:
+    tone = "更稳" if outcome.success else "容易翻车"
+    result = describe_deltas(outcome.deltas)
+    return f"把【{encounter.title}】里 {action.key}号{action.title} 记进 memory：{tone}，结果 {result}。"
+
+
+def push_run_note(notes: list[str], note: str, *, limit: int = 5) -> None:
+    if note in notes:
+        notes.remove(note)
+    notes.append(note)
+    if len(notes) > limit:
+        del notes[0]
+
+
 def resolve_encounter(
     player: Player,
     encounter: Encounter,
     rng: random.Random,
     provider: InputProvider,
-    memory_profile: dict,
-    memory_store: dict,
-    memory_path: Path,
-    memory_profile_name: str,
+    run_notes: list[str],
     *,
     debug_rolls: bool = False,
     verbose_text: bool = False,
 ) -> Outcome:
     print_encounter_header(player, encounter, verbose_text=verbose_text)
-    hint = build_memory_hint(memory_profile, encounter)
-    if hint:
-        print(hint)
-    elif verbose_text:
-        print("壳纹还没学会这个场景，只能靠你再试一次。")
     print_action_menu(encounter, verbose_text=verbose_text)
     choice = prompt_choice(provider, "行动> ", [action.key for action in encounter.actions])
-    player.memory_bonus = memory_bonus_for_action(memory_profile, encounter.key, choice)
-    if player.memory_bonus:
-        print(f"旧壳本能 +{player.memory_bonus}：同一只龙虾记住了这招。")
     action = next(item for item in encounter.actions if item.key == choice)
     outcome = action.resolver(player, rng)
-    player.memory_bonus = 0
     if debug_rolls and outcome.roll is not None and outcome.difficulty is not None:
         print(f"判定：{outcome.roll} / 需求 {outcome.difficulty}")
     if verbose_text:
         print(wrap(outcome.message))
+        print(f"结果：{describe_deltas(outcome.deltas)}")
     else:
         result_tag = "成功" if outcome.success else "失败"
         print(f"{result_tag}：{describe_deltas(outcome.deltas)}")
     apply_deltas(player, outcome.deltas)
     print(f"当前状态：{format_status(player)}")
-    record_memory_outcome(
-        memory_profile,
-        encounter_key=encounter.key,
-        action_key=choice,
-        success=outcome.success,
-        depth=player.depth,
-        cycle=player.cycle,
-    )
-    save_memory_store(memory_path, memory_store)
-    print(
-        f"壳纹记录：{encounter.title}/{choice}号/{'成' if outcome.success else '败'}，"
-        f"已写进 {memory_profile_name} 的旧壳记忆。"
-    )
+    note = build_memory_note(encounter, action, outcome)
+    push_run_note(run_notes, note)
+    print(f"记忆提示：{note}")
     return outcome
 
 
-def handle_cycle_success(player: Player, *, verbose_text: bool = False) -> None:
+def handle_cycle_success(player: Player, run_notes: list[str], *, verbose_text: bool = False) -> None:
     rest = cycle_rest(player)
     if verbose_text:
-        print(wrap(f"\n你闯过了潮段 {player.cycle}。海更深了，但你也把更多经验刻进了甲壳。"))
+        print(wrap(f"\n你闯过了潮段 {player.cycle}。海更深了，但你也更该把活下来的招数写进自己的 memory。"))
     else:
         print(f"\n潮段 {player.cycle} 已穿过，继续深潜。")
     print(f"潮间休整：{describe_deltas(rest)}")
-    print("旧壳建议：继续试错，活过的招数会越来越顺手。")
+    if run_notes:
+        print("建议写入 memory 的近况：")
+        for note in run_notes[-2:]:
+            print(f"- {note}")
+
+
+def print_settlement_memory_prompt(player: Player, run_notes: list[str], *, won: bool) -> None:
+    print("\n=== 记忆结算提示 ===")
+    if won:
+        print("这轮不是白活：请把最稳的 1-3 条策略写进你自己的 memory。")
+    else:
+        print("这轮不是白死：请把最亏的 1-3 条策略写进你自己的 memory。")
+    print(f"推荐记录字段：谱系={player.lineage_name}，潮段={player.cycle}，总深度={player.depth}。")
+    if run_notes:
+        print("本轮可抄走的策略草稿：")
+        for note in run_notes[-3:]:
+            print(f"- {note}")
+    else:
+        print("本轮没有提炼出策略草稿，但你仍然可以总结哪个场景最致命。")
 
 
 def play_run(
     seed: int | None,
     provider: InputProvider,
-    memory_path: Path,
-    memory_profile_name: str,
     scripted_lineage: int | None = None,
     *,
     debug_rolls: bool = False,
@@ -1070,15 +912,12 @@ def play_run(
 ) -> bool:
     actual_seed = seed if seed is not None else random.SystemRandom().randrange(1, 10**9)
     rng = random.Random(actual_seed)
-    memory_store = load_memory_store(memory_path)
-    memory_profile = ensure_memory_profile(memory_store, memory_profile_name)
+    run_notes: list[str] = []
 
     print_title(verbose_text=verbose_text)
     print(f"本轮种子：{actual_seed}")
-    print(format_memory_summary(memory_profile, memory_profile_name))
+    print("开局提醒：这游戏不替你存外挂记忆；如果你是会写 memory 的龙虾，请自己记。")
     player = choose_lineage(provider, scripted_lineage, verbose_text=verbose_text)
-    begin_memory_run(memory_profile, player.lineage_key)
-    save_memory_store(memory_path, memory_store)
     print(f"\n你是【{player.lineage_name}】。初始状态：{format_status(player)}")
 
     cycle = 1
@@ -1093,19 +932,14 @@ def play_run(
                 encounter,
                 rng,
                 provider,
-                memory_profile,
-                memory_store,
-                memory_path,
-                memory_profile_name,
+                run_notes,
                 debug_rolls=debug_rolls,
                 verbose_text=verbose_text,
             )
             failure = check_failure(player)
             if failure:
                 print(wrap(f"\n你死了。{failure}"))
-                print("旧壳临终还在记：下次同一只龙虾回来，会更懂这一层海。")
-                finish_memory_run(memory_profile, lineage_key=player.lineage_key, won=False, depth=player.depth, cycle=player.cycle)
-                save_memory_store(memory_path, memory_store)
+                print_settlement_memory_prompt(player, run_notes, won=False)
                 return False
             if local_depth in UPGRADE_DEPTHS:
                 offer_mutation(player, rng, provider, verbose_text=verbose_text)
@@ -1116,45 +950,35 @@ def play_run(
             FINALE,
             rng,
             provider,
-            memory_profile,
-            memory_store,
-            memory_path,
-            memory_profile_name,
+            run_notes,
             debug_rolls=debug_rolls,
             verbose_text=verbose_text,
         )
         failure = check_failure(player)
         if failure:
             print(wrap(f"\n你没能回海。{failure}"))
-            print("旧壳把这次失败也刻下来了。")
-            finish_memory_run(memory_profile, lineage_key=player.lineage_key, won=False, depth=player.depth, cycle=player.cycle)
-            save_memory_store(memory_path, memory_store)
+            print_settlement_memory_prompt(player, run_notes, won=False)
             return False
         if not outcome.success:
             print(wrap("\n最后一步失败了。你被逆流拍回厨房边缘，成为菜单和海洋悲剧之间的一次小型误会。"))
-            finish_memory_run(memory_profile, lineage_key=player.lineage_key, won=False, depth=player.depth, cycle=player.cycle)
-            save_memory_store(memory_path, memory_store)
+            print_settlement_memory_prompt(player, run_notes, won=False)
             return False
 
-        handle_cycle_success(player, verbose_text=verbose_text)
+        handle_cycle_success(player, run_notes, verbose_text=verbose_text)
         if max_cycles is not None and cycle >= max_cycles:
             print(wrap(f"\n你在约定的 {max_cycles} 个潮段后收壳记事。"))
             print(f"本轮总深度：{player.depth}，龙虾名声 {player.score}。")
-            finish_memory_run(memory_profile, lineage_key=player.lineage_key, won=True, depth=player.depth, cycle=player.cycle)
-            save_memory_store(memory_path, memory_store)
+            print_settlement_memory_prompt(player, run_notes, won=True)
             return True
         cycle += 1
 
 
 def menu_loop(args: argparse.Namespace) -> int:
     provider = InputProvider(args.script.split(",") if args.script else None)
-    memory_path = Path(args.memory_file).expanduser() if args.memory_file else default_memory_path()
     if args.quick_start:
         play_run(
             args.seed,
             provider,
-            memory_path,
-            args.memory_profile,
             args.lineage,
             debug_rolls=args.debug_rolls,
             verbose_text=args.verbose_text,
@@ -1172,8 +996,6 @@ def menu_loop(args: argparse.Namespace) -> int:
             play_run(
                 args.seed,
                 provider,
-                memory_path,
-                args.memory_profile,
                 None,
                 debug_rolls=args.debug_rolls,
                 verbose_text=args.verbose_text,
@@ -1195,12 +1017,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--debug-rolls", action="store_true", help="显示具体判定值，仅用于开发/平衡调试。")
     parser.add_argument("--verbose-text", action="store_true", help="切回长文案模式；默认使用节省 token 的紧凑模式。")
     parser.add_argument("--max-cycles", type=int, help="限制潮段数，便于测试；默认无限继续直到死亡。")
-    parser.add_argument(
-        "--memory-profile",
-        default=os.environ.get("LOBSTER_MEMORY_PROFILE", DEFAULT_MEMORY_PROFILE),
-        help="本地壳纹记忆档名；同一名字会继承试错经验。",
-    )
-    parser.add_argument("--memory-file", help="自定义记忆文件路径，便于测试或多存档。")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser
 
