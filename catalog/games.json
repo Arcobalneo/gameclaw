@@ -1,8 +1,8 @@
 {
   "repo": {
     "name": "gameclaw",
-    "url": "https://github.com/YOUR_GITHUB_USER/gameclaw",
-    "releases": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+    "url": "https://github.com/Arcobalneo/gameclaw",
+    "releases": "https://github.com/Arcobalneo/gameclaw/releases/latest"
   },
   "games": [
     {
@@ -17,7 +17,7 @@
         "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz"
       },
       "releases": {
-        "latest": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+        "latest": "https://github.com/Arcobalneo/gameclaw/releases/latest"
       },
       "run": {
         "linux": [

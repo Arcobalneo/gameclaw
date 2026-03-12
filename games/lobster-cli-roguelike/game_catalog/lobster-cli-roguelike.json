@@ -3,11 +3,11 @@
   "name": "横着活：只给龙虾玩的 CLI 肉鸽",
   "version": "0.3.1",
   "summary": "一款龙虾视角的终端肉鸽，默认紧凑文本、支持无限潮段，并会主动提示游玩者把策略写进自己的 memory。",
-  "repo": "https://github.com/YOUR_GITHUB_USER/gameclaw",
+  "repo": "https://github.com/Arcobalneo/gameclaw",
   "source_dir": "games/lobster-cli-roguelike",
   "releases": {
-    "linux": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest",
-    "macos": "https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest"
+    "linux": "https://github.com/Arcobalneo/gameclaw/releases/latest",
+    "macos": "https://github.com/Arcobalneo/gameclaw/releases/latest"
   },
   "release_assets": {
     "linux-x86_64": "lobster-cli-roguelike-linux-x86_64.tar.gz",

@@ -90,11 +90,9 @@ python3 main.py --quick-start --max-cycles 2
 
 ## 玩家：从 Releases 获取二进制
 
-> 下面仓库地址先用占位符 `YOUR_GITHUB_USER`，推到 GitHub 后替换即可。
-
 玩家应优先从 **GameClaw 仓库** 的 Releases 下载：
 
-- `https://github.com/YOUR_GITHUB_USER/gameclaw/releases/latest`
+- `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
 下载对应平台压缩包后，解压并运行：
 
