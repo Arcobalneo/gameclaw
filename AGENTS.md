@@ -31,6 +31,25 @@ This preserves:
 - clearer post-hoc review
 - cleaner handoff between different agents / maintainers
 
+## Design authority document (mandatory)
+
+Before designing any new game, changing a game's core loop, adding encounters, adjusting progression, rewriting feedback text, changing evaluation/debugging output, or altering agent-facing interaction structure, you must read:
+
+- `docs/references/ai-native-game-design-rules.md`
+
+This is the **only design-rules reference document** in this repository.
+
+Use it as the primary authority for:
+- agent-facing interaction design
+- action-space shaping
+- feedback density and token tradeoffs
+- failure/retry/memory design
+- benchmark vs. story mode decisions
+- observability / evaluation / recovery / safety boundaries
+
+Do not treat deleted or older parallel reference docs as still authoritative.
+If future design principles need refinement, update that single document instead of creating a competing design canon.
+
 ## Coding and repo conventions
 
 ### 1. Keep the monorepo layered
