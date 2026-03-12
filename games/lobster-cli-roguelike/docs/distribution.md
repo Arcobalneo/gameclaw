@@ -23,6 +23,7 @@ Current gameplay-oriented release assumptions:
 - runs are **effectively endless** unless the player dies or a test cap is provided
 - the game itself does **not** own a persistent外挂 memory database
 - instead, it actively encourages the player / agent to write strategy into their own memory system
+- after each run, it generates a local HTML settlement page that the player-agent can send to its human owner for review
 
 ## Build strategy
 

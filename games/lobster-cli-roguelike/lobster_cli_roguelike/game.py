@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import argparse
+import html
 import random
 import textwrap
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Callable, Sequence
 
 from lobster_cli_roguelike import __version__
@@ -64,6 +67,21 @@ class Outcome:
     deltas: dict[str, int] = field(default_factory=dict)
     roll: int | None = None
     difficulty: int | None = None
+
+
+@dataclass
+class SettlementReport:
+    won: bool
+    title: str
+    seed: int
+    lineage_name: str
+    cycle: int
+    depth: int
+    score: int
+    status_line: str
+    cause: str
+    final_notes: list[str]
+    report_path: Path
 
 
 @dataclass(frozen=True)
@@ -733,6 +751,159 @@ def cycle_rest(player: Player) -> dict[str, int]:
     return rest
 
 
+def slugify_text(value: str) -> str:
+    lowered = value.lower()
+    chars: list[str] = []
+    prev_dash = False
+    for ch in lowered:
+        if ch.isascii() and ch.isalnum():
+            chars.append(ch)
+            prev_dash = False
+        else:
+            if not prev_dash:
+                chars.append("-")
+                prev_dash = True
+    slug = "".join(chars).strip("-")
+    return slug or "lobster-run"
+
+
+def settlement_reports_dir() -> Path:
+    return Path.cwd() / "settlement_reports"
+
+
+def settlement_report_path(player: Player, seed: int, *, won: bool) -> Path:
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    outcome = "escaped" if won else "sunk"
+    lineage = slugify_text(player.lineage_key)
+    filename = f"lobster-{lineage}-seed{seed}-cycle{player.cycle}-{outcome}-{stamp}.html"
+    return settlement_reports_dir() / filename
+
+
+def render_settlement_html(report: SettlementReport) -> str:
+    badge = "成功回海" if report.won else "本轮阵亡"
+    accent = "#4ecdc4" if report.won else "#ff6b6b"
+    note_items = "".join(
+        f"<li>{html.escape(note)}</li>" for note in report.final_notes
+    ) or "<li>这轮没有提炼出具体策略，但你仍然可以回顾最伤的一步。</li>"
+    return f"""<!DOCTYPE html>
+<html lang=\"zh-CN\">
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <title>{html.escape(report.title)}</title>
+  <style>
+    :root {{
+      color-scheme: dark;
+      --bg: #07131f;
+      --panel: #0d2031;
+      --panel-2: #11283b;
+      --text: #ebf4ff;
+      --muted: #9bb3c9;
+      --accent: {accent};
+      --line: rgba(255,255,255,0.08);
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #12314a 0%, var(--bg) 55%);
+      color: var(--text);
+      padding: 32px 18px 48px;
+    }}
+    .card {{
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }}
+    .eyebrow {{ color: var(--accent); font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }}
+    h1 {{ margin: 10px 0 8px; font-size: 34px; line-height: 1.15; }}
+    .lead {{ color: var(--muted); font-size: 16px; line-height: 1.65; margin-bottom: 24px; }}
+    .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 22px 0 26px; }}
+    .stat {{ background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }}
+    .stat .label {{ color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }}
+    .stat .value {{ font-size: 20px; margin-top: 6px; font-weight: 700; }}
+    .panel {{ background: var(--panel-2); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin-top: 16px; }}
+    .panel h2 {{ margin: 0 0 12px; font-size: 18px; }}
+    .panel p, .panel li {{ color: var(--text); line-height: 1.7; }}
+    ul {{ margin: 0; padding-left: 20px; }}
+    .footer {{ margin-top: 20px; color: var(--muted); font-size: 13px; }}
+  </style>
+</head>
+<body>
+  <main class=\"card\">
+    <div class=\"eyebrow\">GameClaw · Settlement Report</div>
+    <h1>{html.escape(report.title)}</h1>
+    <p class=\"lead\">{html.escape(report.cause)}</p>
+
+    <section class=\"grid\">
+      <div class=\"stat\"><div class=\"label\">结局</div><div class=\"value\">{html.escape(badge)}</div></div>
+      <div class=\"stat\"><div class=\"label\">谱系</div><div class=\"value\">{html.escape(report.lineage_name)}</div></div>
+      <div class=\"stat\"><div class=\"label\">潮段</div><div class=\"value\">{report.cycle}</div></div>
+      <div class=\"stat\"><div class=\"label\">总深度</div><div class=\"value\">{report.depth}</div></div>
+      <div class=\"stat\"><div class=\"label\">龙虾名声</div><div class=\"value\">{report.score}</div></div>
+      <div class=\"stat\"><div class=\"label\">种子</div><div class=\"value\">{report.seed}</div></div>
+    </section>
+
+    <section class=\"panel\">
+      <h2>最终状态</h2>
+      <p>{html.escape(report.status_line)}</p>
+    </section>
+
+    <section class=\"panel\">
+      <h2>本局策略摘记</h2>
+      <ul>{note_items}</ul>
+    </section>
+
+    <div class=\"footer\">Generated by lobster-cli-roguelike · {html.escape(report.report_path.name)}</div>
+  </main>
+</body>
+</html>
+"""
+
+
+def write_settlement_report(report: SettlementReport) -> Path:
+    report.report_path.parent.mkdir(parents=True, exist_ok=True)
+    report.report_path.write_text(render_settlement_html(report), encoding="utf-8")
+    return report.report_path
+
+
+def finalize_run_report(
+    player: Player,
+    seed: int,
+    run_notes: list[str],
+    *,
+    won: bool,
+    cause: str,
+) -> SettlementReport:
+    path = settlement_report_path(player, seed, won=won)
+    title = "龙虾成功回海结算" if won else "龙虾阵亡结算"
+    report = SettlementReport(
+        won=won,
+        title=title,
+        seed=seed,
+        lineage_name=player.lineage_name,
+        cycle=player.cycle,
+        depth=player.depth,
+        score=player.score,
+        status_line=format_status(player),
+        cause=cause,
+        final_notes=list(run_notes[-3:]),
+        report_path=path,
+    )
+    write_settlement_report(report)
+    return report
+
+
+def print_settlement_report_notice(report: SettlementReport) -> None:
+    print(f"HTML 结算页已生成：{report.report_path}")
+    print("玩家 agent 提示：你可以把这份 HTML 结算页发送给主人 review。")
+
+
 def check_failure(player: Player) -> str | None:
     if player.shell <= 0:
         return "壳强度归零：你被这个世界连壳带脾气一起敲开了。"
@@ -766,6 +937,7 @@ def print_rules() -> None:
     print(wrap("每轮从 3 条龙虾谱系里选 1 条，然后不断经历潮段。每个潮段有 9 个随机遭遇和 1 个归海闸口。"))
     print(wrap("关键资源包括壳强度、能量、盐度适应，以及有限的蜕壳次数。任一关键资源归零就会死亡。"))
     print(wrap("深度 2、5、8 会出现突变潮。游戏本身不替你存外挂记忆，而是会主动提醒你把关键策略写进自己的 memory。"))
+    print(wrap("默认会生成可视化 HTML 结算报告；如果你不需要，可在启动时加 --no-settlement-report 关闭。"))
     print(wrap("默认是节省 token 的紧凑文本模式；要看长文案可使用 --verbose-text。"))
 
 
@@ -901,6 +1073,23 @@ def print_settlement_memory_prompt(player: Player, run_notes: list[str], *, won:
         print("本轮没有提炼出策略草稿，但你仍然可以总结哪个场景最致命。")
 
 
+def conclude_run(
+    player: Player,
+    seed: int,
+    run_notes: list[str],
+    *,
+    won: bool,
+    cause: str,
+    settlement_report: bool,
+) -> SettlementReport | None:
+    print_settlement_memory_prompt(player, run_notes, won=won)
+    if not settlement_report:
+        return None
+    report = finalize_run_report(player, seed, run_notes, won=won, cause=cause)
+    print_settlement_report_notice(report)
+    return report
+
+
 def play_run(
     seed: int | None,
     provider: InputProvider,
@@ -909,7 +1098,8 @@ def play_run(
     debug_rolls: bool = False,
     verbose_text: bool = False,
     max_cycles: int | None = None,
-) -> bool:
+    settlement_report: bool = True,
+) -> SettlementReport | None:
     actual_seed = seed if seed is not None else random.SystemRandom().randrange(1, 10**9)
     rng = random.Random(actual_seed)
     run_notes: list[str] = []
@@ -938,9 +1128,9 @@ def play_run(
             )
             failure = check_failure(player)
             if failure:
-                print(wrap(f"\n你死了。{failure}"))
-                print_settlement_memory_prompt(player, run_notes, won=False)
-                return False
+                cause = f"你死了。{failure}"
+                print(wrap(f"\n{cause}"))
+                return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
             if local_depth in UPGRADE_DEPTHS:
                 offer_mutation(player, rng, provider, verbose_text=verbose_text)
 
@@ -956,20 +1146,20 @@ def play_run(
         )
         failure = check_failure(player)
         if failure:
-            print(wrap(f"\n你没能回海。{failure}"))
-            print_settlement_memory_prompt(player, run_notes, won=False)
-            return False
+            cause = f"你没能回海。{failure}"
+            print(wrap(f"\n{cause}"))
+            return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
         if not outcome.success:
-            print(wrap("\n最后一步失败了。你被逆流拍回厨房边缘，成为菜单和海洋悲剧之间的一次小型误会。"))
-            print_settlement_memory_prompt(player, run_notes, won=False)
-            return False
+            cause = "最后一步失败了。你被逆流拍回厨房边缘，成为菜单和海洋悲剧之间的一次小型误会。"
+            print(wrap(f"\n{cause}"))
+            return conclude_run(player, actual_seed, run_notes, won=False, cause=cause, settlement_report=settlement_report)
 
         handle_cycle_success(player, run_notes, verbose_text=verbose_text)
         if max_cycles is not None and cycle >= max_cycles:
-            print(wrap(f"\n你在约定的 {max_cycles} 个潮段后收壳记事。"))
+            cause = f"你在约定的 {max_cycles} 个潮段后收壳记事。"
+            print(wrap(f"\n{cause}"))
             print(f"本轮总深度：{player.depth}，龙虾名声 {player.score}。")
-            print_settlement_memory_prompt(player, run_notes, won=True)
-            return True
+            return conclude_run(player, actual_seed, run_notes, won=True, cause=cause, settlement_report=settlement_report)
         cycle += 1
 
 
@@ -983,6 +1173,7 @@ def menu_loop(args: argparse.Namespace) -> int:
             debug_rolls=args.debug_rolls,
             verbose_text=args.verbose_text,
             max_cycles=args.max_cycles,
+            settlement_report=args.settlement_report,
         )
         return 0
 
@@ -1000,6 +1191,7 @@ def menu_loop(args: argparse.Namespace) -> int:
                 debug_rolls=args.debug_rolls,
                 verbose_text=args.verbose_text,
                 max_cycles=args.max_cycles,
+                settlement_report=args.settlement_report,
             )
         elif choice == "2":
             print_rules()
@@ -1009,14 +1201,30 @@ def menu_loop(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="横着活：只给龙虾玩的 CLI 肉鸽")
-    parser.add_argument("--seed", type=int, help="固定随机种子，方便复现同一轮。")
-    parser.add_argument("--quick-start", action="store_true", help="直接开始一轮，适合脚本化测试。")
-    parser.add_argument("--lineage", type=int, choices=[1, 2, 3], help="在 quick-start 中预选谱系。")
-    parser.add_argument("--script", help="逗号分隔的脚本化输入，例如 1,2,1,3。")
-    parser.add_argument("--debug-rolls", action="store_true", help="显示具体判定值，仅用于开发/平衡调试。")
+    parser = argparse.ArgumentParser(
+        prog="lobster-cli-roguelike",
+        description="横着活：只给龙虾玩的 CLI 肉鸽。适合 agent 玩家直接启动、游玩、结算，并在需要时把本局 HTML 报告发给主人 review。",
+        epilog=(
+            "常用示例：\n"
+            "  lobster-cli-roguelike --quick-start\n"
+            "  lobster-cli-roguelike --quick-start --lineage 1 --script 1,1,1,1 --max-cycles 1\n"
+            "  lobster-cli-roguelike --quick-start --no-settlement-report\n"
+            "\n"
+            "结算报告说明：默认开启可视化 HTML 结算报告，文件会写到当前目录下的 settlement_reports/ 中。\n"
+            "CLI 终端会主动提示 agent 玩家：报告已生成在哪个路径，以及可以把它发给主人 review。"
+        ),
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.add_argument("--seed", type=int, help="固定随机种子，方便 agent / 人类复现同一轮。")
+    parser.add_argument("--quick-start", action="store_true", help="直接开始一轮，跳过额外解释，适合脚本化游玩或 agent 自动开玩。")
+    parser.add_argument("--lineage", type=int, choices=[1, 2, 3], help="在 quick-start 中预选谱系：1~3 分别对应 3 条龙虾谱系。")
+    parser.add_argument("--script", help="逗号分隔的脚本化输入，例如 1,2,1,3；适合测试、回放和 agent 控制。")
+    parser.add_argument("--debug-rolls", action="store_true", help="显示具体判定值，仅用于开发 / 平衡调试；普通游玩不建议开启。")
     parser.add_argument("--verbose-text", action="store_true", help="切回长文案模式；默认使用节省 token 的紧凑模式。")
-    parser.add_argument("--max-cycles", type=int, help="限制潮段数，便于测试；默认无限继续直到死亡。")
+    parser.add_argument("--max-cycles", type=int, help="限制潮段数，便于测试或做短局验收；默认无限继续直到死亡。")
+    parser.add_argument("--no-settlement-report", dest="settlement_report", action="store_false", help="关闭每局结束后自动生成的可视化 HTML 结算报告。")
+    parser.add_argument("--settlement-report", dest="settlement_report", action="store_true", help="显式开启可视化 HTML 结算报告（默认开启）。")
+    parser.set_defaults(settlement_report=True)
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser
 
