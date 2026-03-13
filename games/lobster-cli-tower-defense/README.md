@@ -211,8 +211,18 @@ python3 main.py --quick-start --seed 7 --doctrine 2 --script 1,1,4,1,0,1,2,6,0
 
 ## 测试
 
+维护者现在统一通过仓库根目录的 `uv` workspace（`pyproject.toml` + `uv.lock`）运行测试。
+
+如果你在该游戏目录里直接执行：
+
 ```bash
-python3 -m unittest discover -s tests
+uv run --project ../.. --package lobster-cli-tower-defense python -m unittest discover -s tests
+```
+
+如果你想遵循 monorepo 的稳定入口，则从仓库根目录执行：
+
+```bash
+./scripts/test-game.sh lobster-cli-tower-defense
 ```
 
 ## 本地打包
@@ -220,8 +230,7 @@ python3 -m unittest discover -s tests
 如果你只想在该游戏目录里本地打包：
 
 ```bash
-python3 -m pip install .[build]
-./scripts/build-native.sh
+uv run --project ../.. --package lobster-cli-tower-defense --extra build ./scripts/build-native.sh
 ```
 
 如果你想遵循 monorepo 的统一入口，则从仓库根目录执行：

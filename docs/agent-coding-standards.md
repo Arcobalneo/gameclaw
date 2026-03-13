@@ -32,11 +32,17 @@ Do not skip or reorder this without an explicit reason documented in the plan.
 
 A game may have its own internal scripts, but repo-level automation should stay predictable.
 
-### 3. Keep game internals self-contained
+### 3. Keep Python dependency ownership layered
+
+- manage repo-level Python lock / sync behavior through the root `pyproject.toml` and `uv.lock`
+- keep game-specific metadata, entrypoints, and extras inside each game's own `pyproject.toml`
+- do not collapse multiple games into one Python package just to simplify tooling
+
+### 4. Keep game internals self-contained
 
 A game's code, tests, docs, and build notes should live under its own folder.
 
-### 4. Update docs in the same change set
+### 5. Update docs in the same change set
 
 If you change:
 - the repo structure
@@ -47,7 +53,7 @@ If you change:
 
 then update the relevant docs before commit.
 
-### 5. Be explicit about security posture
+### 6. Be explicit about security posture
 
 Use language like:
 - binary releases reduce casual source visibility
@@ -55,7 +61,7 @@ Use language like:
 
 Do not overclaim.
 
-### 6. Validate the real artifact when possible
+### 7. Validate the real artifact when possible
 
 If the change affects packaging or release flow, test the built binary / archive, not just the source entrypoint.
 

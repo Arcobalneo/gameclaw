@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GAME_ID="${1:-}"
+UV_BIN="${UV_BIN:-uv}"
 
 if [[ -z "$GAME_ID" ]]; then
   echo "usage: ./scripts/build-game.sh <game-id>" >&2
@@ -15,13 +16,25 @@ if [[ ! -d "$GAME_DIR" ]]; then
   exit 1
 fi
 
-cd "$GAME_DIR"
+if ! "$UV_BIN" --version >/dev/null 2>&1; then
+  echo "uv is required for maintainer build flows. Install uv or set UV_BIN to a uv executable." >&2
+  exit 1
+fi
 
-python3 -m venv .venv-build
-# shellcheck disable=SC1091
-source .venv-build/bin/activate
-python -m pip install --upgrade pip setuptools wheel -i https://pypi.org/simple
-python -m pip install .[build] -i https://pypi.org/simple
-PYTHON_BIN=.venv-build/bin/python ./scripts/build-native.sh
+cd "$GAME_DIR"
+"$UV_BIN" sync \
+  --project "$ROOT_DIR" \
+  --default-index https://pypi.org/simple \
+  --locked \
+  --package "$GAME_ID" \
+  --extra build
+
+"$UV_BIN" run \
+  --project "$ROOT_DIR" \
+  --locked \
+  --no-sync \
+  --package "$GAME_ID" \
+  --extra build \
+  ./scripts/build-native.sh
 
 echo "Built $GAME_ID under: $GAME_DIR/dist"

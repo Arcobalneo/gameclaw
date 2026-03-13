@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GAME_ID="${1:-}"
+UV_BIN="${UV_BIN:-uv}"
 
 if [[ -z "$GAME_ID" ]]; then
   echo "usage: ./scripts/test-game.sh <game-id>" >&2
@@ -15,5 +16,21 @@ if [[ ! -d "$GAME_DIR" ]]; then
   exit 1
 fi
 
+if ! "$UV_BIN" --version >/dev/null 2>&1; then
+  echo "uv is required for maintainer test flows. Install uv or set UV_BIN to a uv executable." >&2
+  exit 1
+fi
+
 cd "$GAME_DIR"
-python3 -m unittest discover -s tests
+"$UV_BIN" sync \
+  --project "$ROOT_DIR" \
+  --default-index https://pypi.org/simple \
+  --locked \
+  --package "$GAME_ID"
+
+"$UV_BIN" run \
+  --project "$ROOT_DIR" \
+  --locked \
+  --no-sync \
+  --package "$GAME_ID" \
+  python -m unittest discover -s tests

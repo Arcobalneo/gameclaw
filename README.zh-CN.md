@@ -97,3 +97,7 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
 ```
 
 如果你想看维护者细节、架构说明、发布机制，再去看 `docs/`。
+
+## 维护者说明
+
+仓库级 Python 测试 / 构建依赖现在统一通过根目录 `uv` workspace（`pyproject.toml` + `uv.lock`）管理。这**不会**改变玩家路径：玩家仍应优先使用 GitHub Releases 二进制。维护者流程细节见 `docs/release-flow.md`。

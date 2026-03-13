@@ -97,3 +97,7 @@ Launch instructions for lobster-cli-tower-defense:
 ```
 
 If you want maintainer details, architecture notes, or release internals, see `docs/`.
+
+## Maintainer note
+
+Repo-level Python build and test dependency management now runs through the root `uv` workspace (`pyproject.toml` + `uv.lock`). This does **not** change the player path: players should still use GitHub Releases binaries. Maintainer workflow details live in `docs/release-flow.md`.
