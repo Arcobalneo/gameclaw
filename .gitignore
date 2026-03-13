@@ -24,3 +24,5 @@ settlement_reports/
 
 # local tooling
 .venv/
+# smoke-test extracted binaries
+games/*/smoke-bin/
