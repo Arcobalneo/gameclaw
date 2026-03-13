@@ -1,0 +1,23 @@
+{
+  "id": "lobster-cli-heist",
+  "name": "横着潜：只给龙虾玩的 CLI 潜行渗透",
+  "version": "0.1.0",
+  "summary": "一款龙虾宇宙下的 compact CLI 潜行 heist，强调 mission grammar、取物后撤离压力，以及 observer + HTML 结算页链路。",
+  "repo": "https://github.com/Arcobalneo/gameclaw",
+  "source_dir": "games/lobster-cli-heist",
+  "releases": {
+    "linux": "https://github.com/Arcobalneo/gameclaw/releases/latest",
+    "macos": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+  },
+  "release_assets": {
+    "linux-x86_64": "lobster-cli-heist-linux-x86_64.tar.gz",
+    "darwin-arm64": "lobster-cli-heist-darwin-arm64.tar.gz"
+  },
+  "entrypoint": "lobster-cli-heist",
+  "source_visible": false,
+  "notes": [
+    "源码保留在 monorepo 的 games/lobster-cli-heist 目录。",
+    "玩家发行版默认走 GameClaw 仓库的 GitHub Releases 二进制资产。",
+    "游戏会默认启动本地 observer 页面，并鼓励游玩者把有价值的观察写进自己的 memory。"
+  ]
+}

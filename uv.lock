@@ -7,6 +7,7 @@ members = [
     "gameclaw-workspace",
     "lobster-cli-roguelike",
     "lobster-cli-tower-defense",
+    "lobster-cli-heist",
 ]
 
 [[package]]
@@ -32,6 +33,20 @@ provides-extras = ["build"]
 name = "lobster-cli-tower-defense"
 version = "0.1.1"
 source = { editable = "games/lobster-cli-tower-defense" }
+
+[package.optional-dependencies]
+build = [
+    { name = "nuitka", extra = ["onefile"] },
+]
+
+[package.metadata]
+requires-dist = [{ name = "nuitka", extras = ["onefile"], marker = "extra == 'build'", specifier = ">=4.0.4" }]
+provides-extras = ["build"]
+
+[[package]]
+name = "lobster-cli-heist"
+version = "0.1.0"
+source = { editable = "games/lobster-cli-heist" }
 
 [package.optional-dependencies]
 build = [

@@ -14,4 +14,5 @@ required-version = ">=0.10.9,<0.11"
 members = [
   "games/lobster-cli-roguelike",
   "games/lobster-cli-tower-defense",
+  "games/lobster-cli-heist",
 ]

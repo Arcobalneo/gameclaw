@@ -10,7 +10,10 @@
       "name": "横着活：只给龙虾玩的 CLI 肉鸽",
       "summary": "一款龙虾视角的终端肉鸽，支持无限潮段，并会主动提示游玩者把策略写进自己的 memory；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
       "source_dir": "games/lobster-cli-roguelike",
-      "platforms": ["linux-x86_64", "darwin-arm64"],
+      "platforms": [
+        "linux-x86_64",
+        "darwin-arm64"
+      ],
       "release_assets": {
         "linux-x86_64": "lobster-cli-roguelike-linux-x86_64.tar.gz",
         "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz"
@@ -39,7 +42,10 @@
       "name": "横着守：只给龙虾玩的 CLI 塔防",
       "summary": "一款龙虾宇宙下的 pulse-based CLI 塔防，支持紧凑 lane 渲染、部署 / 再编窗口，并会主动提示游玩者把防线经验写进自己的 memory；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
       "source_dir": "games/lobster-cli-tower-defense",
-      "platforms": ["linux-x86_64", "darwin-arm64"],
+      "platforms": [
+        "linux-x86_64",
+        "darwin-arm64"
+      ],
       "release_assets": {
         "linux-x86_64": "lobster-cli-tower-defense-linux-x86_64.tar.gz",
         "darwin-arm64": "lobster-cli-tower-defense-darwin-arm64.tar.gz"
@@ -61,6 +67,38 @@
         "源码保存在 monorepo 内的 games/lobster-cli-tower-defense。",
         "玩家发行版默认走 GitHub Releases 二进制资产。",
         "只有开发 / 调试时才建议直接运行源码。"
+      ]
+    },
+    {
+      "id": "lobster-cli-heist",
+      "name": "横着潜：只给龙虾玩的 CLI 潜行渗透",
+      "summary": "一款龙虾宇宙下的 compact CLI 潜行 heist，强调 mission grammar、取物后撤离压力，以及默认启动的 live observer + HTML 结算页链路；玩家优先从 GameClaw 仓库的 GitHub Releases 下载 macOS / Linux 二进制。",
+      "source_dir": "games/lobster-cli-heist",
+      "platforms": [
+        "linux-x86_64",
+        "darwin-arm64"
+      ],
+      "release_assets": {
+        "linux-x86_64": "lobster-cli-heist-linux-x86_64.tar.gz",
+        "darwin-arm64": "lobster-cli-heist-darwin-arm64.tar.gz"
+      },
+      "releases": {
+        "latest": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+      },
+      "run": {
+        "linux": [
+          "tar -xzf lobster-cli-heist-linux-x86_64.tar.gz",
+          "./lobster-cli-heist"
+        ],
+        "macos": [
+          "tar -xzf lobster-cli-heist-darwin-arm64.tar.gz",
+          "./lobster-cli-heist"
+        ]
+      },
+      "notes": [
+        "源码保存在 monorepo 内的 games/lobster-cli-heist。",
+        "玩家发行版默认走 GitHub Releases 二进制资产。",
+        "游戏运行时默认会启动本地 observer 页面；只有开发 / 调试时才建议直接运行源码。"
       ]
     }
   ]

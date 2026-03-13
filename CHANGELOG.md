@@ -4,6 +4,16 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-03-13
 
+### New game: `lobster-cli-heist`
+- Added `games/lobster-cli-heist/` as a full new game source tree with packaging, tests, live observer server, per-game catalog metadata, and distribution docs
+- Shipped a playable stealth-heist vertical slice: compact 2x7 side-strip facilities, `facility / security / objective / complication` mission grammar, three profiles, and real extraction pressure after the pickup
+- Added `--seed`, `--quick-start`, `--profile`, `--script`, `--verbose-text`, `--no-settlement-report`, default localhost observer boot, honest aborted-run handling, and HTML settlement reports
+
+### Catalog / release distribution follow-up
+- Added `lobster-cli-heist` to `catalog/games.json`, `SKILL.md`, `README.md`, and `README.zh-CN.md`
+- Expanded the root GitHub release workflow matrix so GameClaw now builds and ships all three lobster games on Linux x86_64 and macOS arm64
+- Updated release-flow docs and the root `uv` workspace metadata so the new game follows the same monorepo build / test / release entrypoints
+
 ### New game: `lobster-cli-tower-defense`
 - Added `games/lobster-cli-tower-defense/` as a full new game source tree with packaging, tests, per-game catalog metadata, and distribution docs
 - Shipped a playable single-stage vertical slice: pulse-based CLI tower defense, one map, three doctrines, six deployables, five enemy types, deployment / recall windows, and honest leak-based settlement

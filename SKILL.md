@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: Tell users what terminal games exist in GameClaw and how to download the released CLI binaries from GitHub. Use this when users ask what games are available, want a GameClaw game, need Linux/macOS download links, or want quick run instructions for a released game.
-version: 0.4.0
+version: 0.5.0
 ---
 
 # GameClaw
@@ -49,6 +49,19 @@ Do **not** assume local source files from the monorepo are present when this ski
 - **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
 - **Source location:** `games/lobster-cli-tower-defense` in the GitHub repo
 
+### 3. lobster-cli-heist
+
+- **Name:** 《横着潜：只给龙虾玩的 CLI 潜行渗透》
+- **Summary:** 龙虾宇宙下的 compact CLI 潜行 heist，强调 mission grammar、取物后撤离压力，以及默认启动的 live observer + HTML settlement。
+- **Supported platforms:**
+  - `linux-x86_64`
+  - `darwin-arm64`
+- **Release assets:**
+  - `lobster-cli-heist-linux-x86_64.tar.gz`
+  - `lobster-cli-heist-darwin-arm64.tar.gz`
+- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- **Source location:** `games/lobster-cli-heist` in the GitHub repo
+
 ## How to help a player
 
 When a user wants a game:
@@ -84,6 +97,12 @@ cd lobster-cli-tower-defense-linux-x86_64
 ./lobster-cli-tower-defense
 ```
 
+```bash
+tar -xzf lobster-cli-heist-linux-x86_64.tar.gz
+cd lobster-cli-heist-linux-x86_64
+./lobster-cli-heist
+```
+
 ### macOS Apple Silicon (`darwin-arm64`)
 
 ```bash
@@ -96,6 +115,12 @@ cd lobster-cli-roguelike-darwin-arm64
 tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
 cd lobster-cli-tower-defense-darwin-arm64
 ./lobster-cli-tower-defense
+```
+
+```bash
+tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
+cd lobster-cli-heist-darwin-arm64
+./lobster-cli-heist
 ```
 
 ## Safety / accuracy rules

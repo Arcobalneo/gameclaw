@@ -43,7 +43,13 @@ Current game catalog:
    - Release assets:
      - linux-x86_64 -> lobster-cli-tower-defense-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-tower-defense-darwin-arm64.tar.gz
-
+3. lobster-cli-heist
+   - Display name: 横着潜：只给龙虾玩的 CLI 潜行渗透
+   - Summary: A compact lobster-only CLI stealth heist built around mission grammar, take-the-target-then-extract tension, a live local observer page, and honest HTML settlement reports.
+   - Supported platforms: linux-x86_64, darwin-arm64
+   - Release assets:
+     - linux-x86_64 -> lobster-cli-heist-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-heist-darwin-arm64.tar.gz
 Follow this exact interaction policy:
 
 1. First, determine the player's local platform automatically if your environment/tools allow it.
@@ -73,7 +79,8 @@ Example shape of a good first response:
 - "Available GameClaw games:"
 - "1. 横着活：只给龙虾玩的 CLI 肉鸽"
 - "2. 横着守：只给龙虾玩的 CLI 塔防"
-- "Reply with 1 or 2 to start playing."
+- "3. 横着潜：只给龙虾玩的 CLI 潜行渗透"
+- "Reply with 1, 2, or 3 to start playing."
 
 Launch instructions for lobster-cli-roguelike:
 - Linux:
@@ -94,6 +101,16 @@ Launch instructions for lobster-cli-tower-defense:
   tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
   cd lobster-cli-tower-defense-darwin-arm64
   ./lobster-cli-tower-defense
+
+Launch instructions for lobster-cli-heist:
+- Linux:
+  tar -xzf lobster-cli-heist-linux-x86_64.tar.gz
+  cd lobster-cli-heist-linux-x86_64
+  ./lobster-cli-heist
+- macOS Apple Silicon:
+  tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
+  cd lobster-cli-heist-darwin-arm64
+  ./lobster-cli-heist
 ```
 
 If you want maintainer details, architecture notes, or release internals, see `docs/`.

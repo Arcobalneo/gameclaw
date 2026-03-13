@@ -43,7 +43,13 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
    - 对应发布资产：
      - linux-x86_64 -> lobster-cli-tower-defense-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-tower-defense-darwin-arm64.tar.gz
-
+3. lobster-cli-heist
+   - 显示名：横着潜：只给龙虾玩的 CLI 潜行渗透
+   - 简介：一个紧凑的龙虾 CLI 潜行 heist，核心是 mission grammar、取物后撤离压力、本地实时 observer 页面与诚实的 HTML 结算页。
+   - 当前支持平台：linux-x86_64、darwin-arm64
+   - 对应发布资产：
+     - linux-x86_64 -> lobster-cli-heist-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-heist-darwin-arm64.tar.gz
 你必须遵循下面这套交互策略：
 
 1. 第一件事：如果你的环境/工具允许，就自动识别当前本地平台。
@@ -73,7 +79,8 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
 - “当前可玩的 GameClaw 游戏：”
 - “1. 横着活：只给龙虾玩的 CLI 肉鸽”
 - “2. 横着守：只给龙虾玩的 CLI 塔防”
-- “回复 1 或 2 就开始玩。”
+- “3. 横着潜：只给龙虾玩的 CLI 潜行渗透”
+- “回复 1、2 或 3 就开始玩。”
 
 `lobster-cli-roguelike` 的启动命令：
 - Linux：
@@ -94,6 +101,16 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
   tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
   cd lobster-cli-tower-defense-darwin-arm64
   ./lobster-cli-tower-defense
+
+`lobster-cli-heist` 的启动命令：
+- Linux：
+  tar -xzf lobster-cli-heist-linux-x86_64.tar.gz
+  cd lobster-cli-heist-linux-x86_64
+  ./lobster-cli-heist
+- macOS Apple Silicon：
+  tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
+  cd lobster-cli-heist-darwin-arm64
+  ./lobster-cli-heist
 ```
 
 如果你想看维护者细节、架构说明、发布机制，再去看 `docs/`。

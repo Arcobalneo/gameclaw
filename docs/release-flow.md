@@ -31,6 +31,7 @@ Example:
 ```bash
 ./scripts/test-game.sh lobster-cli-roguelike
 ./scripts/test-game.sh lobster-cli-tower-defense
+./scripts/test-game.sh lobster-cli-heist
 ```
 
 These root test commands now:
@@ -56,6 +57,7 @@ Example:
 ```bash
 ./scripts/build-game.sh lobster-cli-roguelike
 ./scripts/build-game.sh lobster-cli-tower-defense
+./scripts/build-game.sh lobster-cli-heist
 ```
 
 These root build commands now:
@@ -86,6 +88,8 @@ Current publicly available release assets confirmed in repo metadata:
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
 - `lobster-cli-tower-defense-linux-x86_64.tar.gz`
 - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
+- `lobster-cli-heist-linux-x86_64.tar.gz`
+- `lobster-cli-heist-darwin-arm64.tar.gz`
 
 Player-facing docs and workflow targets should stay aligned with the assets that are actually being shipped.
 
@@ -107,6 +111,8 @@ Each game is responsible for producing stable asset names. The current naming se
 - `lobster-cli-roguelike-darwin-arm64.tar.gz`
 - `lobster-cli-tower-defense-linux-x86_64.tar.gz`
 - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
+- `lobster-cli-heist-linux-x86_64.tar.gz`
+- `lobster-cli-heist-darwin-arm64.tar.gz`
 
 ## Publishing model
 

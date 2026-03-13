@@ -27,6 +27,12 @@ jobs:
           - game_id: lobster-cli-tower-defense
             os: macos-14
             label: darwin-arm64
+          - game_id: lobster-cli-heist
+            os: ubuntu-latest
+            label: linux-x86_64
+          - game_id: lobster-cli-heist
+            os: macos-14
+            label: darwin-arm64
 
     runs-on: ${{ matrix.os }}
 

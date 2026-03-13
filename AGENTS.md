@@ -92,6 +92,18 @@ If you change packaging or release flow:
 - build the real binary/archive when possible
 - prefer validating the compiled artifact, not only source execution
 
+### 6. New GameClaw games should expose a live local observer page by default
+
+For newly designed / newly implemented GameClaw games, treat this as a default cross-game requirement unless the user explicitly overrides it:
+
+- when a run starts, the game should auto-detect the first free localhost port starting from `8000`
+- the game should start a local HTML observer page on that port for humans to watch the agent player's progress in real time
+- the CLI remains the canonical control surface; the HTML page is for observation, not a browser-only replacement UI
+- when the run ends, the observer server should stop so the port is no longer occupied
+- the final page should be preserved as a static settlement / recap HTML artifact, continuing the existing report tradition
+- the runtime should print the local observer URL clearly so a human can open it during play
+- if the observer page cannot start, fail honestly or degrade explicitly; do not silently pretend the live observer exists
+
 ## Minimum expectations before commit
 
 For large changes, do not skip:
