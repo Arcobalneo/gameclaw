@@ -10,6 +10,12 @@ All notable changes to `gameclaw` will be documented in this file.
 - Added compact lane render, scripted input support, `--quick-start`, `--seed`, `--doctrine` / `--lineage`, `--verbose-text`, and `--no-settlement-report`
 - Added memory-first settlement output plus HTML settlement reports for won / lost / aborted endings
 
+### `lobster-cli-tower-defense` follow-up iteration
+- Refactored the tower-defense slice into clearer layers: `stages.py` for stage data, `simulation.py` for rule resolution, and a slimmer `game.py` focused on CLI flow
+- Added doctrine-specific simulation coverage plus scripted regression baselines for `oracle`, `crusher`, and `gambler`
+- Adjusted support-platform coverage so `LP` / `RP` behave more like side-watch positions instead of trivially seeing through the entire middle front slot
+- Verified the follow-up through repo-level tests, targeted scripted smoke, and real playtests before release
+
 ### Catalog / release distribution
 - Added `lobster-cli-tower-defense` to `catalog/games.json`, `SKILL.md`, `README.md`, and `README.zh-CN.md`
 - Expanded the root GitHub release workflow matrix so GameClaw now builds and ships both lobster games on Linux x86_64 and macOS arm64

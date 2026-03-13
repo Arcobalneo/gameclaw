@@ -62,6 +62,20 @@ python3 main.py --verbose-text
 
 目标不是把第一版做成内容怪物，而是先把“可读、可归因、可脚本化、真有策略张力”的龙虾 CLI 塔防打出来。
 
+## 当前代码结构
+
+为了先拆掉后续多图 / 多关扩展的结构阻塞，当前实现已经按下面几层整理：
+
+- `lobster_cli_tower_defense/content.py`：doctrine、单位、敌人等 roster 数据
+- `lobster_cli_tower_defense/stages.py`：当前官方 stage 的地图、路径、部署位、波次脚本
+- `lobster_cli_tower_defense/simulation.py`：纯规则状态与 pulse 结算
+- `lobster_cli_tower_defense/game.py`：CLI 输入 / 输出、紧凑渲染、结算串联
+
+注意：
+
+- 这 **不代表** 内容 Wave1 已经开始；当前官方可玩内容仍只有 `归海侧排一号线`
+- 这一轮的目标是先把可扩展结构立住，并把当前单关体验当成回归基线
+
 ## 关卡与核心机制
 
 ### 地图
@@ -72,6 +86,12 @@ python3 main.py --verbose-text
 - 一个共享 choke：`C` 闸前总卡口
 - 两个高台：`LP` / `RP`
 - 六个部署位：`L1 / M1 / R1 / C / LP / RP`
+
+高台现在更偏向“侧翼瞭望位”：
+
+- `LP` 主要看左线入口、左前拦口、中入口和总卡口
+- `RP` 主要看右线入口、右前拦口、中入口和总卡口
+- 它们不会把 `M1` 中前拦口整段一路看穿；想长期压住中线，还是得给前排或 choke 真正站人
 
 ### 资源与失败条件
 

@@ -1,48 +1,6 @@
 from __future__ import annotations
 
-import random
-
 from dataclasses import dataclass
-
-
-LANES = ("left", "mid", "right")
-LANE_TITLES = {
-    "left": "左盆沿",
-    "mid": "中排缝",
-    "right": "右塑圈",
-}
-LANE_SHORT = {
-    "left": "左",
-    "mid": "中",
-    "right": "右",
-}
-
-PATHS = {
-    "left": ("L0", "L1", "C", "SEA"),
-    "mid": ("M0", "M1", "C", "SEA"),
-    "right": ("R0", "R1", "C", "SEA"),
-}
-
-NODE_TITLES = {
-    "L0": "左入口",
-    "L1": "左前拦口",
-    "M0": "中入口",
-    "M1": "中前拦口",
-    "R0": "右入口",
-    "R1": "右前拦口",
-    "C": "闸前总卡口",
-    "LP": "左高台",
-    "RP": "右高台",
-    "SEA": "归海线",
-}
-
-STAGE_KEY = "side-drain-line-1"
-STAGE_TITLE = "归海侧排一号线"
-STAGE_BLURB = (
-    "这是一条贴着金属台沿、抽水泵偶尔回涌的侧排水线。"
-    "左边是盆沿碎口，中间是狭窄排缝，右边卡着塑料环。"
-    "你要在它们合流前，把归海线守到最后一 pulse。"
-)
 
 
 @dataclass(frozen=True)
@@ -178,15 +136,7 @@ DOCTRINES = [
     ),
 ]
 
-SLOTS = {
-    "L1": Slot("L1", "左前拦口", "L1", True, ("L1", "C")),
-    "M1": Slot("M1", "中前拦口", "M1", True, ("M1", "C")),
-    "R1": Slot("R1", "右前拦口", "R1", True, ("R1", "C")),
-    "C": Slot("C", "闸前总卡口", "C", True, ("C",)),
-    "LP": Slot("LP", "左高台", "LP", False, ("L0", "L1", "M0", "M1", "C")),
-    "RP": Slot("RP", "右高台", "RP", False, ("R0", "R1", "M0", "M1", "C")),
-}
-SLOT_ORDER = ("L1", "M1", "R1", "C", "LP", "RP")
+ALL_DEFAULT_SLOT_KEYS = ("L1", "M1", "R1", "C", "LP", "RP")
 
 UNITS = {
     "reef-guard": UnitType(
@@ -211,7 +161,7 @@ UNITS = {
         max_hp=6,
         attack=3,
         block=0,
-        allowed_slots=SLOT_ORDER,
+        allowed_slots=ALL_DEFAULT_SLOT_KEYS,
         kind="ranged",
         armor_pierce=1,
         redeploy_cooldown=2,
@@ -225,7 +175,7 @@ UNITS = {
         max_hp=5,
         attack=1,
         block=0,
-        allowed_slots=SLOT_ORDER,
+        allowed_slots=ALL_DEFAULT_SLOT_KEYS,
         kind="support",
         slow=1,
         expose=1,
@@ -240,7 +190,7 @@ UNITS = {
         max_hp=5,
         attack=1,
         block=0,
-        allowed_slots=SLOT_ORDER,
+        allowed_slots=ALL_DEFAULT_SLOT_KEYS,
         kind="splash",
         slow=1,
         redeploy_cooldown=1,
@@ -343,44 +293,8 @@ ENEMIES = {
     ),
 }
 
-WAVE_BLUEPRINTS = (
-    (
-        (SpawnSpec("A", "pot-grunt", 2),),
-        (SpawnSpec("B", "pump-runner", 1), SpawnSpec("C", "pot-grunt", 1)),
-        (SpawnSpec("A", "ring-borer", 1),),
-        (SpawnSpec("B", "eel-spark", 1), SpawnSpec("A", "pot-grunt", 1)),
-        (SpawnSpec("C", "pump-runner", 2),),
-        (SpawnSpec("A", "octopus-hauler", 1), SpawnSpec("B", "pot-grunt", 1)),
-        (SpawnSpec("B", "ring-borer", 1), SpawnSpec("C", "pump-runner", 1)),
-        (SpawnSpec("A", "pump-runner", 1), SpawnSpec("C", "eel-spark", 1)),
-        (SpawnSpec("B", "octopus-hauler", 1), SpawnSpec("A", "ring-borer", 1)),
-        (SpawnSpec("A", "pot-grunt", 2), SpawnSpec("B", "pump-runner", 1), SpawnSpec("C", "eel-spark", 1)),
-    ),
-    (
-        (SpawnSpec("B", "pot-grunt", 2),),
-        (SpawnSpec("C", "pump-runner", 1), SpawnSpec("A", "pot-grunt", 1)),
-        (SpawnSpec("B", "ring-borer", 1),),
-        (SpawnSpec("A", "eel-spark", 1), SpawnSpec("C", "pot-grunt", 1)),
-        (SpawnSpec("B", "pump-runner", 1), SpawnSpec("C", "pump-runner", 1)),
-        (SpawnSpec("A", "octopus-hauler", 1),),
-        (SpawnSpec("C", "ring-borer", 1), SpawnSpec("B", "pot-grunt", 2)),
-        (SpawnSpec("A", "pump-runner", 1), SpawnSpec("B", "eel-spark", 1)),
-        (SpawnSpec("C", "octopus-hauler", 1), SpawnSpec("A", "ring-borer", 1)),
-        (SpawnSpec("A", "pot-grunt", 1), SpawnSpec("B", "pump-runner", 1), SpawnSpec("C", "eel-spark", 1)),
-    ),
-)
 
+def build_wave_plan(seed: int):
+    from lobster_cli_tower_defense.stages import build_wave_plan as _build_wave_plan
 
-def build_wave_plan(seed: int) -> list[tuple[SpawnEntry, ...]]:
-    rng = random.Random(seed)
-    blueprint = WAVE_BLUEPRINTS[rng.randrange(len(WAVE_BLUEPRINTS))]
-    lane_order = rng.sample(list(LANES), k=3)
-    lane_map = {"A": lane_order[0], "B": lane_order[1], "C": lane_order[2]}
-    plan: list[tuple[SpawnEntry, ...]] = []
-    for pulse in blueprint:
-        entries = [
-            SpawnEntry(lane=lane_map[item.lane_symbol], enemy_key=item.enemy_key, count=item.count)
-            for item in pulse
-        ]
-        plan.append(tuple(entries))
-    return plan
+    return _build_wave_plan(seed)

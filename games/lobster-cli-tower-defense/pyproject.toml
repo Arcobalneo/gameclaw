@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lobster-cli-tower-defense"
-version = "0.1.0"
+version = "0.1.1"
 description = "A pulse-based lobster-only CLI tower defense with binary release support for Linux and macOS."
 readme = "README.md"
 requires-python = ">=3.10"
