@@ -1,0 +1,1776 @@
+[
+  {
+    "id": "affix_1",
+    "name": "COMMON词条1",
+    "tier": "common",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.13,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "common 词条 1"
+  },
+  {
+    "id": "affix_2",
+    "name": "COMMON词条2",
+    "tier": "common",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.18,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "common 词条 2"
+  },
+  {
+    "id": "affix_3",
+    "name": "COMMON词条3",
+    "tier": "common",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.25,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "common 词条 3"
+  },
+  {
+    "id": "affix_4",
+    "name": "COMMON词条4",
+    "tier": "common",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "shield",
+      "value": 0.12,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "common 词条 4"
+  },
+  {
+    "id": "affix_5",
+    "name": "COMMON词条5",
+    "tier": "common",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.45
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "common 词条 5"
+  },
+  {
+    "id": "affix_6",
+    "name": "COMMON词条6",
+    "tier": "common",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "heal",
+      "value": 0.14
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "common 词条 6"
+  },
+  {
+    "id": "affix_7",
+    "name": "COMMON词条7",
+    "tier": "common",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "common 词条 7"
+  },
+  {
+    "id": "affix_8",
+    "name": "COMMON词条8",
+    "tier": "common",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.19,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "common 词条 8"
+  },
+  {
+    "id": "affix_9",
+    "name": "COMMON词条9",
+    "tier": "common",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.24,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "common 词条 9"
+  },
+  {
+    "id": "affix_10",
+    "name": "COMMON词条10",
+    "tier": "common",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.2,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "common 词条 10"
+  },
+  {
+    "id": "affix_11",
+    "name": "COMMON词条11",
+    "tier": "common",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "shield",
+      "value": 0.27,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "common 词条 11"
+  },
+  {
+    "id": "affix_12",
+    "name": "COMMON词条12",
+    "tier": "common",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.25
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "common 词条 12"
+  },
+  {
+    "id": "affix_13",
+    "name": "COMMON词条13",
+    "tier": "common",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "heal",
+      "value": 0.11
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "common 词条 13"
+  },
+  {
+    "id": "affix_14",
+    "name": "COMMON词条14",
+    "tier": "common",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "common 词条 14"
+  },
+  {
+    "id": "affix_15",
+    "name": "COMMON词条15",
+    "tier": "common",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.1,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "common 词条 15"
+  },
+  {
+    "id": "affix_16",
+    "name": "COMMON词条16",
+    "tier": "common",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.15,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "common 词条 16"
+  },
+  {
+    "id": "affix_17",
+    "name": "COMMON词条17",
+    "tier": "common",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.15000000000000002,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "common 词条 17"
+  },
+  {
+    "id": "affix_18",
+    "name": "COMMON词条18",
+    "tier": "common",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "shield",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "common 词条 18"
+  },
+  {
+    "id": "affix_19",
+    "name": "COMMON词条19",
+    "tier": "common",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.35
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "common 词条 19"
+  },
+  {
+    "id": "affix_20",
+    "name": "COMMON词条20",
+    "tier": "common",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "heal",
+      "value": 0.08
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "common 词条 20"
+  },
+  {
+    "id": "affix_21",
+    "name": "COMMON词条21",
+    "tier": "common",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "common 词条 21"
+  },
+  {
+    "id": "affix_22",
+    "name": "COMMON词条22",
+    "tier": "common",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.16,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "common 词条 22"
+  },
+  {
+    "id": "affix_23",
+    "name": "COMMON词条23",
+    "tier": "common",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.21,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "common 词条 23"
+  },
+  {
+    "id": "affix_24",
+    "name": "COMMON词条24",
+    "tier": "common",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.1,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "common 词条 24"
+  },
+  {
+    "id": "affix_25",
+    "name": "COMMON词条25",
+    "tier": "common",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "shield",
+      "value": 0.16999999999999998,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "common 词条 25"
+  },
+  {
+    "id": "affix_26",
+    "name": "COMMON词条26",
+    "tier": "common",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.45
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "common 词条 26"
+  },
+  {
+    "id": "affix_27",
+    "name": "COMMON词条27",
+    "tier": "common",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "heal",
+      "value": 0.16999999999999998
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "common 词条 27"
+  },
+  {
+    "id": "affix_28",
+    "name": "COMMON词条28",
+    "tier": "common",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "common 词条 28"
+  },
+  {
+    "id": "affix_29",
+    "name": "COMMON词条29",
+    "tier": "common",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "common 词条 29"
+  },
+  {
+    "id": "affix_30",
+    "name": "COMMON词条30",
+    "tier": "common",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 1,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.12,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "common 词条 30"
+  },
+  {
+    "id": "affix_31",
+    "name": "BLUE词条31",
+    "tier": "blue",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.25,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "blue 词条 31"
+  },
+  {
+    "id": "affix_32",
+    "name": "BLUE词条32",
+    "tier": "blue",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "shield",
+      "value": 0.12,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "blue 词条 32"
+  },
+  {
+    "id": "affix_33",
+    "name": "BLUE词条33",
+    "tier": "blue",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.25
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "blue 词条 33"
+  },
+  {
+    "id": "affix_34",
+    "name": "BLUE词条34",
+    "tier": "blue",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "heal",
+      "value": 0.14
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "blue 词条 34"
+  },
+  {
+    "id": "affix_35",
+    "name": "BLUE词条35",
+    "tier": "blue",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "blue 词条 35"
+  },
+  {
+    "id": "affix_36",
+    "name": "BLUE词条36",
+    "tier": "blue",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.13,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "blue 词条 36"
+  },
+  {
+    "id": "affix_37",
+    "name": "BLUE词条37",
+    "tier": "blue",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.18,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "blue 词条 37"
+  },
+  {
+    "id": "affix_38",
+    "name": "BLUE词条38",
+    "tier": "blue",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.2,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "blue 词条 38"
+  },
+  {
+    "id": "affix_39",
+    "name": "BLUE词条39",
+    "tier": "blue",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "shield",
+      "value": 0.27,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "blue 词条 39"
+  },
+  {
+    "id": "affix_40",
+    "name": "BLUE词条40",
+    "tier": "blue",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.35
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "blue 词条 40"
+  },
+  {
+    "id": "affix_41",
+    "name": "BLUE词条41",
+    "tier": "blue",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "heal",
+      "value": 0.11
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "blue 词条 41"
+  },
+  {
+    "id": "affix_42",
+    "name": "BLUE词条42",
+    "tier": "blue",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "blue 词条 42"
+  },
+  {
+    "id": "affix_43",
+    "name": "BLUE词条43",
+    "tier": "blue",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.19,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "blue 词条 43"
+  },
+  {
+    "id": "affix_44",
+    "name": "BLUE词条44",
+    "tier": "blue",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.24,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "blue 词条 44"
+  },
+  {
+    "id": "affix_45",
+    "name": "BLUE词条45",
+    "tier": "blue",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.15000000000000002,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "blue 词条 45"
+  },
+  {
+    "id": "affix_46",
+    "name": "BLUE词条46",
+    "tier": "blue",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "shield",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "blue 词条 46"
+  },
+  {
+    "id": "affix_47",
+    "name": "BLUE词条47",
+    "tier": "blue",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.45
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "blue 词条 47"
+  },
+  {
+    "id": "affix_48",
+    "name": "BLUE词条48",
+    "tier": "blue",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "heal",
+      "value": 0.08
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "blue 词条 48"
+  },
+  {
+    "id": "affix_49",
+    "name": "BLUE词条49",
+    "tier": "blue",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "blue 词条 49"
+  },
+  {
+    "id": "affix_50",
+    "name": "BLUE词条50",
+    "tier": "blue",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.1,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "blue 词条 50"
+  },
+  {
+    "id": "affix_51",
+    "name": "BLUE词条51",
+    "tier": "blue",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.15,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "blue 词条 51"
+  },
+  {
+    "id": "affix_52",
+    "name": "BLUE词条52",
+    "tier": "blue",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.1,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "blue 词条 52"
+  },
+  {
+    "id": "affix_53",
+    "name": "BLUE词条53",
+    "tier": "blue",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "shield",
+      "value": 0.16999999999999998,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "blue 词条 53"
+  },
+  {
+    "id": "affix_54",
+    "name": "BLUE词条54",
+    "tier": "blue",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.25
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "blue 词条 54"
+  },
+  {
+    "id": "affix_55",
+    "name": "BLUE词条55",
+    "tier": "blue",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "heal",
+      "value": 0.16999999999999998
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "blue 词条 55"
+  },
+  {
+    "id": "affix_56",
+    "name": "BLUE词条56",
+    "tier": "blue",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "blue 词条 56"
+  },
+  {
+    "id": "affix_57",
+    "name": "BLUE词条57",
+    "tier": "blue",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.16,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "blue 词条 57"
+  },
+  {
+    "id": "affix_58",
+    "name": "BLUE词条58",
+    "tier": "blue",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.21,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "blue 词条 58"
+  },
+  {
+    "id": "affix_59",
+    "name": "BLUE词条59",
+    "tier": "blue",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.25,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "blue 词条 59"
+  },
+  {
+    "id": "affix_60",
+    "name": "BLUE词条60",
+    "tier": "blue",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 2,
+    "effect": {
+      "type": "shield",
+      "value": 0.12,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "blue 词条 60"
+  },
+  {
+    "id": "affix_61",
+    "name": "PURPLE词条61",
+    "tier": "purple",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.35
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "purple 词条 61"
+  },
+  {
+    "id": "affix_62",
+    "name": "PURPLE词条62",
+    "tier": "purple",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "heal",
+      "value": 0.14
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "purple 词条 62"
+  },
+  {
+    "id": "affix_63",
+    "name": "PURPLE词条63",
+    "tier": "purple",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "purple 词条 63"
+  },
+  {
+    "id": "affix_64",
+    "name": "PURPLE词条64",
+    "tier": "purple",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "purple 词条 64"
+  },
+  {
+    "id": "affix_65",
+    "name": "PURPLE词条65",
+    "tier": "purple",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.12,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "purple 词条 65"
+  },
+  {
+    "id": "affix_66",
+    "name": "PURPLE词条66",
+    "tier": "purple",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.2,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "purple 词条 66"
+  },
+  {
+    "id": "affix_67",
+    "name": "PURPLE词条67",
+    "tier": "purple",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "shield",
+      "value": 0.27,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "purple 词条 67"
+  },
+  {
+    "id": "affix_68",
+    "name": "PURPLE词条68",
+    "tier": "purple",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.45
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "purple 词条 68"
+  },
+  {
+    "id": "affix_69",
+    "name": "PURPLE词条69",
+    "tier": "purple",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "heal",
+      "value": 0.11
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "purple 词条 69"
+  },
+  {
+    "id": "affix_70",
+    "name": "PURPLE词条70",
+    "tier": "purple",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "purple 词条 70"
+  },
+  {
+    "id": "affix_71",
+    "name": "PURPLE词条71",
+    "tier": "purple",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.13,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "purple 词条 71"
+  },
+  {
+    "id": "affix_72",
+    "name": "PURPLE词条72",
+    "tier": "purple",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.18,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "purple 词条 72"
+  },
+  {
+    "id": "affix_73",
+    "name": "PURPLE词条73",
+    "tier": "purple",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.15000000000000002,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "purple 词条 73"
+  },
+  {
+    "id": "affix_74",
+    "name": "PURPLE词条74",
+    "tier": "purple",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "shield",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "purple 词条 74"
+  },
+  {
+    "id": "affix_75",
+    "name": "PURPLE词条75",
+    "tier": "purple",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.25
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "purple 词条 75"
+  },
+  {
+    "id": "affix_76",
+    "name": "PURPLE词条76",
+    "tier": "purple",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "heal",
+      "value": 0.08
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "purple 词条 76"
+  },
+  {
+    "id": "affix_77",
+    "name": "PURPLE词条77",
+    "tier": "purple",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "purple 词条 77"
+  },
+  {
+    "id": "affix_78",
+    "name": "PURPLE词条78",
+    "tier": "purple",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.19,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "purple 词条 78"
+  },
+  {
+    "id": "affix_79",
+    "name": "PURPLE词条79",
+    "tier": "purple",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.24,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "purple 词条 79"
+  },
+  {
+    "id": "affix_80",
+    "name": "PURPLE词条80",
+    "tier": "purple",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.1,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "purple 词条 80"
+  },
+  {
+    "id": "affix_81",
+    "name": "PURPLE词条81",
+    "tier": "purple",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "shield",
+      "value": 0.16999999999999998,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "purple 词条 81"
+  },
+  {
+    "id": "affix_82",
+    "name": "PURPLE词条82",
+    "tier": "purple",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.35
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "purple 词条 82"
+  },
+  {
+    "id": "affix_83",
+    "name": "PURPLE词条83",
+    "tier": "purple",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "heal",
+      "value": 0.16999999999999998
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "purple 词条 83"
+  },
+  {
+    "id": "affix_84",
+    "name": "PURPLE词条84",
+    "tier": "purple",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "purple 词条 84"
+  },
+  {
+    "id": "affix_85",
+    "name": "PURPLE词条85",
+    "tier": "purple",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 3,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.1,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "purple 词条 85"
+  },
+  {
+    "id": "affix_86",
+    "name": "GOLD词条86",
+    "tier": "gold",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.15,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "gold 词条 86"
+  },
+  {
+    "id": "affix_87",
+    "name": "GOLD词条87",
+    "tier": "gold",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.25,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "gold 词条 87"
+  },
+  {
+    "id": "affix_88",
+    "name": "GOLD词条88",
+    "tier": "gold",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "shield",
+      "value": 0.12,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "gold 词条 88"
+  },
+  {
+    "id": "affix_89",
+    "name": "GOLD词条89",
+    "tier": "gold",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "status_apply",
+      "status": "中毒",
+      "chance": 0.45
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "gold 词条 89"
+  },
+  {
+    "id": "affix_90",
+    "name": "GOLD词条90",
+    "tier": "gold",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "heal",
+      "value": 0.14
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "gold 词条 90"
+  },
+  {
+    "id": "affix_91",
+    "name": "GOLD词条91",
+    "tier": "gold",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "terrain",
+      "name": "激流场",
+      "duration_turns": 3
+    },
+    "synergy_tags": [
+      "rock",
+      "speed"
+    ],
+    "description": "gold 词条 91"
+  },
+  {
+    "id": "affix_92",
+    "name": "GOLD词条92",
+    "tier": "gold",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.16,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "electric",
+      "tank"
+    ],
+    "description": "gold 词条 92"
+  },
+  {
+    "id": "affix_93",
+    "name": "GOLD词条93",
+    "tier": "gold",
+    "trigger": "on_hp_threshold",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.21,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "speed"
+    ],
+    "description": "gold 词条 93"
+  },
+  {
+    "id": "affix_94",
+    "name": "GOLD词条94",
+    "tier": "gold",
+    "trigger": "on_status_apply",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "enemy",
+      "stat": "spd",
+      "value": -0.2,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "spirit",
+      "tank"
+    ],
+    "description": "gold 词条 94"
+  },
+  {
+    "id": "affix_95",
+    "name": "GOLD词条95",
+    "tier": "gold",
+    "trigger": "on_switch_in",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "shield",
+      "value": 0.27,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "tide",
+      "speed"
+    ],
+    "description": "gold 词条 95"
+  },
+  {
+    "id": "affix_96",
+    "name": "GOLD词条96",
+    "tier": "gold",
+    "trigger": "passive_team",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "status_apply",
+      "status": "麻痹",
+      "chance": 0.25
+    },
+    "synergy_tags": [
+      "rock",
+      "tank"
+    ],
+    "description": "gold 词条 96"
+  },
+  {
+    "id": "affix_97",
+    "name": "GOLD词条97",
+    "tier": "gold",
+    "trigger": "on_take_damage",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "heal",
+      "value": 0.11
+    },
+    "synergy_tags": [
+      "electric",
+      "speed"
+    ],
+    "description": "gold 词条 97"
+  },
+  {
+    "id": "affix_98",
+    "name": "GOLD词条98",
+    "tier": "gold",
+    "trigger": "on_deal_damage",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "terrain",
+      "name": "毒潮场",
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "poison",
+      "tank"
+    ],
+    "description": "gold 词条 98"
+  },
+  {
+    "id": "affix_99",
+    "name": "GOLD词条99",
+    "tier": "gold",
+    "trigger": "on_turn_start",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "atk",
+      "value": 0.22,
+      "duration_turns": 1
+    },
+    "synergy_tags": [
+      "spirit",
+      "speed"
+    ],
+    "description": "gold 词条 99"
+  },
+  {
+    "id": "affix_100",
+    "name": "GOLD词条100",
+    "tier": "gold",
+    "trigger": "on_turn_end",
+    "trigger_limit_per_battle": 99,
+    "effect": {
+      "type": "stat_change",
+      "target": "self",
+      "stat": "def",
+      "value": 0.12,
+      "duration_turns": 2
+    },
+    "synergy_tags": [
+      "tide",
+      "tank"
+    ],
+    "description": "gold 词条 100"
+  }
+]

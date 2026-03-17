@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "spirit_strike_1_1",
+    "name": "灵击1",
+    "type": "灵",
+    "category": "physical",
+    "power": 60,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵击1"
+  },
+  {
+    "id": "spirit_slash_1_2",
+    "name": "灵斩1",
+    "type": "灵",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵斩1"
+  },
+  {
+    "id": "spirit_guard_1_3",
+    "name": "灵守1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "spirit"
+    ],
+    "description": "灵系技能 灵守1"
+  },
+  {
+    "id": "spirit_surge_1_4",
+    "name": "灵涌1",
+    "type": "灵",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵涌1"
+  },
+  {
+    "id": "spirit_burst_1_5",
+    "name": "灵爆1",
+    "type": "灵",
+    "category": "special",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵爆1"
+  },
+  {
+    "id": "spirit_veil_1_6",
+    "name": "灵幕1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵幕1"
+  },
+  {
+    "id": "spirit_wave_1_7",
+    "name": "灵波1",
+    "type": "灵",
+    "category": "special",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵波1"
+  },
+  {
+    "id": "spirit_rush_1_8",
+    "name": "灵冲1",
+    "type": "灵",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵冲1"
+  },
+  {
+    "id": "spirit_field_1_9",
+    "name": "灵域1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "灵场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵域1"
+  },
+  {
+    "id": "spirit_shell_1_10",
+    "name": "灵壳1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "spirit"
+    ],
+    "description": "灵系技能 灵壳1"
+  },
+  {
+    "id": "spirit_howl_1_11",
+    "name": "灵鸣1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵鸣1"
+  },
+  {
+    "id": "spirit_spike_1_12",
+    "name": "灵刺1",
+    "type": "灵",
+    "category": "physical",
+    "power": 70,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵刺1"
+  },
+  {
+    "id": "spirit_break_1_13",
+    "name": "灵破1",
+    "type": "灵",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵破1"
+  },
+  {
+    "id": "spirit_echo_1_14",
+    "name": "灵响1",
+    "type": "灵",
+    "category": "special",
+    "power": 74,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "spirit"
+    ],
+    "description": "灵系技能 灵响1"
+  },
+  {
+    "id": "spirit_pulse_1_15",
+    "name": "灵脉1",
+    "type": "灵",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "spirit"
+    ],
+    "description": "灵系技能 灵脉1"
+  },
+  {
+    "id": "spirit_storm_1_16",
+    "name": "灵暴1",
+    "type": "灵",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵暴1"
+  },
+  {
+    "id": "spirit_step_1_17",
+    "name": "灵步1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "spirit"
+    ],
+    "description": "灵系技能 灵步1"
+  },
+  {
+    "id": "spirit_ring_1_18",
+    "name": "灵环1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "spirit"
+    ],
+    "description": "灵系技能 灵环1"
+  },
+  {
+    "id": "spirit_edge_1_19",
+    "name": "灵棱1",
+    "type": "灵",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵棱1"
+  },
+  {
+    "id": "spirit_oath_1_20",
+    "name": "灵誓约1",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵誓约1"
+  },
+  {
+    "id": "spirit_strike_2_1",
+    "name": "灵击2",
+    "type": "灵",
+    "category": "physical",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "basic",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵击2"
+  },
+  {
+    "id": "spirit_slash_2_2",
+    "name": "灵斩2",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵斩2"
+  },
+  {
+    "id": "spirit_guard_2_3",
+    "name": "灵守2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "spirit"
+    ],
+    "description": "灵系技能 灵守2"
+  },
+  {
+    "id": "spirit_surge_2_4",
+    "name": "灵涌2",
+    "type": "灵",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵涌2"
+  },
+  {
+    "id": "spirit_burst_2_5",
+    "name": "灵爆2",
+    "type": "灵",
+    "category": "special",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵爆2"
+  },
+  {
+    "id": "spirit_veil_2_6",
+    "name": "灵幕2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵幕2"
+  },
+  {
+    "id": "spirit_wave_2_7",
+    "name": "灵波2",
+    "type": "灵",
+    "category": "special",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵波2"
+  },
+  {
+    "id": "spirit_rush_2_8",
+    "name": "灵冲2",
+    "type": "灵",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "speed",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵冲2"
+  },
+  {
+    "id": "spirit_field_2_9",
+    "name": "灵域2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "灵场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵域2"
+  },
+  {
+    "id": "spirit_shell_2_10",
+    "name": "灵壳2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "spirit"
+    ],
+    "description": "灵系技能 灵壳2"
+  },
+  {
+    "id": "spirit_howl_2_11",
+    "name": "灵鸣2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵鸣2"
+  },
+  {
+    "id": "spirit_spike_2_12",
+    "name": "灵刺2",
+    "type": "灵",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵刺2"
+  },
+  {
+    "id": "spirit_break_2_13",
+    "name": "灵破2",
+    "type": "灵",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵破2"
+  },
+  {
+    "id": "spirit_echo_2_14",
+    "name": "灵响2",
+    "type": "灵",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "spirit"
+    ],
+    "description": "灵系技能 灵响2"
+  },
+  {
+    "id": "spirit_pulse_2_15",
+    "name": "灵脉2",
+    "type": "灵",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "spirit"
+    ],
+    "description": "灵系技能 灵脉2"
+  },
+  {
+    "id": "spirit_storm_2_16",
+    "name": "灵暴2",
+    "type": "灵",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵暴2"
+  },
+  {
+    "id": "spirit_step_2_17",
+    "name": "灵步2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "spirit"
+    ],
+    "description": "灵系技能 灵步2"
+  },
+  {
+    "id": "spirit_ring_2_18",
+    "name": "灵环2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "spirit"
+    ],
+    "description": "灵系技能 灵环2"
+  },
+  {
+    "id": "spirit_edge_2_19",
+    "name": "灵棱2",
+    "type": "灵",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵棱2"
+  },
+  {
+    "id": "spirit_oath_2_20",
+    "name": "灵誓约2",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵誓约2"
+  },
+  {
+    "id": "spirit_strike_3_1",
+    "name": "灵击3",
+    "type": "灵",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵击3"
+  },
+  {
+    "id": "spirit_slash_3_2",
+    "name": "灵斩3",
+    "type": "灵",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "physical",
+      "crit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵斩3"
+  },
+  {
+    "id": "spirit_guard_3_3",
+    "name": "灵守3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "spirit"
+    ],
+    "description": "灵系技能 灵守3"
+  },
+  {
+    "id": "spirit_surge_3_4",
+    "name": "灵涌3",
+    "type": "灵",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵涌3"
+  },
+  {
+    "id": "spirit_burst_3_5",
+    "name": "灵爆3",
+    "type": "灵",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵爆3"
+  },
+  {
+    "id": "spirit_veil_3_6",
+    "name": "灵幕3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵幕3"
+  },
+  {
+    "id": "spirit_wave_3_7",
+    "name": "灵波3",
+    "type": "灵",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵波3"
+  },
+  {
+    "id": "spirit_rush_3_8",
+    "name": "灵冲3",
+    "type": "灵",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵冲3"
+  },
+  {
+    "id": "spirit_field_3_9",
+    "name": "灵域3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "灵场",
+        "duration_turns": 3
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵域3"
+  },
+  {
+    "id": "spirit_shell_3_10",
+    "name": "灵壳3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "spirit"
+    ],
+    "description": "灵系技能 灵壳3"
+  },
+  {
+    "id": "spirit_howl_3_11",
+    "name": "灵鸣3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵鸣3"
+  },
+  {
+    "id": "spirit_spike_3_12",
+    "name": "灵刺3",
+    "type": "灵",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵刺3"
+  },
+  {
+    "id": "spirit_break_3_13",
+    "name": "灵破3",
+    "type": "灵",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵破3"
+  },
+  {
+    "id": "spirit_echo_3_14",
+    "name": "灵响3",
+    "type": "灵",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "spirit"
+    ],
+    "description": "灵系技能 灵响3"
+  },
+  {
+    "id": "spirit_pulse_3_15",
+    "name": "灵脉3",
+    "type": "灵",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "spirit"
+    ],
+    "description": "灵系技能 灵脉3"
+  },
+  {
+    "id": "spirit_storm_3_16",
+    "name": "灵暴3",
+    "type": "灵",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "aoe",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵暴3"
+  },
+  {
+    "id": "spirit_step_3_17",
+    "name": "灵步3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "spirit"
+    ],
+    "description": "灵系技能 灵步3"
+  },
+  {
+    "id": "spirit_ring_3_18",
+    "name": "灵环3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "spirit"
+    ],
+    "description": "灵系技能 灵环3"
+  },
+  {
+    "id": "spirit_edge_3_19",
+    "name": "灵棱3",
+    "type": "灵",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵棱3"
+  },
+  {
+    "id": "spirit_oath_3_20",
+    "name": "灵誓约3",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵誓约3"
+  },
+  {
+    "id": "spirit_strike_4_1",
+    "name": "灵击4",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵击4"
+  },
+  {
+    "id": "spirit_slash_4_2",
+    "name": "灵斩4",
+    "type": "灵",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵斩4"
+  },
+  {
+    "id": "spirit_guard_4_3",
+    "name": "灵守4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "spirit"
+    ],
+    "description": "灵系技能 灵守4"
+  },
+  {
+    "id": "spirit_surge_4_4",
+    "name": "灵涌4",
+    "type": "灵",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵涌4"
+  },
+  {
+    "id": "spirit_burst_4_5",
+    "name": "灵爆4",
+    "type": "灵",
+    "category": "special",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵爆4"
+  },
+  {
+    "id": "spirit_veil_4_6",
+    "name": "灵幕4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵幕4"
+  },
+  {
+    "id": "spirit_wave_4_7",
+    "name": "灵波4",
+    "type": "灵",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵波4"
+  },
+  {
+    "id": "spirit_rush_4_8",
+    "name": "灵冲4",
+    "type": "灵",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵冲4"
+  },
+  {
+    "id": "spirit_field_4_9",
+    "name": "灵域4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "灵场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵域4"
+  },
+  {
+    "id": "spirit_shell_4_10",
+    "name": "灵壳4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "spirit"
+    ],
+    "description": "灵系技能 灵壳4"
+  },
+  {
+    "id": "spirit_howl_4_11",
+    "name": "灵鸣4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵鸣4"
+  },
+  {
+    "id": "spirit_spike_4_12",
+    "name": "灵刺4",
+    "type": "灵",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵刺4"
+  },
+  {
+    "id": "spirit_break_4_13",
+    "name": "灵破4",
+    "type": "灵",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵破4"
+  },
+  {
+    "id": "spirit_echo_4_14",
+    "name": "灵响4",
+    "type": "灵",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "spirit"
+    ],
+    "description": "灵系技能 灵响4"
+  },
+  {
+    "id": "spirit_pulse_4_15",
+    "name": "灵脉4",
+    "type": "灵",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "spirit"
+    ],
+    "description": "灵系技能 灵脉4"
+  },
+  {
+    "id": "spirit_storm_4_16",
+    "name": "灵暴4",
+    "type": "灵",
+    "category": "special",
+    "power": 110,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵暴4"
+  },
+  {
+    "id": "spirit_step_4_17",
+    "name": "灵步4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "spirit"
+    ],
+    "description": "灵系技能 灵步4"
+  },
+  {
+    "id": "spirit_ring_4_18",
+    "name": "灵环4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "spirit"
+    ],
+    "description": "灵系技能 灵环4"
+  },
+  {
+    "id": "spirit_edge_4_19",
+    "name": "灵棱4",
+    "type": "灵",
+    "category": "physical",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵棱4"
+  },
+  {
+    "id": "spirit_oath_4_20",
+    "name": "灵誓约4",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵誓约4"
+  },
+  {
+    "id": "spirit_strike_5_1",
+    "name": "灵击5",
+    "type": "灵",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵击5"
+  },
+  {
+    "id": "spirit_slash_5_2",
+    "name": "灵斩5",
+    "type": "灵",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵斩5"
+  },
+  {
+    "id": "spirit_guard_5_3",
+    "name": "灵守5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "spirit"
+    ],
+    "description": "灵系技能 灵守5"
+  },
+  {
+    "id": "spirit_surge_5_4",
+    "name": "灵涌5",
+    "type": "灵",
+    "category": "special",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵涌5"
+  },
+  {
+    "id": "spirit_burst_5_5",
+    "name": "灵爆5",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵爆5"
+  },
+  {
+    "id": "spirit_veil_5_6",
+    "name": "灵幕5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵幕5"
+  },
+  {
+    "id": "spirit_wave_5_7",
+    "name": "灵波5",
+    "type": "灵",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "spirit"
+    ],
+    "description": "灵系技能 灵波5"
+  },
+  {
+    "id": "spirit_rush_5_8",
+    "name": "灵冲5",
+    "type": "灵",
+    "category": "physical",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵冲5"
+  },
+  {
+    "id": "spirit_field_5_9",
+    "name": "灵域5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "灵场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵域5"
+  },
+  {
+    "id": "spirit_shell_5_10",
+    "name": "灵壳5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "spirit"
+    ],
+    "description": "灵系技能 灵壳5"
+  },
+  {
+    "id": "spirit_howl_5_11",
+    "name": "灵鸣5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "spirit"
+    ],
+    "description": "灵系技能 灵鸣5"
+  },
+  {
+    "id": "spirit_spike_5_12",
+    "name": "灵刺5",
+    "type": "灵",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵刺5"
+  },
+  {
+    "id": "spirit_break_5_13",
+    "name": "灵破5",
+    "type": "灵",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵破5"
+  },
+  {
+    "id": "spirit_echo_5_14",
+    "name": "灵响5",
+    "type": "灵",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "spirit"
+    ],
+    "description": "灵系技能 灵响5"
+  },
+  {
+    "id": "spirit_pulse_5_15",
+    "name": "灵脉5",
+    "type": "灵",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "spirit"
+    ],
+    "description": "灵系技能 灵脉5"
+  },
+  {
+    "id": "spirit_storm_5_16",
+    "name": "灵暴5",
+    "type": "灵",
+    "category": "special",
+    "power": 116,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "spirit"
+    ],
+    "description": "灵系技能 灵暴5"
+  },
+  {
+    "id": "spirit_step_5_17",
+    "name": "灵步5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "spirit"
+    ],
+    "description": "灵系技能 灵步5"
+  },
+  {
+    "id": "spirit_ring_5_18",
+    "name": "灵环5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "spirit"
+    ],
+    "description": "灵系技能 灵环5"
+  },
+  {
+    "id": "spirit_edge_5_19",
+    "name": "灵棱5",
+    "type": "灵",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "spirit"
+    ],
+    "description": "灵系技能 灵棱5"
+  },
+  {
+    "id": "spirit_oath_5_20",
+    "name": "灵誓约5",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "spirit"
+    ],
+    "description": "灵系技能 灵誓约5"
+  }
+]

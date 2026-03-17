@@ -1,0 +1,202 @@
+[
+  {
+    "id": "ghost_shrimp", "name": "幽虾", "type": "灵", "rarity": "common",
+    "base_stats": {"hp": 38, "atk": 25, "def": 15, "spd": 52, "end": 22},
+    "stat_growth": {"hp": 1.8, "atk": 1.8, "def": 0.8, "spd": 3.2, "end": 1.5},
+    "base_skill": "幻影", "skill_pool_tags": ["spirit", "evasion", "basic", "speed"],
+    "affix_slots": 2, "capture_base_rate": 0.65,
+    "habitat": ["深流峡谷-幽暗层", "暗礁荒野-幽魂角"],
+    "lore": "近乎透明的身体让其难以被发现，擅长利用幻影规避攻击，令对手徒劳出拳。",
+    "evolution": {"target": "deep_ghost_shrimp", "min_level": 20}
+  },
+  {
+    "id": "spirit_snail", "name": "灵光螺", "type": "灵", "rarity": "common",
+    "base_stats": {"hp": 58, "atk": 18, "def": 28, "spd": 25, "end": 38},
+    "stat_growth": {"hp": 3.0, "atk": 1.0, "def": 2.0, "spd": 1.5, "end": 2.8},
+    "base_skill": "灵感", "skill_pool_tags": ["spirit", "support", "buff", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.62,
+    "habitat": ["深流峡谷-幽暗层", "暗礁荒野-幽魂角"],
+    "lore": "螺壳散发淡淡灵光，能将灵感传递给队友，随机提升其某项属性。",
+    "evolution": null
+  },
+  {
+    "id": "phantom_crab", "name": "幻影蟹", "type": "灵", "rarity": "common",
+    "base_stats": {"hp": 45, "atk": 22, "def": 20, "spd": 42, "end": 28},
+    "stat_growth": {"hp": 2.2, "atk": 1.4, "def": 1.2, "spd": 2.8, "end": 2.0},
+    "base_skill": "幻影", "skill_pool_tags": ["spirit", "evasion", "dodge", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["暗礁荒野-幽魂角"],
+    "lore": "能将自身变成半透明状态，在战斗中频繁躲避攻击，令对手感到无比沮丧。",
+    "evolution": null
+  },
+  {
+    "id": "psychic_eel", "name": "心灵鳗", "type": "灵", "rarity": "common",
+    "base_stats": {"hp": 42, "atk": 28, "def": 18, "spd": 45, "end": 30},
+    "stat_growth": {"hp": 2.0, "atk": 1.8, "def": 1.0, "spd": 2.8, "end": 2.2},
+    "base_skill": "心灵感应", "skill_pool_tags": ["spirit", "intel", "support", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["深流峡谷-心灵湾"],
+    "lore": "能读取对手的战斗意图，提前预判并规避攻击，同时将情报传递给同伴。",
+    "evolution": null
+  },
+  {
+    "id": "inspiration_slug", "name": "灵感蛞蝓", "type": "灵", "rarity": "uncommon",
+    "base_stats": {"hp": 55, "atk": 20, "def": 25, "spd": 35, "end": 42},
+    "stat_growth": {"hp": 2.8, "atk": 1.2, "def": 1.8, "spd": 2.2, "end": 3.0},
+    "base_skill": "灵感", "skill_pool_tags": ["spirit", "buff", "random", "support"],
+    "affix_slots": 2, "capture_base_rate": 0.45,
+    "habitat": ["暗礁荒野-灵感丘"],
+    "lore": "能将随机灵感注入战友体内，虽然效果不可预测，但往往能带来奇迹般的转变。",
+    "evolution": null
+  },
+  {
+    "id": "dream_jellyfish", "name": "梦幻水母", "type": "灵", "rarity": "uncommon",
+    "base_stats": {"hp": 62, "atk": 18, "def": 22, "spd": 30, "end": 45},
+    "stat_growth": {"hp": 3.2, "atk": 1.0, "def": 1.5, "spd": 1.8, "end": 3.2},
+    "base_skill": "幻觉毒素", "skill_pool_tags": ["spirit", "confusion", "status", "sleep"],
+    "affix_slots": 2, "capture_base_rate": 0.42,
+    "habitat": ["深流峡谷-梦幻湾"],
+    "lore": "飘动的触须释放致幻粒子，被接触的对手会陷入梦幻状态，无法区分虚实。",
+    "evolution": null
+  },
+  {
+    "id": "precognition_starfish", "name": "预知海星", "type": "灵", "rarity": "uncommon",
+    "base_stats": {"hp": 60, "atk": 20, "def": 30, "spd": 28, "end": 45},
+    "stat_growth": {"hp": 3.0, "atk": 1.2, "def": 2.2, "spd": 1.8, "end": 3.2},
+    "base_skill": "心灵感应", "skill_pool_tags": ["spirit", "intel", "support", "evasion"],
+    "affix_slots": 3, "capture_base_rate": 0.40,
+    "habitat": ["暗礁荒野-预言角"],
+    "lore": "五条触臂各自感知不同维度的信息，能预知对手的下一步行动并提前规避。",
+    "evolution": null
+  },
+  {
+    "id": "magic_claw", "name": "魔力螯", "type": "灵", "rarity": "uncommon",
+    "base_stats": {"hp": 52, "atk": 38, "def": 20, "spd": 40, "end": 32},
+    "stat_growth": {"hp": 2.5, "atk": 2.5, "def": 1.2, "spd": 2.5, "end": 2.2},
+    "base_skill": "灵能冲击", "skill_pool_tags": ["spirit", "special", "high_power", "evasion"],
+    "affix_slots": 2, "capture_base_rate": 0.38,
+    "habitat": ["暗礁荒野-魔力区"],
+    "lore": "螯中蓄积着神秘灵能，攻击时带有难以预测的灵能波动，同时保持高度灵活。",
+    "evolution": null
+  },
+  {
+    "id": "deep_ghost_shrimp", "name": "深幽虾", "type": "灵", "rarity": "rare",
+    "base_stats": {"hp": 52, "atk": 38, "def": 22, "spd": 68, "end": 32},
+    "stat_growth": {"hp": 2.5, "atk": 2.5, "def": 1.2, "spd": 4.2, "end": 2.2},
+    "base_skill": "深幽突袭", "skill_pool_tags": ["spirit", "evasion", "speed", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.30,
+    "habitat": ["深海裂隙-幽灵层", "热泉秘境-幽境"],
+    "lore": "幽虾进化后可以短暂穿越进入半虚空状态，从对手完全无法防御的角度发动攻击。",
+    "evolution": {"target": "extreme_ghost_shrimp", "min_level": 38}
+  },
+  {
+    "id": "illusion_king", "name": "幻觉螯王", "type": "灵", "rarity": "rare",
+    "base_stats": {"hp": 68, "atk": 42, "def": 28, "spd": 58, "end": 38},
+    "stat_growth": {"hp": 3.5, "atk": 2.8, "def": 1.5, "spd": 3.5, "end": 2.5},
+    "base_skill": "终极幻觉", "skill_pool_tags": ["spirit", "confusion", "multi_status", "debuff"],
+    "affix_slots": 3, "capture_base_rate": 0.25,
+    "habitat": ["深海裂隙-幻觉层"],
+    "lore": "能制造完美幻觉的稀有灵系虾米，对手在与它战斗时会不断受到幻觉干扰。",
+    "evolution": null
+  },
+  {
+    "id": "soul_shell", "name": "灵魂贝", "type": "灵", "rarity": "rare",
+    "base_stats": {"hp": 72, "atk": 15, "def": 35, "spd": 25, "end": 55},
+    "stat_growth": {"hp": 3.8, "atk": 0.8, "def": 2.5, "spd": 1.5, "end": 3.8},
+    "base_skill": "灵魂庇护", "skill_pool_tags": ["spirit", "support", "shield", "team_buff"],
+    "affix_slots": 3, "capture_base_rate": 0.22,
+    "habitat": ["暗礁荒野-灵魂湾"],
+    "lore": "贝壳中封存着远古灵魂的力量，能为队友提供最强大的精神防护，是终极支援型虾米。",
+    "evolution": null
+  },
+  {
+    "id": "starlight_shrimp", "name": "星光虾", "type": "灵", "rarity": "rare",
+    "base_stats": {"hp": 60, "atk": 28, "def": 28, "spd": 48, "end": 48},
+    "stat_growth": {"hp": 3.0, "atk": 1.8, "def": 2.0, "spd": 3.0, "end": 3.2},
+    "base_skill": "星光祝福", "skill_pool_tags": ["spirit", "team_buff", "buff", "support"],
+    "affix_slots": 3, "capture_base_rate": 0.20,
+    "habitat": ["热泉秘境-星光区"],
+    "lore": "身体能反射深海星光，将星光转化为祝福能量赐予全体队友，提升各项属性。",
+    "evolution": null
+  },
+  {
+    "id": "abyss_prophet", "name": "深渊预言者", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 78, "atk": 32, "def": 40, "spd": 55, "end": 58},
+    "stat_growth": {"hp": 4.0, "atk": 2.0, "def": 2.8, "spd": 3.5, "end": 4.0},
+    "base_skill": "深渊预言", "skill_pool_tags": ["spirit", "intel", "support", "evasion"],
+    "affix_slots": 3, "capture_base_rate": 0.15,
+    "habitat": ["深海裂隙-预言室"],
+    "lore": "能感知深渊的意志，提前预知深渊中所有敌人的行动，并引导队友规避最强威胁。",
+    "evolution": null
+  },
+  {
+    "id": "phantom_spirit_emperor", "name": "幻灵帝", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 82, "atk": 62, "def": 32, "spd": 78, "end": 42},
+    "stat_growth": {"hp": 4.2, "atk": 4.0, "def": 1.8, "spd": 4.8, "end": 2.8},
+    "base_skill": "帝皇幻影袭", "skill_pool_tags": ["spirit", "evasion", "high_power", "speed"],
+    "affix_slots": 3, "capture_base_rate": 0.12,
+    "habitat": ["深海裂隙-幻灵殿"],
+    "lore": "灵系幻影与攻击的完美融合体，在幻影状态下发动的攻击无法被任何防御手段应对。",
+    "evolution": null
+  },
+  {
+    "id": "time_snail", "name": "时光螺", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 88, "atk": 25, "def": 45, "spd": 65, "end": 65},
+    "stat_growth": {"hp": 4.5, "atk": 1.5, "def": 3.0, "spd": 4.0, "end": 4.5},
+    "base_skill": "时间操控", "skill_pool_tags": ["spirit", "priority", "control", "support"],
+    "affix_slots": 3, "capture_base_rate": 0.10,
+    "habitat": ["深海裂隙-时光洞"],
+    "lore": "传说能微微操控时间流速，在战斗中总能比对手快半步，掌控战斗节奏。",
+    "evolution": null
+  },
+  {
+    "id": "void_claw", "name": "虚空螯", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 95, "atk": 70, "def": 38, "spd": 72, "end": 48},
+    "stat_growth": {"hp": 4.8, "atk": 4.5, "def": 2.2, "spd": 4.5, "end": 3.2},
+    "base_skill": "虚空裂击", "skill_pool_tags": ["spirit", "high_power", "armor_break", "speed"],
+    "affix_slots": 3, "capture_base_rate": 0.08,
+    "habitat": ["深海裂隙-虚空边界"],
+    "lore": "来自虚空的稀有虾米，其攻击穿透虚实边界，无法被任何物理防御完全格挡。",
+    "evolution": null
+  },
+  {
+    "id": "extreme_ghost_shrimp", "name": "极幽虾", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 68, "atk": 55, "def": 30, "spd": 88, "end": 42},
+    "stat_growth": {"hp": 3.2, "atk": 3.5, "def": 1.8, "spd": 5.5, "end": 2.8},
+    "base_skill": "极幽突袭", "skill_pool_tags": ["spirit", "evasion", "speed", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.07,
+    "habitat": ["热泉秘境-极幽区"],
+    "lore": "幽虾进化链的终极形态，可以完全进入虚空状态移动，攻击时才短暂现形。",
+    "evolution": null
+  },
+  {
+    "id": "hot_spring_spirit", "name": "热泉灵使", "type": "灵", "rarity": "rare",
+    "base_stats": {"hp": 72, "atk": 28, "def": 38, "spd": 52, "end": 55},
+    "stat_growth": {"hp": 3.8, "atk": 1.8, "def": 2.5, "spd": 3.2, "end": 3.8},
+    "base_skill": "温泉灵愈", "skill_pool_tags": ["spirit", "support", "heal", "buff"],
+    "affix_slots": 3, "capture_base_rate": 0.18,
+    "habitat": ["热泉秘境-灵泉区"],
+    "lore": "在热泉中凝聚灵力的特殊虾米，能将温泉的治愈力与灵能结合，为队友提供全面恢复。",
+    "evolution": null
+  },
+  {
+    "id": "abyss_phantom_deep", "name": "深渊幻影", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 88, "atk": 60, "def": 35, "spd": 75, "end": 48},
+    "stat_growth": {"hp": 4.5, "atk": 3.8, "def": 2.0, "spd": 4.8, "end": 3.2},
+    "base_skill": "深渊幻击", "skill_pool_tags": ["spirit", "evasion", "high_power", "speed"],
+    "affix_slots": 3, "capture_base_rate": 0.06,
+    "habitat": ["深海裂隙-幻影核心"],
+    "lore": "在深渊幽暗中诞生的幻影实体，其攻击和防御都在虚实之间，令对手无从应对。",
+    "evolution": null
+  },
+  {
+    "id": "void_lord", "name": "虚无领主", "type": "灵", "rarity": "elite",
+    "base_stats": {"hp": 105, "atk": 68, "def": 45, "spd": 68, "end": 58},
+    "stat_growth": {"hp": 5.2, "atk": 4.2, "def": 2.8, "spd": 4.2, "end": 4.0},
+    "base_skill": "虚无领域", "skill_pool_tags": ["spirit", "aoe", "high_power", "control", "evasion"],
+    "affix_slots": 3, "capture_base_rate": 0.05,
+    "habitat": ["深海裂隙-虚无核心"],
+    "lore": "灵系虾米的终极领主，其存在使周围区域的物理法则变得不稳定，在它的领域内，一切攻击都是无效的。",
+    "evolution": null
+  }
+]

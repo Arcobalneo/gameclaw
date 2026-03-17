@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "signature_1",
+    "name": "礁虾奥义",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "礁虾的专属奥义"
+  },
+  {
+    "id": "signature_2",
+    "name": "潮龙虾奥义",
+    "type": "电",
+    "category": "physical",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "潮龙虾的专属奥义"
+  },
+  {
+    "id": "signature_3",
+    "name": "珊瑚帝王蟹奥义",
+    "type": "毒",
+    "category": "special",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "珊瑚帝王蟹的专属奥义"
+  },
+  {
+    "id": "signature_4",
+    "name": "深蓝霸主奥义",
+    "type": "灵",
+    "category": "physical",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "深蓝霸主的专属奥义"
+  },
+  {
+    "id": "signature_5",
+    "name": "巨甲蟹奥义",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "巨甲蟹的专属奥义"
+  },
+  {
+    "id": "signature_6",
+    "name": "磐石王奥义",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "磐石王的专属奥义"
+  },
+  {
+    "id": "signature_7",
+    "name": "闪电帝奥义",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "闪电帝的专属奥义"
+  },
+  {
+    "id": "signature_8",
+    "name": "超电磁霸主奥义",
+    "type": "毒",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "超电磁霸主的专属奥义"
+  },
+  {
+    "id": "signature_9",
+    "name": "深毒螯王奥义",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "深毒螯王的专属奥义"
+  },
+  {
+    "id": "signature_10",
+    "name": "腐化领主奥义",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "腐化领主的专属奥义"
+  },
+  {
+    "id": "signature_11",
+    "name": "幻灵帝奥义",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "幻灵帝的专属奥义"
+  },
+  {
+    "id": "signature_12",
+    "name": "虚无领主奥义",
+    "type": "电",
+    "category": "physical",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "虚无领主的专属奥义"
+  },
+  {
+    "id": "signature_13",
+    "name": "深渊螯王奥义",
+    "type": "毒",
+    "category": "special",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "深渊螯王的专属奥义"
+  },
+  {
+    "id": "signature_14",
+    "name": "创世虾奥义",
+    "type": "灵",
+    "category": "physical",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "创世虾的专属奥义"
+  },
+  {
+    "id": "signature_15",
+    "name": "混沌螯奥义",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "混沌螯的专属奥义"
+  },
+  {
+    "id": "signature_16",
+    "name": "虾米始祖奥义",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "虾米始祖的专属奥义"
+  },
+  {
+    "id": "signature_17",
+    "name": "深蓝之神奥义",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "深蓝之神的专属奥义"
+  },
+  {
+    "id": "signature_18",
+    "name": "永恒虾灵奥义",
+    "type": "毒",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "永恒虾灵的专属奥义"
+  },
+  {
+    "id": "signature_19",
+    "name": "瘟疫领主奥义",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "瘟疫领主的专属奥义"
+  },
+  {
+    "id": "signature_20",
+    "name": "虚空皇帝奥义",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "虚空皇帝的专属奥义"
+  },
+  {
+    "id": "signature_21",
+    "name": "极礁虾奥义",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "极礁虾的专属奥义"
+  },
+  {
+    "id": "signature_22",
+    "name": "远古岩蟹奥义",
+    "type": "电",
+    "category": "physical",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "远古岩蟹的专属奥义"
+  },
+  {
+    "id": "signature_23",
+    "name": "极速电虾奥义",
+    "type": "毒",
+    "category": "special",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "极速电虾的专属奥义"
+  },
+  {
+    "id": "signature_24",
+    "name": "极毒海胆奥义",
+    "type": "灵",
+    "category": "physical",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "极毒海胆的专属奥义"
+  },
+  {
+    "id": "signature_25",
+    "name": "极幽虾奥义",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "极幽虾的专属奥义"
+  },
+  {
+    "id": "signature_26",
+    "name": "海渊执事奥义",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "海渊执事的专属奥义"
+  },
+  {
+    "id": "signature_27",
+    "name": "暗礁霸主奥义",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "暗礁霸主的专属奥义"
+  },
+  {
+    "id": "signature_28",
+    "name": "裂隙电鳗奥义",
+    "type": "毒",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "裂隙电鳗的专属奥义"
+  },
+  {
+    "id": "signature_29",
+    "name": "毒雾章鱼奥义",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "毒雾章鱼的专属奥义"
+  },
+  {
+    "id": "signature_30",
+    "name": "时光螺奥义",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "时光螺的专属奥义"
+  },
+  {
+    "id": "signature_31",
+    "name": "星光虾奥义",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "星光虾的专属奥义"
+  },
+  {
+    "id": "signature_32",
+    "name": "深潮鱼奥义",
+    "type": "电",
+    "category": "physical",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "深潮鱼的专属奥义"
+  },
+  {
+    "id": "signature_33",
+    "name": "深礁虾奥义",
+    "type": "毒",
+    "category": "special",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "深礁虾的专属奥义"
+  },
+  {
+    "id": "signature_34",
+    "name": "风暴螯奥义",
+    "type": "灵",
+    "category": "physical",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "风暴螯的专属奥义"
+  },
+  {
+    "id": "signature_35",
+    "name": "玄武蟹奥义",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "玄武蟹的专属奥义"
+  },
+  {
+    "id": "signature_36",
+    "name": "火山甲虾奥义",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "火山甲虾的专属奥义"
+  },
+  {
+    "id": "signature_37",
+    "name": "雷霆巨螯奥义",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "雷霆巨螯的专属奥义"
+  },
+  {
+    "id": "signature_38",
+    "name": "电鳌奥义",
+    "type": "毒",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "电鳌的专属奥义"
+  },
+  {
+    "id": "signature_39",
+    "name": "毒刃螯奥义",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "毒刃螯的专属奥义"
+  },
+  {
+    "id": "signature_40",
+    "name": "瘟疫蟹奥义",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "瘟疫蟹的专属奥义"
+  },
+  {
+    "id": "signature_41",
+    "name": "灵魂贝奥义",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "灵魂贝的专属奥义"
+  },
+  {
+    "id": "signature_42",
+    "name": "深幽虾奥义",
+    "type": "电",
+    "category": "physical",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "深幽虾的专属奥义"
+  },
+  {
+    "id": "signature_43",
+    "name": "潮汐王奥义",
+    "type": "毒",
+    "category": "special",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "潮汐王的专属奥义"
+  },
+  {
+    "id": "signature_44",
+    "name": "海压巨螯奥义",
+    "type": "灵",
+    "category": "physical",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "海压巨螯的专属奥义"
+  },
+  {
+    "id": "signature_45",
+    "name": "熔核螯王奥义",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "熔核螯王的专属奥义"
+  },
+  {
+    "id": "signature_46",
+    "name": "超速螯王奥义",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "rock"
+    ],
+    "description": "超速螯王的专属奥义"
+  },
+  {
+    "id": "signature_47",
+    "name": "瘟疫降临者奥义",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "electric"
+    ],
+    "description": "瘟疫降临者的专属奥义"
+  },
+  {
+    "id": "signature_48",
+    "name": "毒藻丛林主奥义",
+    "type": "毒",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "poison"
+    ],
+    "description": "毒藻丛林主的专属奥义"
+  },
+  {
+    "id": "signature_49",
+    "name": "深渊预言者奥义",
+    "type": "灵",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "spirit"
+    ],
+    "description": "深渊预言者的专属奥义"
+  },
+  {
+    "id": "signature_50",
+    "name": "深渊幻影奥义",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.2,
+        "duration_turns": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "target_low_hp",
+        "power_bonus": 0.25
+      }
+    ],
+    "tags": [
+      "signature",
+      "high_power",
+      "tide"
+    ],
+    "description": "深渊幻影的专属奥义"
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "abyss_claw_king", "name": "深渊螯王", "type": "潮", "rarity": "legendary",
+    "base_stats": {"hp": 160, "atk": 90, "def": 80, "spd": 60, "end": 85},
+    "stat_growth": {"hp": 8.0, "atk": 5.5, "def": 5.0, "spd": 3.5, "end": 5.5},
+    "base_skill": "深渊螯压", "skill_pool_tags": ["tide", "rock", "high_power", "multi_hit", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.02,
+    "habitat": ["深海裂隙-深渊核心"],
+    "lore": "深渊的绝对统治者，同时掌握潮与岩两系力量，传说没有任何虾米能在其全力之下存活。",
+    "evolution": null
+  },
+  {
+    "id": "genesis_shrimp", "name": "创世虾", "type": "灵", "rarity": "legendary",
+    "base_stats": {"hp": 145, "atk": 75, "def": 75, "spd": 90, "end": 90},
+    "stat_growth": {"hp": 7.5, "atk": 4.8, "def": 4.8, "spd": 5.5, "end": 6.0},
+    "base_skill": "创世之力", "skill_pool_tags": ["spirit", "buff", "team_buff", "aoe", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.015,
+    "habitat": ["深海裂隙-时光洞"],
+    "lore": "据说是最早存在于海洋中的虾米，其身体内蕴藏着创世之初的灵能，所有虾米的祖先。",
+    "evolution": null
+  },
+  {
+    "id": "chaos_claw", "name": "混沌螯", "type": "电", "rarity": "legendary",
+    "base_stats": {"hp": 138, "atk": 98, "def": 55, "spd": 85, "end": 65},
+    "stat_growth": {"hp": 7.0, "atk": 6.2, "def": 3.5, "spd": 5.2, "end": 4.2},
+    "base_skill": "混沌裂击", "skill_pool_tags": ["electric", "poison", "high_power", "risky", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.018,
+    "habitat": ["深海裂隙-混沌区"],
+    "lore": "在深渊混沌能量中诞生的存在，同时具有电与毒两系属性，攻击带来的混沌效果无法预测。",
+    "evolution": null
+  },
+  {
+    "id": "shrimp_ancestor", "name": "虾米始祖", "type": "潮", "rarity": "legendary",
+    "base_stats": {"hp": 150, "atk": 82, "def": 82, "spd": 70, "end": 82},
+    "stat_growth": {"hp": 7.8, "atk": 5.2, "def": 5.2, "spd": 4.2, "end": 5.5},
+    "base_skill": "始祖之怒", "skill_pool_tags": ["tide", "spirit", "buff", "team_buff", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.012,
+    "habitat": ["深海裂隙-远古遗迹"],
+    "lore": "潮系虾米的传说始祖，身上刻有最古老的符文，拥有超越现代虾米认知的战斗能力。",
+    "evolution": null
+  },
+  {
+    "id": "abyss_guardian_god", "name": "深渊守护神", "type": "岩", "rarity": "legendary",
+    "base_stats": {"hp": 180, "atk": 75, "def": 100, "spd": 42, "end": 98},
+    "stat_growth": {"hp": 9.0, "atk": 4.8, "def": 6.5, "spd": 2.5, "end": 6.5},
+    "base_skill": "神圣壁垒", "skill_pool_tags": ["rock", "spirit", "tank", "team_buff", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.010,
+    "habitat": ["深海裂隙-神圣领域"],
+    "lore": "深渊的守护者，用无与伦比的防御力保护着深渊的秩序，曾击退过无数试图破坏平衡的入侵者。",
+    "evolution": null
+  },
+  {
+    "id": "ocean_abyss_supreme", "name": "海渊至尊", "type": "潮", "rarity": "legendary",
+    "base_stats": {"hp": 168, "atk": 95, "def": 88, "spd": 65, "end": 92},
+    "stat_growth": {"hp": 8.5, "atk": 6.0, "def": 5.5, "spd": 4.0, "end": 6.0},
+    "base_skill": "至尊海压", "skill_pool_tags": ["tide", "high_power", "aoe", "terrain", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.008,
+    "habitat": ["深海裂隙-至尊殿"],
+    "lore": "海洋与深渊力量的完美融合体，其力量足以引发真正的海啸，是整片深渊最强大的存在之一。",
+    "evolution": null
+  },
+  {
+    "id": "founding_claw_king", "name": "创始螯王", "type": "岩", "rarity": "legendary",
+    "base_stats": {"hp": 155, "atk": 88, "def": 95, "spd": 48, "end": 90},
+    "stat_growth": {"hp": 8.0, "atk": 5.5, "def": 6.0, "spd": 2.8, "end": 5.8},
+    "base_skill": "创始铁甲", "skill_pool_tags": ["rock", "electric", "tank", "counter", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.009,
+    "habitat": ["深海裂隙-始祖洞"],
+    "lore": "岩系虾米的传说创始者，其铁甲在数亿年的深渊压力下进化为近乎无敌的状态。",
+    "evolution": null
+  },
+  {
+    "id": "deep_blue_god", "name": "深蓝之神", "type": "潮", "rarity": "legendary",
+    "base_stats": {"hp": 172, "atk": 92, "def": 82, "spd": 75, "end": 88},
+    "stat_growth": {"hp": 8.8, "atk": 5.8, "def": 5.2, "spd": 4.5, "end": 5.8},
+    "base_skill": "神域海啸", "skill_pool_tags": ["tide", "high_power", "aoe", "multi_hit", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.007,
+    "habitat": ["深海裂隙-神域"],
+    "lore": "被古代甲录师奉为神明的存在，传说其单次攻击能改变整片海洋的格局。",
+    "evolution": null
+  },
+  {
+    "id": "eternal_shrimp_spirit", "name": "永恒虾灵", "type": "灵", "rarity": "legendary",
+    "base_stats": {"hp": 148, "atk": 78, "def": 78, "spd": 88, "end": 95},
+    "stat_growth": {"hp": 7.5, "atk": 5.0, "def": 5.0, "spd": 5.5, "end": 6.2},
+    "base_skill": "永恒灵光", "skill_pool_tags": ["spirit", "buff", "heal", "team_buff", "evasion", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.006,
+    "habitat": ["深海裂隙-永恒之境"],
+    "lore": "存在于永恒时间中的虾灵，能在己方虾米陷入危机时展现超越时间限制的强大支援力量。",
+    "evolution": null
+  },
+  {
+    "id": "plague_lord", "name": "瘟疫领主", "type": "毒", "rarity": "legendary",
+    "base_stats": {"hp": 158, "atk": 85, "def": 72, "spd": 55, "end": 88},
+    "stat_growth": {"hp": 8.0, "atk": 5.5, "def": 4.5, "spd": 3.2, "end": 5.8},
+    "base_skill": "终极瘟疫", "skill_pool_tags": ["poison", "multi_status", "aoe", "dot", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.008,
+    "habitat": ["深海裂隙-瘟疫核心"],
+    "lore": "所有毒与疫病的终极来源，据说深渊中的疫病现象正是其存在所散布的余波。",
+    "evolution": null
+  },
+  {
+    "id": "void_emperor", "name": "虚空皇帝", "type": "灵", "rarity": "legendary",
+    "base_stats": {"hp": 142, "atk": 88, "def": 65, "spd": 95, "end": 75},
+    "stat_growth": {"hp": 7.2, "atk": 5.5, "def": 4.0, "spd": 6.0, "end": 5.0},
+    "base_skill": "虚空法则", "skill_pool_tags": ["spirit", "electric", "evasion", "high_power", "control", "signature"],
+    "affix_slots": 4, "capture_base_rate": 0.005,
+    "habitat": ["深海裂隙-虚空核心"],
+    "lore": "统治虚空与现实边界的皇帝，其力量来自两个世界的交汇，任何对它的攻击都可能穿透虚空落到攻击者自身。",
+    "evolution": null
+  }
+]

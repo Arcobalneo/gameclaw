@@ -1,0 +1,1012 @@
+[
+  {
+    "id": "universal_claw_hit_1_1",
+    "name": "钳击1",
+    "type": "无",
+    "category": "physical",
+    "power": 62,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 钳击"
+  },
+  {
+    "id": "universal_guard_pose_1_2",
+    "name": "防御姿态1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "universal"
+    ],
+    "description": "通用技能 防御姿态"
+  },
+  {
+    "id": "universal_shell_off_1_3",
+    "name": "蜕壳1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.18
+      }
+    ],
+    "tags": [
+      "heal",
+      "support",
+      "universal"
+    ],
+    "description": "通用技能 蜕壳"
+  },
+  {
+    "id": "universal_taunt_1_4",
+    "name": "嘲讽1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "嘲讽",
+        "chance": 1.0
+      }
+    ],
+    "tags": [
+      "control",
+      "debuff",
+      "universal"
+    ],
+    "description": "通用技能 嘲讽"
+  },
+  {
+    "id": "universal_retreat_ready_1_5",
+    "name": "撤退准备1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "priority",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 撤退准备"
+  },
+  {
+    "id": "universal_focus_1_6",
+    "name": "集中1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 集中"
+  },
+  {
+    "id": "universal_bite_1_7",
+    "name": "撕咬1",
+    "type": "无",
+    "category": "physical",
+    "power": 70,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 撕咬"
+  },
+  {
+    "id": "universal_wave_step_1_8",
+    "name": "滑步1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "speed",
+      "priority",
+      "universal"
+    ],
+    "description": "通用技能 滑步"
+  },
+  {
+    "id": "universal_brace_1_9",
+    "name": "稳固1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "tank",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 稳固"
+  },
+  {
+    "id": "universal_meditate_1_10",
+    "name": "冥思1",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 冥思"
+  },
+  {
+    "id": "universal_claw_hit_2_1",
+    "name": "钳击2",
+    "type": "无",
+    "category": "physical",
+    "power": 67,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 钳击"
+  },
+  {
+    "id": "universal_guard_pose_2_2",
+    "name": "防御姿态2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "universal"
+    ],
+    "description": "通用技能 防御姿态"
+  },
+  {
+    "id": "universal_shell_off_2_3",
+    "name": "蜕壳2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.18
+      }
+    ],
+    "tags": [
+      "heal",
+      "support",
+      "universal"
+    ],
+    "description": "通用技能 蜕壳"
+  },
+  {
+    "id": "universal_taunt_2_4",
+    "name": "嘲讽2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "嘲讽",
+        "chance": 1.0
+      }
+    ],
+    "tags": [
+      "control",
+      "debuff",
+      "universal"
+    ],
+    "description": "通用技能 嘲讽"
+  },
+  {
+    "id": "universal_retreat_ready_2_5",
+    "name": "撤退准备2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "priority",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 撤退准备"
+  },
+  {
+    "id": "universal_focus_2_6",
+    "name": "集中2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 集中"
+  },
+  {
+    "id": "universal_bite_2_7",
+    "name": "撕咬2",
+    "type": "无",
+    "category": "physical",
+    "power": 75,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 撕咬"
+  },
+  {
+    "id": "universal_wave_step_2_8",
+    "name": "滑步2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "speed",
+      "priority",
+      "universal"
+    ],
+    "description": "通用技能 滑步"
+  },
+  {
+    "id": "universal_brace_2_9",
+    "name": "稳固2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "tank",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 稳固"
+  },
+  {
+    "id": "universal_meditate_2_10",
+    "name": "冥思2",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 冥思"
+  },
+  {
+    "id": "universal_claw_hit_3_1",
+    "name": "钳击3",
+    "type": "无",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 钳击"
+  },
+  {
+    "id": "universal_guard_pose_3_2",
+    "name": "防御姿态3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "universal"
+    ],
+    "description": "通用技能 防御姿态"
+  },
+  {
+    "id": "universal_shell_off_3_3",
+    "name": "蜕壳3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.18
+      }
+    ],
+    "tags": [
+      "heal",
+      "support",
+      "universal"
+    ],
+    "description": "通用技能 蜕壳"
+  },
+  {
+    "id": "universal_taunt_3_4",
+    "name": "嘲讽3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "嘲讽",
+        "chance": 1.0
+      }
+    ],
+    "tags": [
+      "control",
+      "debuff",
+      "universal"
+    ],
+    "description": "通用技能 嘲讽"
+  },
+  {
+    "id": "universal_retreat_ready_3_5",
+    "name": "撤退准备3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "priority",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 撤退准备"
+  },
+  {
+    "id": "universal_focus_3_6",
+    "name": "集中3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 集中"
+  },
+  {
+    "id": "universal_bite_3_7",
+    "name": "撕咬3",
+    "type": "无",
+    "category": "physical",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 撕咬"
+  },
+  {
+    "id": "universal_wave_step_3_8",
+    "name": "滑步3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "speed",
+      "priority",
+      "universal"
+    ],
+    "description": "通用技能 滑步"
+  },
+  {
+    "id": "universal_brace_3_9",
+    "name": "稳固3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "tank",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 稳固"
+  },
+  {
+    "id": "universal_meditate_3_10",
+    "name": "冥思3",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 冥思"
+  },
+  {
+    "id": "universal_claw_hit_4_1",
+    "name": "钳击4",
+    "type": "无",
+    "category": "physical",
+    "power": 77,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 钳击"
+  },
+  {
+    "id": "universal_guard_pose_4_2",
+    "name": "防御姿态4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "universal"
+    ],
+    "description": "通用技能 防御姿态"
+  },
+  {
+    "id": "universal_shell_off_4_3",
+    "name": "蜕壳4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.18
+      }
+    ],
+    "tags": [
+      "heal",
+      "support",
+      "universal"
+    ],
+    "description": "通用技能 蜕壳"
+  },
+  {
+    "id": "universal_taunt_4_4",
+    "name": "嘲讽4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "嘲讽",
+        "chance": 1.0
+      }
+    ],
+    "tags": [
+      "control",
+      "debuff",
+      "universal"
+    ],
+    "description": "通用技能 嘲讽"
+  },
+  {
+    "id": "universal_retreat_ready_4_5",
+    "name": "撤退准备4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "priority",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 撤退准备"
+  },
+  {
+    "id": "universal_focus_4_6",
+    "name": "集中4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 集中"
+  },
+  {
+    "id": "universal_bite_4_7",
+    "name": "撕咬4",
+    "type": "无",
+    "category": "physical",
+    "power": 85,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 撕咬"
+  },
+  {
+    "id": "universal_wave_step_4_8",
+    "name": "滑步4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "speed",
+      "priority",
+      "universal"
+    ],
+    "description": "通用技能 滑步"
+  },
+  {
+    "id": "universal_brace_4_9",
+    "name": "稳固4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "tank",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 稳固"
+  },
+  {
+    "id": "universal_meditate_4_10",
+    "name": "冥思4",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 冥思"
+  },
+  {
+    "id": "universal_claw_hit_5_1",
+    "name": "钳击5",
+    "type": "无",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 钳击"
+  },
+  {
+    "id": "universal_guard_pose_5_2",
+    "name": "防御姿态5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "universal"
+    ],
+    "description": "通用技能 防御姿态"
+  },
+  {
+    "id": "universal_shell_off_5_3",
+    "name": "蜕壳5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.18
+      }
+    ],
+    "tags": [
+      "heal",
+      "support",
+      "universal"
+    ],
+    "description": "通用技能 蜕壳"
+  },
+  {
+    "id": "universal_taunt_5_4",
+    "name": "嘲讽5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "嘲讽",
+        "chance": 1.0
+      }
+    ],
+    "tags": [
+      "control",
+      "debuff",
+      "universal"
+    ],
+    "description": "通用技能 嘲讽"
+  },
+  {
+    "id": "universal_retreat_ready_5_5",
+    "name": "撤退准备5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "priority",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 撤退准备"
+  },
+  {
+    "id": "universal_focus_5_6",
+    "name": "集中5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 集中"
+  },
+  {
+    "id": "universal_bite_5_7",
+    "name": "撕咬5",
+    "type": "无",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "universal"
+    ],
+    "description": "通用技能 撕咬"
+  },
+  {
+    "id": "universal_wave_step_5_8",
+    "name": "滑步5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "speed",
+      "priority",
+      "universal"
+    ],
+    "description": "通用技能 滑步"
+  },
+  {
+    "id": "universal_brace_5_9",
+    "name": "稳固5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "tank",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 稳固"
+  },
+  {
+    "id": "universal_meditate_5_10",
+    "name": "冥思5",
+    "type": "无",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "buff",
+      "universal"
+    ],
+    "description": "通用技能 冥思"
+  }
+]

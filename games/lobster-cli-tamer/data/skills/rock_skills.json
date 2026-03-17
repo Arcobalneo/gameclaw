@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "rock_strike_1_1",
+    "name": "岩击1",
+    "type": "岩",
+    "category": "physical",
+    "power": 60,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩击1"
+  },
+  {
+    "id": "rock_slash_1_2",
+    "name": "岩斩1",
+    "type": "岩",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "rock"
+    ],
+    "description": "岩系技能 岩斩1"
+  },
+  {
+    "id": "rock_guard_1_3",
+    "name": "岩守1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "rock"
+    ],
+    "description": "岩系技能 岩守1"
+  },
+  {
+    "id": "rock_surge_1_4",
+    "name": "岩涌1",
+    "type": "岩",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩涌1"
+  },
+  {
+    "id": "rock_burst_1_5",
+    "name": "岩爆1",
+    "type": "岩",
+    "category": "special",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩爆1"
+  },
+  {
+    "id": "rock_veil_1_6",
+    "name": "岩幕1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "rock"
+    ],
+    "description": "岩系技能 岩幕1"
+  },
+  {
+    "id": "rock_wave_1_7",
+    "name": "岩波1",
+    "type": "岩",
+    "category": "special",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "rock"
+    ],
+    "description": "岩系技能 岩波1"
+  },
+  {
+    "id": "rock_rush_1_8",
+    "name": "岩冲1",
+    "type": "岩",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩冲1"
+  },
+  {
+    "id": "rock_field_1_9",
+    "name": "岩域1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "岩场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩域1"
+  },
+  {
+    "id": "rock_shell_1_10",
+    "name": "岩壳1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "rock"
+    ],
+    "description": "岩系技能 岩壳1"
+  },
+  {
+    "id": "rock_howl_1_11",
+    "name": "岩鸣1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩鸣1"
+  },
+  {
+    "id": "rock_spike_1_12",
+    "name": "岩刺1",
+    "type": "岩",
+    "category": "physical",
+    "power": 70,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "灼烧",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩刺1"
+  },
+  {
+    "id": "rock_break_1_13",
+    "name": "岩破1",
+    "type": "岩",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩破1"
+  },
+  {
+    "id": "rock_echo_1_14",
+    "name": "岩响1",
+    "type": "岩",
+    "category": "special",
+    "power": 74,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "rock"
+    ],
+    "description": "岩系技能 岩响1"
+  },
+  {
+    "id": "rock_pulse_1_15",
+    "name": "岩脉1",
+    "type": "岩",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "rock"
+    ],
+    "description": "岩系技能 岩脉1"
+  },
+  {
+    "id": "rock_storm_1_16",
+    "name": "岩暴1",
+    "type": "岩",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩暴1"
+  },
+  {
+    "id": "rock_step_1_17",
+    "name": "岩步1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "rock"
+    ],
+    "description": "岩系技能 岩步1"
+  },
+  {
+    "id": "rock_ring_1_18",
+    "name": "岩环1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "rock"
+    ],
+    "description": "岩系技能 岩环1"
+  },
+  {
+    "id": "rock_edge_1_19",
+    "name": "岩棱1",
+    "type": "岩",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩棱1"
+  },
+  {
+    "id": "rock_oath_1_20",
+    "name": "岩誓约1",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "rock"
+    ],
+    "description": "岩系技能 岩誓约1"
+  },
+  {
+    "id": "rock_strike_2_1",
+    "name": "岩击2",
+    "type": "岩",
+    "category": "physical",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "basic",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩击2"
+  },
+  {
+    "id": "rock_slash_2_2",
+    "name": "岩斩2",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "rock"
+    ],
+    "description": "岩系技能 岩斩2"
+  },
+  {
+    "id": "rock_guard_2_3",
+    "name": "岩守2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "rock"
+    ],
+    "description": "岩系技能 岩守2"
+  },
+  {
+    "id": "rock_surge_2_4",
+    "name": "岩涌2",
+    "type": "岩",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩涌2"
+  },
+  {
+    "id": "rock_burst_2_5",
+    "name": "岩爆2",
+    "type": "岩",
+    "category": "special",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩爆2"
+  },
+  {
+    "id": "rock_veil_2_6",
+    "name": "岩幕2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "rock"
+    ],
+    "description": "岩系技能 岩幕2"
+  },
+  {
+    "id": "rock_wave_2_7",
+    "name": "岩波2",
+    "type": "岩",
+    "category": "special",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "rock"
+    ],
+    "description": "岩系技能 岩波2"
+  },
+  {
+    "id": "rock_rush_2_8",
+    "name": "岩冲2",
+    "type": "岩",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "speed",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩冲2"
+  },
+  {
+    "id": "rock_field_2_9",
+    "name": "岩域2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "岩场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩域2"
+  },
+  {
+    "id": "rock_shell_2_10",
+    "name": "岩壳2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "rock"
+    ],
+    "description": "岩系技能 岩壳2"
+  },
+  {
+    "id": "rock_howl_2_11",
+    "name": "岩鸣2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩鸣2"
+  },
+  {
+    "id": "rock_spike_2_12",
+    "name": "岩刺2",
+    "type": "岩",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "灼烧",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩刺2"
+  },
+  {
+    "id": "rock_break_2_13",
+    "name": "岩破2",
+    "type": "岩",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩破2"
+  },
+  {
+    "id": "rock_echo_2_14",
+    "name": "岩响2",
+    "type": "岩",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "rock"
+    ],
+    "description": "岩系技能 岩响2"
+  },
+  {
+    "id": "rock_pulse_2_15",
+    "name": "岩脉2",
+    "type": "岩",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "rock"
+    ],
+    "description": "岩系技能 岩脉2"
+  },
+  {
+    "id": "rock_storm_2_16",
+    "name": "岩暴2",
+    "type": "岩",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩暴2"
+  },
+  {
+    "id": "rock_step_2_17",
+    "name": "岩步2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "rock"
+    ],
+    "description": "岩系技能 岩步2"
+  },
+  {
+    "id": "rock_ring_2_18",
+    "name": "岩环2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "rock"
+    ],
+    "description": "岩系技能 岩环2"
+  },
+  {
+    "id": "rock_edge_2_19",
+    "name": "岩棱2",
+    "type": "岩",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩棱2"
+  },
+  {
+    "id": "rock_oath_2_20",
+    "name": "岩誓约2",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "rock"
+    ],
+    "description": "岩系技能 岩誓约2"
+  },
+  {
+    "id": "rock_strike_3_1",
+    "name": "岩击3",
+    "type": "岩",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩击3"
+  },
+  {
+    "id": "rock_slash_3_2",
+    "name": "岩斩3",
+    "type": "岩",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "physical",
+      "crit",
+      "rock"
+    ],
+    "description": "岩系技能 岩斩3"
+  },
+  {
+    "id": "rock_guard_3_3",
+    "name": "岩守3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "rock"
+    ],
+    "description": "岩系技能 岩守3"
+  },
+  {
+    "id": "rock_surge_3_4",
+    "name": "岩涌3",
+    "type": "岩",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩涌3"
+  },
+  {
+    "id": "rock_burst_3_5",
+    "name": "岩爆3",
+    "type": "岩",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩爆3"
+  },
+  {
+    "id": "rock_veil_3_6",
+    "name": "岩幕3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "rock"
+    ],
+    "description": "岩系技能 岩幕3"
+  },
+  {
+    "id": "rock_wave_3_7",
+    "name": "岩波3",
+    "type": "岩",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "rock"
+    ],
+    "description": "岩系技能 岩波3"
+  },
+  {
+    "id": "rock_rush_3_8",
+    "name": "岩冲3",
+    "type": "岩",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩冲3"
+  },
+  {
+    "id": "rock_field_3_9",
+    "name": "岩域3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "岩场",
+        "duration_turns": 3
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩域3"
+  },
+  {
+    "id": "rock_shell_3_10",
+    "name": "岩壳3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "rock"
+    ],
+    "description": "岩系技能 岩壳3"
+  },
+  {
+    "id": "rock_howl_3_11",
+    "name": "岩鸣3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩鸣3"
+  },
+  {
+    "id": "rock_spike_3_12",
+    "name": "岩刺3",
+    "type": "岩",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "灼烧",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩刺3"
+  },
+  {
+    "id": "rock_break_3_13",
+    "name": "岩破3",
+    "type": "岩",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩破3"
+  },
+  {
+    "id": "rock_echo_3_14",
+    "name": "岩响3",
+    "type": "岩",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "rock"
+    ],
+    "description": "岩系技能 岩响3"
+  },
+  {
+    "id": "rock_pulse_3_15",
+    "name": "岩脉3",
+    "type": "岩",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "rock"
+    ],
+    "description": "岩系技能 岩脉3"
+  },
+  {
+    "id": "rock_storm_3_16",
+    "name": "岩暴3",
+    "type": "岩",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "aoe",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩暴3"
+  },
+  {
+    "id": "rock_step_3_17",
+    "name": "岩步3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "rock"
+    ],
+    "description": "岩系技能 岩步3"
+  },
+  {
+    "id": "rock_ring_3_18",
+    "name": "岩环3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "rock"
+    ],
+    "description": "岩系技能 岩环3"
+  },
+  {
+    "id": "rock_edge_3_19",
+    "name": "岩棱3",
+    "type": "岩",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩棱3"
+  },
+  {
+    "id": "rock_oath_3_20",
+    "name": "岩誓约3",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "rock"
+    ],
+    "description": "岩系技能 岩誓约3"
+  },
+  {
+    "id": "rock_strike_4_1",
+    "name": "岩击4",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩击4"
+  },
+  {
+    "id": "rock_slash_4_2",
+    "name": "岩斩4",
+    "type": "岩",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "rock"
+    ],
+    "description": "岩系技能 岩斩4"
+  },
+  {
+    "id": "rock_guard_4_3",
+    "name": "岩守4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "rock"
+    ],
+    "description": "岩系技能 岩守4"
+  },
+  {
+    "id": "rock_surge_4_4",
+    "name": "岩涌4",
+    "type": "岩",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩涌4"
+  },
+  {
+    "id": "rock_burst_4_5",
+    "name": "岩爆4",
+    "type": "岩",
+    "category": "special",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩爆4"
+  },
+  {
+    "id": "rock_veil_4_6",
+    "name": "岩幕4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "rock"
+    ],
+    "description": "岩系技能 岩幕4"
+  },
+  {
+    "id": "rock_wave_4_7",
+    "name": "岩波4",
+    "type": "岩",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "rock"
+    ],
+    "description": "岩系技能 岩波4"
+  },
+  {
+    "id": "rock_rush_4_8",
+    "name": "岩冲4",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩冲4"
+  },
+  {
+    "id": "rock_field_4_9",
+    "name": "岩域4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "岩场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩域4"
+  },
+  {
+    "id": "rock_shell_4_10",
+    "name": "岩壳4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "rock"
+    ],
+    "description": "岩系技能 岩壳4"
+  },
+  {
+    "id": "rock_howl_4_11",
+    "name": "岩鸣4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩鸣4"
+  },
+  {
+    "id": "rock_spike_4_12",
+    "name": "岩刺4",
+    "type": "岩",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "灼烧",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩刺4"
+  },
+  {
+    "id": "rock_break_4_13",
+    "name": "岩破4",
+    "type": "岩",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩破4"
+  },
+  {
+    "id": "rock_echo_4_14",
+    "name": "岩响4",
+    "type": "岩",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "rock"
+    ],
+    "description": "岩系技能 岩响4"
+  },
+  {
+    "id": "rock_pulse_4_15",
+    "name": "岩脉4",
+    "type": "岩",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "rock"
+    ],
+    "description": "岩系技能 岩脉4"
+  },
+  {
+    "id": "rock_storm_4_16",
+    "name": "岩暴4",
+    "type": "岩",
+    "category": "special",
+    "power": 110,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩暴4"
+  },
+  {
+    "id": "rock_step_4_17",
+    "name": "岩步4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "rock"
+    ],
+    "description": "岩系技能 岩步4"
+  },
+  {
+    "id": "rock_ring_4_18",
+    "name": "岩环4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "rock"
+    ],
+    "description": "岩系技能 岩环4"
+  },
+  {
+    "id": "rock_edge_4_19",
+    "name": "岩棱4",
+    "type": "岩",
+    "category": "physical",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩棱4"
+  },
+  {
+    "id": "rock_oath_4_20",
+    "name": "岩誓约4",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "rock"
+    ],
+    "description": "岩系技能 岩誓约4"
+  },
+  {
+    "id": "rock_strike_5_1",
+    "name": "岩击5",
+    "type": "岩",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩击5"
+  },
+  {
+    "id": "rock_slash_5_2",
+    "name": "岩斩5",
+    "type": "岩",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "rock"
+    ],
+    "description": "岩系技能 岩斩5"
+  },
+  {
+    "id": "rock_guard_5_3",
+    "name": "岩守5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "rock"
+    ],
+    "description": "岩系技能 岩守5"
+  },
+  {
+    "id": "rock_surge_5_4",
+    "name": "岩涌5",
+    "type": "岩",
+    "category": "special",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩涌5"
+  },
+  {
+    "id": "rock_burst_5_5",
+    "name": "岩爆5",
+    "type": "岩",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩爆5"
+  },
+  {
+    "id": "rock_veil_5_6",
+    "name": "岩幕5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "rock"
+    ],
+    "description": "岩系技能 岩幕5"
+  },
+  {
+    "id": "rock_wave_5_7",
+    "name": "岩波5",
+    "type": "岩",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "rock"
+    ],
+    "description": "岩系技能 岩波5"
+  },
+  {
+    "id": "rock_rush_5_8",
+    "name": "岩冲5",
+    "type": "岩",
+    "category": "physical",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩冲5"
+  },
+  {
+    "id": "rock_field_5_9",
+    "name": "岩域5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "岩场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩域5"
+  },
+  {
+    "id": "rock_shell_5_10",
+    "name": "岩壳5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "rock"
+    ],
+    "description": "岩系技能 岩壳5"
+  },
+  {
+    "id": "rock_howl_5_11",
+    "name": "岩鸣5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "rock"
+    ],
+    "description": "岩系技能 岩鸣5"
+  },
+  {
+    "id": "rock_spike_5_12",
+    "name": "岩刺5",
+    "type": "岩",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "灼烧",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩刺5"
+  },
+  {
+    "id": "rock_break_5_13",
+    "name": "岩破5",
+    "type": "岩",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩破5"
+  },
+  {
+    "id": "rock_echo_5_14",
+    "name": "岩响5",
+    "type": "岩",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "rock"
+    ],
+    "description": "岩系技能 岩响5"
+  },
+  {
+    "id": "rock_pulse_5_15",
+    "name": "岩脉5",
+    "type": "岩",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "rock"
+    ],
+    "description": "岩系技能 岩脉5"
+  },
+  {
+    "id": "rock_storm_5_16",
+    "name": "岩暴5",
+    "type": "岩",
+    "category": "special",
+    "power": 116,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "rock"
+    ],
+    "description": "岩系技能 岩暴5"
+  },
+  {
+    "id": "rock_step_5_17",
+    "name": "岩步5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "rock"
+    ],
+    "description": "岩系技能 岩步5"
+  },
+  {
+    "id": "rock_ring_5_18",
+    "name": "岩环5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "rock"
+    ],
+    "description": "岩系技能 岩环5"
+  },
+  {
+    "id": "rock_edge_5_19",
+    "name": "岩棱5",
+    "type": "岩",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "rock"
+    ],
+    "description": "岩系技能 岩棱5"
+  },
+  {
+    "id": "rock_oath_5_20",
+    "name": "岩誓约5",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "rock"
+    ],
+    "description": "岩系技能 岩誓约5"
+  }
+]

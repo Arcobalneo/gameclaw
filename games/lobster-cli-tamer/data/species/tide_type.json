@@ -1,0 +1,202 @@
+[
+  {
+    "id": "reef_shrimp", "name": "礁虾", "type": "潮", "rarity": "common",
+    "base_stats": {"hp": 40, "atk": 25, "def": 18, "spd": 48, "end": 18},
+    "stat_growth": {"hp": 2.0, "atk": 1.5, "def": 1.0, "spd": 2.8, "end": 1.0},
+    "base_skill": "潮击", "skill_pool_tags": ["tide", "basic", "evasion", "speed"],
+    "affix_slots": 2, "capture_base_rate": 0.65,
+    "habitat": ["潮礁区-礁石表层", "潮礁区-深处"],
+    "lore": "礁石缝隙间最常见的虾米，行动迅捷，是新手甲录师的第一搭档。",
+    "evolution": {"target": "deep_reef_shrimp", "min_level": 20}
+  },
+  {
+    "id": "tide_claw", "name": "潮螯", "type": "潮", "rarity": "common",
+    "base_stats": {"hp": 50, "atk": 30, "def": 22, "spd": 35, "end": 25},
+    "stat_growth": {"hp": 2.5, "atk": 2.0, "def": 1.2, "spd": 1.5, "end": 1.5},
+    "base_skill": "钳击", "skill_pool_tags": ["tide", "physical", "basic", "debuff"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["潮礁区-礁石表层"],
+    "lore": "一对钳子力道十足，喜欢守在礁石边缘等待猎物。",
+    "evolution": null
+  },
+  {
+    "id": "foam_shrimp", "name": "浪花虾", "type": "潮", "rarity": "common",
+    "base_stats": {"hp": 30, "atk": 38, "def": 12, "spd": 52, "end": 15},
+    "stat_growth": {"hp": 1.5, "atk": 2.5, "def": 0.8, "spd": 3.0, "end": 0.8},
+    "base_skill": "深流冲", "skill_pool_tags": ["tide", "high_power", "risky", "speed"],
+    "affix_slots": 2, "capture_base_rate": 0.58,
+    "habitat": ["潮礁区-礁石表层", "潮礁区-浅滩"],
+    "lore": "随浪花翻腾而生，攻击力惊人但防御薄弱，典型的高风险高收益虾米。",
+    "evolution": null
+  },
+  {
+    "id": "seaweed_crab", "name": "海草蟹", "type": "潮", "rarity": "common",
+    "base_stats": {"hp": 65, "atk": 18, "def": 35, "spd": 20, "end": 30},
+    "stat_growth": {"hp": 3.5, "atk": 1.0, "def": 2.5, "spd": 0.8, "end": 2.0},
+    "base_skill": "防御姿态", "skill_pool_tags": ["tide", "tank", "shield", "terrain"],
+    "affix_slots": 2, "capture_base_rate": 0.62,
+    "habitat": ["潮礁区-礁石表层", "潮礁区-深处"],
+    "lore": "用海草把自己伪装成礁石，防御能力出众，行动缓慢。",
+    "evolution": null
+  },
+  {
+    "id": "vortex_slug", "name": "漩涡蛞蝓", "type": "潮", "rarity": "uncommon",
+    "base_stats": {"hp": 55, "atk": 28, "def": 25, "spd": 32, "end": 28},
+    "stat_growth": {"hp": 2.8, "atk": 1.8, "def": 1.5, "spd": 1.8, "end": 1.8},
+    "base_skill": "水幕", "skill_pool_tags": ["tide", "debuff", "status", "support"],
+    "affix_slots": 2, "capture_base_rate": 0.45,
+    "habitat": ["潮礁区-深处", "深流峡谷-表流"],
+    "lore": "能制造微型漩涡干扰对手，擅长削弱敌方战斗力而非直接攻击。",
+    "evolution": null
+  },
+  {
+    "id": "deep_tide_fish", "name": "深潮鱼", "type": "潮", "rarity": "uncommon",
+    "base_stats": {"hp": 48, "atk": 35, "def": 20, "spd": 45, "end": 22},
+    "stat_growth": {"hp": 2.2, "atk": 2.2, "def": 1.2, "spd": 2.5, "end": 1.2},
+    "base_skill": "连击波", "skill_pool_tags": ["tide", "multi_hit", "physical", "speed"],
+    "affix_slots": 2, "capture_base_rate": 0.42,
+    "habitat": ["深流峡谷-表流", "深流峡谷-深流"],
+    "lore": "在深流中以高速连续发起攻击，每次命中都会带走一些敌方的斗志。",
+    "evolution": null
+  },
+  {
+    "id": "salt_crystal_starfish", "name": "盐结海星", "type": "潮", "rarity": "uncommon",
+    "base_stats": {"hp": 60, "atk": 20, "def": 30, "spd": 18, "end": 40},
+    "stat_growth": {"hp": 3.0, "atk": 1.2, "def": 2.0, "spd": 0.8, "end": 2.8},
+    "base_skill": "泡沫护甲", "skill_pool_tags": ["tide", "support", "shield", "buff"],
+    "affix_slots": 3, "capture_base_rate": 0.40,
+    "habitat": ["潮礁区-深处", "深流峡谷-盐晶湾"],
+    "lore": "体内盐晶不断结晶，能为队友提供坚固的盐晶护盾，是优秀的支援型虾米。",
+    "evolution": null
+  },
+  {
+    "id": "tidal_shell", "name": "潮汐贝", "type": "潮", "rarity": "uncommon",
+    "base_stats": {"hp": 70, "atk": 15, "def": 42, "spd": 12, "end": 35},
+    "stat_growth": {"hp": 3.8, "atk": 0.8, "def": 3.0, "spd": 0.5, "end": 2.5},
+    "base_skill": "防御姿态", "skill_pool_tags": ["tide", "tank", "counter", "shield"],
+    "affix_slots": 3, "capture_base_rate": 0.38,
+    "habitat": ["潮礁区-浅滩", "深流峡谷-盐晶湾"],
+    "lore": "双层贝壳中储存着潮汐能量，越被攻击，反击的力量越强。",
+    "evolution": null
+  },
+  {
+    "id": "deep_reef_shrimp", "name": "深礁虾", "type": "潮", "rarity": "rare",
+    "base_stats": {"hp": 55, "atk": 38, "def": 25, "spd": 62, "end": 25},
+    "stat_growth": {"hp": 2.5, "atk": 2.2, "def": 1.5, "spd": 3.5, "end": 1.5},
+    "base_skill": "疾冲", "skill_pool_tags": ["tide", "speed", "evasion", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.30,
+    "habitat": ["深流峡谷-深流", "暗礁荒野-礁丘"],
+    "lore": "礁虾在深海环境中进化的形态，速度提升到了令人惊叹的程度。",
+    "evolution": {"target": "extreme_reef_shrimp", "min_level": 38}
+  },
+  {
+    "id": "tide_lobster", "name": "潮龙虾", "type": "潮", "rarity": "rare",
+    "base_stats": {"hp": 80, "atk": 45, "def": 38, "spd": 30, "end": 38},
+    "stat_growth": {"hp": 4.0, "atk": 3.0, "def": 2.5, "spd": 1.5, "end": 2.5},
+    "base_skill": "海啸蓄势", "skill_pool_tags": ["tide", "physical", "high_power", "tank"],
+    "affix_slots": 3, "capture_base_rate": 0.25,
+    "habitat": ["深流峡谷-深流", "暗礁荒野-礁丘"],
+    "lore": "龙虾族的精英，蓄势攻击时能掀起小型海啸，防御与攻击都不含糊。",
+    "evolution": null
+  },
+  {
+    "id": "surge_eel", "name": "汹涌鳗", "type": "潮", "rarity": "rare",
+    "base_stats": {"hp": 50, "atk": 55, "def": 18, "spd": 70, "end": 20},
+    "stat_growth": {"hp": 2.0, "atk": 3.5, "def": 1.0, "spd": 4.0, "end": 1.0},
+    "base_skill": "潮浪斩", "skill_pool_tags": ["tide", "speed", "high_power", "risky"],
+    "affix_slots": 3, "capture_base_rate": 0.22,
+    "habitat": ["暗礁荒野-暗流", "热泉秘境-温泉入口"],
+    "lore": "在暗流中以极速穿行，攻击时仿佛整条鳗都变成了一把利刃。",
+    "evolution": null
+  },
+  {
+    "id": "sea_pressure_claw", "name": "海压巨螯", "type": "潮", "rarity": "rare",
+    "base_stats": {"hp": 90, "atk": 50, "def": 45, "spd": 18, "end": 45},
+    "stat_growth": {"hp": 4.5, "atk": 3.2, "def": 3.0, "spd": 0.8, "end": 3.0},
+    "base_skill": "深压击", "skill_pool_tags": ["tide", "physical", "tank", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.20,
+    "habitat": ["深流峡谷-深流", "暗礁荒野-礁丘"],
+    "lore": "凭借深海水压锻炼出的巨大双螯，每一击都带着深海的重量。",
+    "evolution": null
+  },
+  {
+    "id": "azure_seahorse", "name": "翠蓝海马", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 72, "atk": 30, "def": 35, "spd": 40, "end": 55},
+    "stat_growth": {"hp": 3.5, "atk": 1.8, "def": 2.2, "spd": 2.2, "end": 3.5},
+    "base_skill": "潮汐感应", "skill_pool_tags": ["tide", "support", "buff", "intel"],
+    "affix_slots": 3, "capture_base_rate": 0.15,
+    "habitat": ["热泉秘境-翠蓝洋流"],
+    "lore": "传说中的翠蓝海马能感知整片海域的潮汐脉动，为同伴提供无与伦比的支援。",
+    "evolution": null
+  },
+  {
+    "id": "coral_king_crab", "name": "珊瑚帝王蟹", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 120, "atk": 42, "def": 65, "spd": 15, "end": 60},
+    "stat_growth": {"hp": 6.0, "atk": 2.5, "def": 4.0, "spd": 0.5, "end": 4.0},
+    "base_skill": "珊瑚壁垒", "skill_pool_tags": ["tide", "tank", "counter", "team_buff"],
+    "affix_slots": 3, "capture_base_rate": 0.12,
+    "habitat": ["暗礁荒野-珊瑚群", "热泉秘境-温泉深处"],
+    "lore": "身躯如同一座珊瑚礁，几乎无坚不摧，队友站在它身后感到无比安心。",
+    "evolution": null
+  },
+  {
+    "id": "deep_ocean_phantom", "name": "深洋幻灵", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 65, "atk": 55, "def": 28, "spd": 75, "end": 35},
+    "stat_growth": {"hp": 3.0, "atk": 3.5, "def": 1.5, "spd": 4.5, "end": 2.0},
+    "base_skill": "幻流袭", "skill_pool_tags": ["tide", "speed", "evasion", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.10,
+    "habitat": ["深海裂隙-幽暗流"],
+    "lore": "在深洋幽暗中诞生，速度快到肉眼难以追踪，攻击来自不可预测的方向。",
+    "evolution": null
+  },
+  {
+    "id": "tide_king", "name": "潮汐王", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 100, "atk": 60, "def": 50, "spd": 45, "end": 55},
+    "stat_growth": {"hp": 5.0, "atk": 3.8, "def": 3.2, "spd": 2.5, "end": 3.5},
+    "base_skill": "王者潮击", "skill_pool_tags": ["tide", "physical", "high_power", "multi_hit", "buff"],
+    "affix_slots": 3, "capture_base_rate": 0.08,
+    "habitat": ["暗礁荒野-王座礁"],
+    "lore": "统治一片海域的潮汐王，全属性均衡且突出，是公认的潮系全能王者。",
+    "evolution": null
+  },
+  {
+    "id": "extreme_reef_shrimp", "name": "极礁虾", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 70, "atk": 55, "def": 35, "spd": 88, "end": 35},
+    "stat_growth": {"hp": 3.2, "atk": 3.5, "def": 2.0, "spd": 5.0, "end": 2.0},
+    "base_skill": "极速冲", "skill_pool_tags": ["tide", "speed", "evasion", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.07,
+    "habitat": ["热泉秘境-极流", "深海裂隙-极速流"],
+    "lore": "礁虾进化链的终极形态，速度已超越大多数虾米的理解范畴。",
+    "evolution": null
+  },
+  {
+    "id": "storm_claw", "name": "风暴螯", "type": "潮", "rarity": "rare",
+    "base_stats": {"hp": 65, "atk": 58, "def": 28, "spd": 55, "end": 28},
+    "stat_growth": {"hp": 3.0, "atk": 3.8, "def": 1.5, "spd": 3.2, "end": 1.5},
+    "base_skill": "风暴冲击", "skill_pool_tags": ["tide", "high_power", "speed", "risky"],
+    "affix_slots": 3, "capture_base_rate": 0.18,
+    "habitat": ["潮礁区-风暴角"],
+    "lore": "只在风暴来临时才会现身的稀有虾米，攻击如同风暴一样猛烈。",
+    "evolution": null
+  },
+  {
+    "id": "abyssal_steward", "name": "海渊执事", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 85, "atk": 48, "def": 55, "spd": 35, "end": 62},
+    "stat_growth": {"hp": 4.2, "atk": 3.0, "def": 3.5, "spd": 1.8, "end": 4.0},
+    "base_skill": "深渊号令", "skill_pool_tags": ["tide", "support", "team_buff", "buff"],
+    "affix_slots": 3, "capture_base_rate": 0.09,
+    "habitat": ["深海裂隙-执事廊"],
+    "lore": "据说是深渊某位古老存在的侍从，身上有着远超同类的统帅气质。",
+    "evolution": null
+  },
+  {
+    "id": "deep_blue_overlord", "name": "深蓝霸主", "type": "潮", "rarity": "elite",
+    "base_stats": {"hp": 110, "atk": 68, "def": 58, "spd": 40, "end": 58},
+    "stat_growth": {"hp": 5.5, "atk": 4.2, "def": 3.8, "spd": 2.0, "end": 3.8},
+    "base_skill": "深蓝巨浪", "skill_pool_tags": ["tide", "high_power", "terrain", "multi_hit"],
+    "affix_slots": 3, "capture_base_rate": 0.06,
+    "habitat": ["深海裂隙-霸主域"],
+    "lore": "深蓝海域的绝对统治者，其一次全力攻击足以改变周边海流走向。",
+    "evolution": null
+  }
+]

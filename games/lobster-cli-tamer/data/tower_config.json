@@ -1,0 +1,195 @@
+{
+  "small_cycle": [
+    "normal",
+    "normal",
+    "normal",
+    "elite"
+  ],
+  "event_floor_positions": [
+    2,
+    3
+  ],
+  "boss_every_n_floors": 10,
+  "elite_plague_chance": 0.35,
+  "boss_plague_chance": 1.0,
+  "bosses": [
+    {
+      "floor": 10,
+      "id": "boss_reef_guardian",
+      "name": "潮礁守护者",
+      "species_id": "coral_king_crab",
+      "phases": 3,
+      "guaranteed_plague": false
+    },
+    {
+      "floor": 20,
+      "id": "boss_deep_phantom",
+      "name": "深流幻影",
+      "species_id": "abyss_phantom_deep",
+      "phases": 3,
+      "guaranteed_plague": false
+    },
+    {
+      "floor": 30,
+      "id": "boss_abyss_claw_king",
+      "name": "深渊螯王",
+      "species_id": "abyss_claw_king",
+      "phases": 4,
+      "guaranteed_plague": true
+    }
+  ],
+  "milestone_unlocks": [
+    {
+      "floor": 10,
+      "unlock": "深流峡谷"
+    },
+    {
+      "floor": 20,
+      "unlock": "毒藻丛林"
+    },
+    {
+      "floor": 30,
+      "unlock": "暗礁荒野"
+    },
+    {
+      "floor": 40,
+      "unlock": "热泉秘境"
+    },
+    {
+      "floor": 60,
+      "unlock": "深海裂隙"
+    }
+  ],
+  "enemy_pool_by_band": [
+    {
+      "min_floor": 1,
+      "max_floor": 30,
+      "species_ids": [
+        "reef_shrimp",
+        "rock_crab",
+        "poison_urchin",
+        "ghost_shrimp",
+        "electric_shrimp",
+        "seaweed_crab",
+        "gravel_shrimp",
+        "spirit_snail"
+      ]
+    },
+    {
+      "min_floor": 31,
+      "max_floor": 60,
+      "species_ids": [
+        "deep_reef_shrimp",
+        "tide_lobster",
+        "swift_electric_shrimp",
+        "electric_claw",
+        "deep_poison_urchin",
+        "poison_mist_octopus",
+        "deep_ghost_shrimp",
+        "illusion_king",
+        "giant_rock_crab",
+        "boulder_shrimp"
+      ]
+    },
+    {
+      "min_floor": 61,
+      "max_floor": 100,
+      "species_ids": [
+        "tide_king",
+        "coral_king_crab",
+        "lightning_emperor",
+        "ultra_speed_king",
+        "deep_poison_king",
+        "plague_bringer",
+        "abyss_prophet",
+        "void_claw",
+        "dark_reef_overlord",
+        "molten_core_king"
+      ]
+    },
+    {
+      "min_floor": 101,
+      "max_floor": 9999,
+      "species_ids": [
+        "abyssal_steward",
+        "deep_blue_overlord",
+        "super_em_overlord",
+        "abyss_poison_mist",
+        "void_lord",
+        "abyss_phantom_deep",
+        "plague_lord",
+        "void_emperor"
+      ]
+    }
+  ],
+  "drops": {
+    "normal": {
+      "甲核": [
+        1,
+        3
+      ],
+      "灵晶": [
+        0,
+        1
+      ]
+    },
+    "elite": {
+      "甲核": [
+        3,
+        6
+      ],
+      "灵晶": [
+        1,
+        3
+      ],
+      "深渊灵晶": [
+        1,
+        2
+      ]
+    },
+    "boss": {
+      "甲核": [
+        8,
+        12
+      ],
+      "灵晶": [
+        3,
+        6
+      ],
+      "深渊灵晶": [
+        2,
+        4
+      ],
+      "潮石": [
+        1,
+        2
+      ]
+    }
+  },
+  "floor_drops": [
+    {
+      "item_id": "jihe_core",
+      "name": "甲核",
+      "count": 2,
+      "chance": 0.5
+    },
+    {
+      "item_id": "spirit_crystal",
+      "name": "灵晶",
+      "count": 1,
+      "chance": 0.3
+    },
+    {
+      "item_id": "tide_stone",
+      "name": "潮石",
+      "count": 1,
+      "chance": 0.2
+    },
+    {
+      "item_id": "shiny_trap",
+      "name": "灵光球",
+      "count": 1,
+      "chance": 0.05
+    }
+  ]
+}

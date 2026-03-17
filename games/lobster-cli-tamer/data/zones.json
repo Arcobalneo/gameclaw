@@ -1,0 +1,580 @@
+[
+  {
+    "id": "reef_zone",
+    "name": "潮礁区",
+    "unlock_condition": "default",
+    "sub_areas": [
+      {
+        "id": "reef_surface",
+        "name": "礁石表层",
+        "level_range": [
+          1,
+          10
+        ],
+        "encounter_table": [
+          {
+            "species_id": "reef_shrimp",
+            "weight": 40
+          },
+          {
+            "species_id": "rock_crab",
+            "weight": 30
+          },
+          {
+            "species_id": "poison_urchin",
+            "weight": 20
+          },
+          {
+            "species_id": "ghost_shrimp",
+            "weight": 10
+          }
+        ]
+      },
+      {
+        "id": "reef_depth",
+        "name": "礁石深处",
+        "level_range": [
+          6,
+          14
+        ],
+        "encounter_table": [
+          {
+            "species_id": "seaweed_crab",
+            "weight": 25
+          },
+          {
+            "species_id": "salt_crystal_starfish",
+            "weight": 20
+          },
+          {
+            "species_id": "coral_rock_crab",
+            "weight": 25
+          },
+          {
+            "species_id": "corrosive_slug",
+            "weight": 20
+          },
+          {
+            "species_id": "spirit_snail",
+            "weight": 10
+          }
+        ]
+      },
+      {
+        "id": "storm_corner",
+        "name": "风暴角",
+        "level_range": [
+          10,
+          18
+        ],
+        "encounter_table": [
+          {
+            "species_id": "storm_claw",
+            "weight": 20
+          },
+          {
+            "species_id": "foam_shrimp",
+            "weight": 30
+          },
+          {
+            "species_id": "gravel_shrimp",
+            "weight": 25
+          },
+          {
+            "species_id": "poison_cloud_shrimp",
+            "weight": 25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "deep_current_canyon",
+    "name": "深流峡谷",
+    "unlock_condition": "tower_best>=10",
+    "sub_areas": [
+      {
+        "id": "surface_current",
+        "name": "表流",
+        "level_range": [
+          12,
+          20
+        ],
+        "encounter_table": [
+          {
+            "species_id": "deep_tide_fish",
+            "weight": 30
+          },
+          {
+            "species_id": "electric_shrimp",
+            "weight": 25
+          },
+          {
+            "species_id": "static_eel",
+            "weight": 20
+          },
+          {
+            "species_id": "psychic_eel",
+            "weight": 15
+          },
+          {
+            "species_id": "vortex_slug",
+            "weight": 10
+          }
+        ]
+      },
+      {
+        "id": "electric_surge",
+        "name": "电涌区",
+        "level_range": [
+          15,
+          24
+        ],
+        "encounter_table": [
+          {
+            "species_id": "flash_claw",
+            "weight": 25
+          },
+          {
+            "species_id": "thunder_urchin",
+            "weight": 25
+          },
+          {
+            "species_id": "electromagnetic_slug",
+            "weight": 20
+          },
+          {
+            "species_id": "thunder_wave_fish",
+            "weight": 20
+          },
+          {
+            "species_id": "swift_electric_shrimp",
+            "weight": 10
+          }
+        ]
+      },
+      {
+        "id": "salt_bay",
+        "name": "盐晶湾",
+        "level_range": [
+          18,
+          26
+        ],
+        "encounter_table": [
+          {
+            "species_id": "salt_crystal_starfish",
+            "weight": 20
+          },
+          {
+            "species_id": "tidal_shell",
+            "weight": 20
+          },
+          {
+            "species_id": "superconducting_crab",
+            "weight": 25
+          },
+          {
+            "species_id": "dream_jellyfish",
+            "weight": 15
+          },
+          {
+            "species_id": "tide_lobster",
+            "weight": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "poison_algae_forest",
+    "name": "毒藻丛林",
+    "unlock_condition": "tower_best>=20",
+    "sub_areas": [
+      {
+        "id": "forest_entry",
+        "name": "丛林入口",
+        "level_range": [
+          20,
+          28
+        ],
+        "encounter_table": [
+          {
+            "species_id": "purple_crab",
+            "weight": 25
+          },
+          {
+            "species_id": "corrosive_slug",
+            "weight": 20
+          },
+          {
+            "species_id": "poison_urchin",
+            "weight": 20
+          },
+          {
+            "species_id": "hallucinogenic_jellyfish",
+            "weight": 15
+          },
+          {
+            "species_id": "plague_shrimp",
+            "weight": 20
+          }
+        ]
+      },
+      {
+        "id": "mist_zone",
+        "name": "迷雾区",
+        "level_range": [
+          24,
+          32
+        ],
+        "encounter_table": [
+          {
+            "species_id": "poison_mist_octopus",
+            "weight": 20
+          },
+          {
+            "species_id": "swamp_gas_fish",
+            "weight": 25
+          },
+          {
+            "species_id": "decay_claw",
+            "weight": 20
+          },
+          {
+            "species_id": "illusion_king",
+            "weight": 10
+          },
+          {
+            "species_id": "deep_poison_urchin",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "id": "plague_core",
+        "name": "瘟疫核心",
+        "level_range": [
+          28,
+          36
+        ],
+        "encounter_table": [
+          {
+            "species_id": "pestilence_crab",
+            "weight": 25
+          },
+          {
+            "species_id": "deep_poison_king",
+            "weight": 20
+          },
+          {
+            "species_id": "corrosion_emperor",
+            "weight": 20
+          },
+          {
+            "species_id": "plague_bringer",
+            "weight": 15
+          },
+          {
+            "species_id": "toxic_algae_king",
+            "weight": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dark_reef_wilds",
+    "name": "暗礁荒野",
+    "unlock_condition": "tower_best>=30",
+    "sub_areas": [
+      {
+        "id": "gravel_beach",
+        "name": "砾石滩",
+        "level_range": [
+          26,
+          34
+        ],
+        "encounter_table": [
+          {
+            "species_id": "sand_gold_claw",
+            "weight": 20
+          },
+          {
+            "species_id": "rock_shield_shell",
+            "weight": 20
+          },
+          {
+            "species_id": "deep_reef_shrimp",
+            "weight": 20
+          },
+          {
+            "species_id": "ghost_shrimp",
+            "weight": 15
+          },
+          {
+            "species_id": "magnetic_crab",
+            "weight": 25
+          }
+        ]
+      },
+      {
+        "id": "coral_group",
+        "name": "珊瑚群",
+        "level_range": [
+          28,
+          38
+        ],
+        "encounter_table": [
+          {
+            "species_id": "coral_king_crab",
+            "weight": 20
+          },
+          {
+            "species_id": "giant_rock_crab",
+            "weight": 20
+          },
+          {
+            "species_id": "deep_reef_guardian",
+            "weight": 20
+          },
+          {
+            "species_id": "tide_king",
+            "weight": 20
+          },
+          {
+            "species_id": "soul_shell",
+            "weight": 20
+          }
+        ]
+      },
+      {
+        "id": "lightning_valley",
+        "name": "闪电谷",
+        "level_range": [
+          30,
+          40
+        ],
+        "encounter_table": [
+          {
+            "species_id": "electric_claw",
+            "weight": 20
+          },
+          {
+            "species_id": "thunder_giant_claw",
+            "weight": 20
+          },
+          {
+            "species_id": "lightning_emperor",
+            "weight": 15
+          },
+          {
+            "species_id": "ultra_speed_king",
+            "weight": 15
+          },
+          {
+            "species_id": "dark_reef_overlord",
+            "weight": 30
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hot_spring_secret",
+    "name": "热泉秘境",
+    "unlock_condition": "tower_best>=40",
+    "sub_areas": [
+      {
+        "id": "spring_entry",
+        "name": "温泉入口",
+        "level_range": [
+          34,
+          44
+        ],
+        "encounter_table": [
+          {
+            "species_id": "surge_eel",
+            "weight": 15
+          },
+          {
+            "species_id": "lava_shrimp",
+            "weight": 20
+          },
+          {
+            "species_id": "hot_spring_electric_claw",
+            "weight": 15
+          },
+          {
+            "species_id": "hot_spring_spirit",
+            "weight": 20
+          },
+          {
+            "species_id": "rock_spring_slug",
+            "weight": 30
+          }
+        ]
+      },
+      {
+        "id": "extreme_flow",
+        "name": "极流",
+        "level_range": [
+          38,
+          48
+        ],
+        "encounter_table": [
+          {
+            "species_id": "extreme_reef_shrimp",
+            "weight": 15
+          },
+          {
+            "species_id": "volcano_shrimp",
+            "weight": 15
+          },
+          {
+            "species_id": "extreme_poison_urchin",
+            "weight": 15
+          },
+          {
+            "species_id": "extreme_ghost_shrimp",
+            "weight": 15
+          },
+          {
+            "species_id": "lightning_emperor",
+            "weight": 20
+          },
+          {
+            "species_id": "starlight_shrimp",
+            "weight": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "deep_sea_rift",
+    "name": "深海裂隙",
+    "unlock_condition": "tower_best>=60",
+    "sub_areas": [
+      {
+        "id": "rift_inner",
+        "name": "裂隙内层",
+        "level_range": [
+          45,
+          60
+        ],
+        "encounter_table": [
+          {
+            "species_id": "deep_ocean_phantom",
+            "weight": 10
+          },
+          {
+            "species_id": "abyssal_steward",
+            "weight": 10
+          },
+          {
+            "species_id": "crystal_crab",
+            "weight": 10
+          },
+          {
+            "species_id": "rift_electric_eel",
+            "weight": 10
+          },
+          {
+            "species_id": "abyss_poison_mist",
+            "weight": 10
+          },
+          {
+            "species_id": "abyss_prophet",
+            "weight": 10
+          },
+          {
+            "species_id": "abyss_rift_claw",
+            "weight": 10
+          },
+          {
+            "species_id": "void_claw",
+            "weight": 10
+          },
+          {
+            "species_id": "deep_blue_overlord",
+            "weight": 10
+          },
+          {
+            "species_id": "void_lord",
+            "weight": 10
+          }
+        ]
+      },
+      {
+        "id": "rift_core",
+        "name": "裂隙核心",
+        "level_range": [
+          55,
+          70
+        ],
+        "encounter_table": [
+          {
+            "species_id": "abyss_claw_king",
+            "weight": 10
+          },
+          {
+            "species_id": "genesis_shrimp",
+            "weight": 8
+          },
+          {
+            "species_id": "chaos_claw",
+            "weight": 8
+          },
+          {
+            "species_id": "shrimp_ancestor",
+            "weight": 8
+          },
+          {
+            "species_id": "abyss_guardian_god",
+            "weight": 8
+          },
+          {
+            "species_id": "ocean_abyss_supreme",
+            "weight": 8
+          },
+          {
+            "species_id": "founding_claw_king",
+            "weight": 8
+          },
+          {
+            "species_id": "deep_blue_god",
+            "weight": 8
+          },
+          {
+            "species_id": "eternal_shrimp_spirit",
+            "weight": 8
+          },
+          {
+            "species_id": "plague_lord",
+            "weight": 8
+          },
+          {
+            "species_id": "void_emperor",
+            "weight": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "abyss_gate",
+    "name": "幽渊入口",
+    "unlock_condition": "default",
+    "sub_areas": [
+      {
+        "id": "gate",
+        "name": "深渊入口",
+        "level_range": [
+          1,
+          999
+        ],
+        "encounter_table": []
+      }
+    ]
+  }
+]

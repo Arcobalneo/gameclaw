@@ -1,0 +1,135 @@
+{
+  "version": "1.0",
+  "combat": {
+    "type_effectiveness": {
+      "潮": {
+        "克制": "电",
+        "克制倍率": 1.5
+      },
+      "电": {
+        "克制": "岩",
+        "克制倍率": 1.5
+      },
+      "岩": {
+        "克制": "毒",
+        "克制倍率": 1.5
+      },
+      "毒": {
+        "克制": "灵",
+        "克制倍率": 1.5
+      },
+      "灵": {
+        "克制": "潮",
+        "克制倍率": 1.5
+      }
+    },
+    "crit_rate": 0.0625,
+    "crit_multiplier": 1.5,
+    "switch_penalty": true
+  },
+  "capture": {
+    "shiny_rate": 0.0078125,
+    "tool_multipliers": {
+      "甲网": 1.0,
+      "精甲网": 1.8,
+      "灵甲网": 3.0
+    }
+  },
+  "affix": {
+    "roll_weights": {
+      "common": 55,
+      "blue": 28,
+      "purple": 13,
+      "gold": 4
+    },
+    "shiny_roll_bonus": {
+      "common": -10,
+      "blue": 4,
+      "purple": 4,
+      "gold": 2
+    },
+    "reroll_cost": {
+      "甲核": 3
+    },
+    "upgrade_cost": {
+      "灵晶": 5
+    },
+    "plague_cure_cost": {
+      "深渊灵晶": 2
+    }
+  },
+  "skill": {
+    "max_skills": 4,
+    "level_up_choices": 3,
+    "own_type_weight_multiplier": 2.0,
+    "affix_synergy_weight_multiplier": 1.5
+  },
+  "exp": {
+    "base": 50,
+    "growth_rate": 1.15,
+    "comment": "升至 N 级所需总经验 = base * growth_rate^(N-1)"
+  },
+  "tower": {
+    "permadeath_in_battle": true,
+    "plague_rate_per_floor": 0.05,
+    "plague_max_rate": 0.5,
+    "plague_trigger_floor": 30,
+    "small_cycle": [
+      {
+        "type": "normal",
+        "is_event": false
+      },
+      {
+        "type": "normal",
+        "is_event": false
+      },
+      {
+        "type": "normal",
+        "is_event": true
+      },
+      {
+        "type": "elite",
+        "is_event": false
+      }
+    ],
+    "boss_every_n_floors": 10,
+    "base_enemy_level": 5,
+    "level_scaling_per_floor": 0.8,
+    "affix_unlock_floor": 31,
+    "deep_abyss_start": 151,
+    "exp_per_floor": 50
+  },
+  "party": {
+    "max_size": 6,
+    "battle_slots": 3
+  },
+  "save": {
+    "slots": 3,
+    "save_dir": "~/.lobster-cli-tamer"
+  },
+  "world": {
+    "hidden_encounter_base_chance": 0.08
+  },
+  "workshop": {
+    "reroll_cost": {
+      "jihe_core": 3
+    },
+    "upgrade_cost_by_tier": [
+      {
+        "spirit_crystal": 2
+      },
+      {
+        "spirit_crystal": 5
+      },
+      {
+        "spirit_crystal": 12
+      }
+    ],
+    "seal_cost": {
+      "tide_stone": 1
+    },
+    "unseal_cost": {
+      "tide_stone": 2
+    }
+  }
+}

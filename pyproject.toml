@@ -15,4 +15,5 @@ members = [
   "games/lobster-cli-roguelike",
   "games/lobster-cli-tower-defense",
   "games/lobster-cli-heist",
+  "games/lobster-cli-tamer",
 ]

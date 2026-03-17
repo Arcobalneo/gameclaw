@@ -1,0 +1,202 @@
+[
+  {
+    "id": "rock_crab", "name": "石蟹", "type": "岩", "rarity": "common",
+    "base_stats": {"hp": 70, "atk": 22, "def": 40, "spd": 15, "end": 35},
+    "stat_growth": {"hp": 4.0, "atk": 1.2, "def": 3.0, "spd": 0.6, "end": 2.5},
+    "base_skill": "硬化", "skill_pool_tags": ["rock", "tank", "counter", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.65,
+    "habitat": ["潮礁区-礁石表层", "潮礁区-深处"],
+    "lore": "全身覆盖厚实岩甲的普通蟹，行动迟缓但防御力出众，是岩系最基础的虾米。",
+    "evolution": {"target": "giant_rock_crab", "min_level": 20}
+  },
+  {
+    "id": "gravel_shrimp", "name": "砾石虾", "type": "岩", "rarity": "common",
+    "base_stats": {"hp": 55, "atk": 30, "def": 28, "spd": 25, "end": 28},
+    "stat_growth": {"hp": 2.8, "atk": 2.0, "def": 2.0, "spd": 1.2, "end": 2.0},
+    "base_skill": "岩砸", "skill_pool_tags": ["rock", "physical", "counter", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.62,
+    "habitat": ["潮礁区-礁石表层", "暗礁荒野-砾石滩"],
+    "lore": "用细小砾石填满体内孔隙，受到攻击时会弹射砾石反击，令对手苦不堪言。",
+    "evolution": null
+  },
+  {
+    "id": "iron_shell_slug", "name": "磐甲蛞蝓", "type": "岩", "rarity": "common",
+    "base_stats": {"hp": 80, "atk": 15, "def": 50, "spd": 8, "end": 40},
+    "stat_growth": {"hp": 4.5, "atk": 0.8, "def": 3.5, "spd": 0.3, "end": 3.0},
+    "base_skill": "防御姿态", "skill_pool_tags": ["rock", "tank", "reflect", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["潮礁区-深处", "暗礁荒野-砾石滩"],
+    "lore": "移动极为缓慢，但其铁质外壳几乎无法被普通攻击击穿，令攻击型虾米头疼。",
+    "evolution": null
+  },
+  {
+    "id": "coral_rock_crab", "name": "珊瑚礁蟹", "type": "岩", "rarity": "common",
+    "base_stats": {"hp": 60, "atk": 28, "def": 32, "spd": 20, "end": 32},
+    "stat_growth": {"hp": 3.2, "atk": 1.8, "def": 2.2, "spd": 1.0, "end": 2.2},
+    "base_skill": "岩刺阵", "skill_pool_tags": ["rock", "aoe", "terrain", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["潮礁区-礁石表层", "暗礁荒野-珊瑚群"],
+    "lore": "生活在珊瑚礁中，能激活珊瑚刺的共鸣，对靠近的敌人造成持续伤害。",
+    "evolution": null
+  },
+  {
+    "id": "sand_gold_claw", "name": "砂金螯", "type": "岩", "rarity": "uncommon",
+    "base_stats": {"hp": 58, "atk": 45, "def": 25, "spd": 22, "end": 25},
+    "stat_growth": {"hp": 2.8, "atk": 3.2, "def": 1.5, "spd": 1.0, "end": 1.5},
+    "base_skill": "破甲击", "skill_pool_tags": ["rock", "physical", "armor_break", "risky"],
+    "affix_slots": 2, "capture_base_rate": 0.45,
+    "habitat": ["暗礁荒野-砾石滩", "暗礁荒野-金砂坑"],
+    "lore": "含有黄金矿物的螯爪能轻易穿透其他虾米的甲壳，但自身防御较弱。",
+    "evolution": null
+  },
+  {
+    "id": "black_tortoise_crab", "name": "玄武蟹", "type": "岩", "rarity": "uncommon",
+    "base_stats": {"hp": 85, "atk": 18, "def": 55, "spd": 10, "end": 48},
+    "stat_growth": {"hp": 4.8, "atk": 1.0, "def": 3.8, "spd": 0.4, "end": 3.2},
+    "base_skill": "玄武反刃", "skill_pool_tags": ["rock", "reflect", "tank", "counter"],
+    "affix_slots": 3, "capture_base_rate": 0.42,
+    "habitat": ["暗礁荒野-玄石湾", "暗礁荒野-珊瑚群"],
+    "lore": "外壳如同玄武石一样坚硬，能将受到的物理伤害原原本本反弹给攻击者。",
+    "evolution": null
+  },
+  {
+    "id": "lava_shrimp", "name": "熔岩虾", "type": "岩", "rarity": "uncommon",
+    "base_stats": {"hp": 62, "atk": 40, "def": 30, "spd": 18, "end": 30},
+    "stat_growth": {"hp": 3.2, "atk": 2.8, "def": 2.0, "spd": 0.8, "end": 2.0},
+    "base_skill": "熔岩喷射", "skill_pool_tags": ["rock", "status", "burn", "physical"],
+    "affix_slots": 2, "capture_base_rate": 0.40,
+    "habitat": ["热泉秘境-温泉入口", "暗礁荒野-熔岩区"],
+    "lore": "体内蓄积着岩浆能量，攻击时会附带灼烧效果，让对手在战斗中持续受苦。",
+    "evolution": null
+  },
+  {
+    "id": "rock_shield_shell", "name": "岩盾贝", "type": "岩", "rarity": "uncommon",
+    "base_stats": {"hp": 78, "atk": 15, "def": 58, "spd": 10, "end": 52},
+    "stat_growth": {"hp": 4.2, "atk": 0.8, "def": 4.0, "spd": 0.3, "end": 3.5},
+    "base_skill": "磐石壁垒", "skill_pool_tags": ["rock", "tank", "team_buff", "shield"],
+    "affix_slots": 3, "capture_base_rate": 0.38,
+    "habitat": ["暗礁荒野-砾石滩"],
+    "lore": "背壳形如一面盾牌，能为整个队伍提供防御加成，是经典的队伍核心。",
+    "evolution": null
+  },
+  {
+    "id": "giant_rock_crab", "name": "巨甲蟹", "type": "岩", "rarity": "rare",
+    "base_stats": {"hp": 100, "atk": 35, "def": 60, "spd": 12, "end": 55},
+    "stat_growth": {"hp": 5.5, "atk": 2.2, "def": 4.2, "spd": 0.5, "end": 3.8},
+    "base_skill": "巨甲反击", "skill_pool_tags": ["rock", "tank", "counter", "reflect"],
+    "affix_slots": 3, "capture_base_rate": 0.30,
+    "habitat": ["暗礁荒野-巨石区", "暗礁荒野-珊瑚群"],
+    "lore": "石蟹进化后体型大幅增加，甲壳厚度堪比礁石，受到攻击后反击力度惊人。",
+    "evolution": {"target": "ancient_rock_crab", "min_level": 38}
+  },
+  {
+    "id": "iron_shell_claw", "name": "铁壳螯", "type": "岩", "rarity": "rare",
+    "base_stats": {"hp": 88, "atk": 48, "def": 58, "spd": 15, "end": 50},
+    "stat_growth": {"hp": 4.5, "atk": 3.0, "def": 3.8, "spd": 0.6, "end": 3.5},
+    "base_skill": "铁甲压制", "skill_pool_tags": ["rock", "tank", "physical", "armor_break"],
+    "affix_slots": 3, "capture_base_rate": 0.25,
+    "habitat": ["暗礁荒野-铁礁壁", "深海裂隙-铁矿层"],
+    "lore": "铁质外壳坚硬无比，攻击时也会利用铁质螯爪穿透对手防御。",
+    "evolution": null
+  },
+  {
+    "id": "mountain_rock_crab", "name": "山岩蟹", "type": "岩", "rarity": "rare",
+    "base_stats": {"hp": 95, "atk": 42, "def": 55, "spd": 12, "end": 52},
+    "stat_growth": {"hp": 5.0, "atk": 2.8, "def": 3.5, "spd": 0.5, "end": 3.5},
+    "base_skill": "地震爪", "skill_pool_tags": ["rock", "aoe", "terrain", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.22,
+    "habitat": ["暗礁荒野-山岩区"],
+    "lore": "体重惊人，重击地面时能引发小型地震，对所有在地面的虾米都造成伤害。",
+    "evolution": null
+  },
+  {
+    "id": "boulder_shrimp", "name": "碎岩巨虾", "type": "岩", "rarity": "rare",
+    "base_stats": {"hp": 82, "atk": 58, "def": 42, "spd": 16, "end": 42},
+    "stat_growth": {"hp": 4.2, "atk": 3.8, "def": 2.8, "spd": 0.7, "end": 2.8},
+    "base_skill": "破甲击", "skill_pool_tags": ["rock", "armor_break", "high_power", "physical"],
+    "affix_slots": 3, "capture_base_rate": 0.20,
+    "habitat": ["暗礁荒野-碎岩峡"],
+    "lore": "专门以坚硬岩石为食，碎岩的力量转化为穿透一切防御的强悍攻击。",
+    "evolution": null
+  },
+  {
+    "id": "crystal_crab", "name": "晶甲蟹", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 105, "atk": 45, "def": 70, "spd": 18, "end": 65},
+    "stat_growth": {"hp": 5.5, "atk": 2.8, "def": 4.5, "spd": 0.7, "end": 4.2},
+    "base_skill": "水晶反射", "skill_pool_tags": ["rock", "reflect", "counter", "shield"],
+    "affix_slots": 3, "capture_base_rate": 0.15,
+    "habitat": ["深海裂隙-晶石洞"],
+    "lore": "水晶甲壳能折射攻击，将一定比例的伤害反射回攻击者，令对手进退两难。",
+    "evolution": null
+  },
+  {
+    "id": "boulder_king", "name": "磐石王", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 140, "atk": 48, "def": 80, "spd": 10, "end": 75},
+    "stat_growth": {"hp": 7.0, "atk": 3.0, "def": 5.0, "spd": 0.4, "end": 5.0},
+    "base_skill": "磐石守护", "skill_pool_tags": ["rock", "tank", "team_buff", "counter"],
+    "affix_slots": 3, "capture_base_rate": 0.12,
+    "habitat": ["暗礁荒野-磐石王座"],
+    "lore": "岩系虾米公认的王者，体型如同一块巨型礁石，防御力几乎无法被突破。",
+    "evolution": null
+  },
+  {
+    "id": "rock_spring_slug", "name": "岩泉蛞蝓", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 118, "atk": 30, "def": 68, "spd": 15, "end": 70},
+    "stat_growth": {"hp": 6.0, "atk": 1.8, "def": 4.5, "spd": 0.5, "end": 4.8},
+    "base_skill": "矿泉愈合", "skill_pool_tags": ["rock", "tank", "heal", "support"],
+    "affix_slots": 3, "capture_base_rate": 0.10,
+    "habitat": ["热泉秘境-岩泉区"],
+    "lore": "栖息在富含矿物质的温泉中，能利用矿泉成分持续恢复自身和队友的生命。",
+    "evolution": null
+  },
+  {
+    "id": "volcano_shrimp", "name": "火山甲虾", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 95, "atk": 72, "def": 45, "spd": 22, "end": 45},
+    "stat_growth": {"hp": 4.8, "atk": 4.5, "def": 2.8, "spd": 1.0, "end": 2.8},
+    "base_skill": "火山爆发", "skill_pool_tags": ["rock", "high_power", "burn", "risky", "aoe"],
+    "affix_slots": 3, "capture_base_rate": 0.09,
+    "habitat": ["热泉秘境-火山口"],
+    "lore": "栖居在水下火山口的稀有虾米，蓄力攻击能引发小型水下火山爆发。",
+    "evolution": null
+  },
+  {
+    "id": "ancient_rock_crab", "name": "远古岩蟹", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 125, "atk": 52, "def": 78, "spd": 10, "end": 72},
+    "stat_growth": {"hp": 6.5, "atk": 3.2, "def": 5.0, "spd": 0.4, "end": 4.8},
+    "base_skill": "远古甲盾", "skill_pool_tags": ["rock", "tank", "reflect", "counter", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.08,
+    "habitat": ["深海裂隙-远古遗迹"],
+    "lore": "巨甲蟹进化链的终极形态，拥有上古岩甲，连深渊的力量都难以穿透。",
+    "evolution": null
+  },
+  {
+    "id": "deep_reef_guardian", "name": "深礁守卫", "type": "岩", "rarity": "rare",
+    "base_stats": {"hp": 92, "atk": 38, "def": 62, "spd": 12, "end": 58},
+    "stat_growth": {"hp": 4.8, "atk": 2.4, "def": 4.0, "spd": 0.5, "end": 3.8},
+    "base_skill": "守卫之盾", "skill_pool_tags": ["rock", "tank", "team_buff", "shield"],
+    "affix_slots": 3, "capture_base_rate": 0.18,
+    "habitat": ["暗礁荒野-深礁哨所"],
+    "lore": "自愿守卫深礁领域边界的稀有虾米，对入侵者展现出不妥协的战斗意志。",
+    "evolution": null
+  },
+  {
+    "id": "dark_reef_overlord", "name": "暗礁霸主", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 115, "atk": 60, "def": 72, "spd": 14, "end": 68},
+    "stat_growth": {"hp": 5.8, "atk": 3.8, "def": 4.5, "spd": 0.5, "end": 4.5},
+    "base_skill": "暗礁震裂", "skill_pool_tags": ["rock", "high_power", "terrain", "aoe"],
+    "affix_slots": 3, "capture_base_rate": 0.07,
+    "habitat": ["暗礁荒野-霸主域"],
+    "lore": "暗礁区的绝对统治者，其震裂地形的攻击能让整片海底为之颤抖。",
+    "evolution": null
+  },
+  {
+    "id": "molten_core_king", "name": "熔核螯王", "type": "岩", "rarity": "elite",
+    "base_stats": {"hp": 108, "atk": 65, "def": 65, "spd": 18, "end": 62},
+    "stat_growth": {"hp": 5.5, "atk": 4.0, "def": 4.2, "spd": 0.8, "end": 4.0},
+    "base_skill": "熔核爆碎", "skill_pool_tags": ["rock", "high_power", "burn", "armor_break"],
+    "affix_slots": 3, "capture_base_rate": 0.06,
+    "habitat": ["热泉秘境-熔核深处"],
+    "lore": "身体内核充满熔融岩石，攻击时能将熔核能量转化为毁灭性的爆碎打击。",
+    "evolution": null
+  }
+]

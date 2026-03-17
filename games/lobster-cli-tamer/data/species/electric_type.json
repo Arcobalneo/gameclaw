@@ -1,0 +1,202 @@
+[
+  {
+    "id": "electric_shrimp", "name": "电虾", "type": "电", "rarity": "common",
+    "base_stats": {"hp": 35, "atk": 28, "def": 15, "spd": 58, "end": 18},
+    "stat_growth": {"hp": 1.8, "atk": 1.8, "def": 0.8, "spd": 3.5, "end": 1.0},
+    "base_skill": "电爪", "skill_pool_tags": ["electric", "speed", "paralyze", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.65,
+    "habitat": ["深流峡谷-表流", "深流峡谷-电涌区"],
+    "lore": "全身带电的小型虾米，速度极快，轻微触碰就能给对手留下麻痹后遗症。",
+    "evolution": {"target": "swift_electric_shrimp", "min_level": 20}
+  },
+  {
+    "id": "flash_crab", "name": "闪纹蟹", "type": "电", "rarity": "common",
+    "base_stats": {"hp": 42, "atk": 32, "def": 20, "spd": 55, "end": 20},
+    "stat_growth": {"hp": 2.0, "atk": 2.2, "def": 1.0, "spd": 3.2, "end": 1.2},
+    "base_skill": "超速冲击", "skill_pool_tags": ["electric", "speed", "physical", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.62,
+    "habitat": ["深流峡谷-表流", "深流峡谷-电涌区"],
+    "lore": "背壳上的闪电纹路并非装饰，而是蓄积电能的导体，冲刺时速度惊人。",
+    "evolution": null
+  },
+  {
+    "id": "thunder_urchin", "name": "雷棘海胆", "type": "电", "rarity": "common",
+    "base_stats": {"hp": 55, "atk": 20, "def": 35, "spd": 18, "end": 35},
+    "stat_growth": {"hp": 2.8, "atk": 1.2, "def": 2.5, "spd": 0.8, "end": 2.5},
+    "base_skill": "静电护盾", "skill_pool_tags": ["electric", "reflect", "counter", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["深流峡谷-电涌区"],
+    "lore": "棘刺中储存着雷电，被攻击时会自动释放电击反伤，令鲁莽的对手吃足苦头。",
+    "evolution": null
+  },
+  {
+    "id": "static_eel", "name": "静电鳗", "type": "电", "rarity": "common",
+    "base_stats": {"hp": 45, "atk": 30, "def": 18, "spd": 50, "end": 22},
+    "stat_growth": {"hp": 2.2, "atk": 2.0, "def": 1.0, "spd": 3.0, "end": 1.4},
+    "base_skill": "电爪", "skill_pool_tags": ["electric", "paralyze", "status", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["深流峡谷-表流"],
+    "lore": "细长的身体充满静电，能精准控制电击的强度，擅长用麻痹拖垮对手。",
+    "evolution": null
+  },
+  {
+    "id": "flash_claw", "name": "闪光螯", "type": "电", "rarity": "uncommon",
+    "base_stats": {"hp": 50, "atk": 42, "def": 20, "spd": 62, "end": 22},
+    "stat_growth": {"hp": 2.4, "atk": 2.8, "def": 1.0, "spd": 3.8, "end": 1.2},
+    "base_skill": "闪击", "skill_pool_tags": ["electric", "speed", "crit", "physical"],
+    "affix_slots": 2, "capture_base_rate": 0.45,
+    "habitat": ["深流峡谷-电涌区", "暗礁荒野-闪电谷"],
+    "lore": "螯爪储电量惊人，攻击瞬间能以极快速度完成充放电，暴击率极高。",
+    "evolution": null
+  },
+  {
+    "id": "electromagnetic_slug", "name": "电磁蛞蝓", "type": "电", "rarity": "uncommon",
+    "base_stats": {"hp": 58, "atk": 22, "def": 30, "spd": 35, "end": 38},
+    "stat_growth": {"hp": 2.8, "atk": 1.4, "def": 2.0, "spd": 2.0, "end": 2.5},
+    "base_skill": "超导", "skill_pool_tags": ["electric", "team_buff", "support", "debuff"],
+    "affix_slots": 2, "capture_base_rate": 0.42,
+    "habitat": ["深流峡谷-电涌区", "深流峡谷-深流"],
+    "lore": "能在身体周围建立电磁场，既能为队友加速，也能让对手的动作变得迟缓。",
+    "evolution": null
+  },
+  {
+    "id": "thunder_wave_fish", "name": "雷涛鱼", "type": "电", "rarity": "uncommon",
+    "base_stats": {"hp": 52, "atk": 38, "def": 22, "spd": 55, "end": 25},
+    "stat_growth": {"hp": 2.5, "atk": 2.5, "def": 1.2, "spd": 3.2, "end": 1.5},
+    "base_skill": "雷鸣爆发", "skill_pool_tags": ["electric", "aoe", "high_power", "multi_hit"],
+    "affix_slots": 2, "capture_base_rate": 0.40,
+    "habitat": ["深流峡谷-雷涛湾"],
+    "lore": "能释放雷电波浪，在水中引起连锁放电，对多个目标同时造成伤害。",
+    "evolution": null
+  },
+  {
+    "id": "superconducting_crab", "name": "超导蟹", "type": "电", "rarity": "uncommon",
+    "base_stats": {"hp": 62, "atk": 28, "def": 38, "spd": 30, "end": 35},
+    "stat_growth": {"hp": 3.2, "atk": 1.8, "def": 2.5, "spd": 1.8, "end": 2.2},
+    "base_skill": "超导", "skill_pool_tags": ["electric", "debuff", "control", "support"],
+    "affix_slots": 3, "capture_base_rate": 0.38,
+    "habitat": ["深流峡谷-深流"],
+    "lore": "体内物质具有超导特性，能大幅降低对手的行动速度，让己方始终占据先手优势。",
+    "evolution": null
+  },
+  {
+    "id": "swift_electric_shrimp", "name": "迅电虾", "type": "电", "rarity": "rare",
+    "base_stats": {"hp": 48, "atk": 45, "def": 22, "spd": 78, "end": 25},
+    "stat_growth": {"hp": 2.2, "atk": 3.0, "def": 1.2, "spd": 4.5, "end": 1.5},
+    "base_skill": "极速电击", "skill_pool_tags": ["electric", "speed", "paralyze", "priority"],
+    "affix_slots": 3, "capture_base_rate": 0.30,
+    "habitat": ["暗礁荒野-闪电谷", "热泉秘境-电流区"],
+    "lore": "电虾进化后速度提升至极限，攻击快得连闪电都追不上。",
+    "evolution": {"target": "extreme_speed_electric_shrimp", "min_level": 38}
+  },
+  {
+    "id": "electric_claw", "name": "电鳌", "type": "电", "rarity": "rare",
+    "base_stats": {"hp": 68, "atk": 60, "def": 30, "spd": 55, "end": 30},
+    "stat_growth": {"hp": 3.2, "atk": 4.0, "def": 1.8, "spd": 3.2, "end": 1.8},
+    "base_skill": "电霸冲击", "skill_pool_tags": ["electric", "high_power", "physical", "speed"],
+    "affix_slots": 3, "capture_base_rate": 0.25,
+    "habitat": ["暗礁荒野-闪电谷"],
+    "lore": "蓄积了大量电能的巨螯虾，爆发时能释放出毁灭性的电击冲击。",
+    "evolution": null
+  },
+  {
+    "id": "thunder_giant_claw", "name": "雷霆巨螯", "type": "电", "rarity": "rare",
+    "base_stats": {"hp": 75, "atk": 68, "def": 28, "spd": 48, "end": 28},
+    "stat_growth": {"hp": 3.8, "atk": 4.5, "def": 1.5, "spd": 2.8, "end": 1.5},
+    "base_skill": "雷霆一击", "skill_pool_tags": ["electric", "high_power", "physical", "risky"],
+    "affix_slots": 3, "capture_base_rate": 0.22,
+    "habitat": ["暗礁荒野-雷霆峰"],
+    "lore": "两只巨大螯爪蕴藏着惊天雷霆，全力一击的破坏力令所有对手胆寒。",
+    "evolution": null
+  },
+  {
+    "id": "magnetic_crab", "name": "磁力甲蟹", "type": "电", "rarity": "rare",
+    "base_stats": {"hp": 72, "atk": 35, "def": 45, "spd": 38, "end": 45},
+    "stat_growth": {"hp": 3.5, "atk": 2.2, "def": 3.0, "spd": 2.2, "end": 3.0},
+    "base_skill": "磁场控制", "skill_pool_tags": ["electric", "control", "terrain", "support"],
+    "affix_slots": 3, "capture_base_rate": 0.20,
+    "habitat": ["深流峡谷-磁力湾"],
+    "lore": "能操控磁场对对手的行动产生干扰，是以控制见长的少见电系虾米。",
+    "evolution": null
+  },
+  {
+    "id": "lightning_emperor", "name": "闪电帝", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 80, "atk": 75, "def": 35, "spd": 92, "end": 38},
+    "stat_growth": {"hp": 4.0, "atk": 4.8, "def": 2.0, "spd": 5.5, "end": 2.2},
+    "base_skill": "帝王电殛", "skill_pool_tags": ["electric", "speed", "high_power", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.12,
+    "habitat": ["热泉秘境-电流区"],
+    "lore": "电系虾米的皇者，速度已达到近乎瞬间移动的程度，其电击来自不可防御的方向。",
+    "evolution": null
+  },
+  {
+    "id": "ultra_speed_king", "name": "超速螯王", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 85, "atk": 82, "def": 32, "spd": 85, "end": 35},
+    "stat_growth": {"hp": 4.2, "atk": 5.2, "def": 1.8, "spd": 5.2, "end": 2.0},
+    "base_skill": "超速毁灭击", "skill_pool_tags": ["electric", "speed", "high_power", "physical"],
+    "affix_slots": 3, "capture_base_rate": 0.10,
+    "habitat": ["暗礁荒野-极速谷"],
+    "lore": "速度越快伤害越强，在顶峰状态下的一击能抹去一切存在。",
+    "evolution": null
+  },
+  {
+    "id": "electric_wave_giant", "name": "电浪巨鱼", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 98, "atk": 65, "def": 40, "spd": 60, "end": 42},
+    "stat_growth": {"hp": 5.0, "atk": 4.2, "def": 2.5, "spd": 3.5, "end": 2.8},
+    "base_skill": "万雷爆涌", "skill_pool_tags": ["electric", "aoe", "high_power", "multi_hit"],
+    "affix_slots": 3, "capture_base_rate": 0.09,
+    "habitat": ["深海裂隙-电涌深层"],
+    "lore": "体型巨大，能释放覆盖整片海域的电浪，是最擅长对多目标输出的电系虾米。",
+    "evolution": null
+  },
+  {
+    "id": "rift_electric_eel", "name": "裂隙电鳗", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 88, "atk": 70, "def": 38, "spd": 80, "end": 40},
+    "stat_growth": {"hp": 4.5, "atk": 4.5, "def": 2.2, "spd": 5.0, "end": 2.5},
+    "base_skill": "裂隙穿透", "skill_pool_tags": ["electric", "speed", "armor_break", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.08,
+    "habitat": ["深海裂隙-雷电裂隙"],
+    "lore": "在深海裂缝中进化的超级电鳗，攻击穿透力极强，无视所有防御屏障。",
+    "evolution": null
+  },
+  {
+    "id": "extreme_speed_electric_shrimp", "name": "极速电虾", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 62, "atk": 62, "def": 28, "spd": 98, "end": 30},
+    "stat_growth": {"hp": 2.8, "atk": 4.0, "def": 1.5, "spd": 6.0, "end": 1.8},
+    "base_skill": "无影电击", "skill_pool_tags": ["electric", "speed", "priority", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.07,
+    "habitat": ["热泉秘境-极速温流"],
+    "lore": "迅电虾进化链终极形态，速度之快已超越光速本身的想象，攻击总在防御之前。",
+    "evolution": null
+  },
+  {
+    "id": "hot_spring_electric_claw", "name": "热泉电螯", "type": "电", "rarity": "rare",
+    "base_stats": {"hp": 70, "atk": 52, "def": 32, "spd": 58, "end": 32},
+    "stat_growth": {"hp": 3.5, "atk": 3.5, "def": 2.0, "spd": 3.5, "end": 2.0},
+    "base_skill": "温泉电爆", "skill_pool_tags": ["electric", "physical", "burn", "paralyze"],
+    "affix_slots": 3, "capture_base_rate": 0.18,
+    "habitat": ["热泉秘境-温泉电流区"],
+    "lore": "栖息在热泉中的罕见电系虾米，同时具有温泉的灼烧效果和电击的麻痹效果。",
+    "evolution": null
+  },
+  {
+    "id": "abyss_rift_claw", "name": "深渊裂隙螯", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 92, "atk": 75, "def": 42, "spd": 70, "end": 45},
+    "stat_growth": {"hp": 4.8, "atk": 4.8, "def": 2.5, "spd": 4.2, "end": 2.8},
+    "base_skill": "深渊电爪", "skill_pool_tags": ["electric", "high_power", "speed", "armor_break"],
+    "affix_slots": 3, "capture_base_rate": 0.06,
+    "habitat": ["深海裂隙-电能裂隙"],
+    "lore": "在深渊电能裂缝中孕育的强大虾米，速度与力量的完美结合体。",
+    "evolution": null
+  },
+  {
+    "id": "super_em_overlord", "name": "超电磁霸主", "type": "电", "rarity": "elite",
+    "base_stats": {"hp": 105, "atk": 72, "def": 48, "spd": 72, "end": 50},
+    "stat_growth": {"hp": 5.2, "atk": 4.5, "def": 3.0, "spd": 4.5, "end": 3.2},
+    "base_skill": "超电磁毁灭", "skill_pool_tags": ["electric", "aoe", "high_power", "control"],
+    "affix_slots": 3, "capture_base_rate": 0.05,
+    "habitat": ["深海裂隙-电磁核心"],
+    "lore": "电系虾米的终极存在，其电磁场可以影响方圆数里的海域，无法被任何手段屏蔽。",
+    "evolution": null
+  }
+]

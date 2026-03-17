@@ -1,0 +1,49 @@
+[
+  {
+    "id": "net_basic",
+    "name": "甲网",
+    "type": "capture",
+    "multiplier": 1.0,
+    "price": 100,
+    "description": "基础捕捉网"
+  },
+  {
+    "id": "net_fine",
+    "name": "精甲网",
+    "type": "capture",
+    "multiplier": 1.8,
+    "price": 300,
+    "description": "更强的捕捉网"
+  },
+  {
+    "id": "net_spirit",
+    "name": "灵甲网",
+    "type": "capture",
+    "multiplier": 3.0,
+    "price": 900,
+    "description": "高阶捕捉网"
+  },
+  {
+    "id": "potion_minor",
+    "name": "小潮药",
+    "type": "heal",
+    "heal_ratio": 0.25,
+    "price": 120,
+    "description": "回复25%生命"
+  },
+  {
+    "id": "potion_major",
+    "name": "大潮药",
+    "type": "heal",
+    "heal_ratio": 0.5,
+    "price": 260,
+    "description": "回复50%生命"
+  },
+  {
+    "id": "cure_plague",
+    "name": "净疫盐",
+    "type": "cure_plague",
+    "price": 0,
+    "description": "在修炼场消除疫病"
+  }
+]

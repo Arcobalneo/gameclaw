@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "tide_strike_1_1",
+    "name": "潮击1",
+    "type": "潮",
+    "category": "physical",
+    "power": 60,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮击1"
+  },
+  {
+    "id": "tide_slash_1_2",
+    "name": "潮斩1",
+    "type": "潮",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "tide"
+    ],
+    "description": "潮系技能 潮斩1"
+  },
+  {
+    "id": "tide_guard_1_3",
+    "name": "潮守1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "tide"
+    ],
+    "description": "潮系技能 潮守1"
+  },
+  {
+    "id": "tide_surge_1_4",
+    "name": "潮涌1",
+    "type": "潮",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮涌1"
+  },
+  {
+    "id": "tide_burst_1_5",
+    "name": "潮爆1",
+    "type": "潮",
+    "category": "special",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮爆1"
+  },
+  {
+    "id": "tide_veil_1_6",
+    "name": "潮幕1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "tide"
+    ],
+    "description": "潮系技能 潮幕1"
+  },
+  {
+    "id": "tide_wave_1_7",
+    "name": "潮波1",
+    "type": "潮",
+    "category": "special",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "tide"
+    ],
+    "description": "潮系技能 潮波1"
+  },
+  {
+    "id": "tide_rush_1_8",
+    "name": "潮冲1",
+    "type": "潮",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮冲1"
+  },
+  {
+    "id": "tide_field_1_9",
+    "name": "潮域1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "潮场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮域1"
+  },
+  {
+    "id": "tide_shell_1_10",
+    "name": "潮壳1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "tide"
+    ],
+    "description": "潮系技能 潮壳1"
+  },
+  {
+    "id": "tide_howl_1_11",
+    "name": "潮鸣1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮鸣1"
+  },
+  {
+    "id": "tide_spike_1_12",
+    "name": "潮刺1",
+    "type": "潮",
+    "category": "physical",
+    "power": 70,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "减速",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮刺1"
+  },
+  {
+    "id": "tide_break_1_13",
+    "name": "潮破1",
+    "type": "潮",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮破1"
+  },
+  {
+    "id": "tide_echo_1_14",
+    "name": "潮响1",
+    "type": "潮",
+    "category": "special",
+    "power": 74,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "tide"
+    ],
+    "description": "潮系技能 潮响1"
+  },
+  {
+    "id": "tide_pulse_1_15",
+    "name": "潮脉1",
+    "type": "潮",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "tide"
+    ],
+    "description": "潮系技能 潮脉1"
+  },
+  {
+    "id": "tide_storm_1_16",
+    "name": "潮暴1",
+    "type": "潮",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮暴1"
+  },
+  {
+    "id": "tide_step_1_17",
+    "name": "潮步1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "tide"
+    ],
+    "description": "潮系技能 潮步1"
+  },
+  {
+    "id": "tide_ring_1_18",
+    "name": "潮环1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "tide"
+    ],
+    "description": "潮系技能 潮环1"
+  },
+  {
+    "id": "tide_edge_1_19",
+    "name": "潮棱1",
+    "type": "潮",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮棱1"
+  },
+  {
+    "id": "tide_oath_1_20",
+    "name": "潮誓约1",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "tide"
+    ],
+    "description": "潮系技能 潮誓约1"
+  },
+  {
+    "id": "tide_strike_2_1",
+    "name": "潮击2",
+    "type": "潮",
+    "category": "physical",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "basic",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮击2"
+  },
+  {
+    "id": "tide_slash_2_2",
+    "name": "潮斩2",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "tide"
+    ],
+    "description": "潮系技能 潮斩2"
+  },
+  {
+    "id": "tide_guard_2_3",
+    "name": "潮守2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "tide"
+    ],
+    "description": "潮系技能 潮守2"
+  },
+  {
+    "id": "tide_surge_2_4",
+    "name": "潮涌2",
+    "type": "潮",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮涌2"
+  },
+  {
+    "id": "tide_burst_2_5",
+    "name": "潮爆2",
+    "type": "潮",
+    "category": "special",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮爆2"
+  },
+  {
+    "id": "tide_veil_2_6",
+    "name": "潮幕2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "tide"
+    ],
+    "description": "潮系技能 潮幕2"
+  },
+  {
+    "id": "tide_wave_2_7",
+    "name": "潮波2",
+    "type": "潮",
+    "category": "special",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "tide"
+    ],
+    "description": "潮系技能 潮波2"
+  },
+  {
+    "id": "tide_rush_2_8",
+    "name": "潮冲2",
+    "type": "潮",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "speed",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮冲2"
+  },
+  {
+    "id": "tide_field_2_9",
+    "name": "潮域2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "潮场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮域2"
+  },
+  {
+    "id": "tide_shell_2_10",
+    "name": "潮壳2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "tide"
+    ],
+    "description": "潮系技能 潮壳2"
+  },
+  {
+    "id": "tide_howl_2_11",
+    "name": "潮鸣2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮鸣2"
+  },
+  {
+    "id": "tide_spike_2_12",
+    "name": "潮刺2",
+    "type": "潮",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "减速",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮刺2"
+  },
+  {
+    "id": "tide_break_2_13",
+    "name": "潮破2",
+    "type": "潮",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮破2"
+  },
+  {
+    "id": "tide_echo_2_14",
+    "name": "潮响2",
+    "type": "潮",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "tide"
+    ],
+    "description": "潮系技能 潮响2"
+  },
+  {
+    "id": "tide_pulse_2_15",
+    "name": "潮脉2",
+    "type": "潮",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "tide"
+    ],
+    "description": "潮系技能 潮脉2"
+  },
+  {
+    "id": "tide_storm_2_16",
+    "name": "潮暴2",
+    "type": "潮",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮暴2"
+  },
+  {
+    "id": "tide_step_2_17",
+    "name": "潮步2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "tide"
+    ],
+    "description": "潮系技能 潮步2"
+  },
+  {
+    "id": "tide_ring_2_18",
+    "name": "潮环2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "tide"
+    ],
+    "description": "潮系技能 潮环2"
+  },
+  {
+    "id": "tide_edge_2_19",
+    "name": "潮棱2",
+    "type": "潮",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮棱2"
+  },
+  {
+    "id": "tide_oath_2_20",
+    "name": "潮誓约2",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "tide"
+    ],
+    "description": "潮系技能 潮誓约2"
+  },
+  {
+    "id": "tide_strike_3_1",
+    "name": "潮击3",
+    "type": "潮",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮击3"
+  },
+  {
+    "id": "tide_slash_3_2",
+    "name": "潮斩3",
+    "type": "潮",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "physical",
+      "crit",
+      "tide"
+    ],
+    "description": "潮系技能 潮斩3"
+  },
+  {
+    "id": "tide_guard_3_3",
+    "name": "潮守3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "tide"
+    ],
+    "description": "潮系技能 潮守3"
+  },
+  {
+    "id": "tide_surge_3_4",
+    "name": "潮涌3",
+    "type": "潮",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮涌3"
+  },
+  {
+    "id": "tide_burst_3_5",
+    "name": "潮爆3",
+    "type": "潮",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮爆3"
+  },
+  {
+    "id": "tide_veil_3_6",
+    "name": "潮幕3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "tide"
+    ],
+    "description": "潮系技能 潮幕3"
+  },
+  {
+    "id": "tide_wave_3_7",
+    "name": "潮波3",
+    "type": "潮",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "tide"
+    ],
+    "description": "潮系技能 潮波3"
+  },
+  {
+    "id": "tide_rush_3_8",
+    "name": "潮冲3",
+    "type": "潮",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮冲3"
+  },
+  {
+    "id": "tide_field_3_9",
+    "name": "潮域3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "潮场",
+        "duration_turns": 3
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮域3"
+  },
+  {
+    "id": "tide_shell_3_10",
+    "name": "潮壳3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "tide"
+    ],
+    "description": "潮系技能 潮壳3"
+  },
+  {
+    "id": "tide_howl_3_11",
+    "name": "潮鸣3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮鸣3"
+  },
+  {
+    "id": "tide_spike_3_12",
+    "name": "潮刺3",
+    "type": "潮",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "减速",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮刺3"
+  },
+  {
+    "id": "tide_break_3_13",
+    "name": "潮破3",
+    "type": "潮",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮破3"
+  },
+  {
+    "id": "tide_echo_3_14",
+    "name": "潮响3",
+    "type": "潮",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "tide"
+    ],
+    "description": "潮系技能 潮响3"
+  },
+  {
+    "id": "tide_pulse_3_15",
+    "name": "潮脉3",
+    "type": "潮",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "tide"
+    ],
+    "description": "潮系技能 潮脉3"
+  },
+  {
+    "id": "tide_storm_3_16",
+    "name": "潮暴3",
+    "type": "潮",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "aoe",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮暴3"
+  },
+  {
+    "id": "tide_step_3_17",
+    "name": "潮步3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "tide"
+    ],
+    "description": "潮系技能 潮步3"
+  },
+  {
+    "id": "tide_ring_3_18",
+    "name": "潮环3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "tide"
+    ],
+    "description": "潮系技能 潮环3"
+  },
+  {
+    "id": "tide_edge_3_19",
+    "name": "潮棱3",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮棱3"
+  },
+  {
+    "id": "tide_oath_3_20",
+    "name": "潮誓约3",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "tide"
+    ],
+    "description": "潮系技能 潮誓约3"
+  },
+  {
+    "id": "tide_strike_4_1",
+    "name": "潮击4",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮击4"
+  },
+  {
+    "id": "tide_slash_4_2",
+    "name": "潮斩4",
+    "type": "潮",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "tide"
+    ],
+    "description": "潮系技能 潮斩4"
+  },
+  {
+    "id": "tide_guard_4_3",
+    "name": "潮守4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "tide"
+    ],
+    "description": "潮系技能 潮守4"
+  },
+  {
+    "id": "tide_surge_4_4",
+    "name": "潮涌4",
+    "type": "潮",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮涌4"
+  },
+  {
+    "id": "tide_burst_4_5",
+    "name": "潮爆4",
+    "type": "潮",
+    "category": "special",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮爆4"
+  },
+  {
+    "id": "tide_veil_4_6",
+    "name": "潮幕4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "tide"
+    ],
+    "description": "潮系技能 潮幕4"
+  },
+  {
+    "id": "tide_wave_4_7",
+    "name": "潮波4",
+    "type": "潮",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "tide"
+    ],
+    "description": "潮系技能 潮波4"
+  },
+  {
+    "id": "tide_rush_4_8",
+    "name": "潮冲4",
+    "type": "潮",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮冲4"
+  },
+  {
+    "id": "tide_field_4_9",
+    "name": "潮域4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "潮场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮域4"
+  },
+  {
+    "id": "tide_shell_4_10",
+    "name": "潮壳4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "tide"
+    ],
+    "description": "潮系技能 潮壳4"
+  },
+  {
+    "id": "tide_howl_4_11",
+    "name": "潮鸣4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮鸣4"
+  },
+  {
+    "id": "tide_spike_4_12",
+    "name": "潮刺4",
+    "type": "潮",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "减速",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮刺4"
+  },
+  {
+    "id": "tide_break_4_13",
+    "name": "潮破4",
+    "type": "潮",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮破4"
+  },
+  {
+    "id": "tide_echo_4_14",
+    "name": "潮响4",
+    "type": "潮",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "tide"
+    ],
+    "description": "潮系技能 潮响4"
+  },
+  {
+    "id": "tide_pulse_4_15",
+    "name": "潮脉4",
+    "type": "潮",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "tide"
+    ],
+    "description": "潮系技能 潮脉4"
+  },
+  {
+    "id": "tide_storm_4_16",
+    "name": "潮暴4",
+    "type": "潮",
+    "category": "special",
+    "power": 110,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮暴4"
+  },
+  {
+    "id": "tide_step_4_17",
+    "name": "潮步4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "tide"
+    ],
+    "description": "潮系技能 潮步4"
+  },
+  {
+    "id": "tide_ring_4_18",
+    "name": "潮环4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "tide"
+    ],
+    "description": "潮系技能 潮环4"
+  },
+  {
+    "id": "tide_edge_4_19",
+    "name": "潮棱4",
+    "type": "潮",
+    "category": "physical",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮棱4"
+  },
+  {
+    "id": "tide_oath_4_20",
+    "name": "潮誓约4",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "tide"
+    ],
+    "description": "潮系技能 潮誓约4"
+  },
+  {
+    "id": "tide_strike_5_1",
+    "name": "潮击5",
+    "type": "潮",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮击5"
+  },
+  {
+    "id": "tide_slash_5_2",
+    "name": "潮斩5",
+    "type": "潮",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "tide"
+    ],
+    "description": "潮系技能 潮斩5"
+  },
+  {
+    "id": "tide_guard_5_3",
+    "name": "潮守5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "tide"
+    ],
+    "description": "潮系技能 潮守5"
+  },
+  {
+    "id": "tide_surge_5_4",
+    "name": "潮涌5",
+    "type": "潮",
+    "category": "special",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮涌5"
+  },
+  {
+    "id": "tide_burst_5_5",
+    "name": "潮爆5",
+    "type": "潮",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮爆5"
+  },
+  {
+    "id": "tide_veil_5_6",
+    "name": "潮幕5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "tide"
+    ],
+    "description": "潮系技能 潮幕5"
+  },
+  {
+    "id": "tide_wave_5_7",
+    "name": "潮波5",
+    "type": "潮",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "tide"
+    ],
+    "description": "潮系技能 潮波5"
+  },
+  {
+    "id": "tide_rush_5_8",
+    "name": "潮冲5",
+    "type": "潮",
+    "category": "physical",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮冲5"
+  },
+  {
+    "id": "tide_field_5_9",
+    "name": "潮域5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "潮场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮域5"
+  },
+  {
+    "id": "tide_shell_5_10",
+    "name": "潮壳5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "tide"
+    ],
+    "description": "潮系技能 潮壳5"
+  },
+  {
+    "id": "tide_howl_5_11",
+    "name": "潮鸣5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "tide"
+    ],
+    "description": "潮系技能 潮鸣5"
+  },
+  {
+    "id": "tide_spike_5_12",
+    "name": "潮刺5",
+    "type": "潮",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "减速",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮刺5"
+  },
+  {
+    "id": "tide_break_5_13",
+    "name": "潮破5",
+    "type": "潮",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮破5"
+  },
+  {
+    "id": "tide_echo_5_14",
+    "name": "潮响5",
+    "type": "潮",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "tide"
+    ],
+    "description": "潮系技能 潮响5"
+  },
+  {
+    "id": "tide_pulse_5_15",
+    "name": "潮脉5",
+    "type": "潮",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "tide"
+    ],
+    "description": "潮系技能 潮脉5"
+  },
+  {
+    "id": "tide_storm_5_16",
+    "name": "潮暴5",
+    "type": "潮",
+    "category": "special",
+    "power": 116,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "tide"
+    ],
+    "description": "潮系技能 潮暴5"
+  },
+  {
+    "id": "tide_step_5_17",
+    "name": "潮步5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "tide"
+    ],
+    "description": "潮系技能 潮步5"
+  },
+  {
+    "id": "tide_ring_5_18",
+    "name": "潮环5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "tide"
+    ],
+    "description": "潮系技能 潮环5"
+  },
+  {
+    "id": "tide_edge_5_19",
+    "name": "潮棱5",
+    "type": "潮",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "tide"
+    ],
+    "description": "潮系技能 潮棱5"
+  },
+  {
+    "id": "tide_oath_5_20",
+    "name": "潮誓约5",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "tide"
+    ],
+    "description": "潮系技能 潮誓约5"
+  }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "poison_urchin", "name": "毒棘海胆", "type": "毒", "rarity": "common",
+    "base_stats": {"hp": 52, "atk": 25, "def": 28, "spd": 22, "end": 30},
+    "stat_growth": {"hp": 2.8, "atk": 1.5, "def": 2.0, "spd": 1.0, "end": 2.2},
+    "base_skill": "毒刺", "skill_pool_tags": ["poison", "dot", "status", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.65,
+    "habitat": ["潮礁区-礁石表层", "毒藻丛林-丛林入口"],
+    "lore": "全身棘刺充满剧毒，只需轻轻碰触就能让对手陷入持续中毒状态。",
+    "evolution": {"target": "deep_poison_urchin", "min_level": 20}
+  },
+  {
+    "id": "purple_crab", "name": "紫蟹", "type": "毒", "rarity": "common",
+    "base_stats": {"hp": 58, "atk": 28, "def": 25, "spd": 25, "end": 28},
+    "stat_growth": {"hp": 3.0, "atk": 2.0, "def": 1.8, "spd": 1.2, "end": 2.0},
+    "base_skill": "毒刺", "skill_pool_tags": ["poison", "dot", "stack", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.62,
+    "habitat": ["毒藻丛林-丛林入口", "毒藻丛林-深处"],
+    "lore": "紫色甲壳中储存着层叠毒素，随着战斗进行，中毒叠层会不断加深。",
+    "evolution": null
+  },
+  {
+    "id": "poison_cloud_shrimp", "name": "毒云虾", "type": "毒", "rarity": "common",
+    "base_stats": {"hp": 45, "atk": 30, "def": 18, "spd": 38, "end": 25},
+    "stat_growth": {"hp": 2.2, "atk": 2.2, "def": 1.0, "spd": 2.2, "end": 1.8},
+    "base_skill": "毒雾", "skill_pool_tags": ["poison", "aoe", "status", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["毒藻丛林-毒云区"],
+    "lore": "能喷射出大范围毒云，在毒云覆盖区域内的所有虾米都难逃中毒命运。",
+    "evolution": null
+  },
+  {
+    "id": "corrosive_slug", "name": "腐蚀蛞蝓", "type": "毒", "rarity": "common",
+    "base_stats": {"hp": 55, "atk": 22, "def": 22, "spd": 28, "end": 35},
+    "stat_growth": {"hp": 2.8, "atk": 1.4, "def": 1.5, "spd": 1.5, "end": 2.5},
+    "base_skill": "腐蚀", "skill_pool_tags": ["poison", "debuff", "armor_break", "basic"],
+    "affix_slots": 2, "capture_base_rate": 0.60,
+    "habitat": ["毒藻丛林-丛林入口"],
+    "lore": "分泌的腐蚀液能溶解对手的甲壳，持续降低其防御能力，为后续攻击铺路。",
+    "evolution": null
+  },
+  {
+    "id": "poison_blade_claw", "name": "毒刃螯", "type": "毒", "rarity": "uncommon",
+    "base_stats": {"hp": 55, "atk": 42, "def": 22, "spd": 38, "end": 25},
+    "stat_growth": {"hp": 2.8, "atk": 3.0, "def": 1.2, "spd": 2.2, "end": 1.5},
+    "base_skill": "毒刃斩", "skill_pool_tags": ["poison", "physical", "crit", "status"],
+    "affix_slots": 2, "capture_base_rate": 0.45,
+    "habitat": ["毒藻丛林-毒刃区"],
+    "lore": "螯爪锋利如刃且布满毒素，每一次命中都有极高概率使对手中毒并造成暴击。",
+    "evolution": null
+  },
+  {
+    "id": "hallucinogenic_jellyfish", "name": "致幻水母", "type": "毒", "rarity": "uncommon",
+    "base_stats": {"hp": 60, "atk": 20, "def": 25, "spd": 30, "end": 40},
+    "stat_growth": {"hp": 3.2, "atk": 1.2, "def": 1.8, "spd": 1.8, "end": 2.8},
+    "base_skill": "幻觉毒素", "skill_pool_tags": ["poison", "confusion", "status", "support"],
+    "affix_slots": 2, "capture_base_rate": 0.42,
+    "habitat": ["毒藻丛林-水母湾"],
+    "lore": "透明的身体中充满致幻神经毒素，被触碰的对手会陷入混乱，无法正常战斗。",
+    "evolution": null
+  },
+  {
+    "id": "plague_shrimp", "name": "疫病虾", "type": "毒", "rarity": "uncommon",
+    "base_stats": {"hp": 62, "atk": 25, "def": 28, "spd": 30, "end": 38},
+    "stat_growth": {"hp": 3.2, "atk": 1.5, "def": 2.0, "spd": 1.8, "end": 2.8},
+    "base_skill": "疫病传播", "skill_pool_tags": ["poison", "multi_status", "dot", "debuff"],
+    "affix_slots": 2, "capture_base_rate": 0.40,
+    "habitat": ["毒藻丛林-深处"],
+    "lore": "能同时传播多种状态异常，接触它的对手往往同时承受中毒、腐蚀和困惑。",
+    "evolution": null
+  },
+  {
+    "id": "swamp_gas_fish", "name": "沼气鱼", "type": "毒", "rarity": "uncommon",
+    "base_stats": {"hp": 58, "atk": 28, "def": 25, "spd": 35, "end": 32},
+    "stat_growth": {"hp": 2.8, "atk": 2.0, "def": 1.8, "spd": 2.0, "end": 2.2},
+    "base_skill": "沼气爆发", "skill_pool_tags": ["poison", "terrain", "aoe", "status"],
+    "affix_slots": 2, "capture_base_rate": 0.38,
+    "habitat": ["毒藻丛林-沼气区"],
+    "lore": "能在水中释放有毒沼气，形成持续伤害的毒性地形，让敌人无处可逃。",
+    "evolution": null
+  },
+  {
+    "id": "deep_poison_urchin", "name": "深毒海胆", "type": "毒", "rarity": "rare",
+    "base_stats": {"hp": 68, "atk": 38, "def": 40, "spd": 28, "end": 42},
+    "stat_growth": {"hp": 3.5, "atk": 2.5, "def": 2.8, "spd": 1.5, "end": 3.0},
+    "base_skill": "剧毒", "skill_pool_tags": ["poison", "dot", "stack", "high_power"],
+    "affix_slots": 3, "capture_base_rate": 0.30,
+    "habitat": ["毒藻丛林-深处", "暗礁荒野-毒礁区"],
+    "lore": "毒棘海胆在深毒环境中进化的形态，毒素强度提升数倍，中毒效果呈指数级递增。",
+    "evolution": {"target": "extreme_poison_urchin", "min_level": 38}
+  },
+  {
+    "id": "decay_claw", "name": "腐化螯", "type": "毒", "rarity": "rare",
+    "base_stats": {"hp": 72, "atk": 45, "def": 32, "spd": 32, "end": 38},
+    "stat_growth": {"hp": 3.8, "atk": 3.2, "def": 2.2, "spd": 1.8, "end": 2.5},
+    "base_skill": "深度腐蚀", "skill_pool_tags": ["poison", "armor_break", "debuff", "stack"],
+    "affix_slots": 3, "capture_base_rate": 0.25,
+    "habitat": ["毒藻丛林-腐化区"],
+    "lore": "螯爪分泌的腐化毒素能让对手的防御层层剥落，越打越脆弱。",
+    "evolution": null
+  },
+  {
+    "id": "pestilence_crab", "name": "瘟疫蟹", "type": "毒", "rarity": "rare",
+    "base_stats": {"hp": 78, "atk": 32, "def": 35, "spd": 28, "end": 48},
+    "stat_growth": {"hp": 4.0, "atk": 2.0, "def": 2.5, "spd": 1.5, "end": 3.2},
+    "base_skill": "瘟疫传染", "skill_pool_tags": ["poison", "multi_status", "dot", "aoe"],
+    "affix_slots": 3, "capture_base_rate": 0.22,
+    "habitat": ["毒藻丛林-瘟疫区"],
+    "lore": "能传播类似深渊疫病的毒素，其攻击能给对手附加多种层叠状态异常。",
+    "evolution": null
+  },
+  {
+    "id": "poison_mist_octopus", "name": "毒雾章鱼", "type": "毒", "rarity": "rare",
+    "base_stats": {"hp": 70, "atk": 38, "def": 30, "spd": 42, "end": 42},
+    "stat_growth": {"hp": 3.5, "atk": 2.5, "def": 2.0, "spd": 2.5, "end": 3.0},
+    "base_skill": "毒雾迷阵", "skill_pool_tags": ["poison", "aoe", "multi_status", "control"],
+    "affix_slots": 3, "capture_base_rate": 0.20,
+    "habitat": ["毒藻丛林-迷雾区"],
+    "lore": "能喷出含有多种毒素的迷雾，同时造成中毒、困惑和腐蚀，控制能力首屈一指。",
+    "evolution": null
+  },
+  {
+    "id": "deep_poison_king", "name": "深毒螯王", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 95, "atk": 58, "def": 42, "spd": 38, "end": 55},
+    "stat_growth": {"hp": 5.0, "atk": 3.8, "def": 2.8, "spd": 2.2, "end": 3.5},
+    "base_skill": "毒爆冲击", "skill_pool_tags": ["poison", "high_power", "dot", "risky"],
+    "affix_slots": 3, "capture_base_rate": 0.15,
+    "habitat": ["深海裂隙-毒核区"],
+    "lore": "毒系爆发输出的最强代表，积累足够毒素后能引发毁灭性的毒爆。",
+    "evolution": null
+  },
+  {
+    "id": "corrosion_emperor", "name": "腐蚀帝", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 100, "atk": 45, "def": 50, "spd": 32, "end": 62},
+    "stat_growth": {"hp": 5.2, "atk": 2.8, "def": 3.5, "spd": 1.8, "end": 4.2},
+    "base_skill": "终极腐蚀", "skill_pool_tags": ["poison", "armor_break", "debuff", "stack"],
+    "affix_slots": 3, "capture_base_rate": 0.12,
+    "habitat": ["毒藻丛林-帝王区"],
+    "lore": "腐蚀类毒系虾米的王者，其腐蚀毒素能渗透一切防御，对手的抗性在它面前形同虚设。",
+    "evolution": null
+  },
+  {
+    "id": "lethal_ghost_fish", "name": "致命幽灵鱼", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 72, "atk": 65, "def": 28, "spd": 62, "end": 35},
+    "stat_growth": {"hp": 3.5, "atk": 4.2, "def": 1.5, "spd": 3.8, "end": 2.2},
+    "base_skill": "致命一击", "skill_pool_tags": ["poison", "crit", "high_power", "assassin"],
+    "affix_slots": 3, "capture_base_rate": 0.10,
+    "habitat": ["深海裂隙-幽灵层"],
+    "lore": "几乎透明的外表让它难以被察觉，单次攻击携带极强毒素，命中则往往致命。",
+    "evolution": null
+  },
+  {
+    "id": "plague_bringer", "name": "瘟疫降临者", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 108, "atk": 52, "def": 48, "spd": 35, "end": 65},
+    "stat_growth": {"hp": 5.5, "atk": 3.2, "def": 3.2, "spd": 2.0, "end": 4.5},
+    "base_skill": "瘟疫降临", "skill_pool_tags": ["poison", "multi_status", "aoe", "dot"],
+    "affix_slots": 3, "capture_base_rate": 0.08,
+    "habitat": ["毒藻丛林-瘟疫核心"],
+    "lore": "传说中瘟疫的化身，所到之处毒素蔓延，任何虾米都难以在其攻势下维持健康状态。",
+    "evolution": null
+  },
+  {
+    "id": "extreme_poison_urchin", "name": "极毒海胆", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 85, "atk": 52, "def": 55, "spd": 35, "end": 58},
+    "stat_growth": {"hp": 4.2, "atk": 3.5, "def": 3.5, "spd": 2.0, "end": 4.0},
+    "base_skill": "极毒爆裂", "skill_pool_tags": ["poison", "dot", "high_power", "signature"],
+    "affix_slots": 3, "capture_base_rate": 0.07,
+    "habitat": ["热泉秘境-极毒区"],
+    "lore": "毒棘海胆进化链终极形态，其毒素已超越普通生命能承受的极限，碰触即溶。",
+    "evolution": null
+  },
+  {
+    "id": "toxic_algae_king", "name": "毒藻丛林主", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 102, "atk": 48, "def": 52, "spd": 30, "end": 60},
+    "stat_growth": {"hp": 5.2, "atk": 3.0, "def": 3.5, "spd": 1.5, "end": 4.0},
+    "base_skill": "毒藻领域", "skill_pool_tags": ["poison", "terrain", "aoe", "dot"],
+    "affix_slots": 3, "capture_base_rate": 0.09,
+    "habitat": ["毒藻丛林-丛林主座"],
+    "lore": "毒藻丛林的守护者与统治者，能将整片区域变成充满剧毒的死亡地带。",
+    "evolution": null
+  },
+  {
+    "id": "abyss_poison_mist", "name": "深渊毒雾", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 90, "atk": 55, "def": 40, "spd": 45, "end": 58},
+    "stat_growth": {"hp": 4.5, "atk": 3.5, "def": 2.5, "spd": 2.8, "end": 4.0},
+    "base_skill": "深渊毒爆", "skill_pool_tags": ["poison", "aoe", "high_power", "multi_status"],
+    "affix_slots": 3, "capture_base_rate": 0.06,
+    "habitat": ["深海裂隙-毒雾层"],
+    "lore": "深渊中诞生的毒雾实体，其毒素融合了深渊的腐蚀力与普通毒素，几乎无法被治愈。",
+    "evolution": null
+  },
+  {
+    "id": "decay_lord", "name": "腐化领主", "type": "毒", "rarity": "elite",
+    "base_stats": {"hp": 112, "atk": 60, "def": 58, "spd": 32, "end": 68},
+    "stat_growth": {"hp": 5.8, "atk": 3.8, "def": 3.8, "spd": 1.8, "end": 4.5},
+    "base_skill": "领主腐化令", "skill_pool_tags": ["poison", "armor_break", "dot", "stack", "aoe"],
+    "affix_slots": 3, "capture_base_rate": 0.05,
+    "habitat": ["深海裂隙-腐化核心"],
+    "lore": "腐化类虾米的终极领主，其存在本身就是一种腐化场域，任何进入其领域的虾米都会被逐渐侵蚀。",
+    "evolution": null
+  }
+]

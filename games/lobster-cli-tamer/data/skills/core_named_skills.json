@@ -1,0 +1,1714 @@
+[
+  {
+    "id": "core_named_1",
+    "name": "毒刺",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒刺"
+  },
+  {
+    "id": "core_named_2",
+    "name": "毒雾",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒雾"
+  },
+  {
+    "id": "core_named_3",
+    "name": "腐蚀",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：腐蚀"
+  },
+  {
+    "id": "core_named_4",
+    "name": "毒刃斩",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒刃斩"
+  },
+  {
+    "id": "core_named_5",
+    "name": "幻觉毒素",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：幻觉毒素"
+  },
+  {
+    "id": "core_named_6",
+    "name": "疫病传播",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：疫病传播"
+  },
+  {
+    "id": "core_named_7",
+    "name": "沼气爆发",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：沼气爆发"
+  },
+  {
+    "id": "core_named_8",
+    "name": "剧毒",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：剧毒"
+  },
+  {
+    "id": "core_named_9",
+    "name": "深度腐蚀",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：深度腐蚀"
+  },
+  {
+    "id": "core_named_10",
+    "name": "瘟疫传染",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：瘟疫传染"
+  },
+  {
+    "id": "core_named_11",
+    "name": "毒雾迷阵",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒雾迷阵"
+  },
+  {
+    "id": "core_named_12",
+    "name": "毒爆冲击",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒爆冲击"
+  },
+  {
+    "id": "core_named_13",
+    "name": "终极腐蚀",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：终极腐蚀"
+  },
+  {
+    "id": "core_named_14",
+    "name": "致命一击",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：致命一击"
+  },
+  {
+    "id": "core_named_15",
+    "name": "瘟疫降临",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：瘟疫降临"
+  },
+  {
+    "id": "core_named_16",
+    "name": "极毒爆裂",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      },
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：极毒爆裂"
+  },
+  {
+    "id": "core_named_17",
+    "name": "毒藻领域",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：毒藻领域"
+  },
+  {
+    "id": "core_named_18",
+    "name": "深渊毒爆",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "中毒",
+        "chance": 0.35
+      }
+    ],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：深渊毒爆"
+  },
+  {
+    "id": "core_named_19",
+    "name": "领主腐化令",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：领主腐化令"
+  },
+  {
+    "id": "core_named_20",
+    "name": "潮击",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：潮击"
+  },
+  {
+    "id": "core_named_21",
+    "name": "钳击",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：钳击"
+  },
+  {
+    "id": "core_named_22",
+    "name": "深流冲",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：深流冲"
+  },
+  {
+    "id": "core_named_23",
+    "name": "防御姿态",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：防御姿态"
+  },
+  {
+    "id": "core_named_24",
+    "name": "水幕",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：水幕"
+  },
+  {
+    "id": "core_named_25",
+    "name": "连击波",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：连击波"
+  },
+  {
+    "id": "core_named_26",
+    "name": "泡沫护甲",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：泡沫护甲"
+  },
+  {
+    "id": "core_named_27",
+    "name": "疾冲",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：疾冲"
+  },
+  {
+    "id": "core_named_28",
+    "name": "海啸蓄势",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：海啸蓄势"
+  },
+  {
+    "id": "core_named_29",
+    "name": "潮浪斩",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：潮浪斩"
+  },
+  {
+    "id": "core_named_30",
+    "name": "深压击",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：深压击"
+  },
+  {
+    "id": "core_named_31",
+    "name": "潮汐感应",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：潮汐感应"
+  },
+  {
+    "id": "core_named_32",
+    "name": "珊瑚壁垒",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：珊瑚壁垒"
+  },
+  {
+    "id": "core_named_33",
+    "name": "幻流袭",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：幻流袭"
+  },
+  {
+    "id": "core_named_34",
+    "name": "王者潮击",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：王者潮击"
+  },
+  {
+    "id": "core_named_35",
+    "name": "极速冲",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：极速冲"
+  },
+  {
+    "id": "core_named_36",
+    "name": "风暴冲击",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：风暴冲击"
+  },
+  {
+    "id": "core_named_37",
+    "name": "深渊号令",
+    "type": "潮",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：深渊号令"
+  },
+  {
+    "id": "core_named_38",
+    "name": "深蓝巨浪",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：深蓝巨浪"
+  },
+  {
+    "id": "core_named_39",
+    "name": "深渊螯压",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：深渊螯压"
+  },
+  {
+    "id": "core_named_40",
+    "name": "创世之力",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：创世之力"
+  },
+  {
+    "id": "core_named_41",
+    "name": "混沌裂击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：混沌裂击"
+  },
+  {
+    "id": "core_named_42",
+    "name": "始祖之怒",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：始祖之怒"
+  },
+  {
+    "id": "core_named_43",
+    "name": "神圣壁垒",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：神圣壁垒"
+  },
+  {
+    "id": "core_named_44",
+    "name": "至尊海压",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：至尊海压"
+  },
+  {
+    "id": "core_named_45",
+    "name": "创始铁甲",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：创始铁甲"
+  },
+  {
+    "id": "core_named_46",
+    "name": "神域海啸",
+    "type": "潮",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "tide"
+    ],
+    "description": "补齐基础技能：神域海啸"
+  },
+  {
+    "id": "core_named_47",
+    "name": "永恒灵光",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：永恒灵光"
+  },
+  {
+    "id": "core_named_48",
+    "name": "终极瘟疫",
+    "type": "毒",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "poison"
+    ],
+    "description": "补齐基础技能：终极瘟疫"
+  },
+  {
+    "id": "core_named_49",
+    "name": "虚空法则",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：虚空法则"
+  },
+  {
+    "id": "core_named_50",
+    "name": "幻影",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：幻影"
+  },
+  {
+    "id": "core_named_51",
+    "name": "灵感",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：灵感"
+  },
+  {
+    "id": "core_named_52",
+    "name": "心灵感应",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：心灵感应"
+  },
+  {
+    "id": "core_named_53",
+    "name": "灵能冲击",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：灵能冲击"
+  },
+  {
+    "id": "core_named_54",
+    "name": "深幽突袭",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：深幽突袭"
+  },
+  {
+    "id": "core_named_55",
+    "name": "终极幻觉",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：终极幻觉"
+  },
+  {
+    "id": "core_named_56",
+    "name": "灵魂庇护",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：灵魂庇护"
+  },
+  {
+    "id": "core_named_57",
+    "name": "星光祝福",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：星光祝福"
+  },
+  {
+    "id": "core_named_58",
+    "name": "深渊预言",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：深渊预言"
+  },
+  {
+    "id": "core_named_59",
+    "name": "帝皇幻影袭",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：帝皇幻影袭"
+  },
+  {
+    "id": "core_named_60",
+    "name": "时间操控",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：时间操控"
+  },
+  {
+    "id": "core_named_61",
+    "name": "虚空裂击",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：虚空裂击"
+  },
+  {
+    "id": "core_named_62",
+    "name": "极幽突袭",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：极幽突袭"
+  },
+  {
+    "id": "core_named_63",
+    "name": "温泉灵愈",
+    "type": "灵",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.2
+      }
+    ],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：温泉灵愈"
+  },
+  {
+    "id": "core_named_64",
+    "name": "深渊幻击",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：深渊幻击"
+  },
+  {
+    "id": "core_named_65",
+    "name": "虚无领域",
+    "type": "灵",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "spirit"
+    ],
+    "description": "补齐基础技能：虚无领域"
+  },
+  {
+    "id": "core_named_66",
+    "name": "电爪",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：电爪"
+  },
+  {
+    "id": "core_named_67",
+    "name": "超速冲击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：超速冲击"
+  },
+  {
+    "id": "core_named_68",
+    "name": "静电护盾",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：静电护盾"
+  },
+  {
+    "id": "core_named_69",
+    "name": "闪击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：闪击"
+  },
+  {
+    "id": "core_named_70",
+    "name": "超导",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：超导"
+  },
+  {
+    "id": "core_named_71",
+    "name": "雷鸣爆发",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：雷鸣爆发"
+  },
+  {
+    "id": "core_named_72",
+    "name": "极速电击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：极速电击"
+  },
+  {
+    "id": "core_named_73",
+    "name": "电霸冲击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：电霸冲击"
+  },
+  {
+    "id": "core_named_74",
+    "name": "雷霆一击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：雷霆一击"
+  },
+  {
+    "id": "core_named_75",
+    "name": "磁场控制",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：磁场控制"
+  },
+  {
+    "id": "core_named_76",
+    "name": "帝王电殛",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：帝王电殛"
+  },
+  {
+    "id": "core_named_77",
+    "name": "超速毁灭击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：超速毁灭击"
+  },
+  {
+    "id": "core_named_78",
+    "name": "万雷爆涌",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：万雷爆涌"
+  },
+  {
+    "id": "core_named_79",
+    "name": "裂隙穿透",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：裂隙穿透"
+  },
+  {
+    "id": "core_named_80",
+    "name": "无影电击",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：无影电击"
+  },
+  {
+    "id": "core_named_81",
+    "name": "温泉电爆",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：温泉电爆"
+  },
+  {
+    "id": "core_named_82",
+    "name": "深渊电爪",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：深渊电爪"
+  },
+  {
+    "id": "core_named_83",
+    "name": "超电磁毁灭",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.3
+      }
+    ],
+    "tags": [
+      "core",
+      "electric"
+    ],
+    "description": "补齐基础技能：超电磁毁灭"
+  },
+  {
+    "id": "core_named_84",
+    "name": "硬化",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：硬化"
+  },
+  {
+    "id": "core_named_85",
+    "name": "岩砸",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：岩砸"
+  },
+  {
+    "id": "core_named_86",
+    "name": "岩刺阵",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：岩刺阵"
+  },
+  {
+    "id": "core_named_87",
+    "name": "破甲击",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：破甲击"
+  },
+  {
+    "id": "core_named_88",
+    "name": "玄武反刃",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：玄武反刃"
+  },
+  {
+    "id": "core_named_89",
+    "name": "熔岩喷射",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：熔岩喷射"
+  },
+  {
+    "id": "core_named_90",
+    "name": "磐石壁垒",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：磐石壁垒"
+  },
+  {
+    "id": "core_named_91",
+    "name": "巨甲反击",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：巨甲反击"
+  },
+  {
+    "id": "core_named_92",
+    "name": "铁甲压制",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：铁甲压制"
+  },
+  {
+    "id": "core_named_93",
+    "name": "地震爪",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：地震爪"
+  },
+  {
+    "id": "core_named_94",
+    "name": "水晶反射",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：水晶反射"
+  },
+  {
+    "id": "core_named_95",
+    "name": "磐石守护",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：磐石守护"
+  },
+  {
+    "id": "core_named_96",
+    "name": "矿泉愈合",
+    "type": "岩",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "heal",
+        "value": 0.2
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：矿泉愈合"
+  },
+  {
+    "id": "core_named_97",
+    "name": "火山爆发",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：火山爆发"
+  },
+  {
+    "id": "core_named_98",
+    "name": "远古甲盾",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：远古甲盾"
+  },
+  {
+    "id": "core_named_99",
+    "name": "守卫之盾",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：守卫之盾"
+  },
+  {
+    "id": "core_named_100",
+    "name": "暗礁震裂",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：暗礁震裂"
+  },
+  {
+    "id": "core_named_101",
+    "name": "熔核爆碎",
+    "type": "岩",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "core",
+      "rock"
+    ],
+    "description": "补齐基础技能：熔核爆碎"
+  }
+]

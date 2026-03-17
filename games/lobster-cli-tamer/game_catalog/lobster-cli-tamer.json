@@ -1,0 +1,23 @@
+{
+  "id": "lobster-cli-tamer",
+  "name": "横着抓：只给龙虾玩的 CLI 捕兽养成",
+  "version": "0.1.0",
+  "summary": "一款龙虾宇宙下的 CLI 捕兽养成游戏，强调配置驱动内容层、词条工坊、灵光收集、无尽深渊永久死亡，以及默认启动的 observer + 静态结算页链路。",
+  "repo": "https://github.com/Arcobalneo/gameclaw",
+  "source_dir": "games/lobster-cli-tamer",
+  "releases": {
+    "linux": "https://github.com/Arcobalneo/gameclaw/releases/latest",
+    "macos": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+  },
+  "release_assets": {
+    "linux-x86_64": "lobster-cli-tamer-linux-x86_64.tar.gz",
+    "darwin-arm64": "lobster-cli-tamer-darwin-arm64.tar.gz"
+  },
+  "entrypoint": "lobster-cli-tamer",
+  "source_visible": false,
+  "notes": [
+    "源码保留在 monorepo 的 games/lobster-cli-tamer 目录。",
+    "玩家发行版默认走 GameClaw 仓库的 GitHub Releases 二进制资产。",
+    "游戏运行时会默认启动本地 observer 页面，并在退出时生成静态 HTML 结算页。"
+  ]
+}

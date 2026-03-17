@@ -104,6 +104,18 @@ For newly designed / newly implemented GameClaw games, treat this as a default c
 - the runtime should print the local observer URL clearly so a human can open it during play
 - if the observer page cannot start, fail honestly or degrade explicitly; do not silently pretend the live observer exists
 
+### 7. If the coding agent is unavailable, use a strict single-agent fallback loop
+
+If Codex / ACP is clearly unavailable but the user still wants the GameClaw task completed, do not pretend the delegation happened. Fall back honestly and keep the process tight:
+
+- still follow the same order: `plan -> implement -> docs -> validate -> commit`
+- prefer repo-level validation first: `./scripts/test-game.sh <game-id>` and `./scripts/build-game.sh <game-id>`
+- when packaging or observer behavior changed, validate both the source run and the built binary / archive, not just one of them
+- for observer checks, verify all three things explicitly: the live localhost page really responds, the runtime server really stops at run end, and a static HTML settlement page is really written
+- if local HTTP proxy settings can interfere with localhost checks, bypass them explicitly instead of treating proxy-caused 502 / connection issues as game bugs
+- "real playtest" means at least one genuine CLI run through the actual game entrypoint; helper search / simulation / scripted reasoning may help derive a stable route, but final acceptance must still be replayed through the real CLI or built binary
+- only after that should you commit, tag, push, and confirm the GitHub release / workflow result
+
 ## Minimum expectations before commit
 
 For large changes, do not skip:

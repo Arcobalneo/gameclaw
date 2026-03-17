@@ -1,0 +1,2052 @@
+[
+  {
+    "id": "electric_strike_1_1",
+    "name": "电击1",
+    "type": "电",
+    "category": "physical",
+    "power": 60,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电击1"
+  },
+  {
+    "id": "electric_slash_1_2",
+    "name": "电斩1",
+    "type": "电",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "electric"
+    ],
+    "description": "电系技能 电斩1"
+  },
+  {
+    "id": "electric_guard_1_3",
+    "name": "电守1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "electric"
+    ],
+    "description": "电系技能 电守1"
+  },
+  {
+    "id": "electric_surge_1_4",
+    "name": "电涌1",
+    "type": "电",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电涌1"
+  },
+  {
+    "id": "electric_burst_1_5",
+    "name": "电爆1",
+    "type": "电",
+    "category": "special",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电爆1"
+  },
+  {
+    "id": "electric_veil_1_6",
+    "name": "电幕1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "electric"
+    ],
+    "description": "电系技能 电幕1"
+  },
+  {
+    "id": "electric_wave_1_7",
+    "name": "电波1",
+    "type": "电",
+    "category": "special",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "electric"
+    ],
+    "description": "电系技能 电波1"
+  },
+  {
+    "id": "electric_rush_1_8",
+    "name": "电冲1",
+    "type": "电",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电冲1"
+  },
+  {
+    "id": "electric_field_1_9",
+    "name": "电域1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "电场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电域1"
+  },
+  {
+    "id": "electric_shell_1_10",
+    "name": "电壳1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "electric"
+    ],
+    "description": "电系技能 电壳1"
+  },
+  {
+    "id": "electric_howl_1_11",
+    "name": "电鸣1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电鸣1"
+  },
+  {
+    "id": "electric_spike_1_12",
+    "name": "电刺1",
+    "type": "电",
+    "category": "physical",
+    "power": 70,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电刺1"
+  },
+  {
+    "id": "electric_break_1_13",
+    "name": "电破1",
+    "type": "电",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电破1"
+  },
+  {
+    "id": "electric_echo_1_14",
+    "name": "电响1",
+    "type": "电",
+    "category": "special",
+    "power": 74,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "electric"
+    ],
+    "description": "电系技能 电响1"
+  },
+  {
+    "id": "electric_pulse_1_15",
+    "name": "电脉1",
+    "type": "电",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "electric"
+    ],
+    "description": "电系技能 电脉1"
+  },
+  {
+    "id": "electric_storm_1_16",
+    "name": "电暴1",
+    "type": "电",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电暴1"
+  },
+  {
+    "id": "electric_step_1_17",
+    "name": "电步1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "electric"
+    ],
+    "description": "电系技能 电步1"
+  },
+  {
+    "id": "electric_ring_1_18",
+    "name": "电环1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "electric"
+    ],
+    "description": "电系技能 电环1"
+  },
+  {
+    "id": "electric_edge_1_19",
+    "name": "电棱1",
+    "type": "电",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电棱1"
+  },
+  {
+    "id": "electric_oath_1_20",
+    "name": "电誓约1",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "electric"
+    ],
+    "description": "电系技能 电誓约1"
+  },
+  {
+    "id": "electric_strike_2_1",
+    "name": "电击2",
+    "type": "电",
+    "category": "physical",
+    "power": 66,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "basic",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电击2"
+  },
+  {
+    "id": "electric_slash_2_2",
+    "name": "电斩2",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "electric"
+    ],
+    "description": "电系技能 电斩2"
+  },
+  {
+    "id": "electric_guard_2_3",
+    "name": "电守2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "electric"
+    ],
+    "description": "电系技能 电守2"
+  },
+  {
+    "id": "electric_surge_2_4",
+    "name": "电涌2",
+    "type": "电",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电涌2"
+  },
+  {
+    "id": "electric_burst_2_5",
+    "name": "电爆2",
+    "type": "电",
+    "category": "special",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电爆2"
+  },
+  {
+    "id": "electric_veil_2_6",
+    "name": "电幕2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "electric"
+    ],
+    "description": "电系技能 电幕2"
+  },
+  {
+    "id": "electric_wave_2_7",
+    "name": "电波2",
+    "type": "电",
+    "category": "special",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "electric"
+    ],
+    "description": "电系技能 电波2"
+  },
+  {
+    "id": "electric_rush_2_8",
+    "name": "电冲2",
+    "type": "电",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "speed",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电冲2"
+  },
+  {
+    "id": "electric_field_2_9",
+    "name": "电域2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "电场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电域2"
+  },
+  {
+    "id": "electric_shell_2_10",
+    "name": "电壳2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "electric"
+    ],
+    "description": "电系技能 电壳2"
+  },
+  {
+    "id": "electric_howl_2_11",
+    "name": "电鸣2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电鸣2"
+  },
+  {
+    "id": "electric_spike_2_12",
+    "name": "电刺2",
+    "type": "电",
+    "category": "physical",
+    "power": 76,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电刺2"
+  },
+  {
+    "id": "electric_break_2_13",
+    "name": "电破2",
+    "type": "电",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电破2"
+  },
+  {
+    "id": "electric_echo_2_14",
+    "name": "电响2",
+    "type": "电",
+    "category": "special",
+    "power": 80,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "electric"
+    ],
+    "description": "电系技能 电响2"
+  },
+  {
+    "id": "electric_pulse_2_15",
+    "name": "电脉2",
+    "type": "电",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "electric"
+    ],
+    "description": "电系技能 电脉2"
+  },
+  {
+    "id": "electric_storm_2_16",
+    "name": "电暴2",
+    "type": "电",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电暴2"
+  },
+  {
+    "id": "electric_step_2_17",
+    "name": "电步2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "electric"
+    ],
+    "description": "电系技能 电步2"
+  },
+  {
+    "id": "electric_ring_2_18",
+    "name": "电环2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "electric"
+    ],
+    "description": "电系技能 电环2"
+  },
+  {
+    "id": "electric_edge_2_19",
+    "name": "电棱2",
+    "type": "电",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电棱2"
+  },
+  {
+    "id": "electric_oath_2_20",
+    "name": "电誓约2",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "electric"
+    ],
+    "description": "电系技能 电誓约2"
+  },
+  {
+    "id": "electric_strike_3_1",
+    "name": "电击3",
+    "type": "电",
+    "category": "physical",
+    "power": 72,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电击3"
+  },
+  {
+    "id": "electric_slash_3_2",
+    "name": "电斩3",
+    "type": "电",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "physical",
+      "crit",
+      "electric"
+    ],
+    "description": "电系技能 电斩3"
+  },
+  {
+    "id": "electric_guard_3_3",
+    "name": "电守3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "electric"
+    ],
+    "description": "电系技能 电守3"
+  },
+  {
+    "id": "electric_surge_3_4",
+    "name": "电涌3",
+    "type": "电",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电涌3"
+  },
+  {
+    "id": "electric_burst_3_5",
+    "name": "电爆3",
+    "type": "电",
+    "category": "special",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电爆3"
+  },
+  {
+    "id": "electric_veil_3_6",
+    "name": "电幕3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "electric"
+    ],
+    "description": "电系技能 电幕3"
+  },
+  {
+    "id": "electric_wave_3_7",
+    "name": "电波3",
+    "type": "电",
+    "category": "special",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "electric"
+    ],
+    "description": "电系技能 电波3"
+  },
+  {
+    "id": "electric_rush_3_8",
+    "name": "电冲3",
+    "type": "电",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电冲3"
+  },
+  {
+    "id": "electric_field_3_9",
+    "name": "电域3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "电场",
+        "duration_turns": 3
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电域3"
+  },
+  {
+    "id": "electric_shell_3_10",
+    "name": "电壳3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "electric"
+    ],
+    "description": "电系技能 电壳3"
+  },
+  {
+    "id": "electric_howl_3_11",
+    "name": "电鸣3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电鸣3"
+  },
+  {
+    "id": "electric_spike_3_12",
+    "name": "电刺3",
+    "type": "电",
+    "category": "physical",
+    "power": 82,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电刺3"
+  },
+  {
+    "id": "electric_break_3_13",
+    "name": "电破3",
+    "type": "电",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电破3"
+  },
+  {
+    "id": "electric_echo_3_14",
+    "name": "电响3",
+    "type": "电",
+    "category": "special",
+    "power": 86,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "electric"
+    ],
+    "description": "电系技能 电响3"
+  },
+  {
+    "id": "electric_pulse_3_15",
+    "name": "电脉3",
+    "type": "电",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "electric"
+    ],
+    "description": "电系技能 电脉3"
+  },
+  {
+    "id": "electric_storm_3_16",
+    "name": "电暴3",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "aoe",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电暴3"
+  },
+  {
+    "id": "electric_step_3_17",
+    "name": "电步3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "electric"
+    ],
+    "description": "电系技能 电步3"
+  },
+  {
+    "id": "electric_ring_3_18",
+    "name": "电环3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "electric"
+    ],
+    "description": "电系技能 电环3"
+  },
+  {
+    "id": "electric_edge_3_19",
+    "name": "电棱3",
+    "type": "电",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电棱3"
+  },
+  {
+    "id": "electric_oath_3_20",
+    "name": "电誓约3",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "electric"
+    ],
+    "description": "电系技能 电誓约3"
+  },
+  {
+    "id": "electric_strike_4_1",
+    "name": "电击4",
+    "type": "电",
+    "category": "physical",
+    "power": 78,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电击4"
+  },
+  {
+    "id": "electric_slash_4_2",
+    "name": "电斩4",
+    "type": "电",
+    "category": "physical",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "electric"
+    ],
+    "description": "电系技能 电斩4"
+  },
+  {
+    "id": "electric_guard_4_3",
+    "name": "电守4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "electric"
+    ],
+    "description": "电系技能 电守4"
+  },
+  {
+    "id": "electric_surge_4_4",
+    "name": "电涌4",
+    "type": "电",
+    "category": "special",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电涌4"
+  },
+  {
+    "id": "electric_burst_4_5",
+    "name": "电爆4",
+    "type": "电",
+    "category": "special",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电爆4"
+  },
+  {
+    "id": "electric_veil_4_6",
+    "name": "电幕4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "electric"
+    ],
+    "description": "电系技能 电幕4"
+  },
+  {
+    "id": "electric_wave_4_7",
+    "name": "电波4",
+    "type": "电",
+    "category": "special",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "electric"
+    ],
+    "description": "电系技能 电波4"
+  },
+  {
+    "id": "electric_rush_4_8",
+    "name": "电冲4",
+    "type": "电",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电冲4"
+  },
+  {
+    "id": "electric_field_4_9",
+    "name": "电域4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "电场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电域4"
+  },
+  {
+    "id": "electric_shell_4_10",
+    "name": "电壳4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "electric"
+    ],
+    "description": "电系技能 电壳4"
+  },
+  {
+    "id": "electric_howl_4_11",
+    "name": "电鸣4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电鸣4"
+  },
+  {
+    "id": "electric_spike_4_12",
+    "name": "电刺4",
+    "type": "电",
+    "category": "physical",
+    "power": 88,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电刺4"
+  },
+  {
+    "id": "electric_break_4_13",
+    "name": "电破4",
+    "type": "电",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电破4"
+  },
+  {
+    "id": "electric_echo_4_14",
+    "name": "电响4",
+    "type": "电",
+    "category": "special",
+    "power": 92,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "electric"
+    ],
+    "description": "电系技能 电响4"
+  },
+  {
+    "id": "electric_pulse_4_15",
+    "name": "电脉4",
+    "type": "电",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "electric"
+    ],
+    "description": "电系技能 电脉4"
+  },
+  {
+    "id": "electric_storm_4_16",
+    "name": "电暴4",
+    "type": "电",
+    "category": "special",
+    "power": 110,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电暴4"
+  },
+  {
+    "id": "electric_step_4_17",
+    "name": "电步4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "electric"
+    ],
+    "description": "电系技能 电步4"
+  },
+  {
+    "id": "electric_ring_4_18",
+    "name": "电环4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "electric"
+    ],
+    "description": "电系技能 电环4"
+  },
+  {
+    "id": "electric_edge_4_19",
+    "name": "电棱4",
+    "type": "电",
+    "category": "physical",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电棱4"
+  },
+  {
+    "id": "electric_oath_4_20",
+    "name": "电誓约4",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "electric"
+    ],
+    "description": "电系技能 电誓约4"
+  },
+  {
+    "id": "electric_strike_5_1",
+    "name": "电击5",
+    "type": "电",
+    "category": "physical",
+    "power": 84,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "basic",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电击5"
+  },
+  {
+    "id": "electric_slash_5_2",
+    "name": "电斩5",
+    "type": "电",
+    "category": "physical",
+    "power": 96,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "physical",
+      "crit",
+      "electric"
+    ],
+    "description": "电系技能 电斩5"
+  },
+  {
+    "id": "electric_guard_5_3",
+    "name": "电守5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "shield",
+        "value": 0.25,
+        "duration_turns": 1
+      },
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "shield",
+      "electric"
+    ],
+    "description": "电系技能 电守5"
+  },
+  {
+    "id": "electric_surge_5_4",
+    "name": "电涌5",
+    "type": "电",
+    "category": "special",
+    "power": 102,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "special",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电涌5"
+  },
+  {
+    "id": "electric_burst_5_5",
+    "name": "电爆5",
+    "type": "电",
+    "category": "special",
+    "power": 112,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "recoil",
+        "value": 0.12
+      }
+    ],
+    "tags": [
+      "special",
+      "risky",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电爆5"
+  },
+  {
+    "id": "electric_veil_5_6",
+    "name": "电幕5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "atk",
+        "value": -0.2,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "support",
+      "debuff",
+      "electric"
+    ],
+    "description": "电系技能 电幕5"
+  },
+  {
+    "id": "electric_wave_5_7",
+    "name": "电波5",
+    "type": "电",
+    "category": "special",
+    "power": 90,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "multi_hit",
+        "hits": [
+          2,
+          3
+        ]
+      }
+    ],
+    "tags": [
+      "special",
+      "multi_hit",
+      "electric"
+    ],
+    "description": "电系技能 电波5"
+  },
+  {
+    "id": "electric_rush_5_8",
+    "name": "电冲5",
+    "type": "电",
+    "category": "physical",
+    "power": 106,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "speed",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电冲5"
+  },
+  {
+    "id": "electric_field_5_9",
+    "name": "电域5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "terrain",
+        "name": "电场",
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "terrain",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电域5"
+  },
+  {
+    "id": "electric_shell_5_10",
+    "name": "电壳5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "buff",
+      "tank",
+      "electric"
+    ],
+    "description": "电系技能 电壳5"
+  },
+  {
+    "id": "electric_howl_5_11",
+    "name": "电鸣5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "team",
+        "stat": "atk",
+        "value": 0.15,
+        "duration_turns": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "team_buff",
+      "support",
+      "electric"
+    ],
+    "description": "电系技能 电鸣5"
+  },
+  {
+    "id": "electric_spike_5_12",
+    "name": "电刺5",
+    "type": "电",
+    "category": "physical",
+    "power": 94,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "麻痹",
+        "chance": 0.4
+      }
+    ],
+    "tags": [
+      "dot",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电刺5"
+  },
+  {
+    "id": "electric_break_5_13",
+    "name": "电破5",
+    "type": "电",
+    "category": "physical",
+    "power": 100,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "enemy",
+        "stat": "def",
+        "value": -0.25,
+        "duration_turns": 3
+      }
+    ],
+    "tags": [
+      "armor_break",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电破5"
+  },
+  {
+    "id": "electric_echo_5_14",
+    "name": "电响5",
+    "type": "电",
+    "category": "special",
+    "power": 98,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      }
+    ],
+    "tags": [
+      "control",
+      "special",
+      "electric"
+    ],
+    "description": "电系技能 电响5"
+  },
+  {
+    "id": "electric_pulse_5_15",
+    "name": "电脉5",
+    "type": "电",
+    "category": "special",
+    "power": 104,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "special",
+      "status",
+      "electric"
+    ],
+    "description": "电系技能 电脉5"
+  },
+  {
+    "id": "electric_storm_5_16",
+    "name": "电暴5",
+    "type": "电",
+    "category": "special",
+    "power": 116,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "aoe",
+      "high_power",
+      "electric"
+    ],
+    "description": "电系技能 电暴5"
+  },
+  {
+    "id": "electric_step_5_17",
+    "name": "电步5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "priority",
+        "value": 1
+      }
+    ],
+    "tags": [
+      "priority",
+      "speed",
+      "electric"
+    ],
+    "description": "电系技能 电步5"
+  },
+  {
+    "id": "electric_ring_5_18",
+    "name": "电环5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "status_apply",
+        "status": "困惑",
+        "chance": 0.25
+      },
+      {
+        "type": "conditional",
+        "condition": "hp_below_half",
+        "power_bonus": 0.2
+      }
+    ],
+    "tags": [
+      "control",
+      "aoe",
+      "electric"
+    ],
+    "description": "电系技能 电环5"
+  },
+  {
+    "id": "electric_edge_5_19",
+    "name": "电棱5",
+    "type": "电",
+    "category": "physical",
+    "power": 108,
+    "accuracy": 1.0,
+    "effects": [],
+    "tags": [
+      "high_power",
+      "physical",
+      "electric"
+    ],
+    "description": "电系技能 电棱5"
+  },
+  {
+    "id": "electric_oath_5_20",
+    "name": "电誓约5",
+    "type": "电",
+    "category": "status",
+    "power": 0,
+    "accuracy": 1.0,
+    "effects": [
+      {
+        "type": "stat_change",
+        "target": "self",
+        "stat": "def",
+        "value": 0.25,
+        "duration_turns": 2
+      }
+    ],
+    "tags": [
+      "signature_like",
+      "buff",
+      "electric"
+    ],
+    "description": "电系技能 电誓约5"
+  }
+]
