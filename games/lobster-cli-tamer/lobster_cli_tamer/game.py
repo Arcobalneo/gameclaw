@@ -1,4 +1,4 @@
-"""game.py – 游戏主状态机 + CLI 主入口。
+"""game.py - 游戏主状态机 + CLI 主入口。
 
 Game 类驱动：主菜单 → 野外探索 / 深渊 / 词条工坊 / 图鉴 / 存档管理
 """
@@ -12,6 +12,7 @@ from lobster_cli_tamer.loader import load_game_data, GameData
 from lobster_cli_tamer.save import (
     new_save, load_save, write_save, list_save_summaries, save_exists,
     SaveSlot, SAVE_DIR,
+    write_last_slot, read_last_slot,
 )
 from lobster_cli_tamer.creature import Creature
 from lobster_cli_tamer.world import (
@@ -84,6 +85,25 @@ class Game:
     # ------------------------------------------------------------------ #
 
     def _select_save(self) -> None:
+        # ── last_slot 快速续档 ──────────────────────────────────
+        last = read_last_slot()
+        if last is not None:
+            summaries = list_save_summaries()
+            s = summaries[last]
+            pt = s.get("playtime_seconds", 0)
+            h, m = divmod(pt // 60, 60)
+            info(f"上次存档：槽{last} · {s.get('player_name','?')} · "
+                 f"队伍{s.get('party_count',0)}只 · 深渊第{s.get('deepest_abyss_floor',0)}层 · {h}h{m:02d}m")
+            print(f"  继续上次存档？(Enter=yes / n=选其他槽) ", end="", flush=True)
+            ans = input().strip().lower()
+            if ans != "n":
+                self.save = load_save(last, self.data)
+                write_last_slot(last)
+                check_zone_unlock(self.save, self.data)
+                self._push_party()
+                return
+
+        # ── 常规槽位选择 ───────────────────────────────────────
         summaries = list_save_summaries()
         render_save_summaries(summaries)
         render_menu("选择存档槽", [
@@ -103,10 +123,11 @@ class Game:
         if save_exists(slot):
             self.save = load_save(slot, self.data)
         else:
-            name = input('  新存档 — 输入你的名字（回车默认“甲录师”）：').strip() or '甲录师'
+            name = input('  新存档 — 输入你的名字（回车默认"甲录师"）：').strip() or '甲录师'
             self.save = new_save(slot, player_name=name)
             self._grant_starter_if_needed()
 
+        write_last_slot(self.save.slot)
         check_zone_unlock(self.save, self.data)
         self._grant_starter_if_needed()
         self._push_party()
@@ -171,7 +192,7 @@ class Game:
         zones = [z for zid, z in self.data.zones.items() if zid in self.save.unlocked_zones]
         if not zones:
             warn("没有可进入的区域"); return
-        opts = [(str(i+1), f"{z['name']} — {z.get('description','')}") for i, z in enumerate(zones)]
+        opts = [(str(i+1), f"{z['name']} - {z.get('description','')}") for i, z in enumerate(zones)]
         opts.append(("0", "返回"))
         render_menu("选择探索区域", opts)
         choice = input().strip()
@@ -271,6 +292,13 @@ class Game:
                 if ev.event_type == WorldEventType.BATTLE_TURN:
                     render_battle_log(ev.data.get("log", []))
                     render_battle_status(ev.data.get("status_bar", ""))
+                # 12.1 精确写盘：捕捉成功 / 战斗结束（EXP+死亡结算后）立即持久化
+                if ev.event_type in (
+                    WorldEventType.CAPTURE_SUCCESS,
+                    WorldEventType.BATTLE_END,
+                    WorldEventType.PARTY_WIPED,
+                ):
+                    write_save(self.save)
                 self.observer.push(ev.event_type.name.lower(), ev.data, ev.message)
 
     def _render_battle_state(self, engine: Any) -> None:
@@ -330,6 +358,15 @@ class Game:
                     if ev.message: info(ev.message)
                     if ev.event_type == TowerEventType.BATTLE_TURN:
                         render_battle_log(ev.data.get("log", []))
+                    # 12.1 精确写盘：深渊每层通过 / 疫病死亡结算 / 全灭后立即持久化
+                    if ev.event_type in (
+                        TowerEventType.BATTLE_END,
+                        TowerEventType.PLAGUE_DEATH,
+                        TowerEventType.WIPE_OUT,
+                        TowerEventType.RETREAT,
+                        TowerEventType.ABYSS_RECORD,
+                    ):
+                        write_save(self.save)
                     self.observer.push(ev.event_type.name.lower(), ev.data, ev.message)
 
             if tower.has_pending_choice():
@@ -352,7 +389,7 @@ class Game:
         print()
         info(f"{BOLD(creature.display_name)} 的技能候选（Lv{creature.level}升级）：")
         for i, s in enumerate(choices):
-            info(f"  [{i+1}] {s['name']} ({s['type']} | {s.get('power',0)}威力) — {s['description']}")
+            info(f"  [{i+1}] {s['name']} ({s['type']} | {s.get('power',0)}威力) - {s['description']}")
         info(f"  [0] 跳过")
         if len(creature.moves) >= 4:
             info(f"  当前技能：{creature.moves}")
@@ -439,7 +476,7 @@ class Game:
         for species_id, sp in self.data.species.items():
             if species_id in self.save.dex_caught:
                 shiny = YELLOW("✦") if species_id in self.save.shiny_caught else " "
-                info(f"  {shiny} {sp['name']} ({sp['type']}) — {sp['lore'][:40]}…")
+                info(f"  {shiny} {sp['name']} ({sp['type']}) - {sp['lore'][:40]}…")
             elif species_id in self.save.dex_seen:
                 info(f"  ? {sp['name']} （已目击）")
         input("  按 Enter 返回…")

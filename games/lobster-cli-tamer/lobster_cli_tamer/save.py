@@ -246,6 +246,30 @@ def new_save(slot: int, player_name: str = "甲录师") -> "SaveSlot":
 
 
 # --------------------------------------------------------------------------- #
+# last_slot 指针（agent 无人值守续档）
+# --------------------------------------------------------------------------- #
+
+_LAST_SLOT_FILE = SAVE_DIR / "last_slot"
+
+
+def write_last_slot(slot: int) -> None:
+    """记录上次使用的存档槽号，供下次启动自动续档。"""
+    SAVE_DIR.mkdir(parents=True, exist_ok=True)
+    _LAST_SLOT_FILE.write_text(str(slot), encoding="utf-8")
+
+
+def read_last_slot() -> Optional[int]:
+    """读取上次存档槽号；文件不存在或无效则返回 None。"""
+    try:
+        val = int(_LAST_SLOT_FILE.read_text(encoding="utf-8").strip())
+        if val in range(NUM_SLOTS) and save_exists(val):
+            return val
+    except Exception:
+        pass
+    return None
+
+
+# --------------------------------------------------------------------------- #
 # 版本迁移（预留）
 # --------------------------------------------------------------------------- #
 
