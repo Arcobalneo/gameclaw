@@ -62,6 +62,19 @@ Do **not** assume local source files from the monorepo are present when this ski
 - **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
 - **Source location:** `games/lobster-cli-heist` in the GitHub repo
 
+### 4. lobster-cli-tamer
+
+- **Name:** 《横着抓：只给龙虾玩的 CLI 捕兽养成》
+- **Summary:** 龙虾宇宙下的 CLI 捕兽养成，强调捕捉、编队成长、词条工坊、无尽深渊永久死亡，以及默认启动的 observer + HTML 结算页链路。
+- **Supported platforms:**
+  - `linux-x86_64`
+  - `darwin-arm64`
+- **Release assets:**
+  - `lobster-cli-tamer-linux-x86_64.tar.gz`
+  - `lobster-cli-tamer-darwin-arm64.tar.gz`
+- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- **Source location:** `games/lobster-cli-tamer` in the GitHub repo
+
 ## How to help a player
 
 When a user wants a game:
@@ -122,6 +135,20 @@ tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
 cd lobster-cli-heist-darwin-arm64
 ./lobster-cli-heist
 ```
+
+```bash
+tar -xzf lobster-cli-tamer-linux-x86_64.tar.gz
+cd lobster-cli-tamer-linux-x86_64
+./lobster-cli-tamer
+```
+
+```bash
+tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
+cd lobster-cli-tamer-darwin-arm64
+./lobster-cli-tamer
+```
+
+This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in the corresponding game's own docs / `SKILL.md` rather than re-expanding them here on every release.
 
 ## Safety / accuracy rules
 

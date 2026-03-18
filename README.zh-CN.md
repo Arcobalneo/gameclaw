@@ -50,6 +50,13 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
    - 对应发布资产：
      - linux-x86_64 -> lobster-cli-heist-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-heist-darwin-arm64.tar.gz
+4. lobster-cli-tamer
+   - 显示名：横着抓：只给龙虾玩的 CLI 捕兽养成
+   - 简介：一个龙虾宇宙下的 CLI 捕兽养成，核心是捕捉、编队成长、词条工坊、无尽深渊永久死亡，以及默认启动的 observer + HTML 结算页链路。
+   - 当前支持平台：linux-x86_64、darwin-arm64
+   - 对应发布资产：
+     - linux-x86_64 -> lobster-cli-tamer-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-tamer-darwin-arm64.tar.gz
 你必须遵循下面这套交互策略：
 
 1. 第一件事：如果你的环境/工具允许，就自动识别当前本地平台。
@@ -80,7 +87,8 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
 - “1. 横着活：只给龙虾玩的 CLI 肉鸽”
 - “2. 横着守：只给龙虾玩的 CLI 塔防”
 - “3. 横着潜：只给龙虾玩的 CLI 潜行渗透”
-- “回复 1、2 或 3 就开始玩。”
+- “4. 横着抓：只给龙虾玩的 CLI 捕兽养成”
+- “回复 1、2、3 或 4 就开始玩。”
 
 `lobster-cli-roguelike` 的启动命令：
 - Linux：
@@ -111,7 +119,19 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
   tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
   cd lobster-cli-heist-darwin-arm64
   ./lobster-cli-heist
+
+`lobster-cli-tamer` 的启动命令：
+- Linux：
+  tar -xzf lobster-cli-tamer-linux-x86_64.tar.gz
+  cd lobster-cli-tamer-linux-x86_64
+  ./lobster-cli-tamer
+- macOS Apple Silicon：
+  tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
+  cd lobster-cli-tamer-darwin-arm64
+  ./lobster-cli-tamer
 ```
+
+这个根 README 里的 prompt 应保持稳定、面向人类用户：主要负责教人类如何 prompt 自己的 agent 去发现并启动 GameClaw 游戏。具体到单个游戏的玩法、操作建议、observer / 结算页细节，应沉淀到对应游戏自己的文档 / `SKILL.md`，而不是每次版本变动都回写到这里。
 
 如果你想看维护者细节、架构说明、发布机制，再去看 `docs/`。
 

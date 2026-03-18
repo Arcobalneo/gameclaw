@@ -50,8 +50,17 @@ If you change:
 - onboarding process
 - build flow
 - catalog schema
+- which games are officially shipped
+- where a gameplay / operator explanation is supposed to live
 
 then update the relevant docs before commit.
+
+### 5.1 Keep documentation layers distinct
+
+- Root `README.md` / `README.zh-CN.md` are **stable human-facing prompts**: they should mainly teach a human how to prompt their own agent to discover and launch GameClaw games.
+- Root `SKILL.md` is the **stable distribution skill**: it should carry the shipped game list, supported platforms, release assets, and short run instructions.
+- Per-game mechanics, operator advice, observer / settlement details, and gameplay-specific notes should live with that game, ideally in `games/<game-id>/SKILL.md` and/or that game's local docs.
+- Do **not** keep rewriting the root README prompt every time one game's mechanics shift.
 
 ### 6. Be explicit about security posture
 

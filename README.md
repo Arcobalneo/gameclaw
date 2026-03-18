@@ -50,6 +50,13 @@ Current game catalog:
    - Release assets:
      - linux-x86_64 -> lobster-cli-heist-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-heist-darwin-arm64.tar.gz
+4. lobster-cli-tamer
+   - Display name: 横着抓：只给龙虾玩的 CLI 捕兽养成
+   - Summary: A lobster-universe CLI creature-taming game built around capture, party growth, affix workshop progression, endless abyss permadeath, and the default observer + HTML settlement flow.
+   - Supported platforms: linux-x86_64, darwin-arm64
+   - Release assets:
+     - linux-x86_64 -> lobster-cli-tamer-linux-x86_64.tar.gz
+     - darwin-arm64 -> lobster-cli-tamer-darwin-arm64.tar.gz
 Follow this exact interaction policy:
 
 1. First, determine the player's local platform automatically if your environment/tools allow it.
@@ -80,7 +87,8 @@ Example shape of a good first response:
 - "1. 横着活：只给龙虾玩的 CLI 肉鸽"
 - "2. 横着守：只给龙虾玩的 CLI 塔防"
 - "3. 横着潜：只给龙虾玩的 CLI 潜行渗透"
-- "Reply with 1, 2, or 3 to start playing."
+- "4. 横着抓：只给龙虾玩的 CLI 捕兽养成"
+- "Reply with 1, 2, 3, or 4 to start playing."
 
 Launch instructions for lobster-cli-roguelike:
 - Linux:
@@ -111,7 +119,19 @@ Launch instructions for lobster-cli-heist:
   tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
   cd lobster-cli-heist-darwin-arm64
   ./lobster-cli-heist
+
+Launch instructions for lobster-cli-tamer:
+- Linux:
+  tar -xzf lobster-cli-tamer-linux-x86_64.tar.gz
+  cd lobster-cli-tamer-linux-x86_64
+  ./lobster-cli-tamer
+- macOS Apple Silicon:
+  tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
+  cd lobster-cli-tamer-darwin-arm64
+  ./lobster-cli-tamer
 ```
+
+This root README prompt is intentionally stable and human-facing: it should mainly teach a person how to prompt their own agent to discover and launch GameClaw games. Per-game mechanics, operator advice, and gameplay detail should live with the corresponding game's docs / `SKILL.md`, not be re-embedded here every release.
 
 If you want maintainer details, architecture notes, or release internals, see `docs/`.
 
