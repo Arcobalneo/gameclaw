@@ -40,15 +40,15 @@ Purpose:
 - keep build/test/release entrypoints consistent across games
 - lock Python maintainer dependencies at the repo root via the `uv` workspace
 
-### 3. Game source + per-game docs layer
+### 3. Game source + per-game README layer
 
 Files:
 - `games/<game-id>/...`
-- especially per-game docs such as `games/<game-id>/README.md` and `games/<game-id>/SKILL.md`
+- especially the per-game English doc `games/<game-id>/README.md`
 
 Purpose:
 - keep each game's code, tests, docs, and per-game packaging scripts together
-- let each game maintain its own mechanics, operator advice, observer / settlement details, and gameplay notes without forcing those details back into the root distribution prompt
+- let each game maintain its own mechanics, operator advice, observer / settlement details, and gameplay notes in its own `README.md` without forcing those details back into the root distribution prompt
 - allow one game to evolve without forcing the same language/runtime on others
 
 ## Python dependency boundary
@@ -76,6 +76,6 @@ Per-game repos would make the skill and release story more fragmented.
 - Every shipped game lives in `games/<game-id>/`
 - Every shipped game can be tested and built via root scripts
 - Root README / root `SKILL.md` stay focused on stable discovery + release asset routing, not volatile gameplay walkthroughs
-- Per-game gameplay and operator detail should live under `games/<game-id>/README.md` / `games/<game-id>/SKILL.md`
+- Per-game gameplay and operator detail should live in each game's English `README.md`
 - Python maintainer workflows resolve through the root `uv` workspace without collapsing per-game package boundaries
 - Player-facing downloads should resolve to GitHub Releases binaries, not raw source checkout

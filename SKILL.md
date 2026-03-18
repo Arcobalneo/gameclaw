@@ -148,7 +148,7 @@ cd lobster-cli-tamer-darwin-arm64
 ./lobster-cli-tamer
 ```
 
-This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in the corresponding game's own docs / `SKILL.md` rather than re-expanding them here on every release.
+This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in each game's own `README.md` rather than re-expanding them here on every release.
 
 ## Safety / accuracy rules
 

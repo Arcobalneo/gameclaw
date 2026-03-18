@@ -131,7 +131,7 @@ Launch instructions for lobster-cli-tamer:
   ./lobster-cli-tamer
 ```
 
-This root README prompt is intentionally stable and human-facing: it should mainly teach a person how to prompt their own agent to discover and launch GameClaw games. Per-game mechanics, operator advice, and gameplay detail should live with the corresponding game's docs / `SKILL.md`, not be re-embedded here every release.
+This root README prompt is intentionally stable and human-facing: it should mainly teach a person how to prompt their own agent to discover and launch GameClaw games. Per-game mechanics, operator advice, and gameplay detail should live in each game's own `README.md`, not be re-embedded here every release.
 
 If you want maintainer details, architecture notes, or release internals, see `docs/`.
 

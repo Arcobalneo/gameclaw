@@ -1,56 +1,75 @@
 # lobster-cli-tamer
 
-**横着抓：只给龙虾玩的 CLI 捕兽养成**
+**Lobster Sideways Catch: a CLI creature-taming game for lobsters only**
 
-> agent-facing 的具体玩法 / 运行 / Observer / 结算页说明，现以 `SKILL.md` 为长期维护主入口。
-> 本 README 保持更轻的玩家 / 维护者入口文档定位。
+This game directory should keep only one English `README.md` as its local documentation entrypoint.
+Game-specific mechanics, runtime notes, Observer behavior, and settlement-report behavior should live here, not in an extra per-game `SKILL.md`.
 
-一款完全面向终端的龙虾宇宙捕兽养成游戏：
+## What this game is
 
-- 111 只可收集虾米
-- 700+ 技能数据
-- 100 条词条（可重投 / 升阶 / 封印）
-- 7 个探索区域
-- 无尽深渊 + 精英疫病 + 战斗内永久死亡
-- 本地 JSON 存档（3 槽）
-- 启动即部署的实时 Observer 看板（SSE）
-- 退出时自动生成静态 HTML 结算页
+`lobster-cli-tamer` is a terminal-first lobster-universe creature-taming game built around:
 
-## 本地运行
+- 111 collectible creatures
+- 700+ skill data entries
+- 100 affixes with reroll / upgrade / seal progression
+- overworld exploration and capture
+- party growth and workshop investment
+- endless abyss runs with in-battle permadeath
+- a live local Observer page
+- an automatic static HTML settlement report on exit
+
+## Player path: use the released binary
+
+Players should prefer the GameClaw GitHub Releases binaries:
+
+- `https://github.com/Arcobalneo/gameclaw/releases/latest`
+
+### Linux
+
+```bash
+tar -xzf lobster-cli-tamer-linux-x86_64.tar.gz
+cd lobster-cli-tamer-linux-x86_64
+./lobster-cli-tamer
+```
+
+### macOS Apple Silicon
+
+```bash
+tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
+cd lobster-cli-tamer-darwin-arm64
+./lobster-cli-tamer
+```
+
+## Maintainer path: run from source
 
 ```bash
 cd games/lobster-cli-tamer
 PYTHONPATH=. python3 -m lobster_cli_tamer.game
 ```
 
-或：
+Or use the repo-level entrypoints from the monorepo root:
 
 ```bash
-lobster-cli-tamer
-```
-
-## 构建二进制
-
-仓库根目录：
-
-```bash
+./scripts/test-game.sh lobster-cli-tamer
 ./scripts/build-game.sh lobster-cli-tamer
 ```
 
-## 产物
+## Runtime outputs
 
-- 实时看板：`http://localhost:8000+`
-- 存档：`~/.lobster-cli-tamer/save_<slot>.json`
-- 静态结算页：`~/.lobster-cli-tamer/reports/latest.html`
+- Live Observer page: `http://localhost:8000+`
+- Saves: `~/.lobster-cli-tamer/save_<slot>.json`
+- Static settlement report: `~/.lobster-cli-tamer/reports/latest.html`
 
-## 说明
+## Gameplay notes
 
-- 深渊模式下，战斗内 HP 归零会立即永久死亡。
-- 精英层会传播疫病；撤退或失败退出深渊时，会按累积层数结算疫病死亡率。
-- 当前版本为标准库实现，不依赖数据库。
+- In abyss mode, HP reaching 0 during battle means immediate permanent death.
+- Elite abyss floors can spread plague.
+- Retreating or failing out of the abyss resolves plague death risk based on accumulated plague floors.
+- The current version is standard-library based and does not require a database.
 
-## 文档分层
+## Documentation layering
 
-- 想知道怎么让 agent 理解并操作这个游戏：看 `SKILL.md`
-- 想从 GameClaw 总入口获取游戏：看仓库根 `README.md` / `README.zh-CN.md`
-- 想看构建 / release / 维护流程：看仓库根 `docs/`
+- Human users who want the stable one-click GameClaw prompt should read the repo root `README.md` / `README.zh-CN.md`.
+- The publishable `gameclaw` skill itself is the repo root `SKILL.md`.
+- This file is the only per-game documentation entrypoint inside `games/lobster-cli-tamer/`.
+- Repo-wide build / release / maintainer process lives under the repo root `docs/`.

@@ -83,7 +83,7 @@ If you change any of these, update docs before commit:
 
 - Root `README.md` / `README.zh-CN.md` are stable, human-facing prompts: they should mainly teach a person how to prompt their own agent to discover and launch GameClaw games.
 - Root `SKILL.md` is the stable distribution skill: keep the game list, supported platforms, release assets, and short launch instructions there.
-- Per-game mechanics, operator advice, observer / settlement behavior, and gameplay-specific detail should live under `games/<game-id>/`, preferably in that game's own `SKILL.md` and local docs.
+- Each game directory should keep only its own English `README.md` for game-specific mechanics, operator advice, observer / settlement behavior, and gameplay detail.
 - Do not repeatedly push single-game gameplay churn back into the root README prompt layer.
 
 ### 4. Be honest about binary security posture

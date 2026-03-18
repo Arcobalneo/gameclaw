@@ -131,7 +131,7 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
   ./lobster-cli-tamer
 ```
 
-这个根 README 里的 prompt 应保持稳定、面向人类用户：主要负责教人类如何 prompt 自己的 agent 去发现并启动 GameClaw 游戏。具体到单个游戏的玩法、操作建议、observer / 结算页细节，应沉淀到对应游戏自己的文档 / `SKILL.md`，而不是每次版本变动都回写到这里。
+这个根 README 里的 prompt 应保持稳定、面向人类用户：主要负责教人类如何 prompt 自己的 agent 去发现并启动 GameClaw 游戏。具体到单个游戏的玩法、操作建议、observer / 结算页细节，应沉淀到对应游戏自己的 `README.md`，而不是每次版本变动都回写到这里。
 
 如果你想看维护者细节、架构说明、发布机制，再去看 `docs/`。
 
