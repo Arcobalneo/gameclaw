@@ -33,7 +33,13 @@
       "甲网": 1.0,
       "精甲网": 1.8,
       "灵甲网": 3.0
-    }
+    },
+    "no_encounter_weight": 0.4,
+    "weakened_bonus": 1.5,
+    "half_hp_bonus": 1.2,
+    "status_poison_burn_bonus": 1.2,
+    "status_para_freeze_bonus": 1.5,
+    "shiny_capture_penalty": 0.7
   },
   "affix": {
     "roll_weights": {
@@ -108,7 +114,9 @@
     "save_dir": "~/.lobster-cli-tamer"
   },
   "world": {
-    "hidden_encounter_base_chance": 0.08
+    "hidden_encounter_base_chance": 0.08,
+    "steps_min": 3,
+    "steps_max": 8
   },
   "workshop": {
     "reroll_cost": {

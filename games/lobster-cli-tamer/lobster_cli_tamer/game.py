@@ -270,7 +270,28 @@ class Game:
             if cmd == "r":
                 evts = ws.battle_turn(BattleAction(action_type=ActionType.SURRENDER))
             elif cmd == "c":
-                item_id = "net_basic"
+                # 捕捉球选择子菜单
+                capture_items = [
+                    it for it in self.data.items.values()
+                    if it.get("type") == "capture"
+                    and self.save.get_item_count(it["id"]) > 0
+                ]
+                if not capture_items:
+                    warn("没有捕捉球了！"); continue
+                if len(capture_items) == 1:
+                    item_id = capture_items[0]["id"]
+                else:
+                    sub_opts = [
+                        (str(i+1), f"{it['name']} ×{self.save.get_item_count(it['id'])}  倍率 {it.get('multiplier',1.0)}×")
+                        for i, it in enumerate(capture_items)
+                    ] + [("0", "取消")]
+                    render_menu("选择捕捉球", sub_opts)
+                    sc = input().strip()
+                    if sc == "0": continue
+                    try:
+                        item_id = capture_items[int(sc)-1]["id"]
+                    except (ValueError, IndexError):
+                        warn("无效输入"); continue
                 evts = ws.battle_turn(BattleAction(action_type=ActionType.USE_SKILL,
                                                     skill_name=f"__capture__{item_id}"))
                 for ev in evts:
@@ -321,7 +342,6 @@ class Game:
         if confirm != "y": return
 
         tower = TowerSession(self.save, self.data)
-        self.save.total_abyss_runs += 1
 
         while self.save.active_party:
             info(f"\n  当前队伍存活：{', '.join(c.display_name for c in self.save.active_party)}")
@@ -330,6 +350,7 @@ class Game:
                 evts = [e for e in tower._settle_plague()]
                 for ev in evts:
                     if ev.message: info(ev.message)
+                self.save.total_abyss_runs += 1
                 tower.floor = 0
                 break
 
@@ -351,8 +372,7 @@ class Game:
                     skill = moves[idx]
                     evts = tower.battle_turn(BattleAction(action_type=ActionType.USE_SKILL, skill_name=skill))
                 except (ValueError, IndexError):
-                    evts = tower.battle_turn(BattleAction(action_type=ActionType.USE_SKILL,
-                                                           skill_name=moves[0] if moves else ""))
+                    warn("无效输入"); continue
 
                 for ev in evts:
                     if ev.message: info(ev.message)
@@ -524,6 +544,7 @@ class Game:
                     events=list(getattr(self.observer, '_event_history', [])),
                     session_seconds=elapsed,
                     title='lobster-cli-tamer Session 结算页',
+                    data=self.data,
                 )
             except Exception as e:
                 warn(f"生成结算页失败：{e}")

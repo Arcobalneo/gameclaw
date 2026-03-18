@@ -23,6 +23,7 @@ def generate_session_report(
     session_seconds: int = 0,
     title: str = "lobster-cli-tamer 结算页",
     output_path: Optional[str | Path] = None,
+    data: Optional[Any] = None,
 ) -> Path:
     reports_dir = SAVE_DIR / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -36,6 +37,7 @@ def generate_session_report(
         observer_snapshot=observer_snapshot or {},
         events=events or [],
         session_seconds=session_seconds,
+        data=data,
     )
     path.write_text(body, encoding="utf-8")
 
@@ -50,6 +52,7 @@ def _build_html(
     observer_snapshot: dict[str, Any],
     events: list[dict[str, Any]],
     session_seconds: int,
+    data: Optional[Any] = None,
 ) -> str:
     party_rows = "\n".join(_render_party_row(c) for c in save.party if c is not None) or "<tr><td colspan='6'>无</td></tr>"
     box_count = len(save.box)
@@ -58,6 +61,16 @@ def _build_html(
         for m in save.memorial[-20:]
     ) or "<tr><td colspan='5'>暂无阵亡记录</td></tr>"
     event_rows = "\n".join(_render_event_row(e) for e in events[-80:]) or "<div class='empty'>本次 session 没有事件日志</div>"
+
+    # 道具仓库：用中文名渲染
+    if save.items:
+        item_lines = []
+        for item_id, count in save.items.items():
+            name = (data.items[item_id]["name"] if (data and item_id in data.items) else item_id)
+            item_lines.append(f"<li>{_e(name)} ×{count}</li>")
+        items_html = "<ul>" + "".join(item_lines) + "</ul>"
+    else:
+        items_html = "<p>（空）</p>"
 
     snapshot_json = html.escape(json.dumps(observer_snapshot, ensure_ascii=False, indent=2))
     play_min = session_seconds // 60
@@ -118,7 +131,7 @@ pre {{ white-space:pre-wrap; word-break:break-word; background:#0d1524; padding:
       <p>已见图鉴：<span class='badge'>{len(save.dex_seen)}</span></p>
       <p>灵光目击：<span class='badge'>{len(save.shiny_encountered)}</span> / 灵光捕获：<span class='badge'>{len(save.shiny_caught)}</span></p>
       <p>战斗次数：<span class='badge'>{save.total_battles}</span> · 捕捉次数：<span class='badge'>{save.total_captures}</span> · 深渊尝试：<span class='badge'>{save.total_abyss_runs}</span></p>
-      <pre>{_e(json.dumps(save.items, ensure_ascii=False, indent=2))}</pre>
+      {items_html}
     </section>
 
     <section class='card'>

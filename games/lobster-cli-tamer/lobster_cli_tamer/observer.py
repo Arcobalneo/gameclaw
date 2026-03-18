@@ -253,7 +253,7 @@ function renderParty(members) {{
     const hp = m.hp_current !== undefined
       ? `HP ${{Math.round(m.hp_current)}}/${{Math.round(m.stats?.hp||0)}}`
       : '';
-    return `<div class="party-member${{dead}}">${{shiny}}${{m.nickname||m.species_id}} Lv${{m.level}} ${{hp}}${{plague}}</div>`;
+    return `<div class="party-member${{dead}}">${{shiny}}${{m.nickname||m.species_name||m.species_id}} Lv${{m.level}} ${{hp}}${{plague}}</div>`;
   }}).join('');
 }}
 

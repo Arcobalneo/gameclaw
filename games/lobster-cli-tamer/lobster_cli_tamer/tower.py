@@ -341,10 +341,29 @@ class TowerSession:
         return max(10, base + self.floor * 3)
 
     def _roll_drop(self) -> Optional[dict[str, Any]]:
-        drops = self.data.tower_config.get("floor_drops", [])
-        if not drops:
-            return None
-        for d in drops:
+        tc = self.data.tower_config
+        # 优先按层类型查分层掉落配置（normal/elite/boss）
+        type_map = {FloorType.NORMAL: "normal", FloorType.ELITE: "elite", FloorType.BOSS: "boss"}
+        type_key = type_map.get(self._floor_type, "normal")
+        drops_by_type: dict[str, Any] = tc.get("drops", {})
+        type_drops = drops_by_type.get(type_key, {})
+
+        if type_drops:
+            # 结构：{中文item名: [min_count, max_count]}
+            items_by_name = {v["name"]: k for k, v in self.data.items.items()}
+            candidates = []
+            for item_name, count_range in type_drops.items():
+                item_id = items_by_name.get(item_name)
+                if item_id:
+                    count = random.randint(int(count_range[0]), int(count_range[1]))
+                    if count > 0:
+                        candidates.append({"id": item_id, "name": item_name, "count": count})
+            if candidates:
+                return random.choice(candidates)
+
+        # fallback：floor_drops（固定概率列表）
+        floor_drops = tc.get("floor_drops", [])
+        for d in floor_drops:
             if random.random() < d.get("chance", 0):
                 return {"id": d["item_id"], "name": d.get("name", d["item_id"]), "count": d.get("count", 1)}
         return None

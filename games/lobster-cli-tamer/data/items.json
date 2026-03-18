@@ -45,5 +45,13 @@
     "type": "cure_plague",
     "price": 0,
     "description": "在修炼场消除疫病"
+  },
+  {
+    "id": "shiny_trap",
+    "name": "灵光球",
+    "type": "capture",
+    "multiplier": 5.0,
+    "price": 0,
+    "description": "专为捕捉灵光虾米设计，捕捉倍率 5.0×，深渊掉落"
   }
 ]

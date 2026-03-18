@@ -217,6 +217,7 @@ class Creature:
         return {
             "uid": self.uid,
             "species_id": self.species_id,
+            "species_name": self.species_name,
             "nickname": self.nickname,
             "level": self.level,
             "exp": self.exp,

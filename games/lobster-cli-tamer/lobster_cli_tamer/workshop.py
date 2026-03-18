@@ -226,6 +226,17 @@ def render_creature_affixes(creature: Creature, data: "GameData") -> str:
     return "\n".join(lines)
 
 
+def _format_cost(cost: dict, data: "GameData") -> str:
+    """将 {item_id: count} 格式化为可读字符串，如 '甲核 ×3 / 灵晶 ×2'。"""
+    if not cost:
+        return "免费"
+    parts = []
+    for item_id, count in cost.items():
+        name = data.items[item_id]["name"] if item_id in data.items else item_id
+        parts.append(f"{name} ×{count}")
+    return " / ".join(parts)
+
+
 def render_material_costs(save: "SaveSlot", data: "GameData") -> str:
     balance = data.balance
     items_cfg = {
@@ -241,8 +252,8 @@ def render_material_costs(save: "SaveSlot", data: "GameData") -> str:
     rc = _reroll_cost(balance)
     uc0 = _upgrade_cost(TIER_ORDER[0], balance)
     lines.append(f"\n操作费用速查：")
-    lines.append(f"  重投：{rc}")
-    lines.append(f"  升阶（common→blue）：{uc0}")
-    lines.append(f"  封印：{_seal_cost(balance)}")
-    lines.append(f"  解封：{_unseal_cost(balance)}")
+    lines.append(f"  重投：{_format_cost(rc, data)}")
+    lines.append(f"  升阶（common→blue）：{_format_cost(uc0, data)}")
+    lines.append(f"  封印：{_format_cost(_seal_cost(balance), data)}")
+    lines.append(f"  解封：{_format_cost(_unseal_cost(balance), data)}")
     return "\n".join(lines)

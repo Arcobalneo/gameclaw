@@ -102,7 +102,8 @@ def render_creature_detail(c: Creature, data: Any) -> None:
         else:
             info(f"  [{i+1}] {label}")
     if c.has_plague:
-        warn(f"携带深渊疫病（已历 {c.plague_floors} 层，死亡率 {c.plague_floors*5:.0f}%）")
+        chance = c.plague_death_chance(data.balance)
+        warn(f"携带深渊疫病（已历 {c.plague_floors} 层，死亡率 {chance*100:.0f}%）")
     if c.is_shiny:
         info(YELLOW("✦ 灵光虾米"))
 
@@ -217,7 +218,7 @@ def render_capture_ball_animation(captured: bool, rate: float) -> None:
         time.sleep(0.15)
     print()
     if captured:
-        globals()["success"]("捕捉成功！🎉")
+        success("捕捉成功！🎉")
     else:
         error(f"失败，虾米挣脱了！（捕捉率 {rate*100:.1f}%）")
 
