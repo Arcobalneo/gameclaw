@@ -46,7 +46,7 @@ class SaveSlot:
     shiny_caught: set[str] = field(default_factory=set)
 
     # 解锁进度
-    unlocked_zones: set[str] = field(default_factory=lambda: {"reef_zone", "abyss_gate"})
+    unlocked_zones: set[str] = field(default_factory=lambda: {"reef_zone"})
     current_zone_id: str = "reef_zone"
     current_sub_area_id: str = ""
 
@@ -119,7 +119,7 @@ class SaveSlot:
         save.dex_caught = set(d.get("dex_caught", []))
         save.shiny_encountered = set(d.get("shiny_encountered", []))
         save.shiny_caught = set(d.get("shiny_caught", []))
-        save.unlocked_zones = set(d.get("unlocked_zones", ["reef_zone", "abyss_gate"]))
+        save.unlocked_zones = set(d.get("unlocked_zones", ["reef_zone"]))
         save.current_zone_id = d.get("current_zone_id", "reef_zone")
         save.current_sub_area_id = d.get("current_sub_area_id", "")
         save.deepest_abyss_floor = d.get("deepest_abyss_floor", 0)

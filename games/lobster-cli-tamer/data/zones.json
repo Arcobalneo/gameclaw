@@ -560,21 +560,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": "abyss_gate",
-    "name": "幽渊入口",
-    "unlock_condition": "default",
-    "sub_areas": [
-      {
-        "id": "gate",
-        "name": "深渊入口",
-        "level_range": [
-          1,
-          999
-        ],
-        "encounter_table": []
-      }
-    ]
   }
 ]

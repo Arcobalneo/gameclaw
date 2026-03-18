@@ -6,7 +6,7 @@ def test_load_game_data_counts() -> None:
     assert summary["species"] >= 100
     assert summary["skills"] >= 550
     assert summary["affixes"] >= 100
-    assert summary["zones"] >= 7
+    assert summary["zones"] >= 6
     assert summary["items"] >= 3
 
 

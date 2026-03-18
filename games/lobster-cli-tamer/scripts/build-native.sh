@@ -14,6 +14,7 @@ mkdir -p "$OUT_DIR" "$DIST_DIR"
 "$PYTHON_BIN" -m nuitka \
   --onefile \
   --assume-yes-for-downloads \
+  --include-data-dir=data=data \
   --output-dir="$OUT_DIR" \
   --output-filename="$APP_NAME" \
   --remove-output \

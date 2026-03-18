@@ -34,7 +34,8 @@ def test_world_encounter_and_unlock_logic() -> None:
     save = new_save_for_test(data)
     newly = check_zone_unlock(save, data)
     assert "reef_zone" in save.unlocked_zones
-    assert "abyss_gate" in save.unlocked_zones
+    # abyss_gate 已从 zones.json 移除，探索区域中不再存在该无效入口
+    assert "abyss_gate" not in data.zones
     assert isinstance(newly, list)
 
     zone = data.zones["reef_zone"]
