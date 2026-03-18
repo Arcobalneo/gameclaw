@@ -106,8 +106,9 @@ class TowerSession:
             events.append(TowerEvent(TowerEventType.BATTLE_END, message="[无法生成敌方]"))
             return events
 
-        # 玩家先手
-        player_lead = self.save.active_party[0] if self.save.active_party else None
+        # 玩家先手：取一次快照，保证 player_party 与 player_lead 指向同一列表
+        active_snapshot = self.save.active_party
+        player_lead = active_snapshot[0] if active_snapshot else None
         if player_lead is None:
             events.append(TowerEvent(TowerEventType.WIPE_OUT, message="队伍全灭，无法进入深渊"))
             return events
@@ -115,7 +116,7 @@ class TowerSession:
         state = BattleState(
             player=Combatant(creature=player_lead),
             enemy=enemy_cb,
-            player_party=self.save.active_party,
+            player_party=active_snapshot,
             is_tower=True,
         )
         self._battle_engine = BattleEngine(state, self.data)

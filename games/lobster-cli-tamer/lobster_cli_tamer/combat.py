@@ -477,15 +477,20 @@ class BattleEngine:
             st.add_log(f"✓ {st.enemy.creature.display_name} 倒下了！获得 {st.exp_gained} EXP")
             return
 
-        # 玩家方：检查是否全部倒下
-        all_down = not st.player.creature.is_alive
-        if all_down:
-            # 检查 party 中是否有可换手的
-            for c in st.player_party:
+        # 玩家方：当前出战虾米已倒
+        if not st.player.creature.is_alive:
+            # 从 player_party 快照中找第一个存活的替补，自动换上
+            for i, c in enumerate(st.player_party):
                 if c.is_alive and c is not st.player.creature:
-                    all_down = False
-                    break
-        if all_down:
+                    st.add_log(
+                        f"⚡ {st.player.creature.display_name} 倒下！"
+                        f"{c.display_name} 自动上场！"
+                    )
+                    st.player_active_index = i
+                    st.player = Combatant(creature=c)
+                    self._apply_passive_team()
+                    return  # 战斗继续，不结束
+            # 无可替补 → 全灭
             st.result = BattleResult.PLAYER_LOSE
             st.add_log("✗ 我方全灭！")
 

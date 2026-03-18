@@ -78,6 +78,43 @@ def test_type_effectiveness_matters() -> None:
     assert eff_electric > eff_neutral
 
 
+def test_auto_switch_when_active_fainted() -> None:
+    """深渊：第一只虾米 HP 归零后，引擎应自动换上第二只，不卡死。"""
+    data = _get_data()
+
+    # 第一只：极低血量，一击就倒
+    c1 = Creature.from_species("reef_shrimp", data, level=1)
+    c1.bind_species_data(data)
+    c1.moves = ["潮击1"]
+    c1.hp_current = 1.0  # 濒死
+
+    # 第二只：正常
+    c2 = Creature.from_species("rock_crab", data, level=5)
+    c2.bind_species_data(data)
+    c2.moves = ["岩砸1"]
+
+    enemy = make_enemy_combatant("reef_shrimp", 1, data)
+    enemy.creature.moves = ["潮击1"]
+
+    state = BattleState(
+        player=Combatant(creature=c1),
+        enemy=enemy,
+        player_party=[c1, c2],
+        is_tower=True,
+    )
+    engine = BattleEngine(state, data)
+
+    # 最多跑 60 回合，战斗必须结束（不能无限循环）
+    for _ in range(60):
+        if state.is_over():
+            break
+        engine.run_turn(BattleAction(action_type=ActionType.USE_SKILL, skill_name="潮击1"))
+
+    assert state.is_over(), "战斗应在有限回合内结束，不应卡死"
+    # c1 已倒，引擎应换上了 c2
+    assert not c1.is_alive, "c1 应已倒下"
+
+
 def test_permadeath_in_tower() -> None:
     """深渊模式：玩家虾米 HP 归零时 dead=True。"""
     player_c, data = _make_player("reef_shrimp", 1)
