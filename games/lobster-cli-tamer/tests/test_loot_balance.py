@@ -140,3 +140,29 @@ def test_tower_pity_guarantees_basic_net(monkeypatch) -> None:
     assert drop["id"] == "net_basic"
     assert drop.get("guaranteed") is True
     assert save.capture_tool_pity == 0
+
+
+def test_normal_floor_no_longer_drops_core_affix_materials() -> None:
+    data = load_game_data()
+    normal = data.tower_config["drops"]["normal"]
+    assert "甲核" not in normal
+    assert "灵晶" not in normal
+    assert "潮石" not in normal
+    assert "甲网" in normal
+
+
+def test_floor_drop_fallback_only_keeps_rare_shiny_trap() -> None:
+    data = load_game_data()
+    fallback_ids = {drop["item_id"] for drop in data.tower_config["floor_drops"]}
+    assert fallback_ids == {"shiny_trap"}
+
+
+def test_elite_and_boss_hold_core_affix_materials() -> None:
+    data = load_game_data()
+    elite = data.tower_config["drops"]["elite"]
+    boss = data.tower_config["drops"]["boss"]
+    assert "甲核" in elite
+    assert "灵晶" in elite
+    assert "潮石" not in elite
+    assert "潮石" in boss
+    assert "深渊灵晶" in boss

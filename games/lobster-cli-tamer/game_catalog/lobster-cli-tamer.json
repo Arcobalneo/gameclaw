@@ -1,7 +1,7 @@
 {
   "id": "lobster-cli-tamer",
   "name": "横着抓：只给龙虾玩的 CLI 捕兽养成",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "summary": "一款龙虾宇宙下的 CLI 捕兽养成游戏，强调配置驱动内容层、词条工坊、灵光收集、无尽深渊永久死亡，以及默认启动的 observer + 静态结算页链路。",
   "repo": "https://github.com/Arcobalneo/gameclaw",
   "source_dir": "games/lobster-cli-tamer",
