@@ -63,8 +63,9 @@ Or use the repo-level entrypoints from the monorepo root:
 ## Gameplay notes
 
 - In abyss mode, HP reaching 0 during battle means immediate permanent death.
-- Elite abyss floors can spread plague.
-- Retreating or failing out of the abyss resolves plague death risk based on accumulated plague floors.
+- All abyss floors now build up abyss taint; enough taint converts into plague.
+- Retreating or failing out of the abyss resolves plague death risk based on accumulated plague floors, while uncleansed taint persists.
+- `cure_plague` / 净疫盐 can cleanse both plague and abyss taint.
 - The current version is standard-library based and does not require a database.
 
 ## Documentation layering

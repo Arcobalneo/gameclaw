@@ -80,6 +80,12 @@
     "plague_rate_per_floor": 0.05,
     "plague_max_rate": 0.5,
     "plague_trigger_floor": 30,
+    "taint_to_plague_threshold": 3,
+    "taint_gain": {
+      "normal": 1,
+      "elite": 2,
+      "boss": 3
+    },
     "small_cycle": [
       {
         "type": "normal",

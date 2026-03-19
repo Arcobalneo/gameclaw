@@ -71,9 +71,10 @@ class Creature:
     # 捕捉信息
     captured_zone: str = ""
 
-    # 深渊疫病
+    # 深渊风险
     has_plague: bool = False
     plague_floors: int = 0            # 带疫病已经历过的深渊层数
+    abyss_taint: int = 0              # 深渊污染；达到阈值后会转化为疫病
 
     # 状态
     dead: bool = False                # 永久死亡（战斗内或疫病结算）
@@ -191,12 +192,26 @@ class Creature:
     # 疫病
     # ------------------------------------------------------------------ #
 
-    def apply_plague(self) -> None:
+    def apply_plague(self, floors: int = 0) -> None:
         self.has_plague = True
+        if floors > 0:
+            self.plague_floors += floors
 
-    def increment_plague(self) -> None:
+    def increment_plague(self, floors: int = 1) -> None:
         if self.has_plague:
-            self.plague_floors += 1
+            self.plague_floors += floors
+
+    def add_abyss_taint(self, amount: int = 1) -> None:
+        if amount > 0:
+            self.abyss_taint += amount
+
+    def convert_taint_to_plague_if_needed(self, threshold: int) -> int:
+        if self.has_plague or self.abyss_taint < threshold:
+            return 0
+        converted = self.abyss_taint
+        self.abyss_taint = 0
+        self.apply_plague(converted)
+        return converted
 
     def plague_death_chance(self, balance: dict) -> float:
         if not self.has_plague:
@@ -208,6 +223,7 @@ class Creature:
     def cure_plague(self) -> None:
         self.has_plague = False
         self.plague_floors = 0
+        self.abyss_taint = 0
 
     # ------------------------------------------------------------------ #
     # 序列化
@@ -229,6 +245,7 @@ class Creature:
             "captured_zone": self.captured_zone,
             "has_plague": self.has_plague,
             "plague_floors": self.plague_floors,
+            "abyss_taint": self.abyss_taint,
             "dead": self.dead,
         }
 
@@ -248,6 +265,7 @@ class Creature:
             captured_zone=d.get("captured_zone", ""),
             has_plague=d.get("has_plague", False),
             plague_floors=d.get("plague_floors", 0),
+            abyss_taint=d.get("abyss_taint", 0),
             dead=d.get("dead", False),
         )
         c.bind_species_data(data)

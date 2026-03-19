@@ -243,6 +243,7 @@ def render_material_costs(save: "SaveSlot", data: "GameData") -> str:
         "jihe_core": "甲核",
         "spirit_crystal": "灵晶",
         "tide_stone": "潮石",
+        "cure_plague": "净疫盐",
     }
     lines = ["当前材料："]
     for item_id, name in items_cfg.items():

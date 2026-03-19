@@ -163,6 +163,8 @@ def _render_party_row(c) -> str:
         state.append("<span class='shiny'>✦灵光</span>")
     if c.has_plague:
         state.append("🦠疫病")
+    if getattr(c, "abyss_taint", 0) > 0:
+        state.append(f"☣污染{c.abyss_taint}")
     if c.dead:
         state.append("<span class='dead'>阵亡</span>")
     state_html = " / ".join(state) or "正常"

@@ -62,12 +62,13 @@ def error(msg: str) -> None:
 def render_creature_brief(c: Creature, data: Any = None, index: Optional[int] = None) -> str:
     shiny = YELLOW("✦ ") if c.is_shiny else ""
     plague = RED(" 🦠") if c.has_plague else ""
+    taint = MAGENTA(f" ☣{c.abyss_taint}") if c.abyss_taint > 0 else ""
     dead = DIM(" [已阵亡]") if c.dead else ""
     hp_bar = _hp_bar(c.hp_current, c.stats["hp"])
     name = c.display_name
     idx = f"[{index}] " if index is not None else ""
     return (f"{idx}{shiny}{BOLD(name)} Lv{c.level}  "
-            f"{hp_bar} {c.hp_current:.0f}/{c.stats['hp']:.0f}{plague}{dead}")
+            f"{hp_bar} {c.hp_current:.0f}/{c.stats['hp']:.0f}{plague}{taint}{dead}")
 
 
 def _hp_bar(current: float, maximum: float, width: int = 10) -> str:
@@ -101,6 +102,8 @@ def render_creature_detail(c: Creature, data: Any) -> None:
             info(f"  [{i+1}] {label} — {desc}")
         else:
             info(f"  [{i+1}] {label}")
+    if c.abyss_taint > 0:
+        warn(f"携带深渊污染（污染值 {c.abyss_taint}）")
     if c.has_plague:
         chance = c.plague_death_chance(data.balance)
         warn(f"携带深渊疫病（已历 {c.plague_floors} 层，死亡率 {chance*100:.0f}%）")

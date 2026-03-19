@@ -172,9 +172,8 @@ class TowerSession:
                 "result": "win", "floor": self.floor,
             }, f"通过了第 {self.floor} 层！"))
 
-            # 精英层：施加疫病
-            if self._floor_type == FloorType.ELITE:
-                events.extend(self._apply_plague())
+            # 所有层：污染 / 疫病压力累积
+            events.extend(self._apply_abyss_taint())
 
             # EXP + 升级
             for c in self.save.active_party:
@@ -212,25 +211,56 @@ class TowerSession:
         return events
 
     # ------------------------------------------------------------------ #
-    # 疫病
+    # 疫病 / 污染
     # ------------------------------------------------------------------ #
 
-    def _apply_plague(self) -> list[TowerEvent]:
+    def _apply_abyss_taint(self) -> list[TowerEvent]:
         events: list[TowerEvent] = []
+        cfg = self.data.balance.get("tower", {})
+        taint_cfg = cfg.get("taint_gain", {})
+        floor_key = {
+            FloorType.NORMAL: "normal",
+            FloorType.ELITE: "elite",
+            FloorType.BOSS: "boss",
+        }.get(self._floor_type, "normal")
+        taint_gain = int(taint_cfg.get(floor_key, 1))
+        threshold = int(cfg.get("taint_to_plague_threshold", 3))
+
         for c in self.save.active_party:
-            if not c.has_plague:
-                c.apply_plague()
-                events.append(TowerEvent(TowerEventType.PLAGUE_RISK, {
-                    "creature": c.display_name,
-                }, f"🦠 {c.display_name} 感染了深渊疫病！"))
-            c.increment_plague()
+            if c.has_plague:
+                c.increment_plague(taint_gain)
+                events.append(TowerEvent(
+                    TowerEventType.PLAGUE_RISK,
+                    {"creature": c.display_name, "plague_floors": c.plague_floors},
+                    f"🦠 {c.display_name} 在深渊中继续恶化（疫病 +{taint_gain}，当前 {c.plague_floors}）",
+                ))
+                continue
+
+            c.add_abyss_taint(taint_gain)
+            events.append(TowerEvent(
+                TowerEventType.PLAGUE_RISK,
+                {"creature": c.display_name, "taint": c.abyss_taint},
+                f"☣ {c.display_name} 深渊污染 +{taint_gain}（当前 {c.abyss_taint}）",
+            ))
+            converted = c.convert_taint_to_plague_if_needed(threshold)
+            if converted:
+                events.append(TowerEvent(
+                    TowerEventType.PLAGUE_RISK,
+                    {"creature": c.display_name, "converted": converted},
+                    f"🦠 {c.display_name} 的深渊污染转化为疫病（+{converted} 层）",
+                ))
+
         return events
 
     def _settle_plague(self) -> list[TowerEvent]:
-        """退出深渊时结算疫病死亡。"""
+        """退出深渊时结算疫病死亡，并保留未净化的污染。"""
         events: list[TowerEvent] = []
         for c in list(self.save.active_party):
             if not c.has_plague:
+                if c.abyss_taint > 0:
+                    events.append(TowerEvent(TowerEventType.PLAGUE_RISK, {
+                        "creature": c.display_name, "taint": c.abyss_taint,
+                    }, f"☣ {c.display_name} 带着深渊污染离开（污染 {c.abyss_taint}，未清除）"))
                 continue
             chance = c.plague_death_chance(self.data.balance)
             events.append(TowerEvent(TowerEventType.PLAGUE_RISK, {

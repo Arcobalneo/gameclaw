@@ -221,6 +221,7 @@ def _build_html(port: int) -> str:
   .party-member {{ border-left:3px solid #26c6da; padding-left:8px; margin:4px 0; }}
   .shiny {{ color:#ffd54f; }}
   .plague {{ color:#ef5350; }}
+  .taint {{ color:#ab47bc; }}
   .log {{ font-size:0.85em; color:#aaa; max-height:200px; overflow-y:auto; }}
   .event {{ border-left:2px solid #4caf50; padding:2px 6px; margin:2px 0; font-size:0.8em; }}
   .dead {{ color:#666; text-decoration:line-through; }}
@@ -249,11 +250,12 @@ function renderParty(members) {{
     if (!m) return '<div class="party-member dead">空槽</div>';
     const shiny = m.is_shiny ? '<span class="shiny">✦</span> ' : '';
     const plague = m.has_plague ? ' <span class="plague">🦠</span>' : '';
+    const taint = m.abyss_taint ? ` <span class="taint">☣${m.abyss_taint}</span>` : '';
     const dead = m.dead ? ' dead' : '';
     const hp = m.hp_current !== undefined
       ? `HP ${{Math.round(m.hp_current)}}/${{Math.round(m.stats?.hp||0)}}`
       : '';
-    return `<div class="party-member${{dead}}">${{shiny}}${{m.nickname||m.species_name||m.species_id}} Lv${{m.level}} ${{hp}}${{plague}}</div>`;
+    return `<div class="party-member${{dead}}">${{shiny}}${{m.nickname||m.species_name||m.species_id}} Lv${{m.level}} ${{hp}}${{plague}}${{taint}}</div>`;
   }}).join('');
 }}
 

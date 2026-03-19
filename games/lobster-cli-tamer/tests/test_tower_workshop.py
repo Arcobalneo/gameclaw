@@ -4,7 +4,7 @@ from lobster_cli_tamer.loader import load_game_data
 from lobster_cli_tamer.save import SaveSlot
 from lobster_cli_tamer.tower import FloorType, TowerSession, classify_floor
 from lobster_cli_tamer.workshop import reroll, seal, unseal, upgrade
-from lobster_cli_tamer.combat import BattleAction, ActionType
+from lobster_cli_tamer.combat import BattleAction, ActionType, BattleState, BattleResult, Combatant
 
 
 def _make_save(data):
@@ -49,3 +49,57 @@ def test_tower_floor_progression() -> None:
             break
         tower.battle_turn(BattleAction(action_type=ActionType.USE_SKILL, skill_name="潮击1"))
     assert save.deepest_abyss_floor >= 0
+
+
+def test_tower_taint_converts_to_plague_on_third_normal_clear() -> None:
+    data = load_game_data()
+    save, c = _make_save(data)
+    tower = TowerSession(save, data)
+    tower._floor_type = FloorType.NORMAL
+
+    for expected in (1, 2):
+        events = tower._apply_abyss_taint()
+        assert c.abyss_taint == expected
+        assert c.has_plague is False
+        assert any("深渊污染" in ev.message for ev in events)
+
+    events = tower._apply_abyss_taint()
+    assert c.abyss_taint == 0
+    assert c.has_plague is True
+    assert c.plague_floors == 3
+    assert any("转化为疫病" in ev.message for ev in events)
+
+
+def test_tower_plague_pressure_scales_by_floor_type() -> None:
+    data = load_game_data()
+    save, c = _make_save(data)
+    c.apply_plague(3)
+    tower = TowerSession(save, data)
+
+    tower._floor_type = FloorType.NORMAL
+    tower._apply_abyss_taint()
+    assert c.plague_floors == 4
+
+    tower._floor_type = FloorType.ELITE
+    tower._apply_abyss_taint()
+    assert c.plague_floors == 6
+
+    tower._floor_type = FloorType.BOSS
+    tower._apply_abyss_taint()
+    assert c.plague_floors == 9
+
+
+def test_tower_retreat_preserves_taint_and_cure_clears_it() -> None:
+    data = load_game_data()
+    save, c = _make_save(data)
+    c.abyss_taint = 2
+    tower = TowerSession(save, data)
+
+    events = tower._settle_plague()
+    assert c.abyss_taint == 2
+    assert any("带着深渊污染离开" in ev.message for ev in events)
+
+    c.cure_plague()
+    assert c.has_plague is False
+    assert c.plague_floors == 0
+    assert c.abyss_taint == 0

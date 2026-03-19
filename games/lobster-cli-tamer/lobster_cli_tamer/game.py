@@ -354,7 +354,7 @@ class Game:
 
         section("进入深渊")
         info(f"当前队伍：{len(self.save.active_party)} 只虾米")
-        warn("⚠ 深渊模式：HP归零=永久死亡！精英层感染疫病，退出时掷死亡骰")
+        warn("⚠ 深渊模式：HP归零=永久死亡！所有层都会累积深渊污染，退出时可能带病/带污染离开")
         confirm = input("  确认进入？(y/n) ").strip().lower()
         if confirm != "y": return
 
@@ -463,10 +463,33 @@ class Game:
                 ("2", "升阶词条（灵晶）"),
                 ("3", "封印词条（潮石×1）"),
                 ("4", "解除封印（潮石×2）"),
+                ("5", "净化深渊污染（净疫盐×1）"),
                 ("0", "返回"),
             ])
             choice = input().strip()
             if choice == "0": break
+            if choice == "5":
+                alive = self.save.active_party
+                if not alive:
+                    warn("队伍为空"); continue
+                candidates = [c for c in alive if c.has_plague or c.abyss_taint > 0]
+                if not candidates:
+                    info("当前没有需要净化的虾米"); continue
+                if self.save.get_item_count("cure_plague") <= 0:
+                    warn("没有净疫盐，无法净化"); continue
+                render_menu("选择净化的虾米", [(str(i+1), f"{c.display_name} (疫病={c.has_plague}, 污染={c.abyss_taint})") for i, c in enumerate(candidates)] + [("0", "取消")])
+                cc = input().strip()
+                if cc == "0": continue
+                try:
+                    creature = candidates[int(cc)-1]
+                except (ValueError, IndexError):
+                    warn("无效输入"); continue
+                if not self.save.consume_item("cure_plague", 1):
+                    warn("净化失败"); continue
+                creature.cure_plague()
+                success(f"已净化 {creature.display_name} 的深渊污染与疫病")
+                write_save(self.save)
+                continue
 
             # 选虾米
             alive = self.save.active_party

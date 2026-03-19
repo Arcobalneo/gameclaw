@@ -20,12 +20,14 @@ def test_save_roundtrip_and_defaults() -> None:
         assert save.get_item_count("net_basic") >= 1
         player = Creature.from_species("reef_shrimp", data, level=5)
         player.bind_species_data(data)
+        player.abyss_taint = 2
         save.party = [player, None, None, None, None, None]
         write_save(save)
         loaded = load_save(0, data)
         assert loaded.player_name == "测试"
         assert loaded.party[0] is not None
         assert loaded.party[0].display_name == "礁虾"
+        assert loaded.party[0].abyss_taint == 2
     finally:
         save_mod.SAVE_DIR = old_dir
 
