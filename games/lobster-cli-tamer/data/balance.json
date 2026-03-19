@@ -116,7 +116,17 @@
   "world": {
     "hidden_encounter_base_chance": 0.08,
     "steps_min": 3,
-    "steps_max": 8
+    "steps_max": 8,
+    "battle_loot": {
+      "net_basic": {
+        "chance": 0.3,
+        "count": [1, 1]
+      },
+      "net_fine": {
+        "chance": 0.06,
+        "count": [1, 1]
+      }
+    }
   },
   "workshop": {
     "reroll_cost": {

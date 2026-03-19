@@ -62,6 +62,9 @@ class SaveSlot:
     total_captures: int = 0
     total_deaths: int = 0  # 永久死亡数
 
+    # 捕捉网掉落保底：连续两次未掉落捕捉网后，下次必掉甲网
+    capture_tool_pity: int = 0
+
     # ------------------------------------------------------------------ #
     # 序列化
     # ------------------------------------------------------------------ #
@@ -88,6 +91,7 @@ class SaveSlot:
             "total_battles": self.total_battles,
             "total_captures": self.total_captures,
             "total_deaths": self.total_deaths,
+            "capture_tool_pity": self.capture_tool_pity,
         }
 
     @staticmethod
@@ -128,6 +132,7 @@ class SaveSlot:
         save.total_battles = d.get("total_battles", 0)
         save.total_captures = d.get("total_captures", 0)
         save.total_deaths = d.get("total_deaths", 0)
+        save.capture_tool_pity = d.get("capture_tool_pity", 0)
         return save
 
     # ------------------------------------------------------------------ #
@@ -157,6 +162,26 @@ class SaveSlot:
 
     def add_item(self, item_id: str, count: int = 1) -> None:
         self.items[item_id] = self.items.get(item_id, 0) + count
+
+    def _is_capture_tool(self, item_id: Optional[str]) -> bool:
+        return bool(item_id) and (item_id.startswith("net_") or item_id == "shiny_trap")
+
+    def consume_capture_tool_pity(self, dropped_item_id: Optional[str]) -> bool:
+        """处理捕捉网保底。
+
+        规则：
+        - 若本次掉落了捕捉网/捕捉球，则保底计数清零
+        - 若此前已连续 2 次未掉落捕捉工具，则这次触发必掉甲网并清零
+        - 否则计数 +1
+        """
+        if self._is_capture_tool(dropped_item_id):
+            self.capture_tool_pity = 0
+            return False
+        if self.capture_tool_pity >= 2:
+            self.capture_tool_pity = 0
+            return True
+        self.capture_tool_pity += 1
+        return False
 
     def add_to_memorial(self, creature: Creature, cause: str) -> None:
         self.memorial.append({

@@ -7,6 +7,7 @@ from lobster_cli_tamer.creature import Creature
 from lobster_cli_tamer.loader import load_game_data
 from lobster_cli_tamer.save import load_save, new_save, write_save
 from lobster_cli_tamer.world import WorldSession, check_zone_unlock
+from lobster_cli_tamer.game import Game
 
 
 def test_save_roundtrip_and_defaults() -> None:
@@ -48,6 +49,24 @@ def test_world_encounter_and_unlock_logic() -> None:
             seen_any = True
             break
     assert seen_any
+
+
+def test_load_insurance_grants_basic_net_when_all_capture_tools_missing(monkeypatch) -> None:
+    data = load_game_data()
+    game = Game()
+    game.data = data
+    game.save = new_save_for_test(data)
+    game.save.items = {"jihe_core": 3}
+
+    wrote = {"called": False}
+    monkeypatch.setattr("lobster_cli_tamer.game.write_save", lambda save: wrote.__setitem__("called", True))
+
+    game._grant_emergency_net_if_needed()
+
+    assert game.save.get_item_count("net_basic") == 1
+    assert game.save.capture_tool_pity == 0
+    assert wrote["called"] is True
+
 
 
 def new_save_for_test(data):

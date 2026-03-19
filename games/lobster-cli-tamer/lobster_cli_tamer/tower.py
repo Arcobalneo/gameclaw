@@ -187,8 +187,9 @@ class TowerSession:
             drop = self._roll_drop()
             if drop:
                 self.save.add_item(drop["id"], drop["count"])
+                suffix = "（保底）" if drop.get("guaranteed") else ""
                 events.append(TowerEvent(TowerEventType.ITEM_DROP, drop,
-                    f"获得了 {drop['name']} ×{drop['count']}"))
+                    f"获得了 {drop['name']} ×{drop['count']}{suffix}"))
 
             # 更新深渊记录
             if self.floor > self.save.deepest_abyss_floor:
@@ -347,6 +348,7 @@ class TowerSession:
         type_key = type_map.get(self._floor_type, "normal")
         drops_by_type: dict[str, Any] = tc.get("drops", {})
         type_drops = drops_by_type.get(type_key, {})
+        chosen = None
 
         if type_drops:
             # 结构：{中文item名: [min_count, max_count]}
@@ -359,14 +361,21 @@ class TowerSession:
                     if count > 0:
                         candidates.append({"id": item_id, "name": item_name, "count": count})
             if candidates:
-                return random.choice(candidates)
+                chosen = random.choice(candidates)
 
-        # fallback：floor_drops（固定概率列表）
-        floor_drops = tc.get("floor_drops", [])
-        for d in floor_drops:
-            if random.random() < d.get("chance", 0):
-                return {"id": d["item_id"], "name": d.get("name", d["item_id"]), "count": d.get("count", 1)}
-        return None
+        if chosen is None:
+            # fallback：floor_drops（固定概率列表）
+            floor_drops = tc.get("floor_drops", [])
+            for d in floor_drops:
+                if random.random() < d.get("chance", 0):
+                    chosen = {"id": d["item_id"], "name": d.get("name", d["item_id"]), "count": d.get("count", 1)}
+                    break
+
+        if self.save.consume_capture_tool_pity(chosen["id"] if chosen else None):
+            item = self.data.items["net_basic"]
+            return {"id": "net_basic", "name": item["name"], "count": 1, "guaranteed": True}
+
+        return chosen
 
     def is_in_battle(self) -> bool:
         return self._battle_engine is not None

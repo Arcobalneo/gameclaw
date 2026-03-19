@@ -100,6 +100,7 @@ class Game:
                 self.save = load_save(last, self.data)
                 write_last_slot(last)
                 check_zone_unlock(self.save, self.data)
+                self._grant_emergency_net_if_needed()
                 self._push_party()
                 return
 
@@ -130,6 +131,7 @@ class Game:
         write_last_slot(self.save.slot)
         check_zone_unlock(self.save, self.data)
         self._grant_starter_if_needed()
+        self._grant_emergency_net_if_needed()
         self._push_party()
 
     # ------------------------------------------------------------------ #
@@ -149,6 +151,21 @@ class Game:
         self.save.dex_seen.add(starter.species_id)
         self.save.dex_caught.add(starter.species_id)
         success("已发放起始虾米：礁虾 Lv5")
+        write_save(self.save)
+
+    def _grant_emergency_net_if_needed(self) -> None:
+        if not self.save or not self.data:
+            return
+        capture_total = sum(
+            count
+            for item_id, count in self.save.items.items()
+            if item_id.startswith("net_") or item_id == "shiny_trap"
+        )
+        if capture_total > 0:
+            return
+        self.save.add_item("net_basic", 1)
+        self.save.capture_tool_pity = 0
+        success("已触发保底补给：补发 甲网 ×1")
         write_save(self.save)
 
     def _main_menu(self) -> None:

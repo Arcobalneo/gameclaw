@@ -213,8 +213,42 @@ class WorldSession:
         return events
 
     # ------------------------------------------------------------------ #
-    # 战斗结束处理
+    # 战斗掉落 / 战斗结束处理
     # ------------------------------------------------------------------ #
+
+    def _roll_battle_loot(self) -> Optional[dict[str, Any]]:
+        loot_cfg = self.data.balance.get("world", {}).get("battle_loot", {})
+        if not loot_cfg:
+            return None
+
+        candidates: list[dict[str, Any]] = []
+        for item_id, cfg in loot_cfg.items():
+            chance = float(cfg.get("chance", 0.0))
+            if random.random() >= chance:
+                continue
+            count_range = cfg.get("count", [1, 1])
+            min_count = int(count_range[0]) if count_range else 1
+            max_count = int(count_range[1]) if len(count_range) > 1 else min_count
+            count = random.randint(min_count, max_count)
+            if count <= 0:
+                continue
+            item = self.data.items.get(item_id)
+            candidates.append({
+                "id": item_id,
+                "name": item["name"] if item else item_id,
+                "count": count,
+            })
+
+        chosen = None
+        if candidates:
+            candidates.sort(key=lambda x: (x["count"], x["id"]), reverse=True)
+            chosen = candidates[0]
+
+        if self.save.consume_capture_tool_pity(chosen["id"] if chosen else None):
+            item = self.data.items["net_basic"]
+            return {"id": "net_basic", "name": item["name"], "count": 1, "guaranteed": True}
+
+        return chosen
 
     def _on_battle_end(self, state: BattleState) -> list[WorldEvent]:
         events: list[WorldEvent] = []
@@ -232,6 +266,16 @@ class WorldSession:
                 }))
                 if leveled:
                     events.extend(self._on_level_up(c))
+
+            loot = self._roll_battle_loot()
+            if loot:
+                self.save.add_item(loot["id"], loot["count"])
+                suffix = "（保底）" if loot.get("guaranteed") else ""
+                events.append(WorldEvent(
+                    WorldEventType.ITEM_FOUND,
+                    loot,
+                    f"击退野怪后捡到了 {loot['name']} ×{loot['count']}{suffix}",
+                ))
 
         elif state.result == BattleResult.PLAYER_LOSE:
             self.save.total_battles += 1
