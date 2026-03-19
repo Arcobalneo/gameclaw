@@ -15,6 +15,11 @@ from lobster_cli_tamer.affixes import format_affix_slot, TIER_SYMBOLS
 
 _USE_COLOR = True
 
+
+def set_use_color(enabled: bool) -> None:
+    global _USE_COLOR
+    _USE_COLOR = enabled
+
 def _c(code: str, text: str) -> str:
     if not _USE_COLOR:
         return text
@@ -158,15 +163,24 @@ def render_battle_status(status_bar: str) -> None:
 # 菜单渲染
 # --------------------------------------------------------------------------- #
 
-def render_menu(title: str, options: list[tuple[str, str]], prompt: str = "选择：") -> None:
+def render_menu(
+    title: str,
+    options: list[tuple[str, str]],
+    prompt: Optional[str] = "选择：",
+    *,
+    compact: bool = False,
+) -> None:
     """渲染编号菜单，options = [(key, label), ...]"""
     print()
-    print(f"  {BOLD(title)}")
-    hr("─", 40)
+    if not compact:
+        print(f"  {BOLD(title)}")
+        hr("─", 40)
     for key, label in options:
         print(f"  {CYAN(f'[{key}]')} {label}")
-    hr("─", 40)
-    print(f"  {prompt}", end="", flush=True)
+    if not compact:
+        hr("─", 40)
+    if prompt is not None:
+        print(f"  {prompt}", end="", flush=True)
 
 
 def prompt_input(label: str = "") -> str:

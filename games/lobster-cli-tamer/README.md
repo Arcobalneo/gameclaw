@@ -54,11 +54,31 @@ Or use the repo-level entrypoints from the monorepo root:
 ./scripts/build-game.sh lobster-cli-tamer
 ```
 
+For coding-agent / PTY driven play, prefer the terminal-native mode:
+
+```bash
+./lobster-cli-tamer --terminal-native --no-color --save-slot 0
+```
+
+If a fresh slot should be created without an extra naming branch:
+
+```bash
+./lobster-cli-tamer --terminal-native --no-color --save-slot 0 --player-name Agent
+```
+
 ## Runtime outputs
 
 - Live Observer page: `http://localhost:8000+`
 - Saves: `~/.lobster-cli-tamer/save_<slot>.json`
 - Static settlement report: `~/.lobster-cli-tamer/reports/latest.html`
+
+In `--terminal-native` mode the game now favors stable text anchors over decorative framing:
+
+- `STATE: ...`
+- `ACTIONS: ...`
+- `PROMPT: ...`
+- free-text and Enter-only prompts also expose short action hints such as `text=玩家名` or `enter=返回`
+- menus suppress most title / separator noise so a generic PTY agent can parse the next action more reliably
 
 ## Gameplay notes
 
