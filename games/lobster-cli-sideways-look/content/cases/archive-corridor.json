@@ -1,0 +1,198 @@
+{
+  "id": "archive-corridor",
+  "name": "archive-corridor",
+  "chineseName": "归档长廊",
+  "summary": "标签错位、目录污染。",
+  "requiredEvidence": 3,
+  "startingRoom": "index-foyer",
+  "defaultAscii": [
+    " [index] [drawer] [drawer] [drawer]",
+    " labels keep staying readable one second too long",
+    " the corridor is wider on paper than in front of you"
+  ],
+  "rooms": [
+    {
+      "id": "index-foyer",
+      "name": "Index Foyer",
+      "tags": [
+        "index",
+        "label",
+        "entry"
+      ],
+      "panels": [
+        " [index foyer] catalog / desk / route map ",
+        " [A-C] [D-H] [I-Z] ",
+        " route-map corners fold inward ",
+        " the corridor begins before the hall begins "
+      ],
+      "inspectTargets": [
+        {
+          "id": "route-map",
+          "label": "route map"
+        },
+        {
+          "id": "catalog-card",
+          "label": "catalog card"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "reading-lamp",
+          "label": "reading lamp",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "long-aisle",
+        "misfile-room"
+      ],
+      "isEntry": true
+    },
+    {
+      "id": "long-aisle",
+      "name": "Long Aisle",
+      "tags": [
+        "corridor",
+        "drawer",
+        "label"
+      ],
+      "panels": [
+        " [long aisle] cabinets / labels / stepping strip ",
+        " |A12| |A13| |A14| |A15| ",
+        " |___| |___| |___| |___| ",
+        " one drawer front is always half a fingernail longer "
+      ],
+      "inspectTargets": [
+        {
+          "id": "a14-label",
+          "label": "A14 label"
+        },
+        {
+          "id": "aisle-depth",
+          "label": "aisle depth"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "rolling-ladder",
+          "label": "rolling ladder",
+          "effect": "reveal"
+        }
+      ],
+      "exits": [
+        "index-foyer",
+        "salt-vault",
+        "exit-desk"
+      ]
+    },
+    {
+      "id": "misfile-room",
+      "name": "Misfile Room",
+      "tags": [
+        "paper",
+        "shadow",
+        "room"
+      ],
+      "panels": [
+        " [misfile room] index piles / bin / overlong shelf ",
+        " [pile] [pile] [bin] [shelf] ",
+        " paper corners all point toward one locked drawer ",
+        " shelf length does not match the wall "
+      ],
+      "inspectTargets": [
+        {
+          "id": "locked-drawer",
+          "label": "locked drawer"
+        },
+        {
+          "id": "shelf-length",
+          "label": "shelf length"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "bin-flap",
+          "label": "bin flap",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "index-foyer",
+        "salt-vault"
+      ]
+    },
+    {
+      "id": "salt-vault",
+      "name": "Salt Vault",
+      "tags": [
+        "archive",
+        "objective",
+        "paper"
+      ],
+      "panels": [
+        " [salt vault] sealed box / humidity meter / record bag ",
+        " [box] [meter] [bag] ",
+        " humidity meter reads a room that is not this one ",
+        " the bag zipper looks already parted "
+      ],
+      "inspectTargets": [
+        {
+          "id": "humidity-meter",
+          "label": "humidity meter"
+        },
+        {
+          "id": "record-bag",
+          "label": "record bag"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "claim-record",
+          "label": "take the sealed archive packet",
+          "effect": "objective"
+        }
+      ],
+      "exits": [
+        "long-aisle",
+        "misfile-room"
+      ],
+      "objective": true
+    },
+    {
+      "id": "exit-desk",
+      "name": "Exit Desk",
+      "tags": [
+        "exit",
+        "desk",
+        "paper"
+      ],
+      "panels": [
+        " [exit desk] stamp / gate / signed-out tray ",
+        " [stamp] [gate] [tray] ",
+        " sign-out sheet has one extra line in your handwriting ",
+        " the gate waits like a mouth held open "
+      ],
+      "inspectTargets": [
+        {
+          "id": "sign-out-line",
+          "label": "sign-out line"
+        },
+        {
+          "id": "gate-gap",
+          "label": "gate gap"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "stamp-lever",
+          "label": "stamp lever",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "long-aisle"
+      ],
+      "isExit": true
+    }
+  ]
+}

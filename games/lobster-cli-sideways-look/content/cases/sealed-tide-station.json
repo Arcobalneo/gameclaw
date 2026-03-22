@@ -1,0 +1,197 @@
+{
+  "id": "sealed-tide-station",
+  "name": "sealed-tide-station",
+  "chineseName": "封潮观察站",
+  "summary": "海边废弃观察站。",
+  "requiredEvidence": 3,
+  "startingRoom": "lookout-deck",
+  "defaultAscii": [
+    "  |\\      ____      /|   |\\      ____      /|   |\\      ____      /|",
+    "  | \\____/ __ \\____/ |   | \\____/ __ \\____/ |   | \\____/ __ \\____/ |",
+    "  |  tide-fog never sits still |   |  tide-fog never sits still |"
+  ],
+  "rooms": [
+    {
+      "id": "lookout-deck",
+      "name": "Lookout Deck",
+      "tags": [
+        "glass",
+        "horizon",
+        "entry"
+      ],
+      "panels": [
+        " [deck]  sea-line ///// window-salt ///// buoy-shadow   ",
+        " [left-pane]             [center-pane]          [right-pane]",
+        "      ____                    ____                    ____ ",
+        "  ___/____\\___          ___/____\\___          ___/____\\___"
+      ],
+      "inspectTargets": [
+        {
+          "id": "left-window",
+          "label": "left window"
+        },
+        {
+          "id": "horizon-gap",
+          "label": "horizon gap"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "salt-latch",
+          "label": "salt-latched blind",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "monitor-hall",
+        "wet-stairs"
+      ],
+      "isEntry": true
+    },
+    {
+      "id": "monitor-hall",
+      "name": "Monitor Hall",
+      "tags": [
+        "screen",
+        "corridor",
+        "glass"
+      ],
+      "panels": [
+        " [monitor wall]  CRT glow / reflection lag / blank fourth feed ",
+        " +------+ +------+ +------+ +------+ ",
+        " | 01   | | 02   | | 03   | | ??   | ",
+        " +------+ +------+ +------+ +------+ "
+      ],
+      "inspectTargets": [
+        {
+          "id": "feed-three",
+          "label": "third feed"
+        },
+        {
+          "id": "blank-fourth",
+          "label": "blank fourth feed"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "signal-switch",
+          "label": "signal switch",
+          "effect": "reveal"
+        }
+      ],
+      "exits": [
+        "lookout-deck",
+        "archive-bay"
+      ]
+    },
+    {
+      "id": "wet-stairs",
+      "name": "Wet Stairs",
+      "tags": [
+        "stair",
+        "drip",
+        "shadow"
+      ],
+      "panels": [
+        " [stairs] drip-line / landing / lower dark ",
+        "  __      __      __      __ ",
+        " |__|____|__|____|__|____|__|",
+        "    \\           \\           \\     "
+      ],
+      "inspectTargets": [
+        {
+          "id": "landing-shadow",
+          "label": "landing shadow"
+        },
+        {
+          "id": "railing-drip",
+          "label": "railing drip"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "drain-valve",
+          "label": "drain valve",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "lookout-deck",
+        "archive-bay"
+      ]
+    },
+    {
+      "id": "archive-bay",
+      "name": "Archive Bay",
+      "tags": [
+        "archive",
+        "objective",
+        "paper"
+      ],
+      "panels": [
+        " [archive bay] drawer / binder / salt-bitten folder ",
+        " |====| |====| |====| [CAB-7] ",
+        " |====| |====| |====| [CAB-8] ",
+        " floor marks keep stopping one step early "
+      ],
+      "inspectTargets": [
+        {
+          "id": "cab-seven",
+          "label": "CAB-7 drawer"
+        },
+        {
+          "id": "binder-spine",
+          "label": "binder spine"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "claim-record",
+          "label": "claim the station folder",
+          "effect": "objective"
+        }
+      ],
+      "exits": [
+        "monitor-hall",
+        "exit-lock"
+      ],
+      "objective": true
+    },
+    {
+      "id": "exit-lock",
+      "name": "Exit Lock",
+      "tags": [
+        "exit",
+        "door",
+        "wind"
+      ],
+      "panels": [
+        " [exit lock] bolt / warning lamp / outer spray ",
+        " ||  ||     RED     ||  || ",
+        " ||__||  < release >||__||",
+        " sea-wind squeezes under the seal "
+      ],
+      "inspectTargets": [
+        {
+          "id": "warning-lamp",
+          "label": "warning lamp"
+        },
+        {
+          "id": "door-gap",
+          "label": "door gap"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "pressure-wheel",
+          "label": "pressure wheel",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "archive-bay"
+      ],
+      "isExit": true
+    }
+  ]
+}

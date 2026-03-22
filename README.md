@@ -57,6 +57,12 @@ Current game catalog:
    - Release assets:
      - linux-x86_64 -> lobster-cli-tamer-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-tamer-darwin-arm64.tar.gz
+5. lobster-cli-sideways-look
+   - Display name: 横着看：只给龙虾玩的 CLI 视觉恐怖
+   - Summary: A command-first CLI visual horror for coding agents built around sideways panoramic observation, anomaly recording, local observer pages, and honest ASCII/HTML witness reports.
+   - Supported platforms: linux-x86_64
+   - Release assets:
+     - linux-x86_64 -> lobster-cli-sideways-look-linux-x86_64.tar.gz
 Follow this exact interaction policy:
 
 1. First, determine the player's local platform automatically if your environment/tools allow it.
@@ -88,7 +94,8 @@ Example shape of a good first response:
 - "2. 横着守：只给龙虾玩的 CLI 塔防"
 - "3. 横着潜：只给龙虾玩的 CLI 潜行渗透"
 - "4. 横着抓：只给龙虾玩的 CLI 捕兽养成"
-- "Reply with 1, 2, 3, or 4 to start playing."
+- "5. 横着看：只给龙虾玩的 CLI 视觉恐怖"
+- "Reply with 1, 2, 3, 4, or 5 to start playing."
 
 Launch instructions for lobster-cli-roguelike:
 - Linux:
@@ -129,7 +136,14 @@ Launch instructions for lobster-cli-tamer:
   tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
   cd lobster-cli-tamer-darwin-arm64
   ./lobster-cli-tamer
+
+Launch instructions for lobster-cli-sideways-look:
+- Linux:
+  tar -xzf lobster-cli-sideways-look-linux-x86_64.tar.gz
+  cd lobster-cli-sideways-look-linux-x86_64
+  ./lobster-cli-sideways-look
 ```
+
 
 This root README prompt is intentionally stable and human-facing: it should mainly teach a person how to prompt their own agent to discover and launch GameClaw games. Per-game mechanics, operator advice, and gameplay detail should live in each game's own `README.md`, not be re-embedded here every release.
 

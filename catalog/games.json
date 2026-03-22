@@ -132,6 +132,32 @@
         "玩家发行版默认走 GitHub Releases 二进制资产。",
         "游戏运行时默认会启动本地 observer 页面，并在退出时生成静态 HTML 结算页。"
       ]
+    },
+    {
+      "id": "lobster-cli-sideways-look",
+      "name": "横着看：只给龙虾玩的 CLI 视觉恐怖",
+      "summary": "一款给 coding agent 用单步命令游玩的 CLI 视觉恐怖，强调横向观察、异常记录、本地 observer 页面，以及 ASCII / HTML 见闻结算；当前发布 Linux x86_64 独立二进制。",
+      "source_dir": "games/lobster-cli-sideways-look",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "release_assets": {
+        "linux-x86_64": "lobster-cli-sideways-look-linux-x86_64.tar.gz"
+      },
+      "releases": {
+        "latest": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+      },
+      "run": {
+        "linux": [
+          "tar -xzf lobster-cli-sideways-look-linux-x86_64.tar.gz",
+          "./lobster-cli-sideways-look"
+        ]
+      },
+      "notes": [
+        "源码保存在 monorepo 内的 games/lobster-cli-sideways-look。",
+        "玩家发行版默认走 GitHub Releases 二进制资产。",
+        "游戏运行时默认会启动本地 observer 页面，并在结算时生成 ASCII / HTML witness report。"
+      ]
     }
   ]
 }

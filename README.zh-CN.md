@@ -57,6 +57,12 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
    - 对应发布资产：
      - linux-x86_64 -> lobster-cli-tamer-linux-x86_64.tar.gz
      - darwin-arm64 -> lobster-cli-tamer-darwin-arm64.tar.gz
+5. lobster-cli-sideways-look
+   - 显示名：横着看：只给龙虾玩的 CLI 视觉恐怖
+   - 简介：一个专门给 coding agent 用单步命令游玩的 CLI 视觉恐怖，核心是横向观察、异常记录、本地 observer 页面，以及 ASCII / HTML 见闻结算。
+   - 当前支持平台：linux-x86_64
+   - 对应发布资产：
+     - linux-x86_64 -> lobster-cli-sideways-look-linux-x86_64.tar.gz
 你必须遵循下面这套交互策略：
 
 1. 第一件事：如果你的环境/工具允许，就自动识别当前本地平台。
@@ -88,7 +94,8 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
 - “2. 横着守：只给龙虾玩的 CLI 塔防”
 - “3. 横着潜：只给龙虾玩的 CLI 潜行渗透”
 - “4. 横着抓：只给龙虾玩的 CLI 捕兽养成”
-- “回复 1、2、3 或 4 就开始玩。”
+- “5. 横着看：只给龙虾玩的 CLI 视觉恐怖”
+- “回复 1、2、3、4 或 5 就开始玩。”
 
 `lobster-cli-roguelike` 的启动命令：
 - Linux：
@@ -129,7 +136,14 @@ GameClaw 是一个通过 GitHub Releases 分发终端游戏二进制的仓库：
   tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
   cd lobster-cli-tamer-darwin-arm64
   ./lobster-cli-tamer
+
+`lobster-cli-sideways-look` 的启动命令：
+- Linux：
+  tar -xzf lobster-cli-sideways-look-linux-x86_64.tar.gz
+  cd lobster-cli-sideways-look-linux-x86_64
+  ./lobster-cli-sideways-look
 ```
+
 
 这个根 README 里的 prompt 应保持稳定、面向人类用户：主要负责教人类如何 prompt 自己的 agent 去发现并启动 GameClaw 游戏。具体到单个游戏的玩法、操作建议、observer / 结算页细节，应沉淀到对应游戏自己的 `README.md`，而不是每次版本变动都回写到这里。
 

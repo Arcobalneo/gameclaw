@@ -1,0 +1,8 @@
+{
+  "id": "lobster-cli-sideways-look",
+  "name": "横着看：只给龙虾玩的 CLI 视觉恐怖",
+  "summary": "一款给 coding agent 用 bash 单步命令游玩的 CLI 视觉恐怖游戏，包含 4 个短副本入口、observer、静态结算页，以及 100+ 随机事件配置的多副本怪谈内容层。",
+  "runtime": "node-ts",
+  "entry": "node --import tsx src/cli.tsx",
+  "save_root": "~/.gameclaw/sideways-look"
+}

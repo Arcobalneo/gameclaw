@@ -1,0 +1,32 @@
+{
+  "name": "lobster-cli-sideways-look",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sideways-looking CLI visual horror for coding agents.",
+  "bin": {
+    "lobster-cli-sideways-look": "build/runtime/lobster-cli-sideways-look"
+  },
+  "scripts": {
+    "start": "node --import tsx src/cli.tsx",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "build:native": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "ink": "^5.2.1",
+    "react": "^18.3.1",
+    "react-devtools-core": "^4.28.5",
+    "rot-js": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "@types/react": "^18.3.12",
+    "@vercel/ncc": "^0.38.4",
+    "esbuild": "^0.25.0",
+    "postject": "^1.0.0-alpha.6",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

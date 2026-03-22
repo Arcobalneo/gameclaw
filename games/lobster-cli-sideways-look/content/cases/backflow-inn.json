@@ -1,0 +1,198 @@
+{
+  "id": "backflow-inn",
+  "name": "backflow-inn",
+  "chineseName": "返潮招待所",
+  "summary": "门缝、床尾、镜面。",
+  "requiredEvidence": 3,
+  "startingRoom": "front-desk",
+  "defaultAscii": [
+    "  |door|     |hall|     |room|",
+    "  carpet keeps swallowing one more step each time",
+    "  mirror-sheen sits exactly where no mirror stands"
+  ],
+  "rooms": [
+    {
+      "id": "front-desk",
+      "name": "Front Desk",
+      "tags": [
+        "desk",
+        "hall",
+        "entry"
+      ],
+      "panels": [
+        " [desk] bell / key-board / wet ledger ",
+        "  ____      ____      ____ ",
+        " |____|    |____|    |____|",
+        " hallway carpet folds toward the rooms "
+      ],
+      "inspectTargets": [
+        {
+          "id": "ledger-edge",
+          "label": "ledger edge"
+        },
+        {
+          "id": "key-board",
+          "label": "key board"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "desk-lamp",
+          "label": "desk lamp",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "hall-3f",
+        "service-room"
+      ],
+      "isEntry": true
+    },
+    {
+      "id": "hall-3f",
+      "name": "Third-Floor Hall",
+      "tags": [
+        "hall",
+        "door",
+        "mirror"
+      ],
+      "panels": [
+        " [hall] room-307 / room-309 / wall mirror ",
+        " |307|   |309|    [////] ",
+        "    carpet seam keeps moving left     ",
+        " bed-frames feel close behind the doors "
+      ],
+      "inspectTargets": [
+        {
+          "id": "room-307-gap",
+          "label": "room 307 door gap"
+        },
+        {
+          "id": "wall-mirror",
+          "label": "wall mirror"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "fire-extinguisher",
+          "label": "fire extinguisher cabinet",
+          "effect": "reveal"
+        }
+      ],
+      "exits": [
+        "front-desk",
+        "guest-room",
+        "bath-end"
+      ]
+    },
+    {
+      "id": "guest-room",
+      "name": "Guest Room 309",
+      "tags": [
+        "bed",
+        "room",
+        "objective"
+      ],
+      "panels": [
+        " [room 309] bed / wardrobe / curtain ",
+        "  ________     ________ ",
+        " |__bed___|   |wardrobe|",
+        " curtain hem stops before touching the floor "
+      ],
+      "inspectTargets": [
+        {
+          "id": "bed-foot",
+          "label": "bed foot"
+        },
+        {
+          "id": "curtain-line",
+          "label": "curtain line"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "claim-record",
+          "label": "take the soaked room ledger",
+          "effect": "objective"
+        }
+      ],
+      "exits": [
+        "hall-3f"
+      ],
+      "objective": true
+    },
+    {
+      "id": "service-room",
+      "name": "Service Room",
+      "tags": [
+        "closet",
+        "pipe",
+        "shadow"
+      ],
+      "panels": [
+        " [service] linen cart / rust pipe / stacked chairs ",
+        "  [] []      |||      /_/ ",
+        "  [] []      |||     /_/  ",
+        " chair-backs keep becoming shoulders "
+      ],
+      "inspectTargets": [
+        {
+          "id": "linen-cart",
+          "label": "linen cart"
+        },
+        {
+          "id": "stacked-chairs",
+          "label": "stacked chairs"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "pipe-valve",
+          "label": "pipe valve",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "front-desk",
+        "bath-end"
+      ]
+    },
+    {
+      "id": "bath-end",
+      "name": "Bath-End Exit",
+      "tags": [
+        "exit",
+        "bath",
+        "mirror"
+      ],
+      "panels": [
+        " [bath-end] cracked tile / sink / exit sign ",
+        " EXIT ->   [sink]   [mirror] ",
+        "  drain water moves before the tap does ",
+        " door push-bar sweats like skin "
+      ],
+      "inspectTargets": [
+        {
+          "id": "sink-reflection",
+          "label": "sink reflection"
+        },
+        {
+          "id": "push-bar",
+          "label": "push bar"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "cold-faucet",
+          "label": "cold faucet",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "hall-3f",
+        "service-room"
+      ],
+      "isExit": true
+    }
+  ]
+}

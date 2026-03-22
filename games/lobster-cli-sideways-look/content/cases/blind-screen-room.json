@@ -1,0 +1,198 @@
+{
+  "id": "blind-screen-room",
+  "name": "blind-screen-room",
+  "chineseName": "盲屏机房",
+  "summary": "监控画面延迟与反向凝视。",
+  "requiredEvidence": 3,
+  "startingRoom": "relay-door",
+  "defaultAscii": [
+    " [feed-a] [feed-b] [feed-c] [feed-d]",
+    " one screen is always a room ahead of you",
+    " another is always a face behind you"
+  ],
+  "rooms": [
+    {
+      "id": "relay-door",
+      "name": "Relay Door",
+      "tags": [
+        "screen",
+        "door",
+        "entry"
+      ],
+      "panels": [
+        " [relay door] swipe reader / dark monitor / cable tray ",
+        " [reader] [CRT-off] [cable] ",
+        " the black screen still manages a reflection ",
+        " tray cables sag like wet hair "
+      ],
+      "inspectTargets": [
+        {
+          "id": "crt-off",
+          "label": "dark monitor"
+        },
+        {
+          "id": "swipe-reader",
+          "label": "swipe reader"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "breaker-cap",
+          "label": "breaker cap",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "main-array",
+        "cooling-rack"
+      ],
+      "isEntry": true
+    },
+    {
+      "id": "main-array",
+      "name": "Main Array",
+      "tags": [
+        "screen",
+        "array",
+        "mirror"
+      ],
+      "panels": [
+        " [main array] feed wall / chair / mirrored glass ",
+        " [01][02][03][04][05] ",
+        " [06][07][08][09][10] ",
+        " feed nine blinks one room ahead of your body "
+      ],
+      "inspectTargets": [
+        {
+          "id": "feed-nine",
+          "label": "feed nine"
+        },
+        {
+          "id": "mirror-glass",
+          "label": "mirror glass"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "chair-caster",
+          "label": "chair caster",
+          "effect": "reveal"
+        }
+      ],
+      "exits": [
+        "relay-door",
+        "edit-booth",
+        "exit-bulkhead"
+      ]
+    },
+    {
+      "id": "cooling-rack",
+      "name": "Cooling Rack",
+      "tags": [
+        "fan",
+        "rack",
+        "shadow"
+      ],
+      "panels": [
+        " [cooling rack] fans / drip tray / warning stickers ",
+        " <fan> <fan> <fan> ",
+        " stickers peel into eye-shapes ",
+        " drip tray catches light before sound "
+      ],
+      "inspectTargets": [
+        {
+          "id": "drip-tray",
+          "label": "drip tray"
+        },
+        {
+          "id": "warning-sticker",
+          "label": "warning sticker"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "fan-switch",
+          "label": "fan switch",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "relay-door",
+        "edit-booth"
+      ]
+    },
+    {
+      "id": "edit-booth",
+      "name": "Edit Booth",
+      "tags": [
+        "screen",
+        "objective",
+        "console"
+      ],
+      "panels": [
+        " [edit booth] keyboard / timecode / export cassette ",
+        " [kbd] [tc] [cassette] ",
+        " timecode keeps naming seconds you did not live ",
+        " cassette window shows an eye where tape should be "
+      ],
+      "inspectTargets": [
+        {
+          "id": "timecode",
+          "label": "timecode"
+        },
+        {
+          "id": "cassette-window",
+          "label": "cassette window"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "claim-record",
+          "label": "export the hidden tape",
+          "effect": "objective"
+        }
+      ],
+      "exits": [
+        "main-array",
+        "cooling-rack"
+      ],
+      "objective": true
+    },
+    {
+      "id": "exit-bulkhead",
+      "name": "Exit Bulkhead",
+      "tags": [
+        "exit",
+        "door",
+        "screen"
+      ],
+      "panels": [
+        " [bulkhead] wheel / red strip / side monitor ",
+        " [wheel] [red] [side-screen] ",
+        " the side monitor shows the bulkhead already open ",
+        " the real one is still locked "
+      ],
+      "inspectTargets": [
+        {
+          "id": "side-screen",
+          "label": "side monitor"
+        },
+        {
+          "id": "red-strip",
+          "label": "red strip"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "pressure-release",
+          "label": "pressure release",
+          "effect": "stabilize"
+        }
+      ],
+      "exits": [
+        "main-array"
+      ],
+      "isExit": true
+    }
+  ]
+}

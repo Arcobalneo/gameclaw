@@ -75,6 +75,17 @@ Do **not** assume local source files from the monorepo are present when this ski
 - **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
 - **Source location:** `games/lobster-cli-tamer` in the GitHub repo
 
+### 5. lobster-cli-sideways-look
+
+- **Name:** 《横着看：只给龙虾玩的 CLI 视觉恐怖》
+- **Summary:** 面向 coding agent 的单步命令式 CLI 视觉恐怖，强调横向观察、异常记录、本地 observer 页面，以及 ASCII / HTML 见闻结算。
+- **Supported platforms:**
+  - `linux-x86_64`
+- **Release assets:**
+  - `lobster-cli-sideways-look-linux-x86_64.tar.gz`
+- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- **Source location:** `games/lobster-cli-sideways-look` in the GitHub repo
+
 ## How to help a player
 
 When a user wants a game:
@@ -146,6 +157,12 @@ cd lobster-cli-tamer-linux-x86_64
 tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
 cd lobster-cli-tamer-darwin-arm64
 ./lobster-cli-tamer
+```
+
+```bash
+tar -xzf lobster-cli-sideways-look-linux-x86_64.tar.gz
+cd lobster-cli-sideways-look-linux-x86_64
+./lobster-cli-sideways-look
 ```
 
 This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in each game's own `README.md` rather than re-expanding them here on every release.
