@@ -1,6 +1,6 @@
 ---
 name: gameclaw
-description: Tell users what terminal games exist in GameClaw and how to download the released CLI binaries from GitHub. Use this when users ask what games are available, want a GameClaw game, need Linux/macOS download links, or want quick run instructions for a released game.
+description: "List available GameClaw terminal games, provide platform-specific download links from GitHub Releases, and give copy-paste unpack/run instructions for released CLI binaries. Use this when users ask what games are available, want to download a GameClaw game, need Linux/macOS binary links, want quick run instructions, or need help troubleshooting a downloaded release."
 version: 0.5.0
 ---
 
@@ -8,126 +8,51 @@ version: 0.5.0
 
 This skill is **prompt-only**. It is not the GameClaw monorepo itself.
 
-Its job is simple:
-- tell the agent which GameClaw games currently exist
-- tell the agent which platforms are actually supported
+Its job is to:
+- list which GameClaw games currently exist and their supported platforms
 - point users to the correct GitHub Releases download
-- explain how to unpack and run the binary
+- provide copy-paste commands to unpack and run each binary
+- help troubleshoot common download/run issues
 
 Do **not** assume local source files from the monorepo are present when this skill is installed from a registry.
 
 ## Canonical repository
 
 - Repo: `https://github.com/Arcobalneo/gameclaw`
-- Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- All releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
 ## Current games
 
-### 1. lobster-cli-roguelike
+| Game ID | Name | Summary | Platforms |
+|---------|------|---------|-----------|
+| lobster-cli-roguelike | 《横着活》 | Terminal roguelike with infinite tide stages and memory-first strategy prompts | linux-x86_64, darwin-arm64 |
+| lobster-cli-tower-defense | 《横着守》 | Pulse-based CLI tower defense with deploy/re-edit windows and doctrine variance | linux-x86_64, darwin-arm64 |
+| lobster-cli-heist | 《横着潜》 | Compact CLI stealth heist with mission grammar, extraction pressure, and live observer + HTML settlement | linux-x86_64, darwin-arm64 |
+| lobster-cli-tamer | 《横着抓》 | CLI creature-tamer with capture, squad growth, affix workshop, permadeath abyss, and observer + HTML settlement | linux-x86_64, darwin-arm64 |
+| lobster-cli-sideways-look | 《横着看》 | Single-step CLI visual horror for coding agents with lateral observation, anomaly logging, and ASCII/HTML settlement | linux-x86_64 |
 
-- **Name:** 《横着活：只给龙虾玩的 CLI 肉鸽》
-- **Summary:** 龙虾视角的终端肉鸽，默认紧凑文本，支持无限潮段，并会主动提示游玩者把策略写进自己的 memory。
-- **Supported platforms:**
-  - `linux-x86_64`
-  - `darwin-arm64`
-- **Release assets:**
-  - `lobster-cli-roguelike-linux-x86_64.tar.gz`
-  - `lobster-cli-roguelike-darwin-arm64.tar.gz`
-- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
-- **Source location:** `games/lobster-cli-roguelike` in the GitHub repo
-
-### 2. lobster-cli-tower-defense
-
-- **Name:** 《横着守：只给龙虾玩的 CLI 塔防》
-- **Summary:** 龙虾宇宙下的 pulse-based CLI 塔防，默认紧凑渲染，强调部署 / 再编窗口、doctrine 差异和 memory-first 结算。
-- **Supported platforms:**
-  - `linux-x86_64`
-  - `darwin-arm64`
-- **Release assets:**
-  - `lobster-cli-tower-defense-linux-x86_64.tar.gz`
-  - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
-- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
-- **Source location:** `games/lobster-cli-tower-defense` in the GitHub repo
-
-### 3. lobster-cli-heist
-
-- **Name:** 《横着潜：只给龙虾玩的 CLI 潜行渗透》
-- **Summary:** 龙虾宇宙下的 compact CLI 潜行 heist，强调 mission grammar、取物后撤离压力，以及默认启动的 live observer + HTML settlement。
-- **Supported platforms:**
-  - `linux-x86_64`
-  - `darwin-arm64`
-- **Release assets:**
-  - `lobster-cli-heist-linux-x86_64.tar.gz`
-  - `lobster-cli-heist-darwin-arm64.tar.gz`
-- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
-- **Source location:** `games/lobster-cli-heist` in the GitHub repo
-
-### 4. lobster-cli-tamer
-
-- **Name:** 《横着抓：只给龙虾玩的 CLI 捕兽养成》
-- **Summary:** 龙虾宇宙下的 CLI 捕兽养成，强调捕捉、编队成长、词条工坊、无尽深渊永久死亡，以及默认启动的 observer + HTML 结算页链路。
-- **Supported platforms:**
-  - `linux-x86_64`
-  - `darwin-arm64`
-- **Release assets:**
-  - `lobster-cli-tamer-linux-x86_64.tar.gz`
-  - `lobster-cli-tamer-darwin-arm64.tar.gz`
-- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
-- **Source location:** `games/lobster-cli-tamer` in the GitHub repo
-
-### 5. lobster-cli-sideways-look
-
-- **Name:** 《横着看：只给龙虾玩的 CLI 视觉恐怖》
-- **Summary:** 面向 coding agent 的单步命令式 CLI 视觉恐怖，强调横向观察、异常记录、本地 observer 页面，以及 ASCII / HTML 见闻结算。
-- **Supported platforms:**
-  - `linux-x86_64`
-- **Release assets:**
-  - `lobster-cli-sideways-look-linux-x86_64.tar.gz`
-- **Release page:** `https://github.com/Arcobalneo/gameclaw/releases/latest`
-- **Source location:** `games/lobster-cli-sideways-look` in the GitHub repo
+Release assets follow the pattern: `<game-id>-<platform>.tar.gz`
+Source for each game lives at `games/<game-id>/` in the GitHub repo.
 
 ## How to help a player
 
-When a user wants a game:
-
-1. identify the game they want, or list available games
-2. ask their platform if unknown
-3. point them to the GitHub Releases page or the exact release asset name
-4. give the shortest useful unpack/run instructions
-5. mention source location only if they ask to inspect or contribute
-
-## Recommended response shape
-
-Keep it practical:
-- game name
-- one-line description
-- supported platforms
-- GitHub release link
-- 1-2 commands to unpack / run
+1. Identify the game they want, or list available games using the table above
+2. Ask their platform if unknown (check the Platforms column)
+3. Point them to the release page or the exact asset name
+4. Give the generic run instructions below, substituting the game ID and platform
+5. Mention source location only if they ask to inspect or contribute
 
 ## Run instructions
 
-### Linux (`linux-x86_64`)
+All games use the same download-and-run pattern. Substitute `<GAME>` with the game ID and `<PLATFORM>` with the platform label from the table above:
 
 ```bash
-tar -xzf lobster-cli-roguelike-linux-x86_64.tar.gz
-cd lobster-cli-roguelike-linux-x86_64
-./lobster-cli-roguelike
+tar -xzf <GAME>-<PLATFORM>.tar.gz
+cd <GAME>-<PLATFORM>
+./<GAME>
 ```
 
-```bash
-tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz
-cd lobster-cli-tower-defense-linux-x86_64
-./lobster-cli-tower-defense
-```
-
-```bash
-tar -xzf lobster-cli-heist-linux-x86_64.tar.gz
-cd lobster-cli-heist-linux-x86_64
-./lobster-cli-heist
-```
-
-### macOS Apple Silicon (`darwin-arm64`)
+### Example: lobster-cli-roguelike on macOS
 
 ```bash
 tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
@@ -135,43 +60,18 @@ cd lobster-cli-roguelike-darwin-arm64
 ./lobster-cli-roguelike
 ```
 
-```bash
-tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
-cd lobster-cli-tower-defense-darwin-arm64
-./lobster-cli-tower-defense
-```
+### Troubleshooting
 
-```bash
-tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
-cd lobster-cli-heist-darwin-arm64
-./lobster-cli-heist
-```
-
-```bash
-tar -xzf lobster-cli-tamer-linux-x86_64.tar.gz
-cd lobster-cli-tamer-linux-x86_64
-./lobster-cli-tamer
-```
-
-```bash
-tar -xzf lobster-cli-tamer-darwin-arm64.tar.gz
-cd lobster-cli-tamer-darwin-arm64
-./lobster-cli-tamer
-```
-
-```bash
-tar -xzf lobster-cli-sideways-look-linux-x86_64.tar.gz
-cd lobster-cli-sideways-look-linux-x86_64
-./lobster-cli-sideways-look
-```
-
-This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in each game's own `README.md` rather than re-expanding them here on every release.
+- **Permission denied**: Run `chmod +x ./<GAME>` before executing.
+- **macOS Gatekeeper quarantine**: Run `xattr -d com.apple.quarantine ./<GAME>` to clear the quarantine flag.
+- **Missing release asset**: Check the [releases page](https://github.com/Arcobalneo/gameclaw/releases/latest) directly — if an asset is not listed, it has not been released for that platform. Say so plainly.
 
 ## Safety / accuracy rules
 
 - Prefer **released binaries** over source checkouts.
 - Do not claim unsupported platforms are supported.
-- Do not say binaries are impossible to reverse engineer.
-- Say binaries **reduce casual source visibility**.
+- Do not say binaries are impossible to reverse engineer — say binaries **reduce casual source visibility**.
 - If a release asset is missing, say so plainly.
 - Do not imply the player must clone the repository unless they explicitly want source access.
+
+This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in each game's own `README.md` rather than re-expanding them here on every release.
