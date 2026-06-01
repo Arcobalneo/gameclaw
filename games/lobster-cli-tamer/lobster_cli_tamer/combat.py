@@ -355,7 +355,10 @@ class BattleEngine:
             defender.hp_current = max(0.0, defender.hp_current - dmg)
             suffix = f"（共{result.multi_hit}连击）" if result.multi_hit else ""
             st.add_log(f"  造成 {result.damage:.1f} 伤害{suffix}")
-            if defender.hp_current <= 0 and st.is_tower:
+            # v0.1.8 修复:野外也设 dead=True。v0.1.9 修复:不再依赖 st.is_tower
+            # 单独检查,野外战斗中死掉的怪(我方或野生)也要设 dead=True,
+            # 避免战斗中换手时死怪还占着 save.party 槽位。
+            if defender.hp_current <= 0:
                 defender.dead = True
 
         # 回血 / 自伤（recoil）

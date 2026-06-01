@@ -4,7 +4,20 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
-### `lobster-cli-tamer` v0.1.9 — 战斗中清埋修复 (验证中再发现)
+### `lobster-cli-tamer` v0.1.9 — battle_turn 立即清埋 + 野外 dead 标记 (完整修复)
+
+- **Fix: combat.py _apply_skill 现在 HP<=0 时统一设 dead=True**
+  - 旧实现: `if defender.hp_current <= 0 and st.is_tower: defender.dead = True`
+  - v0.1.8 commit 有这行 `and st.is_tower` 检查，所以野外战斗中死掉的怪 dead=False。实际 GitHub release v0.1.8 仍未修野外路径。
+  - v0.1.9 修复: 去掉 `and st.is_tower`，无论深渊/野外，HP<=0 时都设 dead=True。
+  - 这是 v0.1.8 commit 注释里写了但实际代码没改完的最后一道。
+
+- **Fix: world.py battle_turn 立即 cleanup_dead_creatures**
+  - v0.1.8 commit 写了 world.py _on_battle_end 统一清埋，但战斗中自动换手时死掉的怪没机会走 _on_battle_end（战斗还在继续）。
+  - v0.1.9 修复: 在 battle_turn 的 run_turn 之后、state.is over() 检查之前，先调 save.cleanup_dead_creatures(cause="野外战斗")，让战斗中死掉的怪立即被释放。
+  - 表现: 野外战斗中抓新怪能在当前战斗中填入之前战斗中死亡的怪留下的空槽。
+
+### `lobster-cli-tamer` v0.1.8 — Bug fix release (unlocks the core loop)
 
 - **Fix: battle_turn 每回合后立即 cleanup_dead_creatures**
   - 派大虾🦞 在 2026-06-01 用 v0.1.8 二进制跑第二轮实测中触发了续问题：战斗中自动换手后死掉的怪 (dead=True HP=0) 仍然占着 save.party 槽位，因为 _on_battle_end 只在 state.is_over() 时才触发。
