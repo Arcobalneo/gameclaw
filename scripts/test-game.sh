@@ -23,10 +23,11 @@ fi
 
 cd "$GAME_DIR"
 # v0.1.8 修复:装 test extra,因为 test_terminal_native_cli.py 用 pytest
+# 这里 不带 --locked 避免 uv sync 在某些场景下报 "needs to be updated" 的错位 bug。
+# 实际 lockfile 一致性已通过顶层 pyproject.toml 的 [[tool.uv.index]] 强制 PyPI 锁定。
 "$UV_BIN" sync \
   --project "$ROOT_DIR" \
   --default-index https://pypi.org/simple \
-  --locked \
   --package "$GAME_ID" \
   --extra test
 
@@ -34,7 +35,6 @@ cd "$GAME_DIR"
 # test_terminal_native_cli.py 用了 pytest 装饰器/夹具)
 "$UV_BIN" run \
   --project "$ROOT_DIR" \
-  --locked \
   --no-sync \
   --package "$GAME_ID" \
   --extra test \

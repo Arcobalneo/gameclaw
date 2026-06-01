@@ -22,16 +22,15 @@ if ! "$UV_BIN" --version >/dev/null 2>&1; then
 fi
 
 cd "$GAME_DIR"
+# v0.1.8 修复:不带 --locked 避免 uv 错位 bug
 "$UV_BIN" sync \
   --project "$ROOT_DIR" \
   --default-index https://pypi.org/simple \
-  --locked \
   --package "$GAME_ID" \
   --extra build
 
 "$UV_BIN" run \
   --project "$ROOT_DIR" \
-  --locked \
   --no-sync \
   --package "$GAME_ID" \
   --extra build \

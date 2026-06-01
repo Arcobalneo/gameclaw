@@ -6,6 +6,15 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
 
+# v0.1.8 修复: 明确锁定 index 为 PyPI,让 uv.lock 在不同 env
+# (aliyun mirror / baidubce / 等)下都能生成一致的 lockfile。
+# 否则 developer's local uv config (如 ~/.config/uv/uv.toml)
+# 会用 mirror, 而 CI runner 用 PyPI default,导致 --locked 不一致。
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+default = true
+
 [tool.uv]
 package = false
 required-version = ">=0.10.9,<0.11"
