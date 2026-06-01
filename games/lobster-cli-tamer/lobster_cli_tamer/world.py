@@ -267,6 +267,17 @@ class WorldSession:
                 if leveled:
                     events.extend(self._on_level_up(c))
 
+            # v0.1.8 修复:胜利后也要清理战斗中死亡的虾米。战斗中
+            # 自动换手可能让上场怪先死,然后被换上的怪赢了,这时
+            # 死掉的怪如果不清理,会一直 dead=True 占着 party 槽位。
+            dead_cleaned = self.save.cleanup_dead_creatures(cause="野外战斗")
+            if dead_cleaned:
+                events.append(WorldEvent(
+                    WorldEventType.BATTLE_END,
+                    {"dead_cleaned": dead_cleaned},
+                    f"× {dead_cleaned} 只虾米在战斗中阵亡，已清理。",
+                ))
+
             loot = self._roll_battle_loot()
             if loot:
                 self.save.add_item(loot["id"], loot["count"])
@@ -280,10 +291,14 @@ class WorldSession:
         elif state.result == BattleResult.PLAYER_LOSE:
             self.save.total_battles += 1
             # 移除战斗内死亡的虾米
-            for c in self.save.active_party:
-                if c.dead:
-                    self.save.add_to_memorial(c, "野外战斗")
+            dead_cleaned = self.save.cleanup_dead_creatures(cause="野外战斗")
             events.append(WorldEvent(WorldEventType.PARTY_WIPED, message="队伍全灭！"))
+            if dead_cleaned:
+                events.append(WorldEvent(
+                    WorldEventType.PARTY_WIPED,
+                    {"dead_cleaned": dead_cleaned},
+                    f"全灭：{dead_cleaned} 只虾米阵亡，已入纪念碑。",
+                ))
 
         elif state.result == BattleResult.SURRENDERED:
             events.append(WorldEvent(WorldEventType.RAN_AWAY, message="成功逃跑！"))

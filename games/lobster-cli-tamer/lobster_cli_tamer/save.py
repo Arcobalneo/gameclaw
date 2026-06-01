@@ -197,6 +197,20 @@ class SaveSlot:
     def unlock_zone(self, zone_id: str) -> None:
         self.unlocked_zones.add(zone_id)
 
+    def cleanup_dead_creatures(self, cause: str = "野外战斗") -> int:
+        """遍历 party,清理 dead=True 的虾米:入 memorial + 槽位置 None。
+
+        v0.1.8 新增,解决野外战斗死掉的怪永远占着 party 槽位的 BUG。
+        返回清理数量。
+        """
+        cleaned = 0
+        for idx, c in enumerate(self.party):
+            if c is not None and getattr(c, "dead", False):
+                self.add_to_memorial(c, cause)
+                self.party[idx] = None
+                cleaned += 1
+        return cleaned
+
 
 # --------------------------------------------------------------------------- #
 # 存档 IO

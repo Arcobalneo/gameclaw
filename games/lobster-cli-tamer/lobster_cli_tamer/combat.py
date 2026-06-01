@@ -77,7 +77,13 @@ class Combatant:
         return self.creature.effective_stat(stat, self.stat_stage)
 
     def take_damage(self, amount: float, is_tower: bool = False) -> tuple[float, bool]:
-        """返回 (实际扣血量, 是否死亡)。护盾先扣。"""
+        """返回 (实际扣血量, 是否死亡)。护盾先扣。
+
+        v0.1.8 修复:HP<=0 时统一把 dead 标记为 True。
+        旧实现只在深渊(is_tower=True)时设 dead,导致野外战斗死亡的怪
+        dead=False HP=0 永远占着 party 槽位无法被 add_to_memorial 清理
+        (see world.py _on_battle_end),后续野外抓的怪装不进 6 槽。
+        """
         actual = amount
         if self.shield_hp > 0:
             absorbed = min(self.shield_hp, amount)
@@ -85,8 +91,10 @@ class Combatant:
             actual = amount - absorbed
         self.creature.hp_current = max(0.0, self.creature.hp_current - actual)
         died = self.creature.hp_current <= 0
-        if died and is_tower:
-            self.creature.dead = True  # 深渊内永久死亡
+        if died:
+            # 统一标记 dead=True。is_tower 时退深渊结算仍然有"无法复活"
+            # 语义(settle_plague 仍会额外掷骰),这里只是把状态写对。
+            self.creature.dead = True
         return actual, died
 
     def tick_status(self) -> list[str]:
@@ -248,7 +256,7 @@ class BattleEngine:
             dmg = st.player.creature.stats["atk"] * 0.4
             st.player.creature.hp_current = max(0, st.player.creature.hp_current - dmg)
             st.add_log(f"{st.player.creature.display_name} 陷入混乱，攻击了自己！({dmg:.1f})")
-            if st.player.creature.hp_current <= 0 and st.is_tower:
+            if st.player.creature.hp_current <= 0:
                 st.player.creature.dead = True
             self._check_end()
             return
@@ -432,6 +440,12 @@ class BattleEngine:
         for side in (self.state.player, self.state.enemy):
             for msg in side.tick_status():
                 self.state.add_log(msg)
+            # v0.1.8 修复:每回合 shield_hp 衰减 50%(下限 0),
+            # 避免珊瑚壁垒这类 shield 技能无限累积。
+            # 原实现完全不衰减,导致 BOSS 战护盾无上限,普通攻击永远
+            # 破不了 → 战斗死循环。衰减后后续回合只加 0.5^n,趋近 0。
+            if side.shield_hp > 0:
+                side.shield_hp = max(0.0, side.shield_hp * 0.5)
 
     # ------------------------------------------------------------------ #
     # 换手

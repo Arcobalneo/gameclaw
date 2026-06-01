@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lobster-cli-tamer"
-version = "0.1.7"
+version = "0.1.8"
 description = "横着抓：只给龙虾玩的 CLI 捕兽养成"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -26,6 +26,10 @@ dependencies = []
 [project.optional-dependencies]
 build = [
   "Nuitka[onefile]>=4.0.4",
+]
+# v0.1.8 新增:为 tamer 测试加 pytest 依赖(原有 test_terminal_native_cli.py 用 pytest)
+test = [
+  "pytest>=8.0",
 ]
 
 [project.scripts]

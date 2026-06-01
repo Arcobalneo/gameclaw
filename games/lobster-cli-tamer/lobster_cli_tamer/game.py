@@ -308,7 +308,8 @@ class Game:
                 ("3", "词条工坊"),
                 ("4", "查看图鉴"),
                 ("5", "查看队伍详情"),
-                ("6", "存档"),
+                ("6", "调换队伍（与仓库互换）"),
+                ("7", "存档"),
                 ("q", "退出"),
             ]
             choice = self._read_menu_choice(
@@ -321,7 +322,8 @@ class Game:
                     ("3", "工坊"),
                     ("4", "图鉴"),
                     ("5", "队伍"),
-                    ("6", "存档"),
+                    ("6", "调换"),
+                    ("7", "存档"),
                     ("q", "退出"),
                 ],
             ).strip().lower()
@@ -336,8 +338,16 @@ class Game:
             elif choice == "5":
                 self._party_detail()
             elif choice == "6":
+                self._swap_menu()
+            elif choice == "7":
+                # v0.1.8 新增:主菜单存档同时触发死掉虾米的清理,
+                # 防止各种边界场景下"死掉但未清理"的状态累积。
+                cleaned = self.save.cleanup_dead_creatures(cause="存档清理")
                 write_save(self.save)
-                success("存档已保存")
+                if cleaned:
+                    success(f"存档已保存（清理了 {cleaned} 只已阵亡虾米）")
+                else:
+                    success("存档已保存")
             elif choice == "q":
                 write_save(self.save)
                 break
@@ -535,10 +545,26 @@ class Game:
                 if eng:
                     render_battle_status(eng.render_status_bar())
                 moves = tower._battle_engine.available_player_moves() if tower._battle_engine else []
-                opts = [(str(i+1), n) for i, n in enumerate(moves)] + [("r", "尝试撤退（本回合无效，下层才能退）")]
+                opts = [(str(i+1), n) for i, n in enumerate(moves)] + [
+                    ("r", "尝试撤退（本回合无效，下层才能退）"),
+                    # v0.1.8 新增:战斗中 q 退整个深渊（可避免 BOSS 战死循环）。
+                    # 代价:会结算疫病骰（settle_plague）+ total_abyss_runs++。
+                    ("q", "放弃本局深渊（结算疫病骰后退出）"),
+                ]
                 cmd = self._read_menu_choice("BATTLE_MENU", "战斗", opts).strip().lower()
                 if cmd == "r":
                     warn("本层不可撤退"); continue
+                if cmd == "q":
+                    warn("放弃本局深渊，结算疫病骰…")
+                    evts = [e for e in tower._settle_plague()]
+                    for ev in evts:
+                        if ev.message: info(ev.message)
+                    self.save.total_abyss_runs += 1
+                    tower.floor = 0
+                    check_zone_unlock(self.save, self.data)
+                    write_save(self.save)
+                    self._push_party()
+                    return
                 try:
                     idx = int(cmd) - 1
                     skill = moves[idx]
@@ -579,6 +605,10 @@ class Game:
 
     def _skill_choice_prompt(self, session: Any, choices: list, creature: Creature) -> None:
         print()
+        # v0.1.8 改进:在显示候选前就明确提示是否会触发替换选择,
+        # 避免 agent/玩家只发了 "1" 就以为完了，忘了后续还要发替换序号。
+        if len(creature.moves) >= 4:
+            warn("⚠ 当前技能已满 4 个。选 1-3 后会被询问「替换第几个技能 1-4」。")
         info(f"{BOLD(creature.display_name)} 的技能候选（Lv{creature.level}升级）：")
         for i, s in enumerate(choices):
             info(f"  [{i+1}] {s['name']} ({s['type']} | {s.get('power',0)}威力) - {s['description']}")
@@ -757,6 +787,81 @@ class Game:
 
     # ------------------------------------------------------------------ #
     # 辅助
+    # ------------------------------------------------------------------ #
+
+    def _swap_menu(self) -> None:
+        """v0.1.8 新增:调换队伍菜单。把 party 中的某只虾米放回 box,
+        或从 box 中选一只填入 party。
+
+        流程:
+          1) 选要动作: 1=从 party 退到 box, 2=从 box 调入 party, 0=返回
+          2) 选具体某只虾米
+          3) 写盘,返回主菜单
+        """
+        if not self.save.box and all(c is None for c in self.save.party):
+            warn("队伍为空且仓库也为空，无可调换的虾米。")
+            return
+        section("调换队伍")
+        info(f"当前队伍 6 槽中已使用 {sum(1 for c in self.save.party if c is not None)} 槽，仓库有 {len(self.save.box)} 只虾米。")
+
+        action = self._read_menu_choice(
+            "SWAP_ACTION",
+            "选择调换方向",
+            [
+                ("1", "从队伍退到仓库（仓库中可重新调出）"),
+                ("2", "从仓库调入队伍（选某只填入第一个空槽）"),
+                ("0", "返回"),
+            ],
+            action_summary=[("1", "退到 box"), ("2", "从 box 调入"), ("0", "返回")],
+        ).strip()
+
+        if action == "0":
+            return
+        if action == "1":
+            # 选 party 一只放入 box
+            alive_party = [(i, c) for i, c in enumerate(self.save.party) if c is not None]
+            if not alive_party:
+                warn("队伍为空，没有可退到仓库的虾米。"); return
+            opts = [(str(i+1), c.display_name + f" Lv{c.level}") for i, c in alive_party]
+            opts.append(("0", "取消"))
+            choice = self._read_menu_choice("SWAP_FROM_PARTY", "选择要退到仓库的虾米", opts).strip()
+            if choice == "0": return
+            try:
+                idx, _ = alive_party[int(choice)-1]
+            except (ValueError, IndexError):
+                self._warn_invalid_input(); return
+            moved = self.save.party[idx]
+            self.save.party[idx] = None
+            self.save.box.append(moved)
+            write_save(self.save)
+            success(f"已将 {moved.display_name} 退到仓库（仓库现有 {len(self.save.box)} 只）")
+        elif action == "2":
+            if not self.save.box:
+                warn("仓库是空的，没有可调入的虾米。先去野外抓几只！"); return
+            if not any(c is None for c in self.save.party):
+                warn("队伍 6 槽全满，需先退一只到仓库再调入。"); return
+            opts = [(str(i+1), c.display_name + f" Lv{c.level}") for i, c in enumerate(self.save.box)]
+            opts.append(("0", "取消"))
+            choice = self._read_menu_choice("SWAP_FROM_BOX", "选择要调入队伍的虾米", opts).strip()
+            if choice == "0": return
+            try:
+                picked = self.save.box.pop(int(choice)-1)
+            except (ValueError, IndexError):
+                self._warn_invalid_input(); return
+            # 填入第一个空槽
+            for i in range(len(self.save.party)):
+                if self.save.party[i] is None:
+                    self.save.party[i] = picked
+                    break
+            else:
+                # 理论不会到这里(上面已 warn),防御性处理
+                self.save.box.append(picked)
+                self._warn_invalid_input(); return
+            write_save(self.save)
+            success(f"已将 {picked.display_name} 调入队伍")
+        else:
+            self._warn_invalid_input()
+
     # ------------------------------------------------------------------ #
 
     def _push_party(self) -> None:
