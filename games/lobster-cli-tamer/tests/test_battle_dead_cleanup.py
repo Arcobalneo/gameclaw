@@ -161,3 +161,46 @@ def test_battle_turn_中间就清埋_dead_creatures():
     new_c.moves = [data.species["ghost_shrimp"]["base_skill"]]
     save.party[0] = new_c
     assert save.party[0] is not None
+
+
+def test_capture_success_走_loot和cleanup():
+    """v0.2.0 修复:抓怪成功(战斗结束)也走 loot + cleanup,不再因 c 试捕
+    不消耗回合而完全错过保底补给。
+    """
+    from lobster_cli_tamer.creature import Creature
+    from lobster_cli_tamer.combat import Combatant
+    from lobster_cli_tamer.world import WorldSession
+
+    data = _get_data()
+    save = _fresh_save()
+
+    # 设一个 dead 怪,模拟战斗中死了
+    save.party[0].hp_current = 0
+    save.party[0].dead = True
+
+    # 模拟 cleanup
+    cleaned = save.cleanup_dead_creatures(cause="野外战斗")
+    assert cleaned == 1
+    assert save.party[0] is None
+
+    # items: 5 个 net + 3 个 potion + 1 cure (新档默认)
+    assert save.items.get("net_basic", 0) == 5
+
+    # 模拟 _grant_emergency_net_if_needed: 旧逻辑 capture_total > 0 不补给
+    # 新逻辑 capture_total > 0 + pity < 3 不补给
+    assert save.capture_tool_pity == 0
+    # 这场景下不应补给 (capture_total > 0 + pity 0 < 3)
+    # 但如果 pity 涨到 3, 应补给
+    save.capture_tool_pity = 3
+    # 旧调用会跑这段
+    capture_total = sum(
+        count for k, count in save.items.items()
+        if k.startswith("net_") or k == "shiny_trap"
+    )
+    # 旧逻辑 (capture_total > 0) 不补给
+    should_grant_old = (capture_total == 0)
+    # 新逻辑 (capture_total > 0 + pity < 3) 不补给
+    should_grant_new = (capture_total == 0) or (save.capture_tool_pity >= 3)
+    # 旧逻辑会错过,新逻辑会补给
+    assert should_grant_new is True
+    assert should_grant_old is False

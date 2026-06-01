@@ -161,7 +161,28 @@ class WorldSession:
 
         # 捕捉行动特殊处理
         if action.action_type == ActionType.USE_SKILL and action.skill_name and action.skill_name.startswith("__capture__"):
-            return self._handle_capture(action)
+            capture_events = self._handle_capture(action)
+            events.extend(capture_events)
+            # v0.1.9 修复:捕捉成功路径也走 loot + cleanup,避免
+            # 只抽 c 1 球试捕不消耗回合的路子完全掉不了甲网。
+            if not self._battle_engine:  # 抓成功 = 战斗结束
+                dead_cleaned = self.save.cleanup_dead_creatures(cause="野外战斗")
+                if dead_cleaned:
+                    events.append(WorldEvent(
+                        WorldEventType.BATTLE_TURN,
+                        {"dead_cleaned": dead_cleaned},
+                        f"× {dead_cleaned} 只虾米在战斗中阵亡，已清理。",
+                    ))
+                loot = self._roll_battle_loot()
+                if loot:
+                    self.save.add_item(loot["id"], loot["count"])
+                    suffix = "（保底）" if loot.get("guaranteed") else ""
+                    events.append(WorldEvent(
+                        WorldEventType.ITEM_FOUND,
+                        loot,
+                        f"击退野怪后捡到了 {loot['name']} ×{loot['count']}{suffix}",
+                    ))
+            return events
 
         state = self._battle_engine.run_turn(action)
         events.append(WorldEvent(WorldEventType.BATTLE_TURN, {

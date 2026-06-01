@@ -286,12 +286,16 @@ class Game:
     def _grant_emergency_net_if_needed(self) -> None:
         if not self.save or not self.data:
             return
+        # v0.1.9 修复: 原始逻辑要求 capture_total == 0 才补给，
+        # 但玩家如果刚开始有 5 个 net，全用完后不会再补给，致永
+        # 永远不能再抓怪。改用 pity-based: 当 capture_tool_pity >= 3 时
+        # 补给 1 个 net_basic 并重置 pity。
         capture_total = sum(
             count
             for item_id, count in self.save.items.items()
             if item_id.startswith("net_") or item_id == "shiny_trap"
         )
-        if capture_total > 0:
+        if capture_total > 0 and self.save.capture_tool_pity < 3:
             return
         self.save.add_item("net_basic", 1)
         self.save.capture_tool_pity = 0

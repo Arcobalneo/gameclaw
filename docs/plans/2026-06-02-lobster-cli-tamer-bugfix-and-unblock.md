@@ -15,6 +15,14 @@
 - 修完后再用新版本跑一轮真实游玩,验证解锁下一区域可达。
 - 同步把整个流程中持续发现的次要 bug 全部修完。
 
+### v0.1.9 / v0.2.0 后续发现
+
+派大虾在用 v0.1.8 / v0.1.9 真实游玩中又发现续问题:
+- v0.1.9: combat.py `_apply_skill` 还依赖 `and st.is_tower` 检查 (野外不设 dead)。commit 注释与实际代码不一致。
+- v0.1.9: world.py `battle_turn` 捕捉成功路径不走 `_roll_battle_loot` 也不走 `cleanup_dead_creatures`，只 c 1 试捕不消耗回合时拿不到保底补给。
+- v0.2.0: `game.py _grant_emergency_net_if_needed` 旧逻辑要求 `capture_total == 0`，玩家如果刚开始有 5 个 net, 全用完后永不再补给。
+- 这些都进入 v0.2.0 完整修复。
+
 ---
 
 ## 二、本轮游玩中亲测发现的所有 bug

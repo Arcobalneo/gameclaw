@@ -4,6 +4,40 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.0 — 完整解锁核心 loop (野外死怪清埋 + BOSS 护盾衰减 + box 调换菜单 + BOSS 战 q 退 + 野外 loot + 保底补给)
+
+完整修复了派大虾在 2026-06-01 两轮实测中触发的所有 P0/P1 死局，以及后续在 v0.1.9 实玩中又发现的 loot 路径 BUG 和保底补给逻辑 BUG。
+
+#### v0.1.8
+
+- combat.py take_damage 统一设 dead=True (HP<=0)
+- world.py _on_battle_end 统一清埋 dead
+- combat.py _tick_status_both 每回合 shield_hp *= 0.5
+- game.py _main_menu 加 6 调换队伍
+- game.py _swap_menu 新增方法
+- save.py cleanup_dead_creatures helper
+- game.py _abyss_loop BOSS 战 q 退到主菜单
+- game.py _skill_choice_prompt 明确替换提示
+- uv.lock 一致性 (PyPI 锁定)
+- scripts/test-game.sh + build-game.sh 修 --locked 错位
+- 新增 52 个测试
+
+#### v0.1.9
+
+- combat.py _apply_skill HP<=0 时统一设 dead=True (野外不依赖 is_tower)
+- world.py battle_turn 每回合 cleanup_dead_creatures
+- 加测试 test_battle_turn_中间就清埋_dead_creatures
+
+#### v0.2.0 (这个版本)
+
+- **Fix: world.py battle_turn 捕捉成功路径也走 loot + cleanup**
+  - 派大虾用 v0.1.9 实玩时发现只 c 1 试捕不消耗回合的路径不走 _on_battle_end也不调 _roll_battle_loot,导致只打 5-6 场战斗后 0 补给,playable 仍受限。
+  - 修复:在 _handle_capture 后检查 battle_engine 是否清空(抓成功 = 战斗结束),清空则走 cleanup + loot。
+
+- **Fix: game.py _grant_emergency_net_if_needed 改为 pity-based 补给**
+  - 旧逻辑要求 capture_total == 0 才补给,玩家如果刚开始有 5 个 net,全用完后永远不再补给,致永不能再抓怪。
+  - 改用 capture_tool_pity >= 3 触发补给 + 重置 pity。
+
 ### `lobster-cli-tamer` v0.1.9 — battle_turn 立即清埋 + 野外 dead 标记 (完整修复)
 
 - **Fix: combat.py _apply_skill 现在 HP<=0 时统一设 dead=True**
