@@ -4,6 +4,13 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.1.9 — 战斗中清埋修复 (验证中再发现)
+
+- **Fix: battle_turn 每回合后立即 cleanup_dead_creatures**
+  - 派大虾🦞 在 2026-06-01 用 v0.1.8 二进制跑第二轮实测中触发了续问题：战斗中自动换手后死掉的怪 (dead=True HP=0) 仍然占着 save.party 槽位，因为 _on_battle_end 只在 state.is_over() 时才触发。
+  - 修改 `world.py battle_turn`: 在 run_turn 之后、state.is_over() 检查之前，先调 save.cleanup_dead_creatures(cause="野外战斗")，让战斗中死掉的怪立即被释放。
+  - 表现: 野外抓到新怪后能在当前战斗中填入之前战斗中死亡的怪留下的空槽，无需等到主菜单才被清理。
+
 ### `lobster-cli-tamer` v0.1.8 — Bug fix release (unlocks the core loop)
 
 - **Fix: 野外战斗死亡的虾米永远不清埋 (P0)**

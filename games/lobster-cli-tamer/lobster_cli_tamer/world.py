@@ -169,6 +169,18 @@ class WorldSession:
             "status_bar": self._battle_engine.render_status_bar(),
         }))
 
+        # v0.1.8 修复:每回合后立即调 cleanup_dead_creatures,避免
+        # 战斗中自动换手后死掉的怪仍占 save.party 槽位。下一次
+        # save.active_party 过滤会排除它们(因为 HP=0),但槽位不释放
+        # 会导致 6 槽全占满,无法用 box 怪换入。
+        dead_cleaned = self.save.cleanup_dead_creatures(cause="野外战斗")
+        if dead_cleaned:
+            events.append(WorldEvent(
+                WorldEventType.BATTLE_TURN,
+                {"dead_cleaned": dead_cleaned},
+                f"× {dead_cleaned} 只虾米在战斗中阵亡，已清理。",
+            ))
+
         if state.is_over():
             events.extend(self._on_battle_end(state))
 

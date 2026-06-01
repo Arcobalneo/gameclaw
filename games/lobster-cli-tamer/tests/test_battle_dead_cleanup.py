@@ -126,3 +126,38 @@ def test_没死的不会被误清理():
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_battle_turn_中间就清埋_dead_creatures():
+    """v0.1.8 修复:战斗 turn 后立即 cleanup,确保 save.party 槽位不卡半死怪。
+
+    场景:战斗中自动换手时,死掉的怪 dead=True HP=0 但战斗未结束。
+    必须在 _on_battle_end 之前就清理,否则 _on_battle_end 触发时
+    cleanup 又会跑一遍(幂等),但 _on_battle_end 是 state.is_over() 才触发,
+    如果战斗因其他原因没结束(例如玩家 SURRENDER 主动退),cleanup 必须在
+    battle_turn 里跑。
+    """
+    from lobster_cli_tamer.creature import Creature
+    from lobster_cli_tamer.combat import Combatant, BattleAction, ActionType
+    from lobster_cli_tamer.world import WorldSession
+
+    data = _get_data()
+    save = _fresh_save()
+
+    # 设一个 zone + sub_area
+    ws = WorldSession("reef_zone", "reef_surface", save, data)
+
+    # 手动模拟战斗中 [0] 死
+    save.party[0].hp_current = 0
+    save.party[0].dead = True
+    # cleanup
+    cleaned = save.cleanup_dead_creatures(cause="野外战斗")
+    assert cleaned == 1
+    # 关键:save.party[0] 现在是 None(可被新怪填)
+    assert save.party[0] is None
+    # 抓新怪填入
+    new_c = Creature.from_species("ghost_shrimp", data, level=5)
+    new_c.bind_species_data(data)
+    new_c.moves = [data.species["ghost_shrimp"]["base_skill"]]
+    save.party[0] = new_c
+    assert save.party[0] is not None

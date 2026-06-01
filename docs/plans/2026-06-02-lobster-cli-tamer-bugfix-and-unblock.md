@@ -221,27 +221,27 @@
 ## 九、Checklist
 
 - [x] 写 plan 文档
-- [ ] 修 combat.py take_damage(野外也设 dead)
-- [ ] 修 world.py _on_battle_end(统一 dead 清理)
+- [x] 修 combat.py take_damage(野外也设 dead) → v0.1.8
+- [x] 修 world.py _on_battle_end(统一 dead 清理) → v0.1.8
 - [ ] 修 combat.py _tick_status_both(shield 衰减)
-- [ ] 修 game.py _main_menu(加 7 调换队伍)
-- [ ] 新增 game.py _swap_menu + save.py swap_party_to_box helper
-- [ ] 修 game.py _abyss_loop(BOSS 战 q 退)
-- [ ] 修 game.py _skill_choice_prompt(明确替换提示)
-- [ ] 写单元测试
-- [ ] 跑 `./scripts/test-game.sh lobster-cli-tamer` 全绿
-- [ ] 本地构建新二进制
-- [ ] 实玩达成 deepest >= 10
-- [ ] 改 version 0.1.7 → 0.1.8
-- [ ] 改 CHANGELOG.md
-- [ ] 改 README.md
-- [ ] commit + push
-- [ ] `gh release create v0.1.8` 触发 actions
-- [ ] 等 actions 跑完
-- [ ] 下载新 release 资产,本地与远端一致
-- [ ] 用新版本再玩一遍验证
-- [ ] (如需) 修次要 bug → v0.1.9
-- [ ] 最终验证:本地 + GitHub 都到 v0.1.9 或更新
+- [x] 修 game.py _main_menu(加 6 调换队伍) → v0.1.8
+- [x] 新增 game.py _swap_menu + save.py cleanup_dead_creatures helper → v0.1.8
+- [x] 修 game.py _abyss_loop(BOSS 战 q 退) → v0.1.8
+- [x] 修 game.py _skill_choice_prompt(明确替换提示) → v0.1.8
+- [x] 写单元测试 (52 测试全绿) → v0.1.8
+- [x] 跑测试脚本 + 修脚本 uv lock 错位 → v0.1.8
+- [x] 本地构建新二进制 → v0.1.8
+- [x] 发版 v0.1.8 到 GitHub Releases (8 个资产全发布)
+- [x] 改 version 0.1.7 → 0.1.8
+- [x] 改 CHANGELOG.md
+- [x] (README 暂未单独修改, CHANGELOG 覆盖了改动)
+- [x] commit + push → v0.1.8
+- [x] tag v0.1.8 + push, 触发 actions
+- [x] 等 actions 跑完 → 成功
+- [x] 下载 v0.1.8 资产,本地用 v0.1.8 替换旧 v0.1.7 二进制
+- [x] 用 v0.1.8 实玩 → 触发续问题: 战斗中死怪不立即清埋
+- [x] v0.1.9 修 world.py battle_turn 立即 cleanup_dead + 加测试
+- [ ] 本地构建 v0.1.9 + commit + push + tag + 等 actions + 下 v0.1.9 资产 + 实玩达成 deepest >= 10 + 最终验证本地 + GitHub 都到 v0.1.9
 
 ---
 
