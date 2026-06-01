@@ -90,6 +90,8 @@ Current publicly available release assets confirmed in repo metadata:
 - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
 - `lobster-cli-heist-linux-x86_64.tar.gz`
 - `lobster-cli-heist-darwin-arm64.tar.gz`
+- `lobster-cli-tamer-linux-x86_64.tar.gz` (v0.1.8 新增)
+- `lobster-cli-tamer-darwin-arm64.tar.gz` (v0.1.8 新增)
 
 Player-facing docs and workflow targets should stay aligned with the assets that are actually being shipped.
 
@@ -113,6 +115,8 @@ Each game is responsible for producing stable asset names. The current naming se
 - `lobster-cli-tower-defense-darwin-arm64.tar.gz`
 - `lobster-cli-heist-linux-x86_64.tar.gz`
 - `lobster-cli-heist-darwin-arm64.tar.gz`
+- `lobster-cli-tamer-linux-x86_64.tar.gz` (v0.1.8 新增)
+- `lobster-cli-tamer-darwin-arm64.tar.gz` (v0.1.8 新增)
 
 ## Publishing model
 
