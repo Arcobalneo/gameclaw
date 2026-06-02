@@ -615,6 +615,13 @@ class Game:
         self._push_party()
         info(f"深渊最深记录：{self.save.deepest_abyss_floor} 层")
 
+        # v0.2.7 修复: 退出深渊时检查新区域解锁 (深流峡谷需 deepest>=10)
+        new_unlocks = check_zone_unlock(self.save, self.data)
+        if new_unlocks:
+            for zone_id in new_unlocks:
+                success(f"✦ 新区域已解锁: {zone_id}")
+            write_save(self.save)
+
     # ------------------------------------------------------------------ #
     # 技能选择
     # ------------------------------------------------------------------ #

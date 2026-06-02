@@ -4,6 +4,19 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.7 (续) — 区域解锁修复
+
+v0.2.7 首发后手动玩推到 deepest=10 击败 BOSS 10 (珊瑚帝王蟹 Lv13), 但 unlocked_zones 未变。原因是 `_abyss_loop` 退出时未调 `check_zone_unlock`。
+
+- **Fix: `game.py _abyss_loop` 退出时调 `check_zone_unlock`**
+  - 退深渊后调 check_zone_unlock (之前只野外探索退出时调)
+  - 新解锁区域立刻 write_save
+
+- **Bug 验证**: 玩家在 deepest=10 退出深渊后, 区域 deep_current_canyon 正确解锁
+
+- 测试: 3 个新测试 (test_abyss_zone_unlock_v027.py)
+- 76 个测试全绿 (73 + 3)
+
 ### `lobster-cli-tamer` v0.2.7 — AI/低等级玩家进一步友好
 
 派大虾 v0.2.6 手动玩发现 Lv5 vs Lv5 同级怪仍过于兇猛 (12 击退 1 怪但我方也死)。v0.2.7 进一步让怪 Lv 低于我方以保证可持续战斗。
