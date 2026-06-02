@@ -65,10 +65,10 @@ def test_plague_max_rate_025():
     assert r == 0.25, f"plague max rate should be 0.25, got {r}"
 
 
-def test_level_scaling_06():
+def test_level_scaling_04():
     data = load_game_data()
     s = data.balance['tower']['level_scaling_per_floor']
-    assert s == 0.6, f"level scaling should be 0.6, got {s}"
+    assert s == 0.4, f"level scaling should be 0.6, got {s}"
 
 
 def test_normal_drop_cure_plague():
@@ -90,8 +90,8 @@ if __name__ == '__main__':
     print("✓ test_taint_threshold_5")
     test_plague_max_rate_025()
     print("✓ test_plague_max_rate_025")
-    test_level_scaling_06()
-    print("✓ test_level_scaling_06")
+    test_level_scaling_04()
+    print("✓ test_level_scaling_04")
     test_normal_drop_cure_plague()
     print("✓ test_normal_drop_cure_plague")
     print("All tests passed")

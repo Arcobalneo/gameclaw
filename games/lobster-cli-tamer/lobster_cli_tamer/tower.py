@@ -341,7 +341,7 @@ class TowerSession:
                         (c.level for c in self.save.active_party if c and c.hp_current > 0),
                         default=5,
                     )
-                    lv = min(lv, party_max_lv + 5)
+                    lv = min(lv, party_max_lv + 3)  # v0.2.7: BOSS Lv cap 队伍+3 (之前 +5 太难)
                 affix_ids = boss.get("affix_ids", [])
                 cb = make_enemy_combatant(sid, lv, self.data, affix_ids=affix_ids or None)
                 cb.creature.moves = [self.data.species[sid]["base_skill"]]

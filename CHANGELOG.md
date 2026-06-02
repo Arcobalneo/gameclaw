@@ -4,6 +4,23 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.7 — AI/低等级玩家进一步友好
+
+派大虾 v0.2.6 手动玩发现 Lv5 vs Lv5 同级怪仍过于兇猛 (12 击退 1 怪但我方也死)。v0.2.7 进一步让怪 Lv 低于我方以保证可持续战斗。
+
+- **ai_easy 怪 Lv 锁: party_max_lv → party_max_lv - 1**
+  - 之前 Lv5 队伍 vs Lv5 怪(同級), 互伤后中变不变
+  - 现在 Lv5 队伍 vs Lv4 怪, 我方永远优势
+- **ai_easy BOSS Lv 锁: party_max_lv + 5 → + 3**
+  - 之前 BOSS 10 (珊瑚帝玉蟹) Lv 35 vs 队伍 Lv 10 等级差 +25 (困难)
+  - 现在 BOSS 10 Lv 13 vs Lv 10 队伍 等级差 +3 (可挑战)
+- **level_scaling_per_floor: 0.6 → 0.4**
+  - 10 层野怪 Lv = 5 + 10*0.4 = 9 (之前 11)
+  - 30 层 Lv = 17 (之前 23)
+
+- 测试: 测试名称从 test_level_scaling_06 改为 test_level_scaling_04
+- 73 个测试全绿
+
 ### `lobster-cli-tamer` v0.2.6 — reef_shrimp 初始强化 + ai_easy 怪 Lv 锁
 
 派大虾 v0.2.5 手动玩试了几局, 发现 Lv5 reef_shrimp base HP 40 太脆弱, 野外抓怪 2 轮就死。v0.2.6 调整两点:

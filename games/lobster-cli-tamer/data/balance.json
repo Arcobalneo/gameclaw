@@ -106,7 +106,7 @@
     ],
     "boss_every_n_floors": 10,
     "base_enemy_level": 5,
-    "level_scaling_per_floor": 0.6,
+    "level_scaling_per_floor": 0.4,
     "affix_unlock_floor": 31,
     "deep_abyss_start": 151,
     "exp_per_floor": 50
