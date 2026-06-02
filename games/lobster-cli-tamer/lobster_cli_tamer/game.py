@@ -50,6 +50,9 @@ class GameOptions:
     no_observer: bool = False
     save_slot: Optional[int] = None
     player_name: Optional[str] = None
+    # v0.2.3 新增: AI 友好模式。野外怪 Lv 锁 ≤ 队伍 max Lv + 1,
+    # 敌怪对我方伤害 ×0.5。不影响 normal mode。
+    ai_easy: bool = False
 
 
 class Game:
@@ -396,7 +399,7 @@ class Game:
         self._explore_loop(z["id"], sub["id"])
 
     def _explore_loop(self, zone_id: str, sub_area_id: str) -> None:
-        ws = WorldSession(zone_id, sub_area_id, self.save, self.data)
+        ws = WorldSession(zone_id, sub_area_id, self.save, self.data, ai_easy=self.options.ai_easy)
         zone = self.data.zones[zone_id]
         sub = next(s for s in zone["sub_areas"] if s["id"] == sub_area_id)
         section(f"探索：{zone['name']} / {sub['name']}")
@@ -526,7 +529,7 @@ class Game:
         ).strip().lower()
         if confirm != "y": return
 
-        tower = TowerSession(self.save, self.data)
+        tower = TowerSession(self.save, self.data, ai_easy=self.options.ai_easy)
 
         while self.save.active_party:
             info(f"\n  当前队伍存活：{', '.join(c.display_name for c in self.save.active_party)}")
@@ -965,6 +968,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--player-name",
         help="与 --save-slot 配合时，用于自动新建存档的默认名字。",
     )
+    parser.add_argument(
+        "--ai-easy",
+        action="store_true",
+        help="v0.2.3 新增: AI 友好模式。野外怪 Lv 锁 ≤ 队伍最高 Lv + 1，敌怪对我方伤害 ×0.5。",
+    )
     return parser
 
 
@@ -978,6 +986,7 @@ def parse_options(argv: Optional[list[str]] = None) -> GameOptions:
         no_observer=bool(args.no_observer or terminal_native),
         save_slot=args.save_slot,
         player_name=args.player_name,
+        ai_easy=bool(args.ai_easy),
     )
 
 

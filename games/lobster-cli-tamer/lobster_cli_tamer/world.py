@@ -68,11 +68,15 @@ class WorldSession:
         sub_area_id: str,
         save: "SaveSlot",
         data: "GameData",
+        *,
+        ai_easy: bool = False,
     ) -> None:
         self.zone_id = zone_id
         self.sub_area_id = sub_area_id
         self.save = save
         self.data = data
+        # v0.2.3 新增: AI 友好模式
+        self.ai_easy = ai_easy
 
         zone = data.zones.get(zone_id)
         if not zone:
@@ -107,7 +111,17 @@ class WorldSession:
         self.steps = 0
 
         # 遭遇判定
-        enc = encounter(self.sub_area, self.data)
+        # v0.2.3: 传 party_max_lv + ai_easy
+        party_max_lv = max(
+            (c.level for c in self.save.active_party if c and c.hp_current > 0),
+            default=5,
+        )
+        enc = encounter(
+            self.sub_area,
+            self.data,
+            party_max_lv=party_max_lv,
+            ai_easy=self.ai_easy,
+        )
         if enc is None:
             events.append(WorldEvent(WorldEventType.NO_ENCOUNTER))
             return events
@@ -142,6 +156,7 @@ class WorldSession:
             enemy=Combatant(creature=enc.creature),
             player_party=self.save.active_party,
             is_tower=False,
+            ai_easy=self.ai_easy,
         )
         self._battle_engine = BattleEngine(state, self.data)
         events.append(WorldEvent(WorldEventType.BATTLE_START, {

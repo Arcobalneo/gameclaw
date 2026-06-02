@@ -76,10 +76,12 @@ class TowerEvent:
 # --------------------------------------------------------------------------- #
 
 class TowerSession:
-    def __init__(self, save: "SaveSlot", data: "GameData") -> None:
+    def __init__(self, save: "SaveSlot", data: "GameData", *, ai_easy: bool = False) -> None:
         self.save = save
         self.data = data
         self.floor = 0
+        # v0.2.3 新增: AI 友好模式
+        self.ai_easy = ai_easy
         self._battle_engine: Optional[BattleEngine] = None
         self._floor_type: FloorType = FloorType.NORMAL
         self._pending_skill_choice: Optional[tuple[Creature, list]] = None
@@ -118,6 +120,7 @@ class TowerSession:
             enemy=enemy_cb,
             player_party=active_snapshot,
             is_tower=True,
+            ai_easy=self.ai_easy,
         )
         self._battle_engine = BattleEngine(state, self.data)
         self._active_log = []
@@ -332,6 +335,13 @@ class TowerSession:
                 boss = bosses[boss_idx % len(bosses)]
                 sid = boss["species_id"]
                 lv = boss.get("level", 30) + (floor // 10 - 1) * 5
+                # v0.2.3 AI 友好: BOSS Lv 锁 ≤ 队伍最高 Lv + 5
+                if self.ai_easy:
+                    party_max_lv = max(
+                        (c.level for c in self.save.active_party if c and c.hp_current > 0),
+                        default=5,
+                    )
+                    lv = min(lv, party_max_lv + 5)
                 affix_ids = boss.get("affix_ids", [])
                 cb = make_enemy_combatant(sid, lv, self.data, affix_ids=affix_ids or None)
                 cb.creature.moves = [self.data.species[sid]["base_skill"]]

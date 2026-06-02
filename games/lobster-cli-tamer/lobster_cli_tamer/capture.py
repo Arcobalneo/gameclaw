@@ -40,8 +40,14 @@ class EncounterResult:
 def encounter(
     sub_area: dict[str, Any],
     data: "GameData",
+    *,
+    party_max_lv: Optional[int] = None,
+    ai_easy: bool = False,
 ) -> Optional[EncounterResult]:
-    """从子区域遭遇表抽取一只野生虾米。返回 None 表示本次无遭遇。"""
+    """从子区域遭遇表抽取一只野生虾米。返回 None 表示本次无遭遇。
+
+    v0.2.3 新增: ai_easy=True 时, 怪 Lv 锁 ≤ party_max_lv + 1, 便于 AI/低等级队伍推进。
+    """
     encounter_table = sub_area.get("encounter_table", [])
     if not encounter_table:
         return None
@@ -62,6 +68,11 @@ def encounter(
 
     level_range = sub_area.get("level_range", [1, 5])
     level = random.randint(level_range[0], level_range[1])
+    # v0.2.3 AI 友好: 怪 Lv 锁 ≤ 队伍最高 Lv + 1
+    if ai_easy and party_max_lv is not None:
+        cap_lv = party_max_lv + 1
+        if level > cap_lv:
+            level = cap_lv
     is_shiny = check_shiny(data)
 
     creature = Creature.from_species(chosen, data, level=level, is_shiny=is_shiny)

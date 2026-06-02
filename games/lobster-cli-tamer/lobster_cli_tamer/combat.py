@@ -138,6 +138,8 @@ class BattleState:
     result: BattleResult = BattleResult.ONGOING
     log: list[str] = field(default_factory=list)
     is_tower: bool = False  # 深渊模式：HP归零=永久死亡
+    # v0.2.3 新增: AI 友好模式, 敌怪对我方伤害 ×0.5
+    ai_easy: bool = False
     # party 切换支持
     player_party: list[Creature] = field(default_factory=list)
     player_active_index: int = 0
@@ -345,6 +347,9 @@ class BattleEngine:
         # 伤害
         if result.damage > 0:
             dmg = result.damage
+            # v0.2.3 AI 友好: 敌打我方伤害 ×0.5
+            if st.ai_easy and not is_player_attacker:
+                dmg = dmg * 0.5
             # 护盾先吸收
             if defender_side.shield_hp > 0:
                 absorbed = min(defender_side.shield_hp, dmg)

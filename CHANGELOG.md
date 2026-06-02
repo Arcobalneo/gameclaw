@@ -4,6 +4,30 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.3 — AI 友好模式 `--ai-easy`
+
+派大虾 v0.2.2 在 AI 自动化实玩中遇到设计层问题：Lve5 礁虾打 Lv10 怪需要 14 回合，Lv10 一击秒 Lv5。AI 自动化无脑 1 攻击策略无法稳定推进。human 玩家可以通过走位/调换/词条策略玩。决定**不污染** normal mode balance，而是加 AI 友好模式 flag。
+
+- **New: `--ai-easy` flag 启动选项**
+  - 野外怪 Lv 锁 ≤ 队伍最高 Lv + 1
+  - BOSS 怪 Lv 锁 ≤ 队伍最高 Lv + 5
+  - 敌怪对我方伤害 ×0.5
+  - normal mode 行为 100% 不变
+
+- **New: GameOptions.ai_easy, BattleState.ai_easy, WorldSession.ai_easy, TowerSession.ai_easy**
+  - 全部默认 False
+  - 传递链: parse_options → Game → WorldSession/TowerSession → encounter/BattleState
+
+- **New: tests/test_ai_easy.py 加 6 个测试**
+  - 验证 GameOptions/BattleState/WorldSession/parse_options/encounter 的 ai_easy 行为
+
+- 61 个测试全绿 (55 + 6 新)
+
+#### Plan
+
+- `docs/plans/2026-06-02-lobster-cli-tamer-ai-easy-mode.md`
+- 关联: `docs/plans/2026-06-02-lobster-cli-tamer-ai-automation-limits.md`
+
 ### `lobster-cli-tamer` v0.2.2 — 没网也涨 pity
 
 派大虾在 v0.2.1 二进制实玩中又发现: c 试捕 fast path 调 `_handle_capture` 内部 `consume_item`，如果没捕捉球了 `consume_item` 失败 early return，但 `consume_capture_tool_pity` 放在 `_handle_capture` 之后调也被跳过，导致玩家卡在“没 net + 战斗不赢 = pity 不涨 = 永不再补给”的状态。
