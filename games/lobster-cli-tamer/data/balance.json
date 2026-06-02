@@ -77,10 +77,10 @@
   },
   "tower": {
     "permadeath_in_battle": true,
-    "plague_rate_per_floor": 0.05,
-    "plague_max_rate": 0.5,
+    "plague_rate_per_floor": 0.03,
+    "plague_max_rate": 0.25,
     "plague_trigger_floor": 30,
-    "taint_to_plague_threshold": 3,
+    "taint_to_plague_threshold": 5,
     "taint_gain": {
       "normal": 1,
       "elite": 2,
@@ -106,7 +106,7 @@
     ],
     "boss_every_n_floors": 10,
     "base_enemy_level": 5,
-    "level_scaling_per_floor": 0.8,
+    "level_scaling_per_floor": 0.6,
     "affix_unlock_floor": 31,
     "deep_abyss_start": 151,
     "exp_per_floor": 50
@@ -126,11 +126,17 @@
     "battle_loot": {
       "net_basic": {
         "chance": 0.3,
-        "count": [1, 1]
+        "count": [
+          1,
+          1
+        ]
       },
       "net_fine": {
         "chance": 0.06,
-        "count": [1, 1]
+        "count": [
+          1,
+          1
+        ]
       }
     }
   },

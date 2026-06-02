@@ -158,9 +158,9 @@ class TowerSession:
         events: list[TowerEvent] = []
         self._battle_engine = None
 
-        # 移除战斗内死亡虾米
+        # 移除战斗内死亡虾米（v0.2.5 修复：同时清理 HP=0 未被标记 dead 的脏数据）
         for c in list(self.save.party):
-            if c and c.dead:
+            if c and (c.dead or c.hp_current <= 0):
                 self.save.add_to_memorial(c, f"深渊第{self.floor}层战斗")
                 idx = self.save.party.index(c)
                 self.save.party[idx] = None

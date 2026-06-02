@@ -201,11 +201,12 @@ class SaveSlot:
         """遍历 party,清理 dead=True 的虾米:入 memorial + 槽位置 None。
 
         v0.1.8 新增,解决野外战斗死掉的怪永远占着 party 槽位的 BUG。
+        v0.2.5 修复：同时清理 HP=0 但未被标记 dead 的脏数据 (HP=0 仍占槽)。
         返回清理数量。
         """
         cleaned = 0
         for idx, c in enumerate(self.party):
-            if c is not None and getattr(c, "dead", False):
+            if c is not None and (getattr(c, "dead", False) or getattr(c, "hp_current", 1) <= 0):
                 self.add_to_memorial(c, cause)
                 self.party[idx] = None
                 cleaned += 1

@@ -4,6 +4,52 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.5 — 深渊数值平衡调整 + 死档脏数据修复
+
+派大虾 v0.2.4 在手动玩 1.5 小时后最深 5 层, BOSS 10 推不到。分析后发现 v0.2.4 的深渊数值过于严苛,给人类玩家挑战能测出极致但也打不到 BOSS 10。v0.2.5 重新平衡数值,同时修一个死档脏数据 bug。
+
+#### 数值调整 (仅影响深渊, 不影响 normal mode)
+
+- **plague_max_rate: 0.5 → 0.25**
+  - 之前 10 层+ 死亡率达 50% (BOSS 10 = 50% 必死几只)
+  - 现在 10 层+ 死亡率 25% (BOSS 10 25%, 仍会扣几但可玩)
+
+- **plague_rate_per_floor: 0.05 → 0.03**
+  - 之前 5 层 25% / 7 层 35%
+  - 现在 5 层 15% / 7 层 21% / 10 层 25% (capped)
+
+- **taint_to_plague_threshold: 3 → 5**
+  - 之前 3 层 normal 累积污染自动转化疫病
+  - 现在 5 层才转化,给玩家多 2 层缓冲
+
+- **level_scaling_per_floor: 0.8 → 0.6**
+  - 之前 BOSS 10 怪等级 = 5 + 10*0.8 = 13
+  - 现在 BOSS 10 怪等级 = 5 + 10*0.6 = 11
+  - 我方养成 Lv10 仍可打
+
+- **normal 净疫盐补给: 0-1 → 1-2**
+  - 之前 normal 0-1, 50% 概率无补给
+  - 现在 1-2, 100% 补给 1 个, 50% 补给 2 个
+  - 野外养成不再卡 "没 cure_plague 不能推进"
+
+#### Bug 修复
+
+- **towertower._on_floor_end 清理逻辑: `c.hp_current <= 0` 也清理**
+  - 之前只清 `c.dead=True` 的怪, 战斗中 HP=0 但未被标记 dead 的脏数据占着 party 槽位
+  - 现在 HP=0 一律清埋 + memorial
+- **save.py cleanup_dead_creatures 同样补 HP=0 清理**
+  - 防御性,主菜单存档时也清
+
+#### 测试
+
+- 7 个新测试 (test_tower_balance_v025.py)
+- 1 个老测试更新 (taint 阈值从 3 改 5)
+- 71 个测试全绿 (64 + 7)
+
+#### Plan
+
+- 下一轮手动玩 推到 BOSS 10 解锁"深流峡谷"
+
 ### `lobster-cli-tamer` v0.2.4 — 主菜单用药
 
 派大虾 v0.2.3 在 AI 友好模式实玩中又发现：potion_minor 在 items 数据里被发放 3 个，但主菜单里没有 UI 入口，AI 自动化 / 人类玩家都无法用，导致多次战斗后血线衰减后无法回血。

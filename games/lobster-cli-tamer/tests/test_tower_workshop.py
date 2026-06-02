@@ -57,7 +57,8 @@ def test_tower_taint_converts_to_plague_on_third_normal_clear() -> None:
     tower = TowerSession(save, data)
     tower._floor_type = FloorType.NORMAL
 
-    for expected in (1, 2):
+    # v0.2.5 调整：taint_to_plague_threshold=5，需要 5 层 normal 才转化为疫病
+    for expected in (1, 2, 3, 4):
         events = tower._apply_abyss_taint()
         assert c.abyss_taint == expected
         assert c.has_plague is False
@@ -66,7 +67,7 @@ def test_tower_taint_converts_to_plague_on_third_normal_clear() -> None:
     events = tower._apply_abyss_taint()
     assert c.abyss_taint == 0
     assert c.has_plague is True
-    assert c.plague_floors == 3
+    assert c.plague_floors == 5
     assert any("转化为疫病" in ev.message for ev in events)
 
 

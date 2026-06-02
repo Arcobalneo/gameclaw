@@ -76,7 +76,7 @@ provides-extras = ["build"]
 
 [[package]]
 name = "lobster-cli-tamer"
-version = "0.2.3"
+version = "0.2.4"
 source = { editable = "games/lobster-cli-tamer" }
 
 [package.optional-dependencies]
