@@ -122,8 +122,8 @@ def test_terminal_native_save_slot_and_player_name_enters_main_flow(monkeypatch,
 
     out = capsys.readouterr().out
     assert "STATE: MAIN_MENU" in out
-    # v0.1.8 主菜单多了 6=调换,7=存档
-    assert "ACTIONS: 1=探索,2=深渊,3=工坊,4=图鉴,5=队伍,6=调换,7=存档,q=退出" in out
+    # v0.2.4 主菜单多了 8=用药
+    assert "ACTIONS: 1=探索,2=深渊,3=工坊,4=图鉴,5=队伍,6=调换,7=存档,8=用药,q=退出" in out
     assert "PROMPT: INPUT_ACTION" in out
 
     loaded = load_save(0, load_game_data())

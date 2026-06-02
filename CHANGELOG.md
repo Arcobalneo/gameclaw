@@ -4,6 +4,29 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.4 — 主菜单用药
+
+派大虾 v0.2.3 在 AI 友好模式实玩中又发现：potion_minor 在 items 数据里被发放 3 个，但主菜单里没有 UI 入口，AI 自动化 / 人类玩家都无法用，导致多次战斗后血线衰减后无法回血。
+
+- **New: 主菜单选项 8=用药**
+  - 消耗 1 个 potion_minor
+  - 给队伍中所有活的 / 未满血 的虾米回 30% 最大 HP
+  - 多个虾米同时回血
+  - 队伍满血时也会显示“已满血”提示
+  - potion 耗尽时提示"没有 potion_minor 了！"
+
+- **New: `game.py` 新增 `_use_potion` 方法**
+
+- **New: tests/test_potion_main_menu.py 加 3 个测试**
+  - test_potion_heals_active_party: 1 只 20% HP → 50% HP
+  - test_potion_heals_multiple_creatures: 3 只同时回
+  - test_potion_fails_when_empty: potion 耗尽返回 False
+
+- **Fix: tests/test_terminal_native_cli.py 主菜单 action 字符串**
+  - 从 "...,7=存档,q=退出" 改为 "...,7=存档,8=用药,q=退出"
+
+- 64 个测试全绿 (61 + 3 新)
+
 ### `lobster-cli-tamer` v0.2.3 — AI 友好模式 `--ai-easy`
 
 派大虾 v0.2.2 在 AI 自动化实玩中遇到设计层问题：Lve5 礁虾打 Lv10 怪需要 14 回合，Lv10 一击秒 Lv5。AI 自动化无脑 1 攻击策略无法稳定推进。human 玩家可以通过走位/调换/词条策略玩。决定**不污染** normal mode balance，而是加 AI 友好模式 flag。

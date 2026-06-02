@@ -321,6 +321,7 @@ class Game:
                 ("5", "查看队伍详情"),
                 ("6", "调换队伍（与仓库互换）"),
                 ("7", "存档"),
+                ("8", f"用药（剩 {self.save.items.get('potion_minor', 0)} 个）"),
                 ("q", "退出"),
             ]
             choice = self._read_menu_choice(
@@ -335,6 +336,7 @@ class Game:
                     ("5", "队伍"),
                     ("6", "调换"),
                     ("7", "存档"),
+                    ("8", "用药"),
                     ("q", "退出"),
                 ],
             ).strip().lower()
@@ -359,6 +361,9 @@ class Game:
                     success(f"存档已保存（清理了 {cleaned} 只已阵亡虾米）")
                 else:
                     success("存档已保存")
+            elif choice == "8":
+                # v0.2.4 新增: 主菜单用药。给队伍中所有活的虾米回 30% 最大 HP。
+                self._use_potion()
             elif choice == "q":
                 write_save(self.save)
                 break
@@ -880,6 +885,25 @@ class Game:
             self.observer.update_party([
                 c.to_dict() if c else None for c in self.save.party
             ])
+
+    def _use_potion(self) -> None:
+        """v0.2.4 新增: 主菜单用药。消耗 1 个 potion_minor, 给队伍中所有活的
+        虾米回 30% 最大 HP。如果无 potion 或全队满血则提示。
+        """
+        if not self.save or not self.save.consume_item("potion_minor", 1):
+            warn("没有 potion_minor 了！")
+            return
+        healed = 0
+        for c in self.save.party:
+            if c is not None and c.hp_current > 0 and c.hp_current < c.stats["hp"]:
+                heal_amt = c.stats["hp"] * 0.3
+                c.hp_current = min(c.stats["hp"], c.hp_current + heal_amt)
+                healed += 1
+        write_save(self.save)
+        if healed > 0:
+            success(f"用药成功，{healed} 只虾米回血")
+        else:
+            success("用药成功，队伍都已满血")
 
     def _on_exit(self) -> None:
         elapsed = int(time.time() - self._start_time)
