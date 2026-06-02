@@ -4,6 +4,17 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.2 — 没网也涨 pity
+
+派大虾在 v0.2.1 二进制实玩中又发现: c 试捕 fast path 调 `_handle_capture` 内部 `consume_item`，如果没捕捉球了 `consume_item` 失败 early return，但 `consume_capture_tool_pity` 放在 `_handle_capture` 之后调也被跳过，导致玩家卡在“没 net + 战斗不赢 = pity 不涨 = 永不再补给”的状态。
+
+- **Fix: world.py battle_turn 把 `consume_capture_tool_pity` 移到 `_handle_capture` 之前**
+  - v0.2.1 把 `consume_capture_tool_pity` 放在 `_handle_capture` 之后，导致没网时 `_handle_capture` 早出跳过 pity 调。
+  - v0.2.2 修复: 不管 `_handle_capture` 内部是否早出，都先调 `consume_capture_tool_pity(None)` 涨 pity。这样 c 1 试捕多次失败后能触发保底补给。
+
+- **New: tests/test_battle_dead_cleanup.py 加 test_capture_no_net_still_increments_pity**
+  - 覆盖 v0.2.2 的没网也涨 pity 逻辑。
+
 ### `lobster-cli-tamer` v0.2.1 — 保底补给贯穿主菜单
 
 派大虾在 v0.2.0 二进制实玩中又发现: c 1 试捕失败路径不走 _roll_battle_loot也不调 consume_capture_tool_pity，导致 capture_tool_pity 不会涨。

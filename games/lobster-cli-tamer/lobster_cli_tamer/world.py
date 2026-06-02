@@ -161,15 +161,14 @@ class WorldSession:
 
         # 捕捉行动特殊处理
         if action.action_type == ActionType.USE_SKILL and action.skill_name and action.skill_name.startswith("__capture__"):
+            # v0.2.2 修复: 不管 _handle_capture 内部是否调了 consume_item,
+            # 我们都先调 consume_capture_tool_pity 涨 pity,
+            # 这样没 net 但 c 试捕多次后也能触发保底补给。
+            # 上一版 v0.2.1 把 consume_capture_tool_pity 放在 _handle_capture 之后,
+            # 但 _handle_capture 内部 consume_item 失败会 early return, 跳过 pity 调。
+            self.save.consume_capture_tool_pity(None)
             capture_events = self._handle_capture(action)
             events.extend(capture_events)
-            # v0.2.1 修复: 试捕行动也调 consume_capture_tool_pity,
-            # 这样 c 1 试捕多次失败后能涨 pity, 触发保底补给
-            # 上一版只调 _roll_battle_loot, 抓成功路径才补给
-            self.save.consume_capture_tool_pity(None)
-            if self.save.capture_tool_pity == 0 and not self.save.items.get("net_basic", 0):
-                # 达到 pity 阈值后 _grant_emergency_net_if_needed 会在下次主菜单补给
-                pass
             # v0.1.9 修复:捕捉成功路径也走 loot + cleanup,避免
             # 只抽 c 1 球试捕不消耗回合的路子完全掉不了甲网。
             if not self._battle_engine:  # 抓成功 = 战斗结束

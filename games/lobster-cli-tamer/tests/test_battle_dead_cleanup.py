@@ -230,3 +230,30 @@ def test_capture_consume_pity_涨_补_网():
     granted = save.consume_capture_tool_pity(None)
     assert granted is True
     assert save.capture_tool_pity == 0
+
+
+def test_capture_no_net_still_increments_pity():
+    """v0.2.2 修复: 即便没捕捉球, c 试捕仍会调 consume_capture_tool_pity
+    涨 pity, 避免玩家卡在"没 net + 战斗不赢"的状态永远不补给。
+    """
+    save = _fresh_save()
+    # 初始 5 net
+    assert save.items.get("net_basic", 0) == 5
+
+    # 5 次试捕成功: net 5 -> 0 (pity 不涨因为是 capture tool)
+    for _ in range(5):
+        save.consume_item("net_basic")
+    assert save.items.get("net_basic", 0) == 0
+
+    # 现在没 net, 但 c 试捕仍应涨 pity
+    for i in range(3):
+        granted = save.consume_capture_tool_pity(None)
+        # i=0: pity 0->1
+        # i=1: pity 1->2
+        # i=2: pity 2->3 -> granted True + reset 0
+        if i < 2:
+            assert granted is False
+            assert save.capture_tool_pity == i + 1
+        else:
+            assert granted is True
+            assert save.capture_tool_pity == 0
