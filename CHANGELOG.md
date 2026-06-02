@@ -4,6 +4,24 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.6 — reef_shrimp 初始强化 + ai_easy 怪 Lv 锁
+
+派大虾 v0.2.5 手动玩试了几局, 发现 Lv5 reef_shrimp base HP 40 太脆弱, 野外抓怪 2 轮就死。v0.2.6 调整两点:
+
+- **species/reef_shrimp base_stats**:
+  - HP 40 → 60 (+50%)
+  - ATK 25 → 30 (+20%)
+  - DEF 18 → 20 (+11%)
+  - SPD 48 → 50 (+4%)
+  - END 18 → 22 (+22%)
+
+- **ai_easy mode 怪 Lv 锁**: party_max_lv + 1 → party_max_lv
+  - 之前 +1 让怪偶尔比我方高 1 级, Lv5 vs Lv6 难以抓
+  - 现在 锁到队伍 Lv, 怪永远不比我方强, AI/低等级玩家可稳定推进
+
+- 测试: 2 个新测试 (test_reef_shrimp_v026.py)
+- 73 个测试全绿 (71 + 2)
+
 ### `lobster-cli-tamer` v0.2.5 — 深渊数值平衡调整 + 死档脏数据修复
 
 派大虾 v0.2.4 在手动玩 1.5 小时后最深 5 层, BOSS 10 推不到。分析后发现 v0.2.4 的深渊数值过于严苛,给人类玩家挑战能测出极致但也打不到 BOSS 10。v0.2.5 重新平衡数值,同时修一个死档脏数据 bug。

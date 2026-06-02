@@ -70,7 +70,7 @@ def encounter(
     level = random.randint(level_range[0], level_range[1])
     # v0.2.3 AI 友好: 怪 Lv 锁 ≤ 队伍最高 Lv + 1
     if ai_easy and party_max_lv is not None:
-        cap_lv = party_max_lv + 1
+        cap_lv = party_max_lv  # v0.2.6: 怪锁队伍 Lv (不死战)
         if level > cap_lv:
             level = cap_lv
     is_shiny = check_shiny(data)
