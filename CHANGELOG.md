@@ -4,6 +4,20 @@ All notable changes to `gameclaw` will be documented in this file.
 
 ## 2026-06-02
 
+### `lobster-cli-tamer` v0.2.1 — 保底补给贯穿主菜单
+
+派大虾在 v0.2.0 二进制实玩中又发现: c 1 试捕失败路径不走 _roll_battle_loot也不调 consume_capture_tool_pity，导致 capture_tool_pity 不会涨。
+
+- **Fix: world.py battle_turn c 试捕失败也调 consume_capture_tool_pity**
+  - 之前 v0.2.0 在 c 试捕成功路径补 loot + cleanup，但失败路径也不调 pity 计算。
+  - v0.2.1 修复: 试捕行动总是调 save.consume_capture_tool_pity(None)，让 c 1 试捕反复失败的 pity 递增能触发保底补给。
+
+- **Fix: game.py _main_menu 每轮都调 _grant_emergency_net_if_needed**
+  - 之前只在加载存档时补给一次。主菜单每轮调，能及时补给已涨 pity 后的玩家。
+
+- **New: tests/test_battle_dead_cleanup.py 加 test_capture_consume_pity_涨_补_网**
+  - 覆盖 v0.2.1 的 pity 涨 + 保底补给逻辑。
+
 ### `lobster-cli-tamer` v0.2.0 — 完整解锁核心 loop (野外死怪清埋 + BOSS 护盾衰减 + box 调换菜单 + BOSS 战 q 退 + 野外 loot + 保底补给)
 
 完整修复了派大虾在 2026-06-01 两轮实测中触发的所有 P0/P1 死局，以及后续在 v0.1.9 实玩中又发现的 loot 路径 BUG 和保底补给逻辑 BUG。

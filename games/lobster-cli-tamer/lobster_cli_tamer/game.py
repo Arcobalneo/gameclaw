@@ -305,6 +305,10 @@ class Game:
     def _main_menu(self) -> None:
         while True:
             section("主菜单")
+            # v0.2.1 修复: 主菜单每轮都调 _grant_emergency_net_if_needed,
+            # 这样玩家回主菜单后会看到补给效果,不会卡在“pity 涨了但
+            # 不补给”的状态。
+            self._grant_emergency_net_if_needed()
             render_party(self.save.party, self.data)
             main_options = [
                 ("1", "野外探索"),

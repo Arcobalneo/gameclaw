@@ -204,3 +204,29 @@ def test_capture_success_走_loot和cleanup():
     # 旧逻辑会错过,新逻辑会补给
     assert should_grant_new is True
     assert should_grant_old is False
+
+
+def test_capture_consume_pity_涨_补_网():
+    """v0.2.1 修复: c 试捕失败也调 consume_capture_tool_pity,
+    累计 2 次失败后下次必掉甲网。
+    """
+    from lobster_cli_tamer.creature import Creature
+    save = _fresh_save()
+    # 初始 pity 0, 1 个 net
+    assert save.capture_tool_pity == 0
+    assert save.items.get("net_basic", 0) == 5
+
+    # 试捕 1 次失败: pity 0 -> 1
+    granted = save.consume_capture_tool_pity(None)
+    assert granted is False
+    assert save.capture_tool_pity == 1
+
+    # 试捕 2 次失败: pity 1 -> 2
+    granted = save.consume_capture_tool_pity(None)
+    assert granted is False
+    assert save.capture_tool_pity == 2
+
+    # 试捕 3 次失败: pity 2 >= 2 -> 触发保底
+    granted = save.consume_capture_tool_pity(None)
+    assert granted is True
+    assert save.capture_tool_pity == 0
