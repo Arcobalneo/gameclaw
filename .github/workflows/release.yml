@@ -1,80 +1,93 @@
-name: gameclaw-build-and-release
+name: release
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
+  matrix:
+    name: build matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        run: echo "matrix=$(node scripts/release-matrix.mjs)" >> "$GITHUB_OUTPUT"
+
   build:
+    name: ${{ matrix.game_id }} · ${{ matrix.platform }}
+    needs: matrix
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - game_id: lobster-cli-roguelike
-            os: ubuntu-latest
-            label: linux-x86_64
-          - game_id: lobster-cli-roguelike
-            os: macos-14
-            label: darwin-arm64
-          - game_id: lobster-cli-tower-defense
-            os: ubuntu-latest
-            label: linux-x86_64
-          - game_id: lobster-cli-tower-defense
-            os: macos-14
-            label: darwin-arm64
-          - game_id: lobster-cli-heist
-            os: ubuntu-latest
-            label: linux-x86_64
-          - game_id: lobster-cli-heist
-            os: macos-14
-            label: darwin-arm64
-          # v0.1.8 新增: tamer 加入 release 矩阵
-          - game_id: lobster-cli-tamer
-            os: ubuntu-latest
-            label: linux-x86_64
-          - game_id: lobster-cli-tamer
-            os: macos-14
-            label: darwin-arm64
-
-    runs-on: ${{ matrix.os }}
-
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: pnpm/action-setup@v4
         with:
-          python-version: '3.12'
+          version: 10.33.0
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+      - uses: actions/setup-node@v4
         with:
-          enable-cache: true
+          node-version: 22
+          cache: pnpm
 
-      - name: Install Linux build deps
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y patchelf
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
-      - name: Build selected game
-        run: ./scripts/build-game.sh ${{ matrix.game_id }}
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
-      - name: Upload workflow artifact
+      - name: Build ${{ matrix.game_id }} for ${{ matrix.platform }}
+        run: node scripts/build-game.mjs ${{ matrix.game_id }} --platform ${{ matrix.platform }}
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.game_id }}-${{ matrix.label }}
-          path: games/${{ matrix.game_id }}/dist/*.tar.gz
+          name: ${{ matrix.game_id }}-${{ matrix.platform }}
+          path: |
+            games/${{ matrix.game_id }}/dist/*.tar.gz
+            games/${{ matrix.game_id }}/dist/*.zip
+          if-no-files-found: error
+          retention-days: 14
 
-      - name: Publish release assets
-        if: startsWith(github.ref, 'refs/tags/v')
+  publish:
+    name: publish GitHub release
+    needs: [matrix, build]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: assets
+          merge-multiple: true
+
+      - name: Write release checksums
+        run: |
+          cd assets
+          find . -maxdepth 1 -type f ! -name 'SHA256SUMS' -print0 \
+            | sort -z \
+            | xargs -0 sha256sum > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          files: games/${{ matrix.game_id }}/dist/*.tar.gz
+          files: assets/*
           generate_release_notes: true
+          fail_on_unmatched_files: true

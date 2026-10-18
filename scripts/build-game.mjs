@@ -60,7 +60,11 @@ function packageArtifact(gameId, platform, gameDir, binaryPath, outDir) {
   fs.mkdirSync(stage, { recursive: true });
   const binaryName = platform.os === 'windows' ? `${gameId}.exe` : gameId;
   fs.copyFileSync(binaryPath, path.join(stage, binaryName));
-  fs.chmodSync(path.join(stage, binaryName), 0o755);
+  try {
+    fs.chmodSync(path.join(stage, binaryName), 0o755);
+  } catch {
+    // Windows does not need a POSIX execute bit.
+  }
   for (const file of ['README.md', 'LICENSE']) {
     const source = path.join(gameDir, file);
     if (fs.existsSync(source)) fs.copyFileSync(source, path.join(stage, file));
@@ -74,10 +78,10 @@ function packageArtifact(gameId, platform, gameDir, binaryPath, outDir) {
       run('powershell', [
         '-NoProfile',
         '-Command',
-        `Compress-Archive -Path "${stage}\\*" -DestinationPath "${archivePath}" -Force`,
+        `Compress-Archive -Path "${stageDir}\\*" -DestinationPath "${archivePath}" -Force`,
       ]);
     } else {
-      run('zip', ['-q', '-r', archivePath, '.'], { cwd: stage });
+      run('zip', ['-q', '-r', archivePath, path.basename(stage)], { cwd: stageDir });
     }
   } else {
     run('tar', ['-czf', archivePath, '-C', stageDir, path.basename(stage)]);
@@ -112,6 +116,16 @@ run('bun', [
   '--outfile',
   binaryPath,
 ]);
+
+// Ad-hoc sign macOS binaries so Gatekeeper is less hostile to a fresh download.
+if (platform.os === 'darwin' && process.platform === 'darwin') {
+  try {
+    run('codesign', ['--force', '--sign', '-', binaryPath]);
+    console.log('build-game: ad-hoc codesigned');
+  } catch {
+    console.warn('build-game: codesign failed, shipping unsigned binary');
+  }
+}
 
 // Verify the produced binary is executable on the host platform.
 if (platform.label === hostPlatform()) {
