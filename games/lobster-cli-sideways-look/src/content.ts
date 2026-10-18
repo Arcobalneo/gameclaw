@@ -16,7 +16,14 @@ import backflowInnEvents from '../content/events/backflow-inn.events.json';
 import blindScreenRoomEvents from '../content/events/blind-screen-room.events.json';
 import sealedTideStationEvents from '../content/events/sealed-tide-station.events.json';
 
-export type EventTrigger = 'inspect' | 'move' | 'interact' | 'record' | 'brace' | 'extract' | 'status';
+export type EventTrigger =
+  | 'inspect'
+  | 'move'
+  | 'interact'
+  | 'record'
+  | 'brace'
+  | 'extract'
+  | 'status';
 
 export type InteractableEffect = 'objective' | 'stabilize' | 'reveal';
 
@@ -166,8 +173,8 @@ function parseRoom(raw: unknown, path: string): RoomConfig {
   const inspectTargets = asArray(record.inspectTargets, `${path}.inspectTargets`).map(
     (item, index) => parseInspectTarget(item, `${path}.inspectTargets[${index}]`),
   );
-  const interactables = asArray(record.interactables, `${path}.interactables`).map(
-    (item, index) => parseInteractable(item, `${path}.interactables[${index}]`),
+  const interactables = asArray(record.interactables, `${path}.interactables`).map((item, index) =>
+    parseInteractable(item, `${path}.interactables[${index}]`),
   );
   const room: RoomConfig = {
     id: asString(record.id, `${path}.id`),
@@ -211,7 +218,8 @@ function parseCase(raw: unknown, index: number): CaseConfig {
 
   const roomIds = new Set<string>();
   for (const [roomIndex, room] of rooms.entries()) {
-    if (roomIds.has(room.id)) invalid(`${path}.rooms[${roomIndex}].id`, `duplicate room id ${room.id}`);
+    if (roomIds.has(room.id))
+      invalid(`${path}.rooms[${roomIndex}].id`, `duplicate room id ${room.id}`);
     roomIds.add(room.id);
     const targetIds = new Set<string>();
     for (const [targetIndex, target] of room.inspectTargets.entries()) {
@@ -292,7 +300,8 @@ function parseContent(
   if (cases.length === 0) invalid('cases', 'at least one case is required');
   const caseIds = new Set<string>();
   for (const [index, caseConfig] of cases.entries()) {
-    if (caseIds.has(caseConfig.id)) invalid(`cases[${index}].id`, `duplicate case id ${caseConfig.id}`);
+    if (caseIds.has(caseConfig.id))
+      invalid(`cases[${index}].id`, `duplicate case id ${caseConfig.id}`);
     caseIds.add(caseConfig.id);
   }
 

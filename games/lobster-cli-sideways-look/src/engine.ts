@@ -6,13 +6,13 @@
  * leave with the wrong record, or stop being able to look.
  */
 
-import { GameError, Rng } from '@gameclaw/gamekit';
 import type { ActionResult, CreateOptions, GameEvent } from '@gameclaw/gamekit';
+import { GameError, Rng } from '@gameclaw/gamekit';
 
 import {
   CASES,
-  caseById,
   type CaseConfig,
+  caseById,
   type EventConfig,
   type EventTrigger,
   eventsFor,
@@ -58,10 +58,7 @@ function metersOf(state: LookState): Record<MeterKey, number> {
   };
 }
 
-function shiftOf(
-  before: Record<MeterKey, number>,
-  state: LookState,
-): Record<MeterKey, number> {
+function shiftOf(before: Record<MeterKey, number>, state: LookState): Record<MeterKey, number> {
   return {
     focus: state.focus - before.focus,
     nerve: state.nerve - before.nerve,
@@ -188,8 +185,7 @@ function syncObjective(state: LookState): void {
     state.objectiveQuality = 'unknown';
     return;
   }
-  state.objectiveQuality =
-    state.evidence >= state.requiredEvidence ? 'verified' : 'uncertain';
+  state.objectiveQuality = state.evidence >= state.requiredEvidence ? 'verified' : 'uncertain';
 }
 
 function applyEvent(state: LookState, event: EventConfig): void {
@@ -267,15 +263,10 @@ function drawEvent(
 ): EventConfig {
   if (!state.caseId) throw new GameError('INTERNAL', 'Cannot draw an event without a case.');
   const all = eventsFor(state.caseId).filter((event) => event.trigger === trigger);
-  const scoped = all.filter((event) =>
-    event.roomTags.some((tag) => room.tags.includes(tag)),
-  );
+  const scoped = all.filter((event) => event.roomTags.some((tag) => room.tags.includes(tag)));
   let pool = scoped.length > 0 ? scoped : all;
   if (pool.length === 0) {
-    throw new GameError(
-      'INTERNAL',
-      `No ${trigger} event exists for case ${state.caseId}.`,
-    );
+    throw new GameError('INTERNAL', `No ${trigger} event exists for case ${state.caseId}.`);
   }
   if (preferFresh) {
     const fresh = pool.filter((event) => !state.recordedClues.includes(event.clueId));
@@ -325,16 +316,15 @@ function chooseCase(state: LookState, rng: Rng, actionId: string): ActionResult 
   return finishAction(state, rng, log, [{ type: 'case', case: caseConfig.id }]);
 }
 
-function inspectTarget(
-  state: LookState,
-  rng: Rng,
-  actionId: string,
-): ActionResult {
+function inspectTarget(state: LookState, rng: Rng, actionId: string): ActionResult {
   const targetId = actionId.slice('inspect:'.length);
   const room = activeRoom(state);
   const target = room.inspectTargets.find((item) => item.id === targetId);
   if (!target) {
-    throw illegal(actionId, `Inspect targets here: ${room.inspectTargets.map((item) => item.id).join(', ')}`);
+    throw illegal(
+      actionId,
+      `Inspect targets here: ${room.inspectTargets.map((item) => item.id).join(', ')}`,
+    );
   }
 
   const before = metersOf(state);
@@ -403,11 +393,7 @@ function moveRoom(state: LookState, rng: Rng, actionId: string): ActionResult {
   ]);
 }
 
-function interactWith(
-  state: LookState,
-  rng: Rng,
-  actionId: string,
-): ActionResult {
+function interactWith(state: LookState, rng: Rng, actionId: string): ActionResult {
   const targetId = actionId.slice('interact:'.length);
   const room = activeRoom(state);
   const item = room.interactables.find((entry) => entry.id === targetId);

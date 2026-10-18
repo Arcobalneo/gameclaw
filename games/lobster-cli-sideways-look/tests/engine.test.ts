@@ -1,14 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { CASES, EVENTS } from '../src/content';
-import {
-  act,
-  activeRoom,
-  caseOf,
-  createRun,
-  GAME_VERSION,
-} from '../src/engine';
 import { definition } from '../src/definition';
+import { act, activeRoom, caseOf, createRun, GAME_VERSION } from '../src/engine';
 import type { LookState } from '../src/model';
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -238,12 +232,7 @@ describe('sideways-look engine', () => {
   it('keeps status sections anchored for agents', () => {
     const state = sealed();
     const status = definition.status(state);
-    expect(status.metrics.map((metric) => metric.label)).toEqual([
-      '专注',
-      '神经',
-      '恐惧',
-      '证据',
-    ]);
+    expect(status.metrics.map((metric) => metric.label)).toEqual(['专注', '神经', '恐惧', '证据']);
     const titles = status.sections.map((section) => section.title);
     expect(titles).toContain('房间 · Lookout Deck');
     expect(titles).toContain('侧视面板');

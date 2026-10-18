@@ -7,13 +7,7 @@ export type Phase = 'case-select' | 'exploring' | 'ended';
  * `Outcome` is the shared win/loss vocabulary. `Ending` keeps the finer story
  * so a wrong-record extraction can be told apart from a collapse.
  */
-export type Ending =
-  | 'none'
-  | 'escaped'
-  | 'wrong-record'
-  | 'lost-nerve'
-  | 'lost-dread'
-  | 'aborted';
+export type Ending = 'none' | 'escaped' | 'wrong-record' | 'lost-nerve' | 'lost-dread' | 'aborted';
 
 export type ObjectiveQuality = 'unknown' | 'uncertain' | 'verified';
 

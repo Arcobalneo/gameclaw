@@ -319,7 +319,9 @@ function lessonsOf(state: LookState): string[] {
 
   switch (state.ending) {
     case 'escaped':
-      lessons.push('有效路线：先 inspect 命名现象、record 攒证据，再取得目标并撤离；这条路线值得写进 memory。');
+      lessons.push(
+        '有效路线：先 inspect 命名现象、record 攒证据，再取得目标并撤离；这条路线值得写进 memory。',
+      );
       break;
     case 'wrong-record':
       lessons.push(
@@ -337,7 +339,9 @@ function lessonsOf(state: LookState): string[] {
       );
       break;
     case 'aborted':
-      lessons.push('中止既不是胜利也不是失败：这份侦察笔记可以保留，下次用 --content <case-id> 直接进入。');
+      lessons.push(
+        '中止既不是胜利也不是失败：这份侦察笔记可以保留，下次用 --content <case-id> 直接进入。',
+      );
       break;
     case 'none':
       lessons.push('本局还没结束；目前的结论只是阶段性观察，不要当成规则。');
@@ -355,9 +359,7 @@ function lessonsOf(state: LookState): string[] {
 
 function recapOf(state: LookState): RecapView {
   const caseConfig = caseOf(state);
-  const title = caseConfig
-    ? `${caseConfig.chineseName} · ${endingLabel(state)}`
-    : '尚未进入副本';
+  const title = caseConfig ? `${caseConfig.chineseName} · ${endingLabel(state)}` : '尚未进入副本';
   const cause = state.cause
     ? state.cause
     : state.caseId
@@ -370,9 +372,9 @@ function recapOf(state: LookState): RecapView {
         ? '这轮不是白走：把“证据不足就取档”的教训写进 memory，下次在 claim 前先数证据。'
         : state.outcome === 'lost'
           ? '这轮不是白怕：把 1-3 条“本局最伤”的教训写进 memory，并标明下局继续验证。'
-        : state.outcome === 'ongoing'
-          ? '这轮还在继续：把已经确认的现象写进 memory，但要标明它还没有经过撤离验证。'
-          : '这轮先收壳：把已经冒头的观察写进 memory，并注明这是一次中止结算。';
+          : state.outcome === 'ongoing'
+            ? '这轮还在继续：把已经确认的现象写进 memory，但要标明它还没有经过撤离验证。'
+            : '这轮先收壳：把已经冒头的观察写进 memory，并注明这是一次中止结算。';
 
   return {
     title,
@@ -386,7 +388,9 @@ function recapOf(state: LookState): RecapView {
       { label: '目标', value: objectiveLabel(state) },
       { label: '记录', value: state.recordedClues.length },
     ],
-    timeline: state.history.slice(-12).map((entry) => `T${entry.turn} ${entry.action} → ${shorten(entry.result)}`),
+    timeline: state.history
+      .slice(-12)
+      .map((entry) => `T${entry.turn} ${entry.action} → ${shorten(entry.result)}`),
     lessons: lessonsOf(state),
     memoryPrompt,
   };

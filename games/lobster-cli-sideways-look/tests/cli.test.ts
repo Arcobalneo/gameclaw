@@ -55,20 +55,13 @@ describe('sideways-look CLI', () => {
     expect(payload.ok).toBe(true);
     expect(payload.phase).toBe('exploring');
     expect(payload.turn).toBe(0);
-    expect((payload.game as { id: string; version: string }).id).toBe(
-      'lobster-cli-sideways-look',
-    );
+    expect((payload.game as { id: string; version: string }).id).toBe('lobster-cli-sideways-look');
     expect((payload.game as { version: string }).version).toBe('2.0.0');
     expect(actionIds(payload)).toEqual(
       expect.arrayContaining(['inspect:left-window', 'move:monitor-hall', 'brace']),
     );
     const metrics = payload.status as { metrics: { label: string; value: unknown }[] };
-    expect(metrics.metrics.map((metric) => metric.label)).toEqual([
-      '专注',
-      '神经',
-      '恐惧',
-      '证据',
-    ]);
+    expect(metrics.metrics.map((metric) => metric.label)).toEqual(['专注', '神经', '恐惧', '证据']);
   });
 
   it('runs inspect then record through the JSON envelope', async () => {
