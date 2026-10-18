@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles."
-version: 2.0.1
+version: 2.0.2
 ---
 
 # GameClaw
@@ -16,6 +16,13 @@ Windows. This skill is for the agent who owns the player's machine. Its job is:
 
 Gameplay itself is deliberately out of scope here — every binary teaches its own
 `new / actions / act / recap` loop via `help`.
+
+## Consent boundary
+
+This skill never changes the player's system silently. Before editing
+`/etc/hosts`, a shell profile, `PATH`, or any global configuration: explain what
+will change, get explicit approval, take a backup, and state how to revert it.
+Prefer user-scope and reversible changes; never run `sudo` on your own initiative.
 
 - Repo: `https://github.com/Arcobalneo/gameclaw`
 - Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
@@ -150,21 +157,9 @@ Remove-Item $Tmp -Recurse -Force
 
 ### PATH
 
-If `$BIN` is not on `PATH`, either use the absolute path or add it once:
-
-```bash
-# macOS / Linux (zsh)
-echo 'export PATH="$HOME/.local/share/gameclaw/bin:$PATH"' >> ~/.zshrc
-```
-
-```powershell
-# Windows (current user)
-[Environment]::SetEnvironmentVariable(
-  'Path',
-  [Environment]::GetEnvironmentVariable('Path','User') + ";$Bin",
-  'User'
-)
-```
+If `$BIN` is not on `PATH`, use the absolute path. Only add it to `PATH` if the
+player asks for it, and say which shell profile or user environment variable you
+are changing.
 
 ## 5. Update a game
 
@@ -208,14 +203,10 @@ Rules for updates:
 
 ### Update this skill itself
 
-```bash
-npx --yes clawhub update @arcobalneo/gameclaw
-```
-
-If ClawHub is unavailable, compare the `version:` field in the installed
-`SKILL.md` with `https://raw.githubusercontent.com/Arcobalneo/gameclaw/main/SKILL.md`
-and replace the skill file only when the remote version is newer. If
-`raw.githubusercontent.com` is blocked, apply the GitHub520 fix in step 7 first.
+Ask the player to run `clawhub update @arcobalneo/gameclaw` in their harness. Do
+not rewrite the installed skill files yourself. If ClawHub is unreachable, tell
+the player that a newer `SKILL.md` exists in the repo and let them decide whether
+to reinstall it.
 
 ## 6. Launch and play (minimal)
 
@@ -298,9 +289,9 @@ curl -fL -o "$TMP/$ASSET" \
   "https://ghfast.top/https://github.com/Arcobalneo/gameclaw/releases/download/<tag>/$ASSET"
 ```
 
-Mirrors are untrusted: verify `SHA256SUMS` and say that the download came from a
-mirror. If no checksum is available, report that instead of pretending it is
-verified.
+Only use a mirror with the player's explicit approval. Mirrors are untrusted:
+verify `SHA256SUMS` and say that the download came from a mirror. If no checksum
+is available, report that instead of pretending it is verified.
 
 ## 8. Troubleshooting
 
