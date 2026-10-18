@@ -1,33 +1,26 @@
 ---
 name: gameclaw
-description: "Launch and play GameClaw terminal games: detect the player's platform, download the right single-file binary from GitHub Releases, fix GitHub network failures with GitHub520 first, then run the agent step loop (new → actions → act → recap). Use when a user asks what games GameClaw has, wants to install or run one, needs a Linux/macOS/Windows binary, or hits a download/network problem."
-version: 2.0.0
+description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles."
+version: 2.0.1
 ---
 
 # GameClaw
 
-GameClaw ships **terminal games as single-file binaries** for macOS, Linux and Windows.
-Every game speaks the same agent-first CLI, so one skill covers all of them.
+GameClaw ships **terminal games as single-file binaries** for macOS, Linux and
+Windows. This skill is for the agent who owns the player's machine. Its job is:
 
-This skill is **self-contained**: it is prompt-only and does not need the GameClaw
-monorepo to be present. Never assume local source files exist.
+1. tell the player which games exist;
+2. install a game bundle correctly;
+3. update an installed game **without touching saves**;
+4. fix GitHub download problems before concluding anything is missing.
+
+Gameplay itself is deliberately out of scope here — every binary teaches its own
+`new / actions / act / recap` loop via `help`.
 
 - Repo: `https://github.com/Arcobalneo/gameclaw`
 - Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
-## Fast path
-
-1. Detect the platform automatically (`uname -s`, `uname -m`, `$OS`, `$PROCESSOR_ARCHITECTURE`).
-2. Show the game menu as a numbered list and ask the player to reply with a number.
-3. Download the matching release asset.
-4. Unpack, verify, and launch.
-
-Do not stay in explanation mode. The player wants to play.
-
-## Games
-
-All assets follow `<game-id>-<platform>.<tar.gz|zip>`. Every platform column below
-means a real binary is published for it.
+## 1. Game catalog
 
 | # | Game ID | Name | Genre | Platforms |
 |---|---------|------|-------|-----------|
@@ -37,30 +30,223 @@ means a real binary is published for it.
 | 4 | `lobster-cli-tamer` | 横着抓 | Creature taming + abyss runs | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 | 5 | `lobster-cli-sideways-look` | 横着看 | Single-step visual horror | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 
-Platform labels: `darwin-arm64` (Apple Silicon), `darwin-x64` (Intel Mac),
-`linux-x64`, `linux-arm64`, `windows-x64`.
+Asset naming is always:
 
-Asset extension: `.tar.gz` on macOS/Linux, `.zip` on Windows.
+```
+<game-id>-<platform>.tar.gz    # macOS, Linux
+<game-id>-<platform>.zip       # Windows
+```
 
-## When GitHub is slow or blocked — fix this FIRST
+Each archive extracts to `<game-id>-<platform>/` and contains the binary,
+`README.md`, `LICENSE` and `SHA256SUMS`.
+
+## 2. Detect the platform
+
+```bash
+uname -s   # Darwin -> darwin, Linux -> linux
+uname -m   # arm64 / aarch64 -> arm64, x86_64 -> x64
+```
+
+```powershell
+$env:OS                     # Windows_NT
+$env:PROCESSOR_ARCHITECTURE # AMD64 -> x64, ARM64 -> arm64
+```
+
+Mapping:
+
+| Host | Platform label |
+|---|---|
+| macOS Apple Silicon | `darwin-arm64` |
+| macOS Intel | `darwin-x64` |
+| Linux x64 | `linux-x64` |
+| Linux arm64 | `linux-arm64` |
+| Windows x64 | `windows-x64` |
+
+If the host does not match one of these, say so plainly. Never invent an asset.
+
+## 3. Install location
+
+Keep all GameClaw binaries in one directory so updates are predictable:
+
+```bash
+# macOS / Linux
+BIN="${XDG_DATA_HOME:-$HOME/.local/share}/gameclaw/bin"
+mkdir -p "$BIN"
+```
+
+```powershell
+# Windows
+$Bin = Join-Path $env:LOCALAPPDATA 'GameClaw\bin'
+New-Item -ItemType Directory -Force -Path $Bin | Out-Null
+```
+
+Saves are **not** stored next to the binary. They live in
+`~/.gameclaw/<game-id>/` (or `%USERPROFILE%\.gameclaw\<game-id>\`), so replacing
+a binary never deletes a run.
+
+## 4. Install a game
+
+Set three variables first:
+
+```bash
+GAME=lobster-cli-heist
+PLATFORM=darwin-arm64          # from step 2
+ASSET="$GAME-$PLATFORM.tar.gz"
+```
+
+Download the latest release asset (always the newest tag):
+
+```bash
+TMP="$(mktemp -d)"
+
+# Preferred: GitHub CLI
+gh release download --repo Arcobalneo/gameclaw \
+  --pattern "$ASSET" --dir "$TMP" --clobber
+
+# Fallback: curl (works without gh)
+curl -fL -o "$TMP/$ASSET" \
+  "https://github.com/Arcobalneo/gameclaw/releases/latest/download/$ASSET"
+
+tar -xzf "$TMP/$ASSET" -C "$TMP"
+```
+
+Verify the checksum **before** installing:
+
+```bash
+EXPECTED=$(awk '{print $1}' "$TMP/$GAME-$PLATFORM/SHA256SUMS")
+ACTUAL=$(shasum -a 256 "$TMP/$GAME-$PLATFORM/$GAME" | awk '{print $1}')
+[ "$EXPECTED" = "$ACTUAL" ] || { echo "CHECKSUM MISMATCH"; exit 1; }
+```
+
+Install atomically, keeping the previous binary for rollback:
+
+```bash
+install -m 755 "$TMP/$GAME-$PLATFORM/$GAME" "$BIN/$GAME.new"
+[ -f "$BIN/$GAME" ] && mv "$BIN/$GAME" "$BIN/$GAME.previous"
+mv "$BIN/$GAME.new" "$BIN/$GAME"
+rm -rf "$TMP"
+"$BIN/$GAME" --version
+```
+
+Windows equivalent:
+
+```powershell
+$Game='lobster-cli-heist'; $Platform='windows-x64'; $Asset="$Game-$Platform.zip"
+$Tmp = Join-Path $env:TEMP ("gameclaw-" + [guid]::NewGuid())
+New-Item -ItemType Directory -Force -Path $Tmp | Out-Null
+
+gh release download --repo Arcobalneo/gameclaw --pattern $Asset --dir $Tmp --clobber
+Expand-Archive (Join-Path $Tmp $Asset) -DestinationPath $Tmp -Force
+
+$Dir = Join-Path $Tmp "$Game-$Platform"
+$Expected = (Get-Content (Join-Path $Dir 'SHA256SUMS')).Split(' ')[0]
+$Actual = (Get-FileHash (Join-Path $Dir "$Game.exe") -Algorithm SHA256).Hash.ToLower()
+if ($Expected -ne $Actual) { throw 'CHECKSUM MISMATCH' }
+
+Copy-Item (Join-Path $Dir "$Game.exe") (Join-Path $Bin "$Game.exe") -Force
+Remove-Item $Tmp -Recurse -Force
+& (Join-Path $Bin "$Game.exe") --version
+```
+
+### PATH
+
+If `$BIN` is not on `PATH`, either use the absolute path or add it once:
+
+```bash
+# macOS / Linux (zsh)
+echo 'export PATH="$HOME/.local/share/gameclaw/bin:$PATH"' >> ~/.zshrc
+```
+
+```powershell
+# Windows (current user)
+[Environment]::SetEnvironmentVariable(
+  'Path',
+  [Environment]::GetEnvironmentVariable('Path','User') + ";$Bin",
+  'User'
+)
+```
+
+## 5. Update a game
+
+Updates are the same download, with a version check first.
+
+```bash
+current="$("$BIN/$GAME" --version | awk '{print $2}')"
+latest="$(gh release view --repo Arcobalneo/gameclaw --json tagName -q .tagName | sed 's/^v//')"
+
+if [ "$current" = "$latest" ]; then
+  echo "$GAME is up to date ($current)"
+else
+  echo "updating $GAME: $current -> $latest"
+  # repeat the install block for the same $GAME
+fi
+```
+
+Without `gh`, resolve the latest tag from the redirect:
+
+```bash
+latest="$(curl -fsSIL -o /dev/null -w '%{url_effective}' \
+  https://github.com/Arcobalneo/gameclaw/releases/latest | sed 's#.*/tag/v##')"
+```
+
+Windows:
+
+```powershell
+$current = (& (Join-Path $Bin "$Game.exe") --version).Split(' ')[1]
+$latest  = (gh release view --repo Arcobalneo/gameclaw --json tagName -q .tagName).TrimStart('v')
+if ($current -ne $latest) { Write-Host "update $Game $current -> $latest" }
+```
+
+Rules for updates:
+
+- Re-download into a temp directory, verify the checksum, then replace.
+- Keep `<game>.previous` until the new binary answers `--version`.
+- Never delete `~/.gameclaw/` or the selected `--state-dir` during an update.
+- On Windows, make sure the game is not running before replacing the `.exe`.
+- To update every installed game, loop the catalog in step 1 and repeat.
+- To roll back: `mv "$BIN/$GAME.previous" "$BIN/$GAME"`.
+
+### Update this skill itself
+
+```bash
+npx --yes clawhub update @arcobalneo/gameclaw
+```
+
+If ClawHub is unavailable, compare the `version:` field in the installed
+`SKILL.md` with `https://raw.githubusercontent.com/Arcobalneo/gameclaw/main/SKILL.md`
+and replace the skill file only when the remote version is newer. If
+`raw.githubusercontent.com` is blocked, apply the GitHub520 fix in step 7 first.
+
+## 6. Launch and play (minimal)
+
+```bash
+"$BIN/lobster-cli-heist" new --seed 7
+"$BIN/lobster-cli-heist" actions
+"$BIN/lobster-cli-heist" act <action-id>
+"$BIN/lobster-cli-heist" recap
+```
+
+- Use `--json` for one machine-readable object per call.
+- `act` returns the full next state, so one call = one turn.
+- `GAMECLAW_HOME` or `--state-dir <path>` isolates a run.
+- `--no-observer --no-report` are the right flags for CI.
+- Run `<game> help` for the game's own action ids and rules.
+
+## 7. When GitHub downloads fail — fix this FIRST
 
 Symptoms: `curl` / `gh release download` hangs or times out, TLS handshake
 failures, `Connection reset`, downloads stuck near 0 B/s, or DNS resolving to a
 dead IP.
 
-**Priority order.** Try 1, retry the download, then 2, then 3. Never skip
-straight to "the asset does not exist", and never silently fall back to building
-from source.
+Try these in order, retrying the download after each step. **Never** conclude
+that an asset does not exist before finishing this list.
 
-### 1. GitHub520 hosts refresh (preferred)
+### 7.1 GitHub520 hosts refresh (preferred)
 
-Follow [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520).
-It publishes a maintained hosts block at `https://raw.hellogithub.com/hosts`
-and `https://raw.hellogithub.com/hosts.json` — both are reachable **without**
-GitHub, so they still work when GitHub itself is blocked.
-
-This writes a system file, so ask the player for permission first. Back up the
-hosts file before editing it.
+Follow [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520). It
+publishes a maintained hosts block at `https://raw.hellogithub.com/hosts`, which
+is reachable **without** GitHub. Ask the player before editing a system file and
+back it up first.
 
 **macOS / Linux**
 
@@ -69,18 +255,15 @@ HOSTS=/etc/hosts
 sudo cp "$HOSTS" "$HOSTS.gameclaw.bak.$(date +%s)"
 curl -fsSL https://raw.hellogithub.com/hosts -o /tmp/github520.hosts
 
-# Remove an older GitHub520 block, then append the fresh one.
 sudo sed -i.bak '/^# GitHub520 Host Start$/,/^# GitHub520 Host End$/d' "$HOSTS"
 sudo tee -a "$HOSTS" < /tmp/github520.hosts > /dev/null
 
-# Flush DNS (macOS)
-sudo dscacheutil -flushcache 2>/dev/null || true
+sudo dscacheutil -flushcache 2>/dev/null || true   # macOS
 sudo killall -HUP mDNSResponder 2>/dev/null || true
-# Linux
-sudo resolvectl flush-caches 2>/dev/null || sudo systemd-resolve --flush-caches 2>/dev/null || true
+sudo resolvectl flush-caches 2>/dev/null || true   # Linux
 ```
 
-**Windows (PowerShell, run as Administrator)**
+**Windows (PowerShell as Administrator)**
 
 ```powershell
 $hosts = Join-Path $env:SystemRoot 'System32\drivers\etc\hosts'
@@ -92,146 +275,56 @@ Set-Content -Path $hosts -Value ($current.TrimEnd() + "`r`n" + $raw) -Encoding A
 ipconfig /flushdns
 ```
 
-Then retry the download. If `raw.hellogithub.com` itself is unreachable, go to
-the proxy fallback.
+If `raw.hellogithub.com` is also unreachable, go to 7.2.
 
-### 2. HTTPS proxy
+### 7.2 HTTPS proxy
 
-Respect the player's proxy instead of inventing one:
+Respect the player's existing proxy instead of inventing one:
 
 ```bash
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
-gh release download ...    # or curl -fL ...
+gh release download ...
 ```
 
 ```powershell
 $env:HTTPS_PROXY = 'http://127.0.0.1:7890'
 ```
 
-If the player already has a proxy launcher (e.g. Clash), use it rather than
-guessing ports.
-
-### 3. Accelerated mirror (last resort)
-
-Only when 1 and 2 both fail:
+### 7.3 Accelerated mirror (last resort)
 
 ```bash
-curl -fL -o game.tar.gz "https://ghfast.top/https://github.com/Arcobalneo/gameclaw/releases/download/<tag>/<asset>"
+curl -fL -o "$TMP/$ASSET" \
+  "https://ghfast.top/https://github.com/Arcobalneo/gameclaw/releases/download/<tag>/$ASSET"
 ```
 
-Mirrors are untrusted. After downloading from a mirror, verify the asset against
-the release's `SHA256SUMS` before running it. If no checksum is available, say so
-plainly instead of pretending the download is verified.
+Mirrors are untrusted: verify `SHA256SUMS` and say that the download came from a
+mirror. If no checksum is available, report that instead of pretending it is
+verified.
 
-### Download commands
-
-```bash
-# Preferred: GitHub CLI
-gh release download --repo Arcobalneo/gameclaw --pattern 'lobster-cli-heist-linux-x64.tar.gz' --dir .
-
-# Fallback: curl
-curl -fL -o lobster-cli-heist-linux-x64.tar.gz \
-  https://github.com/Arcobalneo/gameclaw/releases/latest/download/lobster-cli-heist-linux-x64.tar.gz
-```
-
-Windows PowerShell:
-
-```powershell
-gh release download --repo Arcobalneo/gameclaw --pattern 'lobster-cli-heist-windows-x64.zip' --dir .
-```
-
-### Verify
-
-```bash
-sha256sum -c SHA256SUMS 2>/dev/null || shasum -a 256 -c SHA256SUMS
-```
-
-Every archive contains its own `SHA256SUMS`; each release also carries one
-aggregate `SHA256SUMS`.
-
-### Unpack and run
-
-macOS / Linux:
-
-```bash
-tar -xzf <game>-<platform>.tar.gz
-cd <game>-<platform>
-./<game> --version
-./<game> help
-```
-
-Windows:
-
-```powershell
-Expand-Archive <game>-windows-x64.zip
-cd <game>-windows-x64
-.\<game>.exe --version
-.\<game>.exe help
-```
-
-## Play as an agent
-
-GameClaw games are **step machines**, not full-screen TUIs. One tool call = one
-turn.
-
-```bash
-<game> new --seed 7              # start a run; returns state + legal actions
-<game> actions --json            # list legal action ids
-<game> act <action-id> --json    # resolve one action; returns log + next state + next actions
-<game> recap --json              # settlement: cause, timeline, honest memory lessons
-```
-
-Rules:
-
-- Prefer `--json`. It returns one object with `status`, `actions`, `log`, `events`,
-  `next`, `report` and `observer`.
-- `act` already returns the full next state. Do not call `status` after every
-  `act`; only call it when resuming a run in a new session.
-- Every run is deterministic for a given `--seed` plus action sequence.
-- `abort` is always legal and settles honestly.
-- Use `--state-dir <path>` (or `GAMECLAW_HOME`) to isolate a run in a sandbox.
-- `--no-observer --no-report` are the right flags for CI or headless batches.
-
-Example loop:
-
-```bash
-lobster-cli-roguelike new --seed 7 --json
-lobster-cli-roguelike act lineage:oracle --json
-lobster-cli-roguelike act enc:2 --json
-lobster-cli-roguelike recap --json
-```
-
-### Observer and reports
-
-- A local observer page starts on `http://127.0.0.1:8000+` and stops when the run ends.
-  `--no-observer` disables it.
-- A self-contained HTML settlement report is written to
-  `~/.gameclaw/<game-id>/reports/latest.html`, with a Markdown twin.
-  `--no-report` disables it.
-- The CLI prints `OBSERVER`, `REPORT` and `RECAP` lines with exact paths.
-
-## Troubleshooting
+## 8. Troubleshooting
 
 | Symptom | Action |
 |---|---|
-| `Permission denied` | `chmod +x ./<game>` |
-| macOS "cannot be opened because the developer cannot be verified" | `xattr -d com.apple.quarantine ./<game>` |
-| Windows SmartScreen warning | More info → Run anyway; binaries are not code-signed |
-| `UNSUPPORTED` platform | Say so plainly; do not invent an asset |
-| Checksum mismatch | Delete the download, retry step 1, then re-download |
-| `SLOT_IN_USE` | Pick another `--slot 1`, or pass `--force` to overwrite |
+| `Permission denied` | `chmod +x "$BIN/<game>"` |
+| macOS "cannot be opened because the developer cannot be verified" | `xattr -d com.apple.quarantine "$BIN/<game>"` |
+| Windows SmartScreen warning | More info → Run anyway; releases are not Authenticode-signed |
+| `UNSUPPORTED` platform | Say so plainly; do not substitute another platform's asset |
+| Checksum mismatch | Delete the temp download, retry step 7, download again |
 | `NO_SAVE` | Run `new` first |
-| Observer port busy | Games scan 8000-8039 automatically; or pass `--port` |
+| `SLOT_IN_USE` | Use `--slot 1`, or `--force` to overwrite |
+| Observer port busy | Games scan 8000–8039; or pass `--port` |
+| Update says "same version" but behaviour is old | Check `command -v <game>` — an older copy may shadow `$BIN/<game>` on `PATH` |
 
-## Safety and accuracy
+## 9. Accuracy and safety rules
 
 - Prefer released binaries over source checkouts.
-- Do not claim a platform is supported unless it appears in the table above.
+- Do not claim a platform is supported unless it appears in the catalog table.
 - Do not claim binaries are impossible to reverse engineer. They reduce casual
   source visibility, nothing more.
-- Never fake a successful download. Report the failing step and the exact URL.
-- Never push a hosts/proxy change without telling the player what it changes and
-  how to revert it (the backup path).
-- The games do not store strategy for the player. They emit honest, single-run
+- Never fake a successful download, never invent a checksum, and never silently
+  switch to building from source.
+- Tell the player exactly which URL, version and install path you used.
+- Before a hosts or proxy change, say what it changes and how to revert it.
+- GameClaw games do not store strategy for the player; they emit single-run
   observations and expect the agent to write durable lessons into its own memory.
