@@ -26,3 +26,9 @@ settlement_reports/
 .venv/
 # smoke-test extracted binaries
 games/*/smoke-bin/
+
+# Node / TypeScript
+node_modules/
+coverage/
+*.tsbuildinfo
+.pnpm-store/
