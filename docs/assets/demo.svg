@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="660" viewBox="0 0 1120 660" role="img" aria-label="GameClaw terminal demo">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2031"/><stop offset="1" stop-color="#07131f"/></linearGradient></defs>
+<rect width="1120" height="660" rx="16" fill="url(#bg)" stroke="#1e3a52"/>
+<rect width="1120" height="42" rx="16" fill="#0a1926"/>
+<rect y="26" width="1120" height="16" fill="#0a1926"/>
+<circle cx="26" cy="21" r="6.5" fill="#ff5f57"/>
+<circle cx="48" cy="21" r="6.5" fill="#febc2e"/>
+<circle cx="70" cy="21" r="6.5" fill="#28c840"/>
+<text x="560" y="26" text-anchor="middle" font-family="SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#6d8ba3">lobster-cli-roguelike — agent step mode</text>
+<text x="34" y="96" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ lobster-cli-roguelike new --seed 7</text>
+<text x="34" y="117" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">GAME   lobster-cli-roguelike v2.0.0  slot=0  turn=0  outcome=ongoing  seed=7</text>
+<text x="34" y="138" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#ffd166" xml:space="preserve">STATE  选择你的龙虾谱系</text>
+<text x="34" y="159" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#3f5d75" xml:space="preserve">---</text>
+<text x="34" y="180" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bdff2" xml:space="preserve">三条谱系</text>
+<text x="34" y="201" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">沟壑碎壳者：壳7 能5 盐4 左4 右2 须2 蜕1 —— 左钳像液压机。</text>
+<text x="34" y="222" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">触须预言家：壳5 能6 盐5 左2 右3 须4 蜕1 —— 先闻到坏消息。</text>
+<text x="34" y="243" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">脱壳赌徒：壳4 能6 盐4 左3 右3 须3 蜕2 —— 把旧壳当贷款。</text>
+<text x="34" y="264" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#3f5d75" xml:space="preserve">---</text>
+<text x="34" y="285" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">ACTIONS</text>
+<text x="34" y="306" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [1] lineage:crusher   沟壑碎壳者  risk=low</text>
+<text x="34" y="327" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [2] lineage:oracle    触须预言家  risk=low</text>
+<text x="34" y="348" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [3] lineage:gambler   脱壳赌徒   risk=low</text>
+<text x="34" y="369" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#f4a261" xml:space="preserve">NEXT   act lineage:crusher</text>
+<text x="34" y="411" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ lobster-cli-roguelike act lineage:crusher</text>
+<text x="34" y="432" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">LOG    你以【沟壑碎壳者】的身份开始横着活。</text>
+<text x="34" y="453" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#ffd166" xml:space="preserve">STATE  潮段 1 · 深度 1 · 章鱼讨债者</text>
+<text x="34" y="474" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">STAT   壳=7  能=5  盐=4  左=4  右=2  须=2  蜕=1  势=0  名声=0</text>
+<text x="34" y="495" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">ACTIONS</text>
+<text x="34" y="516" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [1] enc:1  左钳硬拼  risk=medium</text>
+<text x="34" y="537" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [2] enc:2  墨雾伪装  risk=high</text>
+<text x="34" y="558" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [3] enc:3  侧向冲刺  risk=high</text>
+<text x="34" y="579" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#f4a261" xml:space="preserve">NEXT   act enc:1</text>
+</svg>

@@ -1,81 +1,103 @@
 # Repository architecture
 
-`gameclaw` is a monorepo with a clear split between **distribution logic** and **game implementation**.
+`gameclaw` is a monorepo with two implementation layers and one distribution
+layer. The split is deliberate: **runtime** must stay game-agnostic, and
+**games** must stay runtime-agnostic.
 
 ## Layers
 
-### 1. Skill / distribution layer
+### 1. Runtime layer — `packages/gamekit/`
 
-Files in the monorepo:
-- `SKILL.md`
-- `catalog/games.json`
-- `README.md`
-- `README.zh-CN.md`
+`@gameclaw/gamekit` owns everything that is not game rules:
 
-Purpose inside the repo:
-- keep a **stable human-facing prompt** in the root README files, teaching a person how to prompt their own agent to discover and launch GameClaw games
-- keep a **stable distribution skill** in root `SKILL.md`, mapping game ids to GitHub Releases assets and supported platforms
-- give maintainers one place to keep discovery metadata current without pushing per-game gameplay churn into the root prompt layer
+- the CLI surface (`new / status / actions / act / recap / saves / play / observer`)
+- argument parsing, exit codes and the JSON envelope
+- deterministic RNG (sfc32) and slot persistence
+- the local observer daemon and the HTML dashboard
+- settlement reports (HTML + Markdown)
+- the NDJSON journal
 
-Important packaging boundary:
-- the **Forge-published `gameclaw` skill should contain only `SKILL.md`**
-- `catalog/games.json` remains canonical repo metadata, but should not be assumed to exist in registry-installed copies of the skill
-- therefore `SKILL.md` must stay self-contained enough to work on its own
+It has zero third-party runtime dependencies and is bundled into every game
+binary by Bun.
 
-### 2. Operations / maintainer layer
+### 2. Game layer — `games/<game-id>/`
 
-Files:
-- `AGENTS.md`
-- `docs/agent-coding-standards.md`
-- `docs/release-flow.md`
-- `docs/plans/`
-- `pyproject.toml`
-- `uv.lock`
-- `scripts/build-game.sh`
-- `scripts/test-game.sh`
+Each game is a self-contained pnpm workspace package:
 
-Purpose:
-- standardize how agents and maintainers make changes
-- preserve traceability
-- keep build/test/release entrypoints consistent across games
-- lock Python maintainer dependencies at the repo root via the `uv` workspace
+```
+games/<game-id>/
+├── package.json          # name, version, scripts, gamekit dependency
+├── src/
+│   ├── main.ts           # import definition + runCli, nothing else
+│   ├── definition.ts     # meta + GameDefinition assembly
+│   ├── engine.ts         # pure state machine
+│   └── content.ts        # encounters, units, cases, items, ...
+├── tests/                # engine determinism + CLI contract
+├── README.md             # the only per-game documentation entrypoint
+└── LICENSE
+```
 
-### 3. Game source + per-game README layer
+Games do not read `process.argv`, call `process.exit`, write files, open sockets
+or render HTML. They expose state in, actions in, result out.
 
-Files:
-- `games/<game-id>/...`
-- especially the per-game English doc `games/<game-id>/README.md`
+### 3. Distribution layer — root
 
-Purpose:
-- keep each game's code, tests, docs, and per-game packaging scripts together
-- let each game maintain its own mechanics, operator advice, observer / settlement details, and gameplay notes in its own `README.md` without forcing those details back into the root distribution prompt
-- allow one game to evolve without forcing the same language/runtime on others
+- `SKILL.md` — the self-contained skill published to ClawHub / registries
+- `catalog/games.json` — machine-readable manifest (ids, platforms, assets)
+- `README.md` / `README.zh-CN.md` — human discovery and launch entrypoint
+- `.github/workflows/` — `ci.yml` and `release.yml`
+- `scripts/` — stable repo entrypoints
+- `docs/` — maintainer documentation
 
-## Python dependency boundary
+## Dependency direction
 
-For Python-based games in this repo:
+```
+games/<id> ──► packages/gamekit
+     │
+     └──────► node:*
 
-- the repo root owns workspace locking and maintainer environment sync through `pyproject.toml` and `uv.lock`
-- each game keeps its own `pyproject.toml` for package metadata, entrypoints, and game-specific extras
-- root scripts should execute one selected game at a time instead of flattening the whole monorepo into one package
+packages/gamekit ──► node:*
+```
 
-## Why monorepo instead of one repo per game?
+`gamekit` must never import a game. Games must never import each other. Shared
+helpers belong in gamekit; game-specific helpers stay in the game.
+
+## The why: distribution logic vs game logic
 
 Because the repo itself is part of the product:
 
-- one skill distributes many games
-- one catalog describes many games
-- one release philosophy governs many games
-- one agent workflow governs many games
+- one skill distributes five games
+- one catalog describes five games
+- one release pipeline builds five games for five platforms
+- one agent workflow governs every change
 
-Per-game repos would make the skill and release story more fragmented.
+Per-game repositories would fragment the skill, the release matrix and the
+review process without improving the player experience.
 
 ## Expected invariants
 
-- Every shipped game has an entry in `catalog/games.json`
-- Every shipped game lives in `games/<game-id>/`
-- Every shipped game can be tested and built via root scripts
-- Root README / root `SKILL.md` stay focused on stable discovery + release asset routing, not volatile gameplay walkthroughs
-- Per-game gameplay and operator detail should live in each game's English `README.md`
-- Python maintainer workflows resolve through the root `uv` workspace without collapsing per-game package boundaries
-- Player-facing downloads should resolve to GitHub Releases binaries, not raw source checkout
+1. Every shipped game appears in `catalog/games.json` and `games/`.
+2. Every game implements `GameDefinition` and nothing outside it.
+3. Every game passes `pnpm check` and `pnpm test`.
+4. Every game builds a single-file binary via `scripts/build-game.mjs`.
+5. Every game ships the same CLI surface and the same JSON envelope.
+6. Every game is deterministic for a fixed seed and action sequence.
+7. Root README stays focused on discovery and launch; gameplay detail lives in
+   each game's own README.
+8. Player-facing downloads resolve to GitHub Releases, never to a source checkout.
+9. Documentation layers stay distinct: human prompt, agent skill, manifest,
+   per-game README, maintainer docs.
+
+## Runtime state layout
+
+```
+~/.gameclaw/<game-id>/
+├── saves/slot-<n>.json     # authoritative run state
+├── last-slot               # last used slot
+├── journals/<run-id>.ndjson
+├── observer/daemon.json    # port + pid + token, deleted on shutdown
+└── reports/latest.html     # settlement report
+```
+
+`--state-dir` or `GAMECLAW_HOME` relocates the whole tree, which is what tests and
+evaluations use.

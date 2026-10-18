@@ -1,132 +1,176 @@
 # Release flow
 
-This repo distributes games via **GitHub Releases**.
+GameClaw ships **compiled single-file binaries** through GitHub Releases. Source
+stays open; players never need a toolchain.
 
-## Release philosophy
+## Philosophy
 
-- Source stays in-repo and open for maintainers / contributors.
-- Players should normally download compiled binaries from Releases.
-- Maintainers use the root `uv` workspace (`pyproject.toml` + `uv.lock`) to manage Python test / build dependencies.
-- Releases are built from the game source folders inside `games/`.
+- One tag releases the whole catalog, not one game at a time.
+- Every artifact is built from the same commit and the same gamekit version.
+- Asset names are stable and machine-derivable: `<game-id>-<platform>.<ext>`.
+- Every archive carries `SHA256SUMS`; every release carries an aggregate one.
+- Unsigned binaries are stated honestly, not hidden.
 
-`uv` is a maintainer workflow detail. It does **not** change the player-facing product boundary: players should still primarily download release binaries instead of setting up Python environments.
+## Prerequisites
 
-## Maintainer prerequisites
+Maintainers need Node.js ≥ 22, pnpm 10 and Bun ≥ 1.3 (Bun compiles the binaries).
 
-- Install `uv` locally.
-- Use the stable repo entrypoints under `scripts/` whenever possible.
-- Keep each game's own packaging metadata in `games/<game-id>/pyproject.toml`.
-- The root scripts currently pin `uv` to the official PyPI index so `uv.lock` stays portable across machines that have a different default mirror configured.
+```bash
+node --version
+pnpm --version
+bun --version
+```
 
 ## Local workflow
 
-### Test a game
+### Test one game
 
 ```bash
-./scripts/test-game.sh <game-id>
+node scripts/test-game.mjs lobster-cli-heist
+# equivalent to:
+pnpm --filter @gameclaw/lobster-cli-heist check
+pnpm --filter @gameclaw/lobster-cli-heist test
 ```
 
-Example:
+### Test everything
 
 ```bash
-./scripts/test-game.sh lobster-cli-roguelike
-./scripts/test-game.sh lobster-cli-tower-defense
-./scripts/test-game.sh lobster-cli-heist
+pnpm lint
+pnpm check
+pnpm test
 ```
 
-These root test commands now:
-
-1. sync a locked environment from the repo-root `pyproject.toml` and `uv.lock`
-2. install only the selected workspace package into the root `.venv`
-3. run that game's tests from its own folder
-
-If you intentionally want to stay inside a game directory, you can also run:
+### Build one game for the host platform
 
 ```bash
-uv run --project ../.. --package <game-id> python -m unittest discover -s tests
+node scripts/build-game.mjs lobster-cli-heist
 ```
 
-### Build a game locally
+Outputs:
+
+```
+games/lobster-cli-heist/dist/
+├── lobster-cli-heist
+└── lobster-cli-heist-darwin-arm64.tar.gz
+```
+
+The build script runs `--version` on the produced binary when the target matches
+the host, then packages the archive.
+
+### Build for another platform
 
 ```bash
-./scripts/build-game.sh <game-id>
+node scripts/build-game.mjs lobster-cli-heist --platform windows-x64
+node scripts/build-game.mjs lobster-cli-heist --platform linux-arm64
 ```
 
-Example:
+Allowed platforms: `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`,
+`windows-x64`. Cross-compilation is supported by Bun; the script skips the host
+smoke run for foreign targets.
+
+## Release matrix
+
+The matrix is derived from `games/*/package.json` by
+`scripts/release-matrix.mjs`, so onboarding a game does not require editing a
+workflow.
+
+| Platform | Runner | Build mode | Archive |
+|---|---|---|---|
+| `linux-x64` | `ubuntu-latest` | native | `.tar.gz` |
+| `linux-arm64` | `ubuntu-latest` | cross | `.tar.gz` |
+| `darwin-arm64` | `macos-14` | native | `.tar.gz` |
+| `darwin-x64` | `macos-14` | cross | `.tar.gz` |
+| `windows-x64` | `windows-latest` | native | `.zip` |
+
+Five games × five platforms = 25 artifacts per release.
+
+## Release process
+
+1. Update `version` in every `games/<id>/package.json` you changed, and the
+   matching `GAME_VERSION` constant in its `definition.ts`.
+2. Update `CHANGELOG.md` (user-visible changes only).
+3. Run the full local validation:
+
+   ```bash
+   pnpm lint && pnpm check && pnpm test
+   node scripts/build-game.mjs <each changed game>
+   ```
+
+4. Commit, tag, push:
+
+   ```bash
+   git tag v2.0.0
+   git push origin main --tags
+   ```
+
+5. `release.yml` fans out to the matrix, builds 25 artifacts, uploads them as
+   workflow artifacts, writes `SHA256SUMS`, and publishes the GitHub Release.
+6. Verify the release from a clean directory (see below).
+
+## Verification checklist
+
+After the workflow finishes:
 
 ```bash
-./scripts/build-game.sh lobster-cli-roguelike
-./scripts/build-game.sh lobster-cli-tower-defense
-./scripts/build-game.sh lobster-cli-heist
+mkdir -p /tmp/gc-verify && cd /tmp/gc-verify
+gh release download v2.0.0 --repo Arcobalneo/gameclaw
+sha256sum -c SHA256SUMS
+
+tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
+./lobster-cli-heist-darwin-arm64/lobster-cli-heist --version
+
+./lobster-cli-heist-darwin-arm64/lobster-cli-heist new \
+  --seed 7 --state-dir /tmp/gc-verify/state --no-observer --no-report
+./lobster-cli-heist-darwin-arm64/lobster-cli-heist actions \
+  --state-dir /tmp/gc-verify/state --no-observer --no-report
 ```
 
-These root build commands now:
+For observer changes, also verify:
 
-1. sync a locked environment from the repo-root `pyproject.toml` and `uv.lock`
-2. include the selected game's `build` extra
-3. run the game's native build script inside that locked `uv` environment
-4. output release archives under `games/<game-id>/dist/`
+1. the page responds on the printed URL (`curl --noproxy '*'`)
+2. the port is released when the run ends
+3. `reports/latest.html` exists and opens offline
 
-If you intentionally want to stay inside a game directory, you can also run:
+## Archive contents
 
-```bash
-uv run --project ../.. --package <game-id> --extra build ./scripts/build-native.sh
+Every archive extracts into a directory named `<game-id>-<platform>` containing:
+
+- the binary (`<game-id>` or `<game-id>.exe`)
+- `README.md`
+- `LICENSE`
+- `SHA256SUMS`
+
+## Asset naming
+
+```
+<game-id>-<platform>.tar.gz   # darwin-*, linux-*
+<game-id>-<platform>.zip      # windows-*
 ```
 
-## GitHub Actions workflow
+Example: `lobster-cli-tamer-linux-arm64.tar.gz`.
 
-The root workflow lives at:
+## Platform notes
 
-- `.github/workflows/release.yml`
+- **macOS**: binaries are ad-hoc signed (`codesign --sign -`) at build time.
+  Browser downloads may still carry a quarantine flag; `xattr -d
+  com.apple.quarantine ./<game>` clears it.
+- **Windows**: binaries are not Authenticode-signed, so SmartScreen may warn.
+- **Linux**: glibc-based Bun binaries; no extra runtime packages required.
 
-Current supported / published release targets for shipped games:
-- Linux x86_64
-- macOS arm64
+## Rollback
 
-Current publicly available release assets confirmed in repo metadata:
-- `lobster-cli-roguelike-linux-x86_64.tar.gz`
-- `lobster-cli-roguelike-darwin-arm64.tar.gz`
-- `lobster-cli-tower-defense-linux-x86_64.tar.gz`
-- `lobster-cli-tower-defense-darwin-arm64.tar.gz`
-- `lobster-cli-heist-linux-x86_64.tar.gz`
-- `lobster-cli-heist-darwin-arm64.tar.gz`
-- `lobster-cli-tamer-linux-x86_64.tar.gz` (v0.1.8 新增)
-- `lobster-cli-tamer-darwin-arm64.tar.gz` (v0.1.8 新增)
+Releases are immutable in practice. If an artifact is broken:
 
-Player-facing docs and workflow targets should stay aligned with the assets that are actually being shipped.
-
-The workflow now:
-
-1. checks out the monorepo
-2. sets up Python
-3. sets up `uv`
-4. installs OS-level build dependencies when needed
-5. builds the selected game through `./scripts/build-game.sh`
-6. uploads `games/<game-id>/dist/*.tar.gz`
-7. publishes those archives to GitHub Release assets on tagged builds
-
-## Asset naming convention
-
-Each game is responsible for producing stable asset names. The current naming sets in repo metadata are:
-
-- `lobster-cli-roguelike-linux-x86_64.tar.gz`
-- `lobster-cli-roguelike-darwin-arm64.tar.gz`
-- `lobster-cli-tower-defense-linux-x86_64.tar.gz`
-- `lobster-cli-tower-defense-darwin-arm64.tar.gz`
-- `lobster-cli-heist-linux-x86_64.tar.gz`
-- `lobster-cli-heist-darwin-arm64.tar.gz`
-- `lobster-cli-tamer-linux-x86_64.tar.gz` (v0.1.8 新增)
-- `lobster-cli-tamer-darwin-arm64.tar.gz` (v0.1.8 新增)
-
-## Publishing model
-
-Recommended release trigger:
-- push a tag like `v0.1.0`
+1. Publish a patch tag (`v2.0.1`) with the fix.
+2. Mark the broken release as "pre-release" or delete it if it never reached
+   players.
+3. Never silently replace an asset under the same tag.
 
 ## Truthful positioning
 
-Binary distribution in this repo is meant to:
-- make player downloads simple
-- reduce casual source visibility in the player path
+Binary distribution:
 
-It is **not** meant to claim perfect anti-reversing or anti-tamper guarantees.
+- makes downloads simple
+- reduces casual source visibility in the player path
+
+It does **not** guarantee anti-reversing or anti-tamper. Do not claim otherwise.
