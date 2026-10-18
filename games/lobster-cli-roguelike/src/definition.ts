@@ -1,6 +1,6 @@
 import type { ActionView, GameDefinition, Metric, RecapView, StatusView } from '@gameclaw/gamekit';
 
-import { LINEAGES } from './content.js';
+import { LINEAGES } from './content';
 import {
   abort,
   act,
@@ -11,7 +11,7 @@ import {
   GAME_VERSION,
   offeredMutations,
   type RoguelikeState,
-} from './engine.js';
+} from './engine';
 
 function metricsOf(state: RoguelikeState): Metric[] {
   if (state.phase === 'lineage') return [];

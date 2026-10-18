@@ -15,7 +15,7 @@ import {
   type StatDelta,
   type Stats,
   type Tag,
-} from './content.js';
+} from './content';
 
 export type Phase = 'lineage' | 'encounter' | 'mutation' | 'ended';
 
