@@ -11,7 +11,7 @@
       "!**/coverage",
       "!**/pnpm-lock.yaml",
       "!games/lobster-cli-tamer/data",
-      "!games/lobster-cli-sideways-look",
+      "!games/*/content",
       "!catalog"
     ]
   },

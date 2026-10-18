@@ -1,255 +1,211 @@
 # 横着守：只给龙虾玩的 CLI 塔防
 
-一款继承龙虾肉鸽宇宙的纯 CLI 塔防：你不再只是独自横着活，而是要在厨房侧排、塑料卡口和归海闸前，为更多同族守出一条真正能横着回海的线。
+**Lobster Line Defense** — 一款给 coding agent 玩的 pulse-based 终端塔防，版本 `2.0.0`。
 
-这是 `gameclaw` monorepo 里的第二个游戏，源码位于：
-
-- `games/lobster-cli-tower-defense/`
-
-玩家的标准下载路径不是源码，而是 **GameClaw 仓库的 GitHub Releases 二进制**。
-
-## 这版垂直切片的设计重点
-
-### 1. 不是实时塔防，而是 pulse-based CLI 塔防
-
-每个 pulse 都按清楚的顺序进行：
-
-1. 读当前阵线与敌潮预告
-2. 在介入窗口里做 **1 个关键动作**
-3. 自动结算本 pulse 的攻击、卡位、推进和漏怪
-4. 进入下一 pulse
-
-因此它更适合 agent / 脚本化玩家稳定阅读、推理和复盘，而不是拼手速。
-
-### 2. 默认 compact render，低 token 但保留决策信息
-
-默认界面会压成几块稳定的信息：
-
-- 关卡 / pulse / 归海线完整度 / 潮令
-- 小地图与 6 个部署位
-- 待命 roster 与冷却
-- 当前 / 下一 pulse 敌潮预告
-- 当前薄位提醒与潮技状态
-
-如果想切回更长的文案，可以使用：
+三条 lane 在闸前总卡口 `C` 汇合。你要在归海线被打穿之前，把锅沿杂兵、抽水跳虾、塑圈钻头、电鳗借火体和章鱼搬运手一层层挡下来。每个 pulse 只给你一个介入窗口，然后系统自动结算攻击、卡位、推进和漏怪。
 
 ```bash
-python3 main.py --verbose-text
+lobster-cli-tower-defense new --seed 7
+lobster-cli-tower-defense act doctrine:crusher
+lobster-cli-tower-defense act deploy:reef-guard:C
+lobster-cli-tower-defense act ready
+lobster-cli-tower-defense act hold
+lobster-cli-tower-defense recap
 ```
 
-### 3. 继续保持 memory-first 与结算页传统
+## 为什么它是 agent-first 的
 
-游戏不会替玩家外挂一套持久化记忆库。
+- **一次调用 = 一个回合**。`act` 同时返回本回合日志、完整状态和下一步合法动作，agent 不需要额外轮询。
+- **稳定 action id**。`doctrine:*` / `deploy:*:*` / `recall:*` / `skill` / `ready` / `hold` 都是可脚本化、可回归测试的字符串。
+- **稳定文本锚点**。`GAME / STATE / STAT / ACTIONS / NEXT` 五行结构，正则即可解析；`--json` 则给出结构化状态、动作与事件。
+- **确定性**。同一 seed + 同一动作序列 = 同一结果，存档里保存 sfc32 的四个状态字。
+- **低 token 的默认输出**。地图是紧凑 ASCII 行，roster / cooldowns / 敌潮预告都压成短行；细节放在 `ActionView.detail`，只在 `--verbose` 或 JSON 里展开。
+- **诚实结算**。失败会给可归因的漏怪 lane、最后打穿你的敌人，以及只属于本局的观察草稿，方便写进 agent 自己的 memory。
 
-它做的仍然是：
+## 安装（GitHub Releases）
 
-- 在局内给出诚实的 `本局观察`
-- 在失败、胜利和脚本中止时收束成可复盘的结算
-- 默认生成一份本地 **HTML settlement report**
+从 [GameClaw Releases](https://github.com/Arcobalneo/gameclaw/releases/latest) 下载对应平台的单文件二进制：
 
-报告本身只展示结果；“可以转给主人 review” 这类提示只在 CLI 里说，不会硬塞进 HTML 页面正文。
-
-## 本版内容范围
-
-这是一个**深度优先的单关垂直切片**：
-
-- 1 张可玩的地图：`归海侧排一号线`
-- 3 条 doctrine：`沟壑碎壳者` / `触须预言家` / `脱壳赌徒`
-- 6 个可部署单位 / 工事
-- 5 种敌潮单位
-- 1 套 compact render
-- 1 套 HTML settlement report
-
-目标不是把第一版做成内容怪物，而是先把“可读、可归因、可脚本化、真有策略张力”的龙虾 CLI 塔防打出来。
-
-## 当前代码结构
-
-为了先拆掉后续多图 / 多关扩展的结构阻塞，当前实现已经按下面几层整理：
-
-- `lobster_cli_tower_defense/content.py`：doctrine、单位、敌人等 roster 数据
-- `lobster_cli_tower_defense/stages.py`：当前官方 stage 的地图、路径、部署位、波次脚本
-- `lobster_cli_tower_defense/simulation.py`：纯规则状态与 pulse 结算
-- `lobster_cli_tower_defense/game.py`：CLI 输入 / 输出、紧凑渲染、结算串联
-
-注意：
-
-- 这 **不代表** 内容 Wave1 已经开始；当前官方可玩内容仍只有 `归海侧排一号线`
-- 这一轮的目标是先把可扩展结构立住，并把当前单关体验当成回归基线
-
-## 关卡与核心机制
-
-### 地图
-
-关卡是 `归海侧排一号线`：
-
-- 三条入口：左盆沿 / 中排缝 / 右塑圈
-- 一个共享 choke：`C` 闸前总卡口
-- 两个高台：`LP` / `RP`
-- 六个部署位：`L1 / M1 / R1 / C / LP / RP`
-
-高台现在更偏向“侧翼瞭望位”：
-
-- `LP` 主要看左线入口、左前拦口、中入口和总卡口
-- `RP` 主要看右线入口、右前拦口、中入口和总卡口
-- 它们不会把 `M1` 中前拦口整段一路看穿；想长期压住中线，还是得给前排或 choke 真正站人
-
-### 资源与失败条件
-
-- `潮令`：部署、再编和发动潮技的资源
-- `归海线完整度`：漏怪后会下降，归零即失败
-- pulse 结束后会补充 doctrine 对应的潮令恢复
-
-### 每 pulse 的介入动作
-
-进入结算前，你通常可以做 1 件事：
-
-- 新部署
-- 撤回再编
-- 发动 doctrine 潮技
-- 或者保持阵线不动
-
-开局的 setup phase 则允许你先连续布几手，再正式放敌潮进场。
-
-## 三条 doctrine
-
-### 1. 沟壑碎壳者
-
-- 更硬的拦口单位
-- `礁口重钳` / `回涌闸桩` 更便宜
-- 潮技 `碎壳顶潮`：把一个前排位硬顶成这 pulse 的强卡口
-
-### 2. 触须预言家
-
-- 多看 1 个 pulse 预告
-- `须探哨兵` / `盐沫喷口` 输出更稳定
-- 潮技 `触须预警`：点亮一条 lane，让这 pulse 的敌人更慢、更脆
-
-### 3. 脱壳赌徒
-
-- 撤回返还更多潮令
-- 再部署冷却更短
-- `蜕壳诱饵` 持续更久
-- 潮技 `脱壳换线`：把一个已部署单位立刻换到空位，补出临场翻盘窗
-
-## 可部署 roster
-
-1. `礁口重钳`：前排主卡口，拦 2
-2. `塑圈剪手`：剪甲、收精英的稳定输出位
-3. `须探哨兵`：低伤但减速 / 标记，负责让后续火力更值钱
-4. `盐沫喷口`：对拥挤节点做小范围压制
-5. `蜕壳诱饵`：短命但能硬拖一波快潮
-6. `回涌闸桩`：边打边推，特别适合守 choke
-
-## 敌潮 roster
-
-- `锅沿杂兵`：基础推进单位
-- `抽水跳虾`：速度快，前排空了就容易漏
-- `塑圈钻头`：有甲，需要剪手或集火
-- `电鳗借火体`：接触伤害高，会把薄前排电穿
-- `章鱼搬运手`：重量级精英，既能吃 block 又会重创完整度
-
-## 玩家：从 Releases 获取二进制
-
-玩家应优先从 **GameClaw 仓库** 的 Releases 下载：
-
-- `https://github.com/Arcobalneo/gameclaw/releases/latest`
-
-Linux：
+| 平台 | 资产 |
+|---|---|
+| macOS Apple Silicon | `lobster-cli-tower-defense-darwin-arm64.tar.gz` |
+| macOS Intel | `lobster-cli-tower-defense-darwin-x64.tar.gz` |
+| Linux x64 | `lobster-cli-tower-defense-linux-x64.tar.gz` |
+| Linux arm64 | `lobster-cli-tower-defense-linux-arm64.tar.gz` |
+| Windows x64 | `lobster-cli-tower-defense-windows-x64.zip` |
 
 ```bash
-tar -xzf lobster-cli-tower-defense-linux-x86_64.tar.gz
-cd lobster-cli-tower-defense-linux-x86_64
-./lobster-cli-tower-defense
+# macOS / Linux
+tar -xzf lobster-cli-tower-defense-<platform>.tar.gz
+cd lobster-cli-tower-defense-<platform>
+./lobster-cli-tower-defense --version
 ```
 
-macOS Apple Silicon：
+```powershell
+# Windows
+Expand-Archive lobster-cli-tower-defense-windows-x64.zip
+.\lobster-cli-tower-defense-windows-x64\lobster-cli-tower-defense.exe --version
+```
+
+二进制内置运行时，不需要 Node、Python 或任何第三方依赖。
+
+## 玩法
+
+### 一局的结构
+
+1. **doctrine 阶段**：三选一，决定初始潮令、完整度、单位折扣与潮技。
+2. **setup 阶段**：自由部署和撤回，不消耗 pulse；随时 `act ready` 放敌潮。
+3. **battle 阶段**：每个 pulse 只做 **1 个动作**（deploy / recall / skill / hold），然后自动结算。
+4. **结算**：归海线完整度归零即失守；守住最后一 pulse 且场上没有敌人即胜利。
+
+### pulse 结算顺序
+
+```
+入潮 → 潮技生效 → 单位攻击 → 敌人接触伤害 → 敌人推进 / 漏怪 → 持续型单位计时
+```
+
+- `潮令`：部署、再编和发动潮技的资源；每个 pulse 结束后按 doctrine 回复。
+- `归海线完整度`：漏怪会扣，归零即失败。
+- `拦口（block）`：按敌人 `weight` 占用卡口容量；轻单位占 1，章鱼搬运手占 2。
+- `破甲`：减少目标护甲；护甲最多把一次伤害压到 1，不会让攻击完全无效。
+- `减速`：扣减本 pulse 移动步数，但站在空路上的敌人每 pulse 至少前进 1 格，避免尾波无限停滞。
+- `易伤`：本 pulse 内受到更多伤害，结算后清空。
+- `击退`：把目标沿路径往回推。
+
+### 地图与部署位
+
+```
+左  L0[.] -> L1[.] -> C[.] -> 海
+中  M0[.] -> M1[.] -> C[.] -> 海
+右  R0[.] -> R1[.] -> C[.] -> 海
+高  LP[.] | RP[.]
+```
+
+| 位置 | 类型 | 覆盖 |
+|---|---|---|
+| `L1` / `M1` / `R1` | 各线前排拦口 | 本线入口来的敌人 + `C` |
+| `C` | 三线共享的闸前总卡口 | `C`（所有 lane 共用容量） |
+| `LP` | 左高台 | `L0` / `L1` / `M0` / `C` |
+| `RP` | 右高台 | `R0` / `R1` / `M0` / `C` |
+
+### 三条 doctrine
+
+| doctrine | 特点 | 潮技 |
+|---|---|---|
+| 沟壑碎壳者 | 初始潮令 8 / 完整度 8；拦口单位 +2 壳，重钳与闸桩各便宜 1 | `碎壳顶潮`：自动选一个最受压的前排位，本 pulse 攻 +2、拦 +1 |
+| 触须预言家 | 初始潮令 7 / 完整度 7；多看 1 个 pulse 预告；须哨与盐口各便宜 1，支援单位攻 +1 | `触须预警`：自动选压力最高的一条 lane，本 pulse 该 lane 敌人减速 +1、易伤 +1 |
+| 脱壳赌徒 | 初始潮令 7 / 完整度 7；撤回多返 1、再编冷却 -1、诱饵多活 1 pulse | `脱壳换线`：自动把一个已部署单位挪到更危险的空位，并回 2 点壳 |
+
+### 六个可部署单位
+
+| 单位 | cost | 壳 | 攻 | 拦 | 说明 |
+|---|---:|---:|---:|---:|---|
+| 礁口重钳 | 4 | 12 | 3 | 2 | 标准前排，只能站 `L1/M1/R1/C` |
+| 塑圈剪手 | 3 | 6 | 3 | 0 | 远程，优先剪带甲 / 精英，破甲 1 |
+| 须探哨兵 | 3 | 5 | 1 | 0 | 支援，优先快目标；减速 1、易伤 1 |
+| 盐沫喷口 | 2 | 5 | 1 | 0 | 小范围溅射，减速 1；适合补 runners |
+| 蜕壳诱饵 | 2 | 7 | 0 | 3 | 短命肉盾，默认持续 2 pulse |
+| 回涌闸桩 | 4 | 9 | 2 | 1 | 控制前排，攻击会把目标往回推 1 格 |
+
+### 五种敌潮单位
+
+| 敌人 | 壳 | 速度 | 护甲 | 接触伤害 | 漏怪 | 重量 |
+|---|---:|---:|---:|---:|---:|---:|
+| 锅沿杂兵 | 5 | 1 | 0 | 1 | 1 | 1 |
+| 抽水跳虾 | 4 | 2 | 0 | 1 | 1 | 1 |
+| 塑圈钻头 | 8 | 1 | 1 | 2 | 1 | 1 |
+| 电鳗借火体 | 7 | 1 | 0 | 3 | 1 | 1 |
+| 章鱼搬运手 | 14 | 1 | 0 | 3 | 2 | 2 |
+
+## 动作 id
+
+| action id | 作用 |
+|---|---|
+| `doctrine:crusher` / `doctrine:oracle` / `doctrine:gambler` | 开局选择 doctrine |
+| `deploy:<unit-key>:<slot-key>` | 部署一个 ready 单位到合法空位，例如 `deploy:reef-guard:C` |
+| `recall:<slot-key>` | 撤回一个已部署单位，返还潮令并进入再编冷却 |
+| `skill` | 发动 doctrine 潮技；目标由规则自动选定，detail 里给出具体目标与数值 |
+| `ready` | setup → battle，开始敌潮 |
+| `hold` | 本 pulse 不干预，直接结算 |
+| `abort` | 由 gamekit 提供，任何阶段都能诚实中止 |
+
+`deploy` 只在单位 ready、位置合法且空、潮令足够时出现；`skill` 只在冷却结束、潮令足够且有目标时出现。动作列表顺序稳定，`NEXT` 指向当前第一个合法动作。
+
+单位 key：`reef-guard` / `ring-cutter` / `whisker-scout` / `salt-spray` / `molt-decoy` / `gate-stake`。
+
+slot key：`L1` / `M1` / `R1` / `C` / `LP` / `RP`。
+
+## CLI 参考
 
 ```bash
-tar -xzf lobster-cli-tower-defense-darwin-arm64.tar.gz
-cd lobster-cli-tower-defense-darwin-arm64
-./lobster-cli-tower-defense
+lobster-cli-tower-defense new      [--slot N] [--seed N] [--json]
+lobster-cli-tower-defense status   [--slot N] [--json]
+lobster-cli-tower-defense actions  [--slot N] [--json]
+lobster-cli-tower-defense act <id> [--slot N] [--json]
+lobster-cli-tower-defense recap    [--slot N] [--format text|markdown|html] [--json]
+lobster-cli-tower-defense saves    [--json]
+lobster-cli-tower-defense play     [--slot N]
+lobster-cli-tower-defense observer [--port N]
+lobster-cli-tower-defense doctor
+lobster-cli-tower-defense help
+lobster-cli-tower-defense version
 ```
 
-## 维护者：从源码运行
+全局参数：`--state-dir <path>`、`--json`、`--no-color`、`--no-observer`、`--no-report`、`--force`、`--verbose`、`--slot <n>`、`--seed <n>`。
 
-### 方式 A：在游戏目录里直接运行
+本作目前只有一张 stage；gamekit 通用的 `--content` / `--difficulty` 会被接受但不改变关卡内容。
+
+- 文本模式保持紧凑；`--json` 每回合输出一个对象，包含 `status`、`actions`、`log`、`events`。
+- `--force` 覆盖已有 slot；`--state-dir` / `GAMECLAW_HOME` 可把状态放进沙箱目录，适合并行评测。
+- 错误使用稳定退出码：`USAGE=2`、`NO_SAVE=3`、`ILLEGAL_ACTION=4`、`INTERNAL=1`。
+
+## 状态与运行时文件
+
+默认根目录是 `~/.gameclaw/`，可用 `--state-dir` 或环境变量 `GAMECLAW_HOME` 覆盖。
+
+| 内容 | 路径 |
+|---|---|
+| 存档 | `~/.gameclaw/lobster-cli-tower-defense/saves/slot-<n>.json` |
+| 回合日志 | `~/.gameclaw/lobster-cli-tower-defense/journals/<run-id>.ndjson` |
+| 结算报告 | `~/.gameclaw/lobster-cli-tower-defense/reports/latest.html` / `latest.md` |
+| observer 端口文件 | `~/.gameclaw/lobster-cli-tower-defense/observer/daemon.json` |
+
+`new` / `play` 会在 `127.0.0.1:8000+` 自动启动观察页，结束时关闭；失败会明确提示，不会假装观察页存在。
+
+## 本地开发
 
 ```bash
-cd games/lobster-cli-tower-defense
-python3 main.py
+pnpm install
+pnpm --filter @gameclaw/lobster-cli-tower-defense check
+pnpm --filter @gameclaw/lobster-cli-tower-defense test
+bun games/lobster-cli-tower-defense/src/main.ts new --seed 7 --state-dir /tmp/td-dev --no-observer
+node scripts/build-game.mjs lobster-cli-tower-defense
 ```
 
-### 方式 B：从 monorepo 根目录统一调用
+源码结构：
 
-```bash
-./scripts/test-game.sh lobster-cli-tower-defense
-./scripts/build-game.sh lobster-cli-tower-defense
+```
+src/content.ts     doctrine、单位、敌人、关卡与波次蓝图
+src/engine.ts      纯规则状态机与 pulse 结算
+src/definition.ts  meta / status / actions / act / abort / recap
+src/main.ts        只负责 import definition 并调用 runCli
+tests/             engine 与 CLI 回归测试
 ```
 
-## 控制方式
+## 与 Python 垂直切片的差异
 
-- 全程纯数字菜单，适合人类与 agent 脚本化输入
-- setup phase 里可以连续部署多手，再手动放敌潮
-- battle phase 里每 pulse 只做 1 个关键动作
-- 默认会在当前工作目录生成 `settlement_reports/*.html`；如果不需要，可加 `--no-settlement-report`
+这是从旧 Python 垂直切片重写来的 TypeScript 版本，玩法骨架保持一致，但修掉了几个会让 agent 卡死的边界：
 
-## 关键参数
+- **不再有 perma-slow 软锁**：站在空路上的敌人每 pulse 至少前进 1 格；减速仍然对 speed 2 的跳虾有效。
+- **护甲保底 1 点伤害**：防止低攻单位面对护甲目标时完全打不动，导致尾波无限停滞。
+- **撤回退款封顶**：返还不会超过该单位本次部署成本，避免 setup 里反复 deploy/recall 刷潮令。
+- **setup 撤回立即 ready**：setup 是规划阶段，不再因为一次撤回而把自己锁到 battle pulse 2。
+- **潮技自动选目标**：`skill` 是唯一动作 id，目标由确定性规则选定，避免多一层 `skill:<target>` 动作空间。
 
-```bash
-python3 main.py --quick-start --seed 7 --doctrine 2 --script 1,1,4,1,0,1,2,6,0
-```
+## 防逆向边界
 
-参数说明：
+二进制发行会降低普通玩家在下载路径里直接翻源码的便利度，但不承诺不可逆向、不可篡改，也不是强对抗反作弊系统。源码仍保留在 monorepo 的 `games/lobster-cli-tower-defense/`。
 
-- `--seed`：固定随机种子
-- `--quick-start`：跳过主菜单，直接进 setup
-- `--doctrine`：预选 doctrine（1~3）
-- `--lineage`：`--doctrine` 的兼容别名，方便沿用旧习惯
-- `--script`：逗号分隔的脚本化输入；耗尽时会进入诚实的中止结算
-- `--verbose-text`：切回更长说明文案
-- `--no-settlement-report`：关闭 HTML 结算页
+## License
 
-## 测试
-
-维护者现在统一通过仓库根目录的 `uv` workspace（`pyproject.toml` + `uv.lock`）运行测试。
-
-如果你在该游戏目录里直接执行：
-
-```bash
-uv run --project ../.. --package lobster-cli-tower-defense python -m unittest discover -s tests
-```
-
-如果你想遵循 monorepo 的稳定入口，则从仓库根目录执行：
-
-```bash
-./scripts/test-game.sh lobster-cli-tower-defense
-```
-
-## 本地打包
-
-如果你只想在该游戏目录里本地打包：
-
-```bash
-uv run --project ../.. --package lobster-cli-tower-defense --extra build ./scripts/build-native.sh
-```
-
-如果你想遵循 monorepo 的统一入口，则从仓库根目录执行：
-
-```bash
-./scripts/build-game.sh lobster-cli-tower-defense
-```
-
-## 关于“防逆向”的真实边界
-
-这个游戏的二进制发行目标是：
-
-- 降低普通玩家在玩家路径里直接翻源码的便利度
-- 让下载与启动体验更接近正常 CLI 游戏
-
-不是：
-
-- 绝对防逆向
-- 绝对防篡改
-- 强对抗安全系统
-
-它会更不容易被随手看源码，但并不是不可分析的黑盒。
+MIT

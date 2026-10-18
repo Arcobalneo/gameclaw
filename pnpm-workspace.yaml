@@ -1,5 +1,5 @@
 packages:
   - packages/*
   - games/*
-  # Migrated to the gamekit runtime in a follow-up PR.
-  - '!games/lobster-cli-sideways-look'
+
+

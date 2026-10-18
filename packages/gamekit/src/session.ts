@@ -77,7 +77,7 @@ export class Session<S = unknown> {
       slot: this.slot,
       runId: `${this.game.meta.id}-${options.seed}-${Date.now().toString(36)}`,
       seed: options.seed,
-      turn: status.turn,
+      turn: 0,
       outcome: status.outcome,
       createdAt: now,
       updatedAt: now,
@@ -88,7 +88,9 @@ export class Session<S = unknown> {
   }
 
   status(save: SaveFile<S>): StatusView {
-    return this.game.status(save.state);
+    // The save owns the authoritative turn counter: it advances even when a
+    // game's abort hook skips its normal act path.
+    return { ...this.game.status(save.state), turn: save.turn };
   }
 
   actions(save: SaveFile<S>): ActionView[] {

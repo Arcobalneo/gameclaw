@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/lobster-cli-heist",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Compact stealth heist for coding agents.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs lobster-cli-heist"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}

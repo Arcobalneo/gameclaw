@@ -1,59 +1,18 @@
-export type Outcome = 'ongoing' | 'escaped' | 'wrong-record' | 'lost';
+import type { Outcome } from '@gameclaw/gamekit';
 
-export type ActionKind = 'inspect' | 'move' | 'interact' | 'record' | 'brace' | 'extract';
+/** Where the run is: picking a case, walking through one, or finished. */
+export type Phase = 'case-select' | 'exploring' | 'ended';
 
-export interface ActionOption {
-  id: string;
-  kind: ActionKind;
-  label: string;
-  risk: string;
-  target?: string;
-}
+/**
+ * `Outcome` is the shared win/loss vocabulary. `Ending` keeps the finer story
+ * so a wrong-record extraction can be told apart from a collapse.
+ */
+export type Ending = 'none' | 'escaped' | 'wrong-record' | 'lost-nerve' | 'lost-dread' | 'aborted';
 
-export interface RoomConfig {
-  id: string;
-  name: string;
-  tags: string[];
-  panels: string[];
-  inspectTargets: { id: string; label: string; focusCost?: number }[];
-  interactables: { id: string; label: string; effect: 'objective' | 'stabilize' | 'reveal' }[];
-  exits: string[];
-  isEntry?: boolean;
-  isExit?: boolean;
-  objective?: boolean;
-}
+export type ObjectiveQuality = 'unknown' | 'uncertain' | 'verified';
 
-export interface CaseConfig {
-  id: string;
-  name: string;
-  chineseName: string;
-  summary: string;
-  requiredEvidence: number;
-  startingRoom: string;
-  rooms: RoomConfig[];
-  defaultAscii: string[];
-}
-
-export interface EventConfig {
-  id: string;
-  caseId: string;
-  title: string;
-  trigger: ActionKind | 'status';
-  roomTags: string[];
-  severity: number;
-  flavor: string;
-  witness: string;
-  focusDelta: number;
-  nerveDelta: number;
-  dreadDelta: number;
-  evidenceDelta: number;
-  clueId: string;
-  clueText: string;
-  ascii: string[];
-  tags: string[];
-}
-
-export interface CurrentPhenomenon {
+/** A named observation produced by an event and recordable by the player. */
+export interface Phenomenon {
   clueId: string;
   clueText: string;
   title: string;
@@ -61,51 +20,48 @@ export interface CurrentPhenomenon {
   ascii: string[];
 }
 
+/** One resolved turn, kept for the timeline and the settlement report. */
 export interface JournalEntry {
   turn: number;
   action: string;
   roomId: string;
   roomName: string;
   result: string;
-  dread: number;
+  focus: number;
   nerve: number;
+  dread: number;
   evidence: number;
-  witness?: string;
 }
 
-export interface GameState {
-  version: number;
-  slot: number;
-  runId: string;
+/**
+ * The whole run. Everything here is plain JSON; `rng` is the four-word sfc32
+ * state restored before every action so a seed and an action list replay.
+ */
+export interface LookState {
+  version: 1;
   seed: number;
-  rngState: number[];
-  caseId: string;
+  rng: number[];
+  phase: Phase;
+  caseId: string | null;
   caseName: string;
-  roomId: string;
+  roomId: string | null;
+  requiredEvidence: number;
   turn: number;
   focus: number;
   nerve: number;
   dread: number;
   evidence: number;
   objectiveCollected: boolean;
-  objectiveQuality: 'unknown' | 'uncertain' | 'verified';
+  objectiveQuality: ObjectiveQuality;
   recordedClues: string[];
   findings: string[];
-  currentPhenomenon?: CurrentPhenomenon;
+  currentPhenomenon: Phenomenon | null;
   latestAscii: string[];
-  latestWitness?: string;
-  latestResult?: string;
+  latestWitness: string | null;
+  latestResult: string;
+  lastEventId: string | null;
   history: JournalEntry[];
   outcome: Outcome;
-  observer?: { port?: number; pid?: number };
-}
-
-export interface SaveSummary {
-  slot: number;
-  exists: boolean;
-  caseName?: string;
-  turn?: number;
-  outcome?: Outcome;
-  dread?: number;
-  evidence?: number;
+  ending: Ending;
+  cause: string;
 }

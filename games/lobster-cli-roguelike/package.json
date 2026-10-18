@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/lobster-cli-roguelike",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lobster Sideways Run: an endless tide-cycle terminal roguelike for coding agents.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs lobster-cli-roguelike"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}

@@ -1,17 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "jsx": "react-jsx",
-    "outDir": "dist-ts",
-    "rootDir": ".",
-    "strict": false,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["node"]
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "content/**/*.json", "scripts/**/*.mjs"]
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }

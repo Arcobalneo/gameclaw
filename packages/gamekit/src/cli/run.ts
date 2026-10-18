@@ -316,6 +316,7 @@ export async function runCli<S>(
         io.out(JSON.stringify(envelope({ game, save, status, actions }), null, 2));
       } else {
         io.out(renderActions(actions, palette, values.verbose).join('\n'));
+        if (actions[0]) io.out(`NEXT   act ${actions[0].id}`);
       }
       return 0;
     }
