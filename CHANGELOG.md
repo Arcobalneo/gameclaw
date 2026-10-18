@@ -1,6 +1,52 @@
 # Changelog
 
-All notable changes to `gameclaw` will be documented in this file.
+All notable changes to `gameclaw` are documented here.
+
+## v2.0.0 — 2026-10-18
+
+The TypeScript/gamekit rewrite. Everything below is user-visible; see
+`docs/plans/2026-10-18-v2-cross-platform-normalization.md` for the full plan.
+
+### Added
+
+- `@gameclaw/gamekit`: one agent-first CLI runtime shared by every game
+  (`new / status / actions / act / recap / saves / play / observer / doctor`).
+- `--json` envelopes with stable error codes and exit codes for machine players.
+- Deterministic sfc32 RNG with serialised state, so any run can be replayed.
+- Unified save slots under `~/.gameclaw/<game-id>/`, NDJSON journals, a local
+  observer daemon and self-contained HTML/Markdown settlement reports.
+- Windows x64, Linux arm64 and macOS x64 builds (five platforms per game).
+- Aggregate `SHA256SUMS` on every GitHub Release.
+- `SKILL.md` network troubleshooting: GitHub520 hosts refresh first, then proxy,
+  then mirror, with explicit verification steps.
+
+### Changed
+
+- All five games rewritten as strict TypeScript packages with zero third-party
+  runtime dependencies.
+- Text output now uses stable `GAME / STATE / STAT / ACTIONS / NEXT` anchors.
+- Game binaries are built with Bun `build --compile` instead of Nuitka / Node SEA.
+- Release assets renamed to `<game-id>-<platform>.(tar.gz|zip)`.
+
+### Removed
+
+- Python, `uv`, `pyproject.toml`, `uv.lock`, Nuitka and the per-game Python
+  build scripts.
+- Ink/React/rot-js and the old standalone Node CLI for `sideways-look`.
+- Per-game `game_catalog/` files, superseded by `catalog/games.json`.
+- v0.x `--quick-start`, `--script`, `--terminal-native` flags. Use
+  `new / act / recap` instead.
+
+### Migration notes
+
+- v1/v0.2 saves are **not** migrated. Old releases keep working; v2 starts fresh.
+- Replace `--script 1,2,1` with explicit `act <action-id>` calls.
+- Use `--state-dir <path>` to isolate runs in CI or evals.
+
+## Legacy 0.x history (archive)
+
+The entries below describe the Python-era implementation and are kept for
+traceability only. They do not describe the current code.
 
 ## 2026-06-02
 

@@ -27,6 +27,9 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Validate catalog and docs
+        run: pnpm validate:catalog
+
       - name: Lint and format check
         run: pnpm lint
 

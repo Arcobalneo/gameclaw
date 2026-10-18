@@ -1,77 +1,237 @@
 ---
 name: gameclaw
-description: "List available GameClaw terminal games, provide platform-specific download links from GitHub Releases, and give copy-paste unpack/run instructions for released CLI binaries. Use this when users ask what games are available, want to download a GameClaw game, need Linux/macOS binary links, want quick run instructions, or need help troubleshooting a downloaded release."
-version: 0.5.0
+description: "Launch and play GameClaw terminal games: detect the player's platform, download the right single-file binary from GitHub Releases, fix GitHub network failures with GitHub520 first, then run the agent step loop (new → actions → act → recap). Use when a user asks what games GameClaw has, wants to install or run one, needs a Linux/macOS/Windows binary, or hits a download/network problem."
+version: 2.0.0
 ---
 
 # GameClaw
 
-This skill is **prompt-only**. It is not the GameClaw monorepo itself.
+GameClaw ships **terminal games as single-file binaries** for macOS, Linux and Windows.
+Every game speaks the same agent-first CLI, so one skill covers all of them.
 
-Its job is to:
-- list which GameClaw games currently exist and their supported platforms
-- point users to the correct GitHub Releases download
-- provide copy-paste commands to unpack and run each binary
-- help troubleshoot common download/run issues
-
-Do **not** assume local source files from the monorepo are present when this skill is installed from a registry.
-
-## Canonical repository
+This skill is **self-contained**: it is prompt-only and does not need the GameClaw
+monorepo to be present. Never assume local source files exist.
 
 - Repo: `https://github.com/Arcobalneo/gameclaw`
-- All releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
+- Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
-## Current games
+## Fast path
 
-| Game ID | Name | Summary | Platforms |
-|---------|------|---------|-----------|
-| lobster-cli-roguelike | 《横着活》 | Terminal roguelike with infinite tide stages and memory-first strategy prompts | linux-x86_64, darwin-arm64 |
-| lobster-cli-tower-defense | 《横着守》 | Pulse-based CLI tower defense with deploy/re-edit windows and doctrine variance | linux-x86_64, darwin-arm64 |
-| lobster-cli-heist | 《横着潜》 | Compact CLI stealth heist with mission grammar, extraction pressure, and live observer + HTML settlement | linux-x86_64, darwin-arm64 |
-| lobster-cli-tamer | 《横着抓》 | CLI creature-tamer with capture, squad growth, affix workshop, permadeath abyss, and observer + HTML settlement | linux-x86_64, darwin-arm64 |
-| lobster-cli-sideways-look | 《横着看》 | Single-step CLI visual horror for coding agents with lateral observation, anomaly logging, and ASCII/HTML settlement | linux-x86_64 |
+1. Detect the platform automatically (`uname -s`, `uname -m`, `$OS`, `$PROCESSOR_ARCHITECTURE`).
+2. Show the game menu as a numbered list and ask the player to reply with a number.
+3. Download the matching release asset.
+4. Unpack, verify, and launch.
 
-Release assets follow the pattern: `<game-id>-<platform>.tar.gz`
-Source for each game lives at `games/<game-id>/` in the GitHub repo.
+Do not stay in explanation mode. The player wants to play.
 
-## How to help a player
+## Games
 
-1. Identify the game they want, or list available games using the table above
-2. Ask their platform if unknown (check the Platforms column)
-3. Point them to the release page or the exact asset name
-4. Give the generic run instructions below, substituting the game ID and platform
-5. Mention source location only if they ask to inspect or contribute
+All assets follow `<game-id>-<platform>.<tar.gz|zip>`. Every platform column below
+means a real binary is published for it.
 
-## Run instructions
+| # | Game ID | Name | Genre | Platforms |
+|---|---------|------|-------|-----------|
+| 1 | `lobster-cli-roguelike` | 横着活 | Infinite tide-cycle roguelike | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 2 | `lobster-cli-tower-defense` | 横着守 | Pulse-based lane tower defense | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 3 | `lobster-cli-heist` | 横着潜 | Grid stealth heist | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 4 | `lobster-cli-tamer` | 横着抓 | Creature taming + abyss runs | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 5 | `lobster-cli-sideways-look` | 横着看 | Single-step visual horror | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 
-All games use the same download-and-run pattern. Substitute `<GAME>` with the game ID and `<PLATFORM>` with the platform label from the table above:
+Platform labels: `darwin-arm64` (Apple Silicon), `darwin-x64` (Intel Mac),
+`linux-x64`, `linux-arm64`, `windows-x64`.
+
+Asset extension: `.tar.gz` on macOS/Linux, `.zip` on Windows.
+
+## When GitHub is slow or blocked — fix this FIRST
+
+Symptoms: `curl` / `gh release download` hangs or times out, TLS handshake
+failures, `Connection reset`, downloads stuck near 0 B/s, or DNS resolving to a
+dead IP.
+
+**Priority order.** Try 1, retry the download, then 2, then 3. Never skip
+straight to "the asset does not exist", and never silently fall back to building
+from source.
+
+### 1. GitHub520 hosts refresh (preferred)
+
+Follow [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520).
+It publishes a maintained hosts block at `https://raw.hellogithub.com/hosts`
+and `https://raw.hellogithub.com/hosts.json` — both are reachable **without**
+GitHub, so they still work when GitHub itself is blocked.
+
+This writes a system file, so ask the player for permission first. Back up the
+hosts file before editing it.
+
+**macOS / Linux**
 
 ```bash
-tar -xzf <GAME>-<PLATFORM>.tar.gz
-cd <GAME>-<PLATFORM>
-./<GAME>
+HOSTS=/etc/hosts
+sudo cp "$HOSTS" "$HOSTS.gameclaw.bak.$(date +%s)"
+curl -fsSL https://raw.hellogithub.com/hosts -o /tmp/github520.hosts
+
+# Remove an older GitHub520 block, then append the fresh one.
+sudo sed -i.bak '/^# GitHub520 Host Start$/,/^# GitHub520 Host End$/d' "$HOSTS"
+sudo tee -a "$HOSTS" < /tmp/github520.hosts > /dev/null
+
+# Flush DNS (macOS)
+sudo dscacheutil -flushcache 2>/dev/null || true
+sudo killall -HUP mDNSResponder 2>/dev/null || true
+# Linux
+sudo resolvectl flush-caches 2>/dev/null || sudo systemd-resolve --flush-caches 2>/dev/null || true
 ```
 
-### Example: lobster-cli-roguelike on macOS
+**Windows (PowerShell, run as Administrator)**
+
+```powershell
+$hosts = Join-Path $env:SystemRoot 'System32\drivers\etc\hosts'
+Copy-Item $hosts "$hosts.gameclaw.bak" -Force
+$raw = (Invoke-WebRequest https://raw.hellogithub.com/hosts -UseBasicParsing).Content
+$current = Get-Content $hosts -Raw
+$current = [regex]::Replace($current, '(?s)# GitHub520 Host Start.*?# GitHub520 Host End\r?\n?', '')
+Set-Content -Path $hosts -Value ($current.TrimEnd() + "`r`n" + $raw) -Encoding ASCII
+ipconfig /flushdns
+```
+
+Then retry the download. If `raw.hellogithub.com` itself is unreachable, go to
+the proxy fallback.
+
+### 2. HTTPS proxy
+
+Respect the player's proxy instead of inventing one:
 
 ```bash
-tar -xzf lobster-cli-roguelike-darwin-arm64.tar.gz
-cd lobster-cli-roguelike-darwin-arm64
-./lobster-cli-roguelike
+export HTTPS_PROXY=http://127.0.0.1:7890
+export HTTP_PROXY=http://127.0.0.1:7890
+gh release download ...    # or curl -fL ...
 ```
 
-### Troubleshooting
+```powershell
+$env:HTTPS_PROXY = 'http://127.0.0.1:7890'
+```
 
-- **Permission denied**: Run `chmod +x ./<GAME>` before executing.
-- **macOS Gatekeeper quarantine**: Run `xattr -d com.apple.quarantine ./<GAME>` to clear the quarantine flag.
-- **Missing release asset**: Check the [releases page](https://github.com/Arcobalneo/gameclaw/releases/latest) directly — if an asset is not listed, it has not been released for that platform. Say so plainly.
+If the player already has a proxy launcher (e.g. Clash), use it rather than
+guessing ports.
 
-## Safety / accuracy rules
+### 3. Accelerated mirror (last resort)
 
-- Prefer **released binaries** over source checkouts.
-- Do not claim unsupported platforms are supported.
-- Do not say binaries are impossible to reverse engineer — say binaries **reduce casual source visibility**.
-- If a release asset is missing, say so plainly.
-- Do not imply the player must clone the repository unless they explicitly want source access.
+Only when 1 and 2 both fail:
 
-This root `SKILL.md` is the stable distribution skill. Keep per-game mechanics, operator advice, and gameplay detail in each game's own `README.md` rather than re-expanding them here on every release.
+```bash
+curl -fL -o game.tar.gz "https://ghfast.top/https://github.com/Arcobalneo/gameclaw/releases/download/<tag>/<asset>"
+```
+
+Mirrors are untrusted. After downloading from a mirror, verify the asset against
+the release's `SHA256SUMS` before running it. If no checksum is available, say so
+plainly instead of pretending the download is verified.
+
+### Download commands
+
+```bash
+# Preferred: GitHub CLI
+gh release download --repo Arcobalneo/gameclaw --pattern 'lobster-cli-heist-linux-x64.tar.gz' --dir .
+
+# Fallback: curl
+curl -fL -o lobster-cli-heist-linux-x64.tar.gz \
+  https://github.com/Arcobalneo/gameclaw/releases/latest/download/lobster-cli-heist-linux-x64.tar.gz
+```
+
+Windows PowerShell:
+
+```powershell
+gh release download --repo Arcobalneo/gameclaw --pattern 'lobster-cli-heist-windows-x64.zip' --dir .
+```
+
+### Verify
+
+```bash
+sha256sum -c SHA256SUMS 2>/dev/null || shasum -a 256 -c SHA256SUMS
+```
+
+Every archive contains its own `SHA256SUMS`; each release also carries one
+aggregate `SHA256SUMS`.
+
+### Unpack and run
+
+macOS / Linux:
+
+```bash
+tar -xzf <game>-<platform>.tar.gz
+cd <game>-<platform>
+./<game> --version
+./<game> help
+```
+
+Windows:
+
+```powershell
+Expand-Archive <game>-windows-x64.zip
+cd <game>-windows-x64
+.\<game>.exe --version
+.\<game>.exe help
+```
+
+## Play as an agent
+
+GameClaw games are **step machines**, not full-screen TUIs. One tool call = one
+turn.
+
+```bash
+<game> new --seed 7              # start a run; returns state + legal actions
+<game> actions --json            # list legal action ids
+<game> act <action-id> --json    # resolve one action; returns log + next state + next actions
+<game> recap --json              # settlement: cause, timeline, honest memory lessons
+```
+
+Rules:
+
+- Prefer `--json`. It returns one object with `status`, `actions`, `log`, `events`,
+  `next`, `report` and `observer`.
+- `act` already returns the full next state. Do not call `status` after every
+  `act`; only call it when resuming a run in a new session.
+- Every run is deterministic for a given `--seed` plus action sequence.
+- `abort` is always legal and settles honestly.
+- Use `--state-dir <path>` (or `GAMECLAW_HOME`) to isolate a run in a sandbox.
+- `--no-observer --no-report` are the right flags for CI or headless batches.
+
+Example loop:
+
+```bash
+lobster-cli-roguelike new --seed 7 --json
+lobster-cli-roguelike act lineage:oracle --json
+lobster-cli-roguelike act enc:2 --json
+lobster-cli-roguelike recap --json
+```
+
+### Observer and reports
+
+- A local observer page starts on `http://127.0.0.1:8000+` and stops when the run ends.
+  `--no-observer` disables it.
+- A self-contained HTML settlement report is written to
+  `~/.gameclaw/<game-id>/reports/latest.html`, with a Markdown twin.
+  `--no-report` disables it.
+- The CLI prints `OBSERVER`, `REPORT` and `RECAP` lines with exact paths.
+
+## Troubleshooting
+
+| Symptom | Action |
+|---|---|
+| `Permission denied` | `chmod +x ./<game>` |
+| macOS "cannot be opened because the developer cannot be verified" | `xattr -d com.apple.quarantine ./<game>` |
+| Windows SmartScreen warning | More info → Run anyway; binaries are not code-signed |
+| `UNSUPPORTED` platform | Say so plainly; do not invent an asset |
+| Checksum mismatch | Delete the download, retry step 1, then re-download |
+| `SLOT_IN_USE` | Pick another `--slot 1`, or pass `--force` to overwrite |
+| `NO_SAVE` | Run `new` first |
+| Observer port busy | Games scan 8000-8039 automatically; or pass `--port` |
+
+## Safety and accuracy
+
+- Prefer released binaries over source checkouts.
+- Do not claim a platform is supported unless it appears in the table above.
+- Do not claim binaries are impossible to reverse engineer. They reduce casual
+  source visibility, nothing more.
+- Never fake a successful download. Report the failing step and the exact URL.
+- Never push a hosts/proxy change without telling the player what it changes and
+  how to revert it (the backup path).
+- The games do not store strategy for the player. They emit honest, single-run
+  observations and expect the agent to write durable lessons into its own memory.

@@ -295,3 +295,25 @@ NEXT   act enc:1
 - [ ] `docs/` 无与实现矛盾的描述；历史计划明确标注“归档”
 - [ ] 五个栈式 PR 均通过 CI
 - [ ] ClawHub 上的 `gameclaw` skill 更新到与仓库 `SKILL.md` 一致
+
+---
+
+## 13. 执行记录（2026-10-18）
+
+按栈式 PR 落地，每个 PR 的 base 是上一个 PR 的分支：
+
+| 分支 | 内容 | 验证 |
+|---|---|---|
+| `v2/01-plan` | 本计划 | 文档审阅 |
+| `v2/02-foundation` | pnpm workspace、`packages/gamekit`、脚本、CI | gamekit 22 个单测；`pnpm check` |
+| `v2/03-games` | 五款游戏 TS 重写 + 删除 Python 工具链 | 每款游戏 engine/CLI 测试；真实二进制 smoke |
+| `v2/04-release` | 五平台构建与发版流水线 | 本机交叉编译 darwin/linux/windows；YAML 校验 |
+| `v2/05-docs` | README / SKILL / catalog / docs 全量刷新 | `validate-catalog` + 链接检查 |
+
+落地时确认的关键事实：
+
+- `gamekit` 的文本 / JSON 契约在五款游戏中一致，`act` 单次调用即可完成一个回合。
+- macOS 产物做 ad-hoc codesign；Windows 产物为未签名 exe，README 已如实说明。
+- 观察者只监听 `127.0.0.1`，局终通过带 token 的 `/shutdown` 停止，并删除端口文件。
+- 所有状态均为纯 JSON；RNG 状态随存档保存，确定性回归测试覆盖每款游戏。
+- v0.x 存档不迁移；旧 release 继续可用。

@@ -1,34 +1,23 @@
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
+# OS
 .DS_Store
+Thumbs.db
 
-# game build outputs
-build/
-dist/
-*.build/
-*.dist/
-
-# nested game envs / artifacts
-games/*/.venv-build/
-games/*/build/
-games/*/dist/
-games/*/*.egg-info/
-games/*/__pycache__/
-games/*/*.pyc
-games/*/*/__pycache__/
-games/*/*/*.pyc
-games/*/settlement_reports/
-settlement_reports/
-
-# local tooling
-.venv/
-# smoke-test extracted binaries
-games/*/smoke-bin/
-
-# Node / TypeScript
+# Node / package managers
 node_modules/
+.pnpm-store/
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
 coverage/
 *.tsbuildinfo
-.pnpm-store/
+
+# Local game state (should live in ~/.gameclaw, but keep sandboxes out of git)
+.gameclaw/
+settlement_reports/
+
+# Logs and local env
+*.log
+.env
+.env.local

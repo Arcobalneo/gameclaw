@@ -17,7 +17,8 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "build:game": "node scripts/build-game.mjs",
-    "test:game": "node scripts/test-game.mjs"
+    "test:game": "node scripts/test-game.mjs",
+    "validate:catalog": "node scripts/validate-catalog.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",

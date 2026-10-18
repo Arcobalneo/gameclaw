@@ -1,3 +1,7 @@
+> **Archived snapshot.** This log records public Skill Forge feedback from March
+> 2026, before the v2 TypeScript rewrite. It is kept for product context only;
+> the current implementation and the current `SKILL.md` take precedence.
+
 # Forge Feedback Log
 
 This document collects user feedback left on the Noumena Skill Forge page for `gameclaw`.
