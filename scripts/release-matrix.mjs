@@ -11,8 +11,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PLATFORM_RUNNERS = [
   { platform: 'linux-x64', runner: 'ubuntu-latest', native: true },
   { platform: 'linux-arm64', runner: 'ubuntu-latest', native: false },
-  { platform: 'darwin-arm64', runner: 'macos-14', native: true },
-  { platform: 'darwin-x64', runner: 'macos-14', native: false },
+  { platform: 'darwin-arm64', runner: 'macos-15', native: true },
+  { platform: 'darwin-x64', runner: 'macos-15', native: false },
   { platform: 'windows-x64', runner: 'windows-2025', native: true },
 ];
 

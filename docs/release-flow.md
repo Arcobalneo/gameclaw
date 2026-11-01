@@ -78,8 +78,8 @@ workflow.
 |---|---|---|---|
 | `linux-x64` | `ubuntu-latest` | native | `.tar.gz` |
 | `linux-arm64` | `ubuntu-latest` | cross | `.tar.gz` |
-| `darwin-arm64` | `macos-14` | native | `.tar.gz` |
-| `darwin-x64` | `macos-14` | cross | `.tar.gz` |
+| `darwin-arm64` | `macos-15` | native | `.tar.gz` |
+| `darwin-x64` | `macos-15` | cross | `.tar.gz` |
 | `windows-x64` | `windows-latest` | native | `.zip` |
 
 Six games × five platforms = 30 artifacts per release.
