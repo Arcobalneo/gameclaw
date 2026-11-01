@@ -18,6 +18,9 @@ All notable changes to `gameclaw` are documented here.
 ### Changed
 
 - `catalog/games.json` now lists six games; release matrix builds 30 artifacts.
+- Darwin release jobs build on `macos-15`; the previous `macos-14` image is in
+  scheduled brownout before its 2026-11-02 retirement, which silently cancelled
+  every macOS job and skipped the publish step.
 - Root `README.md`, `README.zh-CN.md` and `SKILL.md` list `pumpkin-rampage`.
 
 ## v2.0.0 — 2026-10-18
