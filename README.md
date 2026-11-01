@@ -72,8 +72,9 @@ The full design canon lives in
 | **横着潜** `lobster-cli-heist` | Read patrols and cameras, take the objective, then extract under pressure | Grab early and leave noisy, or verify the target and risk lockdown |
 | **横着抓** `lobster-cli-tamer` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
 | **横着看** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
+| **南瓜大暴走** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
 
-All five ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
+All six ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
 
 ### Platform support
@@ -226,7 +227,7 @@ for repo conventions.
 
 ## Releases
 
-Tagging `vX.Y.Z` builds all 25 artifacts (5 games × 5 platforms) and attaches
+Tagging `vX.Y.Z` builds all 30 artifacts (6 games × 5 platforms) and attaches
 them, plus an aggregate `SHA256SUMS`, to a GitHub Release. The release matrix is
 derived from `catalog/games.json` / `games/*/package.json`, so adding a game does
 not require editing the workflow. Details: [`docs/release-flow.md`](docs/release-flow.md).

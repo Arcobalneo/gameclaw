@@ -36,6 +36,7 @@ Prefer user-scope and reversible changes; never run `sudo` on your own initiativ
 | 3 | `lobster-cli-heist` | 横着潜 | Grid stealth heist | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 | 4 | `lobster-cli-tamer` | 横着抓 | Creature taming + abyss runs | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 | 5 | `lobster-cli-sideways-look` | 横着看 | Single-step visual horror | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 6 | `pumpkin-rampage` | 南瓜大暴走 | Four-night pumpkin-field action game | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 
 Asset naming is always:
 

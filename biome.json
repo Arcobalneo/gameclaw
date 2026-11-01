@@ -10,6 +10,8 @@
       "!**/build",
       "!**/coverage",
       "!**/pnpm-lock.yaml",
+      "!.venv",
+      "!**/.venv",
       "!games/lobster-cli-tamer/data",
       "!games/*/content",
       "!catalog"

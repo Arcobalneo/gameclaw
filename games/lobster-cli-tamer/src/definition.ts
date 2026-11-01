@@ -850,7 +850,7 @@ export const definition: GameDefinition<TamerState> = {
     tagline: '只给龙虾玩的 CLI 捕兽养成',
     description:
       '你是一名甲录师，在潮礁海域捕捉、培养与编队虾米：野外抓宠、词条工坊洗词条、无尽深渊刷材料。深渊里 HP 归零就是永久死亡，撤退时疫病还要掷死亡骰。',
-    version: '2.0.0',
+    version: '2.1.0',
     repo: REPO,
     license: 'MIT',
     guide: [

@@ -227,6 +227,49 @@
           ".\\<binary>.exe --version"
         ]
       }
+    },
+    {
+      "id": "pumpkin-rampage",
+      "name": "南瓜大暴走",
+      "englishName": "Pumpkin Rampage",
+      "tagline": "四夜六动作，找怪、安抚、收成",
+      "summary": "四夜田园动作短局：探明六畦田里会滚会跑会弹会飞的南瓜怪，用糖果、小调或轻拍安抚它们，同时把南瓜种下去、浇上水、收回来。第三夜全体暴走，每做一个动作它们就换一次畦。",
+      "genres": [
+        "action",
+        "farming",
+        "turn-based"
+      ],
+      "source_dir": "games/pumpkin-rampage",
+      "binary": "pumpkin-rampage",
+      "status": "stable",
+      "observer": true,
+      "reports": true,
+      "platforms": [
+        "darwin-arm64",
+        "darwin-x64",
+        "linux-x64",
+        "linux-arm64",
+        "windows-x64"
+      ],
+      "release_assets": {
+        "darwin-arm64": "pumpkin-rampage-darwin-arm64.tar.gz",
+        "darwin-x64": "pumpkin-rampage-darwin-x64.tar.gz",
+        "linux-x64": "pumpkin-rampage-linux-x64.tar.gz",
+        "linux-arm64": "pumpkin-rampage-linux-arm64.tar.gz",
+        "windows-x64": "pumpkin-rampage-windows-x64.zip"
+      },
+      "run": {
+        "unix": [
+          "tar -xzf <asset>",
+          "cd <id>-<platform>",
+          "./<binary> --version"
+        ],
+        "windows": [
+          "Expand-Archive <asset>",
+          "cd <id>-<platform>",
+          ".\\<binary>.exe --version"
+        ]
+      }
     }
   ]
 }

@@ -2,6 +2,24 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.1.0 — 2026-11-01
+
+### Added
+
+- `南瓜大暴走` / `pumpkin-rampage`: a four-night pumpkin-field action game.
+  Four nights × six actions on one shared stamina bar; probe plots to reveal
+  four monster kinds and three moods, soothe them with candy / song / pat, and
+  grow four pumpkins before dawn. Night 3 is a full rampage: after every action
+  all monsters swap plots, so scouted information expires immediately.
+- Deterministic replay tests for the new game (`--seed` → identical status and
+  action list), plus CLI coverage for illegal actions, stamina cost, recap and
+  abort.
+
+### Changed
+
+- `catalog/games.json` now lists six games; release matrix builds 30 artifacts.
+- Root `README.md`, `README.zh-CN.md` and `SKILL.md` list `pumpkin-rampage`.
+
 ## v2.0.0 — 2026-10-18
 
 The TypeScript/gamekit rewrite. Everything below is user-visible; see

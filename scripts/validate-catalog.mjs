@@ -16,6 +16,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PLATFORMS = ['darwin-arm64', 'darwin-x64', 'linux-x64', 'linux-arm64', 'windows-x64'];
 const errors = [];
 
+const rootVersion = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
+
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'catalog', 'games.json'), 'utf8'));
 if (catalog.schema !== 1) errors.push(`catalog: unsupported schema ${catalog.schema}`);
 if (JSON.stringify(catalog.platforms) !== JSON.stringify(PLATFORMS)) {
@@ -48,7 +50,9 @@ for (const game of catalog.games) {
     errors.push(`${game.id}: missing package.json`);
   } else {
     const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf8'));
-    if (pkg.version !== '2.0.0') errors.push(`${game.id}: package version ${pkg.version} != 2.0.0`);
+    if (pkg.version !== rootVersion) {
+      errors.push(`${game.id}: package version ${pkg.version} != ${rootVersion} (root package.json)`);
+    }
   }
   if (game.binary !== game.id) errors.push(`${game.id}: binary must equal the game id`);
   for (const platform of PLATFORMS) {

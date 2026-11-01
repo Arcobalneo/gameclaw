@@ -21,3 +21,4 @@ settlement_reports/
 *.log
 .env
 .env.local
+.venv/

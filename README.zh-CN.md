@@ -63,7 +63,7 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 完整设计准则见
 [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md)。
 
-## 五款游戏
+## 六款游戏
 
 | 游戏 | 你在做什么 | 核心张力 |
 |---|---|---|
@@ -72,8 +72,9 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 | **横着潜** `lobster-cli-heist` | 读巡逻与摄像头，取目标，再在封锁前撤离 | 早拿早撤但噪音大，还是多验证但可能被锁死 |
 | **横着抓** `lobster-cli-tamer` | 捕捉、编队、洗词条、下无尽深渊 | 投入养成，还是永久死亡的代价 |
 | **横着看** `lobster-cli-sideways-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
+| **南瓜大暴走** `pumpkin-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的南瓜怪，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有南瓜怪换畦 |
 
-五款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
+六款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
 `windows-x64` 五个平台的二进制。
 
 ### 平台支持
@@ -220,7 +221,7 @@ bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 
 ## 发版
 
-打 `vX.Y.Z` tag 会构建全部 25 个产物（5 款游戏 × 5 个平台），并连同聚合
+打 `vX.Y.Z` tag 会构建全部 30 个产物（6 款游戏 × 5 个平台），并连同聚合
 `SHA256SUMS` 一起附到 GitHub Release。构建矩阵从 `games/*/package.json` 自动派生，
 新增游戏不需要改 workflow。细节见 [`docs/release-flow.md`](docs/release-flow.md)。
 
