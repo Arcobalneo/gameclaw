@@ -14,7 +14,12 @@
       "!**/.venv",
       "!games/lobster-cli-tamer/data",
       "!games/*/content",
-      "!catalog"
+      "!catalog",
+      "!**/.venv-build",
+      "!**/__pycache__",
+      "!**/*.egg-info",
+      "!**/.tmp",
+      "!**/smoke-bin"
     ]
   },
   "formatter": {

@@ -2,6 +2,28 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.2.0 — 2026-11-02
+
+### Added
+
+- `横着写` / `lobster-cli-ink`: an eighteen-act investigation narrative. Six
+  sites, three starting profiles (believer / skeptic / scribe), twelve one-shot
+  conversations, and a buried brush that only surfaces at the true site with
+  enough belief or proof. Belief finds leads faster and swallows false ones;
+  proof verifies leads and unlocks a skeptic's pen. Every write adds ink debt:
+  backlash from 3, a life per act from 5, and a `墨噬` ending at 6.
+- Nine endings: `执笔` / `证笔` / `售笔` / `封笔` / `寻笔` / `劝世` / `墨尽` /
+  `墨噬` / `收壳`; selling the brush is the safest payout and the lowest score.
+- Engine tests (19) covering determinism, action space, travel economy, lead
+  verification, dig gating, pen probing, debt backlash, all settle branches and
+  abort; CLI tests (6) for `new / act / recap / abort` and same-seed replay.
+
+### Changed
+
+- `catalog/games.json` now lists seven games; release matrix builds 35 artifacts.
+- Root `README.md`, `README.zh-CN.md`, `SKILL.md` and all game packages move to
+  `2.2.0`.
+
 ## v2.1.0 — 2026-11-01
 
 ### Added

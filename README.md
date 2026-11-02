@@ -73,8 +73,9 @@ The full design canon lives in
 | **横着抓** `lobster-cli-tamer` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
 | **横着看** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
 | **南瓜大暴走** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
+| **横着写** `lobster-cli-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
 
-All six ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
+All seven ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
 
 ### Platform support

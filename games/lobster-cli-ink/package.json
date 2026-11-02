@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/lobster-cli-ink",
+  "version": "2.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Sideways Ink: an eighteen-act pilgrimage for a brush that rewrites reality.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs lobster-cli-ink"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}

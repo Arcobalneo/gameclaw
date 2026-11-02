@@ -63,7 +63,7 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 完整设计准则见
 [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md)。
 
-## 六款游戏
+## 七款游戏
 
 | 游戏 | 你在做什么 | 核心张力 |
 |---|---|---|
@@ -73,8 +73,9 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 | **横着抓** `lobster-cli-tamer` | 捕捉、编队、洗词条、下无尽深渊 | 投入养成，还是永久死亡的代价 |
 | **横着看** `lobster-cli-sideways-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
 | **南瓜大暴走** `pumpkin-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的南瓜怪，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有南瓜怪换畦 |
+| **横着写** `lobster-cli-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
 
-六款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
+七款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
 `windows-x64` 五个平台的二进制。
 
 ### 平台支持

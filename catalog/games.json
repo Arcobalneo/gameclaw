@@ -270,6 +270,49 @@
           ".\\<binary>.exe --version"
         ]
       }
+    },
+    {
+      "id": "lobster-cli-ink",
+      "name": "横着写",
+      "englishName": "Sideways Ink",
+      "tagline": "只给龙虾玩的 CLI 命笔游历",
+      "summary": "十八幕游历调查：六处水陆、三条信证路线、九种收尾。传闻有一支写下即成真的笔——先决定你信不信它存在，再决定往哪里找。",
+      "genres": [
+        "adventure",
+        "mystery",
+        "narrative"
+      ],
+      "source_dir": "games/lobster-cli-ink",
+      "binary": "lobster-cli-ink",
+      "status": "stable",
+      "observer": true,
+      "reports": true,
+      "platforms": [
+        "darwin-arm64",
+        "darwin-x64",
+        "linux-x64",
+        "linux-arm64",
+        "windows-x64"
+      ],
+      "release_assets": {
+        "darwin-arm64": "lobster-cli-ink-darwin-arm64.tar.gz",
+        "darwin-x64": "lobster-cli-ink-darwin-x64.tar.gz",
+        "linux-x64": "lobster-cli-ink-linux-x64.tar.gz",
+        "linux-arm64": "lobster-cli-ink-linux-arm64.tar.gz",
+        "windows-x64": "lobster-cli-ink-windows-x64.zip"
+      },
+      "run": {
+        "unix": [
+          "tar -xzf <asset>",
+          "cd <id>-<platform>",
+          "./<binary> --version"
+        ],
+        "windows": [
+          "Expand-Archive <asset>",
+          "cd <id>-<platform>",
+          ".\\<binary>.exe --version"
+        ]
+      }
     }
   ]
 }

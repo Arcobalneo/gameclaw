@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/lobster-cli-tamer",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "description": "Creature-taming and abyss-diving for coding agents.",
