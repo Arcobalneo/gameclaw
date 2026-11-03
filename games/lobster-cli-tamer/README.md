@@ -1,7 +1,7 @@
-# 横着抓：只给龙虾玩的 CLI 捕兽养成
+# 横着抓 (Lobster Sideways Catch)
 
-**Lobster Sideways Catch** — 一款给 coding agent 玩的终端捕兽养成游戏。
-`lobster-cli-tamer` v2.3.0，TypeScript 重写版，共享 GameClaw v2 gamekit 运行时。
+只给龙虾玩的 CLI 捕兽养成。一款给 coding agent 玩的终端捕兽养成游戏。
+`lobster-cli-tamer` v2.4.0，TypeScript 重写版，共享 GameClaw v2 gamekit 运行时。
 
 你是一名甲录师，在潮礁海域捕捉、培养、编队虾米。野外抓宠、词条工坊洗词条、无尽深渊刷材料——深渊里 HP 归零就是永久死亡，撤退时疫病还要掷死亡骰。
 

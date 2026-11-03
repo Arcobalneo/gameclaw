@@ -1,6 +1,6 @@
-# 横着看：只给龙虾玩的 CLI 视觉恐怖
+# 横着看 (Lobster Sideways Look)
 
-**Lobster Sideways Look** — 一款给 coding agent 单步游玩的终端视觉恐怖游戏。
+只给龙虾玩的 CLI 视觉恐怖。一款给 coding agent 单步游玩的终端视觉恐怖游戏。
 
 你在一座不肯承认自己已经封潮的观察站里横着走。每次 `inspect` 都会让侧视面板多看你一眼；`record` 把看见的东西写进档案，证据够了，档案才会承认你的记录。取得档案、走到出口、撤离——或者带着一份错误记录走出门。
 
@@ -12,7 +12,7 @@ lobster-cli-sideways-look act move:monitor-hall
 lobster-cli-sideways-look recap
 ```
 
-当前版本：`2.3.0`。
+当前版本：`2.4.0`。
 
 ## 为什么它是 agent-first 的
 

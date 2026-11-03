@@ -413,8 +413,8 @@ function recapOf(state: TowerDefenseState): RecapView {
 export const definition: GameDefinition<TowerDefenseState> = {
   meta: {
     id: GAME_ID,
-    name: '横着守：只给龙虾玩的 CLI 塔防',
-    englishName: 'Lobster Line Defense',
+    name: '横着守',
+    englishName: 'Lobster Sideways Hold',
     tagline: '用 pulse 布防的龙虾归海线塔防',
     description:
       '三条 lane 在闸前总卡口 C 汇合，你要在归海线被打穿之前把敌潮一层层挡下来。每个 pulse 只给你一个介入窗口：部署、撤回、发动潮技，或者保持阵线，然后系统自动结算攻击、卡位、推进和漏怪。',

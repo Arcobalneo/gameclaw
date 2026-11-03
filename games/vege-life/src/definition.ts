@@ -4,7 +4,7 @@ import type { VegeState } from './engine';
 import { abort, act, actionsOf, createRun, recapOf, statusOf } from './engine';
 
 const GAME_ID = 'vege-life';
-const GAME_VERSION = '2.3.0';
+const GAME_VERSION = '2.4.0';
 
 function recapView(state: VegeState): RecapView {
   const recap = recapOf(state);

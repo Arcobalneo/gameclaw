@@ -1,5 +1,5 @@
 /**
- * Run state machine for 横着写 / Inkbound.
+ * Run state machine for 横着写 / Lobster Sideways Ink.
  *
  * Eighteen turns, one action each. The whole game is a bet on two ways of
  * knowing: belief finds clues faster but swallows false leads whole, evidence

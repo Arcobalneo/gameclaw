@@ -1,9 +1,9 @@
 {
   "name": "@gameclaw/lobster-cli-ink",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "type": "module",
-  "description": "Sideways Ink: an eighteen-act pilgrimage for a brush that rewrites reality.",
+  "description": "Lobster Sideways Ink: an eighteen-act pilgrimage for a brush that rewrites reality.",
   "scripts": {
     "start": "bun src/main.ts",
     "check": "tsc -p tsconfig.json",

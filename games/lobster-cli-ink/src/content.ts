@@ -1,5 +1,5 @@
 /**
- * Static content for 横着写 / Inkbound.
+ * Static content for 横着写 / Lobster Sideways Ink.
  *
  * Everything here is data: six stops on the road, three starting profiles and
  * the twelve conversations that stand in for a whole world of rumours. The

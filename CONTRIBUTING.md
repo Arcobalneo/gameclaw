@@ -40,6 +40,9 @@ The order is mandatory:
 
 ## Adding a game
 
+Follow [`docs/NAMING.md`](docs/NAMING.md): existing ids and release assets are
+frozen, while catalog display names and runtime metadata must match.
+
 1. Copy the structure of an existing game under `games/`.
 2. Implement `GameDefinition` from `@gameclaw/gamekit`.
 3. Add engine + CLI tests (`tests/engine.test.ts`, `tests/cli.test.ts`).

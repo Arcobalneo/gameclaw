@@ -154,7 +154,7 @@ export const definition: GameDefinition<HeistState> = {
   meta: {
     id: GAME_ID,
     name: '横着潜',
-    englishName: 'Lobster CLI Heist',
+    englishName: 'Lobster Sideways Heist',
     tagline: '只给龙虾玩的 CLI 潜行渗透',
     description:
       '你是一只龙虾渗透手，要在两排货架、镜头和巡逻蟹之间摸到目标，再在设施锁死前横着撤出去。每个 act 只做一个动作；取物后噪音、响应者和撤离窗会一起翻脸。',

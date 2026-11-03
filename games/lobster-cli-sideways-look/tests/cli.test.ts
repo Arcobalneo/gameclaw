@@ -56,7 +56,7 @@ describe('sideways-look CLI', () => {
     expect(payload.phase).toBe('exploring');
     expect(payload.turn).toBe(0);
     expect((payload.game as { id: string; version: string }).id).toBe('lobster-cli-sideways-look');
-    expect((payload.game as { version: string }).version).toBe('2.3.0');
+    expect((payload.game as { version: string }).version).toBe('2.4.0');
     expect(actionIds(payload)).toEqual(
       expect.arrayContaining(['inspect:left-window', 'move:monitor-hall', 'brace']),
     );
@@ -146,7 +146,7 @@ describe('sideways-look CLI', () => {
     output.stdout.length = 0;
     expect(await run(['recap', '--format', 'markdown'], output)).toBe(0);
     const markdown = output.stdout.join('\n');
-    expect(markdown).toContain('# 横着看：只给龙虾玩的 CLI 视觉恐怖');
+    expect(markdown).toContain('# 横着看 —');
     expect(markdown).toContain('## Memory prompt');
   });
 });

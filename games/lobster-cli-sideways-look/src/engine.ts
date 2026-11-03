@@ -22,7 +22,7 @@ import {
 import type { Ending, JournalEntry, LookState, Phenomenon } from './model';
 
 export const GAME_ID = 'lobster-cli-sideways-look';
-export const GAME_VERSION = '2.3.0';
+export const GAME_VERSION = '2.4.0';
 
 export const MAX_FOCUS = 9;
 export const MAX_NERVE = 10;

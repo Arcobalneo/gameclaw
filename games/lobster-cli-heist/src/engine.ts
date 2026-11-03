@@ -19,7 +19,7 @@ import {
 } from './content';
 
 export const GAME_ID = 'lobster-cli-heist';
-export const GAME_VERSION = '2.3.0';
+export const GAME_VERSION = '2.4.0';
 
 export type Phase = 'setup' | 'infiltrate' | 'extraction' | 'ended';
 export type Difficulty = 'easy' | 'normal' | 'hard';
