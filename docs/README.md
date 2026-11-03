@@ -17,7 +17,8 @@ Maintainer-facing documentation. Player-facing content lives in the root
 owns one deterministic state machine and its content. `catalog/games.json` is the
 machine-readable manifest. `scripts/` builds and tests one game at a time.
 `.github/workflows` runs CI and the five-platform release. The root `SKILL.md`
-teaches an agent to download, verify and play the released binaries.
+teaches an agent to look up games from the latest Release and the catalog, then
+download, verify and play the binaries.
 
 ## Where to put documentation
 

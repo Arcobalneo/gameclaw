@@ -1,6 +1,6 @@
 ---
 name: gameclaw
-description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles."
+description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles. Look up the live game list from the latest GitHub Release and catalog/games.json; this skill does not contain that list."
 version: 2.3.0
 ---
 
@@ -9,7 +9,7 @@ version: 2.3.0
 GameClaw ships **terminal games as single-file binaries** for macOS, Linux and
 Windows. This skill is for the agent who owns the player's machine. Its job is:
 
-1. tell the player which games exist;
+1. look up which games exist **right now** (this file does not list them);
 2. install a game bundle correctly;
 3. update an installed game **without touching saves**;
 4. fix GitHub download problems before concluding anything is missing.
@@ -27,18 +27,33 @@ Prefer user-scope and reversible changes; never run `sudo` on your own initiativ
 - Repo: `https://github.com/Arcobalneo/gameclaw`
 - Releases: `https://github.com/Arcobalneo/gameclaw/releases/latest`
 
-## 1. Game catalog
+## 1. Discover the current games
 
-| # | Game ID | Name | Genre | Platforms |
-|---|---------|------|-------|-----------|
-| 1 | `lobster-cli-roguelike` | 横着活 | Infinite tide-cycle roguelike | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 2 | `lobster-cli-tower-defense` | 横着守 | Pulse-based lane tower defense | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 3 | `lobster-cli-heist` | 横着潜 | Grid stealth heist | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 4 | `lobster-cli-tamer` | 横着抓 | Creature taming + abyss runs | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 5 | `lobster-cli-sideways-look` | 横着看 | Single-step visual horror | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 6 | `pumpkin-rampage` | 南瓜大暴走 | Four-night pumpkin-field action game | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 7 | `lobster-cli-ink` | 横着写 | Investigation narrative: belief, proof and pen debt | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
-| 8 | `vege-life` | 素食人生 | Sixteen-meal vegetarian life under family and social pressure | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+This skill does **not** keep a game list, a count, or a table of ids. Those go
+stale. This file is the only distribution entrypoint (ClawHub and other
+registries should publish this copy, not a second list). Look the games up, in
+this order, every time the player asks what exists:
+
+1. **Latest release** — what can actually be downloaded, plus the release notes:
+   `https://github.com/Arcobalneo/gameclaw/releases/latest`
+2. **Catalog** — machine-readable ids, names and asset names. Releases do not
+   attach a catalog file; read `main`:
+   `https://raw.githubusercontent.com/Arcobalneo/gameclaw/main/catalog/games.json`
+   Use `games[].id`, `name`, `englishName`, `tagline`, `platforms` and
+   `release_assets`. If `main` lists an id the latest release does not ship,
+   say it is not downloadable yet.
+3. **READMEs, only as a supplement** if the two sources above fail:
+   `https://github.com/Arcobalneo/gameclaw/blob/main/README.md`
+   and `README.zh-CN.md` beside it. If they disagree with the release or the
+   catalog, say so. Downloads follow the release. Ids follow the catalog.
+
+```bash
+gh release view --repo Arcobalneo/gameclaw --json tagName,name,body,assets
+curl -fsSL https://raw.githubusercontent.com/Arcobalneo/gameclaw/main/catalog/games.json
+```
+
+Show the player a numbered list built from that response. Never invent an id,
+and never answer "which games exist" from memory of this file.
 
 Asset naming is always:
 
@@ -99,7 +114,7 @@ a binary never deletes a run.
 Set three variables first:
 
 ```bash
-GAME=lobster-cli-heist
+GAME=<game-id>                 # id from catalog/games.json, present on the latest release
 PLATFORM=darwin-arm64          # from step 2
 ASSET="$GAME-$PLATFORM.tar.gz"
 ```
@@ -141,7 +156,8 @@ rm -rf "$TMP"
 Windows equivalent:
 
 ```powershell
-$Game='lobster-cli-heist'; $Platform='windows-x64'; $Asset="$Game-$Platform.zip"
+$Game = '<game-id>'            # from the catalog, not from memory
+$Platform = 'windows-x64'; $Asset = "$Game-$Platform.zip"
 $Tmp = Join-Path $env:TEMP ("gameclaw-" + [guid]::NewGuid())
 New-Item -ItemType Directory -Force -Path $Tmp | Out-Null
 
@@ -201,7 +217,7 @@ Rules for updates:
 - Keep `<game>.previous` until the new binary answers `--version`.
 - Never delete `~/.gameclaw/` or the selected `--state-dir` during an update.
 - On Windows, make sure the game is not running before replacing the `.exe`.
-- To update every installed game, loop the catalog in step 1 and repeat.
+- To update every installed game, loop the ids you just fetched and repeat.
 - To roll back: `mv "$BIN/$GAME.previous" "$BIN/$GAME"`.
 
 ### Update this skill itself
@@ -214,11 +230,14 @@ to reinstall it.
 ## 6. Launch and play (minimal)
 
 ```bash
-"$BIN/lobster-cli-heist" new --seed 7
-"$BIN/lobster-cli-heist" actions
-"$BIN/lobster-cli-heist" act <action-id>
-"$BIN/lobster-cli-heist" recap
+"$BIN/<game-id>" new --seed 7
+"$BIN/<game-id>" actions
+"$BIN/<game-id>" act <action-id>
+"$BIN/<game-id>" recap
 ```
+
+`<game-id>` is the catalog id. The command surface is the same for every game.
+Which id is current comes from the catalog, not from this file.
 
 - Use `--json` for one machine-readable object per call.
 - `act` returns the full next state, so one call = one turn.
@@ -313,7 +332,8 @@ is available, report that instead of pretending it is verified.
 ## 9. Accuracy and safety rules
 
 - Prefer released binaries over source checkouts.
-- Do not claim a platform is supported unless it appears in the catalog table.
+- Do not claim a platform or a game id is supported unless the live catalog
+  lists it and the latest release has the asset.
 - Do not claim binaries are impossible to reverse engineer. They reduce casual
   source visibility, nothing more.
 - Never fake a successful download, never invent a checksum, and never silently

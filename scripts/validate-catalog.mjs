@@ -6,7 +6,8 @@
  * - a catalog entry points at a missing game or package
  * - a shipped game is missing from the catalog
  * - a platform / asset name does not follow the naming contract
- * - README.md / SKILL.md no longer mention a shipped game id
+ * - README.md no longer mentions a shipped game id
+ * - SKILL.md hardcodes a shipped game id (the skill must look the list up)
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -76,7 +77,13 @@ const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
 const skill = fs.readFileSync(path.join(ROOT, 'SKILL.md'), 'utf8');
 for (const id of shipped) {
   if (!readme.includes(id)) errors.push(`README.md does not mention ${id}`);
-  if (!skill.includes(id)) errors.push(`SKILL.md does not mention ${id}`);
+  if (skill.includes(id)) errors.push(`SKILL.md must not hardcode shipped game id ${id}`);
+}
+for (const needle of [
+  'https://github.com/Arcobalneo/gameclaw/releases/latest',
+  'catalog/games.json',
+]) {
+  if (!skill.includes(needle)) errors.push(`SKILL.md does not mention ${needle}`);
 }
 for (const platform of PLATFORMS) {
   if (!skill.includes(platform)) errors.push(`SKILL.md does not mention platform ${platform}`);

@@ -99,14 +99,15 @@ GameClaw 是一个包含八款终端游戏的 monorepo。它的第一性原理�
 
 请阅读 https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md 并照做：
 1. 自动判断我的平台。
-2. 把八款 GameClaw 游戏作为编号列表展示给我。
+2. 从最新 GitHub Release 和 catalog/games.json 查出当前有哪些游戏，按编号列表展示。不要用旧技能里记住的名单。
 3. 问我要玩第几个，然后下载、校验并启动对应游戏。
 4. 第一局请直接给我 `new` / `actions` / `act` 的具体命令。
 
 如果 GitHub 慢或连不上，先按技能里的 GitHub520 章节处理，不要直接下结论说资源不存在。
 ```
 
-Agent 会使用已发布的 [SKILL.md](SKILL.md)。该技能是自包含的，不要求本仓库被克隆。
+Agent 会使用已发布的 [SKILL.md](SKILL.md)。技能本身不写游戏名单，只引导去最新
+Release 和 `catalog/games.json` 查询，再按结果安装。不要求本仓库被克隆。
 
 ## 手动安装
 
@@ -188,7 +189,7 @@ gameclaw/
 ├── catalog/games.json    # 机器可读发行清单
 ├── scripts/              # build-game.mjs / test-game.mjs / release-matrix.mjs
 ├── docs/                 # 架构、发版、设计准则、计划归档
-└── SKILL.md              # 自包含分发技能
+└── SKILL.md              # 分发技能：去 Releases / catalog 查游戏
 ```
 
 `gamekit` 不认识任何具体游戏；游戏不接触 argv、进程退出、存档或 HTML。
@@ -236,7 +237,7 @@ bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | 给 agent 与人的仓库规范 |
 | [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | 每款游戏都必须回答的 20 条设计准则 |
 | [`docs/plans/`](docs/plans/) | 当前与归档的设计计划 |
-| [`SKILL.md`](SKILL.md) | 可分发、自包含的 agent 技能 |
+| [`SKILL.md`](SKILL.md) | Agent 技能：去 Releases 和 catalog 查询，再安装并启动 |
 
 ## 安全边界
 

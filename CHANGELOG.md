@@ -25,8 +25,10 @@ All notable changes to `gameclaw` are documented here.
   artifacts (8 games × 5 platforms).
 - Root `package.json`, every game package and each game's `GAME_VERSION` move
   to `2.3.0`. Gameplay of the existing seven games is unchanged.
-- Root `README.md`, `README.zh-CN.md`, `SKILL.md`, architecture and release
-  docs count eight games.
+- Root `README.md`, `README.zh-CN.md`, architecture and release docs count eight
+  games. `SKILL.md` no longer embeds a game list or a count: agents query the
+  latest GitHub Release, then `catalog/games.json` on `main`. READMEs are only
+  a supplement. `validate-catalog` rejects a skill that hardcodes a shipped id.
 
 ## v2.2.0 — 2026-11-02
 

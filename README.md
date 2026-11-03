@@ -99,7 +99,7 @@ You are my GameClaw operator.
 
 Read https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md and follow it.
 1. Detect my platform.
-2. Show me the eight GameClaw games as a numbered list.
+2. Look up the current games from the latest GitHub Release and catalog/games.json. Show that live list as a numbered list. Do not use a list remembered from an old skill.
 3. Ask which number I want, then download, verify and launch that game.
 4. For the first run, show me the exact `new` / `actions` / `act` commands.
 
@@ -108,7 +108,9 @@ concluding that anything is missing.
 ```
 
 The agent will use the published [SKILL.md](SKILL.md), which is also distributed
-through ClawHub. It is self-contained and does not assume this repo is cloned.
+through ClawHub. The skill does not embed a game list. It tells the agent to
+query the latest Release and `catalog/games.json`, then install from there. It
+does not assume this repo is cloned.
 
 ## Manual install
 
@@ -192,7 +194,7 @@ gameclaw/
 ├── catalog/games.json    # machine-readable release manifest
 ├── scripts/              # build-game.mjs, test-game.mjs, release-matrix.mjs
 ├── docs/                 # architecture, release flow, design rules, plans
-└── SKILL.md              # self-contained distribution skill
+└── SKILL.md              # distribution skill: look up games via Releases/catalog
 ```
 
 `gamekit` knows nothing about any specific game. Games know nothing about argv,
@@ -243,7 +245,7 @@ not require editing the workflow. Details: [`docs/release-flow.md`](docs/release
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | Repo conventions for agents and humans |
 | [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | The 20 design rules every game must answer to |
 | [`docs/plans/`](docs/plans/) | Current and archived design plans |
-| [`SKILL.md`](SKILL.md) | The distributable, self-contained agent skill |
+| [`SKILL.md`](SKILL.md) | Agent skill: query Releases and the catalog, then install and launch |
 
 ## Security posture
 
