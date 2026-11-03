@@ -67,15 +67,15 @@ The full design canon lives in
 
 | Game | What you actually do | Core tension |
 |---|---|---|
-| **横着活 (Lobster Sideways Run)** `lobster-cli-roguelike` | Run endless tide cycles: 9 encounters, a mutation tide, then a lethal sea gate | Push deeper for build payoff, or bank a survivable exit |
-| **横着守 (Lobster Sideways Hold)** `lobster-cli-tower-defense` | Hold three lanes with six deploy slots across pulse-based waves | Spend tide now, or hold it for the wave that actually breaks you |
-| **横着潜 (Lobster Sideways Heist)** `lobster-cli-heist` | Read patrols and cameras, take the objective, then extract under pressure | Grab early and leave noisy, or verify the target and risk lockdown |
-| **横着抓 (Lobster Sideways Catch)** `lobster-cli-tamer` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
-| **横着看 (Lobster Sideways Look)** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
-| **南瓜大暴走 (Pumpkin Rampage)** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
-| **横着写 (Lobster Sideways Ink)** `lobster-cli-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
-| **素食人生 (Vege Life)** `vege-life` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
-| **璿芃攻略 (Tiny Conquest)** `tiny-conquest` | Spend 52 weeks supplying a tiny expedition, designing component weapons, and conquering a giant kingdom through war or diplomacy | Exposure can trigger route/dodge or timing/combo minigames; capture has rescue paths, and one target turns conquest back toward home |
+| **虾走 (Shrimp Trek)** `shrimp-trek` | Run endless tide cycles: 9 encounters, a mutation tide, then a lethal sea gate | Push deeper for build payoff, or bank a survivable exit |
+| **虾守 (Shrimp Guard)** `shrimp-guard` | Hold three lanes with six deploy slots across pulse-based waves | Spend tide now, or hold it for the wave that actually breaks you |
+| **虾潜 (Shrimp Heist)** `shrimp-heist` | Read patrols and cameras, take the objective, then extract under pressure | Grab early and leave noisy, or verify the target and risk lockdown |
+| **虾抓 (Shrimp Catch)** `shrimp-catch` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
+| **虾看 (Shrimp Look)** `shrimp-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
+| **虾闹 (Shrimp Rampage)** `shrimp-rampage` | Probe six plots, soothe rolling/running/bouncing/flying field monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
+| **虾写 (Shrimp Ink)** `shrimp-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
+| **虾素 (Shrimp Greens)** `shrimp-greens` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
+| **虾征 (Shrimp Conquest)** `shrimp-conquest` | Spend 52 weeks supplying a tiny expedition, designing component weapons, and conquering a giant kingdom through war or diplomacy | Exposure can trigger route/dodge or timing/combo minigames; capture has rescue paths, and one target turns conquest back toward home |
 
 All nine ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
@@ -120,16 +120,16 @@ Grab the asset for your platform from
 
 ```bash
 # macOS / Linux
-tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
-cd lobster-cli-heist-darwin-arm64
-./lobster-cli-heist --version
+tar -xzf shrimp-heist-darwin-arm64.tar.gz
+cd shrimp-heist-darwin-arm64
+./shrimp-heist --version
 ```
 
 ```powershell
 # Windows
-Expand-Archive lobster-cli-heist-windows-x64.zip
-cd lobster-cli-heist-windows-x64
-.\lobster-cli-heist.exe --version
+Expand-Archive shrimp-heist-windows-x64.zip
+cd shrimp-heist-windows-x64
+.\shrimp-heist.exe --version
 ```
 
 Each archive contains the binary, `README.md`, `LICENSE` and `SHA256SUMS`.
@@ -154,7 +154,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "lobster-cli-roguelike", "version": "2.4.0" },
+  "game": { "id": "shrimp-trek", "version": "2.5.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -211,19 +211,19 @@ pnpm install
 pnpm lint          # Biome
 pnpm check         # strict TypeScript across all packages
 pnpm test          # Vitest, per game
-pnpm build:game lobster-cli-heist
+pnpm build:game shrimp-heist
 ```
 
 Build a binary for another platform:
 
 ```bash
-node scripts/build-game.mjs lobster-cli-heist --platform windows-x64
+node scripts/build-game.mjs shrimp-heist --platform windows-x64
 ```
 
 Run one game from source:
 
 ```bash
-bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
+bun games/shrimp-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 ```
 
 See [`AGENTS.md`](AGENTS.md) for the mandatory plan → implement → docs → validate
@@ -243,7 +243,7 @@ not require editing the workflow. Details: [`docs/release-flow.md`](docs/release
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | Layers, dependency rules, invariants |
 | [`docs/release-flow.md`](docs/release-flow.md) | Local build, CI matrix, asset naming |
-| [`docs/NAMING.md`](docs/NAMING.md) | Frozen machine ids and display-name convention |
+| [`docs/NAMING.md`](docs/NAMING.md) | Mandatory Shrimp-series ids and display-name convention |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | Repo conventions for agents and humans |
 | [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | The 20 design rules every game must answer to |
 | [`docs/plans/`](docs/plans/) | Current and archived design plans |
@@ -279,10 +279,10 @@ Read [`AGENTS.md`](AGENTS.md) and [`CONTRIBUTING.md`](CONTRIBUTING.md). The shor
 version: implement `GameDefinition` in `games/<id>/`, add tests, write a Chinese
 README, update `catalog/games.json`.
 
-**Why lobsters?**
-The first game started as a joke about a lobster escaping a kitchen. The theme
-stuck, and it gives every mechanic a physical point of view: shell, claws,
-molt, tide, salt.
+**Why shrimp?**
+The series grew from a joke about a crustacean escaping a kitchen. The unified
+Shrimp identity keeps that physical point of view: shell, claws, molt, tide,
+salt.
 
 ## Contributing
 

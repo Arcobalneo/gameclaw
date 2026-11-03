@@ -67,15 +67,15 @@ GameClaw 是一个包含九款终端游戏的 monorepo。它的第一性原理�
 
 | 游戏 | 你在做什么 | 核心张力 |
 |---|---|---|
-| **横着活 (Lobster Sideways Run)** `lobster-cli-roguelike` | 无限潮段：9 场遭遇、1 次突变潮，然后是一道会死人的归海闸口 | 继续深潜拿 build，还是见好就收 |
-| **横着守 (Lobster Sideways Hold)** `lobster-cli-tower-defense` | 三路防线、六个部署位、pulse 制波次 | 现在花潮令，还是留给真正会崩的那一波 |
-| **横着潜 (Lobster Sideways Heist)** `lobster-cli-heist` | 读巡逻与摄像头，取目标，再在封锁前撤离 | 早拿早撤但噪音大，还是多验证但可能被锁死 |
-| **横着抓 (Lobster Sideways Catch)** `lobster-cli-tamer` | 捕捉、编队、洗词条、下无尽深渊 | 投入养成，还是永久死亡的代价 |
-| **横着看 (Lobster Sideways Look)** `lobster-cli-sideways-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
-| **南瓜大暴走 (Pumpkin Rampage)** `pumpkin-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的南瓜怪，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有南瓜怪换畦 |
-| **横着写 (Lobster Sideways Ink)** `lobster-cli-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
-| **素食人生 (Vege Life)** `vege-life` | 十六席过一个自己选的素食者：家里、校园、出门。开局随机性别、性格和家庭 | 守自己的盘子，还是为场面咬一口——那一口不提供体力 |
-| **璿芃攻略 (Tiny Conquest)** `tiny-conquest` | 五十二週補給小人國遠征、組合部件武器，選一個大人國用戰爭或外交攻陷 | 暴露會觸發路線閃躲或時機連擊；被俘仍有救援，一個目標會把勝利反轉回家 |
+| **虾走 (Shrimp Trek)** `shrimp-trek` | 无限潮段：9 场遭遇、1 次突变潮，然后是一道会死人的归海闸口 | 继续深潜拿 build，还是见好就收 |
+| **虾守 (Shrimp Guard)** `shrimp-guard` | 三路防线、六个部署位、pulse 制波次 | 现在花潮令，还是留给真正会崩的那一波 |
+| **虾潜 (Shrimp Heist)** `shrimp-heist` | 读巡逻与摄像头，取目标，再在封锁前撤离 | 早拿早撤但噪音大，还是多验证但可能被锁死 |
+| **虾抓 (Shrimp Catch)** `shrimp-catch` | 捕捉、编队、洗词条、下无尽深渊 | 投入养成，还是永久死亡的代价 |
+| **虾看 (Shrimp Look)** `shrimp-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
+| **虾闹 (Shrimp Rampage)** `shrimp-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的怪物，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有怪物换畦 |
+| **虾写 (Shrimp Ink)** `shrimp-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
+| **虾素 (Shrimp Greens)** `shrimp-greens` | 十六席过一个自己选的素食者：家里、校园、出门。开局随机性别、性格和家庭 | 守自己的盘子，还是为场面咬一口——那一口不提供体力 |
+| **虾征 (Shrimp Conquest)** `shrimp-conquest` | 五十二週補給小人國遠征、組合部件武器，選一個大人國用戰爭或外交攻陷 | 暴露會觸發路線閃躲或時機連擊；被俘仍有救援，一個目標會把勝利反轉回家 |
 
 九款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
 `windows-x64` 五个平台的二进制。
@@ -116,16 +116,16 @@ Release 和 `catalog/games.json` 查询，再按结果安装。不要求本仓�
 
 ```bash
 # macOS / Linux
-tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
-cd lobster-cli-heist-darwin-arm64
-./lobster-cli-heist --version
+tar -xzf shrimp-heist-darwin-arm64.tar.gz
+cd shrimp-heist-darwin-arm64
+./shrimp-heist --version
 ```
 
 ```powershell
 # Windows
-Expand-Archive lobster-cli-heist-windows-x64.zip
-cd lobster-cli-heist-windows-x64
-.\lobster-cli-heist.exe --version
+Expand-Archive shrimp-heist-windows-x64.zip
+cd shrimp-heist-windows-x64
+.\shrimp-heist.exe --version
 ```
 
 每个压缩包内含二进制、`README.md`、`LICENSE` 与 `SHA256SUMS`。二进制自带运行时，
@@ -150,7 +150,7 @@ cd lobster-cli-heist-windows-x64
 ```json
 {
   "ok": true,
-  "game": { "id": "lobster-cli-roguelike", "version": "2.4.0" },
+  "game": { "id": "shrimp-trek", "version": "2.5.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -205,19 +205,19 @@ pnpm install
 pnpm lint          # Biome
 pnpm check         # 全仓严格 TypeScript
 pnpm test          # Vitest，按游戏分跑
-pnpm build:game lobster-cli-heist
+pnpm build:game shrimp-heist
 ```
 
 交叉编译到其他平台：
 
 ```bash
-node scripts/build-game.mjs lobster-cli-heist --platform windows-x64
+node scripts/build-game.mjs shrimp-heist --platform windows-x64
 ```
 
 从源码直接跑一款游戏：
 
 ```bash
-bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
+bun games/shrimp-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 ```
 
 强制的 plan → 实现 → 文档 → 验证 → 提交流程见 [`AGENTS.md`](AGENTS.md)，
@@ -235,7 +235,7 @@ bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | 分层、依赖规则、仓库不变量 |
 | [`docs/release-flow.md`](docs/release-flow.md) | 本地构建、CI 矩阵、资产命名 |
-| [`docs/NAMING.md`](docs/NAMING.md) | 冻结的机器 id 与显示命名规范 |
+| [`docs/NAMING.md`](docs/NAMING.md) | 强制的 Shrimp 系列机器 id 与显示命名规范 |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | 给 agent 与人的仓库规范 |
 | [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | 每款游戏都必须回答的 20 条设计准则 |
 | [`docs/plans/`](docs/plans/) | 当前与归档的设计计划 |
@@ -263,8 +263,8 @@ bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 **怎么加一款新游戏？**
 先读 [`AGENTS.md`](AGENTS.md) 和 [`CONTRIBUTING.md`](CONTRIBUTING.md)。简版：在 `games/<id>/` 实现 `GameDefinition`，补测试，写中文 README，更新 `catalog/games.json`。
 
-**为什么是龙虾？**
-第一款游戏本来只是“龙虾从厨房逃跑”的玩笑。主题留下来了，因为它给每个机制一个物理视角：壳、钳、蜕壳、潮、盐。
+**为什么是虾？**
+这个系列来自“一只甲壳动物从厨房逃跑”的玩笑。统一的 Shrimp 身份保留了这套物理视角：壳、钳、蜕壳、潮、盐。
 
 ## 贡献
 

@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/shrimp-look",
+  "version": "2.5.0",
+  "private": true,
+  "type": "module",
+  "description": "Shrimp Look: single-step CLI visual horror for coding agents.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs shrimp-look"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}

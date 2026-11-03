@@ -6,9 +6,9 @@
 <circle cx="26" cy="21" r="6.5" fill="#ff5f57"/>
 <circle cx="48" cy="21" r="6.5" fill="#febc2e"/>
 <circle cx="70" cy="21" r="6.5" fill="#28c840"/>
-<text x="560" y="26" text-anchor="middle" font-family="SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#6d8ba3">lobster-cli-roguelike — agent step mode</text>
-<text x="34" y="96" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ lobster-cli-roguelike new --seed 7</text>
-<text x="34" y="117" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">GAME   lobster-cli-roguelike v2.0.0  slot=0  turn=0  outcome=ongoing  seed=7</text>
+<text x="560" y="26" text-anchor="middle" font-family="SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#6d8ba3">shrimp-trek — agent step mode</text>
+<text x="34" y="96" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ shrimp-trek new --seed 7</text>
+<text x="34" y="117" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">GAME   shrimp-trek v2.5.0  slot=0  turn=0  outcome=ongoing  seed=7</text>
 <text x="34" y="138" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#ffd166" xml:space="preserve">STATE  选择你的龙虾谱系</text>
 <text x="34" y="159" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#3f5d75" xml:space="preserve">---</text>
 <text x="34" y="180" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bdff2" xml:space="preserve">三条谱系</text>
@@ -21,8 +21,8 @@
 <text x="34" y="327" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [2] lineage:oracle    触须预言家  risk=low</text>
 <text x="34" y="348" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">  [3] lineage:gambler   脱壳赌徒   risk=low</text>
 <text x="34" y="369" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#f4a261" xml:space="preserve">NEXT   act lineage:crusher</text>
-<text x="34" y="411" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ lobster-cli-roguelike act lineage:crusher</text>
-<text x="34" y="432" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">LOG    你以【沟壑碎壳者】的身份开始横着活。</text>
+<text x="34" y="411" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#7bf1a8" xml:space="preserve">$ shrimp-trek act lineage:crusher</text>
+<text x="34" y="432" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">LOG    你以【沟壑碎壳者】的身份开始虾走。</text>
 <text x="34" y="453" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#ffd166" xml:space="preserve">STATE  潮段 1 · 深度 1 · 章鱼讨债者</text>
 <text x="34" y="474" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#cfe3f5" xml:space="preserve">STAT   壳=7  能=5  盐=4  左=4  右=2  须=2  蜕=1  势=0  名声=0</text>
 <text x="34" y="495" font-family="SFMono-Regular,Menlo,Consolas,'PingFang SC',monospace" font-size="13.5" fill="#8ecae6" xml:space="preserve">ACTIONS</text>

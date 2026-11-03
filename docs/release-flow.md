@@ -26,10 +26,10 @@ bun --version
 ### Test one game
 
 ```bash
-node scripts/test-game.mjs lobster-cli-heist
+node scripts/test-game.mjs shrimp-heist
 # equivalent to:
-pnpm --filter @gameclaw/lobster-cli-heist check
-pnpm --filter @gameclaw/lobster-cli-heist test
+pnpm --filter @gameclaw/shrimp-heist check
+pnpm --filter @gameclaw/shrimp-heist test
 ```
 
 ### Test everything
@@ -43,15 +43,15 @@ pnpm test
 ### Build one game for the host platform
 
 ```bash
-node scripts/build-game.mjs lobster-cli-heist
+node scripts/build-game.mjs shrimp-heist
 ```
 
 Outputs:
 
 ```
-games/lobster-cli-heist/dist/
-├── lobster-cli-heist
-└── lobster-cli-heist-darwin-arm64.tar.gz
+games/shrimp-heist/dist/
+├── shrimp-heist
+└── shrimp-heist-darwin-arm64.tar.gz
 ```
 
 The build script runs `--version` on the produced binary when the target matches
@@ -60,8 +60,8 @@ the host, then packages the archive.
 ### Build for another platform
 
 ```bash
-node scripts/build-game.mjs lobster-cli-heist --platform windows-x64
-node scripts/build-game.mjs lobster-cli-heist --platform linux-arm64
+node scripts/build-game.mjs shrimp-heist --platform windows-x64
+node scripts/build-game.mjs shrimp-heist --platform linux-arm64
 ```
 
 Allowed platforms: `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`,
@@ -116,12 +116,12 @@ mkdir -p /tmp/gc-verify && cd /tmp/gc-verify
 gh release download v2.0.0 --repo Arcobalneo/gameclaw
 sha256sum -c SHA256SUMS
 
-tar -xzf lobster-cli-heist-darwin-arm64.tar.gz
-./lobster-cli-heist-darwin-arm64/lobster-cli-heist --version
+tar -xzf shrimp-heist-darwin-arm64.tar.gz
+./shrimp-heist-darwin-arm64/shrimp-heist --version
 
-./lobster-cli-heist-darwin-arm64/lobster-cli-heist new \
+./shrimp-heist-darwin-arm64/shrimp-heist new \
   --seed 7 --state-dir /tmp/gc-verify/state --no-observer --no-report
-./lobster-cli-heist-darwin-arm64/lobster-cli-heist actions \
+./shrimp-heist-darwin-arm64/shrimp-heist actions \
   --state-dir /tmp/gc-verify/state --no-observer --no-report
 ```
 
@@ -147,7 +147,7 @@ Every archive extracts into a directory named `<game-id>-<platform>` containing:
 <game-id>-<platform>.zip      # windows-*
 ```
 
-Example: `lobster-cli-tamer-linux-arm64.tar.gz`.
+Example: `shrimp-catch-linux-arm64.tar.gz`.
 
 ## Platform notes
 

@@ -12,7 +12,7 @@
       "!**/pnpm-lock.yaml",
       "!.venv",
       "!**/.venv",
-      "!games/lobster-cli-tamer/data",
+      "!games/shrimp-catch/data",
       "!games/*/content",
       "!catalog",
       "!**/.venv-build",

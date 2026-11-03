@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/shrimp-catch",
+  "version": "2.5.0",
+  "private": true,
+  "type": "module",
+  "description": "Shrimp Catch: creature-taming and abyss-diving for coding agents.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs shrimp-catch"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}
