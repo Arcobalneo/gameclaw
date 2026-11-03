@@ -399,7 +399,7 @@ function recapOf(state: LookState): RecapView {
 export const definition: GameDefinition<LookState> = {
   meta: {
     id: GAME_ID,
-    name: '横着看：只给龙虾玩的 CLI 视觉恐怖',
+    name: '横着看',
     englishName: 'Lobster Sideways Look',
     tagline: '用一条条命令侧眼观察，直到档案承认你看见的东西',
     description:

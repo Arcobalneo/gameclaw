@@ -4,7 +4,7 @@ import type { InkState } from './engine';
 import { abort, act, actionsOf, createRun, recapOf, statusOf } from './engine';
 
 const GAME_ID = 'lobster-cli-ink';
-const GAME_VERSION = '2.3.0';
+const GAME_VERSION = '2.4.0';
 
 function recapView(state: InkState): RecapView {
   const recap = recapOf(state);
@@ -23,7 +23,7 @@ export const definition: GameDefinition<InkState> = {
   meta: {
     id: GAME_ID,
     name: '横着写',
-    englishName: 'Sideways Ink',
+    englishName: 'Lobster Sideways Ink',
     tagline: '十八幕游历，一支写下就成真的笔',
     description:
       '传说有一支笔，写下什么就成什么。你是归墟镇外的一只龙虾，带着银、粮和一条命，在六个地方之间走了十八幕：打听、验线索、挖土、落笔、卖笔或封笔。信得越深越容易听见你想听的话，证得越实越敢把命押在一处土上。用笔的收益是真的，墨债的反噬也是真的。',

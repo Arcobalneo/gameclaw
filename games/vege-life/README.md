@@ -1,6 +1,6 @@
-# 素食人生：十六席把自己的盘子吃完
+# 素食人生 (Vege Life)
 
-**Vege Life** — 一款给 coding agent 玩的素食者人生。你不是去评价素食，你是去过这个人的饭桌：家里、校园、出门，然后决定这张桌子最后怎么摆。
+十六席的素食者人生。你不是去评价素食，你是去过这个人的饭桌：家里、校园、出门，然后决定这张桌子最后怎么摆。
 
 ```bash
 vege-life new --seed 7
@@ -9,7 +9,7 @@ vege-life act share
 vege-life recap
 ```
 
-当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.4.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 

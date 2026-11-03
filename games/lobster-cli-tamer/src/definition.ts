@@ -20,7 +20,14 @@ import {
 } from './engine/items';
 import { plagueCandidates } from './engine/party';
 import { AFFIX_BY_ID, displayName, expToNext, skillOf, speciesOf } from './engine/species';
-import { alivePartyIndices, createState, hpRatio, maxHp, type TamerState } from './engine/state';
+import {
+  alivePartyIndices,
+  createState,
+  GAME_VERSION,
+  hpRatio,
+  maxHp,
+  type TamerState,
+} from './engine/state';
 import {
   affixShortSymbols,
   affixSlotLabel,
@@ -850,7 +857,7 @@ export const definition: GameDefinition<TamerState> = {
     tagline: '只给龙虾玩的 CLI 捕兽养成',
     description:
       '你是一名甲录师，在潮礁海域捕捉、培养与编队虾米：野外抓宠、词条工坊洗词条、无尽深渊刷材料。深渊里 HP 归零就是永久死亡，撤退时疫病还要掷死亡骰。',
-    version: '2.1.0',
+    version: GAME_VERSION,
     repo: REPO,
     license: 'MIT',
     guide: [

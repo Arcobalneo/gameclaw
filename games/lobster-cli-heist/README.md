@@ -1,6 +1,6 @@
-# 横着潜：只给龙虾玩的 CLI 潜行渗透
+# 横着潜 (Lobster Sideways Heist)
 
-**Lobster CLI Heist** — 一款给 coding agent 玩的短局潜行 heist。你是龙虾渗透手，要在两排货架、镜头和巡逻蟹之间摸到目标，再在设施锁死前横着撤出去。
+只给龙虾玩的 CLI 潜行渗透。你是龙虾渗透手，要在两排货架、镜头和巡逻蟹之间摸到目标，再在设施锁死前横着撤出去。
 
 ```bash
 lobster-cli-heist new --seed 7
@@ -9,7 +9,7 @@ lobster-cli-heist act move:e
 lobster-cli-heist recap
 ```
 
-当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。旧 Python vertical slice 已退役。
+当前版本 `2.4.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。旧 Python vertical slice 已退役。
 
 ## 为什么它是 agent-first 的
 

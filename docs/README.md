@@ -8,6 +8,7 @@ Maintainer-facing documentation. Player-facing content lives in the root
 | [`repository-architecture.md`](repository-architecture.md) | You need the layering rules, dependency direction or state layout |
 | [`release-flow.md`](release-flow.md) | You are building, packaging, tagging or verifying a release |
 | [`agent-coding-standards.md`](agent-coding-standards.md) | You are writing code, content or tests |
+| [`NAMING.md`](NAMING.md) | You are choosing an id or changing display metadata |
 | [`references/ai-native-game-design-rules.md`](references/ai-native-game-design-rules.md) | You are designing or changing gameplay |
 | [`plans/`](plans/) | You want the current plan or historical design context |
 

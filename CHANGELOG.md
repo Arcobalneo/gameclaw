@@ -2,6 +2,34 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.4.0 — 2026-11-03
+
+### Added
+
+- `璿芃攻略 (Tiny Conquest)` / `tiny-conquest`: a 52-week miniature campaign.
+  Choose one of three giant kingdoms and conquer it through war or diplomacy.
+  Buy rations at home or steal leftovers that giants blame on mice; meet helpful
+  and hostile people; combine frames, heads and drives into honest tiny weapons.
+- Discovery branches into two deterministic terminal minigames: route selection
+  plus countdown dodges, or cursor timing, combos and counters. Capture offers
+  signal, ransom and seeded rescue attempts before the captive ending.
+- War, pact, deadline, starvation, captive and abort settlements, plus the
+  `鏡國` reversal in which the conquered kingdom looks like璿芃's own tiny home.
+- Engine and CLI tests cover same-seed replay, legal actions, supplies, weapon
+  drafts, both minigames, rescue, all ending gates and a legal diplomatic run.
+- `docs/NAMING.md`: frozen legacy machine ids, short kebab-case ids for new
+  games, lobster-series naming, and the `中文名 (English Name)` display form.
+
+### Changed
+
+- Catalog display metadata, runtime definitions and per-game README titles now
+  agree. `lobster-cli-ink` is `Lobster Sideways Ink`; existing heist, tower
+  defense and sideways-look display mismatches are corrected. All legacy ids,
+  directories, binaries and release asset names remain unchanged.
+- The catalog lists nine games and the release matrix contains 45 artifacts.
+- Root, every workspace package, every game runtime version and the skill
+  metadata move to `2.4.0`. `SKILL.md` still contains no game list.
+
 ## v2.3.0 — 2026-11-03
 
 ### Added

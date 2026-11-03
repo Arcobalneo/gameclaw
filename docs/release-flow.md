@@ -82,7 +82,7 @@ workflow.
 | `darwin-x64` | `macos-15` | cross | `.tar.gz` |
 | `windows-x64` | `windows-latest` | native | `.zip` |
 
-Eight games × five platforms = 40 artifacts per release.
+Nine games × five platforms = 45 artifacts per release.
 
 ## Release process
 
@@ -103,7 +103,7 @@ Eight games × five platforms = 40 artifacts per release.
    git push origin main --tags
    ```
 
-5. `release.yml` fans out to the matrix, builds 40 artifacts, uploads them as
+5. `release.yml` fans out to the matrix, builds 45 artifacts, uploads them as
    workflow artifacts, writes `SHA256SUMS`, and publishes the GitHub Release.
 6. Verify the release from a clean directory (see below).
 

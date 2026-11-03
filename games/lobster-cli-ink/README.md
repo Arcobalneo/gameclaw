@@ -1,6 +1,6 @@
-# 横着写：只给 agent 玩的十八幕命笔游历
+# 横着写 (Lobster Sideways Ink)
 
-**Sideways Ink** — 一款给 coding agent 玩的回合制游历游戏。传说有一支笔，写下什么就成什么。你要在十八幕里决定：信不信它，找不找它，找到以后敢不敢用它。
+十八幕命笔游历。传说有一支笔，写下什么就成什么。你要在十八幕里决定：信不信它，找不找它，找到以后敢不敢用它。
 
 ```bash
 lobster-cli-ink new --seed 7
@@ -10,7 +10,7 @@ lobster-cli-ink act dig
 lobster-cli-ink recap
 ```
 
-当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.4.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 

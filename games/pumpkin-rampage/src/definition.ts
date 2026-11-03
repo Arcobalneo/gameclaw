@@ -13,7 +13,7 @@ import {
 } from './engine';
 
 const GAME_ID = 'pumpkin-rampage';
-const GAME_VERSION = '2.3.0';
+const GAME_VERSION = '2.4.0';
 
 function recapView(state: PumpkinState): RecapView {
   const recap = recapOf(state);

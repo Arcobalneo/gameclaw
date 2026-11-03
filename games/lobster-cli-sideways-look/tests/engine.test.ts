@@ -90,7 +90,7 @@ describe('sideways-look engine', () => {
     }
     expect(a.outcome).toBe('won');
     expect(a.ending).toBe('escaped');
-    expect(GAME_VERSION).toBe('2.3.0');
+    expect(GAME_VERSION).toBe('2.4.0');
   });
 
   it('moves only through declared exits and clears the current phenomenon', () => {

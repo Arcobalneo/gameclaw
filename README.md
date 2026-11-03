@@ -26,7 +26,7 @@
 
 ---
 
-GameClaw is a monorepo of eight terminal games that are designed from the first
+GameClaw is a monorepo of nine terminal games that are designed from the first
 principle that the player is an **LLM agent with a tool-calling loop**, not a human
 staring at a TUI. Every game is a deterministic state machine with a tiny,
 uniform CLI:
@@ -67,16 +67,17 @@ The full design canon lives in
 
 | Game | What you actually do | Core tension |
 |---|---|---|
-| **横着活** `lobster-cli-roguelike` | Run endless tide cycles: 9 encounters, a mutation tide, then a lethal sea gate | Push deeper for build payoff, or bank a survivable exit |
-| **横着守** `lobster-cli-tower-defense` | Hold three lanes with six deploy slots across pulse-based waves | Spend tide now, or hold it for the wave that actually breaks you |
-| **横着潜** `lobster-cli-heist` | Read patrols and cameras, take the objective, then extract under pressure | Grab early and leave noisy, or verify the target and risk lockdown |
-| **横着抓** `lobster-cli-tamer` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
-| **横着看** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
-| **南瓜大暴走** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
-| **横着写** `lobster-cli-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
-| **素食人生** `vege-life` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
+| **横着活 (Lobster Sideways Run)** `lobster-cli-roguelike` | Run endless tide cycles: 9 encounters, a mutation tide, then a lethal sea gate | Push deeper for build payoff, or bank a survivable exit |
+| **横着守 (Lobster Sideways Hold)** `lobster-cli-tower-defense` | Hold three lanes with six deploy slots across pulse-based waves | Spend tide now, or hold it for the wave that actually breaks you |
+| **横着潜 (Lobster Sideways Heist)** `lobster-cli-heist` | Read patrols and cameras, take the objective, then extract under pressure | Grab early and leave noisy, or verify the target and risk lockdown |
+| **横着抓 (Lobster Sideways Catch)** `lobster-cli-tamer` | Capture creatures, build squads, reroll affixes, dive the endless abyss | Investment versus permadeath: every abyss floor can end the run |
+| **横着看 (Lobster Sideways Look)** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
+| **南瓜大暴走 (Pumpkin Rampage)** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
+| **横着写 (Lobster Sideways Ink)** `lobster-cli-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
+| **素食人生 (Vege Life)** `vege-life` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
+| **璿芃攻略 (Tiny Conquest)** `tiny-conquest` | Spend 52 weeks supplying a tiny expedition, designing component weapons, and conquering a giant kingdom through war or diplomacy | Exposure can trigger route/dodge or timing/combo minigames; capture has rescue paths, and one target turns conquest back toward home |
 
-All eight ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
+All nine ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
 
 ### Platform support
@@ -153,7 +154,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "lobster-cli-roguelike", "version": "2.3.0" },
+  "game": { "id": "lobster-cli-roguelike", "version": "2.4.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -231,7 +232,7 @@ for repo conventions.
 
 ## Releases
 
-Tagging `vX.Y.Z` builds all 40 artifacts (8 games × 5 platforms) and attaches
+Tagging `vX.Y.Z` builds all 45 artifacts (9 games × 5 platforms) and attaches
 them, plus an aggregate `SHA256SUMS`, to a GitHub Release. The release matrix is
 derived from `catalog/games.json` / `games/*/package.json`, so adding a game does
 not require editing the workflow. Details: [`docs/release-flow.md`](docs/release-flow.md).
@@ -242,6 +243,7 @@ not require editing the workflow. Details: [`docs/release-flow.md`](docs/release
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | Layers, dependency rules, invariants |
 | [`docs/release-flow.md`](docs/release-flow.md) | Local build, CI matrix, asset naming |
+| [`docs/NAMING.md`](docs/NAMING.md) | Frozen machine ids and display-name convention |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | Repo conventions for agents and humans |
 | [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | The 20 design rules every game must answer to |
 | [`docs/plans/`](docs/plans/) | Current and archived design plans |

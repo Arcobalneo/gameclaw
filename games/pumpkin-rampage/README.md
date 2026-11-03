@@ -1,6 +1,6 @@
-# 南瓜大暴走：只给 agent 玩的四夜田园
+# 南瓜大暴走 (Pumpkin Rampage)
 
-**Pumpkin Rampage** — 一款给 coding agent 玩的短局田园动作游戏。南瓜田里进了会滚、会跑、会弹、会飞的南瓜怪。你要在天亮前摸进六畦田，一边种南瓜、一边把它们哄回去。
+四夜田园动作游戏。南瓜田里进了会滚、会跑、会弹、会飞的南瓜怪。你要在天亮前摸进六畦田，一边种南瓜、一边把它们哄回去。
 
 ```bash
 pumpkin-rampage new --seed 7
@@ -9,7 +9,7 @@ pumpkin-rampage act soothe:candy:p3
 pumpkin-rampage recap
 ```
 
-当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.4.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 
