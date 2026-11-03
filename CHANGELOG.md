@@ -2,6 +2,37 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.6.0 — 2026-11-04
+
+### Fixed
+
+- 虾闹 mid-run recaps now preserve `ongoing` and report 季中 progress instead of
+  an abort. Night-finishing act events retain the night and action-budget count
+  where the action actually ran; explicit aborts and terminal outcomes remain
+  distinct.
+- 虾写 no longer offers investigation without 2 silver or a lethal dig at 1
+  life. Other silver-priced actions follow the same affordability filtering.
+- 虾守 clamps leak damage at zero integrity, so pulse events and status metrics
+  agree and reaching zero still loses the run.
+- 虾抓 timeline entries now use the same turn number as the live act response.
+- 虾看 makes `next` progress through record, archive claim and verified extract
+  priorities instead of repeatedly recommending inspect.
+- Mid-run recap adapters in 虾写, 虾素 and 虾征 also preserve `ongoing` rather
+  than misreporting an abort.
+
+### Changed
+
+- 虾写 recommends useful local investigation, verification, supported digs,
+  income and supplies; the price-rise log now says the next food bag costs 4
+  silver.
+- 虾守 leads deployment choices with current lane pressure and distinguishes
+  regular pulses from the cleanup tail waves in setup guidance.
+- 虾潜 explicitly marks an adjacent responder's objective-interaction collision
+  as lethal regardless of the exposure meter.
+- 虾素 recommends an available settlement ahead of hold.
+- Root, gamekit, all nine game packages, runtime versions and skill metadata move
+  to `2.6.0`. `SKILL.md` remains list-free.
+
 ## v2.5.0 — 2026-11-03
 
 ### Breaking

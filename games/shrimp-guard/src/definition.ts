@@ -291,14 +291,16 @@ function deployDetail(state: TowerDefenseState, unitKey: UnitKey, slotKey: SlotK
 }
 
 function deployActions(state: TowerDefenseState): ActionView[] {
-  return deployOptions(state).map((option) => ({
-    id: `deploy:${option.unit}:${option.slot}`,
-    label: `${UNITS[option.unit].title} → ${option.slot}`,
-    detail: deployDetail(state, option.unit, option.slot),
-    risk: 'low',
-    cost: `${option.cost} 潮令`,
-    tags: [UNITS[option.unit].kind],
-  }));
+  return deployOptions(state)
+    .sort((a, b) => slotPressure(state, b.slot) - slotPressure(state, a.slot))
+    .map((option) => ({
+      id: `deploy:${option.unit}:${option.slot}`,
+      label: `${UNITS[option.unit].title} → ${option.slot}`,
+      detail: deployDetail(state, option.unit, option.slot),
+      risk: 'low',
+      cost: `${option.cost} 潮令`,
+      tags: [UNITS[option.unit].kind],
+    }));
 }
 
 function recallActions(state: TowerDefenseState): ActionView[] {
@@ -351,7 +353,7 @@ function actionsOf(state: TowerDefenseState): ActionView[] {
     actions.push({
       id: 'ready',
       label: '开始敌潮',
-      detail: `结束布防，开始 ${state.wavePlan.length} 个 pulse 的敌潮；当前潮令 ${state.tide}，完整度 ${state.integrity}/${state.maxIntegrity}，场上 ${deployedUnits(state).length} 个单位。`,
+      detail: `结束布防，开始 ${state.wavePlan.length} 个常规 pulse，之后清尾波直到敌潮清空；当前潮令 ${state.tide}，完整度 ${state.integrity}/${state.maxIntegrity}，场上 ${deployedUnits(state).length} 个单位。`,
       risk: 'low',
       tags: ['ready'],
     });

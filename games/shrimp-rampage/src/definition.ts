@@ -13,13 +13,13 @@ import {
 } from './engine';
 
 const GAME_ID = 'shrimp-rampage';
-const GAME_VERSION = '2.5.0';
+const GAME_VERSION = '2.6.0';
 
 function recapView(state: PumpkinState): RecapView {
   const recap = recapOf(state);
   return {
     title: recap.title,
-    outcome: recap.outcome === 'ongoing' ? 'aborted' : recap.outcome,
+    outcome: recap.outcome,
     cause: recap.cause || '这一季还没收尾。',
     metrics: recap.metrics,
     timeline: recap.timeline.slice(-10),

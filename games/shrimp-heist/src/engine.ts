@@ -19,7 +19,7 @@ import {
 } from './content';
 
 export const GAME_ID = 'shrimp-heist';
-export const GAME_VERSION = '2.5.0';
+export const GAME_VERSION = '2.6.0';
 
 export type Phase = 'setup' | 'infiltrate' | 'extraction' | 'ended';
 export type Difficulty = 'easy' | 'normal' | 'hard';
@@ -799,11 +799,18 @@ export function availableActions(state: HeistState): ActionView[] {
     const { trueSite } = missionOf(state);
     const known =
       state.objectiveKnown || (isInspected(state, trueSite) && samePos(state.position, trueSite));
+    const responderCollision =
+      state.responderPos !== null &&
+      (state.carrying || state.alert >= 2) &&
+      manhattan(state.responderPos, state.position) === 1;
+    const warning = responderCollision
+      ? '；致命：相邻响应者本拍会进入这一格并直接装箱，和曝光是否到上限无关'
+      : '';
     actions.push({
       id: 'interact:objective',
       label: known && samePos(state.position, trueSite) ? '取目标' : '开货格',
-      detail: objectiveDetail(state),
-      risk: known && samePos(state.position, trueSite) ? 'medium' : 'high',
+      detail: `${objectiveDetail(state)}${warning}`,
+      risk: responderCollision || !(known && samePos(state.position, trueSite)) ? 'high' : 'medium',
       tags: ['interact', 'objective'],
     });
   }

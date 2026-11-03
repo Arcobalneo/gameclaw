@@ -769,7 +769,12 @@ function snapshotOf(state: PumpkinState): Snapshot {
  */
 function eventsOf(before: Snapshot, state: PumpkinState, actionId: string): GameEvent[] {
   const events: GameEvent[] = [
-    { type: 'act', action: actionId, night: state.night, used: state.actionsUsed },
+    {
+      type: 'act',
+      action: actionId,
+      night: before.night,
+      used: before.used + (actionId === 'end-night' ? 0 : 1),
+    },
   ];
 
   if (state.stamina !== before.stamina) {
@@ -937,10 +942,24 @@ export function recapOf(state: PumpkinState): {
     lessons.push('动作分配基本对上了：找怪、安抚、铺田三条线都没有断。');
   }
 
+  const title =
+    state.outcome === 'won'
+      ? '这一季守住了'
+      : state.outcome === 'lost'
+        ? '这一季没守住'
+        : state.outcome === 'aborted'
+          ? '这一季中止了'
+          : `第 ${state.night} 夜 · 季中进度`;
+  const cause =
+    state.cause ||
+    (state.outcome === 'ongoing'
+      ? `季中进度：第 ${state.night}/${NIGHT_LIMIT} 夜，收成 ${state.pumpkins}/${WIN_PUMPKINS}，安抚 ${state.captured}/${WIN_CAPTURED}；还没有最终结局。`
+      : '');
+
   return {
-    title: state.outcome === 'won' ? '这一季守住了' : '这一季没守住',
+    title,
     outcome: state.outcome,
-    cause: state.cause,
+    cause,
     metrics: [
       { label: '收成', value: `${state.pumpkins}/${WIN_PUMPKINS}` },
       { label: '安抚', value: `${state.captured}/${WIN_CAPTURED}` },

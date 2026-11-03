@@ -167,6 +167,31 @@ function neighborSites(state: InkState): SiteId[] {
   return SITES[state.location].neighbors;
 }
 
+function prioritizeActions<T extends { id: string }>(state: InkState, actions: T[]): T[] {
+  const candidates: string[] = [];
+  if (state.food <= 3) {
+    candidates.push('talk:rations', 'talk:buy-food', 'talk:berries');
+  }
+  if (state.silver < INVESTIGATE_COST) {
+    candidates.push('talk:work', 'talk:copy-sutra', 'talk:name-card');
+  }
+  if (state.location === 'temple' && state.lead) candidates.push('verify');
+  if (state.hasPen && !state.penVerified && state.location === 'temple') candidates.push('probe');
+  if (
+    state.lead?.site === state.location &&
+    (state.belief >= 60 || state.proof >= digThreshold(state))
+  ) {
+    candidates.push('dig');
+  }
+  if (!state.lead && SITES[state.location].wild) candidates.push('investigate');
+
+  const preferred = candidates
+    .map((id) => actions.find((action) => action.id === id))
+    .find((action) => action !== undefined);
+  if (!preferred) return actions;
+  return [preferred, ...actions.filter((action) => action !== preferred)];
+}
+
 export function actionsOf(state: InkState): {
   id: string;
   label: string;
@@ -200,25 +225,29 @@ export function actionsOf(state: InkState): {
   const site = SITES[state.location];
 
   if (site.wild && !state.hasPen) {
-    actions.push({
-      id: 'investigate',
-      label: '打听这支笔的来历',
-      detail: '花二银问人、看土、翻旧账。信得越深，越容易听见你想听的话。',
-      risk: 'medium',
-      cost: COST_LABEL.investigate,
-      tags: ['knowledge'],
-    });
-    actions.push({
-      id: 'dig',
-      label: '挖这片土',
-      detail: '你认定的地方就挖下去。挖错也要掉一条命，文案不会告诉你错在哪。',
-      risk: 'high',
-      cost: COST_LABEL.dig,
-      tags: ['commit'],
-    });
+    if (state.silver >= INVESTIGATE_COST) {
+      actions.push({
+        id: 'investigate',
+        label: '打听这支笔的来历',
+        detail: '花二银问人、看土、翻旧账。信得越深，越容易听见你想听的话。',
+        risk: 'medium',
+        cost: COST_LABEL.investigate,
+        tags: ['knowledge'],
+      });
+    }
+    if (state.life > 1) {
+      actions.push({
+        id: 'dig',
+        label: '挖这片土',
+        detail: '你认定的地方就挖下去。挖错也要掉一条命，文案不会告诉你错在哪。',
+        risk: 'high',
+        cost: COST_LABEL.dig,
+        tags: ['commit'],
+      });
+    }
   }
 
-  if (state.location === 'temple' && state.lead) {
+  if (state.location === 'temple' && state.lead && state.silver >= VERIFY_COST) {
     actions.push({
       id: 'verify',
       label: '在荒庙验这条线索',
@@ -229,7 +258,12 @@ export function actionsOf(state: InkState): {
     });
   }
 
-  if (state.hasPen && !state.penVerified && state.location === 'temple') {
+  if (
+    state.hasPen &&
+    !state.penVerified &&
+    state.location === 'temple' &&
+    state.silver >= PROBE_COST
+  ) {
     actions.push({
       id: 'probe',
       label: '请庙里的人验这支笔',
@@ -288,17 +322,19 @@ export function actionsOf(state: InkState): {
     if (talk.site !== state.location) continue;
     if (state.talks.includes(talk.id)) continue;
     if (talk.requiresRenown !== undefined && state.renown < talk.requiresRenown) continue;
+    const cost = talk.id === 'buy-food' ? state.grainPrice : (talk.cost?.silver ?? 0);
+    if (state.silver < cost) continue;
     actions.push({
       id: `talk:${talk.id}`,
       label: talk.label,
       detail: talk.detail,
       risk: 'low',
-      cost: talk.cost ? `${talk.cost.silver ?? 0} 银` : undefined,
+      cost: talk.cost ? `${cost} 银` : undefined,
       tags: ['talk'],
     });
   }
 
-  return actions.slice(0, 9);
+  return prioritizeActions(state, actions).slice(0, 9);
 }
 
 function travel(state: InkState, target: SiteId, log: string[]): void {
@@ -520,7 +556,7 @@ function applyUpkeep(state: InkState, log: string[]): void {
 function worldEvents(state: InkState, log: string[]): void {
   if (state.turn === 7 && state.grainPrice === 3) {
     state.grainPrice = 4;
-    log.push('镇上粮价涨了：一袋粮要 4 银。');
+    log.push('镇上粮价涨了：下一袋涨至 4 银。');
   }
   if (state.turn === 12 && !state.grabbed) {
     state.grabbed = true;

@@ -90,7 +90,7 @@ describe('sideways-look engine', () => {
     }
     expect(a.outcome).toBe('won');
     expect(a.ending).toBe('escaped');
-    expect(GAME_VERSION).toBe('2.5.0');
+    expect(GAME_VERSION).toBe('2.6.0');
   });
 
   it('moves only through declared exits and clears the current phenomenon', () => {
@@ -240,5 +240,30 @@ describe('sideways-look engine', () => {
     expect(titles).toContain('发现与目标');
     expect(titles).toContain('上一次结果');
     expect(caseOf(state)?.id).toBe('sealed-tide-station');
+  });
+
+  it('recommends record when an inspected phenomenon is still unrecorded', () => {
+    const state = sealed();
+    act(state, 'inspect:left-window');
+    expect(definition.actions(state)[0]?.id).toBe('record');
+    expect(ids(state)).toContain('inspect:left-window');
+  });
+
+  it('recommends claiming the archive once evidence is full', () => {
+    const state = sealed();
+    state.roomId = 'archive-bay';
+    state.evidence = state.requiredEvidence;
+    expect(definition.actions(state)[0]?.id).toBe('interact:claim-record');
+    expect(ids(state)).not.toContain('record');
+  });
+
+  it('recommends extraction at an exit with a verified objective', () => {
+    const state = sealed();
+    state.roomId = 'exit-lock';
+    state.objectiveCollected = true;
+    state.objectiveQuality = 'verified';
+    state.evidence = state.requiredEvidence;
+    expect(definition.actions(state)[0]?.id).toBe('extract');
+    expect(ids(state)).toContain('brace');
   });
 });

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { TARGETS, YEAR_WEEKS } from '../src/content';
+import { definition } from '../src/definition';
 import {
   abort,
   act,
@@ -421,5 +422,12 @@ describe('shrimp-conquest replay and legal playthrough', () => {
     expect(guard).toBeLessThan(80);
     expect(state.outcome).toBe('won');
     expect(state.ending).toBe('pact');
+  });
+
+  it('keeps an ongoing recap ongoing rather than reporting an abort', () => {
+    const state = fresh(202, 'mirror');
+    expect(definition.recap(state).outcome).toBe('ongoing');
+    abort(state);
+    expect(definition.recap(state).outcome).toBe('aborted');
   });
 });

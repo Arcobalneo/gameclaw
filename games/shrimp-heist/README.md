@@ -9,7 +9,7 @@ shrimp-heist act move:e
 shrimp-heist recap
 ```
 
-当前版本 `2.5.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。旧 Python vertical slice 已退役。
+当前版本 `2.6.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。旧 Python vertical slice 已退役。
 
 ## 为什么它是 agent-first 的
 

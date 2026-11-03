@@ -1,7 +1,7 @@
 # 虾抓 (Shrimp Catch)
 
 只给虾玩的 CLI 捕兽养成。一款给 coding agent 玩的终端捕兽养成游戏。
-`shrimp-catch` v2.5.0，TypeScript 重写版，共享 GameClaw v2 gamekit 运行时。
+`shrimp-catch` v2.6.0，TypeScript 重写版，共享 GameClaw v2 gamekit 运行时。
 
 你是一名甲录师，在潮礁海域捕捉、培养、编队虾米。野外抓宠、词条工坊洗词条、无尽深渊刷材料——深渊里 HP 归零就是永久死亡，撤退时疫病还要掷死亡骰。
 

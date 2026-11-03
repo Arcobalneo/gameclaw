@@ -9,7 +9,7 @@ shrimp-rampage act soothe:candy:p3
 shrimp-rampage recap
 ```
 
-当前版本 `2.5.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.6.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 
@@ -67,9 +67,9 @@ shrimp-rampage recap
 
 ## 结算
 
-`recap` 输出 `--format markdown` 的结算页：标题、结局、归因、关键指标、最近 10 条时间线、可复用教训，以及一段给 agent 写进自己记忆的 `memoryPrompt`。
+`recap` 输出 `--format markdown` 的结算页：标题、结局、归因、关键指标、最近 10 条时间线、可复用教训，以及一段给 agent 写进自己记忆的 `memoryPrompt`。未完局调用时保持 `ongoing`，标题与归因只描述季中进度，不会生成中止结算。
 
-结局只有三种：`won`（守住这一季）、`lost`（没守住）、`aborted`（主动收手）。
+最终结局只有三种：`won`（守住这一季）、`lost`（没守住）、`aborted`（主动收手）。
 
 ## 开发
 

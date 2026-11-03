@@ -9,7 +9,7 @@ shrimp-greens act share
 shrimp-greens recap
 ```
 
-当前版本 `2.5.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.6.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 
@@ -68,7 +68,7 @@ shrimp-greens recap
 | `settle:script` | 立席，场面 ≥ 7，身体 ≥ 3，立场 ≥ 4 | 外席 |
 | `settle:split` | 立席，素食家庭且分歧已说开，家人 ≥ 4，立场 ≥ 5，身体 ≥ 3 | 分席 |
 
-门槛的现值和「可走 / 未到」写在状态的「收束」段。不够的收束不会出现在动作列表里。
+门槛的现值和「可走 / 未到」写在状态的「收束」段。不够的收束不会出现在动作列表里；已经出现收束时，`next` 会优先推荐它，而不是继续 `hold`。
 
 ## 结局
 
