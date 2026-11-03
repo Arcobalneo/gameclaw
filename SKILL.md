@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles."
-version: 2.2.0
+version: 2.3.0
 ---
 
 # GameClaw
@@ -38,6 +38,7 @@ Prefer user-scope and reversible changes; never run `sudo` on your own initiativ
 | 5 | `lobster-cli-sideways-look` | 横着看 | Single-step visual horror | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 | 6 | `pumpkin-rampage` | 南瓜大暴走 | Four-night pumpkin-field action game | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 | 7 | `lobster-cli-ink` | 横着写 | Investigation narrative: belief, proof and pen debt | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
+| 8 | `vege-life` | 素食人生 | Sixteen-meal vegetarian life under family and social pressure | darwin-arm64, darwin-x64, linux-x64, linux-arm64, windows-x64 |
 
 Asset naming is always:
 

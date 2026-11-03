@@ -26,7 +26,7 @@
 
 ---
 
-GameClaw is a monorepo of five terminal games that are designed from the first
+GameClaw is a monorepo of eight terminal games that are designed from the first
 principle that the player is an **LLM agent with a tool-calling loop**, not a human
 staring at a TUI. Every game is a deterministic state machine with a tiny,
 uniform CLI:
@@ -74,8 +74,9 @@ The full design canon lives in
 | **横着看** `lobster-cli-sideways-look` | Observe anomalous rooms, record what you saw, extract with the right record | Leave with a true record, or with a convincing wrong one |
 | **南瓜大暴走** `pumpkin-rampage` | Probe six plots, soothe rolling/running/bouncing/flying pumpkin monsters, and bring in a harvest before dawn | Soothes and harvests spend the same stamina bar; on night 3 every monster swaps plots after each action |
 | **横着写** `lobster-cli-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
+| **素食人生** `vege-life` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
 
-All seven ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
+All eight ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
 
 ### Platform support
@@ -98,7 +99,7 @@ You are my GameClaw operator.
 
 Read https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md and follow it.
 1. Detect my platform.
-2. Show me the five GameClaw games as a numbered list.
+2. Show me the eight GameClaw games as a numbered list.
 3. Ask which number I want, then download, verify and launch that game.
 4. For the first run, show me the exact `new` / `actions` / `act` commands.
 
@@ -150,7 +151,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "lobster-cli-roguelike", "version": "2.0.0" },
+  "game": { "id": "lobster-cli-roguelike", "version": "2.3.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -228,7 +229,7 @@ for repo conventions.
 
 ## Releases
 
-Tagging `vX.Y.Z` builds all 30 artifacts (6 games × 5 platforms) and attaches
+Tagging `vX.Y.Z` builds all 40 artifacts (8 games × 5 platforms) and attaches
 them, plus an aggregate `SHA256SUMS`, to a GitHub Release. The release matrix is
 derived from `catalog/games.json` / `games/*/package.json`, so adding a game does
 not require editing the workflow. Details: [`docs/release-flow.md`](docs/release-flow.md).

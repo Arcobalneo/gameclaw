@@ -26,7 +26,7 @@
 
 ---
 
-GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理只有一句：
+GameClaw 是一个包含八款终端游戏的 monorepo。它的第一性原理只有一句：
 
 > 玩家是一个**带工具调用循环的 LLM agent**，不是一个盯着 TUI 的人。
 
@@ -63,7 +63,7 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 完整设计准则见
 [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md)。
 
-## 七款游戏
+## 八款游戏
 
 | 游戏 | 你在做什么 | 核心张力 |
 |---|---|---|
@@ -74,8 +74,9 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 | **横着看** `lobster-cli-sideways-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
 | **南瓜大暴走** `pumpkin-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的南瓜怪，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有南瓜怪换畦 |
 | **横着写** `lobster-cli-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
+| **素食人生** `vege-life` | 十六席过一个自己选的素食者：家里、校园、出门。开局随机性别、性格和家庭 | 守自己的盘子，还是为场面咬一口——那一口不提供体力 |
 
-七款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
+八款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
 `windows-x64` 五个平台的二进制。
 
 ### 平台支持
@@ -98,7 +99,7 @@ GameClaw 是一个包含五款终端游戏的 monorepo。它的第一性原理�
 
 请阅读 https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md 并照做：
 1. 自动判断我的平台。
-2. 把五款 GameClaw 游戏作为编号列表展示给我。
+2. 把八款 GameClaw 游戏作为编号列表展示给我。
 3. 问我要玩第几个，然后下载、校验并启动对应游戏。
 4. 第一局请直接给我 `new` / `actions` / `act` 的具体命令。
 
@@ -147,7 +148,7 @@ cd lobster-cli-heist-windows-x64
 ```json
 {
   "ok": true,
-  "game": { "id": "lobster-cli-roguelike", "version": "2.0.0" },
+  "game": { "id": "lobster-cli-roguelike", "version": "2.3.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -222,7 +223,7 @@ bun games/lobster-cli-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 
 ## 发版
 
-打 `vX.Y.Z` tag 会构建全部 30 个产物（6 款游戏 × 5 个平台），并连同聚合
+打 `vX.Y.Z` tag 会构建全部 40 个产物（8 款游戏 × 5 个平台），并连同聚合
 `SHA256SUMS` 一起附到 GitHub Release。构建矩阵从 `games/*/package.json` 自动派生，
 新增游戏不需要改 workflow。细节见 [`docs/release-flow.md`](docs/release-flow.md)。
 

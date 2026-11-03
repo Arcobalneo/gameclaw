@@ -2,6 +2,32 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.3.0 — 2026-11-03
+
+### Added
+
+- `素食人生` / `vege-life`: a sixteen-seat vegetarian life. The opening roll
+  picks gender, personality and household. The protagonist chose to be
+  vegetarian — this is not a prenatal diet. Meat households can stack a clash
+  that ends in `冲突` or a cutoff; vegetarian households may still disagree on
+  why, and have to name that gap before `分席`. A bite of meat buys the table
+  and costs body plus stance; it does not feed you. Living through all sixteen
+  seats without settling is a loss (`没收束`).
+- Four wins: `自席` (your own table), `同桌` (a truce at home), `外席` (a
+  repeatable script outside), `分席` (a vegetarian house that said the
+  disagreement out loud).
+- Engine and CLI tests for both households, the clash path, the creed-gap
+  settlement, the other endings, dice events and same-seed replay.
+
+### Changed
+
+- `catalog/games.json` now lists eight games; the release matrix builds 40
+  artifacts (8 games × 5 platforms).
+- Root `package.json`, every game package and each game's `GAME_VERSION` move
+  to `2.3.0`. Gameplay of the existing seven games is unchanged.
+- Root `README.md`, `README.zh-CN.md`, `SKILL.md`, architecture and release
+  docs count eight games.
+
 ## v2.2.0 — 2026-11-02
 
 ### Added

@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/vege-life",
+  "version": "2.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Vege Life: a sixteen-meal vegetarian life under social pressure.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs vege-life"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}

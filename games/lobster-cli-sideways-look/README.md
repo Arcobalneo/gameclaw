@@ -12,7 +12,7 @@ lobster-cli-sideways-look act move:monitor-hall
 lobster-cli-sideways-look recap
 ```
 
-当前版本：`2.0.0`。
+当前版本：`2.3.0`。
 
 ## 为什么它是 agent-first 的
 

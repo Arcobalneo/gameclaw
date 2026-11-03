@@ -1,6 +1,6 @@
 # AGENTS.md — GameClaw repo rules
 
-This repository is a **GameClaw distribution monorepo**: five agent-first
+This repository is a **GameClaw distribution monorepo**: eight agent-first
 terminal games, one shared TypeScript runtime, one release pipeline.
 
 ## Mandatory change protocol for broad modifications

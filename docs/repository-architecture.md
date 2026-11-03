@@ -66,9 +66,9 @@ helpers belong in gamekit; game-specific helpers stay in the game.
 
 Because the repo itself is part of the product:
 
-- one skill distributes six games
-- one catalog describes six games
-- one release pipeline builds six games for five platforms
+- one skill distributes eight games
+- one catalog describes eight games
+- one release pipeline builds eight games for five platforms
 - one agent workflow governs every change
 
 Per-game repositories would fragment the skill, the release matrix and the

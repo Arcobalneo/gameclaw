@@ -10,7 +10,7 @@ lobster-cli-ink act dig
 lobster-cli-ink recap
 ```
 
-当前版本 `2.2.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 
