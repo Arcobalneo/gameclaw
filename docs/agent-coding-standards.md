@@ -94,8 +94,8 @@ Tests must not touch `~/.gameclaw` or open ports.
   agent-first, platform matrix, mechanics, action ids, CLI reference, state
   paths, local dev, security boundary.
 - Root README does not grow per-game walkthroughs.
-- `SKILL.md` stays self-contained and must be updated when platforms, asset
-  names or the CLI contract change.
+- `SKILL.md` is a stable entrypoint and must not hardcode the game list. Update
+  it when the lookup procedure, platforms, asset names or the CLI contract change.
 - Update `catalog/games.json` whenever a game id, platform or asset name changes.
 
 ## 8. Validation checklist

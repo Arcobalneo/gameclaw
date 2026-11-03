@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/lobster-cli-sideways-look",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "type": "module",
   "description": "Sideways-looking CLI visual horror for coding agents.",

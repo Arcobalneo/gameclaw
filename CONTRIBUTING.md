@@ -46,7 +46,8 @@ The order is mandatory:
 4. Write a Chinese `games/<id>/README.md`.
 5. Add an entry to `catalog/games.json`.
 6. Run `node scripts/test-game.mjs <id>` and build one binary.
-7. Update the root README game table and `SKILL.md` game table.
+7. Update the root README game table and `catalog/games.json`. Do not add the
+   game to `SKILL.md`; that skill looks the list up from Releases and the catalog.
 
 ## PR checklist
 

@@ -48,7 +48,7 @@ export interface RoguelikeState {
 }
 
 export const GAME_ID = 'lobster-cli-roguelike';
-export const GAME_VERSION = '2.1.0';
+export const GAME_VERSION = '2.3.0';
 
 export function parseContentPreset(content: string | undefined): number | null {
   if (!content || content === 'endless') return null;

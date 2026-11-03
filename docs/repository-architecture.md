@@ -42,7 +42,8 @@ or render HTML. They expose state in, actions in, result out.
 
 ### 3. Distribution layer — root
 
-- `SKILL.md` — the self-contained skill published to ClawHub / registries
+- `SKILL.md` — the skill published to ClawHub / registries. It does not list
+  games; it tells agents to query Releases and `catalog/games.json`.
 - `catalog/games.json` — machine-readable manifest (ids, platforms, assets)
 - `README.md` / `README.zh-CN.md` — human discovery and launch entrypoint
 - `.github/workflows/` — `ci.yml` and `release.yml`
@@ -66,9 +67,9 @@ helpers belong in gamekit; game-specific helpers stay in the game.
 
 Because the repo itself is part of the product:
 
-- one skill distributes six games
-- one catalog describes six games
-- one release pipeline builds six games for five platforms
+- one skill tells agents to query Releases and the catalog instead of embedding a game list
+- one catalog describes eight games
+- one release pipeline builds eight games for five platforms
 - one agent workflow governs every change
 
 Per-game repositories would fragment the skill, the release matrix and the

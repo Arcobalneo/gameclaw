@@ -1,6 +1,6 @@
 # AGENTS.md — GameClaw repo rules
 
-This repository is a **GameClaw distribution monorepo**: five agent-first
+This repository is a **GameClaw distribution monorepo**: eight agent-first
 terminal games, one shared TypeScript runtime, one release pipeline.
 
 ## Mandatory change protocol for broad modifications
@@ -136,8 +136,9 @@ If you change any of these, update docs before commit:
 
 - Root `README.md` / `README.zh-CN.md`: stable human-facing prompts that teach a
   person how to ask their agent to discover and launch games.
-- Root `SKILL.md`: the self-contained distribution skill (game list, platforms,
-  assets, launch and network troubleshooting).
+- Root `SKILL.md`: the distribution skill. It does not list games. It tells the
+  agent to query GitHub Releases and `catalog/games.json`, then covers platforms,
+  assets, launch and network troubleshooting.
 - `catalog/games.json`: the machine-readable manifest used by tooling and docs.
 - Each game directory: exactly one `README.md` (Chinese) covering mechanics,
   action ids, state paths and local development.

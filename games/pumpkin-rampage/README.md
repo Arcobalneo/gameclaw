@@ -9,7 +9,7 @@ pumpkin-rampage act soothe:candy:p3
 pumpkin-rampage recap
 ```
 
-当前版本 `2.0.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
+当前版本 `2.3.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。
 
 ## 为什么它是 agent-first 的
 

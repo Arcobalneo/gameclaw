@@ -56,7 +56,7 @@ describe('sideways-look CLI', () => {
     expect(payload.phase).toBe('exploring');
     expect(payload.turn).toBe(0);
     expect((payload.game as { id: string; version: string }).id).toBe('lobster-cli-sideways-look');
-    expect((payload.game as { version: string }).version).toBe('2.1.0');
+    expect((payload.game as { version: string }).version).toBe('2.3.0');
     expect(actionIds(payload)).toEqual(
       expect.arrayContaining(['inspect:left-window', 'move:monitor-hall', 'brace']),
     );

@@ -13,7 +13,7 @@ import { makeCreature, SPECIES } from './species';
 import { rollAffixSlots } from './workshop';
 
 export const GAME_ID = 'lobster-cli-tamer';
-export const GAME_VERSION = '2.1.0';
+export const GAME_VERSION = '2.3.0';
 
 export type Difficulty = 'easy' | 'normal' | 'hard';
 

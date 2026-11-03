@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/lobster-cli-tower-defense",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "type": "module",
   "description": "Pulse-based lobster tower defense for coding agents.",
