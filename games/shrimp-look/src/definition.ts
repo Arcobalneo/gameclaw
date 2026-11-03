@@ -177,14 +177,22 @@ function exploreActions(state: LookState): ActionView[] {
   const caseConfig = caseOf(state);
   if (!caseConfig) return [];
   const room = activeRoom(state);
-  return [
-    ...inspectActions(state, room),
-    ...interactActions(state, room),
-    ...moveActions(state, caseConfig, room),
-    ...recordAction(state),
-    braceAction(),
-    ...(room.isExit ? extractAction(state) : []),
-  ];
+  const inspect = inspectActions(state, room);
+  const interact = interactActions(state, room);
+  const move = moveActions(state, caseConfig, room);
+  const record = recordAction(state);
+  const brace = braceAction();
+  const extract = room.isExit ? extractAction(state) : [];
+  const actions = [...inspect, ...interact, ...move, ...record, brace, ...extract];
+
+  const claim = interact.find((action) => action.tags?.includes('objective'));
+  const preferred =
+    (room.isExit && state.objectiveQuality === 'verified' ? extract[0] : undefined) ??
+    (state.evidence >= state.requiredEvidence && !state.objectiveCollected ? claim : undefined) ??
+    record[0] ??
+    (state.focus <= 2 || state.nerve <= 3 || state.dread >= 7 ? brace : undefined);
+  if (!preferred) return actions;
+  return [preferred, ...actions.filter((action) => action !== preferred)];
 }
 
 function actionsOf(state: LookState): ActionView[] {

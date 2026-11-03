@@ -103,7 +103,7 @@ export interface TowerDefenseState {
 }
 
 export const GAME_ID = 'shrimp-guard';
-export const GAME_VERSION = '2.5.0';
+export const GAME_VERSION = '2.6.0';
 
 export const OUTCOME_TEXT: Record<Outcome, string> = {
   ongoing: '进行中',
@@ -798,7 +798,7 @@ function resolveEnemyMovement(state: TowerDefenseState): Resolution {
       if (isBlockedNow(state, enemy)) break;
       enemy.pos += 1;
       if (enemy.pos >= path.length - 1) {
-        state.integrity -= template.leak;
+        state.integrity = Math.max(0, state.integrity - template.leak);
         state.leaks += template.leak;
         state.laneLeaks[enemy.lane] += template.leak;
         state.lastBreakLane = enemy.lane;
@@ -950,7 +950,9 @@ export function act(state: TowerDefenseState, actionId: string): ActionResolutio
     log.push(
       `你以【${doctrine.title}】入场：潮令 ${doctrine.startingTide}，归海线 ${doctrine.startingIntegrity}/${doctrine.startingIntegrity}。`,
     );
-    log.push(`先布防；随时 act ready 放敌潮进场（共 ${state.wavePlan.length} 个 pulse）。`);
+    log.push(
+      `先布防；随时 act ready 放敌潮进场（共 ${state.wavePlan.length} 个常规 pulse，之后清尾波直到敌潮清空）。`,
+    );
     events.push({ type: 'doctrine', doctrine: doctrine.key });
     state.rng = rng.serialize();
     return { log, events };
@@ -1066,7 +1068,7 @@ export function act(state: TowerDefenseState, actionId: string): ActionResolutio
     state.phase = 'battle';
     state.pulse = 1;
     log.push(
-      `敌潮进场：共 ${state.wavePlan.length} 个 pulse。先手潮令 ${state.tide}，归海线 ${state.integrity}/${state.maxIntegrity}。`,
+      `敌潮进场：共 ${state.wavePlan.length} 个常规 pulse，之后清尾波直到敌潮清空。先手潮令 ${state.tide}，归海线 ${state.integrity}/${state.maxIntegrity}。`,
     );
     events.push({ type: 'ready', waves: state.wavePlan.length });
     state.rng = rng.serialize();

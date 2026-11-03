@@ -154,7 +154,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "2.5.0" },
+  "game": { "id": "shrimp-trek", "version": "2.6.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },

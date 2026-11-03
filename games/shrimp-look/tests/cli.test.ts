@@ -56,7 +56,7 @@ describe('sideways-look CLI', () => {
     expect(payload.phase).toBe('exploring');
     expect(payload.turn).toBe(0);
     expect((payload.game as { id: string; version: string }).id).toBe('shrimp-look');
-    expect((payload.game as { version: string }).version).toBe('2.5.0');
+    expect((payload.game as { version: string }).version).toBe('2.6.0');
     expect(actionIds(payload)).toEqual(
       expect.arrayContaining(['inspect:left-window', 'move:monitor-hall', 'brace']),
     );

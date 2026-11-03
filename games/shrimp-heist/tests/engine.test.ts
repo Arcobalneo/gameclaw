@@ -138,6 +138,20 @@ describe('heist engine', () => {
     expect(state.cause).toMatch(/曝光/);
   });
 
+  it('warns that an adjacent responder can kill on an objective interaction at low exposure', () => {
+    const state = playableRun(7, 'cold-rack');
+    const candidate = missionOf(state).facility.candidates[0]!;
+    state.position = [candidate[0], candidate[1]];
+    state.responderPos = [candidate[0], candidate[1] + 1];
+    state.alert = 2;
+    state.exposure = 0;
+
+    const action = availableActions(state).find((item) => item.id === 'interact:objective');
+    expect(action?.risk).toBe('high');
+    expect(action?.detail).toContain('致命');
+    expect(action?.detail).toContain('和曝光是否到上限无关');
+  });
+
   it('can be aborted honestly', () => {
     const state = playableRun(7);
     abort(state);

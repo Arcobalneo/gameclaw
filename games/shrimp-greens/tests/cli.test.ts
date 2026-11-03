@@ -52,7 +52,7 @@ describe('shrimp-greens CLI', () => {
     const payload = json(output);
     expect(payload.ok).toBe(true);
     expect((payload.game as { id: string; version: string }).id).toBe('shrimp-greens');
-    expect((payload.game as { version: string }).version).toBe('2.5.0');
+    expect((payload.game as { version: string }).version).toBe('2.6.0');
     expect(payload.phase).toBe('家里');
     expect(payload.turn).toBe(0);
     expect(payload.outcome).toBe('ongoing');

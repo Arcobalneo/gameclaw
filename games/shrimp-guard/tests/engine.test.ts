@@ -348,4 +348,32 @@ describe('tower defense engine', () => {
     expect(deployOptions(state).every((option) => option.cost <= state.tide)).toBe(true);
     expect(STAGE.slotOrder).toHaveLength(6);
   });
+
+  it('clamps excess leak damage in state, pulse events and status while still losing', () => {
+    const state = start('crusher');
+    act(state, 'ready');
+    clearWave(state);
+    state.integrity = 1;
+    addEnemy(state, 'pot-grunt', 'left', 2);
+    addEnemy(state, 'pot-grunt', 'left', 2);
+
+    const result = act(state, 'hold');
+
+    expect(state.integrity).toBe(0);
+    expect(state.outcome).toBe('lost');
+    expect(result.events.find((event) => event.type === 'pulse')).toMatchObject({ integrity: 0 });
+    expect(
+      definition.status(state).metrics.find((metric) => metric.label === '完整度')?.value,
+    ).toBe(`0/${state.maxIntegrity}`);
+  });
+
+  it('puts a highest-pressure deployment first for the next recommendation', () => {
+    const state = start('crusher');
+    const deploys = definition.actions(state).filter((action) => action.id.startsWith('deploy:'));
+    const pressures = deploys.map((action) =>
+      Number(action.detail?.match(/本 pulse 压力 (\d+)/)?.[1] ?? -1),
+    );
+    expect(pressures.length).toBeGreaterThan(0);
+    expect(pressures[0]).toBe(Math.max(...pressures));
+  });
 });

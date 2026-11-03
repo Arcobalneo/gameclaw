@@ -13,7 +13,7 @@ import { makeCreature, SPECIES } from './species';
 import { rollAffixSlots } from './workshop';
 
 export const GAME_ID = 'shrimp-catch';
-export const GAME_VERSION = '2.5.0';
+export const GAME_VERSION = '2.6.0';
 
 export type Difficulty = 'easy' | 'normal' | 'hard';
 
@@ -290,7 +290,7 @@ export function note(state: TamerState, text: string): void {
 }
 
 export function timeline(state: TamerState, text: string): void {
-  state.timeline.push(`T${state.turn + 1} ${text}`);
+  state.timeline.push(`T${state.turn} ${text}`);
   if (state.timeline.length > MAX_TIMELINE)
     state.timeline.splice(0, state.timeline.length - MAX_TIMELINE);
 }

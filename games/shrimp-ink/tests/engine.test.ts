@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { SITES, TALKS, WILD_SITES } from '../src/content';
+import { definition } from '../src/definition';
 import {
   abort,
   act,
@@ -227,5 +228,60 @@ describe('shrimp-ink engine', () => {
 
   it('lists the six sites on the board', () => {
     expect(Object.keys(SITES)).toHaveLength(6);
+  });
+
+  it('hides investigate below two silver and offers it at the exact price', () => {
+    const state = fresh();
+    state.location = 'stele';
+    for (const silver of [0, 1]) {
+      state.silver = silver;
+      expect(actionsOf(state).map((action) => action.id)).not.toContain('investigate');
+    }
+    state.silver = 2;
+    expect(actionsOf(state).map((action) => action.id)).toContain('investigate');
+  });
+
+  it('hides a lethal dig at one life and offers it when a life can be spent', () => {
+    const state = fresh();
+    state.location = 'stele';
+    state.life = 1;
+    expect(actionsOf(state).map((action) => action.id)).not.toContain('dig');
+    state.life = 2;
+    expect(actionsOf(state).map((action) => action.id)).toContain('dig');
+  });
+
+  it('keeps ongoing and aborted recap outcomes distinct', () => {
+    const state = fresh();
+    expect(definition.recap(state).outcome).toBe('ongoing');
+    abort(state);
+    expect(definition.recap(state).outcome).toBe('aborted');
+  });
+
+  it('recommends locally useful investigation, verification, income and food', () => {
+    const wild = fresh();
+    wild.location = 'stele';
+    expect(actionsOf(wild)[0]?.id).toBe('investigate');
+
+    const verify = fresh();
+    verify.location = 'temple';
+    verify.lead = { site: 'stele', truth: false };
+    expect(actionsOf(verify)[0]?.id).toBe('verify');
+
+    const poor = fresh();
+    poor.silver = 1;
+    expect(actionsOf(poor)[0]?.id).toBe('talk:work');
+
+    const hungry = fresh();
+    hungry.food = 3;
+    expect(actionsOf(hungry)[0]?.id).toBe('talk:buy-food');
+  });
+
+  it('labels the turn-seven food price as the next bag price', () => {
+    const state = fresh();
+    state.turn = 6;
+    state.silver = 12;
+    const result = act(state, 'talk:buy-food');
+    expect(state.silver).toBe(9);
+    expect(result.log.join('\n')).toContain('下一袋涨至 4 银');
   });
 });

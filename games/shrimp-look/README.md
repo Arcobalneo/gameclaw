@@ -12,7 +12,7 @@ shrimp-look act move:monitor-hall
 shrimp-look recap
 ```
 
-当前版本：`2.5.0`。
+当前版本：`2.6.0`。
 
 ## 为什么它是 agent-first 的
 
@@ -126,7 +126,7 @@ Expand-Archive shrimp-look-windows-x64.zip
 | 撤离 | `extract` | 仅在 `isExit` 房间出现 |
 | 中止 | `abort` | gamekit 自动追加，任何进行中的回合都可用 |
 
-`act` 支持完整 id、合法唯一前缀或动作列表里的序号。
+`act` 支持完整 id、合法唯一前缀或动作列表里的序号。`next` 取动作列表首项：有未记录现象时优先 `record`，证据足够且可取档时优先目标交互，带 verified 档案到出口时优先 `extract`；其余合法动作仍然保留。
 
 ## CLI 参考
 

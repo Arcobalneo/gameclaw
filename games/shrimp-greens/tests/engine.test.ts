@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { FAMILY_IDS, GENDER_IDS, PERSONALITY_IDS, REASON_IDS } from '../src/content';
+import { definition } from '../src/definition';
 import {
   abort,
   act,
@@ -295,6 +296,26 @@ describe('shrimp-greens endings', () => {
     expect(script.outcome).toBe('won');
   });
 
+  it('recommends an available settlement ahead of hold', () => {
+    const state = fresh(1, 'soft:meat');
+    state.turn = 12;
+    state.home = 6;
+    state.body = 3;
+    state.line = 2;
+    state.room = 3;
+    put(state, {
+      id: 'ownstove',
+      kind: 'kitchen',
+      who: 'self',
+      heat: 0,
+      vegOnTable: true,
+      phase: 'seat',
+    });
+    expect(ids(state)).toContain('hold');
+    expect(ids(state)).toContain('settle:truce');
+    expect(ids(state)[0]).toBe('settle:truce');
+  });
+
   it('writes the dice into the event when a talk can land', () => {
     const state = fresh(9, 'steady:veg', 'easy');
     state.creedGap = false;
@@ -367,6 +388,10 @@ describe('shrimp-greens replay', () => {
 });
 
 describe('shrimp-greens abort', () => {
+  it('keeps an ongoing recap ongoing', () => {
+    expect(definition.recap(fresh(1)).outcome).toBe('ongoing');
+  });
+
   it('records an abort without calling it a win or a loss', () => {
     const state = fresh(1);
     abort(state);
@@ -374,6 +399,7 @@ describe('shrimp-greens abort', () => {
     expect(state.ending).toBe('aborted');
     expect(actionsOf(state)).toEqual([]);
     expect(recapOf(state).outcome).toBe('aborted');
+    expect(definition.recap(state).outcome).toBe('aborted');
   });
 });
 

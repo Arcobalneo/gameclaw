@@ -1,6 +1,7 @@
 import { Rng } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 
+import { definition } from '../src/definition.js';
 import { attemptCapture, captureChance } from '../src/engine/capture.js';
 import { act } from '../src/engine/index.js';
 import {
@@ -263,5 +264,15 @@ describe('abyss', () => {
     const unlocked = checkUnlocks(state);
     expect(unlocked).toHaveLength(5);
     expect(state.unlockedZones).toHaveLength(6);
+  });
+});
+
+describe('timeline', () => {
+  it('uses the same encounter turn as the live action response and recap', () => {
+    const state = fresh(7);
+    act(state, 'menu:battle');
+    expect(state.phase).toBe('encounter');
+    expect(state.turn).toBe(1);
+    expect(definition.recap(state).timeline.at(-1)).toMatch(new RegExp(`^T${state.turn} 遭遇 `));
   });
 });

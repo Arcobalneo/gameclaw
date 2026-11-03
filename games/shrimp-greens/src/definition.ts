@@ -4,13 +4,13 @@ import type { VegeState } from './engine';
 import { abort, act, actionsOf, createRun, recapOf, statusOf } from './engine';
 
 const GAME_ID = 'shrimp-greens';
-const GAME_VERSION = '2.5.0';
+const GAME_VERSION = '2.6.0';
 
 function recapView(state: VegeState): RecapView {
   const recap = recapOf(state);
   return {
     title: recap.title,
-    outcome: recap.outcome === 'ongoing' ? 'aborted' : recap.outcome,
+    outcome: recap.outcome,
     cause: recap.cause,
     metrics: recap.metrics,
     timeline: recap.timeline.slice(-10),

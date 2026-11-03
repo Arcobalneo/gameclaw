@@ -637,7 +637,9 @@ export function actionsOf(state: VegeState): ActionView[] {
     }
   }
 
-  return actions;
+  const settle = actions.find((action) => action.id.startsWith('settle:'));
+  if (!settle) return actions;
+  return [settle, ...actions.filter((action) => action !== settle)];
 }
 
 function ensureOngoing(state: VegeState): void {

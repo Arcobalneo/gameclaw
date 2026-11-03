@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { APPROACH_FIT } from '../src/content';
+import { definition } from '../src/definition';
 import {
   act,
   actionsOf,
@@ -144,5 +145,49 @@ describe('shrimp-rampage engine', () => {
     expect(types).toContain('stamina');
     expect(result.events.find((event) => event.type === 'act')?.action).toBe(probe!.id);
     for (const event of result.events) expect(typeof event.type).toBe('string');
+  });
+
+  it('keeps an ongoing recap as honest mid-season progress', () => {
+    const state = createRun({ seed: 202 });
+    act(state, 'water:p1');
+    const recap = definition.recap(state);
+    expect(recap.outcome).toBe('ongoing');
+    expect(recap.title).toContain('季中进度');
+    expect(recap.title).not.toContain('没守住');
+    expect(recap.cause).toContain('还没有最终结局');
+  });
+
+  it('reports aborted only after a real abort', () => {
+    const state = createRun({ seed: 202 });
+    definition.abort?.(state);
+    const recap = definition.recap(state);
+    expect(state.outcome).toBe('aborted');
+    expect(recap.outcome).toBe('aborted');
+    expect(recap.title).toContain('中止');
+  });
+
+  it('preserves won and lost recap outcomes and titles', () => {
+    for (const outcome of ['won', 'lost'] as const) {
+      const state = createRun({ seed: 202 });
+      state.outcome = outcome;
+      state.cause = outcome === 'won' ? '守住了。' : '没守住。';
+      const recap = definition.recap(state);
+      expect(recap.outcome).toBe(outcome);
+      expect(recap.title).toBe(outcome === 'won' ? '这一季守住了' : '这一季没守住');
+    }
+  });
+
+  it('attributes a night-finishing action to the night and budget it consumed', () => {
+    const state = createRun({ seed: 202 });
+    state.actionsUsed = state.actionCap - 1;
+    const result = act(state, 'water:p1');
+    expect(state.night).toBe(2);
+    expect(state.actionsUsed).toBe(0);
+    expect(result.events.find((event) => event.type === 'act')).toMatchObject({
+      action: 'water:p1',
+      night: 1,
+      used: state.actionCap,
+    });
+    expect(result.events.find((event) => event.type === 'night')).toMatchObject({ night: 2 });
   });
 });
