@@ -2,6 +2,40 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.5.0 — 2026-11-03
+
+### Breaking
+
+- Renamed the complete catalog to the Shrimp series. Game ids, source
+  directories, package names, binaries, save/report namespaces, and release
+  assets now use the new ids; no old-id asset aliases are shipped.
+
+| Old id | New id |
+| --- | --- |
+| `lobster-cli-roguelike` | `shrimp-trek` |
+| `lobster-cli-tower-defense` | `shrimp-guard` |
+| `lobster-cli-heist` | `shrimp-heist` |
+| `lobster-cli-tamer` | `shrimp-catch` |
+| `lobster-cli-sideways-look` | `shrimp-look` |
+| `lobster-cli-ink` | `shrimp-ink` |
+| `pumpkin-rampage` | `shrimp-rampage` |
+| `vege-life` | `shrimp-greens` |
+| `tiny-conquest` | `shrimp-conquest` |
+
+### Changed
+
+- Display names are `虾走 (Shrimp Trek)`, `虾守 (Shrimp Guard)`,
+  `虾潜 (Shrimp Heist)`, `虾抓 (Shrimp Catch)`, `虾看 (Shrimp Look)`,
+  `虾写 (Shrimp Ink)`, `虾闹 (Shrimp Rampage)`, `虾素 (Shrimp Greens)`, and
+  `虾征 (Shrimp Conquest)` across the catalog, runtime banners, reports, and
+  documentation.
+- Rewrote `docs/NAMING.md`: every new game must use a two-character `虾×`
+  Chinese title, a Title Case `Shrimp <Word>` English title, and the matching
+  `shrimp-<word>` machine id. Intentional series refreshes may make documented
+  breaking id renames.
+- Bumped the root package, every workspace package, every game runtime, and the
+  skill metadata to `2.5.0`.
+
 ## v2.4.0 — 2026-11-03
 
 ### Added

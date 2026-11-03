@@ -40,8 +40,9 @@ The order is mandatory:
 
 ## Adding a game
 
-Follow [`docs/NAMING.md`](docs/NAMING.md): existing ids and release assets are
-frozen, while catalog display names and runtime metadata must match.
+Follow [`docs/NAMING.md`](docs/NAMING.md): every game uses the Shrimp-series
+display form and a matching `shrimp-<word>` id across the catalog, runtime,
+package, binary, and release assets.
 
 1. Copy the structure of an existing game under `games/`.
 2. Implement `GameDefinition` from `@gameclaw/gamekit`.
@@ -73,4 +74,4 @@ Include:
 
 ## Code of conduct
 
-Be direct about code, generous about people. Lobsters are involved.
+Be direct about code, generous about people. Shrimp are involved.

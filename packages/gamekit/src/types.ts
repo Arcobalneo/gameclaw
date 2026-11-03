@@ -11,7 +11,7 @@ export type Outcome = 'ongoing' | 'won' | 'lost' | 'aborted';
 export type Risk = 'low' | 'medium' | 'high';
 
 export interface GameMeta {
-  /** Stable machine id, e.g. `lobster-cli-heist`. Also the binary name. */
+  /** Stable machine id, e.g. `shrimp-heist`. Also the binary name. */
   id: string;
   /** Display name used in the terminal header. */
   name: string;

@@ -14,18 +14,18 @@
   ],
   "games": [
     {
-      "id": "lobster-cli-roguelike",
-      "name": "横着活",
-      "englishName": "Lobster Sideways Run",
-      "tagline": "只给龙虾玩的无限潮段 CLI 肉鸽",
+      "id": "shrimp-trek",
+      "name": "虾走",
+      "englishName": "Shrimp Trek",
+      "tagline": "只给虾玩的无限潮段 CLI 肉鸽",
       "summary": "九场遭遇加一道归海闸口的无限潮段肉鸽：三种谱系、七种突变、潮势节奏与海压递增。死亡给出可归因死因，结算输出本局观察。",
       "genres": [
         "roguelike",
         "turn-based",
         "survival"
       ],
-      "source_dir": "games/lobster-cli-roguelike",
-      "binary": "lobster-cli-roguelike",
+      "source_dir": "games/shrimp-trek",
+      "binary": "shrimp-trek",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -37,11 +37,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-roguelike-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-roguelike-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-roguelike-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-roguelike-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-roguelike-windows-x64.zip"
+        "darwin-arm64": "shrimp-trek-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-trek-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-trek-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-trek-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-trek-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -57,18 +57,18 @@
       }
     },
     {
-      "id": "lobster-cli-tower-defense",
-      "name": "横着守",
-      "englishName": "Lobster Sideways Hold",
-      "tagline": "pulse 制龙虾 CLI 塔防",
+      "id": "shrimp-guard",
+      "name": "虾守",
+      "englishName": "Shrimp Guard",
+      "tagline": "pulse 制虾 CLI 塔防",
       "summary": "三路线、六个部署位、三条 doctrine 的 pulse 制塔防。每 pulse 只做一个关键动作，随后自动结算推进、卡位与漏怪。",
       "genres": [
         "tower-defense",
         "tactics",
         "turn-based"
       ],
-      "source_dir": "games/lobster-cli-tower-defense",
-      "binary": "lobster-cli-tower-defense",
+      "source_dir": "games/shrimp-guard",
+      "binary": "shrimp-guard",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -80,11 +80,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-tower-defense-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-tower-defense-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-tower-defense-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-tower-defense-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-tower-defense-windows-x64.zip"
+        "darwin-arm64": "shrimp-guard-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-guard-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-guard-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-guard-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-guard-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -100,9 +100,9 @@
       }
     },
     {
-      "id": "lobster-cli-heist",
-      "name": "横着潜",
-      "englishName": "Lobster Sideways Heist",
+      "id": "shrimp-heist",
+      "name": "虾潜",
+      "englishName": "Shrimp Heist",
       "tagline": "网格潜行与撤离压力的 CLI heist",
       "summary": "读巡逻、摄像头与噪音，取走目标后在封锁前撤离。三套 profile、设施、安保、目标与复杂化包交叉生成任务。",
       "genres": [
@@ -110,8 +110,8 @@
         "heist",
         "tactics"
       ],
-      "source_dir": "games/lobster-cli-heist",
-      "binary": "lobster-cli-heist",
+      "source_dir": "games/shrimp-heist",
+      "binary": "shrimp-heist",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -123,11 +123,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-heist-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-heist-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-heist-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-heist-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-heist-windows-x64.zip"
+        "darwin-arm64": "shrimp-heist-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-heist-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-heist-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-heist-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-heist-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -143,9 +143,9 @@
       }
     },
     {
-      "id": "lobster-cli-tamer",
-      "name": "横着抓",
-      "englishName": "Lobster Sideways Catch",
+      "id": "shrimp-catch",
+      "name": "虾抓",
+      "englishName": "Shrimp Catch",
       "tagline": "捕捉、养成、洗词条与无尽深渊",
       "summary": "捕捉虾米、编队、战斗、洗词条，再下会永久死亡的深渊。数据由 JSON 内容层驱动，深渊污染会转化为疫病。",
       "genres": [
@@ -153,8 +153,8 @@
         "rpg",
         "roguelike"
       ],
-      "source_dir": "games/lobster-cli-tamer",
-      "binary": "lobster-cli-tamer",
+      "source_dir": "games/shrimp-catch",
+      "binary": "shrimp-catch",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -166,11 +166,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-tamer-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-tamer-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-tamer-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-tamer-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-tamer-windows-x64.zip"
+        "darwin-arm64": "shrimp-catch-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-catch-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-catch-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-catch-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-catch-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -186,9 +186,9 @@
       }
     },
     {
-      "id": "lobster-cli-sideways-look",
-      "name": "横着看",
-      "englishName": "Lobster Sideways Look",
+      "id": "shrimp-look",
+      "name": "虾看",
+      "englishName": "Shrimp Look",
       "tagline": "单步观察的 CLI 视觉恐怖",
       "summary": "横向观察异常房间，记录现象，带着一份记录撤离。四个案件、事件表驱动，真记录与错记录只差你验证了多少。",
       "genres": [
@@ -196,8 +196,8 @@
         "exploration",
         "mystery"
       ],
-      "source_dir": "games/lobster-cli-sideways-look",
-      "binary": "lobster-cli-sideways-look",
+      "source_dir": "games/shrimp-look",
+      "binary": "shrimp-look",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -209,11 +209,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-sideways-look-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-sideways-look-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-sideways-look-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-sideways-look-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-sideways-look-windows-x64.zip"
+        "darwin-arm64": "shrimp-look-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-look-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-look-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-look-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-look-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -229,18 +229,18 @@
       }
     },
     {
-      "id": "pumpkin-rampage",
-      "name": "南瓜大暴走",
-      "englishName": "Pumpkin Rampage",
+      "id": "shrimp-rampage",
+      "name": "虾闹",
+      "englishName": "Shrimp Rampage",
       "tagline": "四夜六动作，找怪、安抚、收成",
-      "summary": "四夜田园动作短局：探明六畦田里会滚会跑会弹会飞的南瓜怪，用糖果、小调或轻拍安抚它们，同时把南瓜种下去、浇上水、收回来。第三夜全体暴走，每做一个动作它们就换一次畦。",
+      "summary": "四夜田园动作短局：探明六畦田里会滚会跑会弹会飞的怪物，用糖果、小调或轻拍安抚它们，同时种植、浇水、收成。第三夜全体暴走，每做一个动作它们就换一次畦。",
       "genres": [
         "action",
         "farming",
         "turn-based"
       ],
-      "source_dir": "games/pumpkin-rampage",
-      "binary": "pumpkin-rampage",
+      "source_dir": "games/shrimp-rampage",
+      "binary": "shrimp-rampage",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -252,11 +252,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "pumpkin-rampage-darwin-arm64.tar.gz",
-        "darwin-x64": "pumpkin-rampage-darwin-x64.tar.gz",
-        "linux-x64": "pumpkin-rampage-linux-x64.tar.gz",
-        "linux-arm64": "pumpkin-rampage-linux-arm64.tar.gz",
-        "windows-x64": "pumpkin-rampage-windows-x64.zip"
+        "darwin-arm64": "shrimp-rampage-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-rampage-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-rampage-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-rampage-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-rampage-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -272,18 +272,18 @@
       }
     },
     {
-      "id": "lobster-cli-ink",
-      "name": "横着写",
-      "englishName": "Lobster Sideways Ink",
-      "tagline": "只给龙虾玩的 CLI 命笔游历",
+      "id": "shrimp-ink",
+      "name": "虾写",
+      "englishName": "Shrimp Ink",
+      "tagline": "十八幕游历，一支写下即成真的笔",
       "summary": "十八幕游历调查：六处水陆、三条信证路线、九种收尾。传闻有一支写下即成真的笔——先决定你信不信它存在，再决定往哪里找。",
       "genres": [
         "adventure",
         "mystery",
         "narrative"
       ],
-      "source_dir": "games/lobster-cli-ink",
-      "binary": "lobster-cli-ink",
+      "source_dir": "games/shrimp-ink",
+      "binary": "shrimp-ink",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -295,11 +295,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "lobster-cli-ink-darwin-arm64.tar.gz",
-        "darwin-x64": "lobster-cli-ink-darwin-x64.tar.gz",
-        "linux-x64": "lobster-cli-ink-linux-x64.tar.gz",
-        "linux-arm64": "lobster-cli-ink-linux-arm64.tar.gz",
-        "windows-x64": "lobster-cli-ink-windows-x64.zip"
+        "darwin-arm64": "shrimp-ink-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-ink-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-ink-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-ink-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-ink-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -315,9 +315,9 @@
       }
     },
     {
-      "id": "vege-life",
-      "name": "素食人生",
-      "englishName": "Vege Life",
+      "id": "shrimp-greens",
+      "name": "虾素",
+      "englishName": "Shrimp Greens",
       "tagline": "十六席，把自己的盘子吃完",
       "summary": "十六席的素食者人生。开局随机性别、性格和家庭。你自己吃素，不是胎内素。家里可能无肉不欢，也可能同素不同理。守盘、同席、把话说清、备菜，或为场面咬一口——那一口不提供体力。立席要自己收束，只是活到最后不算赢。",
       "genres": [
@@ -325,8 +325,8 @@
         "narrative",
         "turn-based"
       ],
-      "source_dir": "games/vege-life",
-      "binary": "vege-life",
+      "source_dir": "games/shrimp-greens",
+      "binary": "shrimp-greens",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -338,11 +338,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "vege-life-darwin-arm64.tar.gz",
-        "darwin-x64": "vege-life-darwin-x64.tar.gz",
-        "linux-x64": "vege-life-linux-x64.tar.gz",
-        "linux-arm64": "vege-life-linux-arm64.tar.gz",
-        "windows-x64": "vege-life-windows-x64.zip"
+        "darwin-arm64": "shrimp-greens-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-greens-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-greens-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-greens-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-greens-windows-x64.zip"
       },
       "run": {
         "unix": [
@@ -358,9 +358,9 @@
       }
     },
     {
-      "id": "tiny-conquest",
-      "name": "璿芃攻略",
-      "englishName": "Tiny Conquest",
+      "id": "shrimp-conquest",
+      "name": "虾征",
+      "englishName": "Shrimp Conquest",
       "tagline": "五十二週，小武器，一場不一定屬於誰的勝利",
       "summary": "小人國的璿芃受國王召令，要在一年內選一個大人國攻陷，戰爭或外交都行。補給、日常奇遇、部件組合武器、暴露風險，以及逃跑閃躲與迎戰連擊小遊戲；被俘後仍有救援機會，鏡面國藏著指向自家王城的反轉。",
       "genres": [
@@ -368,8 +368,8 @@
         "narrative",
         "turn-based"
       ],
-      "source_dir": "games/tiny-conquest",
-      "binary": "tiny-conquest",
+      "source_dir": "games/shrimp-conquest",
+      "binary": "shrimp-conquest",
       "status": "stable",
       "observer": true,
       "reports": true,
@@ -381,11 +381,11 @@
         "windows-x64"
       ],
       "release_assets": {
-        "darwin-arm64": "tiny-conquest-darwin-arm64.tar.gz",
-        "darwin-x64": "tiny-conquest-darwin-x64.tar.gz",
-        "linux-x64": "tiny-conquest-linux-x64.tar.gz",
-        "linux-arm64": "tiny-conquest-linux-arm64.tar.gz",
-        "windows-x64": "tiny-conquest-windows-x64.zip"
+        "darwin-arm64": "shrimp-conquest-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-conquest-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-conquest-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-conquest-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-conquest-windows-x64.zip"
       },
       "run": {
         "unix": [
