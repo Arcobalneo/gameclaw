@@ -12,8 +12,8 @@ coordinated identity rather than independent branding layers.
   `Shrimp Trek` or `Shrimp Ink`.
 - The machine id is `shrimp-<english-keyword>`: lowercase kebab-case, with the
   final keyword matching the English title's second word. Current keywords are
-  `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`, and
-  `conquest`.
+  `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`,
+  `conquest`, and `leap`.
 - Whenever both display names appear, use **`虾× (English Name)`**, for example
   `虾走 (Shrimp Trek)`. This is the required per-game README title and the
   preferred paired form in user-facing documentation.
