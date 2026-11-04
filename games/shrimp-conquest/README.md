@@ -9,7 +9,7 @@ shrimp-conquest act aid
 shrimp-conquest recap
 ```
 
-当前版本 `2.6.0`，使用 GameClaw 的 TypeScript `gamekit` v2 运行时。游戏正文与状态提示保留繁体中文。
+当前版本 `2.7.0`，使用 GameClaw 的 TypeScript `gamekit` v2 运行时。游戏正文与状态提示保留繁体中文。
 
 ## Agent-first 规则
 

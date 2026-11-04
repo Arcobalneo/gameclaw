@@ -399,6 +399,49 @@
           ".\\<binary>.exe --version"
         ]
       }
+    },
+    {
+      "id": "shrimp-leap",
+      "name": "虾跃",
+      "englishName": "Shrimp Leap",
+      "tagline": "四十五根灯柱，把果冻跳到天亮",
+      "summary": "四十五关灯柱跳跃：性格与颜色塑造果冻属性，三档离散物理、连续街图、视野与街速递增，每十五关成长；同性格离线同伴可能黏连并触发救援。",
+      "genres": [
+        "action",
+        "growth",
+        "turn-based"
+      ],
+      "source_dir": "games/shrimp-leap",
+      "binary": "shrimp-leap",
+      "status": "stable",
+      "observer": true,
+      "reports": true,
+      "platforms": [
+        "darwin-arm64",
+        "darwin-x64",
+        "linux-x64",
+        "linux-arm64",
+        "windows-x64"
+      ],
+      "release_assets": {
+        "darwin-arm64": "shrimp-leap-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-leap-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-leap-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-leap-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-leap-windows-x64.zip"
+      },
+      "run": {
+        "unix": [
+          "tar -xzf <asset>",
+          "cd <id>-<platform>",
+          "./<binary> --version"
+        ],
+        "windows": [
+          "Expand-Archive <asset>",
+          "cd <id>-<platform>",
+          ".\\<binary>.exe --version"
+        ]
+      }
     }
   ]
 }

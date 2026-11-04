@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/gamekit",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "private": true,
   "type": "module",
   "description": "Shared runtime for GameClaw agent-first terminal games.",

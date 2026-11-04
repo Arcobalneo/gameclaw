@@ -26,7 +26,7 @@
 
 ---
 
-GameClaw 是一个包含九款终端游戏的 monorepo。它的第一性原理只有一句：
+GameClaw 是一个包含十款终端游戏的 monorepo。它的第一性原理只有一句：
 
 > 玩家是一个**带工具调用循环的 LLM agent**，不是一个盯着 TUI 的人。
 
@@ -63,7 +63,7 @@ GameClaw 是一个包含九款终端游戏的 monorepo。它的第一性原理�
 完整设计准则见
 [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md)。
 
-## 九款游戏
+## 十款游戏
 
 | 游戏 | 你在做什么 | 核心张力 |
 |---|---|---|
@@ -76,8 +76,9 @@ GameClaw 是一个包含九款终端游戏的 monorepo。它的第一性原理�
 | **虾写 (Shrimp Ink)** `shrimp-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
 | **虾素 (Shrimp Greens)** `shrimp-greens` | 十六席过一个自己选的素食者：家里、校园、出门。开局随机性别、性格和家庭 | 守自己的盘子，还是为场面咬一口——那一口不提供体力 |
 | **虾征 (Shrimp Conquest)** `shrimp-conquest` | 五十二週補給小人國遠征、組合部件武器，選一個大人國用戰爭或外交攻陷 | 暴露會觸發路線閃躲或時機連擊；被俘仍有救援，一個目標會把勝利反轉回家 |
+| **虾跃 (Shrimp Leap)** `shrimp-leap` | 选择果冻性格与颜色，以力度、角度、时机跳过 45 根灯柱，训练并在 15 / 30 关长大 | 阅读延伸街图与风拍，平衡体力和落点；解救同性格离线同伴时还要控制拉力 |
 
-九款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
+十款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
 `windows-x64` 五个平台的二进制。
 
 ### 平台支持
@@ -150,7 +151,7 @@ cd shrimp-heist-windows-x64
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "2.6.0" },
+  "game": { "id": "shrimp-trek", "version": "2.7.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -225,7 +226,7 @@ bun games/shrimp-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 
 ## 发版
 
-打 `vX.Y.Z` tag 会构建全部 45 个产物（9 款游戏 × 5 个平台），并连同聚合
+打 `vX.Y.Z` tag 会构建全部 50 个产物（10 款游戏 × 5 个平台），并连同聚合
 `SHA256SUMS` 一起附到 GitHub Release。构建矩阵从 `games/*/package.json` 自动派生，
 新增游戏不需要改 workflow。细节见 [`docs/release-flow.md`](docs/release-flow.md)。
 

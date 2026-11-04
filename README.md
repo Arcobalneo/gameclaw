@@ -26,7 +26,7 @@
 
 ---
 
-GameClaw is a monorepo of nine terminal games that are designed from the first
+GameClaw is a monorepo of ten terminal games that are designed from the first
 principle that the player is an **LLM agent with a tool-calling loop**, not a human
 staring at a TUI. Every game is a deterministic state machine with a tiny,
 uniform CLI:
@@ -76,8 +76,9 @@ The full design canon lives in
 | **虾写 (Shrimp Ink)** `shrimp-ink` | Travel six sites over 18 turns, chase rumours of a pen that makes whatever it writes real, then decide whether to trust, verify, sell or seal it | Belief speeds up the search but also feeds false leads; every use deepens ink debt |
 | **虾素 (Shrimp Greens)** `shrimp-greens` | Live sixteen meals as someone who chose to be vegetarian, from the family table out into school and work | Hold your own plate, keep the peace, or spend a bite of meat that does not feed you |
 | **虾征 (Shrimp Conquest)** `shrimp-conquest` | Spend 52 weeks supplying a tiny expedition, designing component weapons, and conquering a giant kingdom through war or diplomacy | Exposure can trigger route/dodge or timing/combo minigames; capture has rescue paths, and one target turns conquest back toward home |
+| **虾跃 (Shrimp Leap)** `shrimp-leap` | Grow a jelly creature across 45 lamp posts with nature/color builds, training, and discrete power/angle/timing jumps | Read the extending street and shifting wind; rescue same-nature offline companions without pulling yourself down |
 
-All nine ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
+All ten ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 `windows-x64`.
 
 ### Platform support
@@ -154,7 +155,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "2.6.0" },
+  "game": { "id": "shrimp-trek", "version": "2.7.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -232,7 +233,7 @@ for repo conventions.
 
 ## Releases
 
-Tagging `vX.Y.Z` builds all 45 artifacts (9 games × 5 platforms) and attaches
+Tagging `vX.Y.Z` builds all 50 artifacts (10 games × 5 platforms) and attaches
 them, plus an aggregate `SHA256SUMS`, to a GitHub Release. The release matrix is
 derived from `catalog/games.json` / `games/*/package.json`, so adding a game does
 not require editing the workflow. Details: [`docs/release-flow.md`](docs/release-flow.md).

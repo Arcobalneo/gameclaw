@@ -2,6 +2,31 @@
 
 All notable changes to `gameclaw` are documented here.
 
+## v2.7.0 — 2026-11-04
+
+### Added
+
+- `虾跃 (Shrimp Leap)` / `shrimp-leap`: a 45-level action and growth game about
+  a jelly creature crossing an ever-extending street lamp by lamp. Choose a
+  nature and color, then combine power, angle and timing into deterministic
+  discrete jumps using public physics forecasts.
+- Four build stats, spark-funded training, growth at 15 and 30 clears, increasing
+  vision and street speed, and same-nature offline slime encounters with a
+  three-beat rescue minigame. No network connection or real-time input is used.
+- Legal actions expose their real consequences and `next` recommends a current
+  line. Recaps distinguish ordinary falls, exhaustion and rescue falls with the
+  exact level, action, landing error, stamina and rescue tension.
+- Engine and CLI coverage for action honesty, same-seed replay, builds, physics,
+  street extension, growth, complete wins, offline rescue, endings and recaps.
+
+### Changed
+
+- The catalog lists ten games and the release matrix builds 50 artifacts
+  (10 games × 5 platforms). CI and release workflows continue to discover games
+  from workspace packages without a hardcoded game list.
+- Root, gamekit, all ten game packages, runtime versions and skill metadata move
+  to `2.7.0`. `SKILL.md` remains list-free.
+
 ## v2.6.0 — 2026-11-04
 
 ### Fixed

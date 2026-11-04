@@ -1,0 +1,17 @@
+{
+  "name": "@gameclaw/shrimp-leap",
+  "version": "2.7.0",
+  "private": true,
+  "type": "module",
+  "description": "Shrimp Leap: a deterministic lamp-post jumping and jelly growth game.",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "build": "node ../../scripts/build-game.mjs shrimp-leap"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  }
+}
