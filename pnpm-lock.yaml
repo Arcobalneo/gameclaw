@@ -21,6 +21,12 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@24.19.2)(tsx@4.23.15)
 
+  games/shrimp-burger:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/shrimp-catch:
     dependencies:
       '@gameclaw/gamekit':
