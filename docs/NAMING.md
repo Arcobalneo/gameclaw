@@ -62,6 +62,8 @@ the release notes.
 | `pumpkin-rampage` | `虾闹 (Shrimp Rampage)` | `shrimp-rampage` |
 | `vege-life` | `虾素 (Shrimp Greens)` | `shrimp-greens` |
 | `tiny-conquest` | `虾征 (Shrimp Conquest)` | `shrimp-conquest` |
+| — | `虾跃 (Shrimp Leap)` | `shrimp-leap` |
+| — | `虾堡 (Shrimp Burger)` | `shrimp-burger` |
 
 ## Onboarding check
 

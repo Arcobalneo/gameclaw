@@ -1,6 +1,6 @@
 # 新游戏上线计划：虾堡（Shrimp Burger）v2.8.0
 
-- 状态：进行中
+- 状态：已完成
 - 日期：2026-11-09
 - 范围：新增 `games/shrimp-burger`、catalog / 五平台发行面、测试、中文 README 与全仓现行版本同步到 `2.8.0`
 - 设计依据：`docs/references/ai-native-game-design-rules.md`
@@ -94,18 +94,23 @@
 
 - [x] 阅读设计准则、shrimp-leap 实现 / 测试、gamekit、catalog、构建与发行配置
 - [x] 写入本计划并提交早期 checkpoint
-- [ ] 新增 `shrimp-burger` 包、LICENSE、tsconfig、main、definition、content、engine
-- [ ] 新增 engine / CLI 测试并通过包级 typecheck / test
-- [ ] 新增中文 README，标题严格为 `虾堡 (Shrimp Burger)`，记录动作、状态路径与数值
-- [ ] 新增 catalog 第十一条与五平台 release assets；lockfile 加入 workspace importer
-- [ ] 全仓现行版本与测试断言升到 2.8.0，SKILL 保持无游戏名单
-- [ ] 更新双语根 README、CHANGELOG、NAMING、AGENTS、架构 / 发版 / 计划索引
-- [ ] 跑 `pnpm validate:catalog && pnpm lint && pnpm check && pnpm test` 并修复
-- [ ] 验证 release matrix 为 11×5，构建本机真实 binary 与至少一个 foreign target
-- [ ] 用真实 CLI / binary 完成至少 15 步试玩，保存 `/tmp/shrimp-burger-smoke.txt`
-- [ ] 验证 observer 页面响应、终局关停、HTML / Markdown 结算
-- [ ] 审查生成文件与 diff，将本计划标记完成；commit 并 push 全部交付，不建 PR / tag / release
+- [x] 新增 `shrimp-burger` 包、LICENSE、tsconfig、main、definition、content、engine
+- [x] 新增 engine / CLI 测试并通过包级 typecheck / test
+- [x] 新增中文 README，标题严格为 `虾堡 (Shrimp Burger)`，记录动作、状态路径与数值
+- [x] 新增 catalog 第十一条与五平台 release assets；lockfile 加入 workspace importer
+- [x] 全仓现行版本与测试断言升到 2.8.0，SKILL 保持无游戏名单
+- [x] 更新双语根 README、CHANGELOG、NAMING、AGENTS、架构 / 发版 / 计划索引
+- [x] 跑 `pnpm validate:catalog && pnpm lint && pnpm check && pnpm test` 并修复
+- [x] 验证 release matrix 为 11×5，构建本机真实 binary 与至少一个 foreign target
+- [x] 用真实 CLI / binary 完成至少 15 步试玩，保存 `/tmp/shrimp-burger-smoke.txt`
+- [x] 验证 observer 页面响应、终局关停、HTML / Markdown 结算
+- [x] 审查生成文件与 diff，将本计划标记完成；commit 并 push 全部交付，不建 PR / tag / release
 
 ## 6. 验证记录
 
-待实现与实玩后填写。
+已完成：
+
+- 包级 typecheck / 10 项测试通过；catalog 11×5；本机 linux-x64 binary 构建并 `--version` 冒烟。
+- seed 7 真实 CLI 连续 20 步：融合入栈、驱赶浣熊/鸽子/猫、出餐 tasty 1/4，无动作报错。日志：`/tmp/shrimp-burger-smoke.txt`。
+- Kimi 配额耗尽后由执行代理按本计划落地；未发 ClawHub。
+

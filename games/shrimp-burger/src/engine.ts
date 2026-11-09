@@ -27,10 +27,10 @@ import {
   LANE_COUNT,
   type LegendRole,
   MATERIALS,
-  type MaterialId,
   MAX_NOTES,
   MAX_PESTS,
   MAX_TIMELINE,
+  type MaterialId,
   PEST_KINDS,
   PEST_SPECS,
   type PestKind,
@@ -273,7 +273,12 @@ function weightedBase(rng: Rng, recipe: RecipeView): MaterialId {
   return rng.pick(pool);
 }
 
-function generateLane(state: BurgerState, rng: Rng, slot: number, events: GameEvent[]): FallingItem {
+function generateLane(
+  state: BurgerState,
+  rng: Rng,
+  slot: number,
+  events: GameEvent[],
+): FallingItem {
   const roll = rng.float();
   if (roll < 0.22) {
     const grade = rng.pick(HEAT_GRADES);
@@ -604,7 +609,9 @@ function performCatch(
     });
   } else {
     const materialId =
-      item.kind === 'fusion' ? (item.fusionResultId as MaterialId) : (item.materialId as MaterialId);
+      item.kind === 'fusion'
+        ? (item.fusionResultId as MaterialId)
+        : (item.materialId as MaterialId);
     const unstable = item.kind === 'fusion' && item.progress === 0;
     if (unstable) state.heat = clamp(state.heat + 6, 0, 100);
     const entry = pushStack(state, materialId);
@@ -848,9 +855,7 @@ export function actionsOf(state: BurgerState): ActionView[] {
   const ranked: Ranked[] = [];
   const preview = previewTaste(state);
   const canServeWell =
-    preview.missing.length === 0 &&
-    preview.heatMiss === 0 &&
-    preview.quality >= 65;
+    preview.missing.length === 0 && preview.heatMiss === 0 && preview.quality >= 65;
 
   ranked.push({
     id: 'serve',
@@ -975,7 +980,10 @@ export function statusOf(state: BurgerState): StatusView {
   const metrics: Metric[] = [
     { label: '进度', value: `${state.served}/${state.goal}` },
     { label: '剩余拍', value: state.turnsRemaining },
-    { label: '火候', value: `${state.heat}（目标 ${state.recipe.heatMin}-${state.recipe.heatMax}）` },
+    {
+      label: '火候',
+      value: `${state.heat}（目标 ${state.recipe.heatMin}-${state.recipe.heatMax}）`,
+    },
     { label: '离店', value: `${state.walkouts}/${state.maxWalkouts}` },
     { label: '灾难', value: `${state.ruined}/${state.maxRuined}` },
     { label: '得分', value: state.score },
@@ -990,7 +998,11 @@ export function statusOf(state: BurgerState): StatusView {
         `必需：${state.recipe.required.map((id) => MATERIALS[id].name).join('、')}`,
         `可选：${state.recipe.optional.map((id) => MATERIALS[id].name).join('、') || '无'}`,
         state.recipe.note,
-        `缺失：${missingRequired(state).map((id) => MATERIALS[id].name).join('、') || '无'}`,
+        `缺失：${
+          missingRequired(state)
+            .map((id) => MATERIALS[id].name)
+            .join('、') || '无'
+        }`,
       ],
     });
     sections.push({
@@ -1041,7 +1053,10 @@ export function statusOf(state: BurgerState): StatusView {
   }
 
   if (recommended) {
-    sections.push({ title: '建议', lines: [`next → ${recommended.id}｜${recommended.detail ?? ''}`] });
+    sections.push({
+      title: '建议',
+      lines: [`next → ${recommended.id}｜${recommended.detail ?? ''}`],
+    });
   }
   if (state.notes.length > 0) {
     sections.push({ title: '备忘', lines: state.notes.slice(-4) });
@@ -1082,7 +1097,8 @@ export function recapOf(state: BurgerState): RecapView {
   return {
     title: `虾堡结算 · ${ENDING_NAMES[ending]}`,
     outcome: state.outcome,
-    cause: state.cause || `进行中：${state.served}/${state.goal}，剩余 ${state.turnsRemaining} 拍。`,
+    cause:
+      state.cause || `进行中：${state.served}/${state.goal}，剩余 ${state.turnsRemaining} 拍。`,
     metrics: [
       { label: '美味', value: `${state.served}/${state.goal}` },
       { label: '得分', value: state.score },

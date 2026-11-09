@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.8.0 — 2026-11-09
+
+### Added
+
+- `虾堡 (Shrimp Burger)` / `shrimp-burger`: a shift-timed burger station where
+  agents catch falling ingredients and heat orbs, shoo pests, soothe unhappy
+  guests, and plate burgers. Wrong ingredients never auto-fail — they still
+  enter the stack and reshape a deterministic taste threshold; fusion lanes can
+  spawn hybrids; heat bands differ per recipe.
+
+### Changed
+
+- The catalog lists eleven games and the release matrix builds 55 artifacts
+  (11 games × 5 platforms). CI and release workflows continue to discover games
+  from the workspace.
+- Root, gamekit, all eleven game packages, runtime versions and skill metadata
+  move to `2.8.0`. `SKILL.md` remains list-free.
+
 All notable changes to `gameclaw` are documented here.
 
 ## v2.7.0 — 2026-11-04

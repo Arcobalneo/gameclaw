@@ -55,7 +55,7 @@ describe('shrimp-conquest CLI', () => {
       id: 'shrimp-conquest',
       name: '虾征',
       englishName: 'Shrimp Conquest',
-      version: '2.7.0',
+      version: '2.8.0',
     });
     expect(payload.phase).toBe('野外');
     expect(payload.turn).toBe(0);

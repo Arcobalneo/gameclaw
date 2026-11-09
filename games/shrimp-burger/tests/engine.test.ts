@@ -17,7 +17,7 @@ function clone<T>(value: T): T {
 }
 
 function play(seed: number, steps: number, difficulty: 'easy' | 'normal' | 'hard' = 'normal') {
-  let state = createRun({ seed, difficulty });
+  const state = createRun({ seed, difficulty });
   const log: string[] = [];
   for (let i = 0; i < steps && state.outcome === 'ongoing'; i += 1) {
     const next = actionsOf(state)[0];
