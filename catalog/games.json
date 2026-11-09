@@ -442,6 +442,49 @@
           ".\\<binary>.exe --version"
         ]
       }
+    },
+    {
+      "id": "shrimp-burger",
+      "name": "虾堡",
+      "englishName": "Shrimp Burger",
+      "tagline": "限时接料，错料照吃，害虫来了腾出另一只手",
+      "summary": "混乱汉堡站台：接住食材与火候球，错料照样入栈并靠确定性味觉阈值出餐；落物可融合，小动物间歇偷吃需驱赶，过生过熟要安抚客人。",
+      "genres": [
+        "action",
+        "timing",
+        "turn-based"
+      ],
+      "source_dir": "games/shrimp-burger",
+      "binary": "shrimp-burger",
+      "status": "stable",
+      "observer": true,
+      "reports": true,
+      "platforms": [
+        "darwin-arm64",
+        "darwin-x64",
+        "linux-x64",
+        "linux-arm64",
+        "windows-x64"
+      ],
+      "release_assets": {
+        "darwin-arm64": "shrimp-burger-darwin-arm64.tar.gz",
+        "darwin-x64": "shrimp-burger-darwin-x64.tar.gz",
+        "linux-x64": "shrimp-burger-linux-x64.tar.gz",
+        "linux-arm64": "shrimp-burger-linux-arm64.tar.gz",
+        "windows-x64": "shrimp-burger-windows-x64.zip"
+      },
+      "run": {
+        "unix": [
+          "tar -xzf <asset>",
+          "cd <id>-<platform>",
+          "./<binary> --version"
+        ],
+        "windows": [
+          "Expand-Archive <asset>",
+          "cd <id>-<platform>",
+          ".\\<binary>.exe --version"
+        ]
+      }
     }
   ]
 }

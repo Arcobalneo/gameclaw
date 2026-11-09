@@ -132,7 +132,7 @@ describe('tamer CLI', () => {
   it('prints the text anchors for humans', async () => {
     const output = io();
     await run(['new', '--seed', '7'], output);
-    expect(output.stdout.join('\n')).toContain('GAME   shrimp-catch v2.7.0');
+    expect(output.stdout.join('\n')).toContain('GAME   shrimp-catch v2.8.0');
     expect(output.stdout.join('\n')).toContain('STATE');
     expect(output.stdout.join('\n')).toContain('STAT');
     expect(output.stdout.join('\n')).toContain('NEXT');
