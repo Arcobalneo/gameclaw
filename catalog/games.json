@@ -206,6 +206,62 @@
         "zh": "美味×180 + 幸运×40 + 最佳美味连段×50。幸运不延续连段。离店 −120，比一份幸运更贵。交班成功 +200，再加剩余时间。",
         "en": "Tasty×180 + lucky×40 + best tasty streak×50. A lucky bite does not extend the streak. A walkout is −120, more than a lucky serve. Finishing the shift adds 200 plus time left."
       }
+    },
+    {
+      "id": "claw-stamp",
+      "name": "虾印",
+      "englishName": "Claw Stamp",
+      "tagline": "十二张夜渡。擦边的船资更高，记过也更贵",
+      "summary": "夜渡窗口一次只看一位旅客。合法就盖，禁行就拒。擦边船资更高，盖下去记过并打断连段；特赦免船资，细看花耐心才能把擦边改成合法。放行够数才开船。",
+      "genres": ["judgment", "queue", "turn-based"],
+      "source_dir": "games/claw-stamp",
+      "status": "stable",
+      "score": {
+        "zh": "船资×12 + 拦截×35 + 最好连段×22 − 记过×80 − 误判×40。开船 +420，再加剩余耐心×8。没开船只留三分之一。一次记过比两次拦截更贵。中止为 0。",
+        "en": "Fares×12 + catches×35 + best streak×22 − strikes×80 − misreads×40. Sailing adds 420 plus patience×8. A failed night keeps one third. One strike costs more than two catches. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-melt",
+      "name": "虾熔",
+      "englishName": "Claw Melt",
+      "tagline": "六列潮井。顶壳会被潮推走",
+      "summary": "把壳落入六列潮井。同一行左右相连才熔成更大的一枚，叠在同一列不会。列一旦叠满，井口就堵住。每隔几落，潮把不比邻列矮的顶壳推一格，高过两层的边壳会滑出。",
+      "genres": ["puzzle", "stacking", "turn-based"],
+      "source_dir": "games/claw-melt",
+      "status": "stable",
+      "score": {
+        "zh": "壳分 + 最好连锁×28 + 最大尺寸×30 − 滑出×22。过井 +380。堵住井口只留壳分的三分之一。中止为 0。",
+        "en": "Merge points + best chain×28 + largest size×30 − spills×22. Clearing the well adds 380. A plugged mouth keeps one third of the points. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-net",
+      "name": "虾网",
+      "englishName": "Claw Net",
+      "tagline": "补洞，或者在网破之前收鱼",
+      "summary": "一张五乘四的夜网。两个破洞挨着，完好的结会变湿；湿结再挨着破洞就会裂开。补一结花一根线，剪一结不再蔓延但也没有鱼。四夜里把鱼收到定额，破洞到八张网就破。",
+      "genres": ["puzzle", "containment", "turn-based"],
+      "source_dir": "games/claw-net",
+      "status": "stable",
+      "score": {
+        "zh": "鱼×12 + 剩余线×6 − 剪口×18。鱼够了 +340。没够或网破只按鱼×4。剪一处比一条鱼更贵。中止为 0。",
+        "en": "Fish×12 + thread left×6 − cuts×18. Filling the basket adds 340. A thin haul or a rip scores fish×4. A cut costs more than one fish. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-beat",
+      "name": "虾节",
+      "englishName": "Claw Beat",
+      "tagline": "四拍一句。每轮只许改两拍",
+      "summary": "一句四拍的短语会留下来。每轮最多改两拍，然后迎上下四下来势。点最多两下而且不能相邻，还得留一个歇。闪吃劈，架也吃劈，点吃停，虚专吃闪。五轮内把对方打到零。",
+      "genres": ["duel", "puzzle", "turn-based"],
+      "source_dir": "games/claw-beat",
+      "status": "stable",
+      "score": {
+        "zh": "命中×12 + 拆招×30 + 格挡×10 + 剩余气息×8 − 受击×28。击倒 +420。受击比两次命中更贵。没击倒只留命中和拆招的三分之一。中止为 0。",
+        "en": "Hits×12 + ripostes×30 + blocks×10 + breath left×8 − damage taken×28. A knockout adds 420. Damage taken costs more than two hits. A loss keeps one third of the hit and riposte points. Abort is 0."
+      }
     }
   ]
 }

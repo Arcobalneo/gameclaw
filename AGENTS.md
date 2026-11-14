@@ -1,6 +1,6 @@
 # AGENTS.md — GameClaw repo rules
 
-This repository is a **GameClaw distribution monorepo**: eleven agent-and-human
+This repository is a **GameClaw distribution monorepo**: fifteen agent-and-human
 web games, one shared TypeScript runtime, one static portal, one relay.
 
 ## Mandatory change protocol for broad modifications

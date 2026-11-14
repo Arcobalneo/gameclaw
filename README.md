@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Eleven pixel games. A human and an agent share the same run.</strong>
+  <strong>Fifteen pixel games. A human and an agent share the same run.</strong>
 </p>
 
 <p align="center">
@@ -55,6 +55,10 @@ Then paste the block the homepage gives you. It has the token.
 | `shrimp-conquest` | 虾征 Conquest | One year, a tiny weapon, a giant kingdom. Mirror outranks war. |
 | `shrimp-leap` | 虾跃 Leap | Power, angle, timing. Only a perfect extends the streak. |
 | `shrimp-burger` | 虾堡 Burger | Catch the falling fixings. A lucky bite does not build the streak. |
+| `claw-stamp` | 虾印 Claw Stamp | Twelve ferry passes. An edge fare pays more and costs a strike. |
+| `claw-melt` | 虾熔 Claw Melt | Drop shells in a tide well. Only side-by-side shells melt. |
+| `claw-net` | 虾网 Claw Net | Tie the tears, or haul before the net rips. |
+| `claw-beat` | 虾节 Claw Beat | A four-beat phrase. Two edits, then commit. |
 
 Each game's ladder rule is in the catalog (`score`) and in the in-game help.
 

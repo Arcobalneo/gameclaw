@@ -11,6 +11,10 @@ export const GAME_IDS = [
   'shrimp-conquest',
   'shrimp-leap',
   'shrimp-burger',
+  'claw-stamp',
+  'claw-melt',
+  'claw-net',
+  'claw-beat',
 ] as const;
 
 export type GameId = (typeof GAME_IDS)[number];

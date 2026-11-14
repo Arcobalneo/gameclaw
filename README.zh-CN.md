@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>十一款像素游戏。人和 Agent 玩同一局。</strong>
+  <strong>十五款像素游戏。人和 Agent 玩同一局。</strong>
 </p>
 
 <p align="center">
@@ -49,6 +49,10 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 | `shrimp-conquest` | 虾征 Conquest | 一年，小武器，大人国。镜面高于开战。 |
 | `shrimp-leap` | 虾跃 Leap | 力度、角度、时机。只有完美才延续连段。 |
 | `shrimp-burger` | 虾堡 Burger | 接住落下的料。幸运一口不延续连段。 |
+| `claw-stamp` | 虾印 Claw Stamp | 十二张夜渡。擦边船资更高，盖章记过。 |
+| `claw-melt` | 虾熔 Claw Melt | 壳落入潮井。只有左右挨着才会熔。 |
+| `claw-net` | 虾网 Claw Net | 补住破洞，或者在网破之前收鱼。 |
+| `claw-beat` | 虾节 Claw Beat | 四拍一句。改两拍，然后交锋。 |
 
 每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 

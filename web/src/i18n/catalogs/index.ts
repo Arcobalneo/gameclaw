@@ -1,3 +1,7 @@
+import claw_beat from './claw-beat.json';
+import claw_melt from './claw-melt.json';
+import claw_net from './claw-net.json';
+import claw_stamp from './claw-stamp.json';
 import shrimp_burger from './shrimp-burger.json';
 import shrimp_catch from './shrimp-catch.json';
 import shrimp_conquest from './shrimp-conquest.json';
@@ -29,6 +33,10 @@ export function allCatalogs(): ReadonlyMap<string, GameCatalog> {
   return registry;
 }
 
+registerCatalog('claw-beat', claw_beat as GameCatalog);
+registerCatalog('claw-melt', claw_melt as GameCatalog);
+registerCatalog('claw-net', claw_net as GameCatalog);
+registerCatalog('claw-stamp', claw_stamp as GameCatalog);
 registerCatalog('shrimp-burger', shrimp_burger as GameCatalog);
 registerCatalog('shrimp-catch', shrimp_catch as GameCatalog);
 registerCatalog('shrimp-conquest', shrimp_conquest as GameCatalog);
