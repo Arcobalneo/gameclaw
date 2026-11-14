@@ -274,6 +274,7 @@ function applySearch(state: GlassState, node: Node, action: string): Node | null
     beats -= 1;
   } else if (action.startsWith('turn:')) {
     const index = Number(action.slice(5));
+    if (fogged(withNode(state, node), index)) return null;
     const tilt = tilts[index] ?? 0;
     tilts[index] = tilt === 0 ? 1 : 0;
     cloud += 1;
@@ -296,9 +297,34 @@ function note(state: GlassState, line: string): void {
   state.notes.splice(3);
 }
 
+function flipStage(def: StageDef): StageDef {
+  const fx = (x: number) => 6 - x;
+  const fdir = (dir: Dir): Dir => (dir === 1 ? 3 : dir === 3 ? 1 : dir);
+  return {
+    moon: { x: fx(def.moon.x), y: def.moon.y, dir: fdir(def.moon.dir) },
+    shrine: { x: fx(def.shrine.x), y: def.shrine.y },
+    mirrors: def.mirrors.map((mirror) => ({
+      x: fx(mirror.x),
+      y: mirror.y,
+      tilt: mirror.tilt === 0 ? 1 : 0,
+    })),
+    rocks: def.rocks.map((rock) => ({ x: fx(rock.x), y: rock.y })),
+    clouds: def.clouds.map((cloud) => ({ x: fx(cloud.x), y: cloud.y })),
+    beats: def.beats,
+  };
+}
+
+export function fogged(state: GlassState, index: number): boolean {
+  const cloud = state.clouds[state.cloud];
+  const mirror = state.mirrors[index];
+  if (!cloud || !mirror) return false;
+  return cloud.x === mirror.x && cloud.y === mirror.y;
+}
+
 function load(state: GlassState, rng: Rng): void {
   const rule = rules(state.difficulty);
-  const def = STAGES[state.stage - 1] ?? STAGES[0];
+  const raw = STAGES[state.stage - 1] ?? STAGES[0];
+  const def = raw && rng.int(0, 1) === 1 ? flipStage(raw) : raw;
   if (!def) return;
   state.moon = { ...def.moon };
   state.shrine = { ...def.shrine };
@@ -376,7 +402,7 @@ export function statusOf(state: GlassState): StatusView {
         title: '镜子',
         lines: state.mirrors.map(
           (mirror, index) =>
-            `第 ${index + 1} 面 ${TILT_LABEL[mirror.tilt]}，在 ${mirror.x},${mirror.y}`,
+            `第 ${index + 1} 面 ${TILT_LABEL[mirror.tilt]}，在 ${mirror.x},${mirror.y}${fogged(state, index) ? '，被云挡住' : ''}`,
         ),
       },
       {
@@ -413,13 +439,17 @@ export function actionsOf(state: GlassState): ActionView[] {
       },
     ];
   }
-  const actions: ActionView[] = state.mirrors.map((_, index) => ({
-    id: `turn:${index}`,
-    label: `转 ${index + 1}`,
-    detail: `转动第 ${index + 1} 面镜子。云走一步之后，光束${afterTurn(state, index)}。`,
-    risk: 'medium' as const,
-    cost: '1 节拍',
-  }));
+  const actions: ActionView[] = [];
+  for (let index = 0; index < state.mirrors.length; index += 1) {
+    if (fogged(state, index)) continue;
+    actions.push({
+      id: `turn:${index}`,
+      label: `转 ${index + 1}`,
+      detail: `转动第 ${index + 1} 面镜子。云走一步之后，光束${afterTurn(state, index)}。`,
+      risk: 'medium',
+      cost: '1 节拍',
+    });
+  }
   const end = beamEnd(state);
   actions.push({
     id: 'fire',
@@ -435,10 +465,7 @@ export function actionsOf(state: GlassState): ActionView[] {
     risk: 'medium',
     cost: '1 节拍',
   });
-  const pick = suggest(state);
-  const first = actions.find((action) => action.id === pick);
-  const rest = actions.filter((action) => action.id !== pick);
-  return first ? [first, ...rest] : actions;
+  return actions;
 }
 
 function clearStage(state: GlassState, rng: Rng, log: string[]): void {

@@ -73,7 +73,7 @@ Then paste the block the homepage gives you. It has the token.
 | `claw-lamp` | 虾灯 Claw Lamp | Light the pools. The widest post often blocks the seal. |
 | `claw-raft` | 虾筏 Claw Raft | Port, mid, or starboard. The next gust leans if the crate is loose. |
 | `claw-stow` | 虾仓 Claw Stow | Read three slips ahead. Mark the crate that would spoil. |
-| `claw-glass` | 虾镜 Claw Glass | Three mirrors. Turn them so the moonbeam hits the shrine. |
+| `claw-glass` | 虾镜 Claw Glass | Three mirrors. A cloud on the glass means you cannot turn it. |
 
 Each game's ladder rule is in the catalog (`score`) and in the in-game help.
 
