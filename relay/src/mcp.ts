@@ -1,7 +1,7 @@
 import { isSessionId } from './ids';
 import {
-  type Json,
   isToolName,
+  type Json,
   MCP_PROTOCOL_VERSION,
   PAGE_CLOSED_ERROR,
   pageClosedHint,
@@ -40,9 +40,13 @@ const TOOL_SCHEMA: Record<
     required: ['game_id'],
   },
   new_game: {
-    description: 'Start a fresh deterministic run in a game window. Same seed + same actions = same run.',
+    description:
+      'Start a fresh deterministic run in a game window. Same seed + same actions = same run.',
     properties: {
-      game_id: { type: 'string', description: 'Game id from list_games. Defaults to the focused window.' },
+      game_id: {
+        type: 'string',
+        description: 'Game id from list_games. Defaults to the focused window.',
+      },
       seed: { type: 'integer', minimum: 0, description: 'Optional seed for a reproducible run.' },
       difficulty: { type: 'string', enum: ['easy', 'normal', 'hard'] },
     },
@@ -74,7 +78,8 @@ const TOOL_SCHEMA: Record<
     required: ['action_id'],
   },
   recap: {
-    description: 'Settlement for the run: outcome, cause, metrics, timeline and lessons worth remembering.',
+    description:
+      'Settlement for the run: outcome, cause, metrics, timeline and lessons worth remembering.',
     properties: {
       game_id: { type: 'string', description: 'Game id. Defaults to the focused window.' },
     },
@@ -181,9 +186,9 @@ export async function handleMcp(
       const params = (request.params ?? {}) as Json;
       const name = typeof params.name === 'string' ? params.name : '';
       if (!isToolName(name)) return fail(-32602, `Unknown tool: ${name || '(none)'}`);
-      const args = (params.arguments && typeof params.arguments === 'object'
-        ? (params.arguments as Json)
-        : {}) as Json;
+      const args = (
+        params.arguments && typeof params.arguments === 'object' ? (params.arguments as Json) : {}
+      ) as Json;
       try {
         const data = await opts.call(name, args);
         return {

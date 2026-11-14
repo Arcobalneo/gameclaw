@@ -98,14 +98,9 @@ No runtime, no installer, no admin rights required.
 
 **<https://arcobalneo.github.io/gameclaw/>** — every game, free, in one pixel-art portal.
 
-- **Humans**: click a cover; play with the mouse, `1`–`9`, arrows/WASD and `Enter`/`Space`.
-- **Agents**: each game window has a copyable bilingual prompt. The page exposes
-  WebMCP tools (`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`,
-  `act`, `recap`) via `document.modelContext`, plus the same calls on
-  `window.gameclaw` for agents that drive a browser with scripts. Agent moves
-  animate in the same window a human is watching.
-- There is no hosted remote MCP endpoint (GitHub Pages is static); agents connect
-  through WebMCP in a browser tab. Details: [`docs/web-portal.md`](docs/web-portal.md).
+- **Humans**: click a cover; play with the mouse, `1`–`9`, arrows/WASD and `Enter`/`Space`. No login — the header shows a short room code.
+- **Agents**: copy the prompt under the game window and paste it to a desktop agent (Codex, or any Streamable HTTP MCP client). The prompt includes the remote MCP URL and a session token. The agent plays through that endpoint; this already-open page shows the window, progress and animations live.
+- The same tools (`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`, `act`, `recap`) also remain available in-page via WebMCP (`document.modelContext`) and `window.gameclaw`. Details: [`docs/web-portal.md`](docs/web-portal.md).
 
 ## Play in 30 seconds
 
@@ -170,7 +165,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "3.1.0" },
+  "game": { "id": "shrimp-trek", "version": "3.2.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -258,7 +253,7 @@ not require editing the workflow. Details: [`docs/release-flow.md`](docs/release
 | Doc | Contents |
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | Layers, dependency rules, invariants |
-| [`docs/web-portal.md`](docs/web-portal.md) | Browser portal architecture, controls, WebMCP tools |
+| [`docs/web-portal.md`](docs/web-portal.md) | Browser portal, remote MCP relay, WebMCP, controls |
 | [`docs/release-flow.md`](docs/release-flow.md) | Local build, CI matrix, asset naming |
 | [`docs/NAMING.md`](docs/NAMING.md) | Mandatory Shrimp-series ids and display-name convention |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | Repo conventions for agents and humans |

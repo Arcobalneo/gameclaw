@@ -15,7 +15,9 @@ web/
   src/runtime/registry.ts   lazy `import()` per game (one chunk each)
   src/runtime/host.ts       GameHost: MemorySession + localStorage + change feed
   src/runtime/agent-api.ts  list_games … recap; WebMCP registration
-  src/runtime/prompt.ts     copyable agent prompt (in the current UI language)
+  src/runtime/session.ts    local session token + room code (localStorage)
+  src/runtime/relay.ts      WebSocket to the remote MCP relay
+  src/runtime/prompt.ts     copyable agent prompt (MCP URL + token, current language)
   src/i18n/index.ts         typed zh/en dictionary, lang()/setLang()/t()
   src/i18n/terms.ts         per-game glossary: engine labels/metrics/phases → English
   src/gfx/art.ts            art bible: hue-shifted ramps, grade, bloom, light mask, springs
@@ -23,7 +25,7 @@ web/
   src/gfx/actors.ts         layered humanoid sprite generator (front/back/bust, blink, talk)
   src/gfx/*                 384×216 pixel buffer: sprites, parallax, tiny font, text
   src/games/<id>.ts         scene per game: draw / grade / hud / react / hit regions
-  src/ui/*                  home grid, windowed portal with tabs, game view, topbar, sfx
+  src/ui/*                  home grid, windowed portal with tabs, game view, topbar, session chip, sfx
   public/covers/*.webp      home covers, clean frames captured from the real scenes
 ```
 
@@ -46,6 +48,10 @@ web/
 - **State**: one `GameHost` per game id. Human clicks/keys and agent tool calls go
   through the same host, so an agent's moves animate in the window a human watches
   (an "AGENT" badge marks them). Runs persist in `localStorage` (`gameclaw:v3:<id>`).
+- **Session**: on first visit the page creates a 22-character session id and the
+  relay assigns a 7-character room code (`gameclaw:session:*` in `localStorage`).
+  No login. The room code is in the header; typing it on another device joins the
+  same session. The language switch still applies to these strings.
 - **Performance**: 60fps RAF loop that pauses when hidden; each game is a lazy chunk.
 
 ## Controls
@@ -79,14 +85,40 @@ Without WebMCP, agents that can run page JavaScript use the same functions on
 `window.gameclaw` (`listGames`, `openGame`, `newGame`, `getState`, `listActions`,
 `act`, `recap`, `closeGame`). Every call returns JSON and never throws.
 
-## Hosted remote MCP?
+## Remote MCP
 
-Not shipped. GitHub Pages only serves static files, so it cannot host an MCP
-endpoint (Streamable HTTP needs a server process and per-session state). Because
-the engines are pure TypeScript, a future remote MCP could run them on a
-serverless runtime such as Cloudflare Workers / Durable Objects. Until then,
-agents connect through WebMCP (or the JS API) in a real browser tab, which also
-keeps the human-visible window in sync.
+GitHub Pages is static, so the MCP endpoint lives on a small relay
+(`relay/`): Cloudflare Workers + Durable Objects in production, or a Bun
+server with the same contract locally (`bun relay/src/node-server.ts`).
+
+- **Browser**: `wss://<host>/session/<id>`. The tab executes tools on the
+  existing `GameHost` (same path as clicks and in-page WebMCP) and returns
+  results. If the WebSocket drops, a slim reconnect banner appears.
+- **Agent**: Streamable HTTP MCP at `POST https://<host>/mcp` with
+  `Authorization: Bearer <session-id>`. Tools are the same seven
+  (`list_games` … `recap`). The session token may also be passed as a
+  `session` tool argument. If no tab is connected, the tool returns
+  "The GameClaw page is not connected" and tells the agent to wait until
+  the human opens the portal.
+- **Public MCP URL**: `https://gameclaw-relay.arcobalneo.workers.dev/mcp`
+- **CORS**: locked to `https://arcobalneo.github.io` and localhost.
+- **Lookup**: `GET /room/<code>` resolves a short code to a session id, rate
+  limited. Tokens are not written to logs.
+
+The copyable prompt under each game includes the MCP URL, the token, and
+how to connect, in the current UI language.
+
+Deploy the Worker with `npx wrangler deploy` from `relay/` (requires a
+Cloudflare API token with Workers + Durable Objects permissions, or
+`wrangler login`). Point the portal at a different relay with `?relay=`
+or `VITE_GAMECLAW_RELAY`.
+
+```bash
+pnpm --filter @gameclaw/relay test
+bun relay/src/node-server.ts          # http://127.0.0.1:8787/mcp
+# e2e (page open + remote MCP act):
+node web/e2e/relay.mjs http://localhost:4173/gameclaw/ --relay http://127.0.0.1:8787
+```
 
 ## Development
 

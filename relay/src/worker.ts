@@ -2,8 +2,8 @@
 
 import { handleRequest, RELAY_VERSION, type RoomHandle, type RoomHub } from './app';
 import { isSessionId } from './ids';
-import { type Json, type ToolName } from './protocol';
-import { type CodeStore } from './registry';
+import type { Json, ToolName } from './protocol';
+import type { CodeStore } from './registry';
 import { SessionRoomCore, type SocketLike } from './room';
 
 export interface Env {
@@ -18,7 +18,9 @@ class RegistryStore implements CodeStore {
   constructor(private readonly stub: DurableObjectStub) {}
 
   async getSession(code: string): Promise<string | undefined> {
-    const res = await this.stub.fetch(`https://registry/get-session?code=${encodeURIComponent(code)}`);
+    const res = await this.stub.fetch(
+      `https://registry/get-session?code=${encodeURIComponent(code)}`,
+    );
     if (!res.ok) return undefined;
     const body = (await res.json()) as { session?: string };
     return body.session;
@@ -223,17 +225,22 @@ export default {
       },
     };
 
-    return handleRequest(request, hub, { siteUrl, version: RELAY_VERSION }, {
-      async accept(room) {
-        if (!(room instanceof DoRoom)) {
-          return {
-            socket: { send() {}, close() {}, readyState: 3 },
-            response: new Response('upgrade failed', { status: 500 }),
-          };
-        }
-        const response = await room.connect(request);
-        return { socket: { send() {}, close() {}, readyState: 1 }, response };
+    return handleRequest(
+      request,
+      hub,
+      { siteUrl, version: RELAY_VERSION },
+      {
+        async accept(room) {
+          if (!(room instanceof DoRoom)) {
+            return {
+              socket: { send() {}, close() {}, readyState: 3 },
+              response: new Response('upgrade failed', { status: 500 }),
+            };
+          }
+          const response = await room.connect(request);
+          return { socket: { send() {}, close() {}, readyState: 1 }, response };
+        },
       },
-    });
+    );
   },
 };

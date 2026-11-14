@@ -1,10 +1,10 @@
 import { corsHeaders, isAllowedOrigin } from './cors';
 import { isRoomCode, isSessionId, normalizeRoomCode } from './ids';
 import { extractSession, handleMcp, isJsonRpcRequest, type JsonRpcRequest } from './mcp';
-import { MCP_PROTOCOL_VERSION, type Json, type ToolName } from './protocol';
+import { type Json, MCP_PROTOCOL_VERSION, type ToolName } from './protocol';
 import { codeLookupLimit, mcpLimit } from './rate-limit';
-import { type CodeStore, assignCode, resolveCode } from './registry';
-import { type SocketLike } from './room';
+import { assignCode, type CodeStore, resolveCode } from './registry';
+import type { SocketLike } from './room';
 
 export const RELAY_VERSION = '3.2.0';
 
@@ -28,7 +28,11 @@ export interface RoomHub {
 
 export interface UpgradeHooks {
   /** When the incoming request is a WebSocket upgrade, attach this socket. */
-  accept?(room: RoomHandle): Promise<{ socket: SocketLike; response: Response }> | { socket: SocketLike; response: Response };
+  accept?(
+    room: RoomHandle,
+  ):
+    | Promise<{ socket: SocketLike; response: Response }>
+    | { socket: SocketLike; response: Response };
 }
 
 const INDEX_BODY = `GameClaw relay
@@ -51,7 +55,12 @@ export function clientIp(request: Request): string {
   );
 }
 
-function json(body: unknown, status: number, origin: string | null, extra: readonly string[] = []): Response {
+function json(
+  body: unknown,
+  status: number,
+  origin: string | null,
+  extra: readonly string[] = [],
+): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -62,7 +71,13 @@ function json(body: unknown, status: number, origin: string | null, extra: reado
   });
 }
 
-function text(body: string, status: number, origin: string | null, extra: readonly string[] = [], type = 'text/plain; charset=utf-8'): Response {
+function text(
+  body: string,
+  status: number,
+  origin: string | null,
+  extra: readonly string[] = [],
+  type = 'text/plain; charset=utf-8',
+): Response {
   return new Response(body, {
     status,
     headers: {
@@ -93,7 +108,10 @@ function rpcResponse(
   if (token) headers['Mcp-Session-Id'] = token;
   if (wantsSse(request)) {
     headers['Content-Type'] = 'text/event-stream; charset=utf-8';
-    return new Response(`event: message\ndata: ${JSON.stringify(payload)}\n\n`, { status: 200, headers });
+    return new Response(`event: message\ndata: ${JSON.stringify(payload)}\n\n`, {
+      status: 200,
+      headers,
+    });
   }
   headers['Content-Type'] = 'application/json; charset=utf-8';
   return new Response(JSON.stringify(payload), { status: 200, headers });
@@ -112,7 +130,8 @@ export async function handleRequest(
   const version = env.version ?? RELAY_VERSION;
 
   if (request.method === 'OPTIONS') {
-    if (origin && !isAllowedOrigin(origin, extra)) return new Response(null, { status: 403, headers: corsHeaders(origin, extra) });
+    if (origin && !isAllowedOrigin(origin, extra))
+      return new Response(null, { status: 403, headers: corsHeaders(origin, extra) });
     return new Response(null, { status: 204, headers: corsHeaders(origin, extra) });
   }
 
@@ -125,13 +144,23 @@ export async function handleRequest(
   }
 
   const roomMatch = /^\/room\/([A-Za-z0-9_-]+)$/.exec(path);
-  if (roomMatch && request.method === 'GET' && request.headers.get('Upgrade')?.toLowerCase() !== 'websocket') {
+  if (
+    roomMatch &&
+    request.method === 'GET' &&
+    request.headers.get('Upgrade')?.toLowerCase() !== 'websocket'
+  ) {
     const ip = clientIp(request);
     if (!codeLookupLimit.take(`code:${ip}`)) {
-      return json({ ok: false, error: 'Too many lookups. Try again in a minute.' }, 429, origin, extra);
+      return json(
+        { ok: false, error: 'Too many lookups. Try again in a minute.' },
+        429,
+        origin,
+        extra,
+      );
     }
     const code = normalizeRoomCode(roomMatch[1]!);
-    if (!isRoomCode(code)) return json({ ok: false, error: 'Invalid room code.' }, 400, origin, extra);
+    if (!isRoomCode(code))
+      return json({ ok: false, error: 'Invalid room code.' }, 400, origin, extra);
     const session = await resolveCode(hub.store, code);
     if (!session) return json({ ok: false, error: 'Unknown room code.' }, 404, origin, extra);
     return json({ ok: true, session, code }, 200, origin, extra);
@@ -139,7 +168,9 @@ export async function handleRequest(
 
   const sessionMatch = /^\/session\/([A-Za-z0-9_-]+)$/.exec(path);
   const roomWsMatch =
-    request.headers.get('Upgrade')?.toLowerCase() === 'websocket' ? /^\/room\/([A-Za-z0-9_-]+)$/.exec(path) : null;
+    request.headers.get('Upgrade')?.toLowerCase() === 'websocket'
+      ? /^\/room\/([A-Za-z0-9_-]+)$/.exec(path)
+      : null;
 
   if (
     request.headers.get('Upgrade')?.toLowerCase() === 'websocket' &&
@@ -162,7 +193,8 @@ export async function handleRequest(
     const room = await hub.getRoom(sessionId);
     const code = await assignCode(hub.store, sessionId);
     await room.welcome(code);
-    if (!upgrade?.accept) return text('WebSocket upgrade is not available here.', 426, origin, extra);
+    if (!upgrade?.accept)
+      return text('WebSocket upgrade is not available here.', 426, origin, extra);
     const accepted = await upgrade.accept(room);
     return accepted.response;
   }
@@ -170,14 +202,19 @@ export async function handleRequest(
   if (path === '/mcp' || path.startsWith('/mcp/')) {
     if (request.method === 'GET') {
       // Streamable HTTP optional GET: no standalone notifications yet.
-      return text('SSE listen is not required; POST JSON-RPC to this endpoint.', 405, origin, extra);
+      return text(
+        'SSE listen is not required; POST JSON-RPC to this endpoint.',
+        405,
+        origin,
+        extra,
+      );
     }
     if (request.method !== 'POST') return text('Method not allowed.', 405, origin, extra);
     if (origin && !isAllowedOrigin(origin, extra)) {
       return json({ ok: false, error: 'Origin not allowed.' }, 403, origin, extra);
     }
 
-    let body: unknown = undefined;
+    let body: unknown;
     const raw = await request.text();
     if (raw) {
       try {

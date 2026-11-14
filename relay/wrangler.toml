@@ -11,7 +11,7 @@ bindings = [
 
 [[migrations]]
 tag = "v1"
-new_classes = ["SessionRoom", "CodeRegistry"]
+new_sqlite_classes = ["SessionRoom", "CodeRegistry"]
 
 [vars]
 GAMECLAW_SITE_URL = "https://arcobalneo.github.io/gameclaw/"

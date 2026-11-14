@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles. Look up the live game list from the latest GitHub Release and catalog/games.json; this skill does not contain that list."
-version: 3.1.0
+version: 3.2.0
 ---
 
 # GameClaw
@@ -249,11 +249,14 @@ Which id is current comes from the catalog, not from this file.
 
 Every catalog game is also playable at `https://arcobalneo.github.io/gameclaw/` (no binary, no download).
 If the player only wants to try a game, or downloads are blocked, offer that.
-An agent with a browser plays the same window the player sees through WebMCP
-tools on `document.modelContext` (`list_games`, `open_game`, `new_game`,
-`get_state`, `list_actions`, `act`, `recap`) or the same calls on
-`window.gameclaw`. Each game window has a copyable prompt with the loop.
-Still read the game list from the catalog or the portal, not from this file.
+The page mints a session token with no login. The copyable prompt in each game
+window includes a remote MCP URL and that token. A desktop agent (Codex or
+anything that speaks Streamable HTTP MCP) uses the token; the already-open
+page shows the moves and animations. The same tools
+(`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`, `act`,
+`recap`) also remain on `document.modelContext` and `window.gameclaw` for
+in-page agents. Still read the game list from the catalog or the portal, not
+from this file.
 
 ## 7. When GitHub downloads fail — fix this FIRST
 

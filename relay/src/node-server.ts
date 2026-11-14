@@ -32,7 +32,11 @@ const hub: RoomHub = {
 
 const env = { siteUrl: SITE, version: RELAY_VERSION, extraOrigins: EXTRA };
 
-function bunSocket(ws: { send(data: string | ArrayBuffer): void; close(code?: number, reason?: string): void; readyState: number }): SocketLike {
+function bunSocket(ws: {
+  send(data: string | ArrayBuffer): void;
+  close(code?: number, reason?: string): void;
+  readyState: number;
+}): SocketLike {
   return {
     send: (data) => ws.send(data),
     close: (code, reason) => ws.close(code, reason),

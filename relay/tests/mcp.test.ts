@@ -31,7 +31,9 @@ describe('extractSession', () => {
 
   it('reads Bearer, custom header, query and tool arg, and ignores junk', () => {
     expect(
-      extractSession(new Request('https://x/mcp', { headers: { Authorization: `Bearer ${token}` } })),
+      extractSession(
+        new Request('https://x/mcp', { headers: { Authorization: `Bearer ${token}` } }),
+      ),
     ).toBe(token);
     expect(
       extractSession(new Request('https://x/mcp', { headers: { 'X-GameClaw-Session': token } })),
@@ -43,7 +45,9 @@ describe('extractSession', () => {
       }),
     ).toBe(token);
     expect(
-      extractSession(new Request('https://x/mcp', { headers: { Authorization: 'Bearer not-a-token' } })),
+      extractSession(
+        new Request('https://x/mcp', { headers: { Authorization: 'Bearer not-a-token' } }),
+      ),
     ).toBeNull();
   });
 });
@@ -69,12 +73,18 @@ describe('handleMcp', () => {
       { jsonrpc: '2.0', id: 3, method: 'tools/list' },
       { version: '3.2.0', siteUrl: site, token, call: async () => ({}) },
     );
-    expect((list?.result as { tools: { name: string }[] }).tools).toHaveLength(7);
+    expect(list).toBeTruthy();
+    expect((list!.result as { tools: { name: string }[] }).tools).toHaveLength(7);
   });
 
   it('returns a clear page-closed error when the tab is gone', async () => {
     const res = await handleMcp(
-      { jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'list_games', arguments: {} } },
+      {
+        jsonrpc: '2.0',
+        id: 4,
+        method: 'tools/call',
+        params: { name: 'list_games', arguments: {} },
+      },
       {
         version: '3.2.0',
         siteUrl: site,
@@ -163,9 +173,14 @@ describe('room + http', () => {
     await new Promise((r) => setTimeout(r, 10));
     const call = socket.sent.map((s) => JSON.parse(s)).find((m) => m.type === 'call');
     expect(call).toMatchObject({ type: 'call', tool: 'act', args: { action_id: 'jump' } });
-    room.handleMessage(socket, JSON.stringify({ type: 'result', id: call.id, payload: { ok: true, action: 'jump' } }));
+    room.handleMessage(
+      socket,
+      JSON.stringify({ type: 'result', id: call.id, payload: { ok: true, action: 'jump' } }),
+    );
     const res = await pending;
-    const body = (await res.json()) as { result: { structuredContent: { ok: boolean; action: string } } };
+    const body = (await res.json()) as {
+      result: { structuredContent: { ok: boolean; action: string } };
+    };
     expect(body.result.structuredContent).toEqual({ ok: true, action: 'jump' });
   });
 
@@ -187,25 +202,37 @@ describe('room + http', () => {
     const room = await hub.getRoom(session);
     const socket = new FakeSocket();
     room.attach(socket);
-    // Prime assignment through a websocket-less welcome path: assign via /mcp initialize? 
+    // Prime assignment through a websocket-less welcome path: assign via /mcp initialize?
     // Use the store directly then hit GET /room/:code
     const { assignCode } = await import('../src/registry');
     const code = await assignCode(store, session);
-    const ok = await handleRequest(new Request(`https://relay/room/${code}`), hub, { siteUrl: site });
+    const ok = await handleRequest(new Request(`https://relay/room/${code}`), hub, {
+      siteUrl: site,
+    });
     expect(ok.status).toBe(200);
     const body = (await ok.json()) as { ok: boolean; session: string; code: string };
     expect(body.session).toBe(session);
     expect(body.code).toBe(code);
 
-    const miss = await handleRequest(new Request('https://relay/room/ZZZZZZZ'), hub, { siteUrl: site });
+    const miss = await handleRequest(new Request('https://relay/room/ZZZZZZZ'), hub, {
+      siteUrl: site,
+    });
     expect(miss.status).toBe(404);
 
     const health = await handleRequest(new Request('https://relay/health'), hub, { siteUrl: site });
-    expect((await health.json()) as { ok: boolean }).toMatchObject({ ok: true, version: RELAY_VERSION });
+    expect((await health.json()) as { ok: boolean }).toMatchObject({
+      ok: true,
+      version: RELAY_VERSION,
+    });
   });
 
   it('locks CORS to the Pages origin and localhost', async () => {
-    const hub = { store: new MemoryStore(), async getRoom() { return new SessionRoomCore(generateSessionId(), site); } };
+    const hub = {
+      store: new MemoryStore(),
+      async getRoom() {
+        return new SessionRoomCore(generateSessionId(), site);
+      },
+    };
     const allowed = await handleRequest(
       new Request('https://relay/health', { headers: { Origin: 'https://arcobalneo.github.io' } }),
       hub,

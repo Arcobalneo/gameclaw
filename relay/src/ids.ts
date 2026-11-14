@@ -3,8 +3,7 @@
  * The secret is the MCP bearer token; the room code is only a lookup handle.
  */
 
-export const SESSION_ALPHABET =
-  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_';
+export const SESSION_ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_';
 export const SESSION_LENGTH = 22;
 
 /** No 0/O, 1/I/L — easier to read out and type. */
@@ -49,7 +48,10 @@ export function isSessionId(value: string): boolean {
 }
 
 export function normalizeRoomCode(value: string): string {
-  return value.trim().toUpperCase().replace(/[-_\s]/g, '');
+  return value
+    .trim()
+    .toUpperCase()
+    .replace(/[-_\s]/g, '');
 }
 
 export function isRoomCode(value: string): boolean {

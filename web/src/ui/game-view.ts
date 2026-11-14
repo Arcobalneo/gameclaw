@@ -5,6 +5,7 @@ import { lang, type MsgKey, onLang, t } from '../i18n';
 import { term } from '../i18n/terms';
 import type { GameHost, HostEvent } from '../runtime/host';
 import { buildPrompt } from '../runtime/prompt';
+import { onSession } from '../runtime/session';
 import { clear, copyText, h } from './dom';
 import { sfx } from './sfx';
 import { Stage } from './stage';
@@ -136,6 +137,7 @@ export class GameView {
     this.stage.onHitAction = (id) => this.perform(id);
     this.#unsubs.push(host.subscribe((e) => this.#onHost(e)));
     this.#unsubs.push(onLang(() => this.render()));
+    this.#unsubs.push(onSession(() => this.render()));
     this.#prevMetrics = host.status().metrics;
     this.render();
   }

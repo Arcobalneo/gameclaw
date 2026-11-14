@@ -1,8 +1,8 @@
 import {
   type Json,
   PAGE_CLOSED_ERROR,
-  parseClientMessage,
   pageClosedHint,
+  parseClientMessage,
   type ServerMessage,
   type ToolName,
 } from './protocol';

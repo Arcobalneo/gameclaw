@@ -28,7 +28,7 @@ const ZH = {
   'gv.agent': 'Agent 操作中',
   'gv.again': '再来一局',
   'gv.prompt': 'Agent 提示词',
-  'gv.promptHint': '复制给你的 Agent，它会打开这个页面并直接开玩。',
+  'gv.promptHint': '复制给你的桌面 Agent。它通过远程 MCP 下棋，你在这个窗口里看。',
   'gv.copy': '复制',
   'gv.copied': '已复制',
   'gv.copyFail': '复制失败',
@@ -42,7 +42,7 @@ const ZH = {
   'help.details': '局面',
   'help.agent': 'Agent 接入',
   'help.agentBody':
-    '页面通过 WebMCP 提供工具：list_games、open_game、new_game、get_state、list_actions、act、recap。没有 WebMCP 时可调用 window.gameclaw.*。',
+    '复制提示词给桌面 Agent，它通过远程 MCP 接入（Authorization: Bearer 令牌）。工具：list_games、open_game、new_game、get_state、list_actions、act、recap。同页的 WebMCP 或 window.gameclaw.* 仍然可用。',
   'risk.low': '稳',
   'risk.medium': '险',
   'risk.high': '危',
@@ -56,6 +56,14 @@ const ZH = {
   'who.agent': 'Agent',
   'who.human': '你',
   'who.system': '系统',
+  'session.code': '房间码',
+  'session.copy': '复制房间码 {code}',
+  'session.copied': '已复制房间码 {code}',
+  'session.copyFail': '复制失败',
+  'session.join': '输入房间码',
+  'session.joinHint': '在另一台设备打开同一个房间',
+  'session.joinBad': '找不到这个房间码',
+  'session.reconnecting': '连接已断开，正在重连…',
   'action.abort': '放弃本局',
 } as const;
 
@@ -85,7 +93,8 @@ const EN: Record<MsgKey, string> = {
   'gv.agent': 'Agent playing',
   'gv.again': 'Play again',
   'gv.prompt': 'Agent prompt',
-  'gv.promptHint': 'Paste this to your agent. It opens this page and starts playing.',
+  'gv.promptHint':
+    'Paste this to your desktop agent. It plays over remote MCP; you watch in this window.',
   'gv.copy': 'Copy',
   'gv.copied': 'Copied',
   'gv.copyFail': 'Copy failed',
@@ -99,7 +108,7 @@ const EN: Record<MsgKey, string> = {
   'help.details': 'Situation',
   'help.agent': 'For agents',
   'help.agentBody':
-    'The page exposes WebMCP tools: list_games, open_game, new_game, get_state, list_actions, act, recap. Without WebMCP, call window.gameclaw.*.',
+    'Paste the prompt to a desktop agent; it connects over remote MCP (Authorization: Bearer token). Tools: list_games, open_game, new_game, get_state, list_actions, act, recap. In-page WebMCP and window.gameclaw.* still work.',
   'risk.low': 'Safe',
   'risk.medium': 'Risky',
   'risk.high': 'Danger',
@@ -113,6 +122,14 @@ const EN: Record<MsgKey, string> = {
   'who.agent': 'Agent',
   'who.human': 'You',
   'who.system': 'System',
+  'session.code': 'Room',
+  'session.copy': 'Copy room code {code}',
+  'session.copied': 'Copied room code {code}',
+  'session.copyFail': 'Copy failed',
+  'session.join': 'Enter room code',
+  'session.joinHint': 'Open the same room on another device',
+  'session.joinBad': 'That room code was not found',
+  'session.reconnecting': 'Connection lost, reconnecting…',
   'action.abort': 'Abort run',
 };
 

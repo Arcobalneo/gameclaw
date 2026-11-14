@@ -2,18 +2,37 @@ import './styles.css';
 import { findGame } from './catalog';
 import { loadPixelFont } from './gfx/text';
 import { lang, onLang, t } from './i18n';
-import { createApi, registerWebMcp } from './runtime/agent-api';
+import { createApi, registerWebMcp, toolDescriptors } from './runtime/agent-api';
+import { mcpUrl, relayBaseUrl, roomLookupUrl } from './runtime/config';
+import { connectRelay } from './runtime/relay';
+import {
+  adoptSession,
+  isRoomCode,
+  loadOrCreateSession,
+  normalizeRoomCode,
+  rememberCode,
+} from './runtime/session';
 import { Home } from './ui/home';
 import { Portal } from './ui/portal';
+import { relayBanner, SessionChip } from './ui/session-chip';
 import { topbar } from './ui/topbar';
 
 declare global {
   interface Window {
-    gameclaw?: ReturnType<typeof createApi> & { webmcp: string };
+    gameclaw?: ReturnType<typeof createApi> & {
+      webmcp: string;
+      session: () => {
+        id: string;
+        code: string | null;
+        relay: string;
+        mcp: string;
+        status: string;
+      };
+    };
   }
 }
 
-const VERSION = '3.1.0';
+const VERSION = '3.2.0';
 
 function boot(): void {
   const app = document.getElementById('app');
@@ -27,8 +46,13 @@ function boot(): void {
     const skip = document.querySelector('.skip');
     if (skip) skip.textContent = t('site.skip');
   };
+
+  let session = loadOrCreateSession();
+  const chip = new SessionChip(session);
+  const banner = relayBanner();
   const portal = new Portal(document.body);
-  document.body.prepend(topbar(() => portal.closeAll()));
+  document.body.prepend(banner.root);
+  document.body.prepend(topbar(() => portal.closeAll(), chip.root));
   onLang(syncDoc);
   syncDoc();
   const home = new Home((id) => {
@@ -41,12 +65,60 @@ function boot(): void {
   const api = createApi(portal, VERSION);
   const mode = registerWebMcp(api);
   portal.webmcpMode = mode;
-  window.gameclaw = Object.assign(api, { webmcp: mode });
+
+  const tools = new Map(toolDescriptors(api).map((tool) => [tool.name, tool]));
+  const relay = connectRelay({
+    session: () => session,
+    execute: async (name, args) => {
+      const tool = tools.get(name);
+      if (!tool) return { ok: false, error: `Unknown tool ${name}` };
+      return tool.execute(args);
+    },
+    onWelcome: (code) => {
+      session = rememberCode(code);
+      chip.setSession(session);
+    },
+    onStatus: (status) => {
+      chip.setStatus(status);
+      banner.setStatus(status);
+    },
+  });
+
+  const snapshot = () => ({
+    id: session.id,
+    code: session.code,
+    relay: relayBaseUrl(),
+    mcp: mcpUrl(),
+    status: relay.status,
+  });
+
+  window.gameclaw = Object.assign(api, { webmcp: mode, session: snapshot });
   document.documentElement.dataset.webmcp = mode;
 
+  const joinByCode = async (raw: string): Promise<boolean> => {
+    const code = normalizeRoomCode(raw);
+    if (!isRoomCode(code)) return false;
+    try {
+      const res = await fetch(roomLookupUrl(code));
+      const body = (await res.json()) as { ok?: boolean; session?: string; code?: string };
+      if (!res.ok || !body.session) return false;
+      session = adoptSession(body.session, body.code ?? code);
+      chip.setSession(session);
+      relay.reconnect();
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  chip.onJoin = joinByCode;
+
   const route = () => {
-    const m = /^#\/play\/([a-z0-9-]+)/.exec(location.hash);
-    if (m && findGame(m[1]!)) void portal.open(m[1]!, 'human');
+    const roomHash = /^#\/room\/([A-Za-z0-9_-]+)/.exec(location.hash);
+    const roomQuery = new URLSearchParams(location.search).get('room');
+    const room = roomHash?.[1] ?? roomQuery;
+    if (room) void joinByCode(room);
+    const play = /^#\/play\/([a-z0-9-]+)/.exec(location.hash);
+    if (play && findGame(play[1]!)) void portal.open(play[1]!, 'human');
   };
   window.addEventListener('hashchange', route);
   route();

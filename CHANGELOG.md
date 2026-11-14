@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.2.0 — 2026-11-14
+
+### Added — remote MCP, live spectating
+
+- Opening the portal mints a high-entropy session token (no login, no email,
+  no password) and a 7-character room code, stored in `localStorage`. The
+  room code sits as a small chip in the header and is copyable. Typing a
+  room code on another device reopens the same session.
+- A relay service (`relay/`) fronts Streamable HTTP MCP at `POST /mcp`
+  (`Authorization: Bearer <token>`) and a WebSocket at `/session/<id>`.
+  Agent tool calls are forwarded to the already-open browser tab; the game
+  engines still run there, so the human sees the same window, progress and
+  animations (including the existing "AGENT" marker). If the tab is closed,
+  MCP returns a clear "open the GameClaw page to spectate" error.
+- The copyable agent prompt now includes the MCP URL, the session token,
+  and short connect instructions (中 / EN follows the language switch).
+- In-page WebMCP and `window.gameclaw` are unchanged. CLI games are unchanged.
+
+Default MCP endpoint: `https://gameclaw-relay.arcobalneo.workers.dev/mcp`.
+The Worker + Durable Object entry is in `relay/`; a Bun server with the
+same contract is used for local development and e2e.
+
 ## v3.1.0 — 2026-11-14
 
 ### Changed — web portal polish
