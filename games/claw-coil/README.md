@@ -16,7 +16,7 @@ Docked×80 + length×8 − bumps×40. Docking every crate adds 300. One bump cos
 
 ## 动作
 
-`n` `s` `e` `w` 把头往那个方向走一格。撞墙、撞自己、或箱子推不动，都不移动，只加一次撞。
+`step:n` `step:s` `step:e` `step:w` 把头往那个方向走一格。页面上 W A S D 就是这四步。撞墙、撞自己、或箱子推不动，都不移动，只加一次撞。
 
 ## 状态
 

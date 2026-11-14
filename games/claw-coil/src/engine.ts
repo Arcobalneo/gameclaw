@@ -111,7 +111,7 @@ export function suggest(state: CoilState): string {
     const key = signature(node.snake, node.crate);
     if (seen.has(key)) continue;
     seen.add(key);
-    if (same(node.crate, state.dock)) return node.first || 'e';
+    if (same(node.crate, state.dock)) return node.first ? `step:${node.first}` : 'step:e';
     for (const dir of ['n', 'e', 's', 'w'] as const) {
       const next = stepOf(node.snake, node.crate, dir);
       if (!next) continue;
@@ -123,9 +123,9 @@ export function suggest(state: CoilState): string {
     const step = DIR[dir];
     const nx = head[0] + (step[0] ?? 0);
     const ny = head[1] + (step[1] ?? 0);
-    if (!wall(nx, ny)) return dir;
+    if (!wall(nx, ny)) return `step:${dir}`;
   }
-  return 'e';
+  return 'step:e';
 }
 
 export function createRun(options: { seed: number; difficulty?: string }): CoilState {
@@ -208,7 +208,7 @@ export function actionsOf(state: CoilState): ActionView[] {
       detail = `把箱子从 ${state.crate[0]},${state.crate[1]} 推到 ${cx},${cy}。`;
     }
     return {
-      id: dir,
+      id: `step:${dir}`,
       label: DIR_LABEL[dir],
       detail,
       risk: intoWall || crateBlocked ? 'high' : pushing ? 'medium' : 'low',
@@ -239,11 +239,12 @@ function clearStage(state: CoilState, rng: Rng, log: string[]): void {
 
 export function act(state: CoilState, actionId: string): ActionResult {
   if (state.outcome !== 'ongoing') throw illegalAction('这一局已经收尾。', '用 recap 看结算。');
-  if (!actionsOf(state).some((action) => action.id === actionId)) {
+  const dir = (actionId.startsWith('step:') ? actionId.slice('step:'.length) : actionId) as Dir;
+  const listed = `step:${dir}`;
+  if (!actionsOf(state).some((action) => action.id === listed)) {
     throw illegalAction('现在不能这么做。', '只使用列出的动作。');
   }
   const rng = Rng.restore(state.rng);
-  const dir = actionId as Dir;
   const step = DIR[dir];
   const head = state.snake[0] ?? [1, 1];
   const nx = head[0] + (step[0] ?? 0);

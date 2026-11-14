@@ -58,13 +58,13 @@ function hasNeed(state: RoundState): boolean {
 
 export function suggest(state: RoundState): string {
   const want = state.need.find((item) => !state.pocket.includes(item));
-  if (!want) return 'step:1';
+  if (!want) return 'step:e';
   if (state.held === want) return 'pocket';
   if (state.held) return 'drop';
   const at = state.spots.indexOf(want);
-  if (at < 0) return 'step:1';
-  if (state.pos < at) return 'step:1';
-  if (state.pos > at) return 'step:-1';
+  if (at < 0) return 'step:e';
+  if (state.pos < at) return 'step:e';
+  if (state.pos > at) return 'step:w';
   return 'grab';
 }
 
@@ -160,10 +160,10 @@ export function actionsOf(state: RoundState): ActionView[] {
   if (state.outcome !== 'ongoing') return [];
   const actions: ActionView[] = [];
   if (state.pos < state.spots.length - 1) {
-    actions.push({ id: 'step:1', label: '向前', detail: '往桥尾走一格。', risk: 'low' });
+    actions.push({ id: 'step:e', label: '向前', detail: '往桥尾走一格。', risk: 'low' });
   }
   if (state.pos > 0) {
-    actions.push({ id: 'step:-1', label: '退后', detail: '往桥头走一格。', risk: 'low' });
+    actions.push({ id: 'step:w', label: '退后', detail: '往桥头走一格。', risk: 'low' });
   }
   if (state.spots[state.pos] && !state.held) {
     actions.push({
@@ -200,13 +200,15 @@ export function actionsOf(state: RoundState): ActionView[] {
 
 export function act(state: RoundState, actionId: string): ActionResult {
   if (state.outcome !== 'ongoing') throw illegalAction('这一局已经收尾。', '用 recap 看结算。');
-  if (!actionsOf(state).some((action) => action.id === actionId)) {
+  const listed = actionId === 'step:1' ? 'step:e' : actionId === 'step:-1' ? 'step:w' : actionId;
+  if (!actionsOf(state).some((action) => action.id === listed)) {
     throw illegalAction('现在不能这么做。', '只使用列出的动作。');
   }
   const rng = Rng.restore(state.rng);
   const log: string[] = [];
-  if (actionId === 'step:1') state.pos += 1;
-  else if (actionId === 'step:-1') state.pos -= 1;
+  const step = actionId === 'step:1' ? 'step:e' : actionId === 'step:-1' ? 'step:w' : actionId;
+  if (step === 'step:e') state.pos += 1;
+  else if (step === 'step:w') state.pos -= 1;
   else if (actionId === 'grab') {
     state.held = state.spots[state.pos] ?? null;
     state.spots[state.pos] = null;

@@ -98,10 +98,10 @@ function createScene(): GameScene<RoundState> {
         actionId:
           index === state.pos
             ? (actions.find((action) => action.id === 'grab' || action.id === 'pocket')?.id ??
-              'step:1')
+              'step:e')
             : index > state.pos
-              ? 'step:1'
-              : 'step:-1',
+              ? 'step:e'
+              : 'step:w',
       }));
     },
     draw(f) {
@@ -166,8 +166,9 @@ function createScene(): GameScene<RoundState> {
       const tide = say(f, '潮');
       if (beat) drawText(g, beat, 150, 8, { color: '#9fd8ff' });
       pips(g, beat ? 178 : 150, 10, state.beats, state.beat, '#7ec8ff', state.beat, t);
-      if (wrong) drawText(g, wrong, 8, 188, { color: '#ff8aa0' });
-      pips(g, wrong ? 48 : 8, 190, Math.max(state.wrong, 1), state.wrong, '#ff6d8a', -1, t);
+      const wrongLabel = f.lang === 'en' ? 'Miss' : wrong;
+      if (wrongLabel) drawText(g, wrongLabel, 8, 46, { color: '#ff8aa0' });
+      pips(g, wrongLabel ? 48 : 8, 48, Math.max(state.wrong, 1), state.wrong, '#ff6d8a', -1, t);
       if (tide) drawText(g, `${tide} ${state.loop}/${state.loops}`, 300, 8, { color: '#fff4d6' });
     },
     react(f, outcome) {
