@@ -121,6 +121,11 @@ function createScene(): GameScene<StampState> {
     draw(f) {
       const { g, t, state } = f;
       g.drawImage(pier(), 0, 0);
+      for (let i = 0; i < 8; i += 1) {
+        const x = 24 + i * 28;
+        const wave = Math.round(Math.sin(t * 3 + i) * 2);
+        rect(g, x + wave, 58, 6, 4, i % 2 ? '#ff5d73' : '#ffc24a');
+      }
       stars(g, t, 3, 8, 70);
       moon(g, 48, 28, 9, '#fff3d0', '#c8b4ff');
       for (let x = 0; x < VW; x += 10) {
