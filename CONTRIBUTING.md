@@ -40,17 +40,9 @@ The order is mandatory:
 
 ## Adding a game
 
-Follow [`docs/NAMING.md`](docs/NAMING.md): every game uses the Shrimp-series
-display form and a matching `shrimp-<word>` id across the catalog, runtime,
-and package.
-
-1. Copy the structure of an existing game under `games/`.
-2. Implement `GameDefinition` from `@gameclaw/gamekit`, including `recap.score`.
-3. Add engine tests (`tests/engine.test.ts`, `tests/ladder.test.ts`).
-4. Add a scene in `web/src/games/<id>.ts` and zh/en catalog strings.
-5. Write `games/<id>/README.md` and a catalog entry with `score.zh` and `score.en`.
-6. Run `node scripts/test-game.mjs <id>`.
-7. Update the root README game table. Do not add the game to `SKILL.md`.
+Follow the full checklist in [`docs/adding-a-game.md`](docs/adding-a-game.md).
+Every game uses the Shrimp-series names in [`docs/NAMING.md`](docs/NAMING.md).
+Do not add a CLI entrypoint, and do not add the game to `SKILL.md`.
 
 ## PR checklist
 

@@ -75,4 +75,4 @@ pnpm --filter @gameclaw/web dev
 
 引擎在 `games/<id>/`，是确定性的库。门户在 `web/`。relay 在 `relay/`（Cloudflare Workers + Durable Objects）。见 [`docs/repository-architecture.md`](docs/repository-architecture.md) 和 [`docs/web-portal.md`](docs/web-portal.md)。
 
-发布站点是手动把 `web/dist` 放到 `gh-pages`。发布 relay 是在 `relay/` 里 `wrangler deploy`，它会执行排行榜的 Durable Object 迁移 `v3`。`.github/workflows` 里仍是旧的 CLI 构建，打 tag 之前必须先改掉。
+站点和中继的发布步骤见 [`docs/release-flow.md`](docs/release-flow.md)。新增或改一款游戏见 [`docs/adding-a-game.md`](docs/adding-a-game.md)。

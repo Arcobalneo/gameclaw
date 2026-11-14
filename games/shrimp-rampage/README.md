@@ -25,4 +25,4 @@ pnpm --filter @gameclaw/shrimp-rampage test
 pnpm --filter @gameclaw/shrimp-rampage check
 ```
 
-状态机在 `src/`。网页场景在 `web/src/games/shrimp-rampage.ts`。不要再添加 CLI 入口。
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-rampage.ts`。

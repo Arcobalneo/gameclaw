@@ -88,7 +88,6 @@ Engines live in `games/<id>/` and are deterministic libraries. The portal is
 [`docs/repository-architecture.md`](docs/repository-architecture.md) and
 [`docs/web-portal.md`](docs/web-portal.md).
 
-Publishing the site is a manual copy of `web/dist` to `gh-pages`. Publishing
-the relay is `wrangler deploy` in `relay/`, which applies the `v3` Durable
-Object migration for leaderboards. Workflow files in `.github/workflows` still
-describe the old CLI build and must be retired before any release tag.
+Publishing the site and the relay is described in
+[`docs/release-flow.md`](docs/release-flow.md). To add or rewrite a game, see
+[`docs/adding-a-game.md`](docs/adding-a-game.md).

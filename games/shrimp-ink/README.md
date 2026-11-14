@@ -25,4 +25,4 @@ pnpm --filter @gameclaw/shrimp-ink test
 pnpm --filter @gameclaw/shrimp-ink check
 ```
 
-状态机在 `src/`。网页场景在 `web/src/games/shrimp-ink.ts`。不要再添加 CLI 入口。
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-ink.ts`。

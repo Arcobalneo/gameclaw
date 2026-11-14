@@ -58,7 +58,6 @@ pnpm --filter @gameclaw/web build
 pnpm --filter @gameclaw/relay dev    # local Bun server, same HTTP contract
 ```
 
-Deploy the site by publishing `web/dist` (built with `GAMECLAW_BASE=/gameclaw/`)
-to the `gh-pages` branch. Deploy the relay with `wrangler deploy` inside
-`relay/`. The `v3` migration creates the `Leaderboard` Durable Object. Until
-that deploy runs, the live worker will not have the new class.
+Deploy the site and the relay as described in
+[`release-flow.md`](release-flow.md). The `Leaderboard` Durable Object is
+migration `v3`. Do not edit or delete older migration tags.
