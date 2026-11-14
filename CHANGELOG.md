@@ -5,6 +5,9 @@
 - `虾数` puts the step button in the water, under the planks. `虾罩` shows
   the flood before it reaches you. `虾钟` sweeps the hand across the slot it
   just turned. `虾拨` crosses a gorge with walls, a fall, and mist.
+- `虾印` shows the next guest's kind and fare at the rail, so the pardon
+  can be saved for the dearer edge. `虾节` lines each incoming beat up
+  with the phrase that answers it.
 - `虾筏 (Claw Raft)` and `虾仓 (Claw Stow)` now play on bespoke boards.
   The raft shows this gust and the next one; a crate on the side it does not
   prefer leans the next gust by 1. Stow shows the next three slips, and a

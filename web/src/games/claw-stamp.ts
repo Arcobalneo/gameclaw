@@ -163,6 +163,20 @@ function createScene(): GameScene<StampState> {
           scale: 2,
         });
       }
+      const upcoming = state.next;
+      if (upcoming) {
+        const waiting = travelerOf(upcoming.kind, 0, false);
+        blit(g, waiting, 28, 154, { scale: 1, anchor: 'bc' });
+        const nextKind = say(f, KIND_LABEL[upcoming.kind]);
+        if (nextKind) {
+          drawText(g, nextKind, 48, 128, {
+            color: KIND_SHIRT[upcoming.kind],
+            align: 'left',
+            outline: '#140c08',
+          });
+        }
+        drawText(g, String(upcoming.fare), 48, 140, { color: '#ffc24a', align: 'left' });
+      }
       const pressing = f.focus?.id === 'stamp';
       const stamp = buildSprite(STAMP);
       blit(g, stamp, 248, (pressing ? 118 : 108) + Math.round(Math.sin(t * 2)), {

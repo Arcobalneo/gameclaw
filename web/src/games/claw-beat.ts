@@ -126,7 +126,7 @@ function createScene(): GameScene<BeatState> {
         anchor: 'bc',
       });
       state.tape.slice(0, 4).forEach((intent, i) => {
-        const x = 70 + i * 56;
+        const x = 82 + i * 78;
         const color = BEAT_COLOR[intent] ?? '#fff4d6';
         const icon = buildSprite(ICON[intent] ?? ICON.rest!);
         glow(g, x, 36, 12, color, 0.4);
@@ -139,6 +139,14 @@ function createScene(): GameScene<BeatState> {
         const on = f.focus?.id?.startsWith(`set:${i}:`) === true;
         rect(g, x, 168, 68, 36, on ? '#3a2430' : '#1a1018');
         rect(g, x, 168, 68, 3, BEAT_COLOR[move] ?? '#d8c090');
+        const incoming = state.tape[i];
+        const theirs = incoming ? say(f, INTENT_LABEL[incoming]) : '';
+        if (incoming && theirs) {
+          drawText(g, theirs, x + 34, 156, {
+            color: BEAT_COLOR[incoming] ?? '#fff4d6',
+            align: 'center',
+          });
+        }
         const label = say(f, MOVE_LABEL[move]);
         if (label) drawText(g, label, x + 34, 178, { color: '#fff4d6', align: 'center' });
       });
