@@ -44,7 +44,7 @@
     "大风向右": "hard to starboard",
     "放在它想去的一侧，下一阵风不额外偏": "On the side it prefers, so the next gust does not lean extra",
     "中舱不吃左右的风": "Mid ignores the side gusts",
-    "阵风和下一阵都能看见。把箱子放进它不想去的一侧，下一阵风会再偏 1。": "The gust and the next gust are both visible. A crate on the side it does not prefer leans the next gust by 1.",
+    "阵风和下一阵都能看见。把箱子放进它不想去的一侧，下一阵风会再偏 2。": "The gust and the next gust are both visible. A crate on the side it does not prefer leans the next gust by 2.",
     "先看这一阵，再看下一阵。": "Read this gust, then the next.",
     "这一局已经收尾。": "This run is already over.",
     "用 recap 看结算。": "Use recap for the settlement.",
@@ -86,8 +86,8 @@
     },
     { "zh": "这一箱想放{0}", "en": "This crate prefers {0}", "slots": ["text"] },
     {
-      "zh": "这一箱想放{0}，放这里下一阵风再偏 1",
-      "en": "It prefers {0}, so stowing here leans the next gust by 1",
+      "zh": "这一箱想放{0}，放这里下一阵风再偏 2",
+      "en": "It prefers {0}, so stowing here leans the next gust by 2",
       "slots": ["text"]
     },
     {
