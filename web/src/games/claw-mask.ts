@@ -27,14 +27,23 @@ function walls(): HTMLCanvasElement {
   const c = makeCanvas(VW, VH);
   const g = ctx2d(c);
   sky(g, ['#2a1848', '#160c28', '#0c0814'], 0, VH, 8);
-  rect(g, 0, 0, 22, VH, '#140c20');
-  rect(g, VW - 22, 0, 22, VH, '#140c20');
-  for (let y = 8; y < VH; y += 14) {
-    rect(g, 2, y, 14, 8, hash01(y, 1) > 0.5 ? '#3a2860' : '#2a1848');
-    rect(g, VW - 16, y + 6, 14, 8, '#2a1848');
-    if (y % 28 === 8) rect(g, 6, y + 2, 4, 4, '#c49aff');
+  rect(g, 0, 0, 40, VH, '#140c20');
+  rect(g, VW - 40, 0, 40, VH, '#100818');
+  for (let y = 4; y < VH; y += 12) {
+    const w = 18 + ((y * 3) % 22);
+    rect(g, 0, y, w, 8, hash01(y, 1) > 0.5 ? '#3a2860' : '#2a1848');
+    rect(g, VW - w, y + 4, w, 8, '#241838');
+    rect(g, w - 4, y + 2, 6, 3, '#c49aff');
+    rect(g, VW - w, y + 6, 6, 3, '#7ec8ff');
   }
-  rect(g, 22, 158, VW - 44, 58, '#0c1820');
+  for (let x = 48; x < VW - 48; x += 16) {
+    const h = 6 + (x % 20);
+    rect(g, x, 0, 6, h, '#2a1848');
+    rect(g, x + 1, h, 4, 5, '#c49aff');
+  }
+  rect(g, 40, 150, VW - 80, 10, '#1a2838');
+  rect(g, 40, 160, VW - 80, 56, '#0c2030');
+  rect(g, 40, 160, VW - 80, 2, '#3a6888');
   canyon = c;
   return c;
 }

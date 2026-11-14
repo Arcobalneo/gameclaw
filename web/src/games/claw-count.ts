@@ -43,16 +43,27 @@ function bridge(): HTMLCanvasElement {
   const c = makeCanvas(VW, VH);
   const g = ctx2d(c);
   sky(g, ['#243860', '#141c38', '#0c1018'], 0, VH, 10);
-  rect(g, 40, 48, 70, 16, '#1a2438');
-  rect(g, 48, 44, 28, 8, '#c4a888');
-  rect(g, 90, 52, 14, 6, '#3a2818');
-  for (let x = 12; x < VW; x += 22) {
-    rect(g, x, 168, 3, 48, '#1a140c');
-    rect(g, x - 2, 206, 8, 3, '#3a2818');
+  rect(g, 0, 34, VW, 1, '#3a2818');
+  for (let x = 18; x < VW; x += 26) {
+    rect(g, x, 34, 1, 8, '#3a2818');
+    rect(g, x - 4, 42, 10, 8, x % 52 === 18 ? '#ffc24a' : '#c4483a');
+    rect(g, x - 2, 44, 6, 3, '#fff6dc');
   }
-  rect(g, 0, 176, VW, 40, '#101820');
+  rect(g, 248, 58, 96, 40, '#1a2438');
+  rect(g, 248, 58, 96, 4, '#c4a888');
+  rect(g, 260, 70, 18, 14, '#ffc24a');
+  rect(g, 288, 70, 18, 14, '#7ec8ff');
+  rect(g, 316, 70, 12, 14, '#3a2818');
+  rect(g, 286, 46, 4, 14, '#3a2818');
+  rect(g, 278, 42, 20, 6, '#e8d0a0');
+  for (let x = 12; x < VW; x += 22) {
+    rect(g, x, 168, 4, 48, '#1a140c');
+    rect(g, x - 3, 206, 10, 4, '#3a2818');
+  }
+  rect(g, 0, 174, VW, 42, '#14283c');
+  rect(g, 0, 174, VW, 3, '#5aa0c8');
   for (let i = 0; i < 28; i += 1) {
-    rect(g, hash01(i, 6) * VW, 182 + hash01(i, 7) * 24, 5, 1, '#243848');
+    rect(g, hash01(i, 6) * VW, 182 + hash01(i, 7) * 24, 8, 2, '#3a6888');
   }
   night = c;
   return c;
@@ -83,6 +94,9 @@ function createScene(): GameScene<CountState> {
       g.drawImage(bridge(), 0, 0);
       stars(g, t, 2, 6, 52);
       moon(g, 330, 22, 9, '#fff6dc', '#9eb4ff');
+      for (let i = 0; i < 7; i += 1) {
+        rect(g, 322, 180 + i * 4, 16 - i, 2, withAlpha('#fff6dc', 0.28));
+      }
       for (let x = 0; x < VW; x += 12) {
         const y = 172 + Math.round(Math.sin(t * 1.5 + x * 0.06) * 2);
         rect(g, x, y, 7, 2, withAlpha('#7ec8ff', 0.4));
@@ -91,12 +105,14 @@ function createScene(): GameScene<CountState> {
       const sunk = buildSprite(SUNK);
       state.tiles.forEach((tile, index) => {
         const x = 28 + index * 56;
-        const on = tile.includes(state.count);
+        const blank = tile.length === 0;
+        const on = !blank && tile.includes(state.count);
         const here = index === state.pos;
         const bob = on ? 0 : 10 + Math.round(Math.sin(t * 2 + index) * 2);
         blit(g, on ? plank : sunk, x + 20, 156 + bob, { scale: 2, anchor: 'bc' });
+        if (blank) blit(g, buildSprite(MAGNET), x + 20, 128, { scale: 1, anchor: 'c' });
         if (here) glow(g, x + 20, 128, 16, '#7ee0a0', 0.5);
-        const label = say(f, tile.join('/'));
+        const label = say(f, blank ? '空' : tile.join('/'));
         if (label) {
           drawText(g, label, x + 20, 112, {
             color: on ? '#fff4d6' : '#6a6058',

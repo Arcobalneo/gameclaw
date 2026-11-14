@@ -54,7 +54,14 @@ function rules(difficulty: Difficulty): {
   return { levels: 4, budget: 3, magnets: 2, fallLimit: 3 };
 }
 
-function makePier(rng: Rng): number[][] {
+/** One blank plank on the named stages. No number covers it, so only a magnet crosses. */
+function orphanOn(level: number, difficulty: Difficulty): boolean {
+  if (difficulty === 'easy') return level === 2;
+  if (difficulty === 'hard') return level === 3;
+  return level === 2 || level === 4;
+}
+
+function makePier(rng: Rng, orphan: boolean): number[][] {
   const tiles: number[][] = [];
   for (let i = 0; i < 6; i += 1) {
     const a = rng.int(0, 3);
@@ -65,6 +72,7 @@ function makePier(rng: Rng): number[][] {
   }
   const first = tiles[0] ?? [0, 1];
   if (!first.includes(0)) tiles[0] = [0, first[0] ?? 1].sort((x, y) => x - y);
+  if (orphan) tiles[2 + rng.int(0, 3)] = [];
   return tiles;
 }
 
@@ -93,6 +101,7 @@ function cover(state: CountState, count: number): number {
 export function suggest(state: CountState): string {
   const tile = nextTile(state);
   if (!tile) return 'step';
+  if (tile.length === 0) return state.magnets > 0 ? 'magnet' : 'step';
   if (safe(tile, state.count)) return 'step';
   if (state.budget > 0) {
     let best = tile[0] ?? 0;
@@ -121,7 +130,7 @@ export function createRun(options: { seed: number; difficulty?: string }): Count
     rng: rng.serialize(),
     level: 1,
     levels: rule.levels,
-    tiles: makePier(rng),
+    tiles: makePier(rng, orphanOn(1, difficulty)),
     pos: 0,
     count: 0,
     budget: rule.budget,
@@ -138,7 +147,8 @@ export function createRun(options: { seed: number; difficulty?: string }): Count
 }
 
 function nums(tile: number[] | null): string {
-  return tile ? tile.join('/') : '无';
+  if (!tile || tile.length === 0) return '空';
+  return tile.join('/');
 }
 
 export function statusOf(state: CountState): StatusView {
@@ -240,7 +250,7 @@ function clearLevel(state: CountState, rng: Rng, log: string[]): void {
     return;
   }
   state.level += 1;
-  state.tiles = makePier(rng);
+  state.tiles = makePier(rng, orphanOn(state.level, state.difficulty));
   state.pos = 0;
   state.count = 0;
   state.budget = state.budgetMax;

@@ -41,13 +41,19 @@ function cliffs(): HTMLCanvasElement {
   const c = makeCanvas(VW, VH);
   const g = ctx2d(c);
   sky(g, ['#1a3830', '#0c2018', '#081410'], 0, VH, 8);
-  for (let y = 30; y < 150; y += 10) {
-    rect(g, 0, y, 16 + (y % 20), 8, '#1a3028');
-    rect(g, VW - 20 - (y % 16), y + 4, 24, 8, '#143028');
+  for (let y = 0; y < 170; y += 8) {
+    const w = 28 + ((y * 5) % 26);
+    rect(g, 0, y, w, 6, y % 16 === 0 ? '#245040' : '#1a3028');
+    rect(g, VW - w, y + 3, w, 6, '#143028');
+    if (y % 24 === 0) {
+      rect(g, w - 2, y, 2, 16, '#3a6848');
+      rect(g, VW - w, y + 4, 2, 14, '#2a5840');
+    }
   }
-  rect(g, 0, 168, VW, 48, '#0a1814');
-  for (let i = 0; i < 20; i += 1) {
-    rect(g, hash01(i, 3) * VW, 176 + hash01(i, 4) * 24, 8, 1, withAlpha('#7ec8ff', 0.25));
+  rect(g, 0, 156, VW, 60, '#0a1814');
+  rect(g, 0, 156, VW, 4, '#1a4060');
+  for (let i = 0; i < 24; i += 1) {
+    rect(g, hash01(i, 3) * VW, 164 + hash01(i, 4) * 40, 10, 2, withAlpha('#7ec8ff', 0.35));
   }
   gorge = c;
   return c;

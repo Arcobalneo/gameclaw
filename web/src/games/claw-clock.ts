@@ -44,6 +44,14 @@ function tower(): HTMLCanvasElement {
     rect(g, hash01(i, 2) * 70, 20 + hash01(i, 3) * 160, 3, 3, '#3a2418');
     rect(g, 300 + hash01(i, 4) * 70, 20 + hash01(i, 5) * 160, 3, 3, '#3a2418');
   }
+  for (let x = 70; x <= 300; x += 46) {
+    rect(g, x, 0, 2, 28, '#6a4030');
+    rect(g, x - 3, 28, 8, 4, '#c4a060');
+  }
+  rect(g, 40, 148, 304, 8, '#2a1810');
+  rect(g, 40, 148, 304, 2, '#6a4030');
+  disc(g, 48, 108, 22, '#2a1810');
+  disc(g, 336, 108, 22, '#2a1810');
   chamber = c;
   return c;
 }
@@ -87,6 +95,12 @@ function createScene(): GameScene<ClockState> {
         const sprite = tokenSprite(token);
         if (sprite) blit(g, sprite, x, y + bob, { scale: token === 'you' ? 1 : 2, anchor: 'c' });
         else disc(g, x, y, 4, '#2a2430');
+      });
+      state.ring.forEach((_token, index) => {
+        const angle = (index / 8) * Math.PI * 2 - Math.PI / 2;
+        const x = 192 + Math.round(Math.cos(angle) * 74);
+        const y = 100 + Math.round(Math.sin(angle) * 74);
+        drawText(g, String(index + 1), x, y - 4, { color: '#e8d0a0', align: 'center' });
       });
       const hand = (state.hand / 8) * Math.PI * 2 - Math.PI / 2;
       for (let r = 8; r <= 40; r += 4) {
