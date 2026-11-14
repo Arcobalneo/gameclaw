@@ -47,3 +47,18 @@ export function siteUrl(): string {
     return DEFAULT_SITE;
   }
 }
+
+export function statsUrl(base = relayBaseUrl()): string {
+  return `${base}/stats`;
+}
+
+export function statsHelloUrl(base = relayBaseUrl()): string {
+  return `${base}/stats/hello`;
+}
+
+export function statsWsUrl(base = relayBaseUrl()): string {
+  const http = new URL(base, typeof location === 'undefined' ? 'http://localhost' : location.href);
+  const protocol = http.protocol === 'https:' ? 'wss:' : 'ws:';
+  const path = http.pathname.replace(/\/+$/, '');
+  return `${protocol}//${http.host}${path}/stats/live`;
+}

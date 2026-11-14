@@ -5,8 +5,9 @@ import { type Json, MCP_PROTOCOL_VERSION, type ToolName } from './protocol';
 import { codeLookupLimit, mcpLimit } from './rate-limit';
 import { assignCode, type CodeStore, resolveCode } from './registry';
 import type { SocketLike } from './room';
+import type { PlayCounts, PlayStatsCore } from './stats';
 
-export const RELAY_VERSION = '3.2.0';
+export const RELAY_VERSION = '3.3.0';
 
 export interface AppEnv {
   siteUrl: string;
@@ -33,6 +34,22 @@ export interface UpgradeHooks {
   ):
     | Promise<{ socket: SocketLike; response: Response }>
     | { socket: SocketLike; response: Response };
+  /** WebSocket upgrade for the public play-count channel. */
+  acceptStats?(
+    core: PlayStatsCore,
+  ):
+    | Promise<{ socket: SocketLike; response: Response }>
+    | { socket: SocketLike; response: Response };
+}
+
+export interface StatsHub {
+  core: PlayStatsCore;
+  get(): Promise<PlayCounts>;
+  hello(
+    playerId: string,
+    game: string | undefined,
+    ip: string,
+  ): Promise<{ ok: true; counts: PlayCounts } | { ok: false; error: string; status: number }>;
 }
 
 const INDEX_BODY = `GameClaw relay
@@ -44,6 +61,9 @@ MCP (Streamable HTTP):  POST /mcp
 Browser WebSocket:      GET  /session/<session-id>  (Upgrade: websocket)
 Room lookup:            GET  /room/<code>
 Health:                 GET  /health
+Play counts:            GET  /stats
+  POST /stats/hello     { player, game? }   (anonymous play-id, no login)
+  GET  /stats/live      WebSocket updates
 `;
 
 export function clientIp(request: Request): string {
@@ -122,6 +142,7 @@ export async function handleRequest(
   hub: RoomHub,
   env: AppEnv,
   upgrade?: UpgradeHooks,
+  stats?: StatsHub,
 ): Promise<Response> {
   const origin = request.headers.get('Origin');
   const extra = env.extraOrigins ?? [];
@@ -141,6 +162,40 @@ export async function handleRequest(
 
   if (path === '/health' && request.method === 'GET') {
     return json({ ok: true, version, service: 'gameclaw-relay' }, 200, origin, extra);
+  }
+
+  if (path === '/stats' && request.method === 'GET') {
+    if (!stats) return json({ ok: true, site: 0, games: {} }, 200, origin, extra);
+    const counts = await stats.get();
+    return json({ ok: true, ...counts }, 200, origin, extra);
+  }
+
+  if (path === '/stats/hello' && request.method === 'POST') {
+    if (origin && !isAllowedOrigin(origin, extra)) {
+      return json({ ok: false, error: 'Origin not allowed.' }, 403, origin, extra);
+    }
+    if (!stats) return json({ ok: false, error: 'Stats are unavailable.' }, 503, origin, extra);
+    let body: { player?: unknown; game?: unknown } = {};
+    try {
+      const raw = await request.text();
+      if (raw) body = JSON.parse(raw) as typeof body;
+    } catch {
+      return json({ ok: false, error: 'Invalid JSON.' }, 400, origin, extra);
+    }
+    const player = typeof body.player === 'string' ? body.player : '';
+    const game = typeof body.game === 'string' ? body.game : undefined;
+    const result = await stats.hello(player, game, clientIp(request));
+    if (!result.ok) return json({ ok: false, error: result.error }, result.status, origin, extra);
+    return json({ ok: true, ...result.counts }, 200, origin, extra);
+  }
+
+  if (path === '/stats/live' && request.headers.get('Upgrade')?.toLowerCase() === 'websocket') {
+    if (origin && !isAllowedOrigin(origin, extra))
+      return text('Origin not allowed.', 403, origin, extra);
+    if (!stats || !upgrade?.acceptStats)
+      return text('Play-count stream is not available here.', 426, origin, extra);
+    const accepted = await upgrade.acceptStats(stats.core);
+    return accepted.response;
   }
 
   const roomMatch = /^\/room\/([A-Za-z0-9_-]+)$/.exec(path);

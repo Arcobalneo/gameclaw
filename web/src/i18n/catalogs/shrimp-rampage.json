@@ -1,0 +1,602 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "收成": "Harvest",
+    "安抚": "Soothed",
+    "糖果": "Candy",
+    "南瓜籽": "Seeds",
+    "体力": "Stamina",
+    "喊人巡田": "Call a patrol",
+    "吃掉一把南瓜籽": "Eat some seeds",
+    "在田埂上歇一会": "Rest a while",
+    "煮南瓜": "Cook a pumpkin",
+    "南瓜": "Pumpkin",
+    "动作": "action",
+    "田埂": "ridges",
+    "抽藤": "sprouting vines",
+    "空畦": "Empty bed",
+    "有动静": "There's movement",
+    "掷骰": "roll",
+    "契合": "affinity",
+    "成功线": "success line",
+    "还需": "still need",
+    "次成功": "successes",
+    "躁动": "unrest",
+    "已探明": "probed",
+    "特殊南瓜再": "special pumpkin plus",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "滚筒南瓜": "Roller Pumpkin",
+    "滚走": "rolls away",
+    "疾跑南瓜": "Runner Pumpkin",
+    "跑开": "runs off",
+    "弹跳南瓜": "Hopper Pumpkin",
+    "弹走": "hops away",
+    "飞天南瓜": "Flyer Pumpkin",
+    "飘走": "drifts away",
+    "暴躁": "Irritable",
+    "顽皮": "Playful",
+    "怯生": "Shy",
+    "递糖果": "Offer candy",
+    "哼小调": "Hum a tune",
+    "轻拍藤须": "Pat the tendrils",
+    "东畦": "East bed",
+    "南畦": "South bed",
+    "西畦": "West bed",
+    "中畦": "Center bed",
+    "北畦": "North bed",
+    "角畦": "Corner bed",
+    "可以收了": "ready to harvest",
+    "藤蔓晃了一下，又停住。": "A vine twitches once, then stills.",
+    "田里": "In the field",
+    "田里暂时安静。": "The field is quiet for now.",
+    "还没找到": "Not found yet",
+    "情绪未知": "Mood unknown",
+    "田地": "Field",
+    "南瓜怪": "Pumpkin spirits",
+    "动静": "Movement",
+    "只有风。": "Only the wind.",
+    "今夜": "Tonight",
+    "第四夜结束前要凑够": "Must be met by the end of Night 4",
+    "递糖果用": "Used when offering candy",
+    "种植或吃掉": "Plant or eat",
+    "1 体力": "1 stamina",
+    "找怪": "Find spirits",
+    "情绪未知的南瓜怪": "a pumpkin spirit of unknown mood",
+    "种田": "Farm",
+    "这一畦就能收了。": "This bed is ready to harvest.",
+    "1 体力 + 1 南瓜籽": "1 stamina + 1 pumpkin seed",
+    "2 体力": "2 stamina",
+    "1 南瓜": "1 pumpkin",
+    "恢复": "Recover",
+    "1 南瓜籽": "1 pumpkin seed",
+    "1 动作": "1 action",
+    "节奏": "Pace",
+    "你沿着田埂喊了一嗓子。": "You shout once along the ridge.",
+    "田": "field",
+    "这一季守住了": "This season was held",
+    "这一季没守住": "This season was not held",
+    "这一季中止了": "This season was cut short",
+    "特殊南瓜": "Special pumpkins",
+    "体力上限": "Stamina cap",
+    "得分": "Score",
+    "这一季还没收尾。": "This season is not over yet.",
+    "虾闹": "Shrimp Rampage"
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "滚筒南瓜": "Roller Pumpkin",
+    "滚走": "rolls away",
+    "藤蔓被压出一道圆弧，土是往一边翻的。": "The vines are pressed into an arc, and the soil is turned to one side.",
+    "疾跑南瓜": "Runner Pumpkin",
+    "跑开": "runs off",
+    "畦面留着一串浅浅的脚印，间距很大。": "A string of shallow footprints marks the bed, widely spaced.",
+    "弹跳南瓜": "Hopper Pumpkin",
+    "弹走": "hops away",
+    "畦边有两个对称的浅坑，像落地又弹起。": "Two matching shallow pits sit at the bed's edge, as if something landed and bounced.",
+    "飞天南瓜": "Flyer Pumpkin",
+    "飘走": "drifts away",
+    "它投下的影子比南瓜本身多出一个。": "The shadow it casts is one more than the pumpkin itself.",
+    "暴躁": "Irritable",
+    "它的藤须绷得笔直，你一靠近就想撞过来。": "Its tendrils are pulled taut. The moment you close in, it wants to ram you.",
+    "顽皮": "Playful",
+    "它一边滚一边偷看你，像在等你追。": "It peeks at you as it rolls, as if waiting for you to chase.",
+    "怯生": "Shy",
+    "它缩在畦角，藤须轻轻发抖。": "It shrinks into a corner of the bed, tendrils trembling lightly.",
+    "递糖果": "Offer candy",
+    "消耗 1 糖果，对暴躁的南瓜最有效。": "Spends 1 candy. Most effective on irritable pumpkins.",
+    "哼小调": "Hum a tune",
+    "不花资源，对顽皮的南瓜最有效。": "Costs no resource. Most effective on playful pumpkins.",
+    "轻拍藤须": "Pat the tendrils",
+    "多花 1 体力，对怯生的南瓜最有效。": "Costs 1 extra stamina. Most effective on shy pumpkins.",
+    "东畦": "East bed",
+    "南畦": "South bed",
+    "西畦": "West bed",
+    "中畦": "Center bed",
+    "北畦": "North bed",
+    "角畦": "Corner bed",
+    "空畦": "Empty bed",
+    "抽藤": "sprouting vines",
+    "可以收了": "ready to harvest",
+    "只有几只夜蛾从叶子底下飞出来。": "Only a few night moths flutter out from under the leaves.",
+    "土壤是干的，连虫爬的痕迹都没有。": "The soil is dry. There is not even a trail of bugs.",
+    "你听见的只是风穿过塑料布的声音。": "All you hear is wind through the plastic sheeting.",
+    "叶子在动，但你没看清是风还是别的什么。": "The leaves move, but you cannot tell if it is wind or something else.",
+    "有什么东西从畦那头挪开了，很轻。": "Something shifts away at the far end of the bed, very lightly.",
+    "藤蔓晃了一下，又停住。": "A vine twitches once, then stills.",
+    "它猛地一扭，从你手边滑了出去。": "It twists hard and slips out past your hand.",
+    "它被你惊到，翻过田垄跑了。": "You startle it, and it rolls over the ridge and runs.",
+    "你还没靠近，它就已经弹开了。": "You have not even closed in, and it has already bounced away.",
+    "它慢慢软下来，靠在你手心里不动了。": "It slowly softens and rests still in your palm.",
+    "南瓜怪呼噜了一声，藤须垂下来。": "The pumpkin spirit rumbles once, and its tendrils droop.",
+    "它最后滚了半圈，停下来，安静了。": "It rolls a last half-turn, stops, and goes quiet.",
+    "田里进了南瓜怪。先弄清它在哪，再想怎么安抚。": "Pumpkin spirits have entered the field. Find where they are before you think about soothing them.",
+    "第一夜开始：六畦田，两三个南瓜怪。": "Night one begins: six beds, two or three pumpkin spirits.",
+    "田里": "In the field",
+    "体力耗尽，你倒在田埂上，天亮也没起来。": "Stamina runs out. You fall on the ridge and do not rise at dawn.",
+    "体力见底就是终局：每个动作前先算清还能撑几次。": "Hitting zero stamina is the end: before each action, count how many you can still afford.",
+    "今夜大暴走：每做一个动作，所有南瓜怪都会换畦。": "Tonight is a full rampage: after every action, every pumpkin spirit changes beds.",
+    "有动静": "There's movement",
+    "田里暂时安静。": "The field is quiet for now.",
+    "还没找到": "Not found yet",
+    "情绪未知": "Mood unknown",
+    "田地": "Field",
+    "南瓜怪": "Pumpkin spirits",
+    "动静": "Movement",
+    "只有风。": "Only the wind.",
+    "今夜": "Tonight",
+    "大暴走：每个动作之后，所有南瓜怪都会换畦。": "Full rampage: after every action, every pumpkin spirit changes beds.",
+    "收成": "Harvest",
+    "第四夜结束前要凑够": "Must be met by the end of Night 4",
+    "安抚": "Soothe",
+    "糖果": "Candy",
+    "递糖果用": "Used when offering candy",
+    "南瓜籽": "Pumpkin seeds",
+    "种植或吃掉": "Plant or eat",
+    "体力": "Stamina",
+    "这里有东西在动。花 1 体力看清它是什么、什么情绪。": "Something is moving here. Spend 1 stamina to see what it is and what mood it is in.",
+    "花 1 体力翻一遍叶子，确认这里没有南瓜怪。": "Spend 1 stamina to turn the leaves and confirm there is no pumpkin spirit here.",
+    "1 体力": "1 stamina",
+    "找怪": "Find spirits",
+    "情绪未知的南瓜怪": "a pumpkin spirit of unknown mood",
+    "进 1 个南瓜、回 1 把南瓜籽；小概率是特殊南瓜（分值更高）。": "Gain 1 pumpkin and 1 handful of seeds; a small chance of a special pumpkin (higher score).",
+    "种田": "Farm",
+    "这一畦就能收了。": "This bed is ready to harvest.",
+    "种下之后还要浇一次水才能收。": "After planting, water once more before you can harvest.",
+    "1 体力 + 1 南瓜籽": "1 stamina + 1 pumpkin seed",
+    "喊人巡田": "Call a field sweep",
+    "花 2 体力：最多 3 只南瓜怪暴露位置，但都会被惊到（躁动 +1，下一动作后会乱跑）。": "Spend 2 stamina: up to 3 pumpkin spirits reveal their positions, but all are startled (unrest +1, and they will scatter after the next action).",
+    "2 体力": "2 stamina",
+    "煮南瓜": "Cook pumpkin",
+    "1 南瓜": "1 pumpkin",
+    "恢复": "Recover",
+    "吃掉一把南瓜籽": "Eat a handful of seeds",
+    "消耗 1 南瓜籽，回 1 体力。": "Spend 1 pumpkin seed to restore 1 stamina.",
+    "1 南瓜籽": "1 pumpkin seed",
+    "在田埂上歇一会": "Rest a while on the ridge",
+    "回 3 体力，但占掉一个动作。": "Restore 3 stamina, but it costs an action.",
+    "1 动作": "1 action",
+    "剩下的动作作废，体力带到明晚（明晚还会再回 4）。": "Remaining actions are forfeit. Stamina carries to tomorrow night (which also restores 4).",
+    "节奏": "Pace",
+    "这个南瓜的纹路是旋的——特殊南瓜，能换造型家具，南瓜籽也多一把。": "This pumpkin's grain runs in a spiral — a special pumpkin. It can be traded for sculpted furniture, and it gives an extra handful of seeds.",
+    "你喊了一声，田里没人应——本来就没有南瓜怪。": "You shout once. No one answers in the field — there were no pumpkin spirits to begin with.",
+    "你沿着田埂喊了一嗓子。": "You shout once along the ridge.",
+    "田": "field",
+    "嚼了一把生南瓜籽，回 1 体力。": "You chew a handful of raw seeds and restore 1 stamina.",
+    "你放下手电，走回屋裡——这一季先不管了。": "You set down the flashlight and walk back to the house — this season can wait.",
+    "动作分配基本对上了：找怪、安抚、铺田三条线都没有断。": "The action split mostly landed: finding, soothing, and laying beds never fully broke.",
+    "这一季守住了": "This season was held",
+    "这一季没守住": "This season was not held",
+    "这一季中止了": "This season was cut short",
+    "特殊南瓜": "Special pumpkins",
+    "体力上限": "Stamina cap",
+    "得分": "Score",
+    "写下这局你把六个动作分给了“找怪 / 安抚 / 种田”的哪几条，以及下一次第一夜会先做什么。": "Write down how you split the six actions among finding, soothing, and farming, and what you will do first on Night 1 next time.",
+    "这一季还没收尾。": "This season is not over yet.",
+    "虾闹": "Shrimp Rampage",
+    "四夜六动作，找怪、安抚、收成": "Four nights, six actions: find, soothe, harvest",
+    "南瓜田里进了会滚、会跑、会弹、会飞的南瓜怪。你要在天亮前摸进六畦田，靠一次查看换来的种属与情绪决定递糖果、哼小调还是轻拍藤须；同时把南瓜种下去、浇上水、收回来——这些动作全都从同一份体力里扣。第三夜所有南瓜一起暴走，每做一个动作它们就换一次畦。": "Pumpkin spirits that roll, run, hop, and fly have entered the pumpkin field. Before dawn you slip through six beds, and one look buys you the kind and the mood that decide whether you offer candy, hum a tune, or pat the tendrils. At the same time you plant, water, and harvest — all from the same stamina pool. On Night 3 every pumpkin ramps at once, and each action makes them change beds.",
+    "new 之后先 act probe:p1 看清田里有什么；没探明情绪就安抚会丢掉契合加成。": "After new, start with act probe:p1 to see what is in the field. Soothing before you read the mood wastes the affinity bonus.",
+    "安抚用 act soothe:candy:p1 / soothe:song:p1 / soothe:pat:p1；契合看情绪：暴躁吃糖、顽皮听歌、怯生怕拍。": "Soothe with act soothe:candy:p1 / soothe:song:p1 / soothe:pat:p1. Affinity follows mood: candy for irritable, a song for playful, a pat for shy.",
+    "cook 消耗 1 个南瓜换体力上限 +2，是唯一的长期成长；eat-seed / rest 是小额回体力。": "cook spends 1 pumpkin for stamina cap +2, the only long-term growth; eat-seed / rest restore a little stamina.",
+    "rally 一次暴露最多 3 只南瓜怪的位置，但会把它们惊到（躁动 +1）。": "rally reveals the positions of up to 3 pumpkin spirits at once, but startles them (unrest +1).",
+    "end-night 提前收工：剩下的动作作废，但体力会带到明晚。": "end-night clocks out early: remaining actions are forfeit, but stamina carries to tomorrow night.",
+    "种田是 plant:p1 → water:p1 → harvest:p1，三步各占一个动作；收成给南瓜 + 南瓜籽。": "Farming is plant:p1 → water:p1 → harvest:p1, three steps that each cost an action; a harvest yields a pumpkin and seeds."
+  },
+  "patterns": [
+    {
+      "zh": "第 {0} 夜 · {1}",
+      "en": "Night {0} · {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0}被踩塌了，藤蔓断成两截。",
+      "en": "{0} is trampled; the vines snap in two.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}被踏成一片硬土。",
+      "en": "{0} is stomped into hard earth.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}从{1}{2}到{3}。",
+      "en": "{0} goes from {1}{2} to {3}.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "四个南瓜全收了，{0} 只南瓜怪也安静下来，这一季守住了。",
+      "en": "All four pumpkins are in, and {0} pumpkin spirits have settled. This season is held.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "只安抚了 {0}/3 只南瓜怪，剩下的还在田里闹。",
+      "en": "Only {0}/3 pumpkin spirits were soothed. The rest are still raising hell in the field.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "只收了 {0}/4 个南瓜，冬天没有存粮。",
+      "en": "Only {0}/4 pumpkins were harvested. There is no store for winter.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "天亮了：体力回 {0}，田埂重新垒好，新的南瓜怪摸进田里。",
+      "en": "Dawn: stamina returns to {0}, the ridges are rebuilt, and new pumpkin spirits slip into the field.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 夜开始。",
+      "en": "Night {0} begins.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0}/{1} 夜 · 动作 {2}/{3} · 体力 {4}/{5}",
+      "en": "Night {0}/{1} · actions {2}/{3} · stamina {4}/{5}",
+      "slots": ["n", "n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "{0}：{1}，田埂 {2}/{3}",
+      "en": "{0}: {1}, ridges {2}/{3}",
+      "slots": ["text", "text", "n", "n"]
+    },
+    {
+      "zh": "看不清，只知道在{0}附近",
+      "en": "Too dim to tell; you only know it is near {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "还需 {0} 次成功安抚",
+      "en": "{0} more successful soothes needed",
+      "slots": ["text"]
+    },
+    {
+      "zh": " · 躁动 {0}",
+      "en": " · unrest {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 夜",
+      "en": "Night {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "查看{0}",
+      "en": "Look at {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "对{0}的南瓜怪{1}",
+      "en": "{1} the pumpkin spirit at {0}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0}；还需 {1} 次成功{2}；成功线 {3}+（约 {4}/6）",
+      "en": "{0}; {1} more successful {2} needed; success line {3}+ (about {4}/6)",
+      "slots": ["text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "{0} 体力{1}",
+      "en": "{0} stamina{1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "收{0}的南瓜",
+      "en": "Harvest the pumpkin at {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "给{0}浇水",
+      "en": "Water {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "在{0}种下南瓜籽",
+      "en": "Plant a pumpkin seed at {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "消耗 1 个南瓜：体力上限 +2（现 {0}），并回 4 体力。",
+      "en": "Spend 1 pumpkin: stamina cap +2 (now {0}), and restore 4 stamina.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "收工，提前结束第 {0} 夜",
+      "en": "Clock out and end Night {0} early",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}：什么都没有。",
+      "en": "{0}: nothing there.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "查看{0}：{1}",
+      "en": "Look at {0}: {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0}有{1}，{2}。",
+      "en": "{0} has {1}, {2}.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "查看{0}：{1}，{2}。{3}",
+      "en": "Look at {0}: {1}, {2}. {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "还需 {0} 次成功安抚。",
+      "en": "{0} more successful soothes needed.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "安抚成功：{0}安静了，还留下一颗糖。",
+      "en": "Soothe succeeds: {0} settles down and even leaves a candy.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "安抚住一只{0}。",
+      "en": "You soothe one {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1}{2}{3} = {4} ≥ {5}，成功。",
+      "en": "{0} · roll {1}{2}{3} = {4} ≥ {5}, success.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}被你带走，糖果 +1。",
+      "en": "{0} is taken with you. Candy +1.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}松了一点，还需 {1} 次。",
+      "en": "{0} eases a little; {1} more needed.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1}{2}{3} = {4} < {5}，失败。",
+      "en": "{0} · roll {1}{2}{3} = {4} < {5}, failure.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "它更躁了（躁动 {0}），下个动作之后会换畦。",
+      "en": "It grows more restless (unrest {0}) and will change plots after the next action.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "给{0}浇了水，可以收了。",
+      "en": "You water {0}; it is ready to harvest.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "在{0}种下一颗南瓜籽。",
+      "en": "You plant a pumpkin seed at {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "从{0}收下一个南瓜。",
+      "en": "You harvest a pumpkin from {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}出了特殊南瓜。",
+      "en": "{0} yields a special pumpkin.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "收到一个特殊南瓜。",
+      "en": "You harvest a special pumpkin.",
+      "slots": []
+    },
+    {
+      "zh": "收了{0}的南瓜。",
+      "en": "You harvest the pumpkin at {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "南瓜籽 +1{0}。",
+      "en": "Pumpkin seed +1{0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "有人在{0}报了动静，接下来它可能去{1}。",
+      "en": "Someone reports movement at {0}; next it may go to {1}.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "煮了一锅南瓜汤，体力上限到 {0}。",
+      "en": "You cook a pot of pumpkin soup. Stamina cap is now {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "把南瓜切块下锅。体力上限 +2（现 {0}），回 4 体力。",
+      "en": "You cube a pumpkin into the pot. Stamina cap +2 (now {0}), restore 4 stamina.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "在田埂上坐了一会：体力 {0} → {1}。",
+      "en": "You sit on the ridge a while: stamina {0} → {1}.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "第 {0} 夜的 {1} 个动作做完了。",
+      "en": "The {1} actions of Night {0} are done.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "盲抚 {0} 次：没探明情绪就上手，契合加成白白丢掉。",
+      "en": "Blind soothe {0} time(s): you went in without reading the mood, and the affinity bonus was wasted.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "安抚失败 {0} 次，每次都让它更躁、跑得更远。先看清种属再选手段。",
+      "en": "Soothe failed {0} time(s), each time making it more restless and farther away. Read the kind before you pick a method.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "在田埂上歇了 {0} 次：体力规划偏晚，休息本身也吃动作。",
+      "en": "You rested on the ridge {0} time(s): stamina planning came late, and rest itself costs an action.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "收成 {0}/{1}：种植到收成要占 3 个动作，前期不铺田就来不及。",
+      "en": "Harvest {0}/{1}: plant-to-harvest takes 3 actions. If you do not lay beds early, you will run out of time.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "安抚 {0}/{1}：滚筒和疾跑只要 2 次成功，弹跳和飞天要 3 次。",
+      "en": "Soothe {0}/{1}: rollers and runners need 2 successes; hoppers and fliers need 3.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "田埂被踩 {0} 次：夜里不清理的南瓜怪，天亮前一定会踩一脚。",
+      "en": "Ridges trampled {0} time(s): a pumpkin spirit left uncleared at night will always stomp once before dawn.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "收到 {0} 个特殊南瓜：暴走夜收成，出特殊南瓜的概率更高。",
+      "en": "Harvested {0} special pumpkin(s): harvests on rampage night have a higher chance of a special pumpkin.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 夜 · 季中进度",
+      "en": "Night {0} · mid-season progress",
+      "slots": ["text"]
+    },
+    {
+      "zh": "季中进度：第 {0}/{1} 夜，收成 {2}/{3}，安抚 {4}/{5}；还没有最终结局。",
+      "en": "Mid-season: Night {0}/{1}, harvest {2}/{3}, soothe {4}/{5}; no final ending yet.",
+      "slots": ["n", "n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 夜结束时要同时满足收成 {1} 与安抚 {2}；任一条不够都算没守住。",
+      "en": "By the end of Night {0} you must meet both harvest {1} and soothe {2}. Missing either means the season is not held.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "{0}；还需 {1} 次成功，没探明情绪就没有契合加成；先 probe 能 +{2}；成功线 {3}+（约 {4}/6）",
+      "en": "{0}; {1} more success(es) needed, and there is no affinity bonus until you read the mood; probe first for +{2}; success line {3}+ (about {4}/6)",
+      "slots": ["text", "text", "n", "n", "n"]
+    },
+    {
+      "zh": "{0}：{1}，田埂 {2}/{3} · {4}",
+      "en": "{0}: {1}, ridges {2}/{3} · {4}",
+      "slots": ["text", "text", "n", "n", "text"]
+    },
+    {
+      "zh": "田埂 {0}/{1}",
+      "en": "ridges {0}/{1}",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1} = {2} ≥ {3}，成功。",
+      "en": "{0} · roll {1} = {2} ≥ {3}, success.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1} = {2} < {3}，失败。",
+      "en": "{0} · roll {1} = {2} < {3}, failure.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}：看不清，只知道在{1}附近 · {2} · 躁动 {3}",
+      "en": "{0}: too dim to tell; you only know it is near {1} · {2} · unrest {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}（{1}）；还需 {2} 次成功，契合 +{3}；成功线 {4}+（约 {5}/6）",
+      "en": "{0} ({1}); {2} more success(es) needed, affinity +{3}; success line {4}+ (about {5}/6)",
+      "slots": ["text", "text", "text", "n", "n", "n"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1} + 契合 {2} + 已探明 {3} = {4} ≥ {5}，成功。",
+      "en": "{0} · roll {1} + affinity {2} + probed {3} = {4} ≥ {5}, success.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0} · 掷骰 {1} + 契合 {2} + 已探明 {3} = {4} < {5}，失败。",
+      "en": "{0} · roll {1} + affinity {2} + probed {3} = {4} < {5}, failure.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "南瓜籽 +{0}（特殊南瓜再 +{1}）。",
+      "en": "Pumpkin seed +{0} (special pumpkin +{1} more).",
+      "slots": ["n", "n"]
+    }
+  ]
+}

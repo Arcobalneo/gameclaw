@@ -2,6 +2,7 @@ import type { ActionView, Metric } from '@gameclaw/gamekit';
 import { type GameEntry, gameName } from '../catalog';
 import { metricNumber } from '../gfx/pixel';
 import { lang, type MsgKey, onLang, t } from '../i18n';
+import { localizeActions, localizeLine, localizeRecap, localizeStatus } from '../i18n/localize';
 import { term } from '../i18n/terms';
 import type { GameHost, HostEvent } from '../runtime/host';
 import { buildPrompt } from '../runtime/prompt';
@@ -275,15 +276,21 @@ export class GameView {
     const l = lang();
     const id = this.entry.id;
     const els = this.#els;
-    const status = this.host.status();
+    const rawStatus = this.host.status();
+    const status = localizeStatus(id, rawStatus, l);
     for (const [el, key] of els.statics) el.textContent = t(key);
     els.copy.textContent = t('gv.copy');
     els.prompt.textContent = this.#promptText();
     this.stage.setLabel(t('gv.canvas', { name: gameName(this.entry, l) }));
-    this.#actions = this.host.actions().filter((a) => a.id !== 'abort');
-    const abortAction = this.host.actions().find((a) => a.id === 'abort');
+    const allActions = localizeActions(id, this.host.actions(), l);
+    this.#actions = allActions.filter((a) => a.id !== 'abort');
+    const abortAction = allActions.find((a) => a.id === 'abort');
 
-    els.status.textContent = term(id, dedupeHeadline(status.headline, status.metrics));
+    els.status.textContent = localizeLine(
+      id,
+      dedupeHeadline(rawStatus.headline, rawStatus.metrics),
+      l,
+    );
     if (CJK.test(els.status.textContent)) els.status.lang = 'zh-CN';
     else els.status.removeAttribute('lang');
     els.turn.textContent = t('gv.turn', { n: status.turn });
@@ -291,16 +298,17 @@ export class GameView {
     // HUD chips with animated deltas.
     const prev = this.#prevMetrics;
     clear(els.metrics);
-    for (const m of status.metrics) {
+    status.metrics.forEach((m, i) => {
+      const raw = rawStatus.metrics[i];
       const chip = h(
         'div',
         { class: 'gv-chip', title: m.hint ?? '' },
-        h('dt', {}, term(id, m.label)),
-        h('dd', {}, term(id, String(m.value))),
+        h('dt', {}, m.label),
+        h('dd', {}, String(m.value)),
       );
-      const old = prev.find((p) => p.label === m.label);
-      if (withDeltas && old) {
-        const d = Math.round((metricNumber(m.value) - metricNumber(old.value)) * 100) / 100;
+      const old = raw ? prev.find((p) => p.label === raw.label) : undefined;
+      if (withDeltas && old && raw) {
+        const d = Math.round((metricNumber(raw.value) - metricNumber(old.value)) * 100) / 100;
         if (d && Number.isFinite(d)) {
           chip.classList.add(d > 0 ? 'is-up' : 'is-down');
           chip.append(
@@ -309,8 +317,8 @@ export class GameView {
         }
       }
       els.metrics.append(chip);
-    }
-    this.#prevMetrics = status.metrics;
+    });
+    this.#prevMetrics = rawStatus.metrics;
 
     // Actions.
     clear(els.actions);
@@ -386,16 +394,17 @@ export class GameView {
             { class: 'log-who' },
             `T${entry.turn} · ${who}${entry.action ? ` · ${act ? term(id, act.label) : entry.action}` : ''}`,
           ),
-          ...entry.lines.map((line) =>
-            h('span', { class: 'log-line', lang: CJK.test(line) ? 'zh-CN' : 'en' }, line),
-          ),
+          ...entry.lines.map((raw) => {
+            const line = localizeLine(id, raw, l);
+            return h('span', { class: 'log-line', lang: CJK.test(line) ? 'zh-CN' : 'en' }, line);
+          }),
         ),
       );
     }
 
     // Recap when ended.
     if (status.outcome !== 'ongoing') {
-      const recap = this.host.recap();
+      const recap = localizeRecap(id, this.host.recap(), l);
       clear(els.recap);
       const again = h(
         'button',
@@ -420,7 +429,7 @@ export class GameView {
   #renderHelp(): void {
     const l = lang();
     const help = this.#els.help;
-    const status = this.host.status();
+    const status = localizeStatus(this.entry.id, this.host.status(), l);
     clear(help);
     const close = h(
       'button',
@@ -444,9 +453,15 @@ export class GameView {
         ...status.sections.map((sec) =>
           h(
             'div',
-            { class: 'gv-help-sec', lang: 'zh-CN' },
+            { class: 'gv-help-sec' },
             h('h5', {}, term(this.entry.id, sec.title)),
-            h('ul', {}, ...sec.lines.map((line) => h('li', {}, line))),
+            h(
+              'ul',
+              {},
+              ...sec.lines.map((line) =>
+                h('li', { lang: CJK.test(line) ? 'zh-CN' : l === 'zh' ? 'zh-CN' : 'en' }, line),
+              ),
+            ),
           ),
         ),
         h('h4', {}, t('help.agent')),

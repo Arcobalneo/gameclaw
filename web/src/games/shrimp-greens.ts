@@ -233,8 +233,9 @@ function createScene(): GameScene<VegeState> {
       if (phase === 'out') {
         const flick = Math.sin(t * 17) > -0.9 ? 1 : 0.4;
         glow(g, 300, 37, 50, '#ff4a8a', 0.35 * flick);
-        drawText(g, '素', 270, 31, { color: mix('#ffd0e8', '#ff6aa8', 0.3), outline: '#5a0a2a' });
-        drawText(g, '食', 314, 31, { color: mix('#ffd0e8', '#ff6aa8', 0.3), outline: '#5a0a2a' });
+        const [left, right] = f.lang === 'zh' ? (['素', '食'] as const) : (['VEG', 'AN'] as const);
+        drawText(g, left, 270, 31, { color: mix('#ffd0e8', '#ff6aa8', 0.3), outline: '#5a0a2a' });
+        drawText(g, right, 314, 31, { color: mix('#ffd0e8', '#ff6aa8', 0.3), outline: '#5a0a2a' });
         for (const x of [40, 120, 200]) {
           const sway = Math.round(Math.sin(t * 1.3 + x) * 1.5);
           rect(g, x + sway - 7, 14, 14, 18, '#d8302a');

@@ -1,5 +1,32 @@
 # Changelog
 
+## v3.3.0 — 2026-11-14
+
+### Added — full localization and anonymous play counts
+
+- A proper loc pipeline sits in front of the engines. Engines stay deterministic
+  and still emit canonical Chinese; the web host, agent API, recap, prompts and
+  canvas renderers map every string through typed zh/en catalogs (exact phrases,
+  `{n}` patterns, and a glossary). Switching 中 / EN at the top right now covers
+  site chrome, titles, HUD, action labels and details, names, phases, logs,
+  headlines, recap/lessons, banners, agent prompts, and art-side glyphs (tickets,
+  seals, signs). There is no side-by-side bilingual leftover.
+- The language still defaults from `navigator.language` and persists in
+  `localStorage`. The CLI is unchanged and remains Chinese.
+- The portal footer and each game card / window show “N 人已玩过” / “N have
+  played”. A first visit mints one durable anonymous play id (`gameclaw:player`).
+  Opening the site counts once per id for the site total; opening a game counts
+  that game once per id. Counts are stored on the relay as SHA-256 hashes of the
+  id, not the raw id, and no PII is collected. First paint uses a cached GET
+  `/stats`; live pages subscribe to `/stats/live` and increment together. Hello
+  is rate-limited (30/min per id, 8 new players / 10 min per IP).
+
+### Changed
+
+- Relay version is 3.3.0. A `PlayStats` Durable Object (wrangler migration `v2`)
+  backs the counters; the Bun node server uses the same in-memory contract.
+- docs: README (EN+ZH), `docs/web-portal.md`. SKILL.md stays list-free.
+
 ## v3.2.0 — 2026-11-14
 
 ### Added — remote MCP, live spectating

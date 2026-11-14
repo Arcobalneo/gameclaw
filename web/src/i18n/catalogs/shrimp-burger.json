@@ -1,0 +1,688 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "已收摊": "Closed",
+    "进度": "Served",
+    "剩余拍": "Beats",
+    "火候": "heat",
+    "离店": "Walkouts",
+    "灾难": "Disasters",
+    "得分": "Score",
+    "出餐中": "Serving",
+    "安抚窗口": "Soothe",
+    "接住": "Catch",
+    "丢掉": "Drop",
+    "空拍等待": "Wait a beat",
+    "出餐": "Serve",
+    "安抚客人": "Soothe customer",
+    "放任离店": "Let them go",
+    "驱赶": "Shoo",
+    "融合漩涡": "Fusion swirl",
+    "稳定融合": "Stable fusion",
+    "黄金锅巴": "Golden Crisp",
+    "肉饼": "Patty",
+    "培根": "Bacon",
+    "芝士酱漩": "Cheese Swirl",
+    "全熟火候": "well-done heat",
+    "五分火候": "medium heat",
+    "三分火候": "rare heat",
+    "芝培根": "cheesy bacon",
+    "袜子": "Sock",
+    "面包": "bun",
+    "海苔": "Seaweed",
+    "芝士": "cheese",
+    "酱汁": "sauce",
+    "猫": "cat",
+    "番茄": "Tomato",
+    "酸黄瓜太阳蛋": "Pickle Egg",
+    "酸黄瓜": "Pickle",
+    "太阳蛋": "Fried Egg",
+    "生菜番茄卷": "lettuce-tomato roll",
+    "生菜": "Lettuce",
+    "鸽子": "pigeon",
+    "电池": "Battery",
+    "海鸥": "gull",
+    "老鼠": "rat",
+    "袜排": "Sock Patty",
+    "浣熊": "raccoon",
+    "材料": "ingredient",
+    "图例": "ticket",
+    "融合进度": "Fusion",
+    "虾堡": "Shrimp Burger",
+    "缺失": "Missing",
+    "错料": "wrong ingredients",
+    "火候偏差": "heat miss",
+    "最近一单": "Last ticket",
+    "阈值": "threshold",
+    "结论": "verdict",
+    "越界": "out of range",
+    "融合": "fusion",
+    "叠层剩": "stack left",
+    "当前叠层": "stack now",
+    "丢掉顶层": "Toss the top",
+    "夜班站长堡": "Night-Shift Manager Burger",
+    "潮汐堡": "Tide Burger",
+    "田园鲜堡": "Garden Burger",
+    "经典虾堡": "Classic Shrimp Burger",
+    "焦急的猫": "the anxious cat",
+    "路过的虾": "a passing shrimp",
+    "夜班仓鼠": "the night-shift hamster",
+    "厨房报废": "Kitchen wrecked",
+    "灾难餐": "disaster plates",
+    "融合兼容需求": "fusion-compatible need",
+    "可选配料": "optional topping",
+    "不稳定融合额外": "unstable fusion adds extra",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "清晨熔岩": "Morning Lava",
+    "酸黄瓜屋": "Pickle House",
+    "阿潮": "A-Chao",
+    "灯柱小姐": "Miss Lamp-Post",
+    "迟到的快递员": "A late courier",
+    "会飞的雨衣": "A flying raincoat",
+    "交班成功": "Shift cleared",
+    "客人愤然离店": "Guest walked out",
+    "班次耗尽": "Shift ran out",
+    "主动收摊": "Closed early",
+    "栈空，只啄了一格空气": "The stack is empty; it pecks only air",
+    "栈空，只在落物上踩了一脚": "The stack is empty; it only steps on a falling slot",
+    "栈空，叼走一格落物的影子": "The stack is empty; it carries off the shadow of a falling slot",
+    "不在图例里，照样塞进汉堡": "Not on the ticket, but it goes in the burger anyway",
+    "特殊材料": "Special ingredient",
+    "图例必需": "On the ticket",
+    "1 拍": "1 beat",
+    "汉堡叠层": "Burger stack",
+    "（空）": "(empty)",
+    "落物三格": "Three drop slots",
+    "害虫": "Pests",
+    "不满的客人": "Unhappy guest",
+    "收摊": "Close",
+    "建议": "Advice",
+    "备忘": "Notes",
+    "本局还没有完成出餐判定。": "This run has not finished a serve roll yet.",
+    "美味": "Tasty",
+    "用拍": "Beats used",
+    "偷吃": "Thefts",
+    "图例 required": "required on the ticket"
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "面包": "bun",
+    "肉饼": "Patty",
+    "芝士": "Cheese",
+    "生菜": "Lettuce",
+    "番茄": "Tomato",
+    "酸黄瓜": "Pickle",
+    "酱汁": "sauce",
+    "培根": "Bacon",
+    "太阳蛋": "Sunny egg",
+    "海苔": "Nori",
+    "袜子": "Sock",
+    "电池": "Battery",
+    "芝培根": "Cheese-bacon",
+    "生菜番茄卷": "Lettuce-tomato roll",
+    "酸黄瓜太阳蛋": "pickle-and-sunny-side fusion",
+    "黄金锅巴": "Golden crust",
+    "袜排": "Sock-patty",
+    "芝士酱漩": "Cheese-sauce swirl",
+    "三分火候": "Rare heat",
+    "五分火候": "Medium heat",
+    "全熟火候": "Well-done heat",
+    "经典虾堡": "Classic Shrimp Burger",
+    "配料表外不会自动失败，但会改写味觉阈值。": "Off-ticket items do not auto-fail, but they rewrite the taste threshold.",
+    "田园鲜堡": "Garden Fresh Burger",
+    "清爽路线：错料仍可入栈，火候偏低更好。": "A fresh path: wrong items can still stack, and lower heat is better.",
+    "清晨熔岩": "Morning Lava",
+    "要更烫一点。芝培根融合能一次补齐两样。": "It wants more heat. A cheese-bacon fusion can fill two needs at once.",
+    "酸黄瓜屋": "Pickle House",
+    "酸黄瓜太阳蛋属于可选惊喜。": "A pickle sunny egg is an optional surprise.",
+    "潮汐堡": "Tide Burger",
+    "海苔在这里是正经配料，不是袜子。": "Here, nori is a real ingredient — not a sock.",
+    "夜班站长堡": "Night-Shift Manager",
+    "材料多、火候高；融合与错料的诱惑也最大。": "Many ingredients, high heat; fusion and wrong items tempt the most.",
+    "老鼠": "Rat",
+    "海鸥": "Gull",
+    "浣熊": "Raccoon",
+    "鸽子": "Pigeon",
+    "猫": "Cat",
+    "偷顶层食材；栈空则偷一格落物。": "Steals the top ingredient; if the stack is empty, it steals a falling slot.",
+    "专偷配方内材料；没有就偷顶层。": "Steals a ticket ingredient; if none, it steals the top.",
+    "先偷火候；火候已冷则偷顶层。": "Steals heat first; if the heat is cold, it steals the top.",
+    "啄两格落物，顺手弄脏心情。": "Pecks two falling slots and dirties the guest's mood.",
+    "掀掉顶上两层；栈空则偷一格落物。": "Knocks off the top two layers; if the stack is empty, it steals a falling slot.",
+    "阿潮": "A-Chao",
+    "灯柱小姐": "Miss Lamp-Post",
+    "夜班仓鼠": "Night-shift hamster",
+    "路过的虾": "A passing shrimp",
+    "焦急的猫": "An impatient cat",
+    "迟到的快递员": "A late courier",
+    "会飞的雨衣": "A flying raincoat",
+    "交班成功": "Shift cleared",
+    "客人愤然离店": "Guest walked out",
+    "厨房报废": "Kitchen wrecked",
+    "班次耗尽": "Shift ran out",
+    "主动收摊": "Closed early",
+    "错料照样进汉堡；最终好不好吃看阈值与判定值。": "Wrong items still go in the burger. Whether it tastes good depends on the threshold and the roll.",
+    "火候球和食材抢同一只手；害虫逼近时要腾出另一只手驱赶。": "Heat orbs and ingredients compete for the same hand. When a pest closes in, free the other hand to shoo it.",
+    "找不到可偷的东西，悻悻离开": "Finds nothing to steal and slinks off",
+    "栈空，只啄了一格空气": "The stack is empty; it pecks only air",
+    "栈空，只在落物上踩了一脚": "The stack is empty; it only steps on a falling slot",
+    "栈空，叼走一格落物的影子": "The stack is empty; it carries off the shadow of a falling slot",
+    "不在图例里，照样塞进汉堡": "Not on the ticket, but it goes in the burger anyway",
+    "特殊材料": "Special ingredient",
+    "融合兼容需求": "Fusion covers a need",
+    "可选配料": "Optional topping",
+    "图例必需": "On the ticket",
+    "空拍等待：落物刷新，火候继续冷却，害虫也会靠近。": "Wait a beat: drops refresh, heat keeps cooling, and pests also close in.",
+    "安抚客人": "Soothe the guest",
+    "1 拍": "1 beat",
+    "放任离店": "Let them leave",
+    "出餐": "Serve",
+    "空拍等待": "Wait a beat",
+    "刷新落物并冷却火候；害虫也会靠近。": "Refresh drops and cool the heat; pests also close in.",
+    "这一局已经收尾，用 recap 查看结算。": "This run has ended; use recap to read the settlement.",
+    "进度": "Served",
+    "剩余拍": "Beats left",
+    "火候": "Heat",
+    "离店": "Walkouts",
+    "灾难": "Disasters",
+    "得分": "Score",
+    "汉堡叠层": "Burger stack",
+    "（空）": "(empty)",
+    "落物三格": "Three drop slots",
+    "害虫": "Pests",
+    "暂无": "None",
+    "不满的客人": "Unhappy guest",
+    "收摊": "Close",
+    "建议": "Advice",
+    "备忘": "Notes",
+    "出餐中": "Serving",
+    "安抚窗口": "Soothe window",
+    "已收摊": "Closed",
+    "本局还没有完成出餐判定。": "This run has not finished a serve roll yet.",
+    "这局按时交班。可记录：何时该出餐、何时该驱赶、何时该赌错料。": "You cleared the shift on time. Note when to serve, when to shoo, and when to gamble on a wrong item.",
+    "时间被空拍、安抚或犹豫吃掉了。可记录：推荐动作是否该更早 serve。": "Time was eaten by waits, soothes, or hesitation. Note whether you should have served sooner.",
+    "安抚窗口被放弃。可记录：bad/disaster 后 soothe 的机会成本。": "The soothe window was skipped. Note the cost of not soothing after a bad or disaster plate.",
+    "灾难餐叠满。可记录：阈值公开后仍出餐的风险阈值。": "Disaster plates hit the cap. Note the risk of serving once the threshold is public.",
+    "主动收摊。可记录当前订单的缺失与火候位置。": "You closed early. Note what the current order was missing, and where the heat sat.",
+    "错料从不自动失败；把 seed、错料组合、火候偏差与判定值一起写进 memory，才算可复验。": "Wrong items never auto-fail. Write the seed, the wrong mix, the heat miss, and the roll into memory so it can be retested.",
+    "单局观察不是真理：换 seed 再验证同一策略。": "One run is not a law: switch seeds and test the same strategy again.",
+    "美味": "Tasty",
+    "用拍": "Beats used",
+    "偷吃": "Thefts",
+    "把本局可复验的观察写进 memory：seed、难度、关键动作序列、出餐阈值与判定值、错料组合、火候偏差、害虫偷吃。标注“需换 seed 再验证”，不要把单次幸运写成规律。": "Write retestable notes into memory: seed, difficulty, the key action sequence, serve threshold and roll, the wrong mix, the heat miss, and pest thefts. Mark them “retest on a new seed,” and do not treat one lucky plate as a rule.",
+    "虾堡": "Shrimp Burger",
+    "限时接料，错料照吃，害虫来了腾出另一只手": "Catch it in time, keep the wrong items, and free a hand when the pests arrive",
+    "在混乱的汉堡站台接住落下的食材与火候球。配方外材料照样入栈，最终好不好吃看确定性味觉阈值；部分落物会自行融合；小动物间歇偷吃，需要腾出一只手驱赶；火候过生或过熟会惹恼客人，必须安抚。": "At a chaotic burger counter, catch falling ingredients and heat orbs. Off-ticket items still stack; taste depends on a deterministic threshold. Some drops fuse on their own. Critters steal now and then — free a hand to shoo them. Heat too low or too high upsets the guest, and you must soothe them.",
+    "catch:<0|1|2> 接住对应落物格（食材 / 火候 / 融合）；错料不会自动失败。": "catch:<0|1|2> catches that drop slot (ingredient / heat / fusion). Wrong items do not auto-fail.",
+    "serve 出餐：公开阈值后抽判定值；tasty/lucky 计入进度，bad/disaster 进入安抚窗口。": "serve: after the threshold is public, a roll is drawn. tasty/lucky count toward progress; bad/disaster opens a soothe window.",
+    "shoo:<pestId> 驱赶害虫；忽略则会被偷吃材料或火候。": "shoo:<pestId> shoos a pest. Ignore it, and it steals an ingredient or heat.",
+    "soothe 安抚不满客人；guest 阶段用 wait 等于放任离店。": "soothe calms an unhappy guest. During the guest phase, wait means you let them leave.",
+    "wait 空拍刷新落物并冷却火候；discard-top 丢掉顶层误接。": "wait refreshes drops and cools the heat; discard-top throws away a bad catch on top.",
+    "normal：60 拍内送出 4 份美味。失败原因会写进 recap（订单、阈值、roll、错料、火候、偷吃）。": "normal: serve 4 tasty burgers in 60 beats. Failure reasons go into the recap (order, threshold, roll, wrong items, heat, thefts).",
+    "图例 required": "required on the ticket",
+    "图例": "ticket",
+    "材料": "ingredient"
+  },
+  "patterns": [
+    {
+      "zh": "融合漩涡→{0}",
+      "en": "Fusion swirl → {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "稳定融合→{0}",
+      "en": "Stable fusion → {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 单「{1}」：需要 {2}；火候 {3}-{4}。",
+      "en": "Order {0} \"{1}\": needs {2}; heat {3}-{4}.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "偷走火候 {0}，当前 {1}",
+      "en": "Steals {0} heat, now {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "火候已冷，改偷走{0}",
+      "en": "The heat is already cold, so it steals {0} instead",
+      "slots": ["text"]
+    },
+    {
+      "zh": "叼走配方料{0}",
+      "en": "Snaps up recipe item {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "掀掉{0}{1}",
+      "en": "Knocks off {0}{1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "啄走{0}，客人皱眉（心情 {1}）",
+      "en": "Pecks away {0}; the guest frowns (mood {1})",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "把落物弄脏，客人皱眉（心情 {0}）",
+      "en": "Dirties a falling item; the guest frowns (mood {0})",
+      "slots": ["text"]
+    },
+    {
+      "zh": "偷走顶层{0}",
+      "en": "Steals the top {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "{0}得手：{1}。",
+      "en": "{0} succeeds: {1}.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "班次耗尽：最后动作 {0}，已送出 {1}/{2}，当前第 {3} 单「{4}」仍在台上，火候 {5}（目标 {6}-{7}）。",
+      "en": "The shift runs out: last action {0}, served {1}/{2}, order {3} \"{4}\" still on the board, heat {5} (target {6}-{7}).",
+      "slots": ["text", "n", "n", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "落物格 {0} 不存在",
+      "en": "Drop slot {0} does not exist",
+      "slots": ["text"]
+    },
+    {
+      "zh": "接住{0}：火候 {1}→{2}（本拍末还会冷却 {3}）。目标 {4}-{5}。",
+      "en": "Caught {0}: heat {1}→{2} (it will cool another {3} at the end of the beat). Target {4}-{5}.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "接住{0}（{1}{2}）。当前叠层 {3}。",
+      "en": "Caught {0} ({1}{2}). Stack now {3}.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "腾出另一只手赶走{0}（还剩 {1} 拍就要偷吃）。",
+      "en": "You free the other hand and shoo {0} ({1} beat(s) before it steals).",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "丢掉顶层{0}（{1}）。叠层剩 {2}。",
+      "en": "Toss the top {0} ({1}). Stack left {2}.",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "出餐「{0}」给{1}：阈值 {2}，判定 {3}，结论 {4}；缺失 [{5}]，错料 [{6}]，火候偏差 {7}（越界 {8}）。",
+      "en": "Serve \"{0}\" to {1}: threshold {2}, roll {3}, verdict {4}; missing [{5}], wrong [{6}], heat off by {7} (out of range {8}).",
+      "slots": ["text", "text", "text", "text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}咬了一口，居然觉得好吃！幸运美味计入 {1}/{2}。",
+      "en": "{0} takes a bite and, somehow, likes it! Lucky tasty counts as {1}/{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "{0}点头：正餐美味。进度 {1}/{2}。",
+      "en": "{0} nods: a proper tasty plate. Progress {1}/{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "交班成功：送出 {0}/{1} 份美味汉堡，剩余 {2} 拍。最后一单判定 {3}/{4}（{5}）。",
+      "en": "Shift cleared: served {0}/{1} tasty burgers, {2} beats left. Last order rolled {3}/{4} ({5}).",
+      "slots": ["n", "n", "text", "n", "n", "text"]
+    },
+    {
+      "zh": "班次耗尽：虽然刚送出一单，进度仍为 {0}/{1}。",
+      "en": "The shift runs out: even after that serve, progress is still {0}/{1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "{0}差点把盘子摔了（灾难餐 {1}/{2}）。",
+      "en": "{0} almost drops the plate (disaster meals {1}/{2}).",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "{0}闷闷不乐（心情 {1}）。该安抚还是放他走？",
+      "en": "{0} is sullen (mood {1}). Soothe them, or let them leave?",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "厨房报废：灾难餐达到 {0}/{1}。最后一单 roll {2} / 阈值 {3}，错料 [{4}]，火候偏差 {5}。",
+      "en": "The kitchen is wrecked: disaster meals hit {0}/{1}. Last order rolled {2} / threshold {3}, wrong [{4}], heat off by {5}.",
+      "slots": ["n", "n", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "班次耗尽：出餐失败后已无时间安抚。进度 {0}/{1}。",
+      "en": "The shift runs out: after a failed serve there is no time left to soothe. Progress {0}/{1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "你安抚了{0}，对方勉强留下来。下一单开始。",
+      "en": "You soothe {0}; they stay, barely. The next order starts.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "安抚 · {0}",
+      "en": "Soothe · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "安抚后班次已尽，仍未凑满 {0} 份美味。",
+      "en": "After the soothe, the shift is over and you still do not have {0} tasty plates.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}愤然离店（离店 {1}/{2}）。",
+      "en": "{0} storms out (walkouts {1}/{2}).",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "离店 · {0}",
+      "en": "Walkout · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "客人愤然离店达到上限 {0}/{1}。最近一次出餐：{2}。",
+      "en": "Walkouts hit the cap {0}/{1}. Last serve: {2}.",
+      "slots": ["n", "n", "text"]
+    },
+    {
+      "zh": "离店处理后班次已尽，进度 {0}/{1}。",
+      "en": "After handling the walkout, the shift is over. Progress {0}/{1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "花 1 拍安抚{0}（心情 {1}），保住这单并开下一单。",
+      "en": "Spend 1 beat soothing {0} (mood {1}), keep the ticket, and start the next order.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "明确放弃安抚，记一次愤怒离店（当前 {0}/{1}）。",
+      "en": "Refuse to soothe and count one angry walkout (now {0}/{1}).",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "当前阈值 {0}（缺失 {1}，错料 {2}，火候偏差 {3}，越界 {4}）。判定值出餐时才抽。",
+      "en": "Current threshold {0} (missing {1}, wrong {2}, heat off by {3}, out of range {4}). The roll is drawn only when you serve.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "驱赶{0}",
+      "en": "Shoo {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0} 还有 {1} 拍动手。",
+      "en": "{0} acts in {1} beat(s).",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "接住{0}",
+      "en": "Catch {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "火候 +{0}，拍末再冷却 {1}。",
+      "en": "Heat +{0}, then cools {1} at the end of the beat.",
+      "slots": ["n", "text"]
+    },
+    {
+      "zh": "融合进度 {0}/1 → {1}{2}",
+      "en": "Fusion progress {0}/1 → {1}{2}",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "材料 {0}（图例 {1}）",
+      "en": "Ingredient {0} (ticket {1})",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "丢掉{0}",
+      "en": "Discard {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "移除顶层（{0}），给误接一个真实代价。",
+      "en": "Remove the top ({0}), so a bad catch has a real cost.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "当前不能做：{0}",
+      "en": "Not legal now: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "合法动作：{0}",
+      "en": "Legal actions: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "未处理的客人动作：{0}",
+      "en": "Unhandled guest action: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "未处理的动作：{0}",
+      "en": "Unhandled action: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "主动收摊：进度 {0}/{1}，第 {2} 单「{3}」，剩余 {4} 拍。",
+      "en": "You close the stall: progress {0}/{1}, order {2} \"{3}\", {4} beats left.",
+      "slots": ["n", "n", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}（目标 {1}-{2}）",
+      "en": "{0} (target {1}-{2})",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 单 · {1}",
+      "en": "Order {0} · {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "必需：{0}",
+      "en": "Required: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "可选：{0}",
+      "en": "Optional: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "缺失：{0}",
+      "en": "Missing: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "#{0} 火候 {1} +{2}",
+      "en": "#{0} heat {1} +{2}",
+      "slots": ["text", "text", "n"]
+    },
+    {
+      "zh": "#{0} 融合 progress={1} → {2}",
+      "en": "#{0} fusion progress={1} → {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "{0} {1}｜{2} 拍后偷吃｜{3}",
+      "en": "{0} {1} | steals in {2} beat(s) | {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0} 心情 {1}",
+      "en": "{0} mood {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "上一单 {0}：{1}，阈值 {2}，判定 {3}",
+      "en": "Last order {0}: {1}, threshold {2}, roll {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "缺失 [{0}]，错料 [{1}]，火候偏差 {2}",
+      "en": "Missing [{0}], wrong [{1}], heat off by {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "虾堡｜{0}｜{1}/{2}｜剩 {3} 拍｜火候 {4}",
+      "en": "Shrimp Burger | {0} | {1}/{2} | {3} beats left | heat {4}",
+      "slots": ["text", "n", "n", "text", "text"]
+    },
+    {
+      "zh": "最近一单阈值 {0} / 判定 {1}（{2}）；缺失 [{3}]，错料 [{4}]，火候偏差 {5}。",
+      "en": "Last order: threshold {0} / roll {1} ({2}); missing [{3}], wrong [{4}], heat off by {5}.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "害虫偷吃 {0} 次，融合入栈 {1}，错料入栈 {2}，安抚 {3}。",
+      "en": "Pests stole {0} time(s); fused items stacked {1}, wrong items stacked {2}, soothes {3}.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "虾堡结算 · {0}",
+      "en": "Shrimp Burger settlement · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "进行中：{0}/{1}，剩余 {2} 拍。",
+      "en": "In progress: {0}/{1}, {2} beats left.",
+      "slots": ["n", "n", "text"]
+    },
+    {
+      "zh": "剩 {0} 拍",
+      "en": "{0} beats left",
+      "slots": ["text"]
+    },
+    {
+      "zh": "虾堡｜出餐中｜{0}/{1}｜剩 {2} 拍｜火候 {3}",
+      "en": "Shrimp Burger | Serving | {0}/{1} | {2} beats left | heat {3}",
+      "slots": ["n", "n", "text", "text"]
+    },
+    {
+      "zh": "next → catch:{0}｜材料 {1}（图例 {2}）",
+      "en": "next → catch:{0} | ingredient {1} (ticket {2})",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "融合进度 {0}/{1} → {2}；现在接会额外 +{3} 火候",
+      "en": "Fusion {0}/{1} → {2}; catching it now adds +{3} extra heat",
+      "slots": ["n", "n", "text", "n"]
+    },
+    {
+      "zh": "{0}｜出餐中｜{1}/{2}｜剩 {3} 拍｜火候 {4}",
+      "en": "{0} | Serving | {1}/{2} | {3} beats left | heat {4}",
+      "slots": ["text", "n", "n", "text", "text"]
+    },
+    {
+      "zh": "缺失 {0}，错料 {1}，火候偏差 {2}",
+      "en": "Missing {0}, wrong ingredients {1}, heat miss {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "最近一单阈值 {0} / 判定 {1}（{2}）；{3}",
+      "en": "Last ticket threshold {0} / roll {1} ({2}); {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "出餐「{0}」给{1}：阈值 {2}，判定 {3}，结论 {4}；{5}",
+      "en": "Served \"{0}\" to {1}: threshold {2}, roll {3}, verdict {4}; {5}",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "出餐「{0}」给{1}：阈值 {2}，判定 {3}，结论 {4}；{5}（越界 {6}）。",
+      "en": "Served \"{0}\" to {1}: threshold {2}, roll {3}, verdict {4}; {5} (out of range {6}).",
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "厨房报废：灾难餐达到 {0}/{1}。最后一单 roll {2} / 阈值 {3}，错料 {4}，火候偏差 {5}。",
+      "en": "Kitchen wrecked: disaster plates hit {0}/{1}. Last ticket roll {2} / threshold {3}, wrong ingredients {4}, heat miss {5}.",
+      "slots": ["n", "n", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}. {1} [{2}/融合]",
+      "en": "{0}. {1} [{2}/fusion]",
+      "slots": ["text", "text", "n"]
+    },
+    {
+      "zh": "接住{0}（{1}）。当前叠层 {2}。",
+      "en": "Catch {0} ({1}). Stack is now {2}.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "火候偏差 {0}",
+      "en": "heat miss {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "错料 {0}",
+      "en": "wrong ingredients {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "缺失 {0}",
+      "en": "Missing {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "接住{0}（{1}；不稳定融合额外 +{2} 火候）。当前叠层 {3}。",
+      "en": "Catch {0} ({1}; an unstable fusion adds +{2} extra heat). Stack is now {3}.",
+      "slots": ["text", "text", "n", "text"]
+    }
+  ]
+}

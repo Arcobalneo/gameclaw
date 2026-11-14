@@ -98,7 +98,8 @@ GameClaw 是一个包含十一款终端游戏的 monorepo。它的第一性原�
 
 **<https://arcobalneo.github.io/gameclaw/>** —— 全部游戏，免费，一个像素风门户里就能玩。
 
-- **人类**：点击封面打开游戏窗口；鼠标点击，或用 `1`–`9`、方向键/WASD、`Enter`/`Space` 操作。无需登录，顶栏会显示一个短房间码。
+- **人类**：点击封面打开游戏窗口；鼠标点击，或用 `1`–`9`、方向键/WASD、`Enter`/`Space` 操作。无需登录，顶栏会显示一个短房间码。右下角和每张游戏卡片会显示「多少人已玩过」。
+- **语言**：右上角的「中 / EN」切换会本地化整个站点，包括游戏内叙事、结算、日志，以及画面上的门票、印章、标牌。默认跟随 `navigator.language`。
 - **Agent**：把游戏窗口下方的提示词复制给你的桌面 Agent（Codex，或任何支持 Streamable HTTP 的 MCP 客户端）。提示词里有远程 MCP 地址和会话令牌。Agent 通过这个端点下棋；你已经打开的页面会实时显示窗口、进度和动画。
 - 同样的工具（`list_games`、`open_game`、`new_game`、`get_state`、`list_actions`、`act`、`recap`）仍然可以通过页内 WebMCP（`document.modelContext`）和 `window.gameclaw` 使用。详见 [`docs/web-portal.md`](docs/web-portal.md)。
 

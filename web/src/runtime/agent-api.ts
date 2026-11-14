@@ -1,5 +1,7 @@
 import type { ActionView, StatusView } from '@gameclaw/gamekit';
-import { GAMES } from '../catalog';
+import { GAMES, gameName } from '../catalog';
+import { lang } from '../i18n';
+import { localizeActions, localizeLines, localizeRecap, localizeStatus } from '../i18n/localize';
 import type { GameHost } from './host';
 import { hasGame } from './registry';
 
@@ -18,23 +20,24 @@ export interface PortalController {
 
 type Json = Record<string, unknown>;
 
-function compactStatus(status: StatusView): Json {
+function compactStatus(status: StatusView, gameId: string): Json {
+  const view = localizeStatus(gameId, status, lang());
   return {
-    headline: status.headline,
-    outcome: status.outcome,
-    turn: status.turn,
-    ...(status.phase ? { phase: status.phase } : {}),
-    metrics: status.metrics.map((m) => ({
+    headline: view.headline,
+    outcome: view.outcome,
+    turn: view.turn,
+    ...(view.phase ? { phase: view.phase } : {}),
+    metrics: view.metrics.map((m) => ({
       label: m.label,
       value: m.value,
       ...(m.hint ? { hint: m.hint } : {}),
     })),
-    sections: status.sections,
+    sections: view.sections,
   };
 }
 
-function compactActions(actions: ActionView[]): Json[] {
-  return actions.map((a, i) => ({
+function compactActions(actions: ActionView[], gameId: string): Json[] {
+  return localizeActions(gameId, actions, lang()).map((a, i) => ({
     index: i + 1,
     id: a.id,
     label: a.label,
@@ -83,10 +86,10 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         focused: portal.focused(),
         games: GAMES.map((g) => ({
           id: g.id,
-          name: g.name,
+          name: gameName(g, lang()),
           english_name: g.englishName,
-          tagline: g.tagline,
-          goal: g.goal,
+          tagline: lang() === 'zh' ? g.tagZh : g.tagEn,
+          goal: lang() === 'zh' ? g.goal : g.goalEn,
         })),
       };
     },
@@ -97,8 +100,8 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         ok: true,
         game_id: host.id,
         seed: host.seed,
-        state: compactStatus(host.status()),
-        actions: compactActions(host.actions()),
+        state: compactStatus(host.status(), host.id),
+        actions: compactActions(host.actions(), host.id),
       };
     },
     async newGame(args = {}) {
@@ -117,9 +120,9 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         ok: true,
         game_id: host.id,
         seed: host.seed,
-        guide: host.module.definition.meta.guide,
-        state: compactStatus(host.status()),
-        actions: compactActions(host.actions()),
+        guide: localizeLines(host.id, host.module.definition.meta.guide, lang()),
+        state: compactStatus(host.status(), host.id),
+        actions: compactActions(host.actions(), host.id),
       };
     },
     async getState(args = {}) {
@@ -129,8 +132,8 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         ok: true,
         game_id: host.id,
         seed: host.seed,
-        state: compactStatus(host.status()),
-        actions: compactActions(host.actions()),
+        state: compactStatus(host.status(), host.id),
+        actions: compactActions(host.actions(), host.id),
       };
     },
     async listActions(args = {}) {
@@ -142,7 +145,7 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         game_id: host.id,
         outcome: status.outcome,
         turn: status.turn,
-        actions: compactActions(host.actions()),
+        actions: compactActions(host.actions(), host.id),
       };
     },
     async act(args) {
@@ -161,10 +164,10 @@ export function createApi(portal: PortalController, version: string): GameclawAp
         ok: true,
         game_id: host.id,
         action: o.action.id,
-        log: o.result.log,
+        log: localizeLines(host.id, o.result.log, lang()),
         events: o.events,
-        state: compactStatus(o.status),
-        actions: compactActions(o.actions),
+        state: compactStatus(o.status, host.id),
+        actions: compactActions(o.actions, host.id),
         ...(o.status.outcome !== 'ongoing'
           ? { next: 'Run ended. Call recap for the settlement.' }
           : {}),
@@ -173,7 +176,12 @@ export function createApi(portal: PortalController, version: string): GameclawAp
     async recap(args = {}) {
       const host = await resolve(args.game_id);
       if (isErr(host)) return host;
-      return { ok: true, game_id: host.id, seed: host.seed, recap: host.recap() };
+      return {
+        ok: true,
+        game_id: host.id,
+        seed: host.seed,
+        recap: localizeRecap(host.id, host.recap(), lang()),
+      };
     },
     async closeGame(args = {}) {
       portal.close(args.game_id);

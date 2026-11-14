@@ -1,0 +1,690 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "坠落": "Fall",
+    "进度": "Level",
+    "体型": "Size",
+    "体力": "Stamina",
+    "灯花": "Sparks",
+    "摔落": "Falls",
+    "弹力": "Bounce",
+    "控制": "Control",
+    "耐力": "Endurance",
+    "黏性": "Stick",
+    "塑形": "Shape",
+    "上色": "Color",
+    "跳街": "Street",
+    "黏连救援": "Rescue",
+    "果敢": "Bold",
+    "沉稳": "Calm",
+    "绵韧": "Tough",
+    "珊瑚橙": "Coral",
+    "薄荷青": "Mint",
+    "灯芯黄": "Wick Gold",
+    "夜紫": "Night Violet",
+    "轻力": "Soft",
+    "中力": "Medium",
+    "强力": "Hard",
+    "低角": "low",
+    "高角": "high",
+    "弧线": "arc",
+    "早拍": "early beat",
+    "正拍": "on beat",
+    "晚拍": "late beat",
+    "轻拉": "Soft pull",
+    "中拉": "Firm pull",
+    "强拉": "Hard pull",
+    "完美落地": "Perfect",
+    "站稳": "Solid",
+    "擦边过关": "Edge",
+    "跳远": "Long",
+    "跳短": "Short",
+    "继续缓拉": "Easing",
+    "可以脱黏": "Frees it",
+    "拉力过高": "Too hard",
+    "拍数将尽": "Out of beats",
+    "盘成一团回体力": "Curl up & rest",
+    "灯花养成": "Train",
+    "停一拍松开拉力": "Pause & let go",
+    "豆冻": "Jelly Bean",
+    "弹团": "Bouncer",
+    "软丘": "Soft Mound",
+    "灯团": "Lamp Blob",
+    "未选性格": "no temperament chosen",
+    "未选颜色": "no color chosen",
+    "当前风拍": "Current wind beat",
+    "街速": "street speed",
+    "落地容差": "Landing tolerance",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "轻": "Low",
+    "中": "Mid",
+    "强": "High",
+    "旧城慢街": "Old-town slow street",
+    "风口长街": "Wind-gap avenue",
+    "高架黎明": "Overpass dawn",
+    "糯糯": "Nuo-nuo",
+    "软糖": "Gummy",
+    "小团": "Little blob",
+    "灯苗": "Lamp sprout",
+    "弹弹": "Boing",
+    "雨点儿": "Raindrop",
+    "天亮": "Daylight",
+    "力竭": "Exhausted",
+    "黏连坠落": "Stuck-fall",
+    "收团": "Recoil",
+    "结算": "Settlement",
+    "1 个动作": "1 action",
+    "当前没有黏连救援。": "There is no stick rescue right now.",
+    "1 救援拍": "1 rescue beat",
+    "选择性格": "Choose a nature",
+    "选择颜色": "Choose a color",
+    "灯柱前": "short of the post",
+    "灯柱后": "past the post",
+    "拉力超过灯柱能承受的上限": "Tension passed what the post can take",
+    "三拍用完仍进度不足": "Three beats gone, progress still short",
+    "脚下": "underfoot",
+    "先捏性格": "Shape a nature first",
+    "下一步": "Next",
+    "再给果冻一点颜色": "Give the jelly a little color",
+    "已是最大体型": "Already at max size",
+    "本关物理": "This level's physics",
+    "养成": "Training",
+    "当前没有合法动作。": "There is no legal action right now.",
+    "离线夜频 · 同性格黏连": "Offline night-signal · same-nature stick",
+    "最近一次失误": "Last miss",
+    "街边笔记": "Street notes",
+    "结局": "Ending",
+    "得分": "Score",
+    "通关": "Cleared",
+    "跳跃": "Jumps",
+    "完美": "Perfect",
+    "救援": "Rescues",
+    "虾跃": "Shrimp Leap",
+    "未选性格·未选颜色": "no temperament chosen · no color chosen"
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "果敢": "Bold",
+    "沉稳": "Steady",
+    "绵韧": "Mellow",
+    "先把身体弹出去再想办法。弹力高，控制较低。": "Launch the body first, think later. High spring, lower control.",
+    "看清风拍再收缩。控制高，落点更容易修正。": "Read the wind beat, then contract. High control makes the landing easier to correct.",
+    "慢慢弹，也能一直弹。耐力与黏性高，初始弹力较低。": "Bounce slowly, but bounce for a long time. High endurance and grip, lower starting spring.",
+    "珊瑚橙": "Coral",
+    "薄荷青": "Mint",
+    "灯芯黄": "Amber",
+    "夜紫": "Lilac",
+    "弹力 +1、控制 -1。亮得像一小段刹车灯。": "Spring +1, control -1. Bright as a short stretch of brake light.",
+    "控制 +1、弹力 -1。冷静，但不是没有弹性。": "Control +1, spring -1. Calm, but not without bounce.",
+    "耐力 +1、黏性 -1。把灯光存进身体里。": "Endurance +1, grip -1. Store the lamp light inside the body.",
+    "黏性 +1、耐力 -1。更容易挂住灯柱，也更容易黏住同伴。": "Grip +1, endurance -1. Easier to hang on a post — and to stick to a companion.",
+    "轻": "Low",
+    "中": "Mid",
+    "强": "High",
+    "低角": "Flat",
+    "弧线": "Arc",
+    "高角": "High arc",
+    "早拍": "Early",
+    "正拍": "On beat",
+    "晚拍": "Late",
+    "弹力": "Spring",
+    "控制": "Control",
+    "耐力": "Endurance",
+    "黏性": "Grip",
+    "豆冻": "Bean jelly",
+    "弹团": "Bounce blob",
+    "灯团": "Lamp blob",
+    "旧城慢街": "Old-town slow street",
+    "灯柱还密，风在屋檐之间试探。": "The posts are still close. Wind tests itself between the eaves.",
+    "风口长街": "Wind-gap avenue",
+    "街面变快，灯柱间距拉开，风开始横着走。": "The street speeds up, the gaps widen, and the wind starts to cut sideways.",
+    "高架黎明": "Overpass dawn",
+    "最后一段架在天上。能看见更远，也必须跳得更准。": "The last stretch is up in the sky. You can see farther, and you have to jump truer.",
+    "糯糯": "Nuo-nuo",
+    "软糖": "Gummy",
+    "小团": "Little blob",
+    "灯苗": "Lamp sprout",
+    "弹弹": "Boing",
+    "雨点儿": "Raindrop",
+    "天亮": "Daylight",
+    "坠落": "Fallen",
+    "力竭": "Exhausted",
+    "黏连坠落": "Stuck-fall",
+    "收团": "Recoil",
+    "塑形": "Shape",
+    "上色": "Color",
+    "跳街": "Street leap",
+    "黏连救援": "Stick rescue",
+    "结算": "Settlement",
+    "完美落地": "Perfect landing",
+    "站稳": "Clean landing",
+    "擦边过关": "Edge clear",
+    "跳短": "Short",
+    "跳远": "Long",
+    "性格与颜色会真实改变物理属性；同性格同伴只是确定性的离线事件。": "Nature and color truly change the physics. A same-nature companion is only a deterministic offline event.",
+    "盘成一团回体力": "Curl up and restore stamina",
+    "1 个动作": "1 action",
+    "当前没有黏连救援。": "There is no stick rescue right now.",
+    "可以脱黏": "Can unstick",
+    "继续缓拉": "Keep a gentle pull",
+    "拍数将尽": "Beats almost gone",
+    "拉力过高": "Tension too high",
+    "1 救援拍": "1 rescue beat",
+    "停一拍松开拉力": "Wait one beat and ease the tension",
+    "选择性格": "Choose a nature",
+    "选择颜色": "Choose a color",
+    "灯柱前": "short of the post",
+    "灯柱后": "past the post",
+    "缓力用掉最后一拍，进度不足": "A gentle pull spent the last beat with progress still short",
+    "拉力超过灯柱能承受的上限": "Tension passed what the post can take",
+    "三拍用完仍进度不足": "Three beats gone, progress still short",
+    "这一局已经收尾，用 recap 查看结算。": "This run has ended; use recap to read the settlement.",
+    "脚下": "underfoot",
+    "先捏性格": "Shape a nature first",
+    "下一步": "Next",
+    "执行 next 中的 nature:<id>；也可用 actions 查看全部性格。": "Take the nature:<id> in next, or use actions to see every nature.",
+    "再给果冻一点颜色": "Give the jelly a little color",
+    "执行 next 中的 color:<id>；颜色修正会与性格、训练、体型叠加。": "Take the color:<id> in next. The color modifier stacks with nature, training, and size.",
+    "已是最大体型": "Already at max size",
+    "本关物理": "This level's physics",
+    "力度改变初速度与体力消耗；角度改变抛物线；输入与风拍的差值修正落点。动作 detail 已算出本拍结果。": "Power changes launch speed and stamina cost; angle changes the arc; the gap between your timing and the wind beat corrects the landing. The action detail already computes this beat's result.",
+    "养成": "Training",
+    "当前没有合法动作。": "There is no legal action right now.",
+    "离线夜频 · 同性格黏连": "Offline night-signal · same-nature stick",
+    "力度决定基础贡献；与提示合拍有额外进度且不增额外拉力。超过需求太多也会拉紧。成功得 2 灯花与下一跳护持。": "Power sets the base contribution. Hitting the cue adds extra progress without extra tension. Overshooting the need also tightens tension. Success grants 2 blooms and a ward for the next jump.",
+    "进度": "Level",
+    "体型": "Size",
+    "体力": "Stamina",
+    "灯花": "Blooms",
+    "摔落": "Falls",
+    "一颗果冻在路灯下醒来 · 先选性格": "A jelly wakes under a lamp · pick a nature first",
+    "最近一次失误": "Last miss",
+    "街边笔记": "Street notes",
+    "这次死亡同时满足“体力归零”和“跳跃失误”。高力度耗体力更快；体力不足时应先 rest，而不是把最后一跳交给失误。": "This death met both “stamina at zero” and “a missed jump.” High power drains stamina faster. When stamina is low, rest first instead of leaving the last jump to a miss.",
+    "最后一次摔落发生在救援副本。救援不仅看进度，还要看拉力；超过需求太多也会增加拉力。": "The last fall happened in a rescue. Rescue is not only progress; tension matters too. Overshooting the need also raises tension.",
+    "还没有跳跃失误或训练记录。先比较间距、角度、风拍与动作 detail，再记录这一条街的实际观察。": "No missed jumps or training notes yet. Compare the gap, the angle, the wind beat, and the action detail, then record what this street actually did.",
+    "进行中": "In progress",
+    "结局": "Ending",
+    "得分": "Score",
+    "通关": "Cleared",
+    "跳跃": "Jumps",
+    "完美": "Perfect",
+    "救援": "Rescues",
+    "把本局的性格、颜色、训练、最远关卡、最后一次跳跃的三档与落点误差写进你自己的 memory；若有救援，也记下进度和拉力。只把这些当作这个 seed 与这套 build 的观察，换地图、体型或属性后重新验证，不要把固定档位当成万能攻略。": "Write this run's nature, color, training, farthest level, and the last jump's three inputs and landing error into memory. If there was a rescue, also note progress and tension. Treat these as observations for this seed and this build. After the map, size, or stats change, test again — do not treat a fixed input as a universal guide.",
+    "虾跃": "Shrimp Leap",
+    "四十五根灯柱，把果冻跳到天亮": "Forty-five lamp posts. Leap the jelly into daylight.",
+    "一颗像史莱姆的果冻小生物，沿着不断延伸的街道跳过一根根灯柱。性格与颜色塑造弹力、控制、耐力和黏性；力度、角度、时机组成每一次离散跳跃。每十五关长大一次，离线同性格同伴可能黏在一起，救出它们能换来灯花与护持。": "A slime-like jelly leaps lamp post to lamp post along a street that keeps extending. Nature and color shape spring, control, endurance, and grip. Each discrete jump is power, angle, and timing. Every fifteen clears you grow. An offline same-nature companion may stick to a post; rescuing them yields blooms and a ward.",
+    "先选 nature:bold|steady|mellow，再选 color:coral|mint|amber|lilac；--content bold:coral 可直接开局。": "Pick nature:bold|steady|mellow, then color:coral|mint|amber|lilac. --content bold:coral starts already shaped.",
+    "jump:<low|mid|high>:<flat|arc|high>:<early|on|late> 依次是力度、角度、时机。": "jump:<low|mid|high>:<flat|arc|high>:<early|on|late> is power, angle, and timing, in that order.",
+    "动作 detail 公开预计落点、误差和结果；next 是当前推荐。合法但预测会失误的跳跃也会真实结算，不会报非法动作。": "The action detail publishes the predicted landing, error, and result. next is the current suggestion. A legal jump that is predicted to miss still resolves for real — it is not an illegal action.",
+    "rest 回体力并推进风拍。精准落地攒灯花，train:<spring|control|endurance|grip> 花 3 灯花养成。": "rest restores stamina and advances the wind beat. Clean landings bank blooms. train:<spring|control|endurance|grip> spends 3 blooms.",
+    "街图在 state.street 累积延伸；关数提高视野、街速与间距。通关 15 / 30 关长大。": "The street in state.street keeps extending. Level raises view distance, street speed, and gap. You grow at 15 and 30 clears.",
+    "同性格同伴是确定性的离线事件，不联网。黏连时用 rescue:<力度>:<时机>，公开进度、拉力和剩余拍数。": "A same-nature companion is a deterministic offline event, not a network. When stuck, use rescue:<power>:<timing>. Progress, tension, and remaining beats are public.",
+    "第 45 关落地获胜。摔落到上限、力竭失误或救援最后坠落会输；recap 给出具体关卡、动作和误差。": "Landing level 45 is a win. Hitting the fall cap, missing while exhausted, or falling on the last rescue beat is a loss. The recap names the level, the action, and the error.",
+    "未选性格·未选颜色": "no temperament chosen · no color chosen",
+    "未选性格": "no temperament chosen",
+    "未选颜色": "no color chosen"
+  },
+  "patterns": [
+    {
+      "zh": "第 {0} 关的目标灯柱尚未生成。",
+      "en": "The target lamp post for level {0} has not been generated.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}力·{1}·{2} → {3}",
+      "en": "{0} power · {1} · {2} → {3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "间距 {0}m；预计落点 {1}m，误差 {2}m，容差 ±{3}m。当前风 {4}，风拍 {5}；此输入为{6}。结果：{7}。",
+      "en": "Gap {0}m; predicted landing {1}m, error {2}m, tolerance ±{3}m. Wind {4}, wind beat {5}; this input is {6}. Result: {7}.",
+      "slots": ["text", "text", "text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "体力 -{0}",
+      "en": "Stamina -{0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "体力 +{0}，风拍前进 {1} 格。可以借此等到更合适的风，但不会推进关卡。",
+      "en": "Stamina +{0}, wind beat advances {1}. You can wait for a better wind, but it will not clear the level.",
+      "slots": ["n", "text"]
+    },
+    {
+      "zh": "灯花养成·{0}",
+      "en": "Lamp-bloom training · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}永久 +1（基础与训练合计上限 {1}，体型加成另算）。消耗 {2} 灯花并推进风拍。",
+      "en": "{0} permanently +1 (base + training cap {1}; size bonus is separate). Spends {2} blooms and advances the wind beat.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "灯花 -{0}",
+      "en": "Blooms -{0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}拉·{1} → {2}",
+      "en": "{0} pull · {1} → {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "救援进度 {0} → {1}/{2}，拉力 {3} → {4}/{5}。当前提示 {6}，剩余 {7} 拍。",
+      "en": "Rescue progress {0} → {1}/{2}, tension {3} → {4}/{5}. Current cue {6}, {7} beat(s) left.",
+      "slots": ["text", "n", "n", "text", "n", "n", "text", "text"]
+    },
+    {
+      "zh": "拉力 -2，进度不变，仍消耗 1 救援拍。若这是最后一拍且进度不足，救援会失败。",
+      "en": "Tension -2, progress unchanged, still spends 1 rescue beat. If this is the last beat and progress is short, the rescue fails.",
+      "slots": []
+    },
+    {
+      "zh": "{0} 初始属性：弹力 {1}、控制 {2}、耐力 {3}、黏性 {4}。",
+      "en": "{0} starting stats: spring {1}, control {2}, endurance {3}, grip {4}.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "离线夜频亮起：同为「{0}」的{1}黏在下一根灯柱上。不是真人联网，是这条街留下的一颗同频果冻。",
+      "en": "An offline night-signal lights up: {1}, also \"{0}\", is stuck to the next lamp post. This is not a live network — just a same-nature jelly this street remembered.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "救援{0}：三拍内进度到 {1}，拉力别超过 {2}。",
+      "en": "Rescue {0}: reach progress {1} in three beats, and do not let tension pass {2}.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 根灯柱接住了你。{1} 的落点 {2}m、误差 {3}m；你把整条街跳成了天亮。",
+      "en": "Lamp post {0} catches you. {1} landed at {2}m, error {3}m. You jumped the whole street into daylight.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "通关 {0} 关，你长成「{1}」：弹力、耐力、黏性各 +1，体力 +4；身体重量也略增。",
+      "en": "After clearing {0} levels you grow into a \"{1}\": spring, endurance, and grip +1 each, stamina +4; the body also weighs a little more.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "无法解析跳跃动作：{0}",
+      "en": "Cannot parse jump action: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关 · {1}：预计落点 {2}m，间距 {3}m，误差 {4}m（容差 ±{5}m）。",
+      "en": "Level {0} · {1}: predicted landing {2}m, gap {3}m, error {4}m (tolerance ±{5}m).",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}{1}。体力 -{2}。",
+      "en": "{0}{1}. Stamina -{2}.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 关 · {1} · {2} · 误差 {3}m",
+      "en": "Level {0} · {1} · {2} · error {3}m",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 关 {1} 落在{2}，误差 {3}m；体力剩 {4}，摔落 {5}/{6}。",
+      "en": "Level {0} {1} lands {2}, error {3}m; stamina {4}, falls {5}/{6}.",
+      "slots": ["text", "text", "text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "你落在{0}，被下层电线弹回原来的灯柱。本关尚未完成；摔落 +1。",
+      "en": "You land {0} and the lower wires bounce you back to the same post. The level is not cleared; falls +1.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关 · {1} · {2} · 留在原关",
+      "en": "Level {0} · {1} · {2} · stay on this level",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "{0} 力竭时又没能落上灯柱，所以这次是力竭坠落。",
+      "en": "{0} stamina ran out and you missed the post, so this is an exhaustion fall.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0} 摔落次数到上限，灯柱边沿再也挂不住你。",
+      "en": "{0} falls hit the cap. The lamp-post rim cannot hold you any longer.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你在灯柱上盘成一团，体力 +{0}。风拍前进 {1} 格；第 {2} 关还在前面。",
+      "en": "You curl into a blob on the post, stamina +{0}. The wind beat advances {1}; level {2} is still ahead.",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 关 · rest · 体力 +{1}",
+      "en": "Level {0} · rest · stamina +{1}",
+      "slots": ["text", "n"]
+    },
+    {
+      "zh": "你把 {0} 点灯花揉进身体：{1} +1，现在有效值为 {2}。风拍继续向前。",
+      "en": "You work {0} blooms into the body: {1} +1, now {2} effective. The wind beat keeps moving.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 关 · train:{1} · {2}={3}",
+      "en": "Level {0} · train:{1} · {2}={3}",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}“啵”地一声脱黏，留下 2 点灯花。下一跳获得同伴护持：落地容差 +0.45m。",
+      "en": "{0} pops free with a soft sound and leaves 2 blooms. The next jump gets a companion ward: landing tolerance +0.45m.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关后 · 救出{1} · 灯花 +2",
+      "en": "After level {0} · rescued {1} · blooms +2",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "第 {0} 关后救援{1}失败：{2}；体力 -2，摔落 {3}/{4}。",
+      "en": "After level {0} the rescue of {1} fails: {2}; stamina -2, falls {3}/{4}.",
+      "slots": ["text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 关后 · 救援失败 · {1}",
+      "en": "After level {0} · rescue failed · {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0} 这是最后一次摔落：救同伴时反被黏连带下了灯柱。",
+      "en": "{0} That was the last fall: while rescuing a companion you were pulled off the post.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0} 你被弹回本关后的灯柱，主线可以继续。",
+      "en": "{0} You bounce back to this level's post. The main street can continue.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你停了一拍，拉力降到 {0}；救援进度仍是 {1}/{2}。",
+      "en": "You wait one beat; tension drops to {0}. Rescue progress is still {1}/{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "{0}：拉力贡献 {1}，进度 {2}/{3}，拉力 {4}/{5}，剩 {6} 拍。",
+      "en": "{0}: tension contributed {1}, progress {2}/{3}, tension {4}/{5}, {6} beat(s) left.",
+      "slots": ["text", "text", "n", "n", "n", "n", "text"]
+    },
+    {
+      "zh": "当前不能做：{0}",
+      "en": "Not legal now: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "合法动作：{0}",
+      "en": "Legal actions: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你选择了「{0}」。{1}",
+      "en": "You chose \"{0}\". {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "塑形 · {0}",
+      "en": "Shape · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你染成「{0}」。{1}",
+      "en": "You take the color \"{0}\". {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "身体成形：体力 {0}/{1}。下一调用返回的 next 开始跳街。",
+      "en": "The body takes shape: stamina {0}/{1}. Use the returned next to start leaping the street.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "上色 · {0}",
+      "en": "Color · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "未处理的动作：{0}",
+      "en": "Unhandled action: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "间距 {0}m / 高差 {1}m",
+      "en": "Gap {0}m / height {1}m",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0} #{1} x={2}m 高={3}m｜{4}｜风 {5}",
+      "en": "{0} #{1} x={2}m height={3}m | {4} | wind {5}",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "再通关 {0} 关长大",
+      "en": "Grow after {0} more clear(s)",
+      "slots": ["text"]
+    },
+    {
+      "zh": "目标 #{0}：间距 {1}m，高差 {2}m，基础风 {3}，当前风 {4}。",
+      "en": "Target #{0}: gap {1}m, height {2}m, base wind {3}, current wind {4}.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "当前风拍「{0}」；街速 {1}。落地容差 ±{2}m{3}。",
+      "en": "Current wind beat \"{0}\"; street speed {1}. Landing tolerance ±{2}m{3}.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "延伸街道 · 视野 {0} 根",
+      "en": "The street extends · {0} posts in view",
+      "slots": ["text"]
+    },
+    {
+      "zh": "弹力 {0}｜控制 {1}｜耐力 {2}｜黏性 {3}。体力上限 {4}。",
+      "en": "Spring {0} | control {1} | endurance {2} | grip {3}. Stamina cap {4}.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "{0}；{1}。灯花 {2}，{3} 点可训练一次，单项基础与训练上限 {4}。",
+      "en": "{0}; {1}. Blooms {2}; {3} can buy one training. Per-stat base + training cap {4}.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "摔落 {0}/{1}；失误会留在原关。体力不足时 next 会优先 rest。",
+      "en": "Falls {0}/{1}; a miss keeps you on this level. When stamina is low, next prefers rest.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "建议 act {0}：{1}",
+      "en": "Suggested act {0}: {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "{0}与你同为「{1}」。这是 seed 驱动的离线副本，没有连接网络或其他玩家。",
+      "en": "{0} shares your nature \"{1}\". This is a seed-driven offline event — no network, no other player.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "进度 {0}/{1}，拉力 {2}/{3}，剩余 {4} 拍，当前提示「{5}」。",
+      "en": "Progress {0}/{1}, tension {2}/{3}, {4} beat(s) left, current cue \"{5}\".",
+      "slots": ["n", "n", "n", "n", "text", "text"]
+    },
+    {
+      "zh": "{0}已成形 · 再选颜色",
+      "en": "{0} has taken shape · pick a color",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关后 · 黏连救援 · {1} · 剩 {2} 拍",
+      "en": "After level {0} · stick rescue · {1} · {2} beat(s) left",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "{0} · 第 {1}/{2} 关 · {3} · 街速 {4} · 视野 {5}",
+      "en": "{0} · level {1}/{2} · {3} · street speed {4} · view {5}",
+      "slots": ["text", "n", "n", "text", "text", "text"]
+    },
+    {
+      "zh": "最后一次跳跃是第 {0} 关 {1}：{2}，落点 {3}m、误差 {4}m、容差 ±{5}m。",
+      "en": "The last jump was level {0} {1}: {2}, landing {3}m, error {4}m, tolerance ±{5}m.",
+      "slots": ["text", "text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "这局摔落 {0} 次到上限。动作 detail 已预告跳短或跳远；没有可落地组合时，rest 换风拍比硬跳更稳。",
+      "en": "This run hit the fall cap after {0} fall(s). Action details already warned of short or long jumps. When no landing combo works, rest and change the wind beat is safer than forcing a jump.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "这局以 {0} 次完美落地、{1} 次休息和 {2} 次救援完成 45 关。换 build 或 seed 后，同一档位的落点要重算。",
+      "en": "This run cleared 45 levels with {0} perfect landings, {1} rests, and {2} rescues. After you change the build or seed, the same inputs must be recalculated.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "这局训练了 {0} 次。灯花来自落地质量，训练会改变后续物理；不要把训练前的动作预测带到训练后。",
+      "en": "This run trained {0} time(s). Blooms come from landing quality, and training changes later physics. Do not carry pre-training predictions forward.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "这局救援失败 {0} 次。成功救援的护持只保留下一跳，使用后会消失。",
+      "en": "This run failed {0} rescue(s). A successful rescue's ward lasts only for the next jump, then it is gone.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "虾跃 · {0}",
+      "en": "Shrimp Leap · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "仍在{0}；{1}，体力 {2}/{3}，摔落 {4}/{5}。{6}",
+      "en": "Still {0}; {1}, stamina {2}/{3}, falls {4}/{5}. {6}",
+      "slots": ["text", "text", "n", "n", "n", "n", "text"]
+    },
+    {
+      "zh": "{0} 成 / {1} 败",
+      "en": "{0} won / {1} lost",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "你主动把果冻收回一团，停在第 {0} 关（已通关 {1}/{2}）。这不是摔死，也不是通关。{3}",
+      "en": "You pull the jelly back into a blob and stop at level {0} (cleared {1}/{2}). This is not a fall-death, and not a clear. {3}",
+      "slots": ["text", "n", "n", "text"]
+    },
+    {
+      "zh": "仍在第 {0} 关；{1}，体力 {2}/{3}，摔落 {4}/{5}。",
+      "en": "Still on level {0}; {1}, stamina {2}/{3}, falls {4}/{5}.",
+      "slots": ["text", "text", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "仍在第 {0} 关；未选性格·未选颜色，体力 {1}/{2}，摔落 {3}/{4}。",
+      "en": "Still on level {0}; no temperament chosen · no color chosen, stamina {1}/{2}, falls {3}/{4}.",
+      "slots": ["text", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "最近一次失误：{0}",
+      "en": "Last miss: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关 {1} 落在灯柱后，误差 {2}",
+      "en": "Level {0} {1} landed past the post, error {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 关 {1} 落在灯柱后，误差 {2}；体力剩 {3}，摔落 {4}/{5}。",
+      "en": "Level {0} {1} landed past the post, error {2}; stamina left {3}, falls {4}/{5}.",
+      "slots": ["text", "text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "体力剩 {0}，摔落 {1}/{2}。",
+      "en": "stamina left {0}, falls {1}/{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "落在灯柱后",
+      "en": "landed past the post",
+      "slots": []
+    },
+    {
+      "zh": "当前风拍「{0}」；街速 {1}。落地容差 ±{2}m。",
+      "en": "Current wind beat \"{0}\"; street speed {1}. Landing tolerance ±{2}m.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "坠落 · {0}",
+      "en": "Fall · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 关 {1} 落在灯柱前，误差 {2}；体力剩 {3}，摔落 {4}/{5}。",
+      "en": "Level {0} {1} landed short of the post, error {2}; stamina left {3}, falls {4}/{5}.",
+      "slots": ["text", "text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "落在灯柱前",
+      "en": "landed short of the post",
+      "slots": []
+    },
+    {
+      "zh": "摔落次数到上限，灯柱边沿再也挂不住你。",
+      "en": "Falls have hit the cap. The post edge cannot hold you any longer.",
+      "slots": []
+    }
+  ]
+}

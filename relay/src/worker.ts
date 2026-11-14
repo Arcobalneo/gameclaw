@@ -1,14 +1,16 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { handleRequest, RELAY_VERSION, type RoomHandle, type RoomHub } from './app';
+import { handleRequest, RELAY_VERSION, type RoomHandle, type RoomHub, type StatsHub } from './app';
 import { isSessionId } from './ids';
 import type { Json, ToolName } from './protocol';
 import type { CodeStore } from './registry';
 import { SessionRoomCore, type SocketLike } from './room';
+import { type PlayCounts, PlayStatsCore, type StatsStore } from './stats';
 
 export interface Env {
   SESSION: DurableObjectNamespace;
   REGISTRY: DurableObjectNamespace;
+  STATS: DurableObjectNamespace;
   GAMECLAW_SITE_URL?: string;
 }
 
@@ -206,6 +208,114 @@ class DoRoom implements RoomHandle {
   }
 }
 
+class DoStatsStore implements StatsStore {
+  constructor(private readonly state: DurableObjectState) {}
+
+  async getSite(): Promise<number> {
+    return (await this.state.storage.get<number>('site')) ?? 0;
+  }
+  async setSite(n: number): Promise<void> {
+    await this.state.storage.put('site', n);
+  }
+  async getGame(id: string): Promise<number> {
+    return (await this.state.storage.get<number>(`game:${id}`)) ?? 0;
+  }
+  async setGame(id: string, n: number): Promise<void> {
+    await this.state.storage.put(`game:${id}`, n);
+  }
+  async hasSeen(key: string): Promise<boolean> {
+    return (await this.state.storage.get<number>(`seen:${key}`)) === 1;
+  }
+  async markSeen(key: string): Promise<void> {
+    await this.state.storage.put(`seen:${key}`, 1);
+  }
+}
+
+export class PlayStats implements DurableObject {
+  #core: PlayStatsCore | null = null;
+  readonly #sockets = new WeakMap<WebSocket, SocketLike>();
+
+  constructor(private readonly state: DurableObjectState) {}
+
+  #ensure(): PlayStatsCore {
+    if (!this.#core) {
+      this.#core = new PlayStatsCore(new DoStatsStore(this.state));
+      for (const ws of this.state.getWebSockets()) {
+        const socket = wrapSocket(ws);
+        this.#sockets.set(ws, socket);
+        this.#core.attach(socket);
+      }
+    }
+    return this.#core;
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    const core = this.#ensure();
+    const url = new URL(request.url);
+
+    if (request.headers.get('Upgrade')?.toLowerCase() === 'websocket') {
+      const pair = new WebSocketPair();
+      const client = pair[0];
+      const server = pair[1];
+      this.state.acceptWebSocket(server);
+      const socket = wrapSocket(server);
+      this.#sockets.set(server, socket);
+      await core.welcome(socket);
+      return new Response(null, { status: 101, webSocket: client });
+    }
+
+    if (url.pathname === '/get') {
+      return Response.json(await core.get());
+    }
+    if (url.pathname === '/hello' && request.method === 'POST') {
+      const body = (await request.json()) as { player: string; game?: string; ip: string };
+      const result = await core.hello(body.player, body.game, body.ip);
+      return Response.json(result);
+    }
+    return new Response('not found', { status: 404 });
+  }
+
+  async webSocketClose(ws: WebSocket): Promise<void> {
+    const socket = this.#sockets.get(ws);
+    if (socket) this.#core?.detach(socket);
+  }
+}
+
+class WorkerStatsHub implements StatsHub {
+  readonly core: PlayStatsCore;
+
+  constructor(private readonly stub: DurableObjectStub) {
+    // The live socket set lives inside the Durable Object; this core is unused
+    // for broadcasts and only satisfies the StatsHub type.
+    this.core = new PlayStatsCore({
+      getSite: () => 0,
+      setSite: () => {},
+      getGame: () => 0,
+      setGame: () => {},
+      hasSeen: () => false,
+      markSeen: () => {},
+    });
+  }
+
+  async get(): Promise<PlayCounts> {
+    const res = await this.stub.fetch('https://stats/get');
+    return (await res.json()) as PlayCounts;
+  }
+
+  async hello(playerId: string, game: string | undefined, ip: string) {
+    const res = await this.stub.fetch('https://stats/hello', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ player: playerId, game, ip }),
+    });
+    return (await res.json()) as Awaited<ReturnType<PlayStatsCore['hello']>>;
+  }
+
+  async connect(request: Request): Promise<Response> {
+    return this.stub.fetch(new Request('https://stats/live', { headers: request.headers }));
+  }
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const siteUrl = env.GAMECLAW_SITE_URL ?? SITE_DEFAULT;
@@ -225,6 +335,7 @@ export default {
       },
     };
 
+    const statsHub = new WorkerStatsHub(env.STATS.get(env.STATS.idFromName('global')));
     return handleRequest(
       request,
       hub,
@@ -240,7 +351,12 @@ export default {
           const response = await room.connect(request);
           return { socket: { send() {}, close() {}, readyState: 1 }, response };
         },
+        async acceptStats() {
+          const response = await statsHub.connect(request);
+          return { socket: { send() {}, close() {}, readyState: 1 }, response };
+        },
       },
+      statsHub,
     );
   },
 };

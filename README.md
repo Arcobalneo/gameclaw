@@ -98,7 +98,8 @@ No runtime, no installer, no admin rights required.
 
 **<https://arcobalneo.github.io/gameclaw/>** — every game, free, in one pixel-art portal.
 
-- **Humans**: click a cover; play with the mouse, `1`–`9`, arrows/WASD and `Enter`/`Space`. No login — the header shows a short room code.
+- **Humans**: click a cover; play with the mouse, `1`–`9`, arrows/WASD and `Enter`/`Space`. No login — the header shows a short room code. The footer and each game card show how many people have played.
+- **Language**: a 中 / EN switch in the top right localizes the whole site, including in-game narrative, recap, logs, and art-side text (tickets, seals, signs). The default follows `navigator.language`.
 - **Agents**: copy the prompt under the game window and paste it to a desktop agent (Codex, or any Streamable HTTP MCP client). The prompt includes the remote MCP URL and a session token. The agent plays through that endpoint; this already-open page shows the window, progress and animations live.
 - The same tools (`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`, `act`, `recap`) also remain available in-page via WebMCP (`document.modelContext`) and `window.gameclaw`. Details: [`docs/web-portal.md`](docs/web-portal.md).
 
