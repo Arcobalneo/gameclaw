@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- `虾礁 (Claw Reef)` and `虾灯 (Claw Lamp)` now play on bespoke boards.
+  A reef mark still counts only after the push, and an urchin on that cell is
+  a sweep unless you anchor. Lamp's widest post blocks the posts that seal
+  the shoal, and the action list no longer leads with a solved move. Score
+  formulas are unchanged. Those two games are `meta.version` `4.1.0`.
 - Rebuilt the scenes for `虾印`, `虾熔`, `虾网`, and `虾节`: a night ferry,
   a tide well of shells, a harbor net, and a ring. Each has its own props,
   idle motion, and hit feedback.

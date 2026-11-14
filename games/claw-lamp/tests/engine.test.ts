@@ -47,8 +47,10 @@ describe('claw-lamp engine', () => {
     const state = createRun({ seed: 1 });
     const trap = actionsOf(state).find((action) => action.id === 'place:0');
     expect(trap).toBeTruthy();
+    expect(actionsOf(state)[0]?.id).toBe('place:0');
+    expect(suggest(state)).not.toBe('place:0');
     act(state, 'place:0');
-    expect(actionsOf(state).some((action) => action.id === 'place:1')).toBe(false);
+    expect(actionsOf(state).some((action) => action.id === 'place:3')).toBe(false);
     state.placed = state.posts.map(() => false);
     state.stock = 2;
     state.tide = 3;
