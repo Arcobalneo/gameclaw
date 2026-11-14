@@ -108,6 +108,10 @@ function rockLayer(): HTMLCanvasElement {
         rect(g, px + 1, py + 1, CW - 3, 2, '#3a7a78');
         rect(g, px + 1, py + CH - 4, CW - 3, 2, '#0c3038');
         if ((x + y) % 2 === 0) dither(g, px + 4, py + 6, CW - 10, CH - 10, '#246068', 0.35);
+        if ((x * 5 + y) % 3 === 0) {
+          ellipse(g, px + 8, py + CH - 8, 3, 2, '#e8d8c0');
+          rect(g, px + 7, py + CH - 9, 2, 1, '#fff6dc');
+        }
         continue;
       }
       rect(g, px, py, CW - 1, CH - 1, '#123038');
@@ -119,6 +123,10 @@ function rockLayer(): HTMLCanvasElement {
         const nh = 3 + ((k + y) % 4);
         rect(g, nx, py + 4, 3, nh, (x + k) % 2 ? '#c45a62' : '#d8a05a');
         rect(g, nx, py + 4, 3, 1, '#ffd0c0');
+        if (k === 0) {
+          disc(g, nx + 6, py + 10, 3, (x + y) % 2 ? '#ff6a8a' : '#7ee0c8');
+          disc(g, nx + 6, py + 9, 1, '#fff6dc');
+        }
       }
     }
   }
@@ -291,6 +299,12 @@ function createScene(): GameScene<ReefState> {
         state.anchors < (state.difficulty === 'easy' ? 5 : state.difficulty === 'hard' ? 3 : 4)
       ) {
         blit(g, art().hook, px + 10, py - 2, { scale: 1, anchor: 'bc', alpha: 0.9 });
+      }
+      for (let i = 0; i < 4; i += 1) {
+        const fx = (20 + i * 90 + Math.round(t * 10)) % 360;
+        const fy = 188 + (i % 2) * 8 + Math.round(Math.sin(t + i) * 2);
+        ellipse(g, fx, fy, 5, 2, withAlpha('#9ee0d8', 0.35));
+        rect(g, fx + 4, fy, 3, 1, '#e8fff8');
       }
       kelp(g, 18, 208, 28, t, '#1f6a58');
       kelp(g, 360, 210, 34, t + 1, '#174e48');
