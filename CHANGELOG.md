@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- `虾罩` drips from the ceiling and glints its crystals. `虾拨` drops
+  pebbles through the fall and hangs lanterns on the cliffs. `虾节` fills
+  the ring with a crowd and swinging lanterns, and the fighter cycles the
+  phrase. `虾数` flickers the pier lanterns and puts a boat on the channel.
 - `虾数` puts the step button in the water, under the planks. `虾罩` shows
   the flood before it reaches you. `虾钟` sweeps the hand across the slot it
   just turned. `虾拨` crosses a gorge with walls, a fall, and mist.

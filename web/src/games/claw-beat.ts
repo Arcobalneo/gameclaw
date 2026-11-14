@@ -112,9 +112,21 @@ function createScene(): GameScene<BeatState> {
     draw(f) {
       const { g, t, state } = f;
       g.drawImage(dojo(), 0, 0);
+      for (let i = 0; i < 7; i += 1) {
+        const x = 28 + i * 52;
+        const bob = Math.round(Math.sin(t * 2.2 + i) * 2);
+        rect(g, x, 108 + bob, 12, 18, i % 2 ? '#2a1820' : '#1a2430');
+        rect(g, x + 2, 104 + bob, 8, 5, i % 2 ? '#ff5d73' : '#7ec8ff');
+      }
+      for (const lx of [52, 332]) {
+        const swing = Math.round(Math.sin(t * 1.8 + lx) * 3);
+        rect(g, lx, 8, 1, 18, '#3a2414');
+        rect(g, lx - 4 + swing, 26, 8, 6, '#ffc24a');
+        glow(g, lx + swing, 28, 10, '#ffc24a', 0.4);
+      }
       const step = (Math.floor(t * 4) % 2) as 0 | 1;
       const blink = Math.floor(t * 2) % 8 === 0;
-      const lead = state.phrase[0] ?? 'rest';
+      const lead = state.phrase[Math.floor(t * 2) % 4] ?? 'rest';
       const you = fighter(lead, step, blink);
       const foe = buildSprite(CRAB);
       const lunge = f.since < 0.25 && hitT > 0 ? 10 : 0;
