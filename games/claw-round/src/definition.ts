@@ -13,7 +13,7 @@ export const definition: GameDefinition<RoundState> = {
     repo: 'https://github.com/Arcobalneo/gameclaw',
     license: 'MIT',
     guide: [
-      'step:1 向前，step:-1 退后。grab 拿起脚下的东西。pocket 入袋。drop 放回空格。',
+      'step:e 向前，step:w 退后。grab 拿起脚下的东西。pocket 入袋。drop 放回空格。',
       '拍数用完就潮退。没入袋的手里东西会放回脚下。',
       '要带的两样写在状态里。装错会计入错袋。',
       '两样都入袋就赢。潮数用完还没齐就输。',

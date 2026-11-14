@@ -10,10 +10,10 @@ import { drawText } from '../gfx/text';
 import { blit, pips, plate, shadow } from '../gfx/world';
 
 const DIR_STEP: Record<string, [number, number]> = {
-  n: [0, -1],
-  s: [0, 1],
-  w: [-1, 0],
-  e: [1, 0],
+  'step:n': [0, -1],
+  'step:s': [0, 1],
+  'step:w': [-1, 0],
+  'step:e': [1, 0],
 };
 
 const OX = 78;
@@ -66,16 +66,11 @@ function createScene(): GameScene<CoilState> {
     },
     hits(state, actions): HitRegion[] {
       const head = state.snake[0] ?? [2, 2];
-      const spots: Record<string, [number, number]> = {
-        n: [head[0], head[1] - 1],
-        s: [head[0], head[1] + 1],
-        w: [head[0] - 1, head[1]],
-        e: [head[0] + 1, head[1]],
-      };
       return actions
-        .filter((action) => spots[action.id])
+        .filter((action) => DIR_STEP[action.id])
         .map((action) => {
-          const pair = spots[action.id] ?? [0, 0];
+          const step = DIR_STEP[action.id] ?? [0, 0];
+          const pair: [number, number] = [head[0] + step[0], head[1] + step[1]];
           return {
             x: OX + pair[0] * CELL,
             y: OY + pair[1] * CELL,

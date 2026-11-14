@@ -13,7 +13,7 @@ export const definition: GameDefinition<CoilState> = {
     repo: 'https://github.com/Arcobalneo/gameclaw',
     license: 'MIT',
     guide: [
-      'n 北，s 南，e 东，w 西。一动就是一格。',
+      'step:n 北，step:s 南，step:e 东，step:w 西。一动就是一格。',
       'detail 会告诉你这一步是不是墙或自己的身子。',
       '箱子的格子和坞的格子写在状态里。',
       '全部箱子进坞就赢。撞的次数到上限就输。',

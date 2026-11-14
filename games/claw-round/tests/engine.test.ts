@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, createRun, ladderScore, suggest } from '../src/engine';
+import { act, actionsOf, createRun, ladderScore, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -33,6 +33,15 @@ describe('claw-round engine', () => {
     expect(state.outcome).toBe('ongoing');
     expect(state.held).toBeNull();
     expect(state.loop).toBe(2);
+  });
+
+  it('lists east and west so the pier answers A and D', () => {
+    const state = createRun({ seed: 1 });
+    const ids = actionsOf(state).map((action) => action.id);
+    expect(ids).toContain('step:e');
+    expect(ids).not.toContain('step:1');
+    act(state, 'step:1');
+    expect(state.pos).toBe(1);
   });
 
   it('ends the tide when a wrong item is pocketed', () => {

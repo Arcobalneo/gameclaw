@@ -201,7 +201,7 @@ function createScene(): GameScene<SumState> {
       });
       if (f.focus?.detail) {
         const detail = say(f, f.focus.detail);
-        if (detail) plate(g, detail, 192, 150, '#fff4d6', 210);
+        if (detail) plate(g, detail, 192, 108, '#fff4d6', 210);
       }
     },
     hud(f) {

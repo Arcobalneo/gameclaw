@@ -2,7 +2,7 @@ import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { LEVELS } from '../src/content';
 import { definition } from '../src/definition';
-import { act, createRun, ladderScore, suggest } from '../src/engine';
+import { act, actionsOf, createRun, ladderScore, suggest } from '../src/engine';
 
 function play(seed: number) {
   const state = createRun({ seed });
@@ -32,6 +32,14 @@ describe('claw-coil engine', () => {
       for (const move of level.moves) act(state, move);
       expect(state.outcome).toBe('won');
     }
+  });
+
+  it('lists compass steps so WASD can move the head', () => {
+    const ids = actionsOf(createRun({ seed: 1 })).map((action) => action.id);
+    expect(ids).toEqual(expect.arrayContaining(['step:n', 'step:e', 'step:s', 'step:w']));
+    const state = createRun({ seed: 1 });
+    act(state, 'e');
+    expect(state.snake[0]?.[0]).toBeGreaterThan(1);
   });
 
   it('strikes a wall and does not move', () => {

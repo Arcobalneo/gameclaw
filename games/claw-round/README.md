@@ -16,7 +16,7 @@ A full pocket is 460 − extra tides×30 − wrong pockets×60. A miss scores ke
 
 ## 动作
 
-`step:1` 向前。`step:-1` 退后。`grab` 拿起脚下的东西。`pocket` 入袋。`drop` 放回空格。拍数用完就潮退。
+`step:e` 向前，`step:w` 退后。页面上 D 和 A 就是这两步。`grab` 拿起脚下的东西。`pocket` 入袋。`drop` 放回空格。拍数用完就潮退。
 
 ## 状态
 
