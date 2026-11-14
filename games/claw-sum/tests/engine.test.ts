@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, applyOp, createRun, ladderScore, suggest } from '../src/engine';
+import { act, applyOp, budgetOf, createRun, ladderScore, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -31,6 +31,26 @@ describe('claw-sum engine', () => {
     act(state, 'add2');
     expect(state.outcome).toBe('won');
     expect(state.exacts).toBe(1);
+  });
+
+  it('shortens the pull budget on the next kettle and keeps it winnable', () => {
+    const state = createRun({ seed: 5 });
+    const first = budgetOf(state);
+    while (state.stage === 1 && state.outcome === 'ongoing') act(state, suggest(state));
+    expect(state.stage).toBeGreaterThan(1);
+    expect(budgetOf(state)).toBe(first - 1);
+    expect(play(5, suggest).outcome).toBe('won');
+  });
+
+  it('lets the search win more seeds than always adding two', () => {
+    let careful = 0;
+    let added = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      if (play(seed, suggest).outcome === 'won') careful += 1;
+      if (play(seed, () => 'add2').outcome === 'won') added += 1;
+    }
+    expect(careful).toBeGreaterThanOrEqual(8);
+    expect(added).toBeLessThan(careful);
   });
 
   it('lets the search win more seeds than always doubling', () => {

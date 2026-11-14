@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, createRun, ladderScore, suggest } from '../src/engine';
+import { act, actionsOf, createRun, ladderScore, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -32,15 +32,22 @@ describe('claw-berth engine', () => {
     expect(state.incidents).toBe(1);
   });
 
-  it('lets the harbor line win more often than only waiting', () => {
+  it('lets the harbor line win more often than waiting or the first berth', () => {
+    const firstFit = (state: ReturnType<typeof createRun>) =>
+      actionsOf(state).find(
+        (action) => action.id.startsWith('dock:') || action.id.startsWith('tug:'),
+      )?.id ?? 'wait';
     let careful = 0;
     let waited = 0;
+    let greedy = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
       if (play(seed, suggest).outcome === 'won') careful += 1;
       if (play(seed, () => 'wait').outcome === 'won') waited += 1;
+      if (play(seed, firstFit).outcome === 'won') greedy += 1;
     }
     expect(careful).toBeGreaterThanOrEqual(8);
     expect(waited).toBeLessThan(careful);
+    expect(greedy).toBeLessThan(careful);
   });
 
   it('scores zero on abort', () => {

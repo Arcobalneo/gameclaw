@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { act, createRun, suggest } from '../src/engine';
+import { act, actionsOf, createRun, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -30,6 +30,16 @@ describe('claw-delve engine', () => {
     act(state, 'cut');
     expect(state.outcome).toBe('lost');
     expect(state.cause).toBe('井塌了');
+  });
+
+  it('names the ore when the next cell holds it', () => {
+    const state = createRun({ seed: 1 });
+    state.oreCol[0] = 2;
+    state.col = 1;
+    const right = actionsOf(state).find((action) => action.id === 'shift:1');
+    const left = actionsOf(state).find((action) => action.id === 'shift:-1');
+    expect(right?.detail).toBe('向右一格有矿。横挖不会塌。');
+    expect(left?.detail).toBe('在这一层向左挖开一格。横挖不会塌。');
   });
 
   it('lets bracing before the drop keep the layer', () => {

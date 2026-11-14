@@ -18,6 +18,7 @@ import {
 } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, SHRIMP, type SpriteDef } from '../gfx/sprites';
+import { drawText } from '../gfx/text';
 import { blit, kelp, pips, plate, shadow } from '../gfx/world';
 
 const ITEM_COLOR: Record<Item, string> = {
@@ -143,6 +144,12 @@ function createScene(): GameScene<RoundState> {
         const label = say(f, ITEM_LABEL[item]);
         if (label) plate(g, label, x, 92, ITEM_COLOR[item], 72);
       });
+      for (let i = 0; i < 3; i += 1) {
+        const x = Math.round((40 + i * 120 + t * 18) % 400);
+        const y = 48 + (i % 2) * 10 + Math.round(Math.sin(t * 2 + i) * 3);
+        rect(g, x, y, 8, 2, '#d8e8ff');
+        rect(g, x + 8, y, 4, 1, '#ffffff');
+      }
       const bob = Math.round(Math.sin(t * 4) * 1);
       shadow(g, 62 + state.pos * 70, 152, 20);
       blit(g, buildSprite(SHRIMP), 62 + state.pos * 70, 150 + bob, { scale: 2, anchor: 'bc' });
@@ -154,7 +161,14 @@ function createScene(): GameScene<RoundState> {
     },
     hud(f) {
       const { g, t, state } = f;
-      pips(g, 170, 10, state.beats, state.beat, '#7ec8ff', state.beat, t);
+      const beat = say(f, '拍');
+      const wrong = say(f, '错袋');
+      const tide = say(f, '潮');
+      if (beat) drawText(g, beat, 150, 8, { color: '#9fd8ff' });
+      pips(g, beat ? 178 : 150, 10, state.beats, state.beat, '#7ec8ff', state.beat, t);
+      if (wrong) drawText(g, wrong, 8, 188, { color: '#ff8aa0' });
+      pips(g, wrong ? 48 : 8, 190, Math.max(state.wrong, 1), state.wrong, '#ff6d8a', -1, t);
+      if (tide) drawText(g, `${tide} ${state.loop}/${state.loops}`, 300, 8, { color: '#fff4d6' });
     },
     react(f, outcome) {
       const tide = outcome.result.log.some((line) => line.includes('潮'));
