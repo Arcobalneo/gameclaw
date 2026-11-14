@@ -78,11 +78,7 @@ export class GameHost {
       try {
         const session = MemorySession.restore(module.definition, loaded.snapshot);
         if (session) {
-          const host = new GameHost(
-            module,
-            session,
-            Array.isArray(loaded.log) ? loaded.log : [],
-          );
+          const host = new GameHost(module, session, Array.isArray(loaded.log) ? loaded.log : []);
           if (loaded.migratedFrom) {
             host.#persist();
             store?.removeItem(STORAGE_PREFIX + loaded.migratedFrom);

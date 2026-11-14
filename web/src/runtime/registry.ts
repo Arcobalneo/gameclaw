@@ -1,4 +1,4 @@
-import { canonicalGameId } from '../../relay/src/games';
+import { canonicalGameId } from '../../../relay/src/games';
 import type { AnyGameModule } from '../gfx/scene';
 
 /**

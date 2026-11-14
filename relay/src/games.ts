@@ -61,5 +61,5 @@ export function retagSnapshot<T>(raw: T, currentId: string): T {
   const snap = raw as { game?: unknown };
   if (typeof snap.game !== 'string' || snap.game === currentId) return raw;
   if (canonicalGameId(snap.game) !== currentId) return raw;
-  return { ...snap, game: currentId };
+  return { ...snap, game: currentId } as T;
 }

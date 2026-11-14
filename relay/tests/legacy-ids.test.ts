@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { HeadlessDesk } from '../src/headless';
-import { LeaderboardCore, MemoryBoardStore } from '../src/leaderboard';
 import { legacyGameId } from '../src/games';
+import { HeadlessDesk } from '../src/headless';
 import { generateSessionId } from '../src/ids';
+import { LeaderboardCore, MemoryBoardStore } from '../src/leaderboard';
 import { hashPlayer, MemoryStatsStore, PlayStatsCore } from '../src/stats';
 
 const trek = 'claw-trek';
@@ -68,7 +68,7 @@ describe('legacy game ids', () => {
     const stored = structuredClone(exported);
     const slot = stored.games['claw-leap'];
     expect(slot).toBeTruthy();
-    stored.focused = old;
+    stored.focused = old!;
     stored.games[old!] = slot!;
     delete stored.games['claw-leap'];
     (stored.games[old!]!.snapshot as { game: string }).game = old!;
@@ -77,7 +77,9 @@ describe('legacy game ids', () => {
     expect(restored.load(stored)).toBe(true);
     const out = restored.exportDesk();
     expect(out.focused).toBe('claw-leap');
-    expect(out.games['claw-leap']?.snapshot.game).toBe('claw-leap');
+    expect((out.games['claw-leap']?.snapshot as { game?: string } | undefined)?.game).toBe(
+      'claw-leap',
+    );
     expect(out.games[old!]).toBeUndefined();
     expect(restored.load(out)).toBe(false);
   });

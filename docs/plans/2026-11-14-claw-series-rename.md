@@ -46,12 +46,13 @@ Paired display stays `虾× (English)`.
 ## Checklist
 
 - [x] Plan written before the rename
-- [ ] Move game directories, scenes, catalogs, covers, and loc sources
-- [ ] Replace ids and `Shrimp <Word>` titles; leave species ids and the food
+- [x] Move game directories, scenes, catalogs, covers, and loc sources
+- [x] Replace ids and `Shrimp <Word>` titles; leave species ids and the food
       name `Classic Shrimp Burger`
-- [ ] `catalog/legacy-ids.json` plus resolve-on-read for URLs, MCP, headless
+- [x] `catalog/legacy-ids.json` plus resolve-on-read for URLs, MCP, headless
       desks, local saves, boards, and play counts
-- [ ] Docs: `NAMING.md`, `adding-a-game.md` (including `relay/src/headless.ts`),
+- [x] Docs: `NAMING.md`, `adding-a-game.md` (including `relay/src/headless.ts`),
       changelog mapping
-- [ ] `pnpm lint && pnpm check && pnpm test && pnpm validate:catalog`
-- [ ] `pnpm --filter @gameclaw/web build`
+- [x] Keep `claw-stamp`, `claw-melt`, `claw-net`, and `claw-beat` from main
+- [x] `pnpm lint && pnpm check && pnpm test && pnpm validate:catalog`
+- [x] `pnpm --filter @gameclaw/web build`

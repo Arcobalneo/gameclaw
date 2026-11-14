@@ -108,7 +108,9 @@ describe('legacy game ids on the page', () => {
     });
     const row = { name: 'Ace', score: 9, attempts: 1, updatedAt: 1 };
     expect(
-      foldBoards({ rule: 'best-per-game', games: { [old]: [row] }, total: [row] }).games['claw-ink'],
+      foldBoards({ rule: 'best-per-game', games: { [old]: [row] }, total: [row] }).games[
+        'claw-ink'
+      ],
     ).toEqual([row]);
   });
 });

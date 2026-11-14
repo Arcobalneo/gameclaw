@@ -1,4 +1,4 @@
-import { GAME_IDS, legacyGameId, resolveGameId, type GameId } from './games';
+import { GAME_IDS, type GameId, legacyGameId, resolveGameId } from './games';
 import { isSessionId } from './ids';
 import { TokenBucket } from './rate-limit';
 import type { SocketLike } from './room';
