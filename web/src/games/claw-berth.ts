@@ -158,6 +158,14 @@ function createScene(): GameScene<BerthState> {
       g.drawImage(board(), 0, 0);
       wake(g, t);
       slipLanterns(g, t);
+      for (let i = 0; i < 3; i += 1) {
+        const x = Math.round((20 + i * 140 + t * 14) % 420);
+        const y = 40 + (i % 2) * 8 + Math.round(Math.sin(t * 2 + i) * 2);
+        rect(g, x, y, 7, 2, '#e8f4ff');
+        rect(g, x + 7, y, 3, 1, '#ffffff');
+      }
+      ellipse(g, 300, 48, 5, 5, '#ff5d73');
+      rect(g, 299, 53, 2, 10, '#d8e8ff');
       kelp(g, 12, PIER - 2, 22, t, '#1a6048');
       kelp(g, 370, PIER - 2, 18, t + 1, '#145040');
       state.depths.forEach((depth, index) => {

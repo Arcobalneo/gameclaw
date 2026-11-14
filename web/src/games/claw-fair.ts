@@ -113,6 +113,25 @@ function createScene(): GameScene<FairState> {
       g.drawImage(board(), 0, 0);
       bunting(g, t);
       priceMark(g, state.yesterday, state.purse);
+      for (let i = 0; i < 4; i += 1) {
+        const x = 48 + i * 80;
+        const flicker = 0.25 + 0.08 * Math.sin(t * 5 + i);
+        rect(g, x, 28, 2, 16, '#6a2818');
+        glow(g, x, 26, 8, '#ffc24a', flicker);
+        ellipse(g, x, 24, 4, 3, '#ffe066');
+      }
+      for (let i = 0; i < Math.min(3, state.walkaways + 1); i += 1) {
+        const x = 250 - i * 18;
+        ellipse(g, x, 150, 6, 3, '#3a2018');
+        rect(
+          g,
+          x - 3,
+          138 + Math.round(Math.sin(t * 2 + i)),
+          6,
+          10,
+          i === 0 ? '#3a4a8a' : '#6a4030',
+        );
+      }
       const awning = buildSprite(AWNING, {}, { rim: '#fff6dc' });
       blit(g, awning, STALL_X + 75, 62 + Math.round(Math.sin(t * 1.2) * 1), {
         scale: 2,

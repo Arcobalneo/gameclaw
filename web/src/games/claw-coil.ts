@@ -4,9 +4,17 @@ import type { Grade } from '../gfx/art';
 import { sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
 import { ctx2d, dither, ellipse, hash01, makeCanvas, rect, VH, VW } from '../gfx/pixel';
-import type { GameModule, GameScene, HitRegion } from '../gfx/scene';
+import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, type SpriteDef } from '../gfx/sprites';
-import { blit, shadow } from '../gfx/world';
+import { drawText } from '../gfx/text';
+import { blit, pips, plate, shadow } from '../gfx/world';
+
+const DIR_STEP: Record<string, [number, number]> = {
+  n: [0, -1],
+  s: [0, 1],
+  w: [-1, 0],
+  e: [1, 0],
+};
 
 const OX = 78;
 const OY = 28;
@@ -101,6 +109,23 @@ function createScene(): GameScene<CoilState> {
         scale: 2,
         anchor: 'bc',
       });
+      for (let i = 0; i < 8; i += 1) {
+        const x = OX + 8 + ((i * 28 + Math.round(t * 10)) % (6 * CELL));
+        rect(g, x, OY + 4 * CELL + 8, 12, 2, '#1a4030');
+      }
+      rect(g, OX + 4, OY - 6, 6 * CELL, 3, '#6a5030');
+      for (let i = 0; i < 6; i += 1) rect(g, OX + 10 + i * 28, OY - 10, 3, 8, '#c4a060');
+      const head = state.snake[0] ?? [2, 2];
+      for (const action of f.actions) {
+        const step = DIR_STEP[action.id];
+        if (!step) continue;
+        const x = OX + (head[0] + step[0]) * CELL;
+        const y = OY + (head[1] + step[1]) * CELL;
+        const hot = f.focus?.id === action.id;
+        rect(g, x + 4, y + 4, CELL - 10, CELL - 10, hot ? '#3a6848' : '#1a2820');
+        const label = say(f, action.label);
+        if (label && hot) plate(g, label, x + 14, y - 2, '#d8ffe4', 48);
+      }
       state.snake.forEach((cell, index) => {
         const px = OX + cell[0] * CELL + 14;
         const py = OY + cell[1] * CELL + 24 + (index === 0 ? Math.round(Math.sin(t * 3)) : 0);
@@ -110,6 +135,16 @@ function createScene(): GameScene<CoilState> {
           anchor: 'bc',
         });
       });
+    },
+    hud(f) {
+      const { g, t, state } = f;
+      const crates = say(f, '箱');
+      const bumps = say(f, '撞');
+      if (crates) drawText(g, crates, 8, 8, { color: '#e0b060' });
+      pips(g, crates ? 32 : 8, 10, state.stages, state.seated, '#e0b060', state.stage - 1, t);
+      if (bumps) drawText(g, bumps, 8, 26, { color: '#ff8a9a' });
+      pips(g, bumps ? 32 : 8, 28, state.strikeLimit, state.strikes, '#ff5d73', -1, t);
+      drawText(g, `${state.stage}/${state.stages}`, 360, 8, { color: '#d8ffe4', align: 'right' });
     },
     react(f, outcome) {
       const bumped = outcome.result.log.some((line) => line.includes('撞'));

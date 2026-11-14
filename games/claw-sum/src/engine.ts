@@ -61,9 +61,42 @@ export function applyOp(value: number, op: Op): number | null {
   return null;
 }
 
+/** Later kettles allow one fewer pull, and never fewer than four. */
+export function budgetOf(state: SumState): number {
+  return Math.max(4, state.pullCap - (state.stage - 1));
+}
+
+function reachable(value: number, target: number, budget: number): boolean {
+  const seen = new Set<string>();
+  const queue: Array<[number, number]> = [[value, 0]];
+  while (queue.length > 0) {
+    const [current, pulls] = queue.shift() ?? [value, 0];
+    if (current === target) return true;
+    if (pulls >= budget) continue;
+    for (const op of OPS) {
+      const next = applyOp(current, op);
+      if (next === null || next < 1 || next > 48) continue;
+      const key = `${next}:${pulls + 1}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      queue.push([next, pulls + 1]);
+    }
+  }
+  return false;
+}
+
 function nextStage(state: SumState, rng: Rng): void {
-  state.value = rng.int(2, 6);
-  state.target = state.value + rng.int(4, 9);
+  const band = Math.min(4, state.stage);
+  const budget = budgetOf(state);
+  let value = rng.int(2, 3 + band);
+  let target = value + rng.int(3 + band, 6 + band);
+  for (let attempt = 0; attempt < 8 && !reachable(value, target, budget); attempt += 1) {
+    value = rng.int(2, 3 + band);
+    target = value + rng.int(2, 4 + band);
+  }
+  if (!reachable(value, target, budget)) target = value + 2;
+  state.value = value;
+  state.target = target;
   state.pulls = 0;
 }
 
@@ -102,7 +135,7 @@ export function suggest(state: SumState): string {
   let bestScore = -Infinity;
   const pull = (value: number, pulls: number, depth: number): number => {
     if (value === state.target) return 200 - pulls;
-    if (pulls >= state.pullCap || depth === 0)
+    if (pulls >= budgetOf(state) || depth === 0)
       return value > state.target ? -40 : -Math.abs(state.target - value);
     let local = -Infinity;
     for (const op of OPS) {
@@ -115,7 +148,7 @@ export function suggest(state: SumState): string {
   for (const op of OPS) {
     const next = applyOp(state.value, op);
     if (next === null) continue;
-    const score = next === state.target ? 500 : pull(next, state.pulls + 1, 5);
+    const score = next === state.target ? 500 : pull(next, state.pulls + 1, 8);
     if (score > bestScore) {
       bestScore = score;
       best = op;
@@ -166,7 +199,7 @@ export function statusOf(state: SumState): StatusView {
       { label: '釜', value: `${state.stage}/${state.stages}` },
       { label: '现在', value: state.value },
       { label: '目标', value: state.target },
-      { label: '拉杆', value: `${state.pulls}/${state.pullCap}` },
+      { label: '拉杆', value: `${state.pulls}/${budgetOf(state)}` },
       { label: '对准', value: state.exacts },
       { label: '落空', value: `${state.misses}/${state.missLimit}` },
     ],
@@ -206,7 +239,7 @@ export function act(state: SumState, actionId: string): ActionResult {
     state.pulls += 1;
     log.push(`现在是 ${state.value}。`);
     if (state.value === state.target) finishStage(state, rng, log, true);
-    else if (state.pulls >= state.pullCap) finishStage(state, rng, log, false);
+    else if (state.pulls >= budgetOf(state)) finishStage(state, rng, log, false);
   }
   note(state, log[0] ?? '');
   state.rng = rng.serialize();

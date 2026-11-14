@@ -131,6 +131,13 @@ function createScene(): GameScene<DelveState> {
       g.drawImage(board(), 0, 0);
       ladder(g);
       dust(g, t, state.collapses);
+      rect(g, 16, 150, 48, 18, '#3a2818');
+      rect(g, 18, 148, 44, 4, '#c4a060');
+      for (let i = 0; i < Math.min(state.ore, 4); i += 1) {
+        blit(g, buildSprite(ORE), 28 + i * 10, 156, { scale: 1, anchor: 'c' });
+      }
+      rect(g, 20, 176, 28, 8, '#2a1c12');
+      rect(g, 48, 178, 8, 4, '#6a4830');
       if (state.collapses) cracks(g, state.collapses);
       state.oreCol.forEach((ore, layer) => {
         const y = 16 + layer * ROW;
