@@ -38,8 +38,14 @@ function courtLayer(): HTMLCanvasElement {
       const pos = at(x, y);
       const tile = (x + y) % 2 === 0 ? '#1a2234' : '#161c2c';
       rect(g, pos.x - 18, pos.y - 12, 36, 24, tile);
-      rect(g, pos.x - 18, pos.y - 12, 36, 1, '#2a3450');
-      if (hash01(x * 7 + y, 3) > 0.72) rect(g, pos.x - 4, pos.y, 3, 1, '#3a4458');
+      rect(g, pos.x - 16, pos.y - 10, 32, 20, (x + y) % 2 === 0 ? '#141c2e' : '#1c2638');
+      rect(g, pos.x - 18, pos.y - 12, 36, 1, '#3a4a68');
+      rect(g, pos.x - 16, pos.y - 8, 2, 2, '#6a7898');
+      rect(g, pos.x + 12, pos.y + 6, 2, 2, '#0c1018');
+      if (hash01(x * 7 + y, 3) > 0.62) {
+        rect(g, pos.x - 2, pos.y + 2, 6, 1, '#4a5a70');
+        rect(g, pos.x, pos.y, 1, 4, '#4a5a70');
+      }
     }
   }
   rect(g, 36, 22, 312, 2, '#c8b48a');
@@ -113,6 +119,9 @@ function createScene(): GameScene<GlassState> {
         line(g, a.x, a.y + 1, b.x, b.y + 1, withAlpha(beam, 0.35));
         line(g, a.x, a.y, b.x, b.y, withAlpha(beam, flick + (flash > 0 ? 0.4 : 0)));
         line(g, a.x, a.y - 1, b.x, b.y - 1, withAlpha('#ffffff', 0.28));
+        const span = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+        const u = ((t * 36 + i * 7) % span) / span;
+        disc(g, a.x + (b.x - a.x) * u, a.y + (b.y - a.y) * u, 2, '#ffffff');
       }
       if (flash > 0) {
         glow(g, shrine.x, shrine.y, 22, '#fff6dc', flash);

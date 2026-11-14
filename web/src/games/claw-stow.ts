@@ -69,10 +69,21 @@ function roomLayer(): HTMLCanvasElement {
   }
   ellipse(g, 40, 28, 10, 6, '#ffd27a');
   disc(g, 40, 28, 3, '#fff6dc');
+  for (let x = 108; x < 370; x += 78) {
+    rect(g, x, 18, 5, 168, '#3a2818');
+    rect(g, x, 18, 1, 168, '#8a6848');
+  }
+  for (let x = 130; x < 360; x += 36) rect(g, x, 16, 1, 14 + (x % 3) * 4, '#a08058');
+  for (let i = 0; i < 3; i += 1) {
+    ellipse(g, 300 + i * 16, 168, 7, 9, '#6a3a22');
+    rect(g, 294 + i * 16, 162, 12, 2, '#c48a52');
+    rect(g, 294 + i * 16, 170, 12, 2, '#8a5a32');
+  }
   for (let i = 0; i < 18; i += 1) {
     rect(g, 90 + hash01(i, 1) * 250, 150 + hash01(i, 2) * 40, 8, 2, '#3a2818');
   }
   rect(g, 0, 188, 384, 28, '#120c08');
+  for (let x = 0; x < 384; x += 16) rect(g, x, 190, 14, 1, '#2a1c12');
   room = c;
   return c;
 }
@@ -113,6 +124,11 @@ function createScene(): GameScene<StowState> {
       g.drawImage(roomLayer(), 0, 0);
       const flicker = 0.35 + Math.sin(t * 6) * 0.08;
       disc(g, 40, 28, 16, withAlpha('#ffd27a', flicker));
+      for (let i = 0; i < 8; i += 1) {
+        const dx = (hash01(i, 8) * 300 + t * 6) % 320;
+        const dy = 30 + ((hash01(i, 9) * 140 + t * 4) % 150);
+        rect(g, 40 + dx, dy, 1, 1, withAlpha('#ffe0a0', 0.45));
+      }
       const slip = state.events[state.index];
       if (slip && state.outcome === 'ongoing') {
         const label = say(f, GLYPHS[slip.glyph] ?? '贝');
