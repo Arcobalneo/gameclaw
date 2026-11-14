@@ -108,8 +108,8 @@
       "slots": ["n"]
     },
     {
-      "zh": "盖章。擦边，船资 {0}，记过 +1，连段中断。",
-      "en": "Stamp. Edge, fare {0}, strike +1, streak breaks.",
+      "zh": "盖章。擦边，船资 {0}，记过 +1，不算放行，连段中断。",
+      "en": "Stamp. Edge, fare {0}, strike +1, not an approval, streak breaks.",
       "slots": ["n"]
     },
     {
@@ -153,8 +153,8 @@
       "slots": ["n", "n", "n", "n"]
     },
     {
-      "zh": "擦边船资更高。盖擦边会记过。特赦剩余 {0}。细看 {1} 次。",
-      "en": "Edge fares pay more. Stamping an edge is a strike. Pardons left {0}. Rereads {1}.",
+      "zh": "擦边船资更高。盖擦边会记过，而且不算放行。特赦剩余 {0}。细看 {1} 次。",
+      "en": "Edge fares pay more. Stamping an edge is a strike and is not an approval. Pardons left {0}. Rereads {1}.",
       "slots": ["n", "n"]
     },
     {

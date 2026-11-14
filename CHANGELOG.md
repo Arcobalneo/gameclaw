@@ -7,6 +7,13 @@
   prefer leans the next gust by 1. Stow shows the next three slips, and a
   mark is worth spending when that order arrives after the spoil age. Score
   formulas are unchanged. Those two games are `meta.version` `4.1.0`.
+- `虾印` no longer counts an edge stamp as an approval. The fare and the
+  strike still land. Suggest pardons or rereads that guest. A line that
+  stamps high fares loses the night.
+- `虾网` opens with five tears and a shorter thread. Suggest still fills
+  the basket. Tying knots in board order does not.
+- `虾熔` shows the shell in hand and numbers the columns. A points-only
+  drop still plugs the well.
 - `虾礁 (Claw Reef)` and `虾灯 (Claw Lamp)` now play on bespoke boards.
   A reef mark still counts only after the push, and an urchin on that cell is
   a sweep unless you anchor. Lamp's widest post blocks the posts that seal

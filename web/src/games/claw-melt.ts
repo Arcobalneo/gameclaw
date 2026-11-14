@@ -165,6 +165,14 @@ function createScene(): GameScene<MeltState> {
       if (next) drawText(g, next, 332, 40, { color: '#fff4d6', align: 'center' });
       const name = say(f, SHELL[state.piece] ?? '');
       if (name) drawText(g, name, 20, 48, { color: '#fff4d6', align: 'left', outline: '#140c08' });
+      blit(g, shell(state.piece), 40, 86, { scale: 3, anchor: 'c' });
+      glow(g, 40, 86, 16, '#ffb08a', 0.35);
+      for (let x = 0; x < WELL_W; x += 1) {
+        drawText(g, String(x + 1), OX + x * CW + CW / 2, OY - 16, {
+          color: f.focus?.id === `drop:${x}` ? '#fff6dc' : '#ffb08a',
+          align: 'center',
+        });
+      }
       pips(g, 16, 16, state.winSize, state.maxSize, '#ffb08a', -1, t);
       drawText(g, String(state.points), 300, 120, { color: '#ffc24a', align: 'left', scale: 2 });
     },

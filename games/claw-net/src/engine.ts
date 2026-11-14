@@ -48,9 +48,9 @@ function rules(difficulty: Difficulty): {
   threadGain: number;
   quota: number;
 } {
-  if (difficulty === 'easy') return { thread: 14, threadCap: 16, threadGain: 4, quota: 28 };
-  if (difficulty === 'hard') return { thread: 10, threadCap: 12, threadGain: 2, quota: 44 };
-  return { thread: 12, threadCap: 14, threadGain: 3, quota: 36 };
+  if (difficulty === 'easy') return { thread: 8, threadCap: 10, threadGain: 3, quota: 24 };
+  if (difficulty === 'hard') return { thread: 4, threadCap: 6, threadGain: 1, quota: 32 };
+  return { thread: 3, threadCap: 6, threadGain: 2, quota: 24 };
 }
 
 function idx(x: number, y: number): number {
@@ -115,7 +115,7 @@ export function createRun(options: { seed: number; difficulty?: string }): NetSt
   const cells: Knot[] = Array.from({ length: NET_W * NET_H }, () => 'tied');
   for (const index of rng.sample(
     cells.map((_, i) => i),
-    3,
+    5,
   ))
     cells[index] = 'torn';
   return {
