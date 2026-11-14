@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Added four games on the new `Claw <Word>` / `claw-<word>` identity. The eleven
+  already shipped stay `shrimp-*` until a separate rename.
+  - `虾印 (Claw Stamp)`: a night-ferry window. Edge fares pay more and cost a strike.
+  - `虾熔 (Claw Melt)`: a six-column well. Only side-by-side shells melt, and a full column plugs the mouth.
+  - `虾网 (Claw Net)`: tie tears before they spread, then haul.
+  - `虾节 (Claw Beat)`: a four-beat phrase, two edits a round, then commit.
+- A working slate of nineteen concepts is in `docs/plans/2026-11-14-jam-slate.md`.
+  The other fifteen are not implemented.
+- The four ids are registered for play counts, score submit, and headless play.
+
 ## v4.0.1 — 2026-11-14
 
 Documentation and CI cleanup. No gameplay change. Game `GAME_VERSION` stays 4.0.0.

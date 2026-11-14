@@ -128,6 +128,38 @@ const LOOK: Record<
     tagZh: '接住天上掉的汉堡料。',
     tagEn: 'Catch falling fixings. Serve it hot.',
   },
+  'claw-stamp': {
+    accent: '#ffc24a',
+    ink: '#140e08',
+    goal: '十二张夜渡里放行够数，擦边盖章要记过。',
+    goalEn: 'Approve enough night-ferry passes. Stamping an edge guest is a strike.',
+    tagZh: '夜渡窗口，盖章或拒签。',
+    tagEn: 'A night ferry. Stamp or refuse.',
+  },
+  'claw-melt': {
+    accent: '#ff8a5c',
+    ink: '#14080c',
+    goal: '把壳落入潮井，左右合成，别把井口堵住。',
+    goalEn: 'Drop shells into the tide well, melt them side by side, and do not plug a column.',
+    tagZh: '六列潮井，顶壳会被推走。',
+    tagEn: 'Six columns. The tide pushes the tops.',
+  },
+  'claw-net': {
+    accent: '#7ec8ff',
+    ink: '#06141c',
+    goal: '补住破洞，在网破之前把鱼收到定额。',
+    goalEn: 'Tie the tears and haul a full basket before the net rips.',
+    tagZh: '补网，赶在裂开前收鱼。',
+    tagEn: 'Mend the net. Haul before it rips.',
+  },
+  'claw-beat': {
+    accent: '#ff5d73',
+    ink: '#160810',
+    goal: '改一句四拍的短语，五轮内把对方打到零。',
+    goalEn: 'Rewrite a four-beat phrase and drop the opponent to zero within five rounds.',
+    tagZh: '四拍一句，每轮只改两拍。',
+    tagEn: 'Four beats. Two edits a round.',
+  },
 };
 
 export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])

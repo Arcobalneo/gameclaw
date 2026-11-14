@@ -1,0 +1,125 @@
+{
+  "terms": {},
+  "exact": {
+    "虾网 · 收网结算": "Claw Net · haul recap",
+    "补网进行中": "The net is still out",
+    "网破了": "The net ripped",
+    "鱼够了": "The basket is full",
+    "鱼不够": "The basket is thin",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "补网": "Mending",
+    "鱼": "Fish",
+    "线": "Thread",
+    "夜": "Night",
+    "破洞": "Tears",
+    "湿结": "Wet knots",
+    "剪口": "Cuts",
+    "蔓延": "Spreads",
+    "结局": "Result",
+    "网面": "Net",
+    "记录": "Notes",
+    "收网": "Haul",
+    "网刚撒下": "The net just went out",
+    "还没有收网": "No haul yet",
+    "1 线": "1 thread",
+    "剪掉这结。裂口不再从这里蔓延，这格以后没有鱼。": "Cut this knot. The tear cannot spread through it, and it holds no fish.",
+    "收网结束：网破了": "Haul over: the net ripped",
+    "两个破洞挨着的完好结会变湿。湿结再挨着破洞就会裂开。湿结旁边没有破洞时会干回去。": "A sound knot touching two tears gets wet. A wet knot touching a tear rips. A wet knot with no tear beside it dries.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "把本局哪几夜在破洞变多前收的网、剪了几处、线够不够写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which nights you hauled before the tears spread, how many cuts you made, and whether the thread lasted into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    {
+      "zh": "收网结束 · {0}",
+      "en": "Haul closed · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "收网结束：{0}",
+      "en": "Haul over: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0}/{1} 夜 · 鱼 {2}/{3} · 线 {4}",
+      "en": "Night {0}/{1} · fish {2}/{3} · thread {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "完好 {0}",
+      "en": "Sound {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "湿结 {0}",
+      "en": "Wet {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "破洞 {0}",
+      "en": "Tears {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "缺口 {0}",
+      "en": "Gaps {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "这一网大约 {0} 条",
+      "en": "About {0} fish if you haul",
+      "slots": ["n"]
+    },
+    {
+      "zh": "现在收网，约 {0} 条鱼。破洞 {1}，湿结 {2}。",
+      "en": "Haul now for about {0} fish. Tears {1}, wet knots {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "补 {0}-{1}",
+      "en": "Tie {0}-{1}",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "剪 {0}-{1}",
+      "en": "Cut {0}-{1}",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "补上这结。可稳住 {0} 处即将变湿的邻居。",
+      "en": "Tie this knot. It steadies {0} neighbors that are about to get wet.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "第 {0} 夜收网，鱼 {1}。累计 {2}。",
+      "en": "Night {0} hauled {1} fish. Basket {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "补上 {0}-{1}。线剩余 {2}。蔓延后破洞 {3}。",
+      "en": "Tied {0}-{1}. Thread {2}. Tears after the spread {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "剪开 {0}-{1}。蔓延后破洞 {2}。",
+      "en": "Cut {0}-{1}. Tears after the spread {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "本局鱼 {0}，目标 {1}。剪了 {2} 处，蔓延 {3} 次。",
+      "en": "This run {0} fish, goal {1}. Cuts {2}, spreads {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "线从 {0} 剩到现在。破洞到 {1} 张网就破。",
+      "en": "Thread left is {0}. The net rips at {1} tears.",
+      "slots": ["n", "n"]
+    }
+  ]
+}

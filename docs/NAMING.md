@@ -3,19 +3,21 @@
 Every GameClaw game belongs to the Shrimp series. Chinese name, English name,
 machine id, source path, and package are one coordinated identity.
 
-## Shrimp-series names are mandatory
+## Names
 
 - The Chinese title is exactly two characters: `虾` plus one verb or noun
   character, such as `虾走` or `虾写`.
-- The English title uses Title Case and the form `Shrimp <Word>`, such as
-  `Shrimp Trek` or `Shrimp Ink`.
-- The machine id is `shrimp-<english-keyword>`: lowercase kebab-case, with the
-  final keyword matching the English title's second word. Current keywords are
-  `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`,
-  `conquest`, `leap`, and `burger`.
+- The English title uses Title Case and the form `Claw <Word>`, such as
+  `Claw Stamp`. The machine id is `claw-<word>`, and the word matches the
+  English title's second word.
+- The eleven games already in the tree still use `Shrimp <Word>` and
+  `shrimp-<word>` (`trek`, `guard`, `heist`, `catch`, `look`, `ink`,
+  `rampage`, `greens`, `conquest`, `leap`, `burger`). A separate change renames
+  them. Do not rename those ids in an unrelated change.
+- New keywords in this tree: `stamp`, `melt`, `net`, `beat`.
 - Whenever both display names appear, use **`虾× (English Name)`**, for example
-  `虾走 (Shrimp Trek)`. This is the required per-game README title and the
-  preferred paired form in user-facing documentation.
+  `虾印 (Claw Stamp)` or, for a game that has not been renamed yet,
+  `虾走 (Shrimp Trek)`. This is the required per-game README title.
 - `tagline` and `summary` describe gameplay; they are not part of either title.
 
 New games MUST join this series. Choose the Chinese character, English keyword,
@@ -24,7 +26,8 @@ and machine id together; do not introduce a separate legacy or unprefixed id.
 ## Machine artifacts must agree
 
 For each entry in `catalog/games.json`, all of the following must use the same
-`shrimp-<english-keyword>` id:
+id (`claw-<word>` for a new game, `shrimp-<word>` for one of the eleven not
+yet renamed):
 
 - catalog `id`;
 - `source_dir`, as `games/<id>`;
@@ -46,8 +49,8 @@ same change. Document the old-to-new mapping in `CHANGELOG.md`.
 
 ## Onboarding check
 
-1. Choose a `虾×` Chinese title, a Title Case `Shrimp <Word>` English title, and
-   the matching `shrimp-<word>` id.
+1. Choose a `虾×` Chinese title, a Title Case `Claw <Word>` English title, and
+   the matching `claw-<word>` id.
 2. Add matching `id`, `name`, `englishName`, `source_dir`, and `score` to the catalog.
 3. Copy those exact id/title values into `GameDefinition.meta` and use the id in
    the package name and the portal scene.

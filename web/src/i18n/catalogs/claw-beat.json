@@ -1,0 +1,105 @@
+{
+  "terms": {},
+  "exact": {
+    "虾节 · 对句结算": "Claw Beat · phrase recap",
+    "比试进行中": "The bout is open",
+    "击倒": "Knockout",
+    "气息尽了": "Breath ran out",
+    "轮次用尽": "Rounds ran out",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "对句": "Phrase",
+    "气息": "Breath",
+    "对方": "Opponent",
+    "可改": "Edits",
+    "命中": "Hits",
+    "拆招": "Ripostes",
+    "格挡": "Blocks",
+    "受击": "Damage",
+    "结局": "Result",
+    "短语": "Phrase",
+    "来势": "Incoming",
+    "句式": "Rules",
+    "记录": "Notes",
+    "交锋": "Commit",
+    "点": "Jab",
+    "架": "Guard",
+    "闪": "Slip",
+    "歇": "Rest",
+    "劈": "Chop",
+    "擒": "Grab",
+    "虚": "Feint",
+    "停": "Pause",
+    "点最多两下，且不能相邻。": "At most two jabs, and they cannot touch.",
+    "至少歇一拍。": "One beat must rest.",
+    "闪吃劈，架吃劈，点吃停，虚吃闪。": "Slip answers a chop. Guard answers a chop. Jab answers a pause. A feint punishes a slip.",
+    "短语还是四下歇": "The phrase is still four rests",
+    "还没有交锋": "No commit yet",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "这句改不了。": "That phrase is illegal.",
+    "点不能相邻，也不能超过两下，而且要留一个歇。": "Jabs cannot touch or exceed two, and one beat must rest.",
+    "闪吃劈，架也吃劈。点吃停。虚专吃闪。没有一拍能回答全部来势。": "Slip answers a chop, and so does guard. Jab answers a pause. A feint punishes a slip. No single beat answers every intent.",
+    "把本局短语最后的四拍、受击和拆招写进你自己的 memory。来势每轮会换。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write the last four beats, the damage you took, and the ripostes into your own memory. The incoming bar changes every round. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    {
+      "zh": "比试结束 · {0}",
+      "en": "Bout closed · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "比试结束：{0}",
+      "en": "Bout over: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0}/{1} 轮 · 气息 {2} · 对方 {3}",
+      "en": "Round {0}/{1} · breath {2} · opponent {3}",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "还可改 {0} 拍",
+      "en": "{0} edits left",
+      "slots": ["n"]
+    },
+    {
+      "zh": "交锋预览：你受 {0}，对方掉 {1}，拆招 {2}，格挡 {3}。",
+      "en": "Commit preview: you take {0}, they lose {1}, ripostes {2}, blocks {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 拍改成{1}。短语 {2}。",
+      "en": "Beat {0} set to {1}. Phrase {2}.",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "这一拍现在是{0}。改完短语：{1}。",
+      "en": "This beat is {0}. Phrase becomes {1}.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "第 {0} 拍改{1}",
+      "en": "Beat {0} to {1}",
+      "slots": ["n", "text"]
+    },
+    {
+      "zh": "交锋结束。你受 {0}，对方掉 {1}，气息 {2}，对方剩余 {3}。",
+      "en": "Commit done. You take {0}, they lose {1}, breath {2}, opponent {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "本局命中 {0}，拆招 {1}，格挡 {2}，受击 {3}。",
+      "en": "This run hits {0}, ripostes {1}, blocks {2}, damage {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "每轮只能改 {0} 拍。短语要留一个歇，点不能相邻，点也不能超过两下。",
+      "en": "You may change {0} beats each round. Keep one rest. Jabs cannot touch, and you cannot play more than two.",
+      "slots": ["n"]
+    }
+  ]
+}

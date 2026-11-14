@@ -1,0 +1,108 @@
+{
+  "terms": {},
+  "exact": {
+    "虾熔 · 潮井结算": "Claw Melt · well recap",
+    "潮井进行中": "The well is open",
+    "珠核合成": "A pearl formed",
+    "井口堵住了": "The mouth plugged",
+    "撑过潮井": "The well held",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "落壳": "Drop",
+    "落子": "Drops",
+    "合成": "Melts",
+    "连锁": "Chain",
+    "滑出": "Spilled",
+    "壳分": "Points",
+    "最大": "Largest",
+    "结局": "Result",
+    "手里": "In hand",
+    "潮向": "Tide",
+    "记录": "Notes",
+    "潮向左": "Tide left",
+    "潮向右": "Tide right",
+    "井还是空的": "The well is empty",
+    "还没有落壳": "Nothing has dropped",
+    "壳": "Shell",
+    "碎壳": "Chip",
+    "小壳": "Small",
+    "中壳": "Medium",
+    "大壳": "Large",
+    "厚壳": "Thick",
+    "珠核": "Pearl",
+    "潮珠": "Tide pearl",
+    "潮汐刚推向右，下一潮向左。": "The tide just pushed right. Next tide goes left.",
+    "潮汐刚推向左，下一潮向右。": "The tide just pushed left. Next tide goes right.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "这一列落不进去。": "That column will not take it.",
+    "只落在列出的列。": "Drop only into a listed column.",
+    "滑出 0 枚。左右挨着才会熔，叠在同一列不会。潮把不比邻列矮的顶壳推过去。": "Spilled 0. Only side-by-side shells melt. A stack in one column does not. The tide pushes a top shell onto a neighbor that is no taller.",
+    "把本局的最大尺寸、最好连锁、滑出次数和潮向写进你自己的 memory。平铺的井也会被潮推走。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write this run's largest size, best chain, spills, and tide direction into your own memory. A flat well still gets pushed. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    {
+      "zh": "潮井结束 · {0}",
+      "en": "Well closed · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "潮井结束：{0}",
+      "en": "Well closed: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0}/{1} 落 · 最大 {2}/{3} · 距潮 {4}",
+      "en": "Drop {0}/{1} · largest {2}/{3} · tide in {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "这一枚 {0}",
+      "en": "This one {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "下一枚 {0}",
+      "en": "Next {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "每 {0} 落推一次顶壳",
+      "en": "Tops slide every {0} drops",
+      "slots": ["n"]
+    },
+    {
+      "zh": "第 {0} 列",
+      "en": "Column {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "预览：合成 {0} 次，壳分 +{1}，最大 {2}，滑出 {3}。",
+      "en": "Preview: {0} melts, points +{1}, largest {2}, spilled {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 列落下。合成 {1} 次，最大 {2}，滑出 {3}。",
+      "en": "Column {0} dropped. Melts {1}, largest {2}, spilled {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "本局合成 {0} 次，最好连锁 {1}，最大 {2}。",
+      "en": "This run melted {0} times, best chain {1}, largest {2}.",
+      "slots": ["n", "n", "text"]
+    },
+    {
+      "zh": "滑出 {0} 枚。左右挨着才会熔，叠在同一列不会。潮把不比邻列矮的顶壳推过去。",
+      "en": "Spilled {0}. Only side-by-side shells melt. A stack in one column does not. The tide pushes a top shell onto a neighbor that is no taller.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "落了 {0} 次。目标尺寸是 {1}，撑过 {2} 落也算过井。",
+      "en": "Dropped {0} times. Goal size is {1}. Lasting {2} drops also clears the well.",
+      "slots": ["n", "n", "n"]
+    }
+  ]
+}

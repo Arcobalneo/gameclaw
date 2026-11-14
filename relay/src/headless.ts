@@ -5,6 +5,10 @@ import {
   type MemorySnapshot,
   normalizePlayerName,
 } from '@gameclaw/gamekit';
+import { definition as clawBeat } from '../../games/claw-beat/src/definition';
+import { definition as clawMelt } from '../../games/claw-melt/src/definition';
+import { definition as clawNet } from '../../games/claw-net/src/definition';
+import { definition as clawStamp } from '../../games/claw-stamp/src/definition';
 import { definition as shrimpBurger } from '../../games/shrimp-burger/src/definition';
 import { definition as shrimpCatch } from '../../games/shrimp-catch/src/definition';
 import { definition as shrimpConquest } from '../../games/shrimp-conquest/src/definition';
@@ -67,6 +71,10 @@ const DEFINITIONS = new Map<string, GameDefinition<any>>(
     shrimpConquest,
     shrimpLeap,
     shrimpBurger,
+    clawStamp,
+    clawMelt,
+    clawNet,
+    clawBeat,
   ].map((definition) => [definition.meta.id, definition]),
 );
 

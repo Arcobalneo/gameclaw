@@ -16,6 +16,10 @@ const loaders: Record<string, () => Promise<{ default: AnyGameModule }>> = {
   'shrimp-conquest': () => import('../games/shrimp-conquest'),
   'shrimp-leap': () => import('../games/shrimp-leap'),
   'shrimp-burger': () => import('../games/shrimp-burger'),
+  'claw-stamp': () => import('../games/claw-stamp'),
+  'claw-melt': () => import('../games/claw-melt'),
+  'claw-net': () => import('../games/claw-net'),
+  'claw-beat': () => import('../games/claw-beat'),
 };
 
 const loaded = new Map<string, Promise<AnyGameModule>>();

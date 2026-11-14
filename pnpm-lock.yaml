@@ -21,6 +21,30 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@24.19.2)(happy-dom@21.0.4)(tsx@4.23.15)
 
+  games/claw-beat:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-melt:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-net:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-stamp:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/shrimp-burger:
     dependencies:
       '@gameclaw/gamekit':

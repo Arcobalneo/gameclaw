@@ -1,0 +1,166 @@
+{
+  "terms": {},
+  "exact": {
+    "虾印 · 夜渡结算": "Claw Stamp · ferry recap",
+    "夜渡进行中": "Ferry still open",
+    "船开走了": "The ferry sailed",
+    "放行不够": "Not enough approvals",
+    "耐心用尽": "Patience ran out",
+    "记过满了": "Too many strikes",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "夜渡": "Ferry",
+    "耐心": "Patience",
+    "记过": "Strikes",
+    "放行": "Approved",
+    "船资": "Fare",
+    "拦截": "Catches",
+    "连段": "Streak",
+    "特赦": "Pardon",
+    "当前": "Now",
+    "下一位": "Next",
+    "本班": "Shift",
+    "记录": "Notes",
+    "无人": "Nobody",
+    "结局": "Result",
+    "误判": "Misreads",
+    "盖章": "Stamp",
+    "拒签": "Refuse",
+    "细看": "Reread",
+    "合法": "Clear",
+    "擦边": "Edge",
+    "禁行": "Banned",
+    "过客": "Passer",
+    "潮生": "Tideborn",
+    "灯下": "Lamplight",
+    "壳市": "Shellmarket",
+    "网尾": "Netend",
+    "盐摊": "Saltstall",
+    "珠客": "Pearlguest",
+    "礁民": "Reeffolk",
+    "渡口": "Ferry",
+    "夜帆": "Nightsail",
+    "白爪": "Whiteclaw",
+    "红钳": "Redclaw",
+    "青苔": "Moss",
+    "墨点": "Inkdot",
+    "沙线": "Sandline",
+    "港灯": "Harborlamp",
+    "星壳": "Starshell",
+    "芦苇": "Reed",
+    "晚潮": "Evening",
+    "1 耐心": "1 patience",
+    "2 耐心": "2 patience",
+    "还没有动作": "No action yet",
+    "还没有旅客离窗": "Nobody has left the window",
+    "盖章。禁行，记过 +1，没有船资。": "Stamp. Banned. Strike +1, no fare.",
+    "拒签。对方合法，记过 +1。": "Refuse. They were clear. Strike +1.",
+    "拒签。擦边放走，不记过，连段中断。": "Refuse. An edge guest walks. No strike. Streak breaks.",
+    "拒签。禁行拦截，连段 +1。": "Refuse. A banned guest is caught. Streak +1.",
+    "细看。擦边会改成合法，花 2 耐心，人还在窗口。": "Reread. An edge pass becomes clear, costs 2 patience, and they stay at the window.",
+    "细看。本来就合法，花 2 耐心，没有变化。": "Reread. Already clear. Costs 2 patience and changes nothing.",
+    "细看。禁行不会变，花 2 耐心。": "Reread. Banned stays banned. Costs 2 patience.",
+    "本班结束：耐心用尽": "Shift over: patience ran out",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "最好连段 0。合法盖章、禁行拒签和特赦才延续连段。": "Best streak 0. Only a clear stamp, a banned refusal, or a pardon extends the streak.",
+    "把本局的放行、拦截、记过、误判、特赦和细看次数写进你自己的 memory。擦边的船资更高，但是盖章会记过。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write this run's approvals, catches, strikes, misreads, pardons, and rereads into your own memory. Edge fares pay more, and stamping one is a strike. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    {
+      "zh": "夜渡结束 · {0}",
+      "en": "Ferry closed · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "夜渡 {0}/{1} · 放行 {2}/{3} · 记过 {4}",
+      "en": "Ferry {0}/{1} · approved {2}/{3} · strikes {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "{0} · {1} · 船资 {2}",
+      "en": "{0} · {1} · fare {2}",
+      "slots": ["text", "text", "n"]
+    },
+    {
+      "zh": "已处理 {0} 位",
+      "en": "Seen {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "误判 {0}",
+      "en": "Misreads {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "细看 {0} 次",
+      "en": "Reread {0}",
+      "slots": ["n"]
+    },
+    {
+      "zh": "盖章。合法，船资 {0}，不记过。",
+      "en": "Stamp. Clear, fare {0}, no strike.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "盖章。擦边，船资 {0}，记过 +1，连段中断。",
+      "en": "Stamp. Edge, fare {0}, strike +1, streak breaks.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "特赦。擦边改作放行，船资 {0} 不算，不记过。",
+      "en": "Pardon. The edge guest is approved, fare {0} is waived, no strike.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "细看 {0}（{1}），现在是{2}，耐心 {3}。",
+      "en": "Reread {0} ({1}). Now {2}. Patience {3}.",
+      "slots": ["text", "text", "text", "n"]
+    },
+    {
+      "zh": "盖章 {0}（{1}），船资 {2}，记过 {3}，连段 {4}。",
+      "en": "Stamped {0} ({1}). Fare {2}. Strikes {3}. Streak {4}.",
+      "slots": ["text", "text", "n", "n", "n"]
+    },
+    {
+      "zh": "拒签 {0}（{1}），记过 {2}，连段 {3}。",
+      "en": "Refused {0} ({1}). Strikes {2}. Streak {3}.",
+      "slots": ["text", "text", "n", "n"]
+    },
+    {
+      "zh": "特赦 {0}，船资 0，记过 {1}，连段 {2}。",
+      "en": "Pardoned {0}. Fare 0. Strikes {1}. Streak {2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 位 {1}：{2}",
+      "en": "Guest {0} {1}: {2}",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "本班结束：{0}",
+      "en": "Shift over: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "本局放行 {0}，拦截 {1}，记过 {2}，误判 {3}。",
+      "en": "This run approved {0}, caught {1}, strikes {2}, misreads {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "擦边船资更高。盖擦边会记过。特赦剩余 {0}。细看 {1} 次。",
+      "en": "Edge fares pay more. Stamping an edge is a strike. Pardons left {0}. Rereads {1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "最好连段 {0}。合法盖章、禁行拒签和特赦才延续连段。",
+      "en": "Best streak {0}. Only a clear stamp, a banned refusal, or a pardon extends it.",
+      "slots": ["n"]
+    }
+  ]
+}

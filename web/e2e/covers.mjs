@@ -27,6 +27,10 @@ const PLAN = {
   'shrimp-conquest': [7, [0, 0, 3], 1.6],
   'shrimp-leap': [7, [2, 1, 0, 7], 2.2],
   'shrimp-burger': [7, [1, 1, 1, 0, 0], 1.4],
+  'claw-stamp': [7, [0, 0, 0, 1], 1.4],
+  'claw-melt': [4, [0, 1, 2, 0, 3], 1.4],
+  'claw-net': [7, [1, 2, 0, 1], 1.4],
+  'claw-beat': [3, [1, 2, 0], 1.6],
 };
 
 const browser = await chromium.launch({
