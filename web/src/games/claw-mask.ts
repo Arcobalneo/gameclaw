@@ -68,6 +68,12 @@ function createScene(): GameScene<MaskState> {
     draw(f) {
       const { g, t, state } = f;
       g.drawImage(walls(), 0, 0);
+      for (let i = 0; i < 8; i += 1) {
+        const x = 48 + i * 40;
+        const fall = Math.floor(t * 16 + i * 9) % 36;
+        rect(g, x, 6 + fall, 2, 3, '#7ec8ff');
+        glow(g, x + 8, 22, 5, '#c49aff', 0.15 + 0.2 * Math.sin(t * 3 + i));
+      }
       kelp(g, 26, 168, 28, t, '#3a2860');
       kelp(g, 350, 168, 34, t, '#145060');
       const crystal = buildSprite(CRYSTAL);
