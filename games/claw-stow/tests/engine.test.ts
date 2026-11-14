@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, createRun, ladderScore, type StowState, suggest } from '../src/engine';
+import { act, actionsOf, createRun, ladderScore, type StowState, suggest } from '../src/engine';
 
 function careless(state: StowState): string {
   const slip = state.events[state.index];
@@ -46,6 +46,37 @@ describe('claw-stow engine', () => {
     act(state, 'pull:0');
     expect(state.correct).toBe(1);
     expect(state.streak).toBe(1);
+  });
+
+  it('treats a mark as wasted when the next three slips do not order the crate', () => {
+    const state = createRun({ seed: 4 });
+    const actions = actionsOf(state);
+    const mark = actions.find((action) => action.id.startsWith('mark:'));
+    const shelve = actions.find((action) => action.id.startsWith('shelve:'));
+    expect(mark?.detail).toContain('浪费');
+    expect(mark?.risk).toBe('high');
+    expect(shelve?.risk).toBe('low');
+  });
+
+  it('spoils an unmarked crate that has to wait, and keeps a marked one', () => {
+    const plain = createRun({ seed: 5 });
+    expect(plain.events[3]?.kind).toBe('crate');
+    plain.index = 3;
+    plain.spoil = 3;
+    plain.marks = 1;
+    act(plain, 'shelve:0');
+    act(plain, 'shelve:1');
+    act(plain, 'shelve:2');
+    expect(plain.bays[0]).toBeNull();
+    const marked = createRun({ seed: 5 });
+    marked.index = 3;
+    marked.spoil = 3;
+    marked.marks = 1;
+    const glyph = marked.events[3]?.glyph ?? 0;
+    act(marked, 'mark:0');
+    act(marked, 'shelve:1');
+    act(marked, 'shelve:2');
+    expect(marked.bays[0]?.glyph).toBe(glyph);
   });
 
   it('lets the careful line finish more slips than pulling the first bay', () => {

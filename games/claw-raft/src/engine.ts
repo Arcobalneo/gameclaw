@@ -37,6 +37,7 @@ export interface RaftState {
   holds: Holds;
   gust: number;
   hands: number;
+  nextGust: number;
   dumps: number;
   calm: number;
   quota: number;
@@ -93,8 +94,8 @@ export function aboard(holds: Holds): number {
 export function settle(holds: Holds, gust: number): 'calm' | 'dump' | 'capsize' | 'steady' {
   const signed = pressure(holds, gust);
   const abs = Math.abs(signed);
-  if (abs >= 6) return 'capsize';
-  if (abs >= 3) {
+  if (abs >= 5) return 'capsize';
+  if (abs >= 2) {
     const side: Side = signed > 0 ? 'port' : 'starboard';
     const loss = Math.min(2, holds[side]);
     holds[side] -= loss;
@@ -120,8 +121,9 @@ export function createRun(options: { seed: number; difficulty?: string }): RaftS
     crates: makeCrates(rng),
     index: 0,
     holds: { port: 0, mid: 0, starboard: 0 },
-    gust: rng.int(-1, 1),
+    gust: rng.int(-2, 2),
     hands: rule.hands,
+    nextGust: rng.int(-2, 2),
     dumps: 0,
     calm: 0,
     quota: rule.quota,
@@ -165,7 +167,11 @@ export function suggest(state: RaftState): string {
     else if (kind === 'dump') score = -80;
     else score = 40;
     if (kind === 'calm') score += 25;
-    if (side === crate.pref) score += 8;
+    if (side === crate.pref) score += 14;
+    else if (side !== 'mid') score -= 12;
+    const lean = side === 'mid' || side === crate.pref ? 0 : side === 'port' ? 1 : -1;
+    const upcoming = Math.max(-2, Math.min(2, state.nextGust + lean));
+    score -= Math.abs(upcoming) * 3;
     const next = clone(state.holds);
     next[side] += crate.w;
     const signed = Math.abs(pressure(next, state.gust));
@@ -182,6 +188,19 @@ export function suggest(state: RaftState): string {
   return best;
 }
 
+export function gustWord(gust: number): string {
+  if (gust <= -2) return '大风向左';
+  if (gust < 0) return '向左';
+  if (gust >= 2) return '大风向右';
+  if (gust > 0) return '向右';
+  return '正中';
+}
+
+function leanOf(side: Side, crate: Crate): number {
+  if (side === 'mid' || side === crate.pref) return 0;
+  return side === 'port' ? 1 : -1;
+}
+
 function word(kind: string): string {
   if (kind === 'calm') return '会平稳';
   if (kind === 'dump') return '重的一侧会落水';
@@ -193,11 +212,13 @@ function word(kind: string): string {
 export function statusOf(state: RaftState): StatusView {
   const ended = state.outcome !== 'ongoing';
   const crate = crateOf(state);
-  const gustWord = state.gust < 0 ? '向左' : state.gust > 0 ? '向右' : '正中';
+  const now = gustWord(state.gust);
+  const next = gustWord(state.nextGust);
+  const upcoming = state.crates[state.index + 1];
   return {
     headline: ended
       ? `夜渡结束 · ${state.cause}`
-      : `第 ${state.index + 1}/8 箱 · 货重 ${aboard(state.holds)}/${state.quota} · 阵风 ${gustWord}`,
+      : `第 ${state.index + 1}/8 箱 · 货重 ${aboard(state.holds)}/${state.quota} · 阵风 ${now}`,
     phase: ended ? '收尾' : '夜筏',
     outcome: state.outcome,
     turn: state.index,
@@ -214,7 +235,9 @@ export function statusOf(state: RaftState): StatusView {
         title: '这一箱',
         lines: [
           crate ? `重量 ${crate.w}，想放${PREF_LABEL[crate.pref]}` : '没有下一箱',
-          `阵风 ${gustWord}`,
+          `阵风 ${now}`,
+          `下一阵 ${next}`,
+          upcoming ? `下一箱重量 ${upcoming.w}，想放${PREF_LABEL[upcoming.pref]}` : '没有下一箱',
         ],
       },
       {
@@ -236,10 +259,17 @@ export function actionsOf(state: RaftState): ActionView[] {
   for (const side of PREF) {
     const kind = forecast(state, side);
     if (kind === 'full') continue;
+    const crate = crateOf(state);
+    const pref =
+      !crate || side === 'mid'
+        ? `中舱不吃左右的风，这一箱想放${crate ? PREF_LABEL[crate.pref] : '中舱'}`
+        : side === crate.pref
+          ? '放在它想去的一侧，下一阵风不额外偏'
+          : `这一箱想放${PREF_LABEL[crate.pref]}，放这里下一阵风再偏 1`;
     actions.push({
       id: side,
       label: PREF_LABEL[side],
-      detail: `把这一箱放进${PREF_LABEL[side]}。${word(kind)}。`,
+      detail: `把这一箱放进${PREF_LABEL[side]}。${word(kind)}。${pref}`,
       risk: kind === 'capsize' || kind === 'dump' ? 'high' : 'low',
     });
   }
@@ -253,10 +283,7 @@ export function actionsOf(state: RaftState): ActionView[] {
       cost: '1 只手',
     });
   }
-  const pick = suggest(state);
-  const first = actions.find((action) => action.id === pick);
-  const rest = actions.filter((action) => action.id !== pick);
-  return first ? [first, ...rest] : actions;
+  return actions;
 }
 
 function finish(state: RaftState, log: string[]): void {
@@ -312,7 +339,8 @@ export function act(state: RaftState, actionId: string): ActionResult {
       log.push(`夜渡结束：${state.cause}`);
     } else {
       state.index += 1;
-      state.gust = rng.int(-1, 1);
+      state.gust = Math.max(-2, Math.min(2, state.nextGust + leanOf(side, crate)));
+      state.nextGust = rng.int(-2, 2);
       finish(state, log);
     }
   }
@@ -355,7 +383,7 @@ export function recapOf(state: RaftState) {
     timeline: state.timeline.length ? [...state.timeline] : ['还没有装上一箱'],
     lessons: [
       `本局靠岸时货重 ${aboard(state.holds)}，平稳 ${state.calm} 次，落水 ${state.dumps} 次。`,
-      '阵风在装舱前就能看见。把重箱放进已经偏重的一侧，会落水甚至翻筏。',
+      '阵风和下一阵都能看见。把箱子放进它不想去的一侧，下一阵风会再偏 1。',
       '中舱不进左右倾侧，但只能装 4 成。挪一成要花一只手，箱子还停在码头。',
     ],
     memoryPrompt:

@@ -32,14 +32,20 @@
     "还没有装上一箱": "No crate stowed yet",
     "挪一成": "Shift",
     "1 只手": "1 hand",
-    "会平稳": "it will sit calm",
-    "重的一侧会落水": "the heavy side will dump",
-    "筏会翻": "the raft will capsize",
-    "中舱已经满了": "mid is full",
-    "还能稳住": "it will hold",
+    "会平稳": "It will sit calm",
+    "重的一侧会落水": "The heavy side will dump",
+    "筏会翻": "The raft will capsize",
+    "中舱已经满了": "Mid is full",
+    "还能稳住": "It will hold",
     "向左": "to port",
     "向右": "to starboard",
     "正中": "even",
+    "大风向左": "hard to port",
+    "大风向右": "hard to starboard",
+    "放在它想去的一侧，下一阵风不额外偏": "On the side it prefers, so the next gust does not lean extra",
+    "中舱不吃左右的风": "Mid ignores the side gusts",
+    "阵风和下一阵都能看见。把箱子放进它不想去的一侧，下一阵风会再偏 1。": "The gust and the next gust are both visible. A crate on the side it does not prefer leans the next gust by 1.",
+    "先看这一阵，再看下一阵。": "Read this gust, then the next.",
     "这一局已经收尾。": "This run is already over.",
     "用 recap 看结算。": "Use recap for the settlement.",
     "现在不能这么做。": "You cannot do that now.",
@@ -65,6 +71,29 @@
       "zh": "把这一箱放进{0}。{1}。",
       "en": "Stow this crate {0}. {1}.",
       "slots": ["text", "text"]
+    },
+    {
+      "zh": "把这一箱放进{0}。{1}。{2}",
+      "en": "Stow this crate in {0}. {1}. {2}",
+      "slots": ["text", "text", "text"]
+    },
+    { "zh": "第 {0}/8 箱 · 阵风 {1}", "en": "Crate {0}/8 · gust {1}", "slots": ["n", "text"] },
+    { "zh": "下一阵 {0}", "en": "Next gust {0}", "slots": ["text"] },
+    {
+      "zh": "下一箱重量 {0}，想放{1}",
+      "en": "Next crate weighs {0} and prefers {1}",
+      "slots": ["n", "text"]
+    },
+    { "zh": "这一箱想放{0}", "en": "This crate prefers {0}", "slots": ["text"] },
+    {
+      "zh": "这一箱想放{0}，放这里下一阵风再偏 1",
+      "en": "It prefers {0}, so stowing here leans the next gust by 1",
+      "slots": ["text"]
+    },
+    {
+      "zh": "中舱不吃左右的风，这一箱想放{0}",
+      "en": "Mid ignores side gusts, and this crate prefers {0}",
+      "slots": ["text"]
     },
     {
       "zh": "把{0}的一成货挪进中舱。这一箱还在码头，花 1 只手。",

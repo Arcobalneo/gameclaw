@@ -2,7 +2,7 @@ import type { GameDefinition } from '@gameclaw/gamekit';
 import { abort, act, actionsOf, createRun, recapOf, type StowState, statusOf } from './engine';
 
 const GAME_ID = 'claw-stow';
-const GAME_VERSION = '4.0.0';
+const GAME_VERSION = '4.1.0';
 
 export const definition: GameDefinition<StowState> = {
   meta: {
@@ -18,7 +18,7 @@ export const definition: GameDefinition<StowState> = {
     guide: [
       '进货时 shelve:N 放入空格，mark:N 放入并贴标签。没有空格时才能 swap:N。',
       '提取时 pull:N 取出那一格。字对了才算取对。hold 放过这张单，记一次取错。',
-      'detail 写明这一格的字和单据要的字是否相同。状态里能看见后两张单据。',
+      'detail 写明这一格的字，以及后面三张里这箱要不要贴标签。状态里能看见后三张单据。',
       '取错达到上限就收仓。单据走完时取对达到定额才算交完。',
       '分数：取对×30 + 最好连段×15 − 取错×70。交完 +340。没交完只留三分之一。一次取错比两次取对更贵。中止为 0。',
     ],

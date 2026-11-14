@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, createRun, ladderScore, type RaftState, suggest } from '../src/engine';
+import { act, actionsOf, createRun, ladderScore, type RaftState, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: RaftState) => string) {
   const state = createRun({ seed });
@@ -49,6 +49,19 @@ describe('claw-raft engine', () => {
     }
     expect(careful).toBeGreaterThanOrEqual(8);
     expect(blind).toBeLessThan(careful);
+    const order = ['port', 'mid', 'starboard'];
+    let spin = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      let step = 0;
+      const spun = play(seed, (state) => {
+        const legal = actionsOf(state).map((action) => action.id);
+        const id = order[step % order.length] ?? 'port';
+        step += 1;
+        return legal.includes(id) ? id : (legal[0] ?? 'port');
+      });
+      if (spun.outcome === 'won') spin += 1;
+    }
+    expect(spin).toBeLessThan(careful);
   });
 
   it('scores zero on abort and uses the win formula', () => {
