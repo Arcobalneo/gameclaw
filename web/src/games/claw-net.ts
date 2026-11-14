@@ -101,10 +101,12 @@ function createScene(): GameScene<NetState> {
           rect(g, px, py + 8, CW - 4, 1, '#c4a888');
           rect(g, px + 16, py, 1, CH, '#c4a888');
           if (knot === 'torn') {
-            disc(g, px + 18, py + 10, 7, '#0a2840');
-            disc(g, px + 16, py + 8, 3, '#7ec8ff');
+            disc(g, px + 18, py + 10, 8, '#ff5d73');
+            disc(g, px + 18, py + 10, 5, '#061018');
           } else if (knot === 'wet') {
-            disc(g, px + 18, py + 10, 5, '#3a6a88');
+            disc(g, px + 18, py + 8, 5, '#7ec8ff');
+            rect(g, px + 16, py + 12, 3, 6, '#7ec8ff');
+            glow(g, px + 18, py + 10, 8, '#7ec8ff', 0.35);
           } else if (knot === 'gap') {
             rect(g, px + 8, py + 6, 16, 8, '#1a1008');
           } else {
