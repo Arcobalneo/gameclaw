@@ -69,6 +69,11 @@
       "slots": ["n", "n"]
     },
     {
+      "zh": "把灯笼立在第 {0} 根。新照亮一个水洼。挡住 {1}。",
+      "en": "Stand a lamp on post {0}. It lights one new pool. Blocks {1}.",
+      "slots": ["n", "text"]
+    },
+    {
       "zh": "把灯笼立在第 {0} 根。新照亮 {1} 个水洼。挡住 {2}。",
       "en": "Stand a lamp on post {0}. It lights {1} new pools. Blocks {2}.",
       "slots": ["n", "n", "text"]

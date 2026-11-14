@@ -263,6 +263,18 @@ export function statusOf(state: ReefState): StatusView {
   };
 }
 
+export function forecastStep(
+  state: ReefState,
+  step: Dir,
+): { x: number; y: number; kind: 'wall' | 'urchin' | 'open' } | null {
+  const [dx, dy] = DELTA[step];
+  if (!inside(state.x + dx, state.y + dy)) return null;
+  const landed = push(state.x + dx, state.y + dy, coming(state));
+  if (landed.blocked) return { x: landed.x, y: landed.y, kind: 'wall' };
+  if (onUrchin(state, landed.x, landed.y)) return { x: landed.x, y: landed.y, kind: 'urchin' };
+  return { x: landed.x, y: landed.y, kind: 'open' };
+}
+
 function landingDetail(
   step: Dir,
   dir: Dir,
