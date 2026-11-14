@@ -51,7 +51,7 @@ describe('agent api', () => {
     },
     focused: () => focused,
   };
-  const api = createApi(portal, '3.0.0');
+  const api = createApi(portal, '3.1.0');
 
   it('lists all games', async () => {
     const res = (await api.listGames()) as { games: { id: string }[] };

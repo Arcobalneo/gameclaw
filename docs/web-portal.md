@@ -15,15 +15,32 @@ web/
   src/runtime/registry.ts   lazy `import()` per game (one chunk each)
   src/runtime/host.ts       GameHost: MemorySession + localStorage + change feed
   src/runtime/agent-api.ts  list_games … recap; WebMCP registration
-  src/runtime/prompt.ts     bilingual copyable agent prompt
-  src/gfx/*                 384×216 pixel buffer: sprites, parallax, fx, text
-  src/games/<id>.ts         scene per game: draw / hud / react / hit regions
-  src/ui/*                  home grid, windowed portal with tabs, game view, sfx
+  src/runtime/prompt.ts     copyable agent prompt (in the current UI language)
+  src/i18n/index.ts         typed zh/en dictionary, lang()/setLang()/t()
+  src/i18n/terms.ts         per-game glossary: engine labels/metrics/phases → English
+  src/gfx/art.ts            art bible: hue-shifted ramps, grade, bloom, light mask, springs
+  src/gfx/fx.ts             pooled particles, trauma shake + kick, hit-stop, impact frames
+  src/gfx/actors.ts         layered humanoid sprite generator (front/back/bust, blink, talk)
+  src/gfx/*                 384×216 pixel buffer: sprites, parallax, tiny font, text
+  src/games/<id>.ts         scene per game: draw / grade / hud / react / hit regions
+  src/ui/*                  home grid, windowed portal with tabs, game view, topbar, sfx
+  public/covers/*.webp      home covers, clean frames captured from the real scenes
 ```
 
 - **Rendering**: Canvas2D into a 384×216 buffer, scaled by integers when possible
-  (`image-rendering: pixelated`). Parallax ridges, dithered glows, particles,
-  screen shake, hit-stop, delta floats and outcome banners are shared by all games.
+  (`image-rendering: pixelated`, smooth downscale otherwise). Every frame goes
+  through a shared post pass: per-scene colour grade, cheap bloom, vignette.
+  Sprites get auto light-from-top-left shading and selective outlines; scenes
+  cache their static layers. Particles are pooled (no per-frame allocation),
+  impacts use hit-stop + trauma shake + directional kick, and
+  `prefers-reduced-motion` turns shake/flash/impact frames off.
+- **HUD**: numbers live in the DOM side panel (with animated deltas); the canvas
+  keeps only in-world cues, so floats never collide with the HUD.
+- **Language**: 中 / EN switch in the top bar, saved in `localStorage`
+  (`gameclaw:lang`), default from `navigator.language`. UI strings, game names,
+  taglines, HUD labels, action labels and the agent prompt switch together.
+  Engine narrative (headline / log / details) stays in the engine's Chinese.
+  WebMCP tool descriptions are English.
 - **Font**: a subset of Fusion Pixel 12px (OFL, `web/public/fonts`), regenerate with
   `pnpm --filter @gameclaw/web font`.
 - **State**: one `GameHost` per game id. Human clicks/keys and agent tool calls go
@@ -40,6 +57,7 @@ web/
 | `↑↓` or `W/S` (`A/D`) | move focus (or move, in games with directional actions) |
 | `Enter` / `Space` | take focused action |
 | `N` / `F` / `M` / `Esc` / `Tab` | new run / fullscreen / mute / close / next window |
+| `H` / `?` | help |
 
 ## WebMCP tools
 
@@ -77,6 +95,7 @@ pnpm install
 pnpm --filter @gameclaw/web dev          # http://localhost:5173/gameclaw/
 pnpm --filter @gameclaw/web build        # web/dist
 cd web && npx vite preview --port 4173 &  node e2e/smoke.mjs http://localhost:4173/gameclaw/
+node web/e2e/covers.mjs                  # re-capture home covers from the dev server
 ```
 
 Deploy: build with `GAMECLAW_BASE=/gameclaw/ pnpm --filter @gameclaw/web build` and

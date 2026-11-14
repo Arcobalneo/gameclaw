@@ -20,7 +20,7 @@ import {
 } from '../gfx/pixel';
 import type { GameModule, GameScene } from '../gfx/scene';
 import { BROCCOLI, buildSprite, CARROT, type SpriteDef, TOMATO } from '../gfx/sprites';
-import { drawText, fitText, textWidth } from '../gfx/text';
+import { drawText, textWidth } from '../gfx/text';
 import { tiny } from '../gfx/tiny';
 import { blit } from '../gfx/world';
 
@@ -375,19 +375,6 @@ function createScene(): GameScene<VegeState> {
           rect(g, VW / 2 - w / 2, 5, w, 15, withAlpha('#0a0614', 0.75));
           rect(g, VW / 2 - w / 2, 19, w, 1, withAlpha('#ffd890', 0.5));
           drawText(g, title, VW / 2, 6, { color: '#fff0d0', align: 'center', outline: null });
-        }
-        if (f.lang === 'zh' && scene.blurb && f.since < 7) {
-          const a = Math.min(1, f.since * 3) * Math.min(1, (7 - f.since) * 2);
-          const text = fitText(scene.blurb, 300);
-          const w = textWidth(text) + 14;
-          g.globalAlpha = a;
-          rect(g, VW / 2 - w / 2 + 40, VH - 22, w, 15, withAlpha('#05030c', 0.78));
-          drawText(g, text, VW / 2 + 40, VH - 21, {
-            color: '#fff0d0',
-            align: 'center',
-            outline: null,
-          });
-          g.globalAlpha = 1;
         }
       }
     },

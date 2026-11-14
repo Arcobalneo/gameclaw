@@ -259,11 +259,18 @@ function drawBoot(g: Ctx, x: number, y: number): void {
   rect(g, x + 48, y - 200, 5, 176, shift(leather, 0.8));
   rect(g, x + 92, y - 200, 8, 176, shift(leather, -1.4));
   // Laces criss-cross on the front edge.
-  for (let ly = y - 190; ly < y - 34; ly += 10) {
-    rect(g, x + 50, ly, 3, 3, '#c8c0a8');
-    rect(g, x + 53, ly + 1, 10, 1, '#e8e0c8');
-    rect(g, x + 53, ly + 5, 10, 1, '#a89878');
+  // Tongue + criss-cross laces between two eyelet rows.
+  rect(g, x + 54, y - 200, 14, 166, shift(leather, -0.9));
+  for (let ly = y - 196; ly < y - 40; ly += 12) {
+    rect(g, x + 52, ly, 2, 2, '#d8d0b8');
+    rect(g, x + 68, ly, 2, 2, '#d8d0b8');
+    for (let k = 0; k < 12; k += 1) {
+      rect(g, x + 54 + Math.round(k * 1.2), ly + k, 1, 1, '#e8e0c8');
+      rect(g, x + 67 - Math.round(k * 1.2), ly + k, 1, 1, '#b8a888');
+    }
   }
+  // Stitched seam down the back.
+  for (let ly = y - 200; ly < y - 30; ly += 4) rect(g, x + 88, ly, 1, 2, shift(leather, 0.6));
   // Foot: rounded toe cap.
   for (let row = 0; row < 26; row += 1) {
     const yy = y - 34 + row;
@@ -402,7 +409,8 @@ function createScene(): GameScene<TinyState> {
           rect(g, 150 + i * 10, 34, 8, 4, i < c.round ? '#ff5d73' : '#3a2440');
           if (i === c.round) glow(g, 154 + i * 10, 36, 8, '#ff5d73', 0.5);
         }
-        if (c.combo > 0) tiny(g, `COMBO ×${c.combo}`, 150, 44, { color: '#ffe066', scale: 2 });
+        if (c.combo > 0)
+          tiny(g, `X${c.combo}`, 152 + c.maxRounds * 10, 32, { color: '#ffe066', scale: 2 });
       }
 
       if (phase === 'captured') {
@@ -476,11 +484,18 @@ function createScene(): GameScene<TinyState> {
     hud(f) {
       const { g, state, t } = f;
       // Year track: 52 ticks.
+      // Year track: one hairline tick per week, every 13th taller (seasons).
       for (let i = 0; i < 52; i += 1) {
         const done = i < state.week;
-        rect(g, 8 + i * 3, 9, 2, i % 4 === 3 ? 6 : 4, done ? '#ff8a9a' : '#3a2440');
+        rect(
+          g,
+          8 + i * 2,
+          8,
+          1,
+          i % 13 === 12 ? 5 : 3,
+          done ? '#ff8a9a' : withAlpha('#ffffff', 0.18),
+        );
       }
-      tiny(g, `W${state.week}/52`, 8 + 52 * 3 + 6, 9, { color: '#ffd0d8' });
       if (state.phase === 'briefing') {
         ['bastion', 'harvest', 'mirror'].forEach((id, i) => {
           const name = f.lang === 'zh' ? ZH_NAMES[id]! : f.term(ZH_NAMES[id]!);
@@ -495,7 +510,7 @@ function createScene(): GameScene<TinyState> {
           });
           if (focus) glow(g, x, 92, 40, '#ffe066', 0.25 + 0.1 * Math.sin(t * 6));
         });
-      } else if (state.target) {
+      } else if (state.target && state.phase !== 'combat') {
         const name = f.lang === 'zh' ? ZH_NAMES[state.target]! : f.term(ZH_NAMES[state.target]!);
         const w = textWidth(name) + 12;
         rect(g, 230 - w / 2, 126, w, 15, withAlpha('#05030c', 0.7));

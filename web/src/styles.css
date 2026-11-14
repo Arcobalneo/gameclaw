@@ -570,12 +570,16 @@ a {
   gap: var(--s2);
   min-width: 0;
   min-height: 0;
+  container-type: size;
 }
 
 .gv-stage {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 240px;
+  flex: 0 0 auto;
+  align-self: center;
+  width: min(100cqw, (100cqh - 76px) * 16 / 9);
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
   display: grid;
   place-items: center;
   background: #05030c;
@@ -1125,7 +1129,11 @@ a {
     grid-template-columns: 1fr;
     height: auto;
   }
+  .gv-main {
+    container-type: normal;
+  }
   .gv-stage {
+    width: 100%;
     min-height: 0;
     aspect-ratio: 16 / 9;
   }

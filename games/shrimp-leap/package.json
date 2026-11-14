@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/shrimp-leap",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "type": "module",
   "description": "Shrimp Leap: a deterministic lamp-post jumping and jelly growth game.",

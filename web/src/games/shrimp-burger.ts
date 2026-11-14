@@ -343,7 +343,7 @@ function createScene(): GameScene<BurgerState> {
         8,
         22,
         92,
-        22 + state.recipe.required.length * 12 + 14,
+        22 + state.recipe.required.length * 12 + 20,
         '#d8c8a0',
         '#c8a070',
         '#3a2214',
@@ -369,7 +369,7 @@ function createScene(): GameScene<BurgerState> {
         g,
         `${state.recipe.heatMin}-${state.recipe.heatMax}°`,
         96,
-        26 + state.recipe.required.length * 12 + 8,
+        38 + state.recipe.required.length * 12 + 1,
         { color: '#c8402a', outline: null, align: 'right' },
       );
       if (lastVerdict && f.since < 2) {
