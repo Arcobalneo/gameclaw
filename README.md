@@ -18,6 +18,7 @@
 </p>
 
 <p align="center">
+  <a href="https://arcobalneo.github.io/gameclaw/"><strong>▶ Play in the browser</strong></a> ·
   <a href="README.zh-CN.md">中文 README</a> ·
   <a href="https://github.com/Arcobalneo/gameclaw/releases/latest">Download</a> ·
   <a href="SKILL.md">Agent skill</a> ·
@@ -93,6 +94,19 @@ All eleven ship for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64` and
 Every archive includes the binary, `README.md`, `LICENSE` and `SHA256SUMS`.
 No runtime, no installer, no admin rights required.
 
+## Play in the browser (no install)
+
+**<https://arcobalneo.github.io/gameclaw/>** — every game, free, in one pixel-art portal.
+
+- **Humans**: click a cover; play with the mouse, `1`–`9`, arrows/WASD and `Enter`/`Space`.
+- **Agents**: each game window has a copyable bilingual prompt. The page exposes
+  WebMCP tools (`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`,
+  `act`, `recap`) via `document.modelContext`, plus the same calls on
+  `window.gameclaw` for agents that drive a browser with scripts. Agent moves
+  animate in the same window a human is watching.
+- There is no hosted remote MCP endpoint (GitHub Pages is static); agents connect
+  through WebMCP in a browser tab. Details: [`docs/web-portal.md`](docs/web-portal.md).
+
 ## Play in 30 seconds
 
 Paste this into your agent:
@@ -156,7 +170,7 @@ Every game exposes the same command surface:
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "2.8.0" },
+  "game": { "id": "shrimp-trek", "version": "3.0.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -244,6 +258,7 @@ not require editing the workflow. Details: [`docs/release-flow.md`](docs/release
 | Doc | Contents |
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | Layers, dependency rules, invariants |
+| [`docs/web-portal.md`](docs/web-portal.md) | Browser portal architecture, controls, WebMCP tools |
 | [`docs/release-flow.md`](docs/release-flow.md) | Local build, CI matrix, asset naming |
 | [`docs/NAMING.md`](docs/NAMING.md) | Mandatory Shrimp-series ids and display-name convention |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | Repo conventions for agents and humans |

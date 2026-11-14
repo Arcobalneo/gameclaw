@@ -55,7 +55,7 @@ describe('shrimp-burger CLI', () => {
       id: 'shrimp-burger',
       name: '虾堡',
       englishName: 'Shrimp Burger',
-      version: '2.8.0',
+      version: '3.0.0',
     });
     expect(payload.outcome).toBe('ongoing');
     expect(actionIds(payload)).toContain('serve');
@@ -80,10 +80,10 @@ describe('shrimp-burger CLI', () => {
     expect(payload.next === null || String(payload.next).startsWith('act ')).toBe(true);
   });
 
-  it('reports version 2.8.0', async () => {
+  it('reports version 3.0.0', async () => {
     const output = io();
     expect(await run(['--version'], output)).toBe(0);
-    expect(output.stdout.join('')).toMatch(/shrimp-burger v2\.8\.0/);
+    expect(output.stdout.join('')).toMatch(/shrimp-burger v3\.0\.0/);
   });
 
   it('recap works after abort', async () => {

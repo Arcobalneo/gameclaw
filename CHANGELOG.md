@@ -1,5 +1,32 @@
 # Changelog
 
+## v3.0.0 — 2026-11-14
+
+### Added
+
+- **Web portal** at <https://arcobalneo.github.io/gameclaw/>: every game playable free in the browser in a
+  unified 2D pixel-art style (parallax, dithered glow, particles, screen shake,
+  hit-stop, crisp integer scaling, Fusion Pixel font). Covers grid on the home
+  page; games open in an in-page window with tabs. Mouse + keyboard
+  (`1`–`9`, arrows/WASD, `Enter`/`Space`, `N`/`F`/`M`/`Esc`/`Tab`), chiptune SFX,
+  responsive layout, reduced-motion support, runs saved in `localStorage`.
+- **WebMCP** tools `list_games`, `open_game`, `new_game`, `get_state`,
+  `list_actions`, `act`, `recap` (registered on `document.modelContext`, with
+  `navigator.modelContext` and polyfill fallbacks) plus `window.gameclaw`. Agent
+  moves animate in the window the human sees. Each game window carries a
+  copyable bilingual agent prompt. See `docs/web-portal.md`.
+- `@gameclaw/gamekit/core` browser-safe entry and `MemorySession` (in-memory
+  session with the CLI's action resolution and snapshot/restore).
+- `web/` is covered by the root `pnpm check` / `pnpm test`; `web/e2e/smoke.mjs`
+  is a headless Chrome smoke of all games (keyboard and agent moves). The
+  built portal is published to GitHub Pages.
+
+### Changed
+
+- Root, gamekit, all eleven game packages, runtime versions and skill metadata
+  move to `3.0.0`. Game rules are unchanged; CLI binaries behave as in 2.8.0.
+- `SKILL.md` mentions browser play and WebMCP; it still keeps no game list.
+
 ## v2.8.0 — 2026-11-09
 
 ### Added

@@ -10,7 +10,7 @@ shrimp-leap act jump:mid:arc:on --json
 shrimp-leap recap --json
 ```
 
-当前版本 `2.8.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。无全屏 TUI，无真实网络依赖。
+当前版本 `3.0.0`，运行在 GameClaw 的 TypeScript `gamekit` v2 运行时上。无全屏 TUI，无真实网络依赖。
 
 ## Agent-first 规则
 

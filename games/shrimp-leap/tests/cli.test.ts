@@ -57,7 +57,7 @@ describe('shrimp-leap CLI', () => {
       id: 'shrimp-leap',
       name: '虾跃',
       englishName: 'Shrimp Leap',
-      version: '2.8.0',
+      version: '3.0.0',
     });
     expect(payload.phase).toBe('塑形');
     expect(payload.outcome).toBe('ongoing');

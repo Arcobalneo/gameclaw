@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles. Look up the live game list from the latest GitHub Release and catalog/games.json; this skill does not contain that list."
-version: 2.8.0
+version: 3.0.0
 ---
 
 # GameClaw
@@ -244,6 +244,16 @@ Which id is current comes from the catalog, not from this file.
 - `GAMECLAW_HOME` or `--state-dir <path>` isolates a run.
 - `--no-observer --no-report` are the right flags for CI.
 - Run `<game> help` for the game's own action ids and rules.
+
+### No install: play in a browser
+
+Every catalog game is also playable at `https://arcobalneo.github.io/gameclaw/` (no binary, no download).
+If the player only wants to try a game, or downloads are blocked, offer that.
+An agent with a browser plays the same window the player sees through WebMCP
+tools on `document.modelContext` (`list_games`, `open_game`, `new_game`,
+`get_state`, `list_actions`, `act`, `recap`) or the same calls on
+`window.gameclaw`. Each game window has a copyable prompt with the loop.
+Still read the game list from the catalog or the portal, not from this file.
 
 ## 7. When GitHub downloads fail — fix this FIRST
 

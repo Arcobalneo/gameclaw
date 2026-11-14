@@ -12,7 +12,7 @@ shrimp-look act move:monitor-hall
 shrimp-look recap
 ```
 
-当前版本：`2.8.0`。
+当前版本：`3.0.0`。
 
 ## 为什么它是 agent-first 的
 
