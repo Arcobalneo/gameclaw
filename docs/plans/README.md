@@ -4,6 +4,7 @@ Write a new plan here before a large change: a new game, an engine rewrite, an
 MCP or leaderboard change, or a docs restructure.
 
 Current working plans: [`2026-11-15-reef-lamp-feel.md`](2026-11-15-reef-lamp-feel.md),
+[`2026-11-14-jam-art-path.md`](2026-11-14-jam-art-path.md),
 [`2026-11-14-jam-art-ferry.md`](2026-11-14-jam-art-ferry.md),
 [`2026-11-14-jam-polish-eight.md`](2026-11-14-jam-polish-eight.md),
 [`2026-11-14-jam-slate.md`](2026-11-14-jam-slate.md),

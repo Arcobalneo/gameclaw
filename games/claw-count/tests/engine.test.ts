@@ -38,6 +38,29 @@ describe('claw-count engine', () => {
     expect(state.pos).toBe(0);
   });
 
+  it('crosses a blank plank only with a magnet', () => {
+    const opened = createRun({ seed: 5 });
+    expect(opened.tiles.every((tile) => tile.length > 0)).toBe(true);
+    const state = createRun({ seed: 5 });
+    while (state.level < 2 && state.outcome === 'ongoing') act(state, suggest(state));
+    expect(state.level).toBe(2);
+    expect(state.tiles.filter((tile) => tile.length === 0)).toHaveLength(1);
+    const index = state.tiles.findIndex((tile) => tile.length === 0);
+    while (state.pos < index && state.outcome === 'ongoing') act(state, suggest(state));
+    expect(state.pos).toBe(index);
+    expect(suggest(state)).toBe('magnet');
+    const before = state.magnets;
+    act(state, 'step');
+    expect(state.falls).toBe(1);
+    state.tiles = [[]];
+    state.pos = 0;
+    state.falls = 0;
+    state.magnets = before;
+    act(state, 'magnet');
+    expect(state.magnets).toBe(before - 1);
+    expect(state.falls).toBe(0);
+  });
+
   it('spends a magnet to cross an unsafe plank', () => {
     const state = createRun({ seed: 2 });
     state.tiles = [[2, 3]];

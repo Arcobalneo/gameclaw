@@ -28,6 +28,7 @@
     "1 改数": "1 change",
     "1 磁铁": "1 magnet",
     "无": "none",
+    "空": "blank",
     "下一块在这个数字下可走。": "The next plank exists at this number.",
     "下一块不可走，迈步会坠落回段首。": "The next plank is missing. Stepping falls back to the start.",
     "花一块磁铁，不管数字，走上这一格。": "Spend a magnet and cross this plank whatever the number is.",

@@ -49,7 +49,14 @@ function rules(difficulty: Difficulty): { stages: number; springs: number; wound
   return { stages: 4, springs: 2, woundLimit: 3 };
 }
 
-function makeStage(rng: Rng): Tile[] {
+/** Stones only on the named stages. Springs are not refilled, so a hop spent early is gone. */
+function stoneOn(stage: number, difficulty: Difficulty): boolean {
+  if (difficulty === 'easy') return stage === 2;
+  if (difficulty === 'hard') return stage === 3;
+  return stage === 2 || stage === 4;
+}
+
+function makeStage(rng: Rng, stone: boolean): Tile[] {
   const tiles: Tile[] = [];
   let kind: Tile = rng.pick(['plate', 'gap']);
   while (tiles.length < 8) {
@@ -58,7 +65,7 @@ function makeStage(rng: Rng): Tile[] {
     kind = kind === 'plate' ? 'gap' : 'plate';
   }
   tiles[0] = 'plate';
-  tiles[rng.int(2, 7)] = 'stone';
+  if (stone) tiles[rng.int(2, 7)] = 'stone';
   return tiles;
 }
 
@@ -72,13 +79,6 @@ function note(state: FlipState, line: string): void {
   state.notes.splice(3);
 }
 
-function stonesAhead(state: FlipState): number {
-  let n = 0;
-  for (let i = state.pos + 1; i < state.tiles.length; i += 1)
-    if (state.tiles[i] === 'stone') n += 1;
-  return n;
-}
-
 export function suggest(state: FlipState): string {
   const next = state.tiles[state.pos + 1];
   const land = state.pos + 2;
@@ -86,7 +86,6 @@ export function suggest(state: FlipState): string {
   const hopOk = state.springs > 0 && (land >= state.tiles.length || isSafe(landing, state.flipped));
   if (next && isSafe(next, state.flipped)) return 'step';
   if (next === 'stone' && hopOk) return 'hop';
-  if (hopOk && state.springs > stonesAhead(state)) return 'hop';
   return 'flip';
 }
 
@@ -100,7 +99,7 @@ export function createRun(options: { seed: number; difficulty?: string }): FlipS
     rng: rng.serialize(),
     stage: 1,
     stages: rule.stages,
-    tiles: makeStage(rng),
+    tiles: makeStage(rng, stoneOn(1, difficulty)),
     flipped: false,
     pos: -1,
     springs: rule.springs,
@@ -127,10 +126,9 @@ function clearStage(state: FlipState, rng: Rng, log: string[]): void {
     return;
   }
   state.stage += 1;
-  state.tiles = makeStage(rng);
+  state.tiles = makeStage(rng, stoneOn(state.stage, state.difficulty));
   state.flipped = false;
   state.pos = -1;
-  state.springs = state.springMax;
 }
 
 function wound(state: FlipState, log: string[]): void {
