@@ -40,6 +40,9 @@
     "现在不能这么做。": "You cannot do that now.",
     "只使用列出的动作。": "Use only the listed actions.",
     "提取单写的是字。取出别的字，或者放过这张单，都算取错。": "An order names a glyph. Pulling another glyph, or holding the slip, is a mispick.",
+    "提取单写的是字。后面三张里看得到的提取单，来得及才不用贴标签。": "An order names a glyph. Skip the mark only when that order arrives inside the spoil age.",
+    "后面三张没有这箱的提取单。": "The next three slips have no order for this crate.",
+    "先看后三张。来不及的那箱才值得贴标签。": "Read the next three slips. Spend a mark on the crate that would spoil.",
     "没人点的货放久了会自己腾出格子，那一次不算取错。标签让一格放得更久。": "A crate nobody ordered eventually leaves the bay, and that is not a mispick. A mark lets a bay stay longer.",
     "把本局哪一张提取单来的时候货已经不在架上写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which order arrived after its crate had already left the shelf into your own memory. Treat that as an observation of this seed and check it again on the next seed."
   },
@@ -60,6 +63,29 @@
     { "zh": "进货 {0}", "en": "Inbound {0}", "slots": ["text"] },
     { "zh": "提取 {0}", "en": "Order {0}", "slots": ["text"] },
     { "zh": "下一张 {0}", "en": "Next {0}", "slots": ["text"] },
+    { "zh": "再一张 {0}", "en": "Then {0}", "slots": ["text"] },
+    { "zh": "第三张 {0}", "en": "Third {0}", "slots": ["text"] },
+    { "zh": "单据 {0}/{1}", "en": "Slip {0}/{1}", "slots": ["n", "n"] },
+    {
+      "zh": "把{0}放进第 {1} 格，不贴标签。{2}",
+      "en": "Put {0} in bay {1} with no mark. {2}",
+      "slots": ["text", "n", "text"]
+    },
+    {
+      "zh": "把{0}放进第 {1} 格并贴标签。{2}",
+      "en": "Put {0} in bay {1} and mark it. {2}",
+      "slots": ["text", "n", "text"]
+    },
+    {
+      "zh": "第 {0} 张才提取。不贴标签会先腾掉。",
+      "en": "The order is slip {0}. Unmarked, it spoils first.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "第 {0} 张就提取，可以不贴。",
+      "en": "The order is slip {0}, so a mark is optional.",
+      "slots": ["n"]
+    },
     { "zh": "放入 {0}", "en": "Shelve {0}", "slots": ["n"] },
     { "zh": "贴标 {0}", "en": "Mark {0}", "slots": ["n"] },
     { "zh": "换掉 {0}", "en": "Swap {0}", "slots": ["n"] },

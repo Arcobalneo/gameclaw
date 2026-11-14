@@ -48,6 +48,27 @@ describe('claw-stow engine', () => {
     expect(state.streak).toBe(1);
   });
 
+  it('spoils an unmarked crate that has to wait, and keeps a marked one', () => {
+    const plain = createRun({ seed: 5 });
+    expect(plain.events[3]?.kind).toBe('crate');
+    plain.index = 3;
+    plain.spoil = 3;
+    plain.marks = 1;
+    act(plain, 'shelve:0');
+    act(plain, 'shelve:1');
+    act(plain, 'shelve:2');
+    expect(plain.bays[0]).toBeNull();
+    const marked = createRun({ seed: 5 });
+    marked.index = 3;
+    marked.spoil = 3;
+    marked.marks = 1;
+    const glyph = marked.events[3]?.glyph ?? 0;
+    act(marked, 'mark:0');
+    act(marked, 'shelve:1');
+    act(marked, 'shelve:2');
+    expect(marked.bays[0]?.glyph).toBe(glyph);
+  });
+
   it('lets the careful line finish more slips than pulling the first bay', () => {
     let careful = 0;
     let blind = 0;

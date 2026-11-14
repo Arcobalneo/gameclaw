@@ -58,25 +58,34 @@ function rules(difficulty: Difficulty): {
   marks: number;
   cap: number;
   quota: number;
+  cycles: number;
 } {
-  if (difficulty === 'easy') return { spoil: 4, marks: 4, cap: 4, quota: 3 };
-  if (difficulty === 'hard') return { spoil: 2, marks: 3, cap: 2, quota: 3 };
-  return { spoil: 3, marks: 3, cap: 3, quota: 4 };
+  if (difficulty === 'easy') return { spoil: 4, marks: 4, cap: 4, quota: 3, cycles: 4 };
+  if (difficulty === 'hard') return { spoil: 2, marks: 2, cap: 2, quota: 4, cycles: 4 };
+  return { spoil: 3, marks: 3, cap: 3, quota: 4, cycles: 4 };
 }
 
 export function glyphName(glyph: number): string {
   return GLYPHS[glyph] ?? '贝';
 }
 
-function build(rng: Rng): Slip[] {
+function build(rng: Rng, cycles: number): Slip[] {
   const events: Slip[] = [];
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < cycles; i += 1) {
     const wanted = rng.int(0, 5);
     let filler = rng.int(0, 5);
     if (filler === wanted) filler = (filler + 1) % 6;
+    let extra = rng.int(0, 5);
+    if (extra === wanted) extra = (extra + 1) % 6;
+    if (extra === filler) extra = (extra + 1) % 6;
     events.push({ kind: 'crate', glyph: filler });
     events.push({ kind: 'crate', glyph: wanted });
-    events.push({ kind: 'order', glyph: wanted });
+    if (i % 2 === 0) {
+      events.push({ kind: 'order', glyph: wanted });
+      continue;
+    }
+    events.push({ kind: 'crate', glyph: extra });
+    events.push({ kind: 'order', glyph: filler });
   }
   return events;
 }
@@ -94,7 +103,7 @@ export function createRun(options: { seed: number; difficulty?: string }): StowS
     seed: options.seed >>> 0,
     difficulty,
     rng: rng.serialize(),
-    events: build(rng),
+    events: build(rng, rule.cycles),
     index: 0,
     bays: [null, null, null, null, null, null],
     marks: rule.marks,
@@ -171,6 +180,20 @@ function bump(state: StowState): void {
   if (state.streak > state.bestStreak) state.bestStreak = state.streak;
 }
 
+export function orderDelay(state: StowState, glyph: number): number {
+  const end = Math.min(state.events.length, state.index + 4);
+  for (let i = state.index + 1; i < end; i += 1) {
+    const item = state.events[i];
+    if (item?.kind === 'order' && item.glyph === glyph) return i - state.index;
+  }
+  return -1;
+}
+
+function needsMark(state: StowState, glyph: number): boolean {
+  const delay = orderDelay(state, glyph);
+  return delay >= state.spoil;
+}
+
 export function suggest(state: StowState): string {
   const slip = current(state);
   if (!slip) return 'hold';
@@ -179,12 +202,9 @@ export function suggest(state: StowState): string {
     if (match >= 0) return `pull:${match}`;
     return 'hold';
   }
-  const soon = [upcoming(state, 1), upcoming(state, 2)].some(
-    (item) => item?.kind === 'order' && item.glyph === slip.glyph,
-  );
   const open = emptyBay(state);
   if (open >= 0) {
-    if (soon && state.marks > 0) return `mark:${open}`;
+    if (needsMark(state, slip.glyph) && state.marks > 0) return `mark:${open}`;
     return `shelve:${open}`;
   }
   let worst = 0;
@@ -236,7 +256,12 @@ export function statusOf(state: StowState): StatusView {
     sections: [
       {
         title: '眼下',
-        lines: [slipLine(current(state)), `下一张 ${slipLine(upcoming(state, 1))}`],
+        lines: [
+          slipLine(current(state)),
+          `下一张 ${slipLine(upcoming(state, 1))}`,
+          `再一张 ${slipLine(upcoming(state, 2))}`,
+          `第三张 ${slipLine(upcoming(state, 3))}`,
+        ],
       },
       { title: '仓格', lines: state.bays.map((_, index) => bayLine(state, index)) },
       { title: '记录', lines: state.notes.length ? [...state.notes] : ['还没有搬货'] },
@@ -250,19 +275,20 @@ export function actionsOf(state: StowState): ActionView[] {
   if (!slip) return [];
   const actions: ActionView[] = [];
   if (slip.kind === 'crate') {
-    for (let i = 0; i < state.bays.length; i += 1) {
-      if (state.bays[i]) continue;
+    const open = emptyBay(state);
+    if (open >= 0) {
+      const hint = shelfHint(state, slip.glyph);
       actions.push({
-        id: `shelve:${i}`,
-        label: `放入 ${i + 1}`,
-        detail: `把${glyphName(slip.glyph)}放进第 ${i + 1} 格，不贴标签。`,
-        risk: 'low',
+        id: `shelve:${open}`,
+        label: `放入 ${open + 1}`,
+        detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格，不贴标签。${hint}`,
+        risk: needsMark(state, slip.glyph) ? 'high' : 'low',
       });
       if (state.marks > 0) {
         actions.push({
-          id: `mark:${i}`,
-          label: `贴标 ${i + 1}`,
-          detail: `把${glyphName(slip.glyph)}放进第 ${i + 1} 格并贴标签。标签放得更久。`,
+          id: `mark:${open}`,
+          label: `贴标 ${open + 1}`,
+          detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格并贴标签。${hint}`,
           risk: 'low',
           cost: '1 标签',
         });
@@ -301,10 +327,14 @@ export function actionsOf(state: StowState): ActionView[] {
       risk: 'high',
     });
   }
-  const pick = suggest(state);
-  const first = actions.find((action) => action.id === pick);
-  const rest = actions.filter((action) => action.id !== pick);
-  return first ? [first, ...rest] : actions;
+  return actions;
+}
+
+function shelfHint(state: StowState, glyph: number): string {
+  const delay = orderDelay(state, glyph);
+  if (delay < 0) return '后面三张没有这箱的提取单。';
+  if (delay >= state.spoil) return `第 ${delay} 张才提取。不贴标签会先腾掉。`;
+  return `第 ${delay} 张就提取，可以不贴。`;
 }
 
 function place(state: StowState, index: number, glyph: number, labeled: boolean): void {
@@ -420,7 +450,7 @@ export function recapOf(state: StowState) {
     timeline: state.timeline.length ? [...state.timeline] : ['还没有取出一格'],
     lessons: [
       `本局取对 ${state.correct}，取错 ${state.mispicks}，最好连段 ${state.bestStreak}。`,
-      '提取单写的是字。取出别的字，或者放过这张单，都算取错。',
+      '提取单写的是字。后面三张里看得到的提取单，来得及才不用贴标签。',
       '没人点的货放久了会自己腾出格子，那一次不算取错。标签让一格放得更久。',
     ],
     memoryPrompt:

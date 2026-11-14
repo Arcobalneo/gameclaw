@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- `虾筏 (Claw Raft)` and `虾仓 (Claw Stow)` now play on bespoke boards.
+  The raft shows this gust and the next one; a crate on the side it does not
+  prefer leans the next gust by 1. Stow shows the next three slips, and a
+  mark is worth spending when that order arrives after the spoil age. Score
+  formulas are unchanged. Those two games are `meta.version` `4.1.0`.
 - `虾礁 (Claw Reef)` and `虾灯 (Claw Lamp)` now play on bespoke boards.
   A reef mark still counts only after the push, and an urchin on that cell is
   a sweep unless you anchor. Lamp's widest post blocks the posts that seal
