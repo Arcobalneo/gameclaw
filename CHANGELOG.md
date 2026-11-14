@@ -2,10 +2,6 @@
 
 ## Unreleased
 
-- `虾镜 (Claw Glass)` now plays in its own moon court. A mirror under the
-  cloud cannot be turned, half the seeds mirror the court, and the action
-  list no longer leads with the search. The score formula is unchanged.
-  `meta.version` is `4.1.0`.
 - `虾筏 (Claw Raft)` and `虾仓 (Claw Stow)` now play on bespoke boards.
   The raft shows this gust and the next one; a crate on the side it does not
   prefer leans the next gust by 1. Stow shows the next three slips, and a
