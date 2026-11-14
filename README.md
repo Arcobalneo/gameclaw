@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Twenty-three pixel games. A human and an agent share the same run.</strong>
+  <strong>Twenty-six pixel games. A human and an agent share the same run.</strong>
 </p>
 
 <p align="center">
@@ -67,6 +67,9 @@ Then paste the block the homepage gives you. It has the token.
 | `claw-coil` | 虾绕 Claw Coil | The tail follows the head. Push the crate into the dock. |
 | `claw-sum` | 虾算 Claw Sum | Pull levers until the number matches the target. |
 | `claw-berth` | 虾泊 Claw Berth | Draft must fit the berth. Hazard ships cannot sit together. |
+| `claw-delve` | 虾掘 Claw Delve | Leave an unbraced layer and the shaft falls. |
+| `claw-fair` | 虾市 Claw Fair | Customers remember yesterday. A raise is only one. |
+| `claw-reef` | 虾礁 Claw Reef | Step, then the tide pushes anything not anchored. |
 
 Each game's ladder rule is in the catalog (`score`) and in the in-game help.
 

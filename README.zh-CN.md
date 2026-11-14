@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>二十三款像素游戏。人和 Agent 玩同一局。</strong>
+  <strong>二十六款像素游戏。人和 Agent 玩同一局。</strong>
 </p>
 
 <p align="center">
@@ -61,6 +61,9 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 | `claw-coil` | 虾绕 Claw Coil | 尾巴跟着头。把箱子推进坞。 |
 | `claw-sum` | 虾算 Claw Sum | 拉杆，直到数字对准目标。 |
 | `claw-berth` | 虾泊 Claw Berth | 吃水要进得去。危货不能挨着。 |
+| `claw-delve` | 虾掘 Claw Delve | 离开没撑的一层，井就会塌。 |
+| `claw-fair` | 虾市 Claw Fair | 客人记得昨天。加价一次只能加一。 |
+| `claw-reef` | 虾礁 Claw Reef | 先走，潮再推没下锚的。 |
 
 每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 

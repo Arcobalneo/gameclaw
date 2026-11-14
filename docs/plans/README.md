@@ -3,7 +3,8 @@
 Write a new plan here before a large change: a new game, an engine rewrite, an
 MCP or leaderboard change, or a docs restructure.
 
-Current working plan: [`2026-11-14-jam-batch-3.md`](2026-11-14-jam-batch-3.md).
+Current working plan: [`2026-11-14-jam-batch-4.md`](2026-11-14-jam-batch-4.md).
+Batch 3 is [`2026-11-14-jam-batch-3.md`](2026-11-14-jam-batch-3.md).
 The slate is [`2026-11-14-jam-slate.md`](2026-11-14-jam-slate.md).
 Batch 2 is [`2026-11-14-jam-batch-2.md`](2026-11-14-jam-batch-2.md).
 

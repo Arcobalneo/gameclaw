@@ -1,0 +1,63 @@
+{
+  "terms": {},
+  "exact": {
+    "虾掘 · 掘井结算": "Claw Delve · shaft recap",
+    "掘井": "Shaft",
+    "收尾": "Done",
+    "层": "Layer",
+    "矿": "Ore",
+    "撑": "Brace",
+    "塌": "Falls",
+    "井壁": "Wall",
+    "记录": "Notes",
+    "还没下挖": "No digging yet",
+    "向左": "Left",
+    "向右": "Right",
+    "下挖": "Dig down",
+    "支撑": "Brace",
+    "在这一层向左挖开一格。横挖不会塌。": "Dig one cell left on this layer. Sideways digging does not collapse.",
+    "在这一层向右挖开一格。横挖不会塌。": "Dig one cell right on this layer. Sideways digging does not collapse.",
+    "离开这一层。没有支撑，井会塌一次。": "Leave this layer. With no brace, the shaft falls once.",
+    "这一层有支撑，下挖不会塌。": "This layer is braced. Digging down does not collapse it.",
+    "井塌了": "The shaft fell",
+    "挖太久": "Dug too long",
+    "矿够了": "The quota is met",
+    "矿不够": "Not enough ore",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "结局": "Result",
+    "无矿": "No ore",
+    "空": "Open",
+    "还没有塌方": "No fall yet",
+    "离开没有支撑的一层，井就会塌。横挖不会塌。": "Leaving a layer with no brace collapses it. Sideways digging does not.",
+    "一次塌比方比两车矿更贵。撑要留在离开之前。": "One fall costs more than two loads. Brace before you leave.",
+    "把哪一层的矿在左中右、你在离开前有没有撑写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which layer's ore was left, middle, or right, and whether you braced before leaving, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "掘井结束 · {0}", "en": "Shaft closed · {0}", "slots": ["text"] },
+    { "zh": "掘井结束：{0}", "en": "Shaft over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 层 · 矿 {2}/{3} · 塌 {4}",
+      "en": "Layer {0}/{1} · ore {2}/{3} · falls {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    { "zh": "矿 {0}/{1}", "en": "Ore {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "塌 {0}/{1}", "en": "Falls {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "第 {0}/{1} 层", "en": "Layer {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "用一根撑。还剩 {0} 根。", "en": "Spend one brace. {0} left.", "slots": ["n"] },
+    { "zh": "挖到矿。矿 {0}。", "en": "Struck ore. Ore {0}.", "slots": ["n"] },
+    { "zh": "移到第 {0} 格。", "en": "Moved to cell {0}.", "slots": ["n"] },
+    { "zh": "下到第 {0} 层。", "en": "Descended to layer {0}.", "slots": ["n"] },
+    { "zh": "第 {0} 层塌了。塌 {1}。", "en": "Layer {0} fell. Falls {1}.", "slots": ["n", "n"] },
+    { "zh": "第 {0} 层撑住了。", "en": "Layer {0} is braced.", "slots": ["n"] },
+    { "zh": "第 {0} 层 无矿 {1}", "en": "Layer {0} no ore {1}", "slots": ["n", "text"] },
+    {
+      "zh": "第 {0} 层 矿在 {1} {2}",
+      "en": "Layer {0} ore in {1} {2}",
+      "slots": ["n", "n", "text"]
+    },
+    { "zh": "本局矿 {0}，塌了 {1} 次。", "en": "This run ore {0}, falls {1}.", "slots": ["n", "n"] }
+  ]
+}

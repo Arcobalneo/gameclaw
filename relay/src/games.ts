@@ -25,6 +25,9 @@ export const GAME_IDS = [
   'claw-coil',
   'claw-sum',
   'claw-berth',
+  'claw-delve',
+  'claw-fair',
+  'claw-reef',
 ] as const;
 
 export type GameId = (typeof GAME_IDS)[number];

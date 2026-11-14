@@ -225,6 +225,30 @@ const LOOK: Record<
     tagZh: '吃水不能超过水深。',
     tagEn: 'Draft cannot exceed the berth.',
   },
+  'claw-delve': {
+    accent: '#e0b050',
+    ink: '#140c08',
+    goal: '挖够矿。离开没撑的层会塌。',
+    goalEn: 'Fill the ore quota. An unbraced layer falls when you leave it.',
+    tagZh: '横挖不塌。下挖才离开这一层。',
+    tagEn: 'Sideways does not fall. Down leaves the layer.',
+  },
+  'claw-fair': {
+    accent: '#ff9a4a',
+    ink: '#1a0c08',
+    goal: '把钱攒够。客人记得昨天的价钱。',
+    goalEn: "Fill the till. Customers remember yesterday's price.",
+    tagZh: '加价一次只能加一。',
+    tagEn: 'A raise is only one.',
+  },
+  'claw-reef': {
+    accent: '#6ec8e0',
+    ink: '#041018',
+    goal: '潮推完之后，还站在标上。',
+    goalEn: 'Still be standing on the mark after the tide pushes.',
+    tagZh: '先走，潮再推没下锚的。',
+    tagEn: 'Step, then the tide pushes what is not anchored.',
+  },
 };
 
 export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])

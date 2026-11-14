@@ -1,0 +1,77 @@
+{
+  "terms": {},
+  "exact": {
+    "虾市 · 市集结算": "Claw Fair · stall recap",
+    "市集": "Stall",
+    "收尾": "Done",
+    "钱": "Coins",
+    "昨": "Yesterday",
+    "袋": "Purse",
+    "货": "Stock",
+    "走": "Walkaways",
+    "记录": "Notes",
+    "还没开市": "Not open yet",
+    "进货": "Restock",
+    "照昨": "Hold",
+    "加一": "Raise",
+    "降到袋": "Cut",
+    "这一天不卖。货加二。客人不算走。": "No sale today. Stock plus two. The customer does not count as a walkaway.",
+    "客人走了": "Customers left",
+    "钱够了": "The purse is full",
+    "市散了": "The fair closed",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "结局": "Result",
+    "卖": "Sales",
+    "还没有成交": "No sale yet",
+    "客人记得昨天。加价一次只能加一，而且不能超过袋子。": "Customers remember yesterday. A raise is only one, and it cannot pass the purse.",
+    "走掉的人不改昨天的价钱。一次走掉比两笔薄利更贵。": "A walkaway does not change yesterday. One walkaway costs more than two thin sales.",
+    "把客人袋子比昨天高还是低、你是加价还是降价写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write whether the purse was above or below yesterday, and whether you raised or cut, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "市集结束 · {0}", "en": "Fair closed · {0}", "slots": ["text"] },
+    { "zh": "市集结束：{0}", "en": "Fair over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 天 · 昨 {2} · 袋 {3} · 钱 {4}/{5}",
+      "en": "Day {0}/{1} · yesterday {2} · purse {3} · coins {4}/{5}",
+      "slots": ["n", "n", "n", "n", "n", "n"]
+    },
+    { "zh": "钱 {0}/{1}", "en": "Coins {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "走 {0}/{1}", "en": "Walkaways {0}/{1}", "slots": ["n", "n"] },
+    {
+      "zh": "按昨天的 {0} 卖。客人付得起。",
+      "en": "Sell at yesterday's {0}. The customer can pay.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "昨天是 {0}，客人只有 {1}。会走。",
+      "en": "Yesterday was {0}. The purse is {1}. They will walk.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "卖到 {0}。客人记得昨天，只肯再加一，这次付得起。",
+      "en": "Sell at {0}. They remember yesterday and will pay one more.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "卖到 {0}。客人只有 {1}。会走，昨天的价钱不变。",
+      "en": "Sell at {0}. The purse is {1}. They walk, and yesterday stays.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "降到客人袋里的 {0}。能卖掉，明天就从这里再涨。",
+      "en": "Cut to the purse {0}. It sells, and tomorrow climbs from there.",
+      "slots": ["n"]
+    },
+    { "zh": "进了货。货 {0}。", "en": "Restocked. Stock {0}.", "slots": ["n"] },
+    { "zh": "客人走了。走 {0}。", "en": "The customer walked. Walkaways {0}.", "slots": ["n"] },
+    { "zh": "卖出 {0}。钱 {1}。", "en": "Sold at {0}. Coins {1}.", "slots": ["n", "n"] },
+    {
+      "zh": "本局卖了 {0} 笔，走了 {1} 位。",
+      "en": "This run sold {0} and lost {1}.",
+      "slots": ["n", "n"]
+    }
+  ]
+}

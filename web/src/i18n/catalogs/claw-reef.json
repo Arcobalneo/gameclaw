@@ -1,0 +1,69 @@
+{
+  "terms": {},
+  "exact": {
+    "虾礁 · 礁盘结算": "Claw Reef · reef recap",
+    "礁盘": "Reef",
+    "收尾": "Done",
+    "标": "Marks",
+    "锚": "Anchors",
+    "冲": "Sweeps",
+    "潮": "Tide",
+    "东": "East",
+    "西": "West",
+    "南": "South",
+    "北": "North",
+    "标点": "Marks",
+    "记录": "Notes",
+    "潮还没推": "The tide has not pushed yet",
+    "下锚": "Anchor",
+    "标都踩了": "Every mark is stood",
+    "被冲走了": "Swept away",
+    "潮退了": "The tide left",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "结局": "Result",
+    "还没有踩到标": "No mark yet",
+    "标只在潮推完之后、你还站着的那一格算数。": "A mark counts only on the cell where you still stand after the push.",
+    "一次被冲比省下两只锚更贵。": "One sweep costs more than two saved anchors.",
+    "把下一步潮往哪边、标在被推之后落在哪一格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which way the next tide pushes, and which cell a mark lands on after the push, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "礁盘结束 · {0}", "en": "Reef closed · {0}", "slots": ["text"] },
+    { "zh": "礁盘结束：{0}", "en": "Reef over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 潮 · 下一步{2} · 标 {3}/{4}",
+      "en": "Tide {0}/{1} · next {2} · marks {3}/{4}",
+      "slots": ["n", "n", "text", "n", "n"]
+    },
+    { "zh": "标 {0}/{1}", "en": "Marks {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "冲 {0}/{1}", "en": "Sweeps {0}/{1}", "slots": ["n", "n"] },
+    { "zh": "{0},{1} 已踩", "en": "{0},{1} stood", "slots": ["n", "n"] },
+    { "zh": "{0},{1} 还没踩", "en": "{0},{1} open", "slots": ["n", "n"] },
+    {
+      "zh": "先向{0}，潮再向{1}。潮会把你顶在墙上。",
+      "en": "Step {0}, then the tide goes {1}. It pins you to the wall.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "先向{0}，潮再把你推到 {1},{2}。",
+      "en": "Step {0}, then the tide pushes you to {1},{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "这一潮停在 {0},{1}。锚还剩 {2}。",
+      "en": "Hold {0},{1} this tide. Anchors left {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    { "zh": "下锚。停在 {0},{1}。", "en": "Anchored. Held {0},{1}.", "slots": ["n", "n"] },
+    { "zh": "潮把你顶在墙上。冲 {0}。", "en": "The tide pinned you. Sweeps {0}.", "slots": ["n"] },
+    { "zh": "潮把你推到 {0},{1}。", "en": "The tide pushed you to {0},{1}.", "slots": ["n", "n"] },
+    { "zh": "踩到标 {0},{1}。", "en": "Stood on mark {0},{1}.", "slots": ["n", "n"] },
+    {
+      "zh": "本局踩了 {0} 个标，被冲 {1} 次。",
+      "en": "This run stood {0} marks and was swept {1} times.",
+      "slots": ["n", "n"]
+    }
+  ]
+}
