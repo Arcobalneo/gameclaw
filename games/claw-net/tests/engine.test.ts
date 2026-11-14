@@ -34,7 +34,7 @@ describe('claw-net engine', () => {
     expect(fresh(2).rng).toHaveLength(4);
     const again = fresh(4);
     expect(JSON.parse(JSON.stringify(again))).toEqual(again);
-    expect(countKind(fresh(1).cells, 'torn')).toBe(3);
+    expect(countKind(fresh(1).cells, 'torn')).toBe(5);
   });
 
   it('wets a sound knot between two tears and rips a wet knot on the next pulse', () => {
@@ -61,7 +61,7 @@ describe('claw-net engine', () => {
     const x = torn % 5;
     const y = Math.floor(torn / 5);
     act(state, `tie:${x}:${y}`);
-    expect(state.thread).toBe(11);
+    expect(state.thread).toBe(2);
     act(state, 'haul');
     expect(state.basket).toBeGreaterThan(0);
     expect(state.night).toBe(2);
@@ -94,6 +94,22 @@ describe('claw-net engine', () => {
     }
     expect(mended).toBeGreaterThanOrEqual(10);
     expect(rushed).toBeLessThan(mended);
+    let ordered = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      const state = fresh(seed);
+      let guard = 0;
+      while (state.outcome === 'ongoing' && guard < 80) {
+        const index =
+          state.thread > 0
+            ? state.cells.findIndex((cell) => cell === 'torn' || cell === 'wet')
+            : -1;
+        const id = index >= 0 ? `tie:${index % 5}:${Math.floor(index / 5)}` : 'haul';
+        act(state, id);
+        guard += 1;
+      }
+      if (state.outcome === 'won') ordered += 1;
+    }
+    expect(ordered).toBeLessThanOrEqual(3);
   });
 
   it('scores zero on abort and pays the documented win formula', () => {

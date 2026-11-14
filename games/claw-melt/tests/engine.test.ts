@@ -102,6 +102,25 @@ describe('claw-melt engine', () => {
     }
     expect(careful).toBeGreaterThanOrEqual(8);
     expect(stack).toBeLessThan(careful);
+    let points = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      const greedy = fresh(seed);
+      let guard = 0;
+      while (greedy.outcome === 'ongoing' && guard < 40) {
+        let best = 'drop:0';
+        let bestPoints = -1;
+        for (let x = 0; x < 6; x += 1) {
+          const preview = previewDrop(greedy, x);
+          if (!preview || preview.points <= bestPoints) continue;
+          bestPoints = preview.points;
+          best = `drop:${x}`;
+        }
+        act(greedy, best);
+        guard += 1;
+      }
+      if (greedy.outcome === 'won') points += 1;
+    }
+    expect(points).toBeLessThanOrEqual(2);
   });
 
   it('scores zero on an abort and a positive integer after a finished run', () => {

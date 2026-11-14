@@ -2,8 +2,9 @@
  * 虾印 / Claw Stamp.
  *
  * A night ferry. Twelve passes, a public kind, and a fare. Edge fares pay more
- * and cost a strike if you stamp them. One pardon waives the fare. Listening
- * spends patience and only rewrites an edge when the detail says so.
+ * and cost a strike if you stamp them, and that stamp does not count as an
+ * approval. One pardon waives the fare and does count. Listening spends
+ * patience and only rewrites an edge when the detail says so.
  */
 
 import {
@@ -54,9 +55,9 @@ export interface StampState {
 const TOTAL = 12;
 
 function rules(difficulty: Difficulty): { quota: number; patience: number; strikeLimit: number } {
-  if (difficulty === 'easy') return { quota: 6, patience: 17, strikeLimit: 4 };
+  if (difficulty === 'easy') return { quota: 5, patience: 17, strikeLimit: 4 };
   if (difficulty === 'hard') return { quota: 8, patience: 13, strikeLimit: 2 };
-  return { quota: 7, patience: 14, strikeLimit: 3 };
+  return { quota: 6, patience: 14, strikeLimit: 3 };
 }
 
 function difficultyOf(value: string | undefined): Difficulty {
@@ -188,7 +189,7 @@ export function statusOf(state: StampState): StatusView {
 
 function stampDetail(kind: Kind, fare: number): string {
   if (kind === 'clear') return `盖章。合法，船资 ${fare}，不记过。`;
-  if (kind === 'edge') return `盖章。擦边，船资 ${fare}，记过 +1，连段中断。`;
+  if (kind === 'edge') return `盖章。擦边，船资 ${fare}，记过 +1，不算放行，连段中断。`;
   return '盖章。禁行，记过 +1，没有船资。';
 }
 
@@ -204,16 +205,22 @@ function listenDetail(kind: Kind): string {
   return '细看。禁行不会变，花 2 耐心。';
 }
 
+function canListen(state: StampState): boolean {
+  const resolvesLeft = state.total - state.index;
+  return state.patience - 2 >= resolvesLeft;
+}
+
 export function suggest(state: StampState): string {
   const traveler = state.traveler;
   if (!traveler || state.outcome !== 'ongoing') return 'stamp';
   if (traveler.kind === 'clear') return 'stamp';
   if (traveler.kind === 'banned') return 'refuse';
-  const need = state.approvals < state.quota;
-  const danger = state.strikes >= state.strikeLimit - 1;
-  if (need && state.pardons > 0) return 'pardon';
-  if (need && !danger) return 'stamp';
-  if (need && danger && state.patience >= 3) return 'listen';
+  const nextFare = state.next?.kind === 'edge' ? state.next.fare : 0;
+  const savePardon = state.pardons > 0 && nextFare > traveler.fare;
+  if (savePardon && canListen(state)) return 'listen';
+  if (savePardon) return 'refuse';
+  if (state.pardons > 0) return 'pardon';
+  if (canListen(state)) return 'listen';
   return 'refuse';
 }
 
@@ -300,7 +307,6 @@ export function act(state: StampState, actionId: string): ActionResult {
       state.fares += traveler.fare;
       bumpStreak(state);
     } else if (traveler.kind === 'edge') {
-      state.approvals += 1;
       state.fares += traveler.fare;
       state.strikes += 1;
       state.streak = 0;
@@ -394,7 +400,7 @@ export function recapOf(state: StampState) {
     timeline: state.timeline.length ? [...state.timeline] : ['还没有旅客离窗'],
     lessons: [
       `本局放行 ${state.approvals}，拦截 ${state.catches}，记过 ${state.strikes}，误判 ${state.wrongs}。`,
-      `擦边船资更高。盖擦边会记过。特赦剩余 ${state.pardons}。细看 ${state.listens} 次。`,
+      `擦边船资更高。盖擦边会记过，而且不算放行。特赦剩余 ${state.pardons}。细看 ${state.listens} 次。`,
       `最好连段 ${state.bestStreak}。合法盖章、禁行拒签和特赦才延续连段。`,
     ],
     memoryPrompt:

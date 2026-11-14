@@ -56,11 +56,12 @@ describe('claw-stamp engine', () => {
     expect(state.strikes).toBe(1);
     expect(state.streak).toBe(0);
     expect(state.fares).toBe(6);
+    expect(state.approvals).toBe(0);
     state.traveler = { name: '网尾', kind: 'edge', fare: 5 };
     act(state, 'pardon');
     expect(state.pardons).toBe(0);
     expect(state.fares).toBe(6);
-    expect(state.approvals).toBe(2);
+    expect(state.approvals).toBe(1);
     expect(state.streak).toBe(1);
     expect(actionsOf(state).some((action) => action.id === 'pardon')).toBe(false);
   });
@@ -115,6 +116,21 @@ describe('claw-stamp engine', () => {
     }
     expect(careful).toBeGreaterThanOrEqual(12);
     expect(greedy).toBeLessThan(careful);
+    let fare = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      const fareLine = play(fresh(seed), (state) => {
+        const traveler = state.traveler;
+        if (!traveler || traveler.kind === 'clear') return 'stamp';
+        if (traveler.kind === 'banned') return 'refuse';
+        return traveler.fare >= 5 ? 'stamp' : 'refuse';
+      });
+      if (fareLine.outcome === 'won') fare += 1;
+    }
+    let carefulDozen = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      if (play(fresh(seed), suggest).outcome === 'won') carefulDozen += 1;
+    }
+    expect(carefulDozen).toBeGreaterThanOrEqual(fare + 5);
   });
 
   it('scores zero until the run ends, including an abort', () => {
