@@ -23,3 +23,5 @@ settlement_reports/
 .env.local
 .venv/
 .tmp/
+
+.wrangler/
