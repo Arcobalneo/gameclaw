@@ -1,0 +1,129 @@
+{
+  "terms": {
+    "贝": "Shell",
+    "螺": "Spiral",
+    "星": "Star",
+    "盐": "Salt",
+    "网": "Net",
+    "灯": "Lamp",
+    "已标": "labeled",
+    "未标": "plain"
+  },
+  "exact": {
+    "虾仓 · 仓库结算": "Claw Stow · warehouse recap",
+    "仓还开着": "The warehouse is open",
+    "单子交完了": "The slips are filled",
+    "单子没交够": "Not enough slips filled",
+    "取错太多": "Too many mispicks",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "仓库": "Warehouse",
+    "取对": "Right",
+    "取错": "Mispicks",
+    "标签": "Marks",
+    "连段": "Streak",
+    "腐坏": "Spoil",
+    "眼下": "Now",
+    "仓格": "Bays",
+    "记录": "Notes",
+    "结局": "Result",
+    "放过": "Hold",
+    "没有更多单据": "No more slips",
+    "还没有搬货": "Nothing moved yet",
+    "还没有取出一格": "Nothing pulled yet",
+    "1 标签": "1 mark",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "提取单写的是字。取出别的字，或者放过这张单，都算取错。": "An order names a glyph. Pulling another glyph, or holding the slip, is a mispick.",
+    "没人点的货放久了会自己腾出格子，那一次不算取错。标签让一格放得更久。": "A crate nobody ordered eventually leaves the bay, and that is not a mispick. A mark lets a bay stay longer.",
+    "把本局哪一张提取单来的时候货已经不在架上写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which order arrived after its crate had already left the shelf into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "仓库结束 · {0}", "en": "Warehouse closed · {0}", "slots": ["text"] },
+    { "zh": "仓库结束：{0}", "en": "Warehouse over: {0}", "slots": ["text"] },
+    {
+      "zh": "单据 {0}/{1} · 取对 {2}/{3} · 取错 {4}",
+      "en": "Slip {0}/{1} · right {2}/{3} · mispicks {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    { "zh": "第 {0} 格空着", "en": "Bay {0} empty", "slots": ["n"] },
+    {
+      "zh": "第 {0} 格 {1} 年龄 {2} {3}",
+      "en": "Bay {0} {1} age {2} {3}",
+      "slots": ["n", "text", "n", "text"]
+    },
+    { "zh": "进货 {0}", "en": "Inbound {0}", "slots": ["text"] },
+    { "zh": "提取 {0}", "en": "Order {0}", "slots": ["text"] },
+    { "zh": "下一张 {0}", "en": "Next {0}", "slots": ["text"] },
+    { "zh": "放入 {0}", "en": "Shelve {0}", "slots": ["n"] },
+    { "zh": "贴标 {0}", "en": "Mark {0}", "slots": ["n"] },
+    { "zh": "换掉 {0}", "en": "Swap {0}", "slots": ["n"] },
+    { "zh": "取出 {0}", "en": "Pull {0}", "slots": ["n"] },
+    {
+      "zh": "把{0}放进第 {1} 格，不贴标签。",
+      "en": "Put {0} in bay {1} with no mark.",
+      "slots": ["text", "n"]
+    },
+    {
+      "zh": "把{0}放进第 {1} 格并贴标签。标签放得更久。",
+      "en": "Put {0} in bay {1} and mark it. A mark lasts longer.",
+      "slots": ["text", "n"]
+    },
+    {
+      "zh": "扔掉第 {0} 格的{1}，改放{2}。",
+      "en": "Drop bay {0}'s {1} and put {2} there instead.",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 格是{1}，和单据一样。",
+      "en": "Bay {0} is {1}, which matches the slip.",
+      "slots": ["n", "text"]
+    },
+    {
+      "zh": "第 {0} 格是{1}，单据要的是{2}。取错。",
+      "en": "Bay {0} is {1}. The slip wants {2}. That is a mispick.",
+      "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "这张提取单不要了，记一次取错。单据要的是{0}。",
+      "en": "Drop this order and take a mispick. It wanted {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 格的{1}放久了，腾出来。",
+      "en": "Bay {0}'s {1} sat too long and left.",
+      "slots": ["n", "text"]
+    },
+    { "zh": "换掉第 {0} 格的{1}。", "en": "Swapped out bay {0}'s {1}.", "slots": ["n", "text"] },
+    {
+      "zh": "把{0}贴标放进第 {1} 格。标签还剩 {2}。",
+      "en": "Marked {0} into bay {1}. Marks left {2}.",
+      "slots": ["text", "n", "n"]
+    },
+    { "zh": "把{0}放进第 {1} 格。", "en": "Put {0} in bay {1}.", "slots": ["text", "n"] },
+    {
+      "zh": "取出第 {0} 格的{1}。连段 {2}。",
+      "en": "Pulled {1} from bay {0}. Streak {2}.",
+      "slots": ["n", "text", "n"]
+    },
+    {
+      "zh": "第 {0} 格不是{1}。取错 {2}。",
+      "en": "Bay {0} is not {1}. Mispicks {2}.",
+      "slots": ["n", "text", "n"]
+    },
+    { "zh": "放过{0}。取错 {1}。", "en": "Held {0}. Mispicks {1}.", "slots": ["text", "n"] },
+    { "zh": "取对 {0}", "en": "Right {0}", "slots": ["text"] },
+    { "zh": "取错 {0}", "en": "Mispick {0}", "slots": ["text"] },
+    { "zh": "放过 {0}", "en": "Held {0}", "slots": ["text"] },
+    {
+      "zh": "本局取对 {0}，取错 {1}，最好连段 {2}。",
+      "en": "This run pulled {0} right, mispicked {1}, best streak {2}.",
+      "slots": ["n", "n", "n"]
+    }
+  ]
+}

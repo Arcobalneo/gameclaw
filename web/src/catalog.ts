@@ -249,6 +249,38 @@ const LOOK: Record<
     tagZh: '先走，潮再推没下锚的。',
     tagEn: 'Step, then the tide pushes what is not anchored.',
   },
+  'claw-lamp': {
+    accent: '#ffb45a',
+    ink: '#100c18',
+    goal: '立灯照亮水洼，两盏灯不能互相看见。',
+    goalEn: 'Light the pools. Two lanterns must not see each other.',
+    tagZh: '灯笼不能互相看见。',
+    tagEn: 'Lanterns must not see each other.',
+  },
+  'claw-raft': {
+    accent: '#e8a05a',
+    ink: '#1a1020',
+    goal: '把箱子放进左舷、中舱或右舷，别让筏翻。',
+    goalEn: 'Stash each crate port, mid, or starboard without capsizing.',
+    tagZh: '偏重的一侧会落水。',
+    tagEn: 'The heavy side dumps.',
+  },
+  'claw-stow': {
+    accent: '#d8a868',
+    ink: '#140e08',
+    goal: '按单据取出正确的一格，别取错。',
+    goalEn: 'Pull the bay the slip names. A wrong bay is a mispick.',
+    tagZh: '先上架，再按单据取。',
+    tagEn: 'Shelve it, then pull the slip.',
+  },
+  'claw-glass': {
+    accent: '#c8e4ff',
+    ink: '#080c18',
+    goal: '转动镜子，让月光束照到神龛。',
+    goalEn: 'Turn the mirrors so the moonbeam hits the shrine.',
+    tagZh: '三面镜子，一道月光束。',
+    tagEn: 'Three mirrors. One moonbeam.',
+  },
 };
 
 export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])

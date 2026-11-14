@@ -28,6 +28,10 @@ export const GAME_IDS = [
   'claw-delve',
   'claw-fair',
   'claw-reef',
+  'claw-lamp',
+  'claw-raft',
+  'claw-stow',
+  'claw-glass',
 ] as const;
 
 export type GameId = (typeof GAME_IDS)[number];

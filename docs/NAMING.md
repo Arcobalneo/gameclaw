@@ -14,7 +14,7 @@ machine id, source path, and package are one coordinated identity.
   `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`,
   `conquest`, `leap`, `burger`, `stamp`, `melt`, `net`, `beat`, `count`,
   `mask`, `clock`, `flip`, `round`, `coil`, `sum`, `berth`, `delve`, `fair`,
-  and `reef`.
+  `reef`, `lamp`, `raft`, `stow`, and `glass`.
 - Whenever both display names appear, use **`虾× (English Name)`**, for example
   `虾走 (Claw Trek)` or `虾印 (Claw Stamp)`. This is the required per-game
   README title and the preferred paired form in user-facing documentation.
@@ -70,8 +70,8 @@ Durable Object migration tag for that fold.
 
 `claw-stamp`, `claw-melt`, `claw-net`, `claw-beat`, `claw-count`, `claw-mask`,
 `claw-clock`, `claw-flip`, `claw-round`, `claw-coil`, `claw-sum`, `claw-berth`,
-`claw-delve`, `claw-fair`, and `claw-reef` were born on the current identity
-and have no former id.
+`claw-delve`, `claw-fair`, `claw-reef`, `claw-lamp`, `claw-raft`, `claw-stow`,
+and `claw-glass` were born on the current identity and have no former id.
 
 ## Intentional identity refreshes
 

@@ -416,6 +416,62 @@
         "zh": "标×90 + 剩余锚×10 − 被冲×70。踩完 +280。一次被冲比省下两只锚更贵。中止为 0。",
         "en": "Marks×90 + anchors left×10 − sweeps×70. Standing on every mark adds 280. One sweep costs more than two saved anchors. Abort is 0."
       }
+    },
+    {
+      "id": "claw-lamp",
+      "name": "虾灯",
+      "englishName": "Claw Lamp",
+      "tagline": "灯笼不能互相看见",
+      "summary": "黑浅滩上的柱子照亮水洼。两根能看见彼此的柱不能同时立着灯笼。潮水只够很少几次挪动，立错了再收回来比省下灯笼更贵。",
+      "genres": ["puzzle", "placement", "turn-based"],
+      "source_dir": "games/claw-lamp",
+      "status": "stable",
+      "score": {
+        "zh": "封上的段×100 + 省下灯笼×8 − 挪灯×18。全部封上 +360。没封完只留三分之一。一次挪灯比两只省下的灯笼更贵。中止为 0。",
+        "en": "Stages×100 + lamps saved×8 − lifts×18. Sealing every stage adds 360. A failed night keeps one third. One lift costs more than two saved lamps. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-raft",
+      "name": "虾筏",
+      "englishName": "Claw Raft",
+      "tagline": "左右一偏，重的一侧就落水",
+      "summary": "夜筏只有左舷、中舱、右舷。每一箱的重量和这一阵风都先看见。偏重的一侧会落水，再偏就翻。把货挪进中舱要花一只手，箱子还停在码头。",
+      "genres": ["puzzle", "balance", "turn-based"],
+      "source_dir": "games/claw-raft",
+      "status": "stable",
+      "score": {
+        "zh": "货重×25 + 平稳×20 − 落水×60。靠岸 +380。没靠岸只留三分之一。一次落水比两成货重更贵。中止为 0。",
+        "en": "Cargo×25 + calm arrivals×20 − dumps×60. Making shore adds 380. A failed crossing keeps one third. One dump costs more than two cargo. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-stow",
+      "name": "虾仓",
+      "englishName": "Claw Stow",
+      "tagline": "先上架，再按单据取",
+      "summary": "六格货架。先进一箱垫货，再进单据要的那一箱，然后提取。取出别的字，或者放过这张单，都算取错。没人点的货放久了会自己腾出来，那一次不算取错。",
+      "genres": ["puzzle", "memory", "turn-based"],
+      "source_dir": "games/claw-stow",
+      "status": "stable",
+      "score": {
+        "zh": "取对×30 + 最好连段×15 − 取错×70。交完 +340。没交完只留三分之一。一次取错比两次取对更贵。中止为 0。",
+        "en": "Right pulls×30 + best streak×15 − mispicks×70. Filling the slips adds 340. A failed shift keeps one third. One mispick costs more than two right pulls. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-glass",
+      "name": "虾镜",
+      "englishName": "Claw Glass",
+      "tagline": "三面镜子，一道月光束",
+      "summary": "月庭里三面镜子。转动一面，云就走一步。光束照到神龛才算点亮。没照到就放光，记一次错照，而且比两座神龛更贵。云盖住神龛，这一庭就完了。",
+      "genres": ["puzzle", "aiming", "turn-based"],
+      "source_dir": "games/claw-glass",
+      "status": "stable",
+      "score": {
+        "zh": "点亮×80 − 错照×180。全部点亮 +320。没点亮完只留三分之一。一次错照比两座神龛更贵。中止为 0。",
+        "en": "Shrines×80 − faults×180. Lighting every court adds 320. A failed night keeps one third. One fault costs more than two shrines. Abort is 0."
+      }
     }
   ]
 }

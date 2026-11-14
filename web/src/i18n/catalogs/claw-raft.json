@@ -1,0 +1,91 @@
+{
+  "terms": {
+    "左舷": "port",
+    "中舱": "mid",
+    "右舷": "starboard"
+  },
+  "exact": {
+    "虾筏 · 夜渡结算": "Claw Raft · raft recap",
+    "筏还在浪上": "The raft is still out",
+    "筏靠岸了": "The raft made shore",
+    "货不够": "Not enough cargo",
+    "筏翻了": "The raft capsized",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "夜筏": "Raft",
+    "货重": "Cargo",
+    "左舷": "Port",
+    "中舱": "Mid",
+    "右舷": "Starboard",
+    "落水": "Dumps",
+    "手": "Hands",
+    "平稳": "Calm",
+    "这一箱": "This crate",
+    "舱": "Holds",
+    "记录": "Notes",
+    "结局": "Result",
+    "没有下一箱": "No crate left",
+    "还没有装舱": "Nothing stowed yet",
+    "还没有装上一箱": "No crate stowed yet",
+    "挪一成": "Shift",
+    "1 只手": "1 hand",
+    "会平稳": "it will sit calm",
+    "重的一侧会落水": "the heavy side will dump",
+    "筏会翻": "the raft will capsize",
+    "中舱已经满了": "mid is full",
+    "还能稳住": "it will hold",
+    "向左": "to port",
+    "向右": "to starboard",
+    "正中": "even",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "阵风在装舱前就能看见。把重箱放进已经偏重的一侧，会落水甚至翻筏。": "The gust is visible before you stow. A heavy crate on the heavy side dumps, and can capsize the raft.",
+    "中舱不进左右倾侧，但只能装 4 成。挪一成要花一只手，箱子还停在码头。": "Mid does not tilt the raft, and it holds only 4. Shifting one spends a hand and leaves the crate on the dock.",
+    "把本局哪一阵风把重的一侧掀下水写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which gust dumped the heavy side into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "夜渡结束 · {0}", "en": "Crossing closed · {0}", "slots": ["text"] },
+    { "zh": "夜渡结束：{0}", "en": "Crossing over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/8 箱 · 货重 {1}/{2} · 阵风 {3}",
+      "en": "Crate {0}/8 · cargo {1}/{2} · gust {3}",
+      "slots": ["n", "n", "n", "text"]
+    },
+    { "zh": "重量 {0}，想放{1}", "en": "Weight {0}, prefers {1}", "slots": ["n", "text"] },
+    { "zh": "阵风 {0}", "en": "Gust {0}", "slots": ["text"] },
+    { "zh": "左舷 {0}", "en": "Port {0}", "slots": ["n"] },
+    { "zh": "中舱 {0}/4", "en": "Mid {0}/4", "slots": ["n"] },
+    { "zh": "右舷 {0}", "en": "Starboard {0}", "slots": ["n"] },
+    {
+      "zh": "把这一箱放进{0}。{1}。",
+      "en": "Stow this crate {0}. {1}.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "把{0}的一成货挪进中舱。这一箱还在码头，花 1 只手。",
+      "en": "Shift one from {0} into mid. The crate stays on the dock and spends 1 hand.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "挪了一成进中舱。手还剩 {0}。",
+      "en": "Shifted one into mid. Hands left {0}.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "第 {0} 箱放进{1}，阵风之后{2}。货重 {3}。",
+      "en": "Crate {0} went {1}. After the gust, {2}. Cargo {3}.",
+      "slots": ["n", "text", "text", "n"]
+    },
+    { "zh": "第 {0} 箱 {1}", "en": "Crate {0} {1}", "slots": ["n", "text"] },
+    {
+      "zh": "本局靠岸时货重 {0}，平稳 {1} 次，落水 {2} 次。",
+      "en": "At shore the cargo was {0}, with {1} calm arrivals and {2} dumps.",
+      "slots": ["n", "n", "n"]
+    }
+  ]
+}
