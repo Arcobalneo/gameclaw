@@ -13,7 +13,7 @@ import { makeCreature, SPECIES } from './species';
 import { rollAffixSlots } from './workshop';
 
 export const GAME_ID = 'shrimp-catch';
-export const GAME_VERSION = '2.8.0';
+export const GAME_VERSION = '3.0.0';
 
 export type Difficulty = 'easy' | 'normal' | 'hard';
 

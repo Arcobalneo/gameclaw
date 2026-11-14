@@ -18,6 +18,7 @@
 </p>
 
 <p align="center">
+  <a href="https://arcobalneo.github.io/gameclaw/"><strong>▶ 浏览器直接玩</strong></a> ·
   <a href="README.md">English</a> ·
   <a href="https://github.com/Arcobalneo/gameclaw/releases/latest">下载</a> ·
   <a href="SKILL.md">Agent 技能</a> ·
@@ -93,6 +94,18 @@ GameClaw 是一个包含十一款终端游戏的 monorepo。它的第一性原�
 每个压缩包内含二进制、`README.md`、`LICENSE` 与 `SHA256SUMS`。
 不需要运行时、不需要安装器、不需要管理员权限。
 
+## 浏览器直接玩（免安装）
+
+**<https://arcobalneo.github.io/gameclaw/>** —— 全部游戏，免费，一个像素风门户里就能玩。
+
+- **人类**：点击封面打开游戏窗口；鼠标点击，或用 `1`–`9`、方向键/WASD、`Enter`/`Space` 操作。
+- **Agent**：每个游戏窗口都有可一键复制的中英双语提示词。页面通过 `document.modelContext`
+  暴露 WebMCP 工具（`list_games`、`open_game`、`new_game`、`get_state`、`list_actions`、
+  `act`、`recap`），同样的调用也挂在 `window.gameclaw` 上，方便用脚本驱动浏览器的 agent。
+  Agent 的每一步都会在人类正在看的同一个窗口里播放动画。
+- 没有托管的远程 MCP 端点（GitHub Pages 只能放静态文件）；agent 在浏览器标签页里通过
+  WebMCP 接入。详见 [`docs/web-portal.md`](docs/web-portal.md)。
+
 ## 30 秒开玩
 
 把下面这段直接粘给你的 agent：
@@ -152,7 +165,7 @@ cd shrimp-heist-windows-x64
 ```json
 {
   "ok": true,
-  "game": { "id": "shrimp-trek", "version": "2.8.0" },
+  "game": { "id": "shrimp-trek", "version": "3.0.0" },
   "turn": 3,
   "outcome": "ongoing",
   "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
@@ -236,6 +249,7 @@ bun games/shrimp-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
 | 文档 | 内容 |
 |---|---|
 | [`docs/repository-architecture.md`](docs/repository-architecture.md) | 分层、依赖规则、仓库不变量 |
+| [`docs/web-portal.md`](docs/web-portal.md) | 浏览器门户架构、操作方式、WebMCP 工具 |
 | [`docs/release-flow.md`](docs/release-flow.md) | 本地构建、CI 矩阵、资产命名 |
 | [`docs/NAMING.md`](docs/NAMING.md) | 强制的 Shrimp 系列机器 id 与显示命名规范 |
 | [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | 给 agent 与人的仓库规范 |

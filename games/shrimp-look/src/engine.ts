@@ -22,7 +22,7 @@ import {
 import type { Ending, JournalEntry, LookState, Phenomenon } from './model';
 
 export const GAME_ID = 'shrimp-look';
-export const GAME_VERSION = '2.8.0';
+export const GAME_VERSION = '3.0.0';
 
 export const MAX_FOCUS = 9;
 export const MAX_NERVE = 10;

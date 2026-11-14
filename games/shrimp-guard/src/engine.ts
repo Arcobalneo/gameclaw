@@ -103,7 +103,7 @@ export interface TowerDefenseState {
 }
 
 export const GAME_ID = 'shrimp-guard';
-export const GAME_VERSION = '2.8.0';
+export const GAME_VERSION = '3.0.0';
 
 export const OUTCOME_TEXT: Record<Outcome, string> = {
   ongoing: '进行中',
