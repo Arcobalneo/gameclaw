@@ -276,8 +276,8 @@ const LOOK: Record<
   'claw-glass': {
     accent: '#c8e4ff',
     ink: '#080c18',
-    goal: '转动镜子，让月光束照到神龛。',
-    goalEn: 'Turn the mirrors so the moonbeam hits the shrine.',
+    goal: '转动镜子，让月光束照到神龛。云盖住的镜子转不了。',
+    goalEn: 'Turn the mirrors onto the shrine. A clouded mirror will not turn.',
     tagZh: '三面镜子，一道月光束。',
     tagEn: 'Three mirrors. One moonbeam.',
   },

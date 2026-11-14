@@ -32,6 +32,9 @@
     "等云": "Wait",
     "1 节拍": "1 beat",
     "还没有转镜": "No mirror turned yet",
+    "被云挡住": "under the cloud",
+    "云正盖住的镜子转不了。": "A mirror under the cloud cannot be turned.",
+    "转镜子要花一拍。云盖住的镜子转不了。": "Turning a mirror spends a beat. A mirror under the cloud cannot be turned.",
     "还没有点亮一座": "No shrine lit yet",
     "现在放光会照到神龛。": "Firing now hits the shrine.",
     "镜子不动，只让云走一步。": "Leave the mirrors and let the cloud step.",
@@ -54,6 +57,11 @@
       "en": "Court {0}/{1} · beats {2} · beam {3}",
       "slots": ["n", "n", "n", "text"]
     },
+    {
+      "zh": "第 {0}/{1} 庭 · 光束{2}",
+      "en": "Court {0}/{1} · beam {2}",
+      "slots": ["n", "n", "text"]
+    },
     { "zh": "转 {0}", "en": "Turn {0}", "slots": ["n"] },
     {
       "zh": "转动第 {0} 面镜子。云走一步之后，光束{1}。",
@@ -64,6 +72,11 @@
       "zh": "现在放光会{0}，并记一次错照。",
       "en": "Firing now {0}, and that is a fault.",
       "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 面 {1}，在 {2},{3}，被云挡住",
+      "en": "Mirror {0} is {1} at {2},{3}, under the cloud",
+      "slots": ["n", "text", "n", "n"]
     },
     {
       "zh": "第 {0} 面 {1}，在 {2},{3}",

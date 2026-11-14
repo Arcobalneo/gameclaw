@@ -1,7 +1,15 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, beamEnd, createRun, type GlassState, ladderScore, suggest } from '../src/engine';
+import {
+  act,
+  actionsOf,
+  beamEnd,
+  createRun,
+  type GlassState,
+  ladderScore,
+  suggest,
+} from '../src/engine';
 
 function play(seed: number, policy: (state: GlassState) => string) {
   const state = createRun({ seed });
@@ -52,7 +60,12 @@ describe('claw-glass engine', () => {
     let blind = 0;
     for (let seed = 1; seed <= 8; seed += 1) {
       if (play(seed, suggest).outcome === 'won') careful += 1;
-      if (play(seed, () => 'turn:0').outcome === 'won') blind += 1;
+      if (
+        play(seed, (state) =>
+          actionsOf(state).some((action) => action.id === 'turn:0') ? 'turn:0' : 'wait',
+        ).outcome === 'won'
+      )
+        blind += 1;
     }
     expect(careful).toBeGreaterThanOrEqual(6);
     expect(blind).toBeLessThan(careful);

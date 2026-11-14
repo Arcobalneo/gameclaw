@@ -464,7 +464,7 @@
       "name": "虾镜",
       "englishName": "Claw Glass",
       "tagline": "三面镜子，一道月光束",
-      "summary": "月庭里三面镜子。转动一面，云就走一步。光束照到神龛才算点亮。没照到就放光，记一次错照，而且比两座神龛更贵。云盖住神龛，这一庭就完了。",
+      "summary": "月庭里三面镜子。转动一面，云就走一步。云盖住的镜子转不了。光束照到神龛才算点亮。没照到就放光，记一次错照，而且比两座神龛更贵。",
       "genres": ["puzzle", "aiming", "turn-based"],
       "source_dir": "games/claw-glass",
       "status": "stable",
