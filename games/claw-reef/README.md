@@ -16,7 +16,7 @@ Marks×90 + anchors left×10 − sweeps×70. Standing on every mark adds 280. On
 
 ## 动作
 
-`step:n` `step:e` `step:s` `step:w` 先走一格。`anchor` 这一潮停住，花一只锚。detail 写明潮推完落在哪，或者会不会顶墙。
+`step:n` `step:e` `step:s` `step:w` 先走一格。`anchor` 这一潮停住，花一只锚。detail 写明潮推完落在哪、那一格是不是还没踩的标，或者会不会顶墙、推上海胆。
 
 ## 状态
 

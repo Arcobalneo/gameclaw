@@ -55,6 +55,16 @@
       "slots": ["text", "text"]
     },
     {
+      "zh": "先向{0}，潮再把你推到 {1},{2}。那一格是还没踩的标。",
+      "en": "Step {0}, then the tide pushes you to {1},{2}. That cell is an open mark.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "先向{0}，潮再把你推到 {1},{2}。那一格没有标。",
+      "en": "Step {0}, then the tide pushes you to {1},{2}. That cell has no mark.",
+      "slots": ["text", "n", "n"]
+    },
+    {
       "zh": "先向{0}，潮再把你推到 {1},{2}。",
       "en": "Step {0}, then the tide pushes you to {1},{2}.",
       "slots": ["text", "n", "n"]

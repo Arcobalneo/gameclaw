@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { act, createRun, forecastStep, suggest } from '../src/engine';
+import { act, actionsOf, createRun, forecastStep, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -37,6 +37,21 @@ describe('claw-reef engine', () => {
     expect(state.got).toEqual(['1,1']);
     expect(state.x).toBe(1);
     expect(state.anchors).toBe(3);
+  });
+
+  it('says whether the landing is still an open mark', () => {
+    const state = createRun({ seed: 1 });
+    state.x = 1;
+    state.y = 1;
+    state.tide = 0;
+    state.goals = [[3, 1]];
+    state.got = [];
+    state.urchins = [];
+    const east = actionsOf(state).find((action) => action.id === 'step:e');
+    expect(east?.detail).toContain('还没踩的标');
+    state.goals = [[1, 2]];
+    const empty = actionsOf(state).find((action) => action.id === 'step:e');
+    expect(empty?.detail).toContain('没有标');
   });
 
   it('forecasts the cell you occupy after the tide', () => {

@@ -43,8 +43,28 @@ describe('claw-lamp engine', () => {
     expect(differ).toBe(true);
   });
 
+  it('opens different seeds on different shoals', () => {
+    const seen = new Set<string>();
+    for (let seed = 1; seed <= 12; seed += 1) {
+      seen.add(
+        createRun({ seed })
+          .posts.map((post) => post.covers.join('.'))
+          .join('|'),
+      );
+    }
+    expect(seen.size).toBeGreaterThan(1);
+  });
+
   it('refuses a post that can see a standing lantern and seals a lit shoal', () => {
-    const state = createRun({ seed: 1 });
+    let state = createRun({ seed: 1 });
+    for (let seed = 1; seed <= 16; seed += 1) {
+      const candidate = createRun({ seed });
+      const post = candidate.posts[0];
+      if (post && post.covers.length >= 3 && post.sees.includes(3)) {
+        state = candidate;
+        break;
+      }
+    }
     const trap = actionsOf(state).find((action) => action.id === 'place:0');
     expect(trap).toBeTruthy();
     expect(actionsOf(state)[0]?.id).toBe('place:0');
