@@ -2137,1572 +2137,992 @@
     {
       "zh": "营地 · {0}/{1} · 深渊最深 {2} 层",
       "en": "Camp · {0}/{1} · Abyss deepest: floor {2}",
-      "slots": [
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "选择探索区域 · 已解锁 {0} 片海域",
       "en": "Choose a zone · {0} seas unlocked",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "选择子区域 · {0}",
       "en": "Choose an area · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "探索 {0}/{1} · 第 {2}/{3} 步",
       "en": "Explore {0}/{1} · step {2}/{3}",
-      "slots": [
-        "n",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n", "n", "n"]
     },
     {
       "zh": "探索 {0}/{1}",
       "en": "Explore {0}/{1}",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "遭遇 · {0} Lv{1} · {2}",
       "en": "Encounter · {0} Lv{1} · {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "捕捉 · {0} · HP {1}",
       "en": "Catch · {0} · HP {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "深渊第 {0} 层",
       "en": "Abyss floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "战斗 · {0} · {1} vs {2}",
       "en": "Battle · {0} · {1} vs {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "升级 · {0} 选择技能",
       "en": "Level up · {0} choose a skill",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "队伍与仓库 · 队伍 {0}/6 · 仓库 {1}",
       "en": "Party / storage · party {0}/6 · storage {1}",
-      "slots": [
-        "n",
-        "text"
-      ]
+      "slots": ["n", "text"]
     },
     {
       "zh": "词条工坊 · {0} · {1} 槽",
       "en": "Affix workshop · {0} · {1} slots",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "深渊入口 · 最深 {0} 层 · 通关目标 {1} 层",
       "en": "Abyss gate · deepest floor {0} · clear target floor {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "深渊第 {0} 层待命 · 已通过 {1} 层 · 最深 {2}",
       "en": "Abyss floor {0}, standing by · cleared {1} · deepest {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "本局结束 · {0}",
       "en": "Run over · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} {1} Lv{2} {3} HP{4}/{5} 词条{6} 技能{7}{8}",
       "en": "{0} {1} Lv{2} {3} HP{4}/{5} affixes{6} skills{7}{8}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "n", "n", "text", "text", "text"]
     },
     {
       "zh": "仓库 {0} 只：{1}{2}",
       "en": "Storage: {0} · {1}{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "捕捉率：{0}",
       "en": "Catch rate: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "可用技能：{0}",
       "en": "Skills: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "回合 {0} · {1}",
       "en": "Turn {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 当前技能：{1}（{2}/4）",
       "en": "{0} current skills: {1} ({2}/4)",
-      "slots": [
-        "text",
-        "text",
-        "n"
-      ]
+      "slots": ["text", "text", "n"]
     },
     {
       "zh": "[{0}] {1} · {2} · 威力{3} · {4}",
       "en": "[{0}] {1} · {2} · power {3} · {4}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} {1} Lv{2} EXP {3}/{4} 技能 {5}",
       "en": "{0} {1} Lv{2} EXP {3}/{4} skills {5}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "n", "n", "text"]
     },
     {
       "zh": "  词条：{0}",
       "en": "  Affixes: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} {1} Lv{2} HP{3}/{4} 词条{5}",
       "en": "{0} {1} Lv{2} HP{3}/{4} affixes{5}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "n", "n", "text"]
     },
     {
       "zh": "槽{0} {1}{2}",
       "en": "Slot {0} {1}{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "费用：重投 {0} / 升阶 {1} 起 / 封印 {2} / 解封 {3}",
       "en": "Costs: reroll {0} / upgrade from {1} / seal {2} / unseal {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "下一层：第 {0} 层 [{1}] · 敌人等级约 Lv{2}",
       "en": "Next: floor {0} [{1}] · enemy about Lv{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "疫病{0}层 死亡率{1}%",
       "en": "Plague {0} stacks, death chance {1}%",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "污染{0}",
       "en": "Contamination {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "可用药：{0}",
       "en": "Tonics: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "图鉴 {0}/111 已捕 · {1}/111 已见 · 灵光 {2}",
       "en": "Dex {0}/111 caught · {1}/111 seen · gleam {2}",
-      "slots": [
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "捕获 {0} · 战斗 {1} · 深渊 {2} 次 · 永久死亡 {3}",
       "en": "Caught {0} · battles {1} · abyss runs {2} · permadeaths {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "再走 {0} 步可能遭遇野生虾米。",
       "en": "{0} more step(s) until a possible wild encounter.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} {1} · 疫病{2} · 污染{3}",
       "en": "{0} {1} · plague {2} · contamination {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "每 10 层 BOSS，每 5 层精英；战斗内 HP 归零永久死亡。通关目标：第 {0} 层。",
       "en": "A boss every 10 floors, an elite every 5. HP to 0 in battle is permadeath. Clear target: floor {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "当前最深 {0} 层；撤退会按疫病层数掷死亡骰。",
       "en": "Deepest so far: floor {0}. Retreat rolls a death die by plague stacks.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从 {0}/{1} 开始按步数推进，遇野生虾米后进入遭遇。",
       "en": "Advance step by step from {0}/{1}; a wild shrimp starts an encounter.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "跳过步数，在当前区域 {0}/{1} 直接抽一次遭遇（可能落空）。",
       "en": "Skip steps and draw one encounter in {0}/{1} (it may come up empty).",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "进入深渊（最深 {0} 层）",
       "en": "Enter the Abyss (deepest: floor {0})",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "重投 {0}；升阶 {1} 起；封印 {2}。",
       "en": "Reroll {0}; upgrade from {1}; seal {2}.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "队伍 {0}/6，仓库 {1} 只；可换位、治疗、退回仓库。",
       "en": "Party {0}/6, storage {1}. You may swap, heal, or return one to storage.",
-      "slots": [
-        "n",
-        "text"
-      ]
+      "slots": ["n", "text"]
     },
     {
       "zh": "当前 {0}/{1}，再走 {2} 步可能遭遇。",
       "en": "Now at {0}/{1}. {2} more step(s) until a possible encounter.",
-      "slots": [
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "对手 {0} Lv{1} HP{2}/{3}。战斗胜利给 EXP 与掉落。",
       "en": "Foe {0} Lv{1} HP{2}/{3}. A win grants EXP and drops.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n"]
     },
     {
       "zh": "预计 {0} {1}；失败会进入战斗。",
       "en": "Estimated {0} {1}; failure starts a battle.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "投出 {0}",
       "en": "Throw {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "捕捉率 {0}；消耗 {1}×1，失败后进入战斗。",
       "en": "Catch rate {0}; spends 1× {1}; failure starts a battle.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} · 威力{1} · 命中{2}% · {3}",
       "en": "{0} · power {1} · accuracy {2}% · {3}",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "text"]
     },
     {
       "zh": "换上 {0}",
       "en": "Switch to {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "Lv{0} HP{1}/{2}；换手后敌方自由攻击。",
       "en": "Lv{0} HP{1}/{2}; the foe gets a free attack after you switch.",
-      "slots": [
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "n", "n"]
     },
     {
       "zh": "使用 {0}",
       "en": "Use {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "为当前出战虾米回复 {0}% 最大 HP；敌方随后攻击。",
       "en": "Restore {0}% of the active shrimp's max HP; the foe then attacks.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "投 {0}",
       "en": "Throw {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "捕捉率 {0}；失败会被敌方反击。",
       "en": "Catch rate {0}; failure lets the foe counter.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} · 威力{1} · {2}",
       "en": "{0} · power {1} · {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "治疗 {0}",
       "en": "Heal {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "回复 25% 最大 HP（小潮药）；当前 {0}/{1}。",
       "en": "Restore 25% max HP (Minor Tide Tonic); now {0}/{1}.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "换入 {0} Lv{1}",
       "en": "Swap in {0} Lv{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "替换 {0} Lv{1}（队伍槽 {2}）。",
       "en": "Replace {0} Lv{1} (party slot {2}).",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "填入空槽 {0}。",
       "en": "Fill empty slot {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "退回仓库 {0}",
       "en": "Return {0} to storage",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "把队伍槽 {0} 的虾米放回仓库。",
       "en": "Move the shrimp in party slot {0} back to storage.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "全队回复 {0}% 最大 HP。",
       "en": "The whole party restores {0}% max HP.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "净化一只虾米的疫病与深渊污染；持有 {0}。",
       "en": "Cleanse one shrimp of plague and abyss contamination. You have {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "净疫盐×{0}",
       "en": "Cleansing Salt ×{0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "净化 {0}",
       "en": "Cleanse {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "疫病{0} · 污染{1}",
       "en": "plague {0} · contamination {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "词条 {0}；材料 甲核{1} 灵晶{2} 潮石{3}",
       "en": "Affix {0}; materials: cores {1}, gems {2}, tidestones {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "重投槽{0}",
       "en": "Reroll slot {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "保持 {0} 品阶随机换词条；当前 {1}。",
       "en": "Reroll the affix, keeping the {0} tier; currently {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "升阶槽{0}",
       "en": "Upgrade slot {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "把 {0}（{1}）升到下一品阶。",
       "en": "Upgrade {0} ({1}) to the next tier.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "封印槽{0}",
       "en": "Seal slot {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "解封槽{0}",
       "en": "Unseal slot {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从第 1 层开始，目标第 {0} 层；战斗内 HP 归零永久死亡。",
       "en": "Start at floor 1, target floor {0}. HP to 0 in battle is permadeath.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "前往第 {0} 层 [{1}]",
       "en": "Go to floor {0} [{1}]",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "敌人等级约 Lv{0}；HP 归零=永久死亡。",
       "en": "Enemy about Lv{0}; HP to 0 = permadeath.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "全队回复 {0}% 最大 HP；深渊内不回血，只能靠药。",
       "en": "The party restores {0}% max HP. The Abyss does not heal you; only tonics do.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "最深 {0} 层 · 图鉴 {1}/111",
       "en": "Deepest floor {0} · dex {1}/111",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "本局尚未结束：当前最深 {0} 层，队伍 {1}/6，仓库 {2} 只。",
       "en": "This run is not over: deepest floor {0}, party {1}/6, storage {2}.",
-      "slots": [
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "n", "text"]
     },
     {
       "zh": "第 {0} 层",
       "en": "Floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "深渊敌人：{0} Lv{1}（{2}{3}）",
       "en": "Abyss foe: {0} Lv{1} ({2}{3})",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "✦ 队伍词条 [{0}] → {1}+{2}%",
       "en": "✦ Party affix [{0}] → {1}+{2}%",
-      "slots": [
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "n", "n"]
     },
     {
       "zh": "  获得 {0} 护盾",
       "en": "  Gained {0} shield",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  回复 {0} HP",
       "en": "  Restored {0} HP",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  词条附加状态：{0}",
       "en": "  Affix status: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  场地变化：{0}",
       "en": "  Field change: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  ✦ {0} 触发",
       "en": "  ✦ {0} triggered",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 麻痹！无法行动",
       "en": "{0} is paralyzed and cannot act!",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 被冰封，无法行动",
       "en": "{0} is frozen and cannot act",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 陷入混乱，攻击了自己！（{1}）",
       "en": "{0} is confused and hits itself! ({1})",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 的 {1} 没有命中",
       "en": "{0}'s {1} missed",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "  护盾吸收了 {0} 伤害",
       "en": "  The shield absorbed {0} damage",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "（共{0}连击）",
       "en": "({0} hits)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  造成 {0} 伤害{1}",
       "en": "  Dealt {0} damage{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "  回复了 {0} HP",
       "en": "  Restored {0} HP",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  {0} 陷入了 {1}！",
       "en": "  {0} was inflicted with {1}!",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "  反伤 {0}",
       "en": "  Reflect {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "  场地变成 {0}（叙事效果）",
       "en": "  The field becomes {0} (narrative)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} {1}！受到 {2} 伤害",
       "en": "{0} {1}! Takes {2} damage",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} 的 {1} 解除了",
       "en": "{0}'s {1} wore off",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "✓ {0} 倒下了！获得 {1} EXP",
       "en": "✓ {0} fell! Gained {1} EXP",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "⚡ {0} 倒下！{1} 自动上场",
       "en": "⚡ {0} fell! {1} comes out automatically",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "[找不到技能 {0}，跳过]",
       "en": "[Skill {0} not found, skipped]",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 使用了 【{1}】",
       "en": "{0} used [{1}]",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 退场，{1} 上场！",
       "en": "{0} withdraws, {1} comes out!",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "使用 {0}，{1} 回复 {2} HP",
       "en": "Used {0}; {1} restored {2} HP",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "── 回合 {0} ──",
       "en": "── Turn {0} ──",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "我方 #{0} {1} Lv{2} HP {3}/{4}{5}{6}",
       "en": "Ally #{0} {1} Lv{2} HP {3}/{4}{5}{6}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "n", "n", "text", "text"]
     },
     {
       "zh": "敌方 {0} Lv{1} HP {2}/{3}{4}{5}",
       "en": "Foe {0} Lv{1} HP {2}/{3}{4}{5}",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "n", "text", "text"]
     },
     {
       "zh": "{0} 回复 {1} HP",
       "en": "{0} restored {1} HP",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 从昏迷中醒来（25% HP）",
       "en": "{0} woke from faint (25% HP)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "✝ {0} 永远留在了深渊（{1}）",
       "en": "✝ {0} remains in the Abyss forever ({1})",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "✦ {0} 进化成了 {1}！（Lv{2}）",
       "en": "✦ {0} evolved into {1}! (Lv{2})",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "观察：{0} 在 Lv{1} 进化成 {2}，形态变化会改写基础技能。",
       "en": "Note: {0} evolved into {2} at Lv{1}. The form change rewrites the base skill.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} 获得 {1} EXP",
       "en": "{0} gained {1} EXP",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "✓ {0} 升到 Lv{1}",
       "en": "✓ {0} reached Lv{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "无效的队伍槽：{0}",
       "en": "Invalid party slot: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "仓库里没有第 {0} 只虾米",
       "en": "There is no shrimp #{0} in storage",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 与 {1} 交换了位置",
       "en": "{0} swapped places with {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 从仓库进入队伍第 {1} 槽",
       "en": "{0} entered party slot {1} from storage",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 从仓库补进了队伍。",
       "en": "{0} was called into the party from storage.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你在潮礁区领到了 Lv5 的{0}，甲录师生涯开始。",
       "en": "You received a Lv5 {0} at Tide Reef. Your life as a shell-recorder begins.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "没有 {0} 了。",
       "en": "You have no {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "投出 {0}！捕捉率 {1}%",
       "en": "Threw {0}! Catch rate {1}%",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "捕捉成功！{0} 加入了队伍。",
       "en": "Caught! {0} joined the party.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "无效的技能序号：{0}（可用 {1} 个）",
       "en": "Invalid skill index: {0} ({1} available)",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "队伍槽 {0} 是空的。",
       "en": "Party slot {0} is empty.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "深渊入口：最深 {0} 层。战斗内 HP 归零 = 永久死亡。",
       "en": "Abyss gate: deepest floor {0}. HP to 0 in battle = permadeath.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "未知区域：{0}",
       "en": "Unknown zone: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "区域 {0} 尚未解锁。",
       "en": "Zone {0} is not unlocked yet.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "未知子区域：{0}",
       "en": "Unknown area: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "准备投出 {0}。可选择甲网或诱饵。",
       "en": "Ready to throw {0}. You may choose a Shell Net or bait.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你投出 {0}：捕捉率 {1}%",
       "en": "You throw {0}: catch rate {1}%",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "观察：{0} 在遭遇阶段被直接收下，没有经过战斗。",
       "en": "Note: {0} was taken during the encounter, without a battle.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "捕获 {0}",
       "en": "Caught {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 学会了 【{1}】",
       "en": "{0} learned [{1}]",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 使用 {1}，回复 {2} HP。",
       "en": "{0} used {1} and restored {2} HP.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} 退回仓库",
       "en": "{0} returns to storage",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 退回了仓库。",
       "en": "{0} was returned to storage.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "使用 {0}，{1} 只虾米回复了 HP。",
       "en": "Used {0}; {1} shrimp restored HP.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 的疫病与深渊污染被净化了。",
       "en": "{0}'s plague and abyss contamination were cleansed.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "选中 {0}（Lv{1}），选择词条槽与操作。",
       "en": "Selected {0} (Lv{1}). Choose an affix slot and an action.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "✦ 新区域已解锁：{0}",
       "en": "✦ New zone unlocked: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "━━ 深渊第 {0} 层 [{1}] ━━",
       "en": "━━ Abyss floor {0} [{1}] ━━",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "敌人：{0} Lv{1}（{2}）",
       "en": "Foe: {0} Lv{1} ({2})",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "深渊第 {0} 层 [{1}]",
       "en": "Abyss floor {0} [{1}]",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "🦠 {0} 带着疫病继续恶化（+{1}，当前 {2} 层）",
       "en": "🦠 {0}'s plague worsens (+{1}, now {2} stacks)",
-      "slots": [
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "n", "text"]
     },
     {
       "zh": "☣ {0} 深渊污染 +{1}（当前 {2}/{3}）",
       "en": "☣ {0} abyss contamination +{1} (now {2}/{3})",
-      "slots": [
-        "text",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "n", "n", "n"]
     },
     {
       "zh": "🦠 {0} 的污染转化为疫病（+{1} 层）",
       "en": "🦠 {0}'s contamination became plague (+{1} stacks)",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "观察：{0} 的深渊污染转为疫病，撤退时会掷死亡骰。",
       "en": "Note: {0}'s abyss contamination became plague. Retreat will roll a death die.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "☣ {0} 带着深渊污染离开（{1}，未清除）",
       "en": "☣ {0} leaves with abyss contamination ({1}, uncleansed)",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "🦠 {0} 疫病死亡率 {1}%，掷骰……",
       "en": "🦠 {0} plague death chance {1}%, rolling…",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "{0} 死于深渊疫病。",
       "en": "{0} died of abyss plague.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "✝ {0} 因疫病永远离去……",
       "en": "✝ {0} is gone forever to the plague…",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "深渊疫病（{0}层）",
       "en": "Abyss plague ({0} stacks)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 侥幸活了下来，但疫病仍在。",
       "en": "{0} barely survived, but the plague remains.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "✦ 深渊里程碑：第 {0} 层，{1} 已开放。",
       "en": "✦ Abyss milestone: floor {0}, {1} is open.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "深渊第{0}层战斗",
       "en": "Abyss floor {0} battle",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "🦠 {0} 的诅咒让 {1} 染上疫病。",
       "en": "🦠 {0}'s curse infects {1} with plague.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "获得了 {0} ×{1}{2}",
       "en": "Received {0} ×{1}{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "✦ 新纪录！深渊最深到达第 {0} 层。",
       "en": "✦ New record! Deepest Abyss floor {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "观察：首次通过深渊第 {0} 层，最深纪录更新。",
       "en": "Note: first clear of Abyss floor {0}. The deepest record was updated.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "通过深渊第 {0} 层",
       "en": "Cleared Abyss floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你抵达深渊第 {0} 层，六片海域全部向你敞开。潮汐记住了这只甲录师。",
       "en": "You reach Abyss floor {0}. All six seas open to you. The tide remembers this shell-recorder.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "★ 通关：抵达第 {0} 层，本局胜利。",
       "en": "★ Clear: you reached floor {0}. This run is a win.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "深渊第 {0} 层全灭",
       "en": "Wiped on Abyss floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从深渊第 {0} 层撤退",
       "en": "Retreat from Abyss floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你在第 {0} 层选择撤退。",
       "en": "You choose to retreat on floor {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "观察：第 {0} 层撤退，未清洁的污染会保留到下一次深渊。",
       "en": "Note: retreated on floor {0}. Uncleansed contamination carries into the next Abyss.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "[未知:{0}]",
       "en": "[Unknown:{0}]",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "无效的词条槽序号：{0}",
       "en": "Invalid affix slot: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "材料不足：需要 {0}。",
       "en": "Not enough materials: need {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "重投成功：{0} 槽{1} → {2}（{3}）",
       "en": "Reroll ok: {0} slot {1} → {2} ({3})",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "升阶成功：{0}（{1}）→ {2}（{3}）",
       "en": "Upgrade ok: {0} ({1}) → {2} ({3})",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "观察：探索进度解锁了新区域 {0}（{1}）。",
       "en": "Note: exploration unlocked a new zone, {0} ({1}).",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "进入 {0} / {1}（Lv{2}-{3}）。",
       "en": "Enter {0} / {1} (Lv{2}-{3}).",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0}野生 {1}（Lv{2} · {3}）出现了！",
       "en": "{0}A wild {1} appeared (Lv{2} · {3})!",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "观察：灵光 {0} 出现，灵光个体捕捉率更低，词条更好。",
       "en": "Note: a gleam {0} appeared. Gleam individuals are harder to catch and have better affixes.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "遭遇 {0} Lv{1}",
       "en": "Encounter {0} Lv{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "第 {0}/{1} 步，水面暂时平静。",
       "en": "Step {0}/{1}. The water is quiet for now.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "战斗开始：{0} 拦住了去路。",
       "en": "Battle start: {0} blocks the way.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "战斗开始 vs {0}",
       "en": "Battle start vs {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "击退 {0} 后捡到了 {1} ×{2}{3}",
       "en": "After driving off {0} you found {1} ×{2}{3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "观察：在 {0} 击败 {1}，获得 {2} EXP。",
       "en": "Note: defeated {1} in {0}, gained {2} EXP.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "击败 {0}",
       "en": "Defeated {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "野外全灭 vs {0}",
       "en": "Wiped in the wild vs {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 已被收进甲录。",
       "en": "{0} was added to the shell-dex.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "逃离 {0}",
       "en": "Fled from {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "观察：{0} 在 {1}% HP 时被捕获，词条槽 {2} 个。",
       "en": "Note: {0} was caught at {1}% HP, with {2} affix slot(s).",
-      "slots": [
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "n", "text"]
     },
     {
       "zh": "捕获 {0} Lv{1}",
       "en": "Caught {0} Lv{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "探索 {0} · 第 {1}/{2} 步",
       "en": "Explore {0} · step {1}/{2}",
-      "slots": [
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "n", "n"]
     },
     {
       "zh": "仓库 {0} 只：{1}",
       "en": "Warehouse {0}: {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "仓库 {0} 只：{1}Lv{2}",
       "en": "Warehouse {0}: {1} Lv{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0}Lv{1}",
       "en": "{0} Lv{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "深渊最深 {0} 层",
       "en": "abyss deepest floor {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从 {0} 开始按步数推进，遇野生虾米后进入遭遇。",
       "en": "Advance by steps from {0}; a wild shrimp starts an encounter.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "跳过步数，在当前区域 {0} 直接抽一次遭遇（可能落空）。",
       "en": "Skip steps and draw one encounter in the current area {0} (it may come up empty).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     }
   ]
 }

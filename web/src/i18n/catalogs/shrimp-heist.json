@@ -375,48 +375,32 @@
     {
       "zh": "{0} 的视线压在你身上（曝光 +{1}）。",
       "en": "{0}'s line of sight sits on you (exposure +{1}).",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "镜头扫过你现在这格（曝光 +{0}）。",
       "en": "A camera sweeps the tile you are on (exposure +{0}).",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "巡逻蟹从近线压了上来（曝光 +{0}）。",
       "en": "A patrol crab presses in from the near line (exposure +{0}).",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "观察时机：噪音 -{0}",
       "en": "Read the timing: noise -{0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "曝光 +{0}",
       "en": "Exposure +{0}",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "{0}；噪音 {1}；{2}{3}",
       "en": "{0}; noise {1}; {2}{3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "撤离窗 +2、快门可开",
@@ -426,401 +410,247 @@
     {
       "zh": "确认是真目标；目标分 +{0}，取物后撤离窗 {1} 拍，带货噪音 +{2}。",
       "en": "Confirm it is the real target; objective +{0}, extract window {1} beats after the take, carry noise +{2}.",
-      "slots": [
-        "n",
-        "text",
-        "n"
-      ]
+      "slots": ["n", "text", "n"]
     },
     {
       "zh": "已知真目标在 {0}；这格是空的，硬开只会警戒 +{1}、噪音 +2。",
       "en": "The real target is known to be at {0}; this tile is empty. Forcing it only raises alert +{1} and noise +2.",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "未确认货格：若为空，警戒 +{0}、噪音 +2；若为真，目标分 +{1}、撤离窗 {2} 拍。",
       "en": "Unconfirmed cargo tile: if empty, alert +{0} and noise +2; if real, objective +{1} and extract window {2} beats.",
-      "slots": [
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "在当前格留下 2 拍墨幕，并立刻曝光 -2。本次消耗 1，剩余 {0} 次。",
       "en": "Leave a 2-beat ink screen on this tile and immediately cut exposure by 2. Uses 1 this time, {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "钉死镜头 2 拍。本次消耗 1，剩余 {0} 次。",
       "en": "Pin a camera for 2 beats. Uses 1 this time, {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "钉哑 sensor 2 拍。本次消耗 1，剩余 {0} 次。",
       "en": "Mute a sensor for 2 beats. Uses 1 this time, {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "钉住巡逻蟹 1 拍。本次消耗 1，剩余 {0} 次。",
       "en": "Pin a patrol crab for 1 beat. Uses 1 this time, {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "没有可用的冲刺线：原地缩壳，曝光 -2。本次消耗 1，剩余 {0} 次。",
       "en": "No usable dash line: tuck into your shell in place, exposure -2. Uses 1 this time, {0} left.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "冲到 {0}；噪音 {1}，曝光 +{2}。本次消耗 1，剩余 {3} 次。",
       "en": "Dash to {0}; noise {1}, exposure +{2}. Uses 1 this time, {3} left.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "text"]
     },
     {
       "zh": "{0}×{1}；被动：{2}；撤离窗 +{3}。{4}",
       "en": "{0}×{1}; passive: {2}; extract window +{3}. {4}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "n", "text"]
     },
     {
       "zh": "{0}；噪音 1。",
       "en": "{0}; noise 1.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "读下一拍巡逻/镜头；掩体/暗格额外曝光 -1；下一拍位移 / 冲刺噪音 -{0}。",
       "en": "Read next-beat patrol/cameras; cover/dark tiles cut exposure by 1 more; next-beat move / dash noise -{0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "曝光 -{0}；设施仍会推进一拍。",
       "en": "Exposure -{0}; the facility still advances one beat.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "T{0} {1} {2} · 曝光 {3}/{4} · 警戒 {5}{6}",
       "en": "T{0} {1} {2} · exposure {3}/{4} · alert {5}{6}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "n", "n", "text", "text"]
     },
     {
       "zh": "你顺着 vent 滑到 {0}。",
       "en": "You slide along the vent to {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你挪到了 {0}。",
       "en": "You shift to {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你停下来重新读节奏：巡逻下一拍大概率到 {0}。",
       "en": "You stop to reread the rhythm: the patrol will likely reach {0} next beat.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "下一拍位移 / 冲刺噪音 -{0}。",
       "en": "Next-beat move / dash noise -{0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "镜头本拍扫 {0}；再下一拍扫 {1}。",
       "en": "Cameras sweep {0} this beat; they sweep {1} the beat after.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你把节奏压慢了一拍，曝光 -{0}。",
       "en": "You slow the rhythm by one beat, exposure -{0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你拿到了【{0}】。现在真正的游戏才开始。",
       "en": "You have the [{0}]. Now the real game begins.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你脱壳一冲，直接换到 {0}。",
       "en": "You molt and dash, switching straight to {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你以【{0}】的身份接手这票：{1}×{2}。",
       "en": "You take the job as [{0}]: {1}×{2}.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "被动：{0}",
       "en": "Passive: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} · {1} · 强度 {2}",
       "en": "{0} · {1} · intensity {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "设施：{0}（{1}）—— {2}",
       "en": "Facility: {0} ({1}) — {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "安保：{0} —— {1}",
       "en": "Security: {0} — {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "目标：{0} —— {1}",
       "en": "Target: {0} — {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "麻烦：{0} —— {1}",
       "en": "Complication: {0} — {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "安保 {0} · 目标 {1} · 麻烦 {2}",
       "en": "Security {0} · target {1} · complication {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "目标 {0} · 终端 {1} · 缓存 {2} · 快门 {3}",
       "en": "Target {0} · terminal {1} · cache {2} · shutter {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "撤离窗 {0} 拍 · 目标分 {1} · 撤离加成 +{2}",
       "en": "Extract window {0} beats · objective {1} · extract bonus +{2}",
-      "slots": [
-        "text",
-        "text",
-        "n"
-      ]
+      "slots": ["text", "text", "n"]
     },
     {
       "zh": "真目标在 {0}（{1}）。",
       "en": "The real target is at {0} ({1}).",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "带货噪音 +{0}（缓存抵扣 {1}） · 出口 {2}",
       "en": "Carry noise +{0} (cache offset {1}) · exit {2}",
-      "slots": [
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["n", "text", "text"]
     },
     {
       "zh": "缓存收益：{0}。",
       "en": "Cache payout: {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "巡逻下一拍：{0}（当前 {1}）。",
       "en": "Patrol next beat: {0} (now {1}).",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} @ {1} 朝{2} {3} 格。",
       "en": "{0} @ {1} facing {2}, {3} tiles.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "镜头停摆 {0} 拍。",
       "en": "Cameras pinned for {0} beat(s).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "Sensor 已钉哑 {0} 拍。",
       "en": "Sensor muted for {0} beat(s).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "快速响应者 @ {0}。",
       "en": "Quick responder @ {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "快速响应者预计 {0} 拍后切入。",
       "en": "Quick responder expected in {0} beat(s).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "蒸汽格 {0}：{1}（每 3 拍一次）。",
       "en": "Steam tile {0}: {1} (once every 3 beats).",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "Sensor 线：{0}。",
       "en": "Sensor line: {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "- 另有 {0} 条细节省略。",
       "en": "- {0} more detail(s) omitted.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "选择 profile · {0} · {1}",
       "en": "Choose a profile · {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}：{1}×{2}；被动 {3}；撤离窗 +{4}",
       "en": "{0}: {1}×{2}; passive {3}; extract window +{4}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "n"
-      ]
+      "slots": ["text", "text", "text", "text", "n"]
     },
     {
       "zh": "账面 {0} · 回合 {1} · 曝光峰值 {2}",
       "en": "Ledger {0} · turn {1} · peak exposure {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} @ 下{1} 朝{2} {3} 格。",
       "en": "{0} @ lower {1} facing {2}, {3} tiles.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0} @ 上{1} 朝{2} {3} 格。",
       "en": "{0} @ upper {1} facing {2}, {3} tiles.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     }
   ]
 }

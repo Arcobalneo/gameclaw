@@ -365,375 +365,222 @@
     {
       "zh": "身体 {0}",
       "en": "Body {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "家人 {0}",
       "en": "Family {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "场面 {0}",
       "en": "Mood {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "立场 {0}",
       "en": "Stance {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "备菜 {0}",
       "en": "Prep {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "冲突 {0}",
       "en": "Clash {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "桌上没有你的菜。守着空盘子会掉身体，家里还可能叠冲突。{0}",
       "en": "There is no dish of yours on the table. Guarding an empty plate costs body, and at home it may also stack clash. {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "掷 1d6{0}，需要 {1}，约 {2}/6。说动：{3} +2，立场 +1{4}。没说动：{5} -1{6}。",
       "en": "Roll 1d6{0}, need {1}, about {2}/6. If you convince: {3} +2, stance +1{4}. If not: {5} -1{6}.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "text", "text", "text", "text"]
     },
     {
       "zh": "这一口不提供体力。{0} +2，身体 -2，立场 -2。",
       "en": "This bite gives no stamina. {0} +2, body -2, stance -2.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "家里的冲突叠到 {0}。到 3 且身体≤2、家人≤2 会爆。",
       "en": "Clash at home stacks to {0}. At 3, if body≤2 and family≤2, it blows.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "身体只剩 {0}。空肚子再守一次就危险。",
       "en": "Body is down to {0}. One more watch on an empty stomach is dangerous.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "立场只剩 {0}。再沉默或再咬，身份会散。",
       "en": "Stance is down to {0}. One more silence or one more bite, and the identity unravels.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "判定 {0}{1}={2}，{3} {4}",
       "en": "Check {0}{1}={2}, {3} {4}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text"]
     },
     {
       "zh": "你把话说清了。{0}。（{1}）",
       "en": "You said it plainly. {0}. ({1})",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你说了，没说动。{0}。（{1}）",
       "en": "You spoke, and did not convince. {0}. ({1})",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你把备好的菜摆上去。这一桌终于有你能吃的。（{0}）",
       "en": "You put your prepared dish on the table. This meal finally has something you can eat. ({0})",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你为了这一桌咬了一口。恶心是真的，立场也掉了。这一口不提供体力。（{0}）",
       "en": "You took a bite for this table. The nausea is real, and stance drops too. This bite gives no stamina. ({0})",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你备了菜，自己也吃了一点。备菜现在是 {0}。（{1}）",
       "en": "You prepped a dish and ate a little of it yourself. Prep is now {0}. ({1})",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你说：我们都吃素，但不是为了同一件事。（{0}）",
       "en": "You say: we all eat vegetarian, but not for the same reason. ({0})",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "不认识的动作：{0}",
       "en": "Unknown action: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "这一席不能做：{0}",
       "en": "You cannot do this at this meal: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0} 席 · {1} · {2}{3}",
       "en": "Meal {0} · {1} · {2}{3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0} 自席：立场≥{1}（现 {2}），身体≥{3}（现 {4}），备菜≥{5}（现 {6}），且在立席",
       "en": "{0} Own Table: stance≥{1} (now {2}), body≥{3} (now {4}), prep≥{5} (now {6}), and you are at the finale meals",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} 同桌：家人≥{1}（现 {2}），身体≥{3}（现 {4}），立场≥{5}（现 {6}），且在立席",
       "en": "{0} Same Table: family≥{1} (now {2}), body≥{3} (now {4}), stance≥{5} (now {6}), and you are at the finale meals",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} 外席：场面≥{1}（现 {2}），身体≥{3}（现 {4}），立场≥{5}（现 {6}），且在立席",
       "en": "{0} Eat Out: mood≥{1} (now {2}), body≥{3} (now {4}), stance≥{5} (now {6}), and you are at the finale meals",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} 分席：素食家庭、理由不同且已说开，家人≥{1}（现 {2}），立场≥{3}（现 {4}），身体≥{5}（现 {6}），且在立席",
       "en": "{0} Split Table: a vegetarian household, reasons differ and have been talked out, family≥{1} (now {2}), stance≥{3} (now {4}), body≥{5} (now {6}), and you are at the finale meals",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "冲突到 {0} 且身体≤{1}、家人≤{2} 是冲突。家人先到 0 则算断席。",
       "en": "Clash at {0} with body≤{1} and family≤{2} is a blow-up. If family hits 0 first, it counts as leaving the table.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "备菜 {0}/{1}。",
       "en": "Prep {0}/{1}.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "家人的理由是{0}。{1}{2}",
       "en": "The family's reason is {0}. {1}{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "冲突 {0}/{1}。没素菜且热度≥2 的家里，硬守、离席或没说动会 +1。",
       "en": "Clash {0}/{1}. At a meat-eating home with no vegetarian dish and heat≥2, hard-guarding, leaving, or failing to convince adds +1.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "{0} · 第 {1}/{2} 席 · {3}·{4} · {5} · 身体 {6} 家人 {7} 场面 {8} 立场 {9}",
       "en": "{0} · Meal {1}/{2} · {3}·{4} · {5} · body {6} family {7} mood {8} stance {9}",
-      "slots": [
-        "text",
-        "n",
-        "n",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "n", "n", "text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "热度 {0}/3。{1}",
       "en": "Heat {0}/3. {1}",
-      "slots": [
-        "n",
-        "text"
-      ]
+      "slots": ["n", "text"]
     },
     {
       "zh": "这一席算在{0}上。",
       "en": "This meal counts toward {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "别人会用的词是「{0}」。",
       "en": "The word other people will use is \"{0}\".",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "理由：{0}。{1}",
       "en": "Reason: {0}. {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "这一局咬了 {0} 口。那一口换来关系，不提供体力，还掉立场。",
       "en": "This run took {0} bite(s). That bite buys relationship, gives no stamina, and drops stance.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "虾素 · {0}",
       "en": "Shrimp Greens · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "家人的理由是{0}",
       "en": "The family's reason is {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你把话说清了。判定 {0}，{1}。（{2}）",
       "en": "You said it plainly. Check {0}, {1}. ({2})",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "你说了，没说动。判定 {0}，需要 {1}。（{2}）",
       "en": "You spoke, and did not convince. Check {0}, need {1}. ({2})",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "掷 1d6{0}，需要 {1}，约 {2}/6。说动：{3}。没说动：{4}。",
       "en": "Roll 1d6{0}, need {1}, about {2}/6. If you convince: {3}. If not: {4}.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "text", "text"]
     },
     {
       "zh": "过了 {0}",
       "en": "cleared {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "说动：{0}",
       "en": "If you convince: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "没说动：{0}",
       "en": "If not: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     }
   ]
 }

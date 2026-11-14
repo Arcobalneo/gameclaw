@@ -279,636 +279,387 @@
     {
       "zh": "{0}+尾波",
       "en": "+{0} leftover waves",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "{0}总共漏了 {1} 点完整度；如果这条线又要吃快潮又要吃精英，C 位最好别空太久。",
       "en": "{0} leaked {1} integrity in total. If this lane has to eat both runners and elites, do not leave C empty for long.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "本局输出最高的是【{0}】（{1} 伤 / {2} 收壳）；它更像补关键 threat 的位子，不该随手乱摆。",
       "en": "Highest damage this run was [{0}] ({1} dmg / {2} shells taken). It belongs on a key threat, not dropped wherever is convenient.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "这轮【{0}】共用了 {1} 次；它更像救节奏的窗，而不是一冷却好就必须交的按钮。",
       "en": "[{0}] was used {1} times this run. Treat it as a timing window, not a button you press the moment it cools down.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "最后打穿你的是 {0}的【{1}】；下局优先验证那里是缺拦口、缺减速，还是潮技交晚了。",
       "en": "The last breach came from {0}'s [{1}]. Next run, check whether that post lacked block, a slow, or a late skill.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "结束 · {0} · {1}",
       "en": "End · {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "这次把【{0}】交给了 {1}；它像翻盘窗，不等于每个 pulse 都该提前白交。",
       "en": "You spent [{0}] on {1}. It is a comeback window, not something to burn early every pulse.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "入潮：{0}。",
       "en": "Incoming: {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}被【触须预警】点亮：{1} 个目标更慢、更脆。",
       "en": "{0} was lit by [Feeler Alert]: {1} targets are slower and more fragile.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} {1} 收壳了【{2}】。",
       "en": "{0} {1} shelled [{2}].",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} {1} 在 {2} 喷出盐沫，压了 {3} 个目标。",
       "en": "{0} {1} sprayed salt at {2}, pressing {3} targets.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0} {1} 吃到 {2} 个目标合计 {3} 点冲击（壳 {4}→{5}）。",
       "en": "{0} {1} took {3} impact from {2} targets (shell {4}→{5}).",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} 的【{1}】被拆掉，进入再编冷却。",
       "en": "{0}'s [{1}] was broken and entered reform cooldown.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} 的【{1}】{2}；这说明这里只靠薄前排容易崩。",
       "en": "{0}'s [{1}] {2}. A thin front here will buckle.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0}在 pulse {1} 第一次漏了【{2}】；下局要再验证这里是缺前排，还是只是太贪着省潮令。",
       "en": "{0} first leaked [{2}] on pulse {1}. Next run, check whether this post lacked a front-liner, or you were just hoarding orders.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "【{0}】从 {1}漏过，归海线 -{2}。",
       "en": "[{0}] slipped through {1}. Sea-return line -{2}.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0} 的【{1}】撑完了这波，自动退回再编。",
       "en": "{0}'s [{1}] lasted the wave and automatically reformed.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "Pulse {0}：收壳 {1} · 漏 {2} · 归海线 {3}→{4}/{5} · 潮令 {6}",
       "en": "Pulse {0}: shelled {1} · leaked {2} · sea-return {3}→{4}/{5} · orders {6}",
-      "slots": [
-        "n",
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "text", "text", "text", "n", "n", "text"]
     },
     {
       "zh": "本局已经结束（{0}）。",
       "en": "This run is over ({0}).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "开局必须先选择 doctrine，不能执行 {0}。",
       "en": "You must pick a doctrine first; {0} is not legal yet.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "合法动作：{0}",
       "en": "Legal actions: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "未知 doctrine：{0}",
       "en": "Unknown doctrine: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你以【{0}】入场：潮令 {1}，归海线 {2}/{3}。",
       "en": "You enter as [{0}]: {1} orders, sea-return line {2}/{3}.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n"]
     },
     {
       "zh": "先布防；随时 act ready 放敌潮进场（共 {0} 个常规 pulse，之后清尾波直到敌潮清空）。",
       "en": "Deploy first; act ready whenever you are set ( {0} regular pulses, then leftover waves until the field is clear).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "不能部署 {0} 到 {1}。",
       "en": "Cannot deploy {0} to {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "未知单位：{0}",
       "en": "Unknown unit: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "【{0}】入位 {1}。潮令 -{2}，壳 {3}，拦 {4}。",
       "en": "[{0}] takes {1}. Orders -{2}, shell {3}, block {4}.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text"]
     },
     {
       "zh": "没有可撤回的单位在 {0}。",
       "en": "No unit to recall at {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "【{0}】从 {1} 退潮再编，返还潮令 {2}；setup 内可立即重放。",
       "en": "[{0}] reforms from {1}, refunding {2} orders; in setup you may redeploy at once.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "【{0}】从 {1} 退潮再编，返还潮令 {2}，再编冷却 {3} pulse。",
       "en": "[{0}] reforms from {1}, refunding {2} orders, with a {3}-pulse cooldown.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "【{0}】现在不可用（冷却 {1} pulse，潮令 {2}/{3}，或没有目标）。",
       "en": "[{0}] is not available now (cooldown {1} pulse, orders {2}/{3}, or no target).",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n"]
     },
     {
       "zh": "你发动了【{0}】：{1}@{2} 本 pulse 攻 +2、拦口 +1。",
       "en": "You used [{0}]: {1}@{2} gains +2 attack and +1 block this pulse.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "你发动了【{0}】：{1}本 pulse 的敌人更慢、更脆。",
       "en": "You used [{0}]: enemies on {1} are slower and more fragile this pulse.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你发动了【{0}】：{1} {2}→{3}，并回 2 点壳。",
       "en": "You used [{0}]: {1} {2}→{3}, and restored 2 shell.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "敌潮进场：共 {0} 个常规 pulse，之后清尾波直到敌潮清空。先手潮令 {1}，归海线 {2}/{3}。",
       "en": "The tide is in: {0} regular pulses, then leftover waves until the field is clear. Opening orders {1}, sea-return line {2}/{3}.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n"]
     },
     {
       "zh": "未知动作：{0}",
       "en": "Unknown action: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "归海线被打穿了。最后压垮你的是 {0}的【{1}】。",
       "en": "The sea-return line was breached. The last push was {0}'s [{1}].",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "- 场上：{0}",
       "en": "- On the field: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "- 后备：{0}",
       "en": "- In reserve: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}无新敌潮",
       "en": "{0}no new wave",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "潮技：{0}（cost {1} 潮令，{2}）— {3}",
       "en": "Tide skill: {0} (costs {1} orders, {2}) — {3}",
-      "slots": [
-        "text",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "n", "text", "text"]
     },
     {
       "zh": "- 现在 act skill 会自动选择：{0}。",
       "en": "- act skill will now auto-target: {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "- 还要等 {0} 个 pulse 才能再交。",
       "en": "- {0} more pulse(s) before you can use it again.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "潮令 {0}；首波在“敌潮预告”里，先决定 C 位和两侧高台的取舍。",
       "en": "Orders {0}. The first wave is in the tide forecast; decide first how to spend C and the two perches.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}（{1}）：潮令 {2} · 完整度 {3} · 预告 {4} pulse · 潮技 {5}。{6}",
       "en": "{0} ({1}): orders {2} · integrity {3} · forecast {4} pulses · skill {5}. {6}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "选择 doctrine · {0}",
       "en": "Choose a doctrine · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "布防 · {0} · {1}",
       "en": "Setup · {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "本局结束 · {0} · Pulse {1}",
       "en": "Run over · {0} · Pulse {1}",
-      "slots": [
-        "text",
-        "n"
-      ]
+      "slots": ["text", "n"]
     },
     {
       "zh": "{0}@{1}（本 pulse 攻 +2、拦口 +1）",
       "en": "{0}@{1} (+2 attack, +1 block this pulse)",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}（本 pulse 该 lane 敌人减速 +1、易伤 +1）",
       "en": "{0} (this pulse: that lane's enemies +1 slow, +1 vulnerability)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} {1}→{2}（回 2 点壳）",
       "en": "{0} {1}→{2} (restore 2 shell)",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "cost {0} 潮令",
       "en": "costs {0} orders",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "壳 {0}",
       "en": "shell {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "攻 {0}",
       "en": "Atk {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "拦 {0}",
       "en": "block {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "破甲 {0}",
       "en": "Shred {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "减速 {0}",
       "en": "Slow {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "易伤 {0}",
       "en": "Vulnerable {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "击退 {0}",
       "en": "Knockback {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "持续 {0} pulse",
       "en": "Lasts {0} pulse(s)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "再编 {0} pulse",
       "en": "Reform {0} pulse(s)",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "视野 {0}",
       "en": "Vision {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "本 pulse 压力 {0}",
       "en": "pressure this pulse {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 潮令",
       "en": "{0} orders",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "撤回 {0} {1}",
       "en": "Recall {0} {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "壳 {0}/{1} · 返还 {2} 潮令 · {3}",
       "en": "Shell {0}/{1} · refund {2} orders · {3}",
-      "slots": [
-        "n",
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["n", "n", "text", "text"]
     },
     {
       "zh": "+{0} 潮令",
       "en": "+{0} orders",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "cost {0} 潮令 · 冷却 {1} pulse · 自动目标：{2}",
       "en": "costs {0} orders · cooldown {1} pulse(s) · auto-target: {2}",
-      "slots": [
-        "n",
-        "text",
-        "text"
-      ]
+      "slots": ["n", "text", "text"]
     },
     {
       "zh": "{0} 初始潮令 {1} · 完整度 {2} · 预告 {3} pulse · 潮技 {4}（{5}）· {6}",
       "en": "{0} starts with {1} orders · integrity {2} · forecast {3} pulses · skill {4} ({5}) · {6}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "结束布防，开始 {0} 个常规 pulse，之后清尾波直到敌潮清空；当前潮令 {1}，完整度 {2}/{3}，场上 {4} 个单位。",
       "en": "End setup and begin {0} regular pulses, then leftover waves until the field is clear. Orders {1}, integrity {2}/{3}, {4} units on the field.",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "n", "text"]
     },
     {
       "zh": "不部署、不撤回、不发潮技，直接结算本 pulse。当前风险：{0}。",
       "en": "Do not deploy, recall, or use a skill; resolve this pulse as-is. Current risk: {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "虾守 · {0} · {1}",
       "en": "Shrimp Guard · {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "- 本 pulse 入潮：{0}",
       "en": "- Incoming this pulse: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "本 pulse 入潮：{0}",
       "en": "Incoming this pulse: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}【{1}】x{2}",
       "en": "{0}[{1}] x{2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "壳 {0}/{1} · 返还 {2} 潮令 · setup 内立即重放",
       "en": "shell {0}/{1} · refund {2} orders · redeploy at once in setup",
-      "slots": [
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "{0} 的【{1}】被【{2}】打穿过一次；这说明这里只靠薄前排容易崩。",
       "en": "{0}'s [{1}] was punched through once by [{2}]; a thin front line is liable to collapse here.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     }
   ]
 }

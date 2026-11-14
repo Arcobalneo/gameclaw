@@ -257,233 +257,132 @@
     {
       "zh": "你以【{0}】的身份开始虾走。",
       "en": "You begin Shrimp Trek as [{0}].",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "build 观察：拿到【{0}】后，{1}；下局继续验证它更适合哪类动作。",
       "en": "Build note: after taking [{0}], {1}. Next run, keep testing which actions it suits best.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你接受了【{0}】。{1}",
       "en": "You take [{0}]. {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "判定 d6+基础 vs {0}{1}",
       "en": "Roll d6+base vs {0}{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "结果 {0}",
       "en": "Result {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "本局观察：在【{0}】用【{1}】{2}，结果 {3}；下局最好再验证一次。",
       "en": "Note this run: in [{0}] you used [{1}] {2}, result {3}. Worth testing again next run.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "你倒在【{0}】后。{1}",
       "en": "You fall after [{0}]. {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "潮段 {0} 已穿过。潮间休整：{1}。",
       "en": "Tide {0} is through. Intertidal rest: {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你在约定的 {0} 个潮段后收壳记事，带着 {1} 点龙虾名声回到真正的海。",
       "en": "After the agreed {0} tide cycles you shell out and take notes, returning to the real sea with {1} lobster fame.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}：壳{1} 能{2} 盐{3} 左{4} 右{5} 须{6} 蜕{7} —— {8}",
       "en": "{0}: shell {1} energy {2} salt {3} L-claw {4} R-claw {5} feelers {6} molt {7} — {8}",
-      "slots": [
-        "text",
-        "n",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "n", "text", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "突变潮 · 潮段 {0}",
       "en": "Mutation tide · cycle {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "潮段 {0} · 深度 {1} · {2}",
       "en": "Tide {0} · depth {1} · {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "遭遇 · {0}",
       "en": "Encounter · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "本潮段所有判定难度 +{0}。",
       "en": "All rolls this cycle are +{0} difficulty.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "本局结束 · {0}",
       "en": "Run over · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} 初始：壳{1} 能{2} 盐{3} 左{4} 右{5} 须{6} 蜕{7}",
       "en": "{0} starts: shell {1} energy {2} salt {3} L-claw {4} R-claw {5} feelers {6} molt {7}",
-      "slots": [
-        "text",
-        "n",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "n", "text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} 判定 d6+{1} vs {2}。成功：{3}；失败：{4}。",
       "en": "{0} rolls d6+{1} vs {2}. Success: {3}. Failure: {4}.",
-      "slots": [
-        "text",
-        "n",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "n", "text", "text", "text"]
     },
     {
       "zh": "{0} · 潮段 {1} · 深度 {2}",
       "en": "{0} · tide {1} · depth {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "能{0} 盐{1} 名{2}",
       "en": "energy {0} salt {1} fame {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "能{0} 名{1} 势{2}",
       "en": "energy {0} fame {1} momentum {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "能{0} 名{1}",
       "en": "energy {0} fame {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "能{0} 盐{1} 名{2} 势{3}",
       "en": "energy {0} salt {1} fame {2} momentum {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "能{0} 名{1} 蜕{2} 势{3}",
       "en": "energy {0} fame {1} molt {2} momentum {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "C{0} D{1} {2}",
       "en": "C{0} D{1} {2}",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "本局观察：在【{0}】用【{1}】成了，结果 {2}；下局最好再验证一次。",
       "en": "Note this run: in [{0}] you used [{1}] and it worked, result {2}. Worth testing again next run.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "本局观察：在【{0}】用【{1}】没成，结果 {2}；下局最好再验证一次。",
       "en": "Note this run: in [{0}] you used [{1}] and it failed, result {2}. Worth testing again next run.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     }
   ]
 }

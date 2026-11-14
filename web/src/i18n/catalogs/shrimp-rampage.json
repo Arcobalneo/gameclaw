@@ -261,317 +261,202 @@
     {
       "zh": "第 {0} 夜 · {1}",
       "en": "Night {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}被踩塌了，藤蔓断成两截。",
       "en": "{0} is trampled; the vines snap in two.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}被踏成一片硬土。",
       "en": "{0} is stomped into hard earth.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}从{1}{2}到{3}。",
       "en": "{0} goes from {1}{2} to {3}.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "四个南瓜全收了，{0} 只南瓜怪也安静下来，这一季守住了。",
       "en": "All four pumpkins are in, and {0} pumpkin spirits have settled. This season is held.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "只安抚了 {0}/3 只南瓜怪，剩下的还在田里闹。",
       "en": "Only {0}/3 pumpkin spirits were soothed. The rest are still raising hell in the field.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "只收了 {0}/4 个南瓜，冬天没有存粮。",
       "en": "Only {0}/4 pumpkins were harvested. There is no store for winter.",
-      "slots": [
-        "n"
-      ]
+      "slots": ["n"]
     },
     {
       "zh": "天亮了：体力回 {0}，田埂重新垒好，新的南瓜怪摸进田里。",
       "en": "Dawn: stamina returns to {0}, the ridges are rebuilt, and new pumpkin spirits slip into the field.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0} 夜开始。",
       "en": "Night {0} begins.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0}/{1} 夜 · 动作 {2}/{3} · 体力 {4}/{5}",
       "en": "Night {0}/{1} · actions {2}/{3} · stamina {4}/{5}",
-      "slots": [
-        "n",
-        "n",
-        "n",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n", "n", "n", "n", "n"]
     },
     {
       "zh": "{0}：{1}，田埂 {2}/{3}",
       "en": "{0}: {1}, ridges {2}/{3}",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n"]
     },
     {
       "zh": "看不清，只知道在{0}附近",
       "en": "Too dim to tell; you only know it is near {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "还需 {0} 次成功安抚",
       "en": "{0} more successful soothes needed",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": " · 躁动 {0}",
       "en": " · unrest {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0} 夜",
       "en": "Night {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "查看{0}",
       "en": "Look at {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "对{0}的南瓜怪{1}",
       "en": "{1} the pumpkin spirit at {0}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}；还需 {1} 次成功{2}；成功线 {3}+（约 {4}/6）",
       "en": "{0}; {1} more successful {2} needed; success line {3}+ (about {4}/6)",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "text", "n", "n"]
     },
     {
       "zh": "{0} 体力{1}",
       "en": "{0} stamina{1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "收{0}的南瓜",
       "en": "Harvest the pumpkin at {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "给{0}浇水",
       "en": "Water {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "在{0}种下南瓜籽",
       "en": "Plant a pumpkin seed at {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "消耗 1 个南瓜：体力上限 +2（现 {0}），并回 4 体力。",
       "en": "Spend 1 pumpkin: stamina cap +2 (now {0}), and restore 4 stamina.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "收工，提前结束第 {0} 夜",
       "en": "Clock out and end Night {0} early",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}：什么都没有。",
       "en": "{0}: nothing there.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "查看{0}：{1}",
       "en": "Look at {0}: {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0}有{1}，{2}。",
       "en": "{0} has {1}, {2}.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "查看{0}：{1}，{2}。{3}",
       "en": "Look at {0}: {1}, {2}. {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "还需 {0} 次成功安抚。",
       "en": "{0} more successful soothes needed.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "安抚成功：{0}安静了，还留下一颗糖。",
       "en": "Soothe succeeds: {0} settles down and even leaves a candy.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "安抚住一只{0}。",
       "en": "You soothe one {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0} · 掷骰 {1}{2}{3} = {4} ≥ {5}，成功。",
       "en": "{0} · roll {1}{2}{3} = {4} ≥ {5}, success.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0}被你带走，糖果 +1。",
       "en": "{0} is taken with you. Candy +1.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}松了一点，还需 {1} 次。",
       "en": "{0} eases a little; {1} more needed.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "{0} · 掷骰 {1}{2}{3} = {4} < {5}，失败。",
       "en": "{0} · roll {1}{2}{3} = {4} < {5}, failure.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "它更躁了（躁动 {0}），下个动作之后会换畦。",
       "en": "It grows more restless (unrest {0}) and will change plots after the next action.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "给{0}浇了水，可以收了。",
       "en": "You water {0}; it is ready to harvest.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "在{0}种下一颗南瓜籽。",
       "en": "You plant a pumpkin seed at {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从{0}收下一个南瓜。",
       "en": "You harvest a pumpkin from {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "{0}出了特殊南瓜。",
       "en": "{0} yields a special pumpkin.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "收到一个特殊南瓜。",
@@ -581,237 +466,137 @@
     {
       "zh": "收了{0}的南瓜。",
       "en": "You harvest the pumpkin at {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "南瓜籽 +1{0}。",
       "en": "Pumpkin seed +1{0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "有人在{0}报了动静，接下来它可能去{1}。",
       "en": "Someone reports movement at {0}; next it may go to {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "煮了一锅南瓜汤，体力上限到 {0}。",
       "en": "You cook a pot of pumpkin soup. Stamina cap is now {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "把南瓜切块下锅。体力上限 +2（现 {0}），回 4 体力。",
       "en": "You cube a pumpkin into the pot. Stamina cap +2 (now {0}), restore 4 stamina.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "在田埂上坐了一会：体力 {0} → {1}。",
       "en": "You sit on the ridge a while: stamina {0} → {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "第 {0} 夜的 {1} 个动作做完了。",
       "en": "The {1} actions of Night {0} are done.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "盲抚 {0} 次：没探明情绪就上手，契合加成白白丢掉。",
       "en": "Blind soothe {0} time(s): you went in without reading the mood, and the affinity bonus was wasted.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "安抚失败 {0} 次，每次都让它更躁、跑得更远。先看清种属再选手段。",
       "en": "Soothe failed {0} time(s), each time making it more restless and farther away. Read the kind before you pick a method.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "在田埂上歇了 {0} 次：体力规划偏晚，休息本身也吃动作。",
       "en": "You rested on the ridge {0} time(s): stamina planning came late, and rest itself costs an action.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "收成 {0}/{1}：种植到收成要占 3 个动作，前期不铺田就来不及。",
       "en": "Harvest {0}/{1}: plant-to-harvest takes 3 actions. If you do not lay beds early, you will run out of time.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "安抚 {0}/{1}：滚筒和疾跑只要 2 次成功，弹跳和飞天要 3 次。",
       "en": "Soothe {0}/{1}: rollers and runners need 2 successes; hoppers and fliers need 3.",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "田埂被踩 {0} 次：夜里不清理的南瓜怪，天亮前一定会踩一脚。",
       "en": "Ridges trampled {0} time(s): a pumpkin spirit left uncleared at night will always stomp once before dawn.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "收到 {0} 个特殊南瓜：暴走夜收成，出特殊南瓜的概率更高。",
       "en": "Harvested {0} special pumpkin(s): harvests on rampage night have a higher chance of a special pumpkin.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0} 夜 · 季中进度",
       "en": "Night {0} · mid-season progress",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "季中进度：第 {0}/{1} 夜，收成 {2}/{3}，安抚 {4}/{5}；还没有最终结局。",
       "en": "Mid-season: Night {0}/{1}, harvest {2}/{3}, soothe {4}/{5}; no final ending yet.",
-      "slots": [
-        "n",
-        "n",
-        "n",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n", "n", "n", "n", "n"]
     },
     {
       "zh": "第 {0} 夜结束时要同时满足收成 {1} 与安抚 {2}；任一条不够都算没守住。",
       "en": "By the end of Night {0} you must meet both harvest {1} and soothe {2}. Missing either means the season is not held.",
-      "slots": [
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text"]
     },
     {
       "zh": "{0}；还需 {1} 次成功，没探明情绪就没有契合加成；先 probe 能 +{2}；成功线 {3}+（约 {4}/6）",
       "en": "{0}; {1} more success(es) needed, and there is no affinity bonus until you read the mood; probe first for +{2}; success line {3}+ (about {4}/6)",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "n", "n", "n"]
     },
     {
       "zh": "{0}：{1}，田埂 {2}/{3} · {4}",
       "en": "{0}: {1}, ridges {2}/{3} · {4}",
-      "slots": [
-        "text",
-        "text",
-        "n",
-        "n",
-        "text"
-      ]
+      "slots": ["text", "text", "n", "n", "text"]
     },
     {
       "zh": "田埂 {0}/{1}",
       "en": "ridges {0}/{1}",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     },
     {
       "zh": "{0} · 掷骰 {1} = {2} ≥ {3}，成功。",
       "en": "{0} · roll {1} = {2} ≥ {3}, success.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0} · 掷骰 {1} = {2} < {3}，失败。",
       "en": "{0} · roll {1} = {2} < {3}, failure.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0}：看不清，只知道在{1}附近 · {2} · 躁动 {3}",
       "en": "{0}: too dim to tell; you only know it is near {1} · {2} · unrest {3}",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text"]
     },
     {
       "zh": "{0}（{1}）；还需 {2} 次成功，契合 +{3}；成功线 {4}+（约 {5}/6）",
       "en": "{0} ({1}); {2} more success(es) needed, affinity +{3}; success line {4}+ (about {5}/6)",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "n",
-        "n",
-        "n"
-      ]
+      "slots": ["text", "text", "text", "n", "n", "n"]
     },
     {
       "zh": "{0} · 掷骰 {1} + 契合 {2} + 已探明 {3} = {4} ≥ {5}，成功。",
       "en": "{0} · roll {1} + affinity {2} + probed {3} = {4} ≥ {5}, success.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "{0} · 掷骰 {1} + 契合 {2} + 已探明 {3} = {4} < {5}，失败。",
       "en": "{0} · roll {1} + affinity {2} + probed {3} = {4} < {5}, failure.",
-      "slots": [
-        "text",
-        "text",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text", "text", "text", "text", "text"]
     },
     {
       "zh": "南瓜籽 +{0}（特殊南瓜再 +{1}）。",
       "en": "Pumpkin seed +{0} (special pumpkin +{1} more).",
-      "slots": [
-        "n",
-        "n"
-      ]
+      "slots": ["n", "n"]
     }
   ]
 }

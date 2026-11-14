@@ -330,188 +330,127 @@
     {
       "zh": "{0} 银",
       "en": "{0} silver",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0} 幕 · {1}",
       "en": "Act {0} · {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "前往{0}",
       "en": "Go to {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "验满 {0} 次才算数。没验明之前，它写不出任何东西。",
       "en": "It only counts after {0} examinations. Until it is verified, it can write nothing.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "从{0}走不到{1}。",
       "en": "You cannot walk from {0} to {1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "你走了半天，到了{0}。{1}",
       "en": "After a long walk you reach {0}. {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "赶路多吃了一份干粮（-{0} 粮）。",
       "en": "The road costs an extra ration (-{0} food).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你问到一个关键的人。他压低声音说：笔在{0}，别声张。",
       "en": "You find someone who matters. He lowers his voice: the brush is in {0}. Say nothing.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "线索断在了{0}。{1}",
       "en": "The lead breaks off at {0}. {1}",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "残墨对上了。{0}那条线索是真的，你把它记进证里（证 +1）。",
       "en": "The leftover ink matches. The lead at {0} is true, and you write it into proof (proof +1).",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "验到第 {0} 次，还差 {1} 次。",
       "en": "This is examination {0}; {1} more to go.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "不认识的交谈：{0}",
       "en": "Unknown talk: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "不认识的落笔：{0}",
       "en": "Unknown writing: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "不认识的处置：{0}",
       "en": "Unknown settlement: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "不认识的动作：{0}",
       "en": "Unknown action: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "十八天到了。{0}",
       "en": "Eighteen days are up. {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "第 {0}/{1} 幕 · 在{2} · 银 {3} · 粮 {4} · 命 {5}",
       "en": "Act {0}/{1} · at {2} · silver {3} · food {4} · life {5}",
-      "slots": [
-        "n",
-        "n",
-        "text",
-        "text",
-        "text",
-        "text"
-      ]
+      "slots": ["n", "n", "text", "text", "text", "text"]
     },
     {
       "zh": "你手里有一条线索，指向{0}{1}。",
       "en": "You hold a lead that points to {0}{1}.",
-      "slots": [
-        "text",
-        "text"
-      ]
+      "slots": ["text", "text"]
     },
     {
       "zh": "可去：{0}",
       "en": "You can go to: {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "债 {0}：反噬随时可能来，到 5 每回合掉命，到 6 就回不来了。",
       "en": "Debt {0}: backlash can come at any time. At 5, you lose life each turn; at 6 you do not come back.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "挖到第 {0} 层能靠证开笔",
       "en": "By dig {0} you can open the brush with proof",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "这一局挖空了 {0} 次，每次都是 1 命。线索没验之前，别急着挖。",
       "en": "This run dug empty {0} time(s), each costing 1 life. Do not rush to dig before a lead is verified.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "墨债到过 {0}：用笔的收益是真的，反噬也是真的。",
       "en": "Ink debt reached {0}: the brush's gains are real, and so is the backlash.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "虾写 · {0}",
       "en": "Shrimp Ink · {0}",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     },
     {
       "zh": "你手里有一条线索，指向{0}。",
       "en": "You hold a lead that points to {0}.",
-      "slots": [
-        "text"
-      ]
+      "slots": ["text"]
     }
   ]
 }
