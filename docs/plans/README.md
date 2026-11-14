@@ -9,7 +9,8 @@ Current working plans: [`2026-11-14-jam-art-ferry.md`](2026-11-14-jam-art-ferry.
 [`2026-11-14-jam-batch-2.md`](2026-11-14-jam-batch-2.md),
 [`2026-11-14-jam-batch-3.md`](2026-11-14-jam-batch-3.md),
 [`2026-11-14-jam-batch-4.md`](2026-11-14-jam-batch-4.md),
-[`2026-11-14-jam-batch-lamp.md`](2026-11-14-jam-batch-lamp.md).
+[`2026-11-14-jam-batch-lamp.md`](2026-11-14-jam-batch-lamp.md),
+[`2026-11-14-polish-round-coil-sum.md`](2026-11-14-polish-round-coil-sum.md).
 
 Name the file `YYYY-MM-DD-short-title.md`. State the goal, scope, assumptions,
 risks, and a checklist. Update the plan if the scope changes.

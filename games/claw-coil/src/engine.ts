@@ -27,7 +27,6 @@ export interface CoilState {
   snake: [number, number][];
   crate: [number, number];
   dock: [number, number];
-  plan: Dir[];
   strikes: number;
   strikeLimit: number;
   seated: number;
@@ -70,12 +69,62 @@ function load(state: CoilState, preset: number): void {
   state.snake = level.snake.map((cell) => [cell[0], cell[1]]);
   state.crate = [level.crate[0], level.crate[1]];
   state.dock = [level.dock[0], level.dock[1]];
-  state.plan = [...level.moves];
+}
+
+function signature(snake: [number, number][], crate: [number, number]): string {
+  return `${snake.map((cell) => cell.join(',')).join(';')}>${crate.join(',')}`;
+}
+
+function stepOf(
+  snake: [number, number][],
+  crate: [number, number],
+  dir: Dir,
+): { snake: [number, number][]; crate: [number, number] } | null {
+  const step = DIR[dir];
+  const head = snake[0] ?? [1, 1];
+  const nx = head[0] + (step[0] ?? 0);
+  const ny = head[1] + (step[1] ?? 0);
+  const blocked = (x: number, y: number, cells: [number, number][]) =>
+    wall(x, y) || cells.some((cell) => cell[0] === x && cell[1] === y);
+  if (blocked(nx, ny, snake.slice(0, -1))) return null;
+  if (crate[0] === nx && crate[1] === ny) {
+    const cx = nx + (step[0] ?? 0);
+    const cy = ny + (step[1] ?? 0);
+    if (blocked(cx, cy, snake)) return null;
+    return { snake: [[nx, ny], ...snake.slice(0, -1)], crate: [cx, cy] };
+  }
+  return { snake: [[nx, ny], ...snake.slice(0, -1)], crate: [crate[0], crate[1]] };
 }
 
 export function suggest(state: CoilState): string {
-  const next = state.plan[0];
-  if (next) return next;
+  const startSnake = state.snake.map((cell) => [cell[0], cell[1]] as [number, number]);
+  const startCrate: [number, number] = [state.crate[0], state.crate[1]];
+  const queue: { snake: [number, number][]; crate: [number, number]; first: Dir | '' }[] = [
+    { snake: startSnake, crate: startCrate, first: '' },
+  ];
+  const seen = new Set<string>();
+  let guard = 0;
+  while (queue.length && guard < 4000) {
+    const node = queue.shift();
+    guard += 1;
+    if (!node) break;
+    const key = signature(node.snake, node.crate);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (same(node.crate, state.dock)) return node.first || 'e';
+    for (const dir of ['n', 'e', 's', 'w'] as const) {
+      const next = stepOf(node.snake, node.crate, dir);
+      if (!next) continue;
+      queue.push({ snake: next.snake, crate: next.crate, first: node.first || dir });
+    }
+  }
+  const head = state.snake[0] ?? [1, 1];
+  for (const dir of ['n', 'e', 's', 'w'] as const) {
+    const step = DIR[dir];
+    const nx = head[0] + (step[0] ?? 0);
+    const ny = head[1] + (step[1] ?? 0);
+    if (!wall(nx, ny)) return dir;
+  }
   return 'e';
 }
 
@@ -93,7 +142,6 @@ export function createRun(options: { seed: number; difficulty?: string }): CoilS
     snake: [[1, 1]],
     crate: [2, 1],
     dock: [3, 1],
-    plan: [],
     strikes: 0,
     strikeLimit: rule.strikeLimit,
     seated: 0,
@@ -149,13 +197,21 @@ export function actionsOf(state: CoilState): ActionView[] {
     const nx = head[0] + (step[0] ?? 0);
     const ny = head[1] + (step[1] ?? 0);
     const intoWall = wall(nx, ny) || occupy(state, nx, ny, true);
+    const pushing = state.crate[0] === nx && state.crate[1] === ny;
+    const cx = nx + (step[0] ?? 0);
+    const cy = ny + (step[1] ?? 0);
+    const crateBlocked = pushing && (wall(cx, cy) || occupy(state, cx, cy, false));
+    let detail = `走到 ${nx},${ny}，箱子还在 ${state.crate[0]},${state.crate[1]}。`;
+    if (intoWall) detail = '这一步是墙或者自己的身子，会撞上并停住。';
+    else if (crateBlocked) detail = `箱子前面的 ${cx},${cy} 被挡住，推上去会撞。`;
+    else if (pushing) {
+      detail = `把箱子从 ${state.crate[0]},${state.crate[1]} 推到 ${cx},${cy}。`;
+    }
     return {
       id: dir,
       label: DIR_LABEL[dir],
-      detail: intoWall
-        ? '这一步是墙或者自己的身子，会撞上并停住。'
-        : '尾巴会跟着头走。箱子在前面就会被推一格。',
-      risk: intoWall ? 'high' : 'low',
+      detail,
+      risk: intoWall || crateBlocked ? 'high' : pushing ? 'medium' : 'low',
     } satisfies ActionView;
   });
   const pick = suggest(state);
@@ -216,13 +272,11 @@ export function act(state: CoilState, actionId: string): ActionResult {
     } else {
       state.crate = [cx, cy];
       state.snake = [[nx, ny], ...state.snake.slice(0, -1)];
-      state.plan = state.plan.slice(1);
       log.push(`箱子推到 ${cx},${cy}。`);
       if (same(state.crate, state.dock)) clearStage(state, rng, log);
     }
   } else {
     state.snake = [[nx, ny], ...state.snake.slice(0, -1)];
-    state.plan = state.plan.slice(1);
     log.push(`头移到 ${nx},${ny}。`);
   }
   note(state, log[0] ?? '');

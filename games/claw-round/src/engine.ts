@@ -212,14 +212,18 @@ export function act(state: RoundState, actionId: string): ActionResult {
     state.spots[state.pos] = null;
     log.push(`拿起${state.held ? ITEM_LABEL[state.held] : '空'}。`);
   } else if (actionId === 'pocket' && state.held) {
-    if (!state.need.includes(state.held)) state.wrong += 1;
-    state.pocket.push(state.held);
-    log.push(`入袋${ITEM_LABEL[state.held]}。`);
+    const item = state.held;
+    const useful = state.need.includes(item);
+    if (!useful) state.wrong += 1;
+    state.pocket.push(item);
     state.held = null;
+    log.push(useful ? `入袋${ITEM_LABEL[item]}。` : `入袋${ITEM_LABEL[item]}，潮提前退了。`);
     if (hasNeed(state)) {
       state.outcome = 'won';
       state.cause = '两件都在';
       log.push(`潮环结束：${state.cause}`);
+    } else if (!useful) {
+      rewind(state, log);
     }
   } else if (actionId === 'drop' && state.held) {
     state.spots[state.pos] = state.held;
@@ -228,7 +232,8 @@ export function act(state: RoundState, actionId: string): ActionResult {
   }
   if (log.length === 0) log.push(actionId.startsWith('step') ? '走了一格。' : '停了一拍。');
   note(state, log[0] ?? '');
-  if (state.outcome === 'ongoing') {
+  const rewound = log.some((line) => line.startsWith('潮退了'));
+  if (state.outcome === 'ongoing' && !rewound) {
     state.beat += 1;
     if (state.beat >= state.beats) rewind(state, log);
   }

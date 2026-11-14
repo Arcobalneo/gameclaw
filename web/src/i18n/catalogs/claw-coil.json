@@ -40,6 +40,21 @@
       "en": "Crate {0}/{1} · head {2},{3} · bumps {4}",
       "slots": ["n", "n", "n", "n", "n"]
     },
+    {
+      "zh": "走到 {0},{1}，箱子还在 {2},{3}。",
+      "en": "Step to {0},{1}. The crate stays at {2},{3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "箱子前面的 {0},{1} 被挡住，推上去会撞。",
+      "en": "{0},{1} in front of the crate is blocked. Pushing bumps.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "把箱子从 {0},{1} 推到 {2},{3}。",
+      "en": "Push the crate from {0},{1} to {2},{3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
     { "zh": "箱在 {0},{1}", "en": "Crate at {0},{1}", "slots": ["n", "n"] },
     { "zh": "坞在 {0},{1}", "en": "Dock at {0},{1}", "slots": ["n", "n"] },
     { "zh": "撞上了。撞 {0}。", "en": "Bumped. Bumps {0}.", "slots": ["n"] },

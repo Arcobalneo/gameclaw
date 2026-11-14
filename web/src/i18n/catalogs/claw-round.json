@@ -68,6 +68,11 @@
     },
     { "zh": "拿起{0}。", "en": "Took the {0}.", "slots": ["text"] },
     { "zh": "入袋{0}。", "en": "Pocketed the {0}.", "slots": ["text"] },
+    {
+      "zh": "入袋{0}，潮提前退了。",
+      "en": "Pocketed the {0}, and the tide turned early.",
+      "slots": ["text"]
+    },
     { "zh": "放下{0}。", "en": "Dropped the {0}.", "slots": ["text"] },
     {
       "zh": "潮退了。口袋里是{0}。",
