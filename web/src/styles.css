@@ -817,7 +817,7 @@ a {
 }
 
 .gv-action-label {
-  flex: 1;
+  flex: 1 1 55%;
   min-width: 0;
   color: var(--text);
 }
@@ -826,12 +826,22 @@ a {
   display: inline-flex;
   gap: var(--s2);
   align-items: center;
-  flex: none;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 45%;
   color: var(--dim);
 }
 
 .gv-action-tags em {
   font-style: normal;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gv-action-tags .risk {
+  flex: none;
 }
 
 .risk {
