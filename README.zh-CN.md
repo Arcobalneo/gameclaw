@@ -64,6 +64,10 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 | `claw-delve` | 虾掘 Claw Delve | 离开没撑的一层，井就会塌。 |
 | `claw-fair` | 虾市 Claw Fair | 客人记得昨天。加价一次只能加一。 |
 | `claw-reef` | 虾礁 Claw Reef | 先走，潮再推没下锚的。 |
+| `claw-lamp` | 虾灯 Claw Lamp | 立灯照亮水洼。两盏灯不能互相看见。 |
+| `claw-raft` | 虾筏 Claw Raft | 左舷、中舱或右舷。偏重的一侧会落水。 |
+| `claw-stow` | 虾仓 Claw Stow | 先上架，再按单据取出那一格。 |
+| `claw-glass` | 虾镜 Claw Glass | 三面镜子，把月光束照到神龛。 |
 
 每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 

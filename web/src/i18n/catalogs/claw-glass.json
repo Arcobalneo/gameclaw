@@ -1,0 +1,88 @@
+{
+  "terms": {
+    "反斜": "backslash",
+    "正斜": "slash",
+    "照到神龛": "hits the shrine",
+    "撞上云": "hits the cloud",
+    "落空": "misses"
+  },
+  "exact": {
+    "虾镜 · 月庭结算": "Claw Glass · court recap",
+    "月光束还没到": "The moonbeam is still out",
+    "月庭都亮了": "Every court is lit",
+    "云盖住了神龛": "The cloud covered the shrine",
+    "节拍用尽": "The beats ran out",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "月庭": "Court",
+    "庭": "Court",
+    "节拍": "Beats",
+    "点亮": "Lit",
+    "错照": "Faults",
+    "云": "Cloud",
+    "镜子": "Mirrors",
+    "光束": "Beam",
+    "记录": "Notes",
+    "结局": "Result",
+    "到了": "here",
+    "放光": "Fire",
+    "等云": "Wait",
+    "1 节拍": "1 beat",
+    "还没有转镜": "No mirror turned yet",
+    "还没有点亮一座": "No shrine lit yet",
+    "现在放光会照到神龛。": "Firing now hits the shrine.",
+    "镜子不动，只让云走一步。": "Leave the mirrors and let the cloud step.",
+    "光束照到神龛。": "The beam hit the shrine.",
+    "等云走了一步。": "The cloud took a step.",
+    "云会盖住神龛": "the cloud will cover the shrine",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "反斜和正斜把光折向不同的方向。状态里写着现在的光束会落到哪里。": "A backslash and a slash bend the beam different ways. The status says where the beam lands now.",
+    "没照到就放光，记一次错照。一次错照比两座神龛更贵。": "Firing when the beam misses is a fault. One fault costs more than two shrines.",
+    "把本局哪一面镜子要转成正斜还是反斜才照到神龛写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which mirror had to be a slash or a backslash to hit the shrine into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "月庭结束 · {0}", "en": "Court closed · {0}", "slots": ["text"] },
+    { "zh": "月庭结束：{0}", "en": "Court over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 庭 · 节拍 {2} · 光束{3}",
+      "en": "Court {0}/{1} · beats {2} · beam {3}",
+      "slots": ["n", "n", "n", "text"]
+    },
+    { "zh": "转 {0}", "en": "Turn {0}", "slots": ["n"] },
+    {
+      "zh": "转动第 {0} 面镜子。云走一步之后，光束{1}。",
+      "en": "Turn mirror {0}. After the cloud steps, the beam {1}.",
+      "slots": ["n", "text"]
+    },
+    {
+      "zh": "现在放光会{0}，并记一次错照。",
+      "en": "Firing now {0}, and that is a fault.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "第 {0} 面 {1}，在 {2},{3}",
+      "en": "Mirror {0} {1} at {2},{3}",
+      "slots": ["n", "text", "n", "n"]
+    },
+    { "zh": "现在{0}", "en": "Now it {0}", "slots": ["text"] },
+    { "zh": "神龛在 {0},{1}", "en": "Shrine at {0},{1}", "slots": ["n", "n"] },
+    { "zh": "光束{0}。错照 {1}。", "en": "The beam {0}. Faults {1}.", "slots": ["text", "n"] },
+    {
+      "zh": "转动第 {0} 面，现在是{1}。",
+      "en": "Turned mirror {0}. It is now a {1}.",
+      "slots": ["n", "text"]
+    },
+    { "zh": "第 {0} 座神龛亮了。", "en": "Shrine {0} lit.", "slots": ["n"] },
+    {
+      "zh": "本局点亮 {0} 座，错照 {1} 次。",
+      "en": "This run lit {0} shrines and faulted {1} times.",
+      "slots": ["n", "n"]
+    }
+  ]
+}

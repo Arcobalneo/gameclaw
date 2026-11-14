@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import legacyIds from '../../catalog/legacy-ids.json';
 import { handleRequest, RELAY_VERSION } from '../src/app';
+import { GAME_IDS } from '../src/games';
 import { generateSessionId } from '../src/ids';
 import { extractSession, handleMcp, toolList } from '../src/mcp';
 import { PAGE_CLOSED_ERROR, TOOL_NAMES } from '../src/protocol';
@@ -155,7 +156,7 @@ describe('room + http', () => {
     };
     expect(closedBody.result.isError).toBe(false);
     expect(closedBody.result.structuredContent.ok).toBe(true);
-    expect(closedBody.result.structuredContent.games).toHaveLength(26);
+    expect(closedBody.result.structuredContent.games).toHaveLength(GAME_IDS.length);
     expect(closedBody.result.structuredContent.watch_url).toMatch(
       /#\/watch\/[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{7}$/,
     );

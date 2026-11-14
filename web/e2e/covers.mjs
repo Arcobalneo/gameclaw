@@ -42,6 +42,10 @@ const PLAN = {
   'claw-delve': [7, [0, 1], 1.4],
   'claw-fair': [7, [0], 1.4],
   'claw-reef': [7, [0, 1], 1.4],
+  'claw-lamp': [4, [0], 1.6],
+  'claw-raft': [5, [0, 2, 1], 1.4],
+  'claw-stow': [6, [0, 1], 1.4],
+  'claw-glass': [3, [0, 1], 1.5],
 };
 
 const browser = await chromium.launch({

@@ -1,0 +1,92 @@
+{
+  "terms": {
+    "已立": "set",
+    "空着": "empty"
+  },
+  "exact": {
+    "虾灯 · 浅滩结算": "Claw Lamp · shoal recap",
+    "浅滩还黑着": "The shoal is still dark",
+    "浅滩都亮了": "The shoal is lit",
+    "潮水灭了灯": "The tide put the lamps out",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "浅滩": "Shoal",
+    "段": "Stage",
+    "水洼": "Pools",
+    "灯笼": "Lamps",
+    "潮": "Tide",
+    "挪灯": "Lifts",
+    "省下": "Saved",
+    "柱": "Posts",
+    "视线": "Sight",
+    "记录": "Notes",
+    "结局": "Result",
+    "无": "none",
+    "封滩": "Seal",
+    "1 潮": "1 tide",
+    "还没有立灯": "No lamp yet",
+    "还没有封上一段": "No stage sealed yet",
+    "两根能互相看见的柱不能同时立着。收起灯笼要花一潮，并记一次挪灯。": "Two posts that see each other cannot both hold a lamp. Picking one up spends a tide and counts as a lift.",
+    "能互相看见的两根柱不能同时立。先立照亮水洼最多的那根。": "Two posts that see each other cannot both stand. Place the post that lights the most new pools.",
+    "潮不够把立错的灯都收回来。一次挪灯比两只省下的灯笼更贵。": "There is not enough tide to undo a bad post. One lift costs more than two saved lamps.",
+    "把本局哪一根柱挡住了真正照亮水洼的位置写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which post blocked the one that actually lights the pools into your own memory. Treat that as an observation of this seed and check it again on the next seed.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions."
+  },
+  "patterns": [
+    { "zh": "浅滩结束 · {0}", "en": "Shoal closed · {0}", "slots": ["text"] },
+    { "zh": "浅滩结束：{0}", "en": "Shoal over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 段 · 水洼 {2}/{3} · 潮 {4}",
+      "en": "Stage {0}/{1} · pools {2}/{3} · tide {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "第 {0} 根 {1}，能照 {2}",
+      "en": "Post {0} {1}, lights {2}",
+      "slots": ["n", "text", "text"]
+    },
+    { "zh": "立 {0}", "en": "Place {0}", "slots": ["n"] },
+    { "zh": "收 {0}", "en": "Lift {0}", "slots": ["n"] },
+    {
+      "zh": "把灯笼立在第 {0} 根。新照亮 {1} 个水洼。",
+      "en": "Stand a lamp on post {0}. It lights {1} new pools.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "收起第 {0} 根。灯笼回来，记一次挪灯。",
+      "en": "Lift post {0}. The lamp comes back and counts as a lift.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "水洼都亮了。封这一段，省下的 {0} 只灯笼记进分数。",
+      "en": "Every pool is lit. Seal this stage. {0} saved lamps count.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "第 {0} 段封上了。省下灯笼 {1}。",
+      "en": "Stage {0} sealed. Lamps saved {1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "收起第 {0} 根。灯笼 {1}，挪灯 {2}。",
+      "en": "Lifted post {0}. Lamps {1}, lifts {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "立灯 {0}，新照亮 {1}，灯笼 {2}，潮 {3}。",
+      "en": "Placed lamp {0}, new pools {1}, lamps {2}, tide {3}.",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "本局封上 {0} 段，省下 {1} 只灯笼，挪灯 {2} 次。",
+      "en": "This run sealed {0} stages, saved {1} lamps, and lifted {2} times.",
+      "slots": ["n", "n", "n"]
+    }
+  ]
+}

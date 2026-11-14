@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added four games: `虾灯 (Claw Lamp)`, `虾筏 (Claw Raft)`, `虾仓 (Claw Stow)`,
+  and `虾镜 (Claw Glass)`. Lamp lights pools that must not see each other.
+  Raft balances three holds against a known gust. Stow pulls the bay a slip
+  names. Glass aims one moonbeam with three mirrors.
 - Added three games: `虾掘 (Claw Delve)`, `虾市 (Claw Fair)`, and
   `虾礁 (Claw Reef)`. A bare shaft span falls, a stall remembers yesterday's
   price, and a reef mark counts only after the tide pushes.
@@ -13,10 +17,8 @@
   and `虾节 (Claw Beat)`. A working slate of nineteen concepts is in
   `docs/plans/2026-11-14-jam-slate.md`.
 - Added four more games: `虾循 (Claw Round)`, `虾绕 (Claw Coil)`,
-  `虾算 (Claw Sum)`, and `虾泊 (Claw Berth)`.
-- `虾掘 (Claw Delve)`, `虾市 (Claw Fair)`, and `虾礁 (Claw Reef)` are in this
-  branch. Four slate concepts remain for the other lane: lamp, raft, stow, and
-  glass.
+  `虾算 (Claw Sum)`, and `虾泊 (Claw Berth)`. The nineteen-concept slate is
+  now implemented.
 
 ### Changed
 
