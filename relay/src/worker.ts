@@ -10,7 +10,7 @@ import {
 } from './app';
 import { isSessionId } from './ids';
 import { type BoardFile, type BoardStore, LeaderboardCore, type SubmitInput } from './leaderboard';
-import type { Json, ToolName } from './protocol';
+import type { Json, StoredDesk, ToolName } from './protocol';
 import type { CodeStore } from './registry';
 import { SessionRoomCore, type SocketLike } from './room';
 import { type PlayCounts, PlayStatsCore, type StatsStore } from './stats';
@@ -103,8 +103,13 @@ export class SessionRoom implements DurableObject {
     if (this.#core) return this.#core;
     const site = this.env.GAMECLAW_SITE_URL ?? SITE_DEFAULT;
     const storedCode = await this.state.storage.get<string>('code');
+    const storedDesk = await this.state.storage.get<StoredDesk>('desk');
     await this.state.storage.put('sessionId', sessionId);
     const room = new SessionRoomCore(sessionId, site, storedCode ?? null);
+    if (storedDesk) room.loadDesk(storedDesk);
+    room.onDesk((desk) => {
+      void this.state.storage.put('desk', structuredClone(desk));
+    });
     for (const ws of this.state.getWebSockets()) {
       const socket = wrapSocket(ws);
       this.#sockets.set(ws, socket);

@@ -145,10 +145,17 @@ describe('room + http', () => {
       { siteUrl: site, version: RELAY_VERSION },
     );
     const closedBody = (await closed.json()) as {
-      result: { isError: boolean; structuredContent: { error: string } };
+      result: {
+        isError: boolean;
+        structuredContent: { ok: boolean; watch_url: string; games: unknown[] };
+      };
     };
-    expect(closedBody.result.isError).toBe(true);
-    expect(closedBody.result.structuredContent.error).toBe(PAGE_CLOSED_ERROR);
+    expect(closedBody.result.isError).toBe(false);
+    expect(closedBody.result.structuredContent.ok).toBe(true);
+    expect(closedBody.result.structuredContent.games).toHaveLength(11);
+    expect(closedBody.result.structuredContent.watch_url).toMatch(
+      /#\/watch\/[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{7}$/,
+    );
 
     const room = await hub.getRoom(session);
     const socket = new FakeSocket();
@@ -179,9 +186,12 @@ describe('room + http', () => {
     );
     const res = await pending;
     const body = (await res.json()) as {
-      result: { structuredContent: { ok: boolean; action: string } };
+      result: { structuredContent: { ok: boolean; action: string; watch_url: string } };
     };
-    expect(body.result.structuredContent).toEqual({ ok: true, action: 'jump' });
+    expect(body.result.structuredContent).toMatchObject({ ok: true, action: 'jump' });
+    expect(body.result.structuredContent.watch_url).toBe(
+      'https://arcobalneo.github.io/gameclaw/#/watch/ABC23XY',
+    );
   });
 
   it('resolves a room code only for the session that owns it', async () => {

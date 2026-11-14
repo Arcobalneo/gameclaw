@@ -1,10 +1,13 @@
 import { type ActionView, normalizePlayerName, type StatusView } from '@gameclaw/gamekit';
+import { watchUrl } from '../../../relay/src/protocol';
 import { GAMES, gameName } from '../catalog';
 import { lang, setLang } from '../i18n';
 import { localizeActions, localizeLines, localizeRecap, localizeStatus } from '../i18n/localize';
+import { siteUrl } from './config';
 import type { GameHost } from './host';
 import { refreshBoard, rowsFor, submitScore } from './leaderboard';
 import { hasGame } from './registry';
+import { loadOrCreateSession } from './session';
 
 /**
  * Agent surface. The same functions back three transports:
@@ -271,7 +274,20 @@ const gameIdProp = {
   description: 'Game id such as shrimp-trek. Defaults to the game focused in the page.',
 };
 
+function withWatch(data: unknown): unknown {
+  const code = loadOrCreateSession().code;
+  if (!code || !data || typeof data !== 'object') return data;
+  return { ...(data as Record<string, unknown>), watch_url: watchUrl(siteUrl(), code) };
+}
+
 export function toolDescriptors(api: GameclawApi): ToolDescriptor[] {
+  return describeTools(api).map((tool) => ({
+    ...tool,
+    execute: async (input) => withWatch(await tool.execute(input ?? {})),
+  }));
+}
+
+function describeTools(api: GameclawApi): ToolDescriptor[] {
   const ids = GAMES.map((g) => g.id);
   return [
     {
@@ -283,7 +299,8 @@ export function toolDescriptors(api: GameclawApi): ToolDescriptor[] {
     },
     {
       name: 'open_game',
-      description: 'Open (and focus) a game window so the human can watch; resumes its saved run.',
+      description:
+        'Open a game so the human can watch. Resumes its saved run. If no browser is connected, the run still starts. Tell the human to open watch_url from the result.',
       inputSchema: {
         type: 'object',
         properties: { game_id: { type: 'string', enum: ids } },
@@ -294,7 +311,7 @@ export function toolDescriptors(api: GameclawApi): ToolDescriptor[] {
     {
       name: 'new_game',
       description:
-        'Start a fresh deterministic run in a game window. Same seed + same actions = same run.',
+        'Start a fresh deterministic run. Same seed + same actions = same run. Plays even if no browser is open. Tell the human to open watch_url from the result.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -331,7 +348,7 @@ export function toolDescriptors(api: GameclawApi): ToolDescriptor[] {
     {
       name: 'act',
       description:
-        'Take exactly one action; it animates in the shared game window. Returns log, new state and next actions.',
+        'Take exactly one action. It shows in the shared window when a browser is watching, and still resolves when none is. Remind the human to open watch_url.',
       inputSchema: {
         type: 'object',
         properties: {

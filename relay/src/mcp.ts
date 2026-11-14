@@ -33,7 +33,8 @@ const TOOL_SCHEMA: Record<
     readOnly: true,
   },
   open_game: {
-    description: 'Open (and focus) a game window so the human can watch; resumes its saved run.',
+    description:
+      'Open a game so the human can watch. Resumes its saved run. If no browser is connected, the run still starts. The result includes watch_url: tell the human to open it.',
     properties: {
       game_id: { type: 'string', description: 'Game id from list_games.' },
     },
@@ -41,7 +42,7 @@ const TOOL_SCHEMA: Record<
   },
   new_game: {
     description:
-      'Start a fresh deterministic run in a game window. Same seed + same actions = same run.',
+      'Start a fresh deterministic run. Same seed + same actions = same run. Plays even if no browser is open. Tell the human to open watch_url from the result.',
     properties: {
       game_id: {
         type: 'string',
@@ -67,7 +68,7 @@ const TOOL_SCHEMA: Record<
   },
   act: {
     description:
-      'Take exactly one action; it animates in the shared game window. Returns log, new state and next actions.',
+      'Take exactly one action. It shows up in the shared window when a browser is watching, and still resolves when none is. Remind the human to open watch_url.',
     properties: {
       action_id: {
         type: 'string',
@@ -200,7 +201,7 @@ export async function handleMcp(
           capabilities: { tools: { listChanged: false } },
           serverInfo: { name: 'gameclaw-relay', version: opts.version },
           instructions:
-            'Use Authorization: Bearer <session-token> on every call. The token is in the prompt the human copied from the GameClaw page. Tools run in that open browser tab so the human sees every move.',
+            'Use Authorization: Bearer <session-token> on every call. The token is in the prompt the human copied from the GameClaw page. When their tab is open, tools run there so they see every move. If no tab is connected, the run still plays. Results include watch_url. Tell the human to open it and watch.',
         },
       };
     case 'ping':

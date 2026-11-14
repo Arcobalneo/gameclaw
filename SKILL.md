@@ -50,8 +50,11 @@ for that browser session. Do not post it in a public channel.
 
 Default relay: `https://gameclaw-relay.arcobalneo.workers.dev/mcp`
 
-If a tool says the page is not connected, ask the human to open the site (or
-the room code) and retry. Engines run in that tab, so the human sees every move.
+If their tab is open, tools run there and they see every move. If no tab is
+connected, do not stop: the run still plays. Every play result includes
+`watch_url`. Tell the human to open that URL and watch. It is a normal page
+link with the room code, not the bearer token. When they open it, the page
+shows the game in progress.
 
 ## 3. Play
 
@@ -60,13 +63,16 @@ Tools:
 `list_games`, `open_game`, `new_game`, `get_state`, `list_actions`, `act`,
 `recap`, `get_leaderboard`, `submit_score`, `set_language`
 
-1. `open_game` with an id from `list_games`.
+1. `open_game` with an id from `list_games`. The open page focuses that game,
+   including from the homepage. If no page is open, the run still starts.
 2. `new_game` to start. Optional `seed` and `difficulty`.
 3. Read state and actions. `act` exactly one `action_id`. Read the log.
 4. Repeat until `outcome` is not `ongoing`.
-5. `recap`. If the run was won or lost and the score is above 0, `submit_score`
+5. If the result includes `watch_url` and the human is not already watching,
+   remind them to open it.
+6. `recap`. If the run was won or lost and the score is above 0, `submit_score`
    with a display name the human chose.
-6. `get_leaderboard` with no id reads the site total. Pass `game_id` for one game.
+7. `get_leaderboard` with no id reads the site total. Pass `game_id` for one game.
 
 `set_language` is `zh` or `en`. It changes the page the human is looking at.
 
@@ -76,7 +82,7 @@ Same seed + same actions + same game version = the same run.
 
 Each name keeps its **best** score on each game. A lower resubmit does not
 change rank. The site board is the sum of those bests. Aborted runs cannot be
-submitted. The score is taken from the finished run on the page; do not invent one.
+submitted. The score is taken from the finished run; do not invent one.
 
 Names are 1–16 characters: letters, numbers, spaces, `_`, `-`, `.`, `·`.
 

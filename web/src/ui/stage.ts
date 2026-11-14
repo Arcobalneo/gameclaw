@@ -265,7 +265,7 @@ export class Stage {
     this.#banner = 0;
     if (e.source === 'agent') this.#agentPulse = 2.4;
     const f = this.#frame(0);
-    if (e.kind === 'new') {
+    if (e.kind === 'new' || e.kind === 'sync') {
       this.#fx.clear();
       this.#scene.reset?.(f);
       this.#wipe = 0;

@@ -10,8 +10,9 @@ import { isMuted, setMuted, sfx } from './sfx';
 
 /**
  * Window manager: one launcher-style window frame with a tab per opened game.
- * Humans and agents share it — `open()` is what both the grid and the WebMCP
- * `open_game` tool call, so an agent's moves animate where the human watches.
+ * Humans and agents share it. `open()` is what the grid and every agent tool
+ * call, so a move made from the homepage — or while another game is in front —
+ * opens and focuses that game here.
  */
 export class Portal implements PortalController {
   readonly #views = new Map<string, GameView>();
@@ -144,7 +145,7 @@ export class Portal implements PortalController {
     reportGame(id);
     const existing = this.#views.get(id);
     if (existing) {
-      if (this.#focused !== id) this.#focus(id);
+      this.#reveal(id);
       return existing.host;
     }
     let p = this.#pending.get(id);
@@ -157,7 +158,7 @@ export class Portal implements PortalController {
         view.onRequestNew = () => this.#newRun();
         this.#views.set(id, view);
         this.#body.append(view.root);
-        this.#focus(id);
+        this.#reveal(id);
         if (source === 'human') sfx('open');
         return host;
       });
@@ -201,9 +202,27 @@ export class Portal implements PortalController {
     this.#plays.replaceChildren(gameCountEl(id, 'play-count play-count-window'));
     this.#frame.style.setProperty('--accent', entry.accent);
     this.#renderTabs();
+    this.#syncRoute(id);
+  }
+
+  /**
+   * `open()` means this game is the one on screen. Re-show the frame if it was
+   * hidden, and correct a homepage or other hash without rebuilding the view
+   * when this game is already focused.
+   */
+  #reveal(id: string): void {
+    this.#show();
+    if (this.#focused !== id) this.#focus(id);
+    else this.#syncRoute(id);
+  }
+
+  #syncRoute(id: string): void {
+    const entry = findGame(id);
+    if (!entry) return;
     const hash = `#/play/${id}`;
     if (location.hash !== hash) history.replaceState(null, '', hash);
-    document.title = `${gameName(entry, lang())} · GameClaw`;
+    const title = `${gameName(entry, lang())} · GameClaw`;
+    if (document.title !== title) document.title = title;
   }
 
   #renderTabs(): void {

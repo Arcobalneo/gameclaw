@@ -23,6 +23,7 @@ export type AnyOutcome = MemoryActOutcome<any>;
 
 export type HostEvent =
   | { kind: 'new'; source: ActSource }
+  | { kind: 'sync'; source: ActSource }
   | { kind: 'act'; source: ActSource; outcome: AnyOutcome };
 
 export interface ActError {
@@ -114,6 +115,24 @@ export class GameHost {
   subscribe(fn: (event: HostEvent) => void): () => void {
     this.#listeners.add(fn);
     return () => this.#listeners.delete(fn);
+  }
+
+  /**
+   * Replace this run with one played elsewhere (the relay, while this tab was
+   * closed). A newer local turn of the same run is kept.
+   */
+  adopt(raw: unknown, log: LogEntry[]): boolean {
+    const session = MemorySession.restore(this.module.definition, raw);
+    if (!session) return false;
+    const local = this.session.snapshot;
+    const next = session.snapshot;
+    const sameRun = local.createdAt === next.createdAt && local.seed === next.seed;
+    if (sameRun && local.turn >= next.turn) return false;
+    this.session = session;
+    this.log = log.filter((entry) => Array.isArray(entry.lines)).slice(-MAX_LOG);
+    this.#persist();
+    this.#emit({ kind: 'sync', source: 'agent' });
+    return true;
   }
 
   newGame(opts: { seed?: number; difficulty?: string; source?: ActSource } = {}): void {

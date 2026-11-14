@@ -1,3 +1,4 @@
+import type { StoredDesk } from '../../../relay/src/protocol';
 import { sessionWsUrl } from './config';
 import type { LocalSession } from './session';
 
@@ -11,10 +12,16 @@ export interface RelayClient {
   reconnect(): void;
 }
 
+export interface ToolAnswer {
+  payload: unknown;
+  desk?: StoredDesk;
+}
+
 export function connectRelay(opts: {
   session: () => LocalSession;
-  execute: (tool: string, args: Json) => Promise<unknown>;
+  execute: (tool: string, args: Json) => Promise<ToolAnswer>;
   onWelcome: (code: string) => void;
+  onRun: (desk: StoredDesk) => Promise<void> | void;
   onStatus: (status: RelayStatus) => void;
 }): RelayClient {
   let ws: WebSocket | null = null;
@@ -81,9 +88,11 @@ export function connectRelay(opts: {
         if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify({ type: 'pong' }));
       }, 25_000);
     });
+    let chain: Promise<void> = Promise.resolve();
     socket.addEventListener('message', (event) => {
       if (ws !== socket) return;
-      void onMessage(socket, String(event.data));
+      const raw = String(event.data);
+      chain = chain.then(() => onMessage(socket, raw)).catch(() => undefined);
     });
     socket.addEventListener('close', () => {
       if (ws !== socket) return;
@@ -98,7 +107,14 @@ export function connectRelay(opts: {
   };
 
   const onMessage = async (socket: WebSocket, raw: string) => {
-    let message: { type?: string; id?: string; tool?: string; args?: Json; code?: string };
+    let message: {
+      type?: string;
+      id?: string;
+      tool?: string;
+      args?: Json;
+      code?: string;
+      desk?: StoredDesk;
+    };
     try {
       message = JSON.parse(raw) as typeof message;
     } catch {
@@ -108,14 +124,21 @@ export function connectRelay(opts: {
       opts.onWelcome(message.code);
       return;
     }
+    if (message.type === 'run' && message.desk && typeof message.desk === 'object') {
+      await opts.onRun(message.desk);
+      return;
+    }
     if (
       message.type === 'call' &&
       typeof message.id === 'string' &&
       typeof message.tool === 'string'
     ) {
       let payload: unknown;
+      let desk: StoredDesk | undefined;
       try {
-        payload = await opts.execute(message.tool, message.args ?? {});
+        const answered = await opts.execute(message.tool, message.args ?? {});
+        payload = answered.payload;
+        desk = answered.desk;
       } catch (error) {
         payload = {
           ok: false,
@@ -123,7 +146,9 @@ export function connectRelay(opts: {
         };
       }
       if (socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({ type: 'result', id: message.id, payload }));
+        socket.send(
+          JSON.stringify({ type: 'result', id: message.id, payload, ...(desk ? { desk } : {}) }),
+        );
       }
     }
   };

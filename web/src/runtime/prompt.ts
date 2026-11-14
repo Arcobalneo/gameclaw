@@ -56,7 +56,7 @@ export function buildPrompt(
       `Goal: ${game.goalEn}`,
       `Scoring: ${game.scoreEn}`,
       'After each move, say in one line why you chose it.',
-      'If a tool says the page is not connected, wait until I open the Page URL above, then retry.',
+      'If no browser is connected, keep playing. Tell me to open watch_url from the tool result so I can watch.',
       'Do not share this token publicly.',
     ]
       .filter((line, i, arr) => line !== '' || arr[i - 1] !== '')
@@ -82,7 +82,7 @@ export function buildPrompt(
     `计分：${game.scoreZh}`,
     ...(guideLines.length ? ['要点：', ...guideLines] : []),
     '每步之后用一句话说明理由。',
-    '如果工具返回页面未连接，等我打开上面的页面后再试。',
+    '如果页面没连上，继续玩。把结果里的 watch_url 发给我，我打开就能看。',
     '不要把令牌发到公开场合。',
   ]
     .filter((line, i, arr) => line !== '' || arr[i - 1] !== '')
