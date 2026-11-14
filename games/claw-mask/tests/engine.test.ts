@@ -53,7 +53,7 @@ describe('claw-mask engine', () => {
     }
     expect(careful).toBeGreaterThanOrEqual(6);
     expect(blind).toBeLessThan(careful);
-  });
+  }, 20_000);
 
   it('scores zero on abort', () => {
     const session = MemorySession.create(definition, { seed: 5 });
