@@ -1,0 +1,81 @@
+{
+  "terms": {},
+  "exact": {
+    "虾泊 · 泊位结算": "Claw Berth · berth recap",
+    "泊位进行中": "The harbor is still open",
+    "货装够了": "The cargo quota is met",
+    "危货贴在一起": "Hazards sat together",
+    "船等怒了": "Ships got angry",
+    "潮退了": "The tide went out",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "泊位": "Berth",
+    "货": "Cargo",
+    "潮": "Tide",
+    "拖": "Tugs",
+    "怒": "Anger",
+    "事": "Incidents",
+    "开航": "Sailed",
+    "当前船": "This ship",
+    "下一艘": "Next ship",
+    "记录": "Notes",
+    "结局": "Result",
+    "危货": "Hazard",
+    "等待": "Wait",
+    "港还是空的": "The harbor is empty",
+    "还没有开航": "Nothing has sailed",
+    "装卸减一拍。装完就开航。当前船的耐心也减一，到零就生气离开。": "Loading ticks down and then the ship sails. The waiting ship's patience also drops, and at zero it leaves angry.",
+    "花一艘拖船，把深一档的船塞进这个泊位。": "Spend a tug to force a ship one draft too deep into this berth.",
+    "吃水够，但会和旁边的危货贴在一起。": "The draft fits, but it will sit against another hazard.",
+    "1 拖": "1 tug",
+    "吃水不能超过水深。拖船只能多塞深一档。": "Draft cannot exceed depth. A tug only forces one extra draft.",
+    "两艘危货挨着就算一次事故。等待会让当前船失去耐心。": "Two hazards side by side are an incident. Waiting spends the current ship's patience.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "把哪条船吃水太深、危货有没有挨在一起写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which ship was too deep, and whether hazards sat together, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "泊位结束 · {0}", "en": "Harbor closed · {0}", "slots": ["text"] },
+    { "zh": "泊位结束：{0}", "en": "Harbor over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 潮 · 货 {2}/{3} · 怒 {4}",
+      "en": "Tide {0}/{1} · cargo {2}/{3} · anger {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    {
+      "zh": "吃水 {0} · 货 {1} · 耐心 {2} · 危货",
+      "en": "Draft {0} · cargo {1} · patience {2} · hazard",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "吃水 {0} · 货 {1} · 耐心 {2}",
+      "en": "Draft {0} · cargo {1} · patience {2}",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "{0} 深 {1} 装 {2} 危",
+      "en": "{0} depth {1} loading {2} hazard",
+      "slots": ["n", "n", "n"]
+    },
+    { "zh": "{0} 深 {1} 装 {2}", "en": "{0} depth {1} loading {2}", "slots": ["n", "n", "n"] },
+    { "zh": "{0} 深 {1} 空", "en": "{0} depth {1} empty", "slots": ["n", "n"] },
+    { "zh": "靠 {0}", "en": "Dock {0}", "slots": ["n"] },
+    { "zh": "拖 {0}", "en": "Tug {0}", "slots": ["n"] },
+    { "zh": "吃水 {0} 不超过水深 {1}。", "en": "Draft {0} fits depth {1}.", "slots": ["n", "n"] },
+    { "zh": "船靠上 {0} 号泊位。", "en": "The ship took berth {0}.", "slots": ["n"] },
+    { "zh": "{0} 号装完，货 +{1}。", "en": "Berth {0} sailed, cargo +{1}.", "slots": ["n", "n"] },
+    { "zh": "装卸走了一拍。", "en": "Loading advanced one beat.", "slots": [] },
+    { "zh": "当前船等怒了，离开。", "en": "The waiting ship left angry.", "slots": [] },
+    { "zh": "潮走了一拍。", "en": "The tide advanced one beat.", "slots": [] },
+    {
+      "zh": "本局货 {0}，开航 {1}，怒 {2}，危货事故 {3}。",
+      "en": "This run cargo {0}, sailed {1}, anger {2}, hazard incidents {3}.",
+      "slots": ["n", "n", "n", "n"]
+    }
+  ]
+}

@@ -155,7 +155,7 @@ describe('room + http', () => {
     };
     expect(closedBody.result.isError).toBe(false);
     expect(closedBody.result.structuredContent.ok).toBe(true);
-    expect(closedBody.result.structuredContent.games).toHaveLength(19);
+    expect(closedBody.result.structuredContent.games).toHaveLength(23);
     expect(closedBody.result.structuredContent.watch_url).toMatch(
       /#\/watch\/[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{7}$/,
     );

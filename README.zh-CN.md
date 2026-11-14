@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>十九款像素游戏。人和 Agent 玩同一局。</strong>
+  <strong>二十三款像素游戏。人和 Agent 玩同一局。</strong>
 </p>
 
 <p align="center">
@@ -57,6 +57,10 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 | `claw-mask` | 虾罩 Claw Mask | 三格面罩，决定你踩的是哪一层。 |
 | `claw-clock` | 虾钟 Claw Clock | 先转环，指针再吃下一格。 |
 | `claw-flip` | 虾拨 Claw Flip | 一拨，板和空对调。石头只能跳。 |
+| `claw-round` | 虾循 Claw Round | 六拍之后，没入袋的都被潮带走。 |
+| `claw-coil` | 虾绕 Claw Coil | 尾巴跟着头。把箱子推进坞。 |
+| `claw-sum` | 虾算 Claw Sum | 拉杆，直到数字对准目标。 |
+| `claw-berth` | 虾泊 Claw Berth | 吃水要进得去。危货不能挨着。 |
 
 每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 

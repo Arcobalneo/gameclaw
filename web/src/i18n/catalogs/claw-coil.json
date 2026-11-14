@@ -1,0 +1,56 @@
+{
+  "terms": {},
+  "exact": {
+    "虾绕 · 绕行结算": "Claw Coil · coil recap",
+    "绕行进行中": "The coil is still moving",
+    "箱子都进了": "Every crate is docked",
+    "撞得太多": "Too many bumps",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "绕行": "Coil",
+    "箱": "Crates",
+    "撞": "Bumps",
+    "身长": "Length",
+    "记录": "Notes",
+    "结局": "Result",
+    "北": "North",
+    "南": "South",
+    "东": "East",
+    "西": "West",
+    "还没推动": "Nothing has been pushed",
+    "还没有箱子进坞": "No crate has docked",
+    "这一步是墙或者自己的身子，会撞上并停住。": "That step is a wall or your own body. You bump and stay.",
+    "尾巴会跟着头走。箱子在前面就会被推一格。": "The tail follows the head. A crate in front is pushed one cell.",
+    "尾巴跟着头。推箱子时，箱子前面必须是空的。": "The tail follows the head. The cell in front of a crate must be empty.",
+    "撞墙或撞自己不会移动，只加一次撞。": "A wall or your own body does not move you. It only adds a bump.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "把箱子和坞的位置、你从哪一侧推的写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write where the crate and the dock were, and which side you pushed from, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "绕行结束 · {0}", "en": "Coil closed · {0}", "slots": ["text"] },
+    { "zh": "绕行结束：{0}", "en": "Coil over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 箱 · 头 {2},{3} · 撞 {4}",
+      "en": "Crate {0}/{1} · head {2},{3} · bumps {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    { "zh": "箱在 {0},{1}", "en": "Crate at {0},{1}", "slots": ["n", "n"] },
+    { "zh": "坞在 {0},{1}", "en": "Dock at {0},{1}", "slots": ["n", "n"] },
+    { "zh": "撞上了。撞 {0}。", "en": "Bumped. Bumps {0}.", "slots": ["n"] },
+    { "zh": "箱子推不动。撞 {0}。", "en": "The crate will not move. Bumps {0}.", "slots": ["n"] },
+    { "zh": "箱子推到 {0},{1}。", "en": "Pushed the crate to {0},{1}.", "slots": ["n", "n"] },
+    { "zh": "头移到 {0},{1}。", "en": "Head moved to {0},{1}.", "slots": ["n", "n"] },
+    { "zh": "第 {0} 箱进坞。", "en": "Crate {0} docked.", "slots": ["n"] },
+    {
+      "zh": "本局进坞 {0} 箱，撞了 {1} 次。",
+      "en": "This run docked {0} crates and bumped {1} times.",
+      "slots": ["n", "n"]
+    }
+  ]
+}

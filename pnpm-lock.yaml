@@ -27,6 +27,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/gamekit
 
+  games/claw-berth:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/claw-burger:
     dependencies:
       '@gameclaw/gamekit':
@@ -40,6 +46,12 @@ importers:
         version: link:../../packages/gamekit
 
   games/claw-clock:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-coil:
     dependencies:
       '@gameclaw/gamekit':
         specifier: workspace:*
@@ -123,7 +135,19 @@ importers:
         specifier: workspace:*
         version: link:../../packages/gamekit
 
+  games/claw-round:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/claw-stamp:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-sum:
     dependencies:
       '@gameclaw/gamekit':
         specifier: workspace:*

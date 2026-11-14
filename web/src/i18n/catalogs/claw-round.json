@@ -1,0 +1,88 @@
+{
+  "terms": {},
+  "exact": {
+    "虾循 · 潮环结算": "Claw Round · tide recap",
+    "潮环进行中": "The tide is still out",
+    "两件都在": "Both pieces are kept",
+    "潮走完了": "The tides ran out",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "潮环": "Tide",
+    "潮": "Tide",
+    "拍": "Beat",
+    "位置": "Place",
+    "错袋": "Wrong pockets",
+    "要带": "Needed",
+    "手里": "Hands",
+    "桥上": "Pier",
+    "脚下": "Underfoot",
+    "记录": "Notes",
+    "结局": "Result",
+    "口袋": "Pocket",
+    "票": "Ticket",
+    "灯": "Lamp",
+    "币": "Coin",
+    "绳": "Rope",
+    "铃": "Bell",
+    "空": "Empty",
+    "空的": "empty",
+    "空手": "Empty hands",
+    "向前": "Forward",
+    "退后": "Back",
+    "拿起": "Take",
+    "入袋": "Pocket",
+    "放下": "Drop",
+    "往桥尾走一格。": "Step toward the end of the pier.",
+    "往桥头走一格。": "Step back toward the mouth.",
+    "这件是闸门要的，入袋后潮退也留得住。": "The gate wants this. Pocketing keeps it through the tide.",
+    "这件不是闸门要的。入袋会浪费这一潮。": "The gate does not want this. Pocketing wastes the tide.",
+    "放回脚下。这一潮还能拿别的。": "Put it back. You can still take something else this tide.",
+    "走了一格。": "Moved one cell.",
+    "停了一拍。": "Spent a beat.",
+    "潮还没退": "The tide has not turned",
+    "潮还没退过": "The tide has not turned yet",
+    "没入袋的东西在潮退时会回到脚下。入袋才留得过潮。": "Anything not pocketed returns underfoot when the tide turns. Only a pocket survives.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "把闸门要的两件东西、它们在第几格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write the two things the gate wants, and which cells they were on, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "潮环结束 · {0}", "en": "Tide closed · {0}", "slots": ["text"] },
+    { "zh": "潮环结束：{0}", "en": "Tide over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 潮 · 第 {2}/{3} 拍 · 位 {4}",
+      "en": "Tide {0}/{1} · beat {2}/{3} · cell {4}",
+      "slots": ["n", "n", "n", "n", "n"]
+    },
+    { "zh": "口袋 {0}", "en": "Pocket {0}", "slots": ["text"] },
+    { "zh": "第 {0} 格 {1}", "en": "Cell {0} {1}", "slots": ["n", "text"] },
+    {
+      "zh": "拿起{0}。还没入袋，潮退会冲走。",
+      "en": "Take the {0}. It is not pocketed, so the tide will wash it away.",
+      "slots": ["text"]
+    },
+    { "zh": "拿起{0}。", "en": "Took the {0}.", "slots": ["text"] },
+    { "zh": "入袋{0}。", "en": "Pocketed the {0}.", "slots": ["text"] },
+    { "zh": "放下{0}。", "en": "Dropped the {0}.", "slots": ["text"] },
+    {
+      "zh": "潮退了。口袋里是{0}。",
+      "en": "The tide turned. The pocket holds {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "闸门要的是{0}。错袋 {1} 次。",
+      "en": "The gate wants {0}. Wrong pockets {1}.",
+      "slots": ["text", "n"]
+    },
+    {
+      "zh": "这一局用了 {0} 潮。拍数不够就够不到桥尾。",
+      "en": "This run used {0} tides. Too few beats and you cannot reach the end.",
+      "slots": ["n"]
+    }
+  ]
+}

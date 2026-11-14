@@ -8,8 +8,10 @@
   plate and gap at once.
 - Added four games: `虾印 (Claw Stamp)`, `虾熔 (Claw Melt)`, `虾网 (Claw Net)`,
   and `虾节 (Claw Beat)`. A working slate of nineteen concepts is in
-  `docs/plans/2026-11-14-jam-slate.md`. Eleven concepts from that slate are
-  still not implemented.
+  `docs/plans/2026-11-14-jam-slate.md`.
+- Added four more games: `虾循 (Claw Round)`, `虾绕 (Claw Coil)`,
+  `虾算 (Claw Sum)`, and `虾泊 (Claw Berth)`. Seven slate concepts are not
+  implemented yet.
 
 ### Changed
 

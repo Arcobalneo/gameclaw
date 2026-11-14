@@ -35,6 +35,10 @@ const PLAN = {
   'claw-mask': [4, [0, 0, 1, 0], 1.4],
   'claw-clock': [6, [0, 1, 0], 1.4],
   'claw-flip': [2, [1, 0, 0], 1.4],
+  'claw-round': [7, [0, 0, 1], 1.4],
+  'claw-coil': [7, [0, 1, 2], 1.4],
+  'claw-sum': [7, [0, 1], 1.4],
+  'claw-berth': [7, [0], 1.4],
 };
 
 const browser = await chromium.launch({

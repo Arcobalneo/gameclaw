@@ -1,0 +1,59 @@
+{
+  "terms": {},
+  "exact": {
+    "虾算 · 演算结算": "Claw Sum · sum recap",
+    "演算进行中": "The kettle is still running",
+    "釜都对准": "Every kettle landed",
+    "没对准": "Missed the target",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "演算": "Sum",
+    "釜": "Kettle",
+    "现在": "Now",
+    "目标": "Target",
+    "拉杆": "Pulls",
+    "对准": "Exact",
+    "落空": "Misses",
+    "记录": "Notes",
+    "结局": "Result",
+    "加二": "Add two",
+    "加三": "Add three",
+    "翻倍": "Double",
+    "对半": "Halve",
+    "还没拉杆": "No pull yet",
+    "还没有一釜结束": "No kettle has finished",
+    "奇数不能对半。": "An odd number cannot be halved.",
+    "加二、加三、翻倍、偶数才能对半。正好等于目标才算对准。": "Add two, add three, double, or halve an even number. Only an exact target counts.",
+    "拉杆次数用完还没相等，这一釜算落空。": "If the pulls run out before the numbers match, that kettle is a miss.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "把每釜的起点和目标、你是先加还是先翻倍写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write each kettle's start and target, and whether you added or doubled first, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "演算结束 · {0}", "en": "Sum closed · {0}", "slots": ["text"] },
+    { "zh": "演算结束：{0}", "en": "Sum over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 釜 · 现在 {2} · 目标 {3}",
+      "en": "Kettle {0}/{1} · now {2} · target {3}",
+      "slots": ["n", "n", "n", "n"]
+    },
+    {
+      "zh": "拉一下变成 {0}。目标是 {1}。",
+      "en": "One pull makes {0}. The target is {1}.",
+      "slots": ["n", "n"]
+    },
+    { "zh": "现在是 {0}。", "en": "Now {0}.", "slots": ["n"] },
+    { "zh": "第 {0} 釜正好是 {1}。", "en": "Kettle {0} landed on {1}.", "slots": ["n", "n"] },
+    { "zh": "第 {0} 釜没对准。", "en": "Kettle {0} missed.", "slots": ["n"] },
+    {
+      "zh": "本局对准 {0} 釜，落空 {1} 釜。",
+      "en": "This run landed {0} kettles and missed {1}.",
+      "slots": ["n", "n"]
+    }
+  ]
+}

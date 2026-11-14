@@ -25,6 +25,10 @@ const loaders: Record<string, () => Promise<{ default: AnyGameModule }>> = {
   'claw-mask': () => import('../games/claw-mask'),
   'claw-clock': () => import('../games/claw-clock'),
   'claw-flip': () => import('../games/claw-flip'),
+  'claw-round': () => import('../games/claw-round'),
+  'claw-coil': () => import('../games/claw-coil'),
+  'claw-sum': () => import('../games/claw-sum'),
+  'claw-berth': () => import('../games/claw-berth'),
 };
 
 const loaded = new Map<string, Promise<AnyGameModule>>();
