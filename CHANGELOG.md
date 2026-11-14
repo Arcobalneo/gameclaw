@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added three games: `虾掘 (Claw Delve)`, `虾市 (Claw Fair)`, and
+  `虾礁 (Claw Reef)`. A bare shaft span falls, a stall remembers yesterday's
+  price, and a reef mark counts only after the tide pushes.
 - Added four games: `虾数 (Claw Count)`, `虾罩 (Claw Mask)`, `虾钟 (Claw Clock)`,
   and `虾拨 (Claw Flip)`. Count shares one number across a run of planks. Mask
   chooses which of two layers is solid. Clock feeds a hand. Flip swaps every
@@ -10,8 +13,10 @@
   and `虾节 (Claw Beat)`. A working slate of nineteen concepts is in
   `docs/plans/2026-11-14-jam-slate.md`.
 - Added four more games: `虾循 (Claw Round)`, `虾绕 (Claw Coil)`,
-  `虾算 (Claw Sum)`, and `虾泊 (Claw Berth)`. Seven slate concepts are not
-  implemented yet.
+  `虾算 (Claw Sum)`, and `虾泊 (Claw Berth)`.
+- `虾掘 (Claw Delve)`, `虾市 (Claw Fair)`, and `虾礁 (Claw Reef)` are in this
+  branch. Four slate concepts remain for the other lane: lamp, raft, stow, and
+  glass.
 
 ### Changed
 

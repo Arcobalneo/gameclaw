@@ -13,6 +13,8 @@ import { definition as clawClock } from '../../games/claw-clock/src/definition';
 import { definition as clawCoil } from '../../games/claw-coil/src/definition';
 import { definition as clawConquest } from '../../games/claw-conquest/src/definition';
 import { definition as clawCount } from '../../games/claw-count/src/definition';
+import { definition as clawDelve } from '../../games/claw-delve/src/definition';
+import { definition as clawFair } from '../../games/claw-fair/src/definition';
 import { definition as clawFlip } from '../../games/claw-flip/src/definition';
 import { definition as clawGreens } from '../../games/claw-greens/src/definition';
 import { definition as clawGuard } from '../../games/claw-guard/src/definition';
@@ -24,6 +26,7 @@ import { definition as clawMask } from '../../games/claw-mask/src/definition';
 import { definition as clawMelt } from '../../games/claw-melt/src/definition';
 import { definition as clawNet } from '../../games/claw-net/src/definition';
 import { definition as clawRampage } from '../../games/claw-rampage/src/definition';
+import { definition as clawReef } from '../../games/claw-reef/src/definition';
 import { definition as clawRound } from '../../games/claw-round/src/definition';
 import { definition as clawStamp } from '../../games/claw-stamp/src/definition';
 import { definition as clawSum } from '../../games/claw-sum/src/definition';
@@ -92,6 +95,9 @@ const DEFINITIONS = new Map<string, GameDefinition<any>>(
     clawCoil,
     clawSum,
     clawBerth,
+    clawDelve,
+    clawFair,
+    clawReef,
   ].map((definition) => [definition.meta.id, definition]),
 );
 

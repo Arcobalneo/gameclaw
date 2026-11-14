@@ -69,6 +69,18 @@ importers:
         specifier: workspace:*
         version: link:../../packages/gamekit
 
+  games/claw-delve:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-fair:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/claw-flip:
     dependencies:
       '@gameclaw/gamekit':
@@ -130,6 +142,12 @@ importers:
         version: link:../../packages/gamekit
 
   games/claw-rampage:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-reef:
     dependencies:
       '@gameclaw/gamekit':
         specifier: workspace:*

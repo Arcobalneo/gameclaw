@@ -1,0 +1,53 @@
+import { describe, expect, it } from 'vitest';
+import { act, createRun, suggest } from '../src/engine';
+
+function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
+  const state = createRun({ seed });
+  let guard = 0;
+  while (state.outcome === 'ongoing' && guard < 40) {
+    act(state, policy(state));
+    guard += 1;
+  }
+  return state;
+}
+
+describe('claw-delve engine', () => {
+  it('replays a seed and stays JSON-safe', () => {
+    expect(createRun({ seed: 4 })).toEqual(createRun({ seed: 4 }));
+    expect(createRun({ seed: 1 }).oreCol).not.toEqual(createRun({ seed: 2 }).oreCol);
+    expect(createRun({ seed: 3 }).rng).toHaveLength(4);
+    const again = createRun({ seed: 8 });
+    expect(JSON.parse(JSON.stringify(again))).toEqual(again);
+  });
+
+  it('collapses an unbraced layer and loses on the next one', () => {
+    const state = createRun({ seed: 1 });
+    state.collapseLimit = 1;
+    state.braces = 0;
+    act(state, 'cut');
+    expect(state.collapses).toBe(1);
+    expect(state.outcome).toBe('ongoing');
+    act(state, 'cut');
+    expect(state.outcome).toBe('lost');
+    expect(state.cause).toBe('井塌了');
+  });
+
+  it('lets bracing before the drop keep the layer', () => {
+    const state = createRun({ seed: 2 });
+    act(state, 'brace');
+    act(state, 'cut');
+    expect(state.collapses).toBe(0);
+    expect(state.layer).toBe(1);
+  });
+
+  it('lets the careful line win more seeds than cutting straight down', () => {
+    let careful = 0;
+    let blind = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      if (play(seed, suggest).outcome === 'won') careful += 1;
+      if (play(seed, () => 'cut').outcome === 'won') blind += 1;
+    }
+    expect(careful).toBeGreaterThanOrEqual(8);
+    expect(careful).toBeGreaterThan(blind);
+  });
+});

@@ -13,7 +13,7 @@ import { GAME_IDS, loadGame } from '../src/runtime/registry';
 describe('catalog', () => {
   it('covers every registered game exactly once', () => {
     expect(GAMES.map((g) => g.id).sort()).toEqual([...GAME_IDS].sort());
-    expect(GAMES).toHaveLength(23);
+    expect(GAMES).toHaveLength(26);
   });
 });
 
@@ -55,7 +55,7 @@ describe('agent api', () => {
 
   it('lists all games', async () => {
     const res = (await api.listGames()) as { games: { id: string }[] };
-    expect(res.games).toHaveLength(23);
+    expect(res.games).toHaveLength(26);
   });
 
   it('reports a helpful error before any game is open', async () => {

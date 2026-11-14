@@ -374,6 +374,48 @@
         "zh": "货×12 + 开航×15 − 怒×40 − 事故×70。装满 +320。一次事故比三次开航更贵。中止为 0。",
         "en": "Cargo×12 + sailed×15 − anger×40 − incidents×70. Filling the quota adds 320. One incident costs more than three sailings. Abort is 0."
       }
+    },
+    {
+      "id": "claw-delve",
+      "name": "虾掘",
+      "englishName": "Claw Delve",
+      "tagline": "离开没撑的一层，井就会塌",
+      "summary": "井壁上的矿都看得见。横挖不会塌。下挖会离开这一层，没有支撑就塌一次。撑比要离开的层少。矿够了就停。",
+      "genres": ["puzzle", "mining", "turn-based"],
+      "source_dir": "games/claw-delve",
+      "status": "stable",
+      "score": {
+        "zh": "矿×20 + 层×15 − 塌×50。挖够 +300。一次塌比方比两车矿更贵。中止为 0。",
+        "en": "Ore×20 + depth×15 − falls×50. Filling the quota adds 300. One fall costs more than two loads. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-fair",
+      "name": "虾市",
+      "englishName": "Claw Fair",
+      "tagline": "客人记得昨天的价钱",
+      "summary": "今天的袋子和昨天的价钱都公开。照昨、加一，或者降到袋子里。加价被拒绝时，昨天的价钱不变。货空了就得进货。",
+      "genres": ["puzzle", "market", "turn-based"],
+      "source_dir": "games/claw-fair",
+      "status": "stable",
+      "score": {
+        "zh": "利×8 + 成交×20 − 走掉×50。钱够 +280。一次走掉比两笔薄利更贵。中止为 0。",
+        "en": "Margin×8 + sales×20 − walkaways×50. Filling the till adds 280. One walkaway costs more than two thin sales. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-reef",
+      "name": "虾礁",
+      "englishName": "Claw Reef",
+      "tagline": "先走，潮再推没下锚的",
+      "summary": "标点都看得见。先走一步，或者下锚停住。然后公开的潮把没下锚的推一格。标只在潮推完、你还站着的那一格算数。",
+      "genres": ["puzzle", "tide", "turn-based"],
+      "source_dir": "games/claw-reef",
+      "status": "stable",
+      "score": {
+        "zh": "标×90 + 剩余锚×10 − 被冲×70。踩完 +280。一次被冲比省下两只锚更贵。中止为 0。",
+        "en": "Marks×90 + anchors left×10 − sweeps×70. Standing on every mark adds 280. One sweep costs more than two saved anchors. Abort is 0."
+      }
     }
   ]
 }
