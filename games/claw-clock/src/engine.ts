@@ -199,7 +199,7 @@ export function suggest(state: ClockState): string {
   for (const id of options) {
     const next = clone(state);
     apply(next, id, null, []);
-    visit(next, 2, id);
+    visit(next, 4, id);
   }
   return best;
 }

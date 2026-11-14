@@ -61,7 +61,10 @@ function createScene(): GameScene<CountState> {
       if (outcome.events.some((event) => event.type === 'step')) f.cue('land');
       if (outcome.events.some((event) => event.type === 'magnet')) f.cue('coin');
       const fell = outcome.result.log.some((line) => line.includes('坠落'));
-      if (fell) f.cue('bad');
+      if (fell) {
+        f.cue('bad');
+        f.fx.addTrauma(0.35);
+      }
     },
   };
 }

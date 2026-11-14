@@ -3,7 +3,7 @@ import type { ClockState, Token } from '@games/claw-clock/src/engine';
 import type { Grade } from '../gfx/art';
 import { sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { disc } from '../gfx/pixel';
+import { disc, rect } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, SHRIMP } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
@@ -36,6 +36,12 @@ function createScene(): GameScene<ClockState> {
       sky(g, ['#201018', '#14080c', '#0c0808'], 0, 216, 6);
       disc(g, 192, 100, 78, '#1a1014');
       disc(g, 192, 100, 62, '#2a1820');
+      for (let i = 0; i < 8; i += 1) {
+        const angle = (i / 8) * Math.PI * 2 - Math.PI / 2;
+        const x = 192 + Math.round(Math.cos(angle) * 86);
+        const y = 100 + Math.round(Math.sin(angle) * 86);
+        rect(g, x, y, i === state.hand ? 4 : 2, i === state.hand ? 4 : 2, '#ffc24a');
+      }
       const shrimp = buildSprite(SHRIMP);
       state.ring.forEach((token, index) => {
         const angle = (index / 8) * Math.PI * 2 - Math.PI / 2;
@@ -60,7 +66,18 @@ function createScene(): GameScene<ClockState> {
     react(f, outcome) {
       const tick = outcome.events.find((event) => event.type === 'tick');
       if (!tick) return;
-      f.cue(Number(tick.wounds) > 0 ? 'bad' : 'hit');
+      const wounded = outcome.result.log.some((line) => line.includes('击中了你'));
+      f.cue(wounded ? 'bad' : 'hit');
+      const angle = (f.state.hand / 8) * Math.PI * 2 - Math.PI / 2;
+      const x = 192 + Math.round(Math.cos(angle) * 70);
+      const y = 100 + Math.round(Math.sin(angle) * 70);
+      f.fx.burst(x, y, {
+        count: 10,
+        colors: wounded ? ['#ff5d73', '#fff6dc'] : ['#ffc24a', '#fff6dc'],
+        speed: 28,
+        life: 0.35,
+      });
+      if (wounded) f.fx.addTrauma(0.35);
     },
   };
 }
