@@ -55,6 +55,23 @@ describe('claw-glass engine', () => {
     expect(state.faults).toBe(0);
   });
 
+  it('does not open a court with the beam already on the shrine', () => {
+    for (let seed = 1; seed <= 8; seed += 1) {
+      const state = createRun({ seed });
+      const seen = new Set<number>();
+      let guard = 0;
+      while (state.outcome === 'ongoing' && guard < 40) {
+        if (!seen.has(state.stage)) {
+          expect(beamEnd(state), `seed ${seed} court ${state.stage}`).not.toBe('shrine');
+          seen.add(state.stage);
+        }
+        act(state, suggest(state));
+        guard += 1;
+      }
+      expect(state.outcome, `seed ${seed}`).toBe('won');
+    }
+  });
+
   it('lets the careful line light more courts than spinning the first mirror', () => {
     let careful = 0;
     let blind = 0;

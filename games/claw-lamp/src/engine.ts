@@ -37,6 +37,8 @@ export interface LampState {
   rng: number[];
   stage: number;
   stages: number;
+  /** Rotates which authored shoal is first, so seeds do not open on the same puzzle. */
+  shift: number;
   pools: number;
   posts: Post[];
   placed: boolean[];
@@ -274,7 +276,8 @@ function note(state: LampState, line: string): void {
 function load(state: LampState, rng: Rng): void {
   const rule = rules(state.difficulty);
   const variant = rng.int(0, 1) === 0 ? A : B;
-  const def = variant[state.stage - 1] ?? A[0];
+  const index = (state.stage - 1 + state.shift) % variant.length;
+  const def = variant[index] ?? A[0];
   if (!def) return;
   state.posts = clonePosts(def.posts);
   state.pools = def.pools;
@@ -293,6 +296,7 @@ export function createRun(options: { seed: number; difficulty?: string }): LampS
     rng: rng.serialize(),
     stage: 1,
     stages: rule.stages,
+    shift: rng.int(0, 3),
     pools: 0,
     posts: [],
     placed: [],

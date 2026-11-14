@@ -276,6 +276,7 @@ export function forecastStep(
 }
 
 function landingDetail(
+  state: ReefState,
   step: Dir,
   dir: Dir,
   landed: { x: number; y: number; blocked: boolean },
@@ -283,7 +284,10 @@ function landingDetail(
 ): string {
   if (landed.blocked) return `先向${DIR_LABEL[step]}，潮再向${DIR_LABEL[dir]}。潮会把你顶在墙上。`;
   if (urchin) return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y} 的海胆上。`;
-  return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y}。`;
+  const key = `${landed.x},${landed.y}`;
+  const mark = state.goals.some((goal) => keyOf(goal) === key) && !state.got.includes(key);
+  const tail = mark ? '那一格是还没踩的标。' : '那一格没有标。';
+  return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y}。${tail}`;
 }
 
 export function actionsOf(state: ReefState): ActionView[] {
@@ -298,7 +302,7 @@ export function actionsOf(state: ReefState): ActionView[] {
     actions.push({
       id: `step:${step}`,
       label: DIR_LABEL[step],
-      detail: landingDetail(step, dir, landed, urchin),
+      detail: landingDetail(state, step, dir, landed, urchin),
       risk: landed.blocked || urchin ? 'high' : 'low',
     });
   }
