@@ -1,0 +1,19 @@
+{
+  "name": "@gameclaw/relay",
+  "version": "3.2.0",
+  "private": true,
+  "type": "module",
+  "description": "GameClaw realtime relay: WebSocket sessions + remote Streamable HTTP MCP.",
+  "scripts": {
+    "dev": "bun src/node-server.ts",
+    "start": "bun src/node-server.ts",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

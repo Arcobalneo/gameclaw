@@ -2,8 +2,8 @@ import { type Lang, lang, onLang, setLang, t } from '../i18n';
 import { h } from './dom';
 import { sfx } from './sfx';
 
-/** Fixed site bar: wordmark on the left, 中 / EN switch on the right. */
-export function topbar(onHome: () => void): HTMLElement {
+/** Fixed site bar: wordmark on the left, optional session chip, 中 / EN on the right. */
+export function topbar(onHome: () => void, trailing?: HTMLElement): HTMLElement {
   const home = h(
     'a',
     { class: 'tb-brand', href: '#/' },
@@ -32,5 +32,6 @@ export function topbar(onHome: () => void): HTMLElement {
     });
   onLang(sync);
   sync();
-  return h('header', { class: 'topbar' }, home, group);
+  const right = h('div', { class: 'tb-right' }, ...(trailing ? [trailing] : []), group);
+  return h('header', { class: 'topbar' }, home, right);
 }

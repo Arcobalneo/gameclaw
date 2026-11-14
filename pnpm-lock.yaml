@@ -89,6 +89,15 @@ importers:
 
   packages/gamekit: {}
 
+  relay:
+    devDependencies:
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@24.19.2)(tsx@4.23.15)
+
   web:
     dependencies:
       '@gameclaw/gamekit':

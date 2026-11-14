@@ -225,9 +225,142 @@ a {
   color: var(--text);
 }
 
+
 .lang-btn[aria-pressed='true'] {
   background: var(--text);
   color: var(--ink);
+}
+
+/* ---------- session chip ---------- */
+.tb-right {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.session-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.session-code,
+.session-join-btn,
+.session-go {
+  height: 24px;
+  border: 0;
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-hi);
+  color: var(--muted);
+}
+
+.session-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+
+.session-code:hover,
+.session-join-btn:hover,
+.session-go:hover {
+  color: var(--text);
+}
+
+.session-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--dim);
+}
+
+.session-chip.is-open .session-dot {
+  background: var(--good);
+}
+
+.session-chip.is-reconnecting .session-dot {
+  background: var(--warn);
+}
+
+.session-chip.is-offline .session-dot,
+.session-chip.is-connecting .session-dot {
+  background: var(--dim);
+}
+
+.session-join-btn,
+.session-go {
+  width: 24px;
+  padding: 0;
+}
+
+.session-form {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 70;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: 4px;
+  width: 200px;
+  padding: 8px;
+  background: var(--panel);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 12px 32px -16px #000;
+}
+
+.session-form[hidden] {
+  display: none;
+}
+
+.session-input {
+  grid-column: 1;
+  height: 24px;
+  padding: 0 8px;
+  border: 0;
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-hi);
+  color: var(--text);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font: inherit;
+}
+
+.session-input:focus {
+  outline: 1px solid var(--line-hi);
+}
+
+.session-go {
+  grid-column: 2;
+}
+
+.session-hint {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: var(--dim);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.session-hint.is-error {
+  color: var(--bad);
+}
+
+.relay-banner {
+  position: fixed;
+  top: var(--bar);
+  left: 0;
+  right: 0;
+  z-index: 59;
+  padding: 4px 12px;
+  background: color-mix(in srgb, var(--warn) 16%, var(--bg));
+  color: var(--warn);
+  text-align: center;
+  letter-spacing: 0.4px;
+  font-size: 11px;
+  box-shadow: 0 1px 0 var(--line);
 }
 
 /* ---------- home ---------- */

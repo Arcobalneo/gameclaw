@@ -1,0 +1,17 @@
+name = "gameclaw-relay"
+main = "src/worker.ts"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[durable_objects]
+bindings = [
+  { name = "SESSION", class_name = "SessionRoom" },
+  { name = "REGISTRY", class_name = "CodeRegistry" },
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SessionRoom", "CodeRegistry"]
+
+[vars]
+GAMECLAW_SITE_URL = "https://arcobalneo.github.io/gameclaw/"

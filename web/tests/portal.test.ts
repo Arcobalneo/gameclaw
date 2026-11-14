@@ -51,7 +51,7 @@ describe('agent api', () => {
     },
     focused: () => focused,
   };
-  const api = createApi(portal, '3.1.0');
+  const api = createApi(portal, '3.2.0');
 
   it('lists all games', async () => {
     const res = (await api.listGames()) as { games: { id: string }[] };
@@ -102,18 +102,28 @@ describe('agent api', () => {
 });
 
 describe('prompt', () => {
-  it('is single-language and points at the game url and tools', () => {
+  it('is single-language and points at the remote MCP URL, token and tools', () => {
     const game = GAMES[0]!;
-    const zh = buildPrompt(game, ['先看状态'], 'zh');
-    const en = buildPrompt(game, [], 'en');
+    const ctx = {
+      mcpUrl: 'https://gameclaw-relay.arcobalneo.workers.dev/mcp',
+      token: 'abcdefghijklmnopqrstuv',
+      code: 'AB23K7M',
+      pageUrl: `https://arcobalneo.github.io/gameclaw/#/play/${game.id}`,
+    };
+    const zh = buildPrompt(game, ['先看状态'], 'zh', ctx);
+    const en = buildPrompt(game, [], 'en', ctx);
     for (const text of [zh, en]) {
+      expect(text).toContain(ctx.mcpUrl);
+      expect(text).toContain(ctx.token);
+      expect(text).toContain(ctx.code);
       expect(text).toContain(`#/play/${game.id}`);
       expect(text).toContain('list_actions');
-      expect(text).toContain('gameclaw.newGame');
+      expect(text).toContain('Authorization');
     }
     expect(zh).toMatch(/[\u4e00-\u9fff]/);
-    expect(zh).not.toMatch(/\bPlay\b/);
+    expect(zh).toContain('先看状态');
     expect(en).not.toMatch(/[\u3400-\u9fff]/);
     expect(en).toMatch(/^Play /);
+    expect(en).not.toMatch(/令牌/);
   });
 });

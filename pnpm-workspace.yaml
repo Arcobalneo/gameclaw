@@ -2,3 +2,4 @@ packages:
   - packages/*
   - games/*
   - web
+  - relay

@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/web",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "private": true,
   "type": "module",
   "description": "GameClaw web portal: every game playable in-browser by humans and agents (WebMCP).",
