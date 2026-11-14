@@ -88,6 +88,28 @@ export class Stage {
     this.#syncMotion();
     this.resize();
     this.#scene.reset?.(this.#frame(0));
+    // biome-ignore lint/suspicious/noExplicitAny: dev-only capture hook for cover art
+    if (import.meta.env.DEV) (window as any).__gcStage = this;
+  }
+
+  /** Dev-only: a clean frame (no focus, HUD, banner or badge) as a PNG data URL. */
+  snapshot(): string {
+    const focus = this.#focus;
+    const pulse = this.#agentPulse;
+    this.#focus = null;
+    this.#hover = null;
+    const g = this.#g;
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    const f = { ...this.#frame(0), quiet: true };
+    this.#scene.draw(f);
+    const grade = this.#scene.grade?.(f.state) ?? DEFAULT_GRADE;
+    applyGrade(g, grade);
+    this.#bloom.apply(g, this.#buffer, grade.bloom ?? 0.45);
+    vignette(g, grade.vignette ?? 0.9);
+    const url = this.#buffer.toDataURL('image/png');
+    this.#focus = focus;
+    this.#agentPulse = pulse;
+    return url;
   }
 
   set focus(action: ActionView | null) {

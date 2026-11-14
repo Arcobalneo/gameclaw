@@ -142,13 +142,13 @@ export function lang(): Lang {
 }
 
 export function setLang(next: Lang): void {
-  if (next === current) return;
-  current = next;
   try {
     globalThis.localStorage?.setItem(STORAGE_KEY, next);
   } catch {
     /* ignore */
   }
+  if (next === current) return;
+  current = next;
   if (typeof document !== 'undefined')
     document.documentElement.lang = next === 'zh' ? 'zh-CN' : 'en';
   for (const fn of listeners) fn(next);

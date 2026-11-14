@@ -46,16 +46,30 @@ await page.waitForFunction(() => window.gameclaw && document.fonts.status === 'l
 await page.waitForTimeout(800);
 await shot('00-home');
 
+// Language switch: top-right 中/EN toggles every string, persists in localStorage.
+const langCheck = await page.evaluate(async () => {
+  const btn = (l) => document.querySelector(`.lang-switch button[data-lang="${l}"]`);
+  btn('en')?.click();
+  await new Promise((r) => setTimeout(r, 100));
+  const en = { lang: document.documentElement.lang, name: document.querySelector('.card-name')?.textContent, stored: localStorage.getItem('gameclaw:lang') };
+  btn('zh')?.click();
+  await new Promise((r) => setTimeout(r, 100));
+  const zh = { lang: document.documentElement.lang, name: document.querySelector('.card-name')?.textContent };
+  return { en, zh };
+});
+const langOk = langCheck.en.lang === 'en' && !/[\u3400-\u9fff]/.test(langCheck.en.name ?? '') && langCheck.en.stored === 'en' && langCheck.zh.lang.startsWith('zh') && /[\u3400-\u9fff]/.test(langCheck.zh.name ?? '');
+console.log(`${langOk ? 'PASS' : 'FAIL'} language switch ${JSON.stringify(langCheck)}`);
+
 const list = await page.evaluate(() => window.gameclaw.listGames());
 const ids = list.games.map((g) => g.id).filter((id) => !only || only.includes(id));
 console.log(`webmcp mode: ${await page.evaluate(() => window.gameclaw.webmcp)}`);
 const tools = await page.evaluate(() => document.modelContext?.getTools?.().map((t) => t.name) ?? []);
 console.log(`tools: ${tools.join(', ')}`);
 
-let failures = 0;
+let failures = langOk ? 0 : 1;
 for (const [i, id] of ids.entries()) {
   // Human path: click the card, then play by keyboard.
-  await page.click(`button.card[aria-label*="${list.games.find((g) => g.id === id).english_name}"]`);
+  await page.click(`button.card[data-id="${id}"]`);
   await page.waitForSelector('.gv:not([hidden]) .gv-action', { timeout: 15000 });
   await page.evaluate(() => window.gameclaw.newGame({ seed: 7 }));
   await page.waitForTimeout(200);

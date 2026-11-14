@@ -361,6 +361,8 @@ const G: Record<string, Glossary> = {
   },
   'shrimp-greens': {
     terms: {
+      断席: 'Left the table',
+      没收束: 'Unresolved',
       身体: 'Body',
       家人: 'Family',
       场面: 'Mood',
@@ -457,6 +459,7 @@ const G: Record<string, Glossary> = {
   },
   'shrimp-leap': {
     terms: {
+      坠落: 'Fallen',
       进度: 'Level',
       体型: 'Size',
       体力: 'Stamina',
@@ -509,6 +512,7 @@ const G: Record<string, Glossary> = {
   },
   'shrimp-burger': {
     terms: {
+      已收摊: 'Closed',
       进度: 'Served',
       剩余拍: 'Beats',
       火候: 'Heat',

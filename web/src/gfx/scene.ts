@@ -20,6 +20,8 @@ export interface Frame<S> {
   turn: number;
   /** UI language; in-canvas copy must follow it. */
   lang: 'zh' | 'en';
+  /** Cover capture: suppress every language-specific in-canvas string. */
+  quiet?: boolean;
   /** Translate a short engine string (names, labels) into `lang`. */
   term(text: string): string;
   /** Play a sound cue in sync with an impact. */
@@ -64,7 +66,11 @@ export type AnyGameModule = GameModule<any>;
 
 const CJK_RE = /[\u3400-\u9fff]/;
 /** Engine text in the UI language, or '' when it cannot be shown without mixing languages. */
-export function say(f: { lang: 'zh' | 'en'; term(text: string): string }, text: string): string {
+export function say(
+  f: { lang: 'zh' | 'en'; quiet?: boolean; term(text: string): string },
+  text: string,
+): string {
+  if (f.quiet) return '';
   const out = f.term(text);
   return f.lang === 'zh' || !CJK_RE.test(out) ? out : '';
 }

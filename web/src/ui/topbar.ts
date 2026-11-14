@@ -15,8 +15,8 @@ export function topbar(onHome: () => void): HTMLElement {
     onHome();
   });
   const buttons: Record<Lang, HTMLButtonElement> = {
-    zh: h('button', { type: 'button', class: 'lang-btn', lang: 'zh-CN' }, '中'),
-    en: h('button', { type: 'button', class: 'lang-btn', lang: 'en' }, 'EN'),
+    zh: h('button', { type: 'button', class: 'lang-btn', lang: 'zh-CN', 'data-lang': 'zh' }, '中'),
+    en: h('button', { type: 'button', class: 'lang-btn', lang: 'en', 'data-lang': 'en' }, 'EN'),
   };
   const group = h('div', { class: 'lang-switch', role: 'group' }, buttons.zh, buttons.en);
   const sync = () => {

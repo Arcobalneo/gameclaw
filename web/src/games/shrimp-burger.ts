@@ -353,7 +353,8 @@ function createScene(): GameScene<BurgerState> {
       state.recipe.required.forEach((id, i) => {
         const have = state.stack.some((s) => s.id === id);
         blit(g, layer(id, 14), 12, 40 + i * 12);
-        const mn = say(f, MATERIALS[id]?.name ?? String(id)) || String(id).toUpperCase();
+        const mn =
+          say(f, MATERIALS[id]?.name ?? String(id)) || (f.quiet ? '' : String(id).toUpperCase());
         drawText(g, fitText(mn, 56), 30, 38 + i * 12, {
           color: have ? '#2a8a2a' : '#5a3a24',
           outline: null,

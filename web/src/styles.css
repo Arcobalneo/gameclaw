@@ -316,8 +316,19 @@ a {
 .card-cover {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   image-rendering: pixelated;
+  transition:
+    transform 600ms var(--ease),
+    filter 240ms var(--ease);
+  filter: saturate(0.92) brightness(0.94);
+}
+
+.card:hover .card-cover,
+.card:focus-visible .card-cover {
+  transform: scale(1.05);
+  filter: saturate(1.08) brightness(1.06);
 }
 
 .card-play {

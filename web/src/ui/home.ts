@@ -4,7 +4,6 @@ import { glow } from '../gfx/fx';
 import { ctx2d, hash01, makeCanvas, VW } from '../gfx/pixel';
 import { buildSprite, CRAB, SHRIMP, SHRIMP_WALK, SLIME } from '../gfx/sprites';
 import { lang, onLang, t } from '../i18n';
-import { CH, CW, paintCover } from './covers';
 import { h } from './dom';
 import { logo } from './logo';
 import { sfx } from './sfx';
@@ -13,16 +12,13 @@ const HERO_H = 112;
 
 interface Cover {
   id: string;
-  canvas: HTMLCanvasElement;
-  visible: boolean;
-  hover: boolean;
   name: HTMLElement;
   tag: HTMLElement;
   btn: HTMLButtonElement;
   game: GameEntry;
 }
 
-/** Home: animated pixel hero + the game grid with live covers. */
+/** Home: animated pixel hero + the game grid. Covers are clean frames captured from each scene. */
 export class Home {
   readonly root: HTMLElement;
   readonly #covers: Cover[] = [];
@@ -38,17 +34,10 @@ export class Home {
     heroCanvas.className = 'hero-canvas';
     heroCanvas.setAttribute('aria-hidden', 'true');
     const grid = h('ul', { class: 'grid', role: 'list' });
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        const c = this.#covers.find((cv) => cv.canvas === e.target);
-        if (c) c.visible = e.isIntersecting;
-      }
-    });
     GAMES.forEach((game, i) => {
       const card = this.#card(game, i, onOpen);
       grid.append(card);
     });
-    for (const c of this.#covers) io.observe(c.canvas);
     this.#tagline = h('p', { class: 'hero-tag' });
     this.root = h(
       'main',
@@ -86,9 +75,15 @@ export class Home {
   }
 
   #card(game: GameEntry, index: number, onOpen: (id: string) => void): HTMLElement {
-    const canvas = makeCanvas(CW, CH);
-    canvas.className = 'card-cover';
-    canvas.setAttribute('aria-hidden', 'true');
+    const cover = h('img', {
+      class: 'card-cover',
+      src: `${import.meta.env.BASE_URL}covers/${game.id}.webp`,
+      alt: '',
+      width: '384',
+      height: '216',
+      loading: index < 6 ? 'eager' : 'lazy',
+      decoding: 'async',
+    });
     const name = h('span', { class: 'card-name' });
     const tag = h('span', { class: 'card-tag' });
     const btn = h(
@@ -96,32 +91,23 @@ export class Home {
       {
         type: 'button',
         class: 'card',
+        'data-id': game.id,
         style: `--accent:${game.accent};--ink:${game.ink};--i:${index}`,
       },
       h(
         'span',
         { class: 'card-frame' },
-        canvas,
+        cover,
         h('span', { class: 'card-play', 'aria-hidden': 'true' }, '▶'),
       ),
       h('span', { class: 'card-text' }, name, tag),
     );
-    const entry: Cover = { id: game.id, canvas, visible: true, hover: false, name, tag, btn, game };
+    const entry: Cover = { id: game.id, name, tag, btn, game };
     this.#covers.push(entry);
     btn.addEventListener('click', () => {
       sfx('press');
       onOpen(game.id);
     });
-    const on = () => {
-      entry.hover = true;
-    };
-    const off = () => {
-      entry.hover = false;
-    };
-    btn.addEventListener('mouseenter', on);
-    btn.addEventListener('mouseleave', off);
-    btn.addEventListener('focus', on);
-    btn.addEventListener('blur', off);
     return h('li', {}, btn);
   }
 
@@ -141,13 +127,8 @@ export class Home {
       if (acc < 1 / 30) return; // home art runs at 30fps to stay light
       acc = 0;
       this.#paintHero();
-      for (const c of this.#covers) {
-        if (!c.visible) continue;
-        paintCover(ctx2d(c.canvas, false), c.id, this.#t, c.hover);
-      }
     };
     this.#paintHero();
-    for (const c of this.#covers) paintCover(ctx2d(c.canvas, false), c.id, 0, false);
     this.#raf = requestAnimationFrame(loop);
   }
 
@@ -163,11 +144,7 @@ export class Home {
     stars(g, t, 11, 50, 46);
     glow(g, 300, 20, 60, '#ff7ad9', 0.12);
     glow(g, 70, 10, 70, '#4fd1ff', 0.12);
-    ridge(
-      g,
-      { seed: 2, base: 88, amp: 34, color: '#0e2348', kind: 'city', scale: 14, windows: '#ffd36b' },
-      t * 4,
-    );
+    ridge(g, { seed: 2, base: 84, amp: 30, color: '#0c1d40', kind: 'hills' }, t * 3);
     ridge(
       g,
       { seed: 5, base: 98, amp: 22, color: '#081733', kind: 'reef', edge: '#1d3f78' },
