@@ -1,7 +1,7 @@
 import { MemorySession } from '@gameclaw/gamekit';
 import { describe, expect, it } from 'vitest';
 import { definition } from '../src/definition';
-import { act, createRun, isSafe, ladderScore, suggest } from '../src/engine';
+import { act, actionsOf, createRun, isSafe, ladderScore, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -21,7 +21,7 @@ describe('claw-flip engine', () => {
     const again = createRun({ seed: 4 });
     expect(JSON.parse(JSON.stringify(again))).toEqual(again);
     expect(again.tiles[0]).toBe('plate');
-    expect(again.tiles).toContain('stone');
+    expect(again.tiles).not.toContain('stone');
   });
 
   it('swaps plates and gaps and never makes a stone safe', () => {
@@ -46,6 +46,30 @@ describe('claw-flip engine', () => {
     act(state, 'hop');
     expect(state.pos).toBe(2);
     expect(state.springs).toBe(0);
+  });
+
+  it('saves the springs for the stone on stage 2', () => {
+    const state = createRun({ seed: 3 });
+    expect(state.tiles).not.toContain('stone');
+    const start = state.springs;
+    while (state.stage < 2 && state.outcome === 'ongoing') act(state, suggest(state));
+    expect(state.stage).toBe(2);
+    expect(state.springs).toBe(start);
+    expect(state.tiles.filter((tile) => tile === 'stone')).toHaveLength(1);
+    const greedy = (current: ReturnType<typeof createRun>) => {
+      const ids = actionsOf(current).map((action) => action.id);
+      if (ids.includes('hop')) return 'hop';
+      const next = current.tiles[current.pos + 1];
+      return isSafe(next, current.flipped) ? 'step' : 'flip';
+    };
+    let saved = 0;
+    let spent = 0;
+    for (let seed = 1; seed <= 10; seed += 1) {
+      if (play(seed, suggest).outcome === 'won') saved += 1;
+      if (play(seed, greedy).outcome === 'won') spent += 1;
+    }
+    expect(saved).toBeGreaterThanOrEqual(8);
+    expect(spent).toBeLessThan(saved);
   });
 
   it('lets the careful line win more seeds than stepping blind', () => {

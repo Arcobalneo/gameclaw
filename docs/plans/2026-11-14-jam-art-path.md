@@ -10,6 +10,8 @@ net, and ring rebuild is a separate pull request.
 
 ## Each world
 
+- Flip engine: springs persist. Stage 2 and stage 4 (normal) each place
+  one stone. Suggest saves the hop for the stone.
 - Count engine: stage 2 and stage 4 (normal) each hide one blank plank.
   No number covers it. Suggest spends the magnet there; stepping falls.
 - Count: a night pier with posts and a far hull. Planks and sunken gaps are

@@ -10,6 +10,8 @@
 - Rebuilt the scenes for `虾印`, `虾熔`, `虾网`, and `虾节`: a night ferry,
   a tide well of shells, a harbor net, and a ring. Each has its own props,
   idle motion, and hit feedback.
+- `虾拨` no longer refills springs between stages. On normal, stage 2 and
+  stage 4 each place one stone, and a hop spent earlier cannot cross it.
 - `虾数` now hides one blank plank on stage 2 and stage 4. No number
   covers it, so the magnet is the only crossing. Stepping onto it falls.
 - Rebuilt the scenes for `虾数`, `虾罩`, `虾钟`, and `虾拨`: a counted pier
