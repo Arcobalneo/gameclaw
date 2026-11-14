@@ -4,16 +4,58 @@ import type { NetState } from '@games/claw-net/src/engine';
 import type { Grade } from '../gfx/art';
 import { moon, sky, stars } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { disc, rect, withAlpha } from '../gfx/pixel';
+import { ctx2d, disc, hash01, makeCanvas, rect, VH, VW, withAlpha } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
-import { buildSprite, SHRIMP } from '../gfx/sprites';
+import { buildSprite, type SpriteDef } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
-import { blit } from '../gfx/world';
+import { blit, kelp, pips, shadow } from '../gfx/world';
 
-const OX = 78;
-const OY = 36;
-const CW = 42;
-const CH = 32;
+const OX = 64;
+const OY = 48;
+const CW = 48;
+const CH = 28;
+
+const FISH: SpriteDef = {
+  rows: [
+    '...tt....',
+    '..tbbbt..',
+    '.tbbbbbt.',
+    'tbbewbbbt',
+    '.tbbbbbt.',
+    '..tbbbt..',
+    '...tt....',
+    '....t....',
+  ],
+  pal: { t: '#ffb08a', b: '#ff6b4a', e: '#14081a', w: '#fff6dc' },
+};
+
+const BUOY: SpriteDef = {
+  rows: ['..rr..', '.rwwr.', 'rwwwwr', '.rwwr.', '..ss..', '..ss..'],
+  pal: { r: '#ff5d73', w: '#fff6dc', s: '#3a2414' },
+};
+
+let sea: HTMLCanvasElement | null = null;
+
+function harbor(): HTMLCanvasElement {
+  if (sea) return sea;
+  const c = makeCanvas(VW, VH);
+  const g = ctx2d(c);
+  sky(g, ['#0c2848', '#081828', '#061018'], 0, VH, 8);
+  rect(g, 0, 150, VW, VH - 150, '#0a2030');
+  for (let i = 0; i < 50; i += 1) {
+    rect(g, hash01(i, 1) * VW, 160 + hash01(i, 2) * 40, 3, 1, '#143848');
+  }
+  rect(g, 20, 132, 340, 8, '#6a4a2a');
+  rect(g, 28, 108, 8, 28, '#3a2814');
+  rect(g, 340, 108, 8, 28, '#3a2814');
+  rect(g, 16, 100, 40, 16, '#2a1c12');
+  rect(g, 328, 100, 40, 16, '#2a1c12');
+  for (let i = 0; i < 6; i += 1) rect(g, 40 + i * 52, 136, 2, 14, '#8a6840');
+  rect(g, 280, 48, 80, 36, '#1a2830');
+  rect(g, 280, 48, 80, 2, '#7ec8ff');
+  sea = c;
+  return c;
+}
 
 function createScene(): GameScene<NetState> {
   return {
@@ -25,62 +67,97 @@ function createScene(): GameScene<NetState> {
       if (state.outcome !== 'ongoing') return [];
       const regions: HitRegion[] = [];
       const haul = actions.find((action) => action.id === 'haul');
-      if (haul) regions.push({ x: 300, y: 150, w: 70, h: 48, actionId: 'haul' });
+      if (haul) regions.push({ x: 300, y: 156, w: 72, h: 44, actionId: 'haul' });
       for (let y = 0; y < NET_H; y += 1) {
         for (let x = 0; x < NET_W; x += 1) {
           const tie = actions.find((action) => action.id === `tie:${x}:${y}`);
-          if (!tie) continue;
-          regions.push({ x: OX + x * CW, y: OY + y * CH, w: CW - 4, h: CH - 4, actionId: tie.id });
+          const cut = actions.find((action) => action.id === `cut:${x}:${y}`);
+          const id = tie?.id ?? cut?.id;
+          if (!id) continue;
+          regions.push({ x: OX + x * CW, y: OY + y * CH, w: CW - 6, h: CH - 4, actionId: id });
         }
       }
       return regions;
     },
     draw(f) {
       const { g, t, state } = f;
-      sky(g, ['#0c2040', '#081828', '#061018'], 0, 216, 8);
-      stars(g, t, 2, 20, 40);
-      moon(g, 40, 28, 8, '#fff6dc', '#9ec8ff');
-      rect(g, 0, 150, 384, 66, '#082030');
-      for (let i = 0; i < 8; i += 1) {
-        const x = (i * 48 + Math.round(t * 12)) % 400;
-        rect(g, x, 168 + (i % 3) * 8, 16, 1, withAlpha('#7ec8ff', 0.3));
+      g.drawImage(harbor(), 0, 0);
+      stars(g, t, 2, 6, 40);
+      moon(g, 40, 22, 8, '#fff6dc', '#9ec8ff');
+      kelp(g, 16, 150, 36, t, '#1a6848');
+      kelp(g, 360, 150, 42, t, '#145840');
+      for (let x = 0; x < VW; x += 12) {
+        const y = 148 + Math.round(Math.sin(t * 1.5 + x * 0.07) * 2);
+        rect(g, x, y, 8, 2, withAlpha('#7ec8ff', 0.4));
       }
+      const buoy = buildSprite(BUOY);
+      blit(g, buoy, 48, 120 + Math.round(Math.sin(t * 2) * 2), { scale: 2, anchor: 'c' });
+      blit(g, buoy, 330, 118 + Math.round(Math.sin(t * 2 + 1) * 2), { scale: 2, anchor: 'c' });
       for (let y = 0; y < NET_H; y += 1) {
-        rect(g, OX, OY + y * CH + 12, NET_W * CW - 8, 1, '#8a6840');
         for (let x = 0; x < NET_W; x += 1) {
-          rect(g, OX + x * CW + 16, OY, 1, NET_H * CH - 6, '#8a6840');
-          const cell = state.cells[y * NET_W + x];
-          const px = OX + x * CW + 16;
-          const py = OY + y * CH + 12;
-          if (cell === 'tied') disc(g, px, py, 4, '#d8c090');
-          else if (cell === 'wet') {
-            disc(g, px, py, 4, '#6ec8e0');
-            rect(g, px - 1, py + 4, 2, 4, '#6ec8e0');
-          } else if (cell === 'torn') {
-            glow(g, px, py, 10, '#ff5d73', 0.4);
-            disc(g, px, py, 5, '#1a0c14');
-            rect(g, px - 4, py, 8, 1, '#ff5d73');
+          const knot = state.cells[y * NET_W + x];
+          const px = OX + x * CW;
+          const py = OY + y * CH + Math.round(Math.sin(t * 1.4 + x + y) * 1);
+          rect(g, px, py + 8, CW - 4, 1, '#c4a888');
+          rect(g, px + 16, py, 1, CH, '#c4a888');
+          if (knot === 'torn') {
+            disc(g, px + 18, py + 10, 7, '#0a2840');
+            disc(g, px + 16, py + 8, 3, '#7ec8ff');
+          } else if (knot === 'wet') {
+            disc(g, px + 18, py + 10, 5, '#3a6a88');
+          } else if (knot === 'gap') {
+            rect(g, px + 8, py + 6, 16, 8, '#1a1008');
           } else {
-            rect(g, px - 5, py, 4, 1, '#3a3028');
-            rect(g, px + 2, py, 4, 1, '#3a3028');
+            disc(g, px + 18, py + 10, 3, '#e8d5b5');
           }
+          const focus = f.focus?.id === `tie:${x}:${y}` || f.focus?.id === `cut:${x}:${y}`;
+          if (focus) glow(g, px + 18, py + 10, 10, '#ffc24a', 0.45);
         }
       }
-      const shrimp = buildSprite(SHRIMP);
-      const bob = Math.round(Math.sin(t * 2) * 2);
-      blit(g, shrimp, 332, 176 + bob, { scale: 2, anchor: 'bc' });
-      rect(g, 300, 176, 64, 8, '#6a4a2a');
+      const hull = buildSprite({
+        rows: ['..hhhhhhhh..', '.hddddddddh.', 'dddddddddddd', '.dddddddddd.'],
+        pal: { h: '#c4a060', d: '#6a4a2a' },
+      });
+      blit(g, hull, 200, 168 + Math.round(Math.sin(t) * 1), { scale: 2, anchor: 'bc' });
+      const fish = buildSprite(FISH);
+      const shown = Math.min(6, state.basket);
+      for (let i = 0; i < shown; i += 1) {
+        const bob = Math.round(Math.sin(t * 3 + i) * 1);
+        blit(g, fish, 300 + (i % 3) * 18, 70 + Math.floor(i / 3) * 14 + bob, {
+          scale: 1,
+          anchor: 'c',
+        });
+      }
+      shadow(g, 40, 168, 16);
+      pips(g, 16, 16, 8, Math.min(8, state.thread), '#e8d5b5', -1, t);
       const haul = say(f, '收网');
       if (haul && f.actions.some((action) => action.id === 'haul')) {
-        drawText(g, haul, 332, 186, { color: '#fff4d6', align: 'center' });
+        const on = f.focus?.id === 'haul';
+        rect(g, 300, 160, 70, 32, on ? '#3a2a18' : '#1a120c');
+        rect(g, 300, 160, 70, 2, '#ffc24a');
+        drawText(g, haul, 335, 168, { color: '#fff4d6', align: 'center' });
       }
+      drawText(g, String(state.basket), 24, 36, { color: '#ffb08a', align: 'left', scale: 2 });
     },
     react(f, outcome) {
-      if (outcome.events.some((event) => event.type === 'haul')) {
+      const event = outcome.events[0];
+      const type = String(event?.type ?? '');
+      if (type === 'haul') {
         f.cue('coin');
-        f.fx.burst(180, 100, { count: 18, colors: ['#7ec8ff', '#fff6dc'], speed: 40, life: 0.6 });
-      } else if (outcome.events.some((event) => event.type === 'tie')) f.cue('good');
-      else if (outcome.events.some((event) => event.type === 'cut')) f.cue('bad');
+        f.fx.burst(180, 100, {
+          count: 16,
+          colors: ['#ff6b4a', '#7ec8ff', '#fff6dc'],
+          speed: 40,
+          life: 0.55,
+        });
+        f.fx.float(200, 70, `+${event?.fish ?? ''}`, '#ffb08a');
+      } else if (type === 'tie') {
+        f.cue('good');
+        f.fx.burst(180, 110, { count: 6, colors: ['#e8d5b5'], speed: 16, life: 0.3 });
+      } else if (type === 'cut') {
+        f.cue('bad');
+        f.fx.flash('#7ec8ff', 0.2);
+      } else f.cue('splash');
     },
   };
 }
