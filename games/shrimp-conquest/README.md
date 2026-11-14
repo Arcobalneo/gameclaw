@@ -25,4 +25,4 @@ pnpm --filter @gameclaw/shrimp-conquest test
 pnpm --filter @gameclaw/shrimp-conquest check
 ```
 
-状态机在 `src/`。网页场景在 `web/src/games/shrimp-conquest.ts`。不要再添加 CLI 入口。
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-conquest.ts`。

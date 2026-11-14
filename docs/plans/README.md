@@ -1,21 +1,15 @@
 # Plans
 
-This directory keeps design history for GameClaw.
+Write a new plan here before a large change: a new game, an engine rewrite, an
+MCP or leaderboard change, or a docs restructure.
 
-- **Active plan**: `2026-11-14-v4-web-only-and-leaderboards.md` — web + Web MCP only, leaderboards, v4.0.0.
-- **Previous platform change**: `2026-11-14-web-portal-v3.0.0.md` — browser portal + WebMCP (v3.0.0). The CLI it still mentions is retired in v4.
-- **Latest game onboarding**: `2026-11-09-shrimp-burger-v2.8.0.md` — 虾堡 / Shrimp Burger (v2.8.0). Previous: `2026-11-04-shrimp-leap-v2.7.0.md` — 虾跃 / Shrimp Leap.
-  Shrimp Leap, the tenth game, with deterministic lamp-post physics, growth and
-  offline rescue, shipping with catalog version 2.8.0.
-- **Archive**: `archive/` contains plans from the v0.x Python era. They are kept
-  for traceability only. **They do not describe the current implementation.**
-  When a historical plan and the code disagree, the code and `docs/` win.
+Name the file `YYYY-MM-DD-short-title.md`. State the goal, scope, assumptions,
+risks, and a checklist. Update the plan if the scope changes. When the change
+has shipped and the maintainer docs are current, move the plan into
+[`archive/`](archive/).
 
-Rules for new plans:
-
-1. One file per large change, named `YYYY-MM-DD-short-title.md`.
-2. State goal, scope, assumptions, risks and a concrete checklist.
-3. Write it before the code, and update it if the scope changes.
-4. When the change ships and docs are current, move the plan to `archive/`.
+[`archive/`](archive/) holds shipped plans, including the old CLI era. Those
+files are history. They are not the current product. When a historical plan and
+the code disagree, the code and the rest of `docs/` win.
 
 Small changes do not need a plan.

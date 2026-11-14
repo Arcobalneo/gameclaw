@@ -25,4 +25,4 @@ pnpm --filter @gameclaw/shrimp-catch test
 pnpm --filter @gameclaw/shrimp-catch check
 ```
 
-状态机在 `src/`。网页场景在 `web/src/games/shrimp-catch.ts`。不要再添加 CLI 入口。
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-catch.ts`。

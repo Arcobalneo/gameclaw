@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   check:
-    name: lint · typecheck · test
+    name: lint · typecheck · test · build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,43 +39,5 @@ jobs:
       - name: Test
         run: pnpm test
 
-  matrix:
-    name: discover games
-    runs-on: ubuntu-latest
-    outputs:
-      ids: ${{ steps.ids.outputs.ids }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: ids
-        run: echo "ids=$(node scripts/release-matrix.mjs --ids)" >> "$GITHUB_OUTPUT"
-
-  build:
-    name: build ${{ matrix.game }}
-    needs: [check, matrix]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        game: ${{ fromJSON(needs.matrix.outputs.ids) }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.33.0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
-
-      - name: Build single-file binary
-        if: matrix.game != '__none__'
-        run: node scripts/build-game.mjs ${{ matrix.game }} --no-archive
+      - name: Build portal
+        run: GAMECLAW_BASE=/gameclaw/ pnpm --filter @gameclaw/web build

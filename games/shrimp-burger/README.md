@@ -25,4 +25,4 @@ pnpm --filter @gameclaw/shrimp-burger test
 pnpm --filter @gameclaw/shrimp-burger check
 ```
 
-状态机在 `src/`。网页场景在 `web/src/games/shrimp-burger.ts`。不要再添加 CLI 入口。
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-burger.ts`。

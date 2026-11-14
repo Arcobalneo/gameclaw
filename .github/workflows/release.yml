@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,23 +13,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  matrix:
-    name: build matrix
+  release:
+    name: GitHub Release notes
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: matrix
-        run: echo "matrix=$(node scripts/release-matrix.mjs)" >> "$GITHUB_OUTPUT"
-
-  build:
-    name: ${{ matrix.game_id }} · ${{ matrix.platform }}
-    needs: matrix
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -43,51 +28,24 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build ${{ matrix.game_id }} for ${{ matrix.platform }}
-        run: node scripts/build-game.mjs ${{ matrix.game_id }} --platform ${{ matrix.platform }}
+      - name: Validate
+        run: pnpm lint && pnpm check && pnpm test && pnpm validate:catalog
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.game_id }}-${{ matrix.platform }}
-          path: |
-            games/${{ matrix.game_id }}/dist/*.tar.gz
-            games/${{ matrix.game_id }}/dist/*.zip
-          if-no-files-found: error
-          retention-days: 14
+      - name: Build portal
+        run: GAMECLAW_BASE=/gameclaw/ pnpm --filter @gameclaw/web build
 
-  publish:
-    name: publish GitHub release
-    needs: [matrix, build]
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: assets
-          merge-multiple: true
-
-      - name: Write release checksums
+      - name: Publish notes-only GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd assets
-          find . -maxdepth 1 -type f ! -name 'SHA256SUMS' -print0 \
-            | sort -z \
-            | xargs -0 sha256sum > SHA256SUMS
-          cat SHA256SUMS
+          gh release create "${GITHUB_REF_NAME}" --generate-notes --notes "$(cat <<'MD'
+Play at https://arcobalneo.github.io/gameclaw/
 
-      - name: Publish release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: assets/*
-          generate_release_notes: true
-          fail_on_unmatched_files: true
+This tag records a web release. There are no CLI binaries. The site (`gh-pages`)
+and the relay (`wrangler deploy`) are published separately; see
+`docs/release-flow.md`.
+MD
+)"

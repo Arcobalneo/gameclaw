@@ -1,39 +1,43 @@
 # GameClaw documentation
 
 Maintainer-facing documentation. Player-facing content lives in the root
-[`README.md`](../README.md) and the distributable [`SKILL.md`](../SKILL.md).
+[`README.md`](../README.md) / [`README.zh-CN.md`](../README.zh-CN.md) and the
+distributable [`SKILL.md`](../SKILL.md).
 
 | Document | Read it when |
 |---|---|
-| [`repository-architecture.md`](repository-architecture.md) | You need the layering rules, dependency direction or state layout |
-| [`release-flow.md`](release-flow.md) | You are building, packaging, tagging or verifying a release |
-| [`agent-coding-standards.md`](agent-coding-standards.md) | You are writing code, content or tests |
+| [`repository-architecture.md`](repository-architecture.md) | You need the layering rules, dependency direction, or state layout |
+| [`web-portal.md`](web-portal.md) | You are changing the site, Web MCP, or the relay contract |
+| [`adding-a-game.md`](adding-a-game.md) | You are adding a game or iterating on an existing one |
+| [`release-flow.md`](release-flow.md) | You are publishing the site, the relay, or a git tag |
+| [`agent-coding-standards.md`](agent-coding-standards.md) | You are writing code, content, or tests |
 | [`NAMING.md`](NAMING.md) | You are choosing an id or changing display metadata |
 | [`references/ai-native-game-design-rules.md`](references/ai-native-game-design-rules.md) | You are designing or changing gameplay |
-| [`plans/`](plans/) | You want the current plan or historical design context |
+| [`plans/`](plans/) | You are writing a new plan, or reading shipped history in `plans/archive/` |
 
 ## The one-paragraph version
 
-`packages/gamekit` owns the agent-first CLI runtime. Each `games/<id>` package
-owns one deterministic state machine and its content. `catalog/games.json` is the
-machine-readable manifest. `scripts/` builds and tests one game at a time.
-`.github/workflows` runs CI and the five-platform release. The root `SKILL.md`
-teaches an agent to look up games from the latest Release and the catalog, then
-download, verify and play the binaries.
+GameClaw is a web product. Humans play in the browser. Agents play the same
+session through Web MCP (in the tab, or through the remote relay).
+`packages/gamekit` is the browser-safe runtime. Each `games/<id>` package is
+one deterministic engine. `web/` is the portal. `relay/` is the Cloudflare
+Worker for sessions, play counts, and leaderboards. `catalog/games.json` is the
+machine-readable manifest. The root `SKILL.md` tells an agent to discover games
+from the live site or the catalog, then play only through Web MCP. There is no
+CLI and no downloadable binary.
 
 ## Where to put documentation
 
-- Human discovery / launch prompt → root README
-- Agent distribution + troubleshooting → `SKILL.md`
+- Human discovery and the Agent paste-in → root README
+- Agent distribution → `SKILL.md` (no game list)
 - Machine-readable catalog → `catalog/games.json`
-- One game's mechanics and operators notes → `games/<id>/README.md`
-- Architecture, release, standards, design rules → `docs/`
-- Design history → `docs/plans/`
+- One game's mechanics and score rule → `games/<id>/README.md`
+- Architecture, portal, onboarding, release, standards → `docs/`
+- Design history → `docs/plans/archive/`
 
 Do not duplicate a fact across layers. Link to the owning layer instead.
 
 ## Archived material
 
-`docs/archive/` holds historical notes that are kept for context but are not
-maintained. In particular, the Python/uv workflow described in v0.x plans no
-longer exists.
+`docs/archive/` and `docs/plans/archive/` are historical. They are not
+maintained. When they disagree with the code, the code wins.

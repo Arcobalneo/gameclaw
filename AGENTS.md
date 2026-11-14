@@ -90,9 +90,9 @@ used by the runtime.
 
 ### 6. Zero third-party runtime dependencies
 
-Games may import `node:*` and `@gameclaw/gamekit` only. Dev dependencies belong
-at the repo root. This keeps binaries small, cold start fast and the five-platform
-matrix honest.
+A game may import `@gameclaw/gamekit` and its own files only. No `node:`
+imports, no `process`, no sockets. Dev dependencies belong at the workspace
+root. The portal runs in the browser; the engine must stay browser-safe.
 
 ### 7. Keep the monorepo layered
 
@@ -126,7 +126,6 @@ If you change any of these, update docs before commit:
 
 - repo layout
 - build or release flow
-- release asset names or platform matrix
 - catalog schema
 - skill behaviour
 - game onboarding process
@@ -138,8 +137,8 @@ If you change any of these, update docs before commit:
 - Root `README.md` / `README.zh-CN.md`: stable human-facing prompts that teach a
   person how to ask their agent to discover and launch games.
 - Root `SKILL.md`: the distribution skill. It does not list games. It tells the
-  agent to query GitHub Releases and `catalog/games.json`, then covers platforms,
-  assets, launch and network troubleshooting.
+  agent to discover games from the live site or `catalog/games.json`, then play
+  only through Web MCP.
 - `catalog/games.json`: the machine-readable manifest used by tooling and docs.
 - Each game directory: exactly one `README.md` (Chinese) covering mechanics,
   action ids, state paths and local development.
@@ -180,7 +179,7 @@ do not pretend the delegation happened:
 - still follow `plan → implement → docs → validate → commit`
 - prefer repo-level validation: `pnpm lint && pnpm check && pnpm test`, then build the portal
 - replay at least one genuine `new → act → recap` loop in the dev server
-- only then commit, tag, push and confirm the GitHub release / workflow result
+- only then commit, and publish the site and relay as in `docs/release-flow.md`
 
 ## Minimum expectations before commit
 
@@ -197,9 +196,9 @@ For large changes, do not skip:
 packages/gamekit/       shared runtime
 games/<game-id>/        one game
 catalog/                machine-readable manifest
-scripts/                build / test / release entrypoints
-docs/plans/             active plans; archive/ holds historical plans
+scripts/                catalog validation and per-game test entrypoints
+docs/plans/             new plans; archive/ holds shipped history
 docs/references/        single design-rules canon
-.github/workflows/      ci.yml + release.yml
-SKILL.md                distributable skill
+.github/workflows/      ci.yml (quality gate) + release.yml (notes-only tag)
+SKILL.md                distributable skill (no game list)
 ```

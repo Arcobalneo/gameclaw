@@ -1,5 +1,19 @@
 # Changelog
 
+## v4.0.1 — 2026-11-14
+
+Documentation and CI cleanup. No gameplay change. Game `GAME_VERSION` stays 4.0.0.
+
+- Replaced the leftover CLI binary jobs in `ci.yml` and `release.yml`. CI now
+  lints, typechecks, tests, validates the catalog, and builds the portal.
+  Tagging `v*` publishes GitHub Release notes only; it does not attach binaries
+  or deploy the site.
+- Removed `scripts/release-matrix.mjs`.
+- Moved shipped design plans, including the CLI-era plans, into
+  `docs/plans/archive/`.
+- Rewrote `docs/README.md`, `AGENTS.md`, and `docs/release-flow.md` so they
+  describe the web product. Added `docs/adding-a-game.md`.
+
 ## v4.0.0 — 2026-11-14
 
 Breaking product change. The browser is the only GameClaw. The CLI, the
@@ -40,9 +54,8 @@ single-file binaries, and the multi-platform release assets are gone.
 - CLI entrypoints (`games/*/src/main.ts`), CLI tests, Bun `start`/`build`
   scripts, `scripts/build-game.mjs`, and the gamekit CLI (argv, saves, observer,
   reports).
-- `scripts/release-matrix.mjs` now reports no CLI products so the existing CI
-  build job skips. `.github/workflows` was not edited. Do not tag a release
-  until those workflows are retired.
+- CLI entrypoints and `scripts/build-game.mjs` were removed. Workflow cleanup
+  and the retirement of `scripts/release-matrix.mjs` followed in v4.0.1.
 
 ### Catalog
 
