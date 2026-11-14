@@ -20,7 +20,7 @@ import {
 } from '../gfx/pixel';
 import { type GameModule, type GameScene, say } from '../gfx/scene';
 import { ANVIL, buildSprite, CRAB, SHRIMP } from '../gfx/sprites';
-import { drawText, fitText } from '../gfx/text';
+import { drawBlock } from '../gfx/text';
 import { tiny } from '../gfx/tiny';
 import { blit, kelp, plate, shadow } from '../gfx/world';
 
@@ -97,24 +97,29 @@ function nameOf(c: Creature): string {
 }
 
 function infoBox(g: Ctx, x: number, y: number, c: Creature, accent: string, name: string): void {
-  panel(g, x, y, 128, 30, '#0d1a1a', mix(accent, '#000000', 0.3));
-  if (name) drawText(g, fitText(name, 80), x + 6, y + 3, { color: '#fff4d6', outline: null });
-  tiny(g, `LV${c.level}`, x + 122, y + 6, { color: accent, align: 'right' });
+  panel(g, x, y, 128, 42, '#0d1a1a', mix(accent, '#000000', 0.3));
+  if (name)
+    drawBlock(g, name, x + 6, y + 2, 96, {
+      color: '#fff4d6',
+      outline: null,
+      maxLines: 2,
+    });
+  tiny(g, `LV${c.level}`, x + 122, y + 4, { color: accent, align: 'right' });
   const ratio = c.hp / Math.max(1, c.stats.hp);
   bar(
     g,
     x + 6,
-    y + 19,
+    y + 28,
     92,
     4,
     ratio,
     ratio > 0.5 ? '#5ee08f' : ratio > 0.2 ? '#ffd23f' : '#ff4d6d',
   );
-  tiny(g, `${Math.max(0, Math.round(c.hp))}`, x + 122, y + 18, {
+  tiny(g, `${Math.max(0, Math.round(c.hp))}`, x + 122, y + 26, {
     color: '#c8f0e0',
     align: 'right',
   });
-  if (c.shiny) tiny(g, '★', x + 104, y + 18, { color: '#ffe066' });
+  if (c.shiny) tiny(g, '★', x + 104, y + 26, { color: '#ffe066' });
 }
 
 function createScene(): GameScene<TamerState> {

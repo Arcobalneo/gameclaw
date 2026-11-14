@@ -5,293 +5,74 @@
 </p>
 
 <p align="center">
-  <strong>给 coding agent 玩的终端游戏，以单文件二进制发行。</strong><br/>
-  不需要运行时，不需要安装脚本，也没有全屏 TUI 需要跟 agent 抢终端。
+  <strong>十一款像素游戏。人和 Agent 玩同一局。</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Arcobalneo/gameclaw/releases/latest"><img alt="最新版本" src="https://img.shields.io/github/v/release/Arcobalneo/gameclaw?display_name=tag&sort=semver" /></a>
-  <a href="https://github.com/Arcobalneo/gameclaw/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/Arcobalneo/gameclaw/ci.yml?branch=main" /></a>
-  <a href="LICENSE"><img alt="许可证" src="https://img.shields.io/github/license/Arcobalneo/gameclaw" /></a>
-  <img alt="平台" src="https://img.shields.io/badge/platforms-macOS%20%7C%20Linux%20%7C%20Windows-4ecdc4" />
-  <img alt="运行时依赖" src="https://img.shields.io/badge/runtime%20deps-zero-7bf1a8" />
-</p>
-
-<p align="center">
-  <a href="https://arcobalneo.github.io/gameclaw/"><strong>▶ 浏览器直接玩</strong></a> ·
+  <a href="https://arcobalneo.github.io/gameclaw/"><strong>开始玩</strong></a> ·
   <a href="README.md">English</a> ·
-  <a href="https://github.com/Arcobalneo/gameclaw/releases/latest">下载</a> ·
-  <a href="SKILL.md">Agent 技能</a> ·
-  <a href="docs/">维护者文档</a>
+  <a href="SKILL.md">Skill</a> ·
+  <a href="docs/">文档</a>
 </p>
 
----
+站点是 <https://arcobalneo.github.io/gameclaw/>。人在浏览器里玩。Agent 通过
+Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 relay。没有安装包，也没有命令行。
 
-GameClaw 是一个包含十一款终端游戏的 monorepo。它的第一性原理只有一句：
+首页有一段可以直接贴给 Agent 的文字。它指向 [`SKILL.md`](SKILL.md)、当前站点和你浏览器里的会话令牌。Agent 必须从站点或 [`catalog/games.json`](catalog/games.json) 发现游戏。下面的表只是这一版的快照。
 
-> 玩家是一个**带工具调用循环的 LLM agent**，不是一个盯着 TUI 的人。
+右上角 中 / EN 切换整站、局内文字和画面上的字。中文名保持虾×。
 
-所以每款游戏都是一个确定性状态机，并且共享同一套极简 CLI：
-
-```bash
-<game> new --seed 7 --json     # 开一局
-<game> act <action-id> --json  # 结算一个回合
-<game> recap --json            # 结算页 + 诚实的 memory 引导
-```
-
-<p align="center">
-  <img src="docs/assets/demo.svg" alt="GameClaw 终端演示" width="1000" />
-</p>
-
-## 为什么会有这个仓库
-
-绝大多数终端游戏假设玩家有一块持续刷新的屏幕。Agent 没有屏幕，它只有工具调用；
-而每一次工具调用，就是一个决策点。
-
-因此 GameClaw 做了五个明确取舍：
-
-1. **一次调用 = 一个回合。** `act` 返回本回合结果、完整新状态和下一步合法动作，
-   不需要 `status → actions → act` 三次往返。
-2. **可读优先于电影感。** 稳定的文本锚点（`GAME` / `STATE` / `STAT` /
-   `ACTIONS` / `NEXT`）和单一 JSON 信封，取代光标控制与全屏重绘。
-3. **默认确定性。** 同一个 seed + 同一串动作 + 同一个版本 = 完全相同的一局。
-   回放、回归测试、可归因复盘都建立在这上面。
-4. **失败必须可归因。** 输了要能说清输在哪。结算只输出“本局观察”，不把一次好运
-   或一次暴毙伪装成普适规律。
-5. **记忆长在 agent 身上，不在游戏里。** GameClaw 不内置策略数据库，只负责在关键
-   节点推动 agent 把教训写进自己的 memory。
-
-完整设计准则见
-[`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md)。
-
-## 十一款游戏
-
-| 游戏 | 你在做什么 | 核心张力 |
-|---|---|---|
-| **虾走 (Shrimp Trek)** `shrimp-trek` | 无限潮段：9 场遭遇、1 次突变潮，然后是一道会死人的归海闸口 | 继续深潜拿 build，还是见好就收 |
-| **虾守 (Shrimp Guard)** `shrimp-guard` | 三路防线、六个部署位、pulse 制波次 | 现在花潮令，还是留给真正会崩的那一波 |
-| **虾潜 (Shrimp Heist)** `shrimp-heist` | 读巡逻与摄像头，取目标，再在封锁前撤离 | 早拿早撤但噪音大，还是多验证但可能被锁死 |
-| **虾抓 (Shrimp Catch)** `shrimp-catch` | 捕捉、编队、洗词条、下无尽深渊 | 投入养成，还是永久死亡的代价 |
-| **虾看 (Shrimp Look)** `shrimp-look` | 单步观察异常房间、记录线索、带着记录撤离 | 带着真记录走，还是带着一份很像真的错记录走 |
-| **虾闹 (Shrimp Rampage)** `shrimp-rampage` | 四夜摸进六畦田，探明并安抚会滚会跑会弹会飞的怪物，同时种植、浇水、收成 | 安抚与收成抢同一条体力；第三夜起每做一个动作，所有怪物换畦 |
-| **虾写 (Shrimp Ink)** `shrimp-ink` | 十八幕走遍六处水陆，追一支“写下即成真”的笔，最后决定信它、验它、卖它还是封它 | 相信能让你搜得更快，也更容易被假线索骗；每用一次笔，墨债就深一层 |
-| **虾素 (Shrimp Greens)** `shrimp-greens` | 十六席过一个自己选的素食者：家里、校园、出门。开局随机性别、性格和家庭 | 守自己的盘子，还是为场面咬一口——那一口不提供体力 |
-| **虾征 (Shrimp Conquest)** `shrimp-conquest` | 五十二週補給小人國遠征、組合部件武器，選一個大人國用戰爭或外交攻陷 | 暴露會觸發路線閃躲或時機連擊；被俘仍有救援，一個目標會把勝利反轉回家 |
-| **虾跃 (Shrimp Leap)** `shrimp-leap` | 选择果冻性格与颜色，以力度、角度、时机跳过 45 根灯柱，训练并在 15 / 30 关长大 | 阅读延伸街图与风拍，平衡体力和落点；解救同性格离线同伴时还要控制拉力 |
-| **虾堡 (Shrimp Burger)** `shrimp-burger` | 限时接住食材与火候球做出美味汉堡；错料照样进栈 | 融合落物、驱赶偷吃小动物、火候失准后安抚客人 |
-
-十一款游戏均提供 `darwin-arm64`、`darwin-x64`、`linux-x64`、`linux-arm64`、
-`windows-x64` 五个平台的二进制。
-
-### 平台支持
-
-| 系统 | 架构 | 压缩格式 |
-|---|---|---|
-| macOS | Apple Silicon（`darwin-arm64`）、Intel（`darwin-x64`） | `.tar.gz` |
-| Linux | x64（`linux-x64`）、arm64（`linux-arm64`） | `.tar.gz` |
-| Windows | x64（`windows-x64`） | `.zip` |
-
-每个压缩包内含二进制、`README.md`、`LICENSE` 与 `SHA256SUMS`。
-不需要运行时、不需要安装器、不需要管理员权限。
-
-## 浏览器直接玩（免安装）
-
-**<https://arcobalneo.github.io/gameclaw/>** —— 全部游戏，免费，一个像素风门户里就能玩。
-
-- **人类**：点击封面打开游戏窗口；鼠标点击，或用 `1`–`9`、方向键/WASD、`Enter`/`Space` 操作。无需登录，顶栏会显示一个短房间码。右下角和每张游戏卡片会显示「多少人已玩过」。
-- **语言**：右上角的「中 / EN」切换会本地化整个站点，包括游戏内叙事、结算、日志，以及画面上的门票、印章、标牌。默认跟随 `navigator.language`。
-- **Agent**：把游戏窗口下方的提示词复制给你的桌面 Agent（Codex，或任何支持 Streamable HTTP 的 MCP 客户端）。提示词里有远程 MCP 地址和会话令牌。Agent 通过这个端点下棋；你已经打开的页面会实时显示窗口、进度和动画。
-- 同样的工具（`list_games`、`open_game`、`new_game`、`get_state`、`list_actions`、`act`、`recap`）仍然可以通过页内 WebMCP（`document.modelContext`）和 `window.gameclaw` 使用。详见 [`docs/web-portal.md`](docs/web-portal.md)。
-
-## 30 秒开玩
-
-把下面这段直接粘给你的 agent：
+## 贴给你的 Agent
 
 ```text
-你现在是我的 GameClaw 游戏操作员。
-
-请阅读 https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md 并照做：
-1. 自动判断我的平台。
-2. 从最新 GitHub Release 和 catalog/games.json 查出当前有哪些游戏，按编号列表展示。不要用旧技能里记住的名单。
-3. 问我要玩第几个，然后下载、校验并启动对应游戏。
-4. 第一局请直接给我 `new` / `actions` / `act` 的具体命令。
-
-如果 GitHub 慢或连不上，先按技能里的 GitHub520 章节处理，不要直接下结论说资源不存在。
+先读 https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md 并照做。
+和我打开 https://arcobalneo.github.io/gameclaw/。
+从线上站点或 catalog/games.json 发现游戏，不要用记在技能里的列表。
+只用 Web MCP，令牌用我从页面贴给你的那一串。
 ```
 
-Agent 会使用已发布的 [SKILL.md](SKILL.md)。技能本身不写游戏名单，只引导去最新
-Release 和 `catalog/games.json` 查询，再按结果安装。不要求本仓库被克隆。
+然后再贴首页生成的那一段。里面有令牌。
 
-## 手动安装
+## 游戏
 
-从 [Releases](https://github.com/Arcobalneo/gameclaw/releases/latest) 下载对应平台的资产：
+| Id | 名字 | 你在做什么 |
+|---|---|---|
+| `shrimp-trek` | 虾走 Trek | 潮段肉鸽。收壳，或者把闸口活过去。 |
+| `shrimp-guard` | 虾守 Guard | 三条水道。漏一次比杀掉三只更贵。 |
+| `shrimp-heist` | 虾潜 Heist | 读巡逻，取真目标，安静离开。 |
+| `shrimp-catch` | 虾抓 Catch | 捕捉养成，再下深渊。层数才是分。 |
+| `shrimp-look` | 虾看 Look | 记下异象。错误记录能出门，分数很低。 |
+| `shrimp-rampage` | 虾闹 Rampage | 找怪、安抚、天亮前收成。盲抚会把收成抹掉。 |
+| `shrimp-ink` | 虾写 Ink | 写下即成真的笔。验明或封存，卖掉就少一截。 |
+| `shrimp-greens` | 虾素 Greens | 十六席。办自己的席。咬肉很贵。 |
+| `shrimp-conquest` | 虾征 Conquest | 一年，小武器，大人国。镜面高于开战。 |
+| `shrimp-leap` | 虾跃 Leap | 力度、角度、时机。只有完美才延续连段。 |
+| `shrimp-burger` | 虾堡 Burger | 接住落下的料。幸运一口不延续连段。 |
 
-```bash
-# macOS / Linux
-tar -xzf shrimp-heist-darwin-arm64.tar.gz
-cd shrimp-heist-darwin-arm64
-./shrimp-heist --version
-```
+每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 
-```powershell
-# Windows
-Expand-Archive shrimp-heist-windows-x64.zip
-cd shrimp-heist-windows-x64
-.\shrimp-heist.exe --version
-```
+## 排行榜
 
-每个压缩包内含二进制、`README.md`、`LICENSE` 与 `SHA256SUMS`。二进制自带运行时，
-不需要 Node、Python 或包管理器。
+胜或负结束时可以交一个显示名。这一分会留在该游戏的榜上，如果它高于你这个名字的旧纪录。首页的大榜是每个名字在各游戏最高分之和。再交较低分不改排名。不登录。服务器只保存你写下的名字和分数。
 
-## Agent 循环
+Agent 用 `get_leaderboard` 和 `submit_score` 做同样的事。
 
-所有游戏共享同一套命令：
+## 给 Agent
 
-```bash
-<game> new      [--seed N] [--content X] [--difficulty Y] [--slot N]
-<game> status   [--slot N]
-<game> actions  [--slot N]
-<game> act <id> [--slot N]
-<game> recap    [--slot N] [--format text|markdown|html]
-<game> saves
-<game> play     # 可选的人类交互模式
-```
+[`SKILL.md`](SKILL.md) 是技能入口，里面没有游戏列表。
 
-加 `--json` 后，每次调用都只输出一个机器可读对象：
+工具：`list_games`、`open_game`、`new_game`、`get_state`、`list_actions`、`act`、`recap`、`get_leaderboard`、`submit_score`、`set_language`。
 
-```json
-{
-  "ok": true,
-  "game": { "id": "shrimp-trek", "version": "3.2.0" },
-  "turn": 3,
-  "outcome": "ongoing",
-  "status": { "headline": "潮段 2 · 深度 12 · 章鱼讨债者", "metrics": [] },
-  "actions": [{ "id": "enc:1", "label": "左钳硬拼", "risk": "medium" }],
-  "log": ["你把章鱼的一条腕足夹成了问号。"],
-  "next": "act enc:1"
-}
-```
+远程 MCP：`https://gameclaw-relay.arcobalneo.workers.dev/mcp`，请求头 `Authorization: Bearer <令牌>`。
 
-错误同样是结构化的，带稳定错误码与退出码（`NO_SAVE`、`SLOT_IN_USE`、
-`ILLEGAL_ACTION`、`GAME_OVER`、`STATE_CORRUPT`）。
-
-### 确定性与存档
-
-- 状态放在 `~/.gameclaw/<game-id>/`，一个槽位一个 JSON。
-- `--state-dir <path>` 或 `GAMECLAW_HOME` 可以把一局隔离到沙箱目录，适合评测 / CI。
-- 每局都保存 PRNG 状态，可以逐回合精确恢复。
-- 每个回合写入 NDJSON 日志，便于事后分析。
-
-### 旁观页与结算
-
-`new` / `play` 会从 8000 起寻找空闲端口启动本地 observer 页面，局终自动停止。
-每局结束会写一份自包含 HTML 结算页和一份 Markdown 版本，位于
-`~/.gameclaw/<game-id>/reports/`。可用 `--no-observer` / `--no-report` 关闭。
-
-## 架构
-
-```
-gameclaw/
-├── packages/gamekit/     # 共享运行时：CLI、存档、RNG、observer、报告
-├── games/
-│   └── <game-id>/        # 每款游戏一个自包含包
-│       ├── src/definition.ts   # 元数据 + GameDefinition 装配
-│       ├── src/engine.ts       # 纯规则 / 状态机
-│       ├── src/content.ts      # 内容数据
-│       └── tests/
-├── catalog/games.json    # 机器可读发行清单
-├── scripts/              # build-game.mjs / test-game.mjs / release-matrix.mjs
-├── docs/                 # 架构、发版、设计准则、计划归档
-└── SKILL.md              # 分发技能：去 Releases / catalog 查游戏
-```
-
-`gamekit` 不认识任何具体游戏；游戏不接触 argv、进程退出、存档或 HTML。
-依赖方向只有一个：`games/* → gamekit`。
-
-## 本地开发
-
-依赖：Node.js ≥ 22、pnpm 10、Bun 1.3+（仅编译二进制时需要）。
+## 开发
 
 ```bash
 pnpm install
-pnpm lint          # Biome
-pnpm check         # 全仓严格 TypeScript
-pnpm test          # Vitest，按游戏分跑
-pnpm build:game shrimp-heist
+pnpm lint && pnpm check && pnpm test
+pnpm --filter @gameclaw/web dev
 ```
 
-交叉编译到其他平台：
+引擎在 `games/<id>/`，是确定性的库。门户在 `web/`。relay 在 `relay/`（Cloudflare Workers + Durable Objects）。见 [`docs/repository-architecture.md`](docs/repository-architecture.md) 和 [`docs/web-portal.md`](docs/web-portal.md)。
 
-```bash
-node scripts/build-game.mjs shrimp-heist --platform windows-x64
-```
-
-从源码直接跑一款游戏：
-
-```bash
-bun games/shrimp-heist/src/main.ts new --seed 7 --state-dir /tmp/gc
-```
-
-强制的 plan → 实现 → 文档 → 验证 → 提交流程见 [`AGENTS.md`](AGENTS.md)，
-仓库约定见 [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md)。
-
-## 发版
-
-打 `vX.Y.Z` tag 会构建全部 55 个产物（11 款游戏 × 5 个平台），并连同聚合
-`SHA256SUMS` 一起附到 GitHub Release。构建矩阵从 `games/*/package.json` 自动派生，
-新增游戏不需要改 workflow。细节见 [`docs/release-flow.md`](docs/release-flow.md)。
-
-## 文档
-
-| 文档 | 内容 |
-|---|---|
-| [`docs/repository-architecture.md`](docs/repository-architecture.md) | 分层、依赖规则、仓库不变量 |
-| [`docs/web-portal.md`](docs/web-portal.md) | 浏览器门户、远程 MCP 中继、WebMCP、操作方式 |
-| [`docs/release-flow.md`](docs/release-flow.md) | 本地构建、CI 矩阵、资产命名 |
-| [`docs/NAMING.md`](docs/NAMING.md) | 强制的 Shrimp 系列机器 id 与显示命名规范 |
-| [`docs/agent-coding-standards.md`](docs/agent-coding-standards.md) | 给 agent 与人的仓库规范 |
-| [`docs/references/ai-native-game-design-rules.md`](docs/references/ai-native-game-design-rules.md) | 每款游戏都必须回答的 20 条设计准则 |
-| [`docs/plans/`](docs/plans/) | 当前与归档的设计计划 |
-| [`SKILL.md`](SKILL.md) | Agent 技能：去 Releases 和 catalog 查询，再安装并启动 |
-
-## 安全边界
-
-二进制降低普通玩家直接翻源码的便利度，让玩家路径更像正常 CLI 工具。
-它**不**保证不可逆向、不可篡改，也不是反作弊系统。请如实描述。
-
-## 常见问题
-
-**GameClaw 是 benchmark 吗？**
-不是。它就是一个游戏发行仓库。确定性和 JSON 输出让每一局都容易检查，但目的是玩，不是打分。
-
-**需要克隆仓库吗？**
-不需要。玩家下载 Releases 二进制即可。仓库是给维护者、贡献者和想看源码的 agent 用的。
-
-**为什么不做 Web UI？**
-因为玩家是 agent，它原生的界面就是工具调用。一次调用返回一整帧的 CLI，比浏览器 UI 或全屏 TUI 更简单、更快、也更容易跨平台。
-
-**五个平台是同一款游戏吗？**
-是。每个平台跑的都是同一套 TypeScript 状态机编译出的单文件二进制，只有打包格式不同（`.tar.gz` 与 `.zip`）。
-
-**怎么加一款新游戏？**
-先读 [`AGENTS.md`](AGENTS.md) 和 [`CONTRIBUTING.md`](CONTRIBUTING.md)。简版：在 `games/<id>/` 实现 `GameDefinition`，补测试，写中文 README，更新 `catalog/games.json`。
-
-**为什么是虾？**
-这个系列来自“一只甲壳动物从厨房逃跑”的玩笑。统一的 Shrimp 身份保留了这套物理视角：壳、钳、蜕壳、潮、盐。
-
-## 贡献
-
-欢迎 issue 与 PR。大改动前请先读 `AGENTS.md`，在 `docs/plans/` 写计划；
-游戏机制细节写在各游戏自己的 `README.md`，根 README 只负责发现与启动。
-
-## 许可证
-
-MIT，见 [LICENSE](LICENSE)。
-
-## 致谢
-
-- [GitHub520](https://github.com/521xueweihan/GitHub520)：技能中优先推荐的
-  基于 hosts 的 GitHub 连接性修复方案。
-- [Bun](https://bun.sh)：跨平台单文件编译。
-- [pnpm](https://pnpm.io)、[Vitest](https://vitest.dev)、[Biome](https://biomejs.dev)：
-  维护者工具链。
+发布站点是手动把 `web/dist` 放到 `gh-pages`。发布 relay 是在 `relay/` 里 `wrangler deploy`，它会执行排行榜的 Durable Object 迁移 `v3`。`.github/workflows` 里仍是旧的 CLI 构建，打 tag 之前必须先改掉。

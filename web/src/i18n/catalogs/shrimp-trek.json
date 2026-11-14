@@ -251,7 +251,14 @@
     "遭遇里用 act enc:1|2|3 选择动作；判定是 d6 + 基础值 vs 难度 + 海压。": "In an encounter, choose with act enc:1|2|3. The roll is d6 + base vs difficulty + sea pressure.",
     "第 2/5/8 场后进入突变潮，用 act mutation:<key> 三选一。": "After encounters 2/5/8 you enter a mutation tide; pick one with act mutation:<key>.",
     "潮段数可用 --content one-cycle 或 three-cycles 限制，默认 endless。": "Limit the cycles with --content one-cycle or three-cycles; the default is endless.",
-    "--difficulty easy|normal|hard 调整每潮段的海压。": "--difficulty easy|normal|hard adjusts sea pressure each cycle."
+    "--difficulty easy|normal|hard 调整每潮段的海压。": "--difficulty easy|normal|hard adjusts sea pressure each cycle.",
+    "收壳记名": "Bank the name",
+    "以当前名声离开。活过归海闸口才乘倍率；现在离开没有闸口倍率。": "Leave on your current fame. Surviving the sea gate multiplies it; leaving now does not.",
+    "你在闸口前收壳。天梯分按深度和名声结算，没有闸口倍率。": "You bank before the gate. Ladder points use depth and fame, with no gate multiplier.",
+    "闸口上不能收壳，只能把最后一步走完。": "You cannot bank on the gate. Finish the last step.",
+    "无限潮段。收壳，或者把闸口活过去": "Endless tides. Bank, or live through the gate.",
+    "非闸口回合可以 act bank 收壳。活过归海闸口的天梯倍率更高，死在路上只留一部分名声。": "On a non-gate turn, act bank to cash out. Surviving the sea gate multiplies the ladder score; dying keeps only part of your fame.",
+    "difficulty 用 easy、normal 或 hard，每潮段海压不同。content 可用 one-cycle 或 three-cycles。": "difficulty is easy, normal, or hard and changes sea pressure each tide. content may be one-cycle or three-cycles."
   },
   "patterns": [
     {

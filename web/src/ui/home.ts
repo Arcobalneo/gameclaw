@@ -4,6 +4,8 @@ import { glow } from '../gfx/fx';
 import { ctx2d, hash01, makeCanvas, VW } from '../gfx/pixel';
 import { buildSprite, CRAB, SHRIMP, SHRIMP_WALK, SLIME } from '../gfx/sprites';
 import { lang, onLang, t } from '../i18n';
+import { agentCard } from './agent-card';
+import { boardList } from './board-list';
 import { h } from './dom';
 import { logo } from './logo';
 import { gameCountEl } from './play-counts';
@@ -25,6 +27,8 @@ export class Home {
   readonly #covers: Cover[] = [];
   readonly #hero = makeCanvas(VW, HERO_H);
   readonly #tagline: HTMLElement;
+  readonly #boardTitle: HTMLElement;
+  readonly #boardRule: HTMLElement;
   #raf = 0;
   #t = 0;
   #last = 0;
@@ -40,6 +44,8 @@ export class Home {
       grid.append(card);
     });
     this.#tagline = h('p', { class: 'hero-tag' });
+    this.#boardTitle = h('h2', { class: 'board-title' });
+    this.#boardRule = h('p', { class: 'board-rule' });
     this.root = h(
       'main',
       { class: 'home', id: 'main' },
@@ -49,6 +55,14 @@ export class Home {
         heroCanvas,
         h('h1', { class: 'sr-only' }, 'GameClaw'),
         this.#tagline,
+      ),
+      agentCard(),
+      h(
+        'section',
+        { class: 'site-board' },
+        this.#boardTitle,
+        this.#boardRule,
+        boardList('total', 10),
       ),
       grid,
       h(
@@ -68,6 +82,8 @@ export class Home {
   #applyLang(): void {
     const l = lang();
     this.#tagline.textContent = t('site.tagline');
+    this.#boardTitle.textContent = t('home.boardTitle');
+    this.#boardRule.textContent = t('home.boardRule');
     for (const c of this.#covers) {
       c.name.textContent = gameName(c.game, l);
       c.tag.textContent = gameTag(c.game, l);

@@ -103,7 +103,7 @@ export interface TowerDefenseState {
 }
 
 export const GAME_ID = 'shrimp-guard';
-export const GAME_VERSION = '3.1.0';
+export const GAME_VERSION = '4.0.0';
 
 export const OUTCOME_TEXT: Record<Outcome, string> = {
   ongoing: '进行中',
@@ -228,8 +228,21 @@ export function laneHasBlocker(state: TowerDefenseState, lane: LaneKey): boolean
   });
 }
 
+/**
+ * Ladder: kills×12 + integrity×25 − leaks×40.
+ * A clean win adds 300. A win that leaked adds 80. A leak costs more than three kills.
+ * Abort is 0. An ongoing fight shows the body without the win bonus.
+ */
 export function scoreOf(state: TowerDefenseState): number {
-  return state.kills * 2 + Math.max(0, state.integrity) * 3 - state.leaks;
+  if (state.outcome === 'aborted') return 0;
+  const body = state.kills * 12 + Math.max(0, state.integrity) * 25 - state.leaks * 40;
+  const bonus = state.outcome === 'won' ? (state.leaks === 0 ? 300 : 80) : 0;
+  return Math.max(0, Math.min(999_999, body + bonus));
+}
+
+export function ladderScore(state: TowerDefenseState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return scoreOf(state);
 }
 
 export function pulseLabel(state: TowerDefenseState): string {

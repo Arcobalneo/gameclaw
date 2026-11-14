@@ -10,6 +10,9 @@ export const TOOL_NAMES = [
   'list_actions',
   'act',
   'recap',
+  'get_leaderboard',
+  'submit_score',
+  'set_language',
 ] as const;
 
 export interface PromptContext {
@@ -33,7 +36,8 @@ export function buildPrompt(
   const page =
     ctx.pageUrl ?? (typeof window !== 'undefined' ? `${siteUrl()}#/play/${game.id}` : '');
   const id = game.id;
-  const tools = 'list_games, open_game, new_game, get_state, list_actions, act, recap';
+  const tools =
+    'list_games, open_game, new_game, get_state, list_actions, act, recap, get_leaderboard, submit_score';
 
   if (lang === 'en') {
     return [
@@ -47,8 +51,10 @@ export function buildPrompt(
       '1. Connect a Streamable HTTP MCP client to the MCP URL. Send Authorization: Bearer <token> on every request.',
       `2. Tools: ${tools}. game_id "${id}".`,
       '3. Loop: open_game or new_game → read state + actions → act on exactly one action_id → read the log → repeat until outcome is not "ongoing".',
-      '4. Finish with recap. Sum up in 3 sentences: result, key decision, one lesson for next run.',
+      '4. Finish with recap. If the run was won or lost, call submit_score with a display name. get_leaderboard reads this game and the site total.',
+      '5. Sum up in 3 sentences: result, key decision, one lesson for next run.',
       `Goal: ${game.goalEn}`,
+      `Scoring: ${game.scoreEn}`,
       'After each move, say in one line why you chose it.',
       'If a tool says the page is not connected, wait until I open the Page URL above, then retry.',
       'Do not share this token publicly.',
@@ -70,8 +76,10 @@ export function buildPrompt(
     '1. 用支持 Streamable HTTP 的 MCP 客户端连接上述 MCP 地址，每个请求加 Authorization: Bearer <令牌>。',
     `2. 工具：${tools.replaceAll(', ', '、')}。game_id = "${id}"。`,
     '3. 循环：open_game 或 new_game → 读 state 和 actions → 从列表里选一个 action_id 执行 act → 读返回的 log → 重复，直到 outcome 不是 "ongoing"。',
-    '4. 结束后调用 recap，用 3 句话总结：结局、关键决策、下局要验证的一条经验。',
+    '4. 结束后调用 recap。胜或负时用 submit_score 交一个显示名。get_leaderboard 读取本局榜和总榜。',
+    '5. 用 3 句话总结：结局、关键决策、下局要验证的一条经验。',
     `目标：${game.goal}`,
+    `计分：${game.scoreZh}`,
     ...(guideLines.length ? ['要点：', ...guideLines] : []),
     '每步之后用一句话说明理由。',
     '如果工具返回页面未连接，等我打开上面的页面后再试。',

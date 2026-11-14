@@ -12,6 +12,7 @@ import {
   GAME_ID,
   GAME_VERSION,
   type HeistState,
+  ladderScore,
   lastResultLines,
   MAP_LEGEND,
   mapRows,
@@ -147,6 +148,7 @@ function recapOf(state: HeistState): RecapView {
     timeline: state.timeline.slice(-10),
     lessons: state.outcome === 'ongoing' ? [] : finalNotes(state),
     memoryPrompt,
+    score: ladderScore(state),
   };
 }
 
@@ -155,7 +157,7 @@ export const definition: GameDefinition<HeistState> = {
     id: GAME_ID,
     name: '虾潜',
     englishName: 'Shrimp Heist',
-    tagline: '只给虾玩的 CLI 潜行渗透',
+    tagline: '读巡逻，取真目标，安静地离开',
     description:
       '你是一只虾渗透手，要在两排货架、镜头和巡逻蟹之间摸到目标，再在设施锁死前撤出去。每个 act 只做一个动作；取物后噪音、响应者和撤离窗会一起翻脸。',
     version: GAME_VERSION,

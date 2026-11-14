@@ -1,23 +1,19 @@
 {
-  "schema": 1,
+  "schema": 2,
+  "product": "web",
   "repo": {
     "name": "gameclaw",
     "url": "https://github.com/Arcobalneo/gameclaw",
-    "releases": "https://github.com/Arcobalneo/gameclaw/releases/latest"
+    "site": "https://arcobalneo.github.io/gameclaw/",
+    "skill": "https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md",
+    "catalog": "https://raw.githubusercontent.com/Arcobalneo/gameclaw/main/catalog/games.json"
   },
-  "platforms": [
-    "darwin-arm64",
-    "darwin-x64",
-    "linux-x64",
-    "linux-arm64",
-    "windows-x64"
-  ],
   "games": [
     {
       "id": "shrimp-trek",
       "name": "虾走",
       "englishName": "Shrimp Trek",
-      "tagline": "只给虾玩的无限潮段 CLI 肉鸽",
+      "tagline": "无限潮段。收壳，或者把闸口活过去",
       "summary": "九场遭遇加一道归海闸口的无限潮段肉鸽：三种谱系、七种突变、潮势节奏与海压递增。死亡给出可归因死因，结算输出本局观察。",
       "genres": [
         "roguelike",
@@ -25,42 +21,17 @@
         "survival"
       ],
       "source_dir": "games/shrimp-trek",
-      "binary": "shrimp-trek",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-trek-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-trek-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-trek-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-trek-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-trek-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "收壳：名声×3 + 深度×18 + 壳 + 能。活过闸口：名声×6 + 潮段×160 + 深度×8 + 海压×20。死亡只留名声的一部分加深度×4。中止为 0。",
+        "en": "Bank: fame×3 + depth×18 + shell + energy. Survive the gate: fame×6 + cycle×160 + depth×8 + pressure×20. A death keeps a fraction of fame plus depth×4. Abort is 0."
       }
     },
     {
       "id": "shrimp-guard",
       "name": "虾守",
       "englishName": "Shrimp Guard",
-      "tagline": "pulse 制虾 CLI 塔防",
+      "tagline": "三条水道，漏一次比杀掉三只更贵",
       "summary": "三路线、六个部署位、三条 doctrine 的 pulse 制塔防。每 pulse 只做一个关键动作，随后自动结算推进、卡位与漏怪。",
       "genres": [
         "tower-defense",
@@ -68,42 +39,17 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-guard",
-      "binary": "shrimp-guard",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-guard-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-guard-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-guard-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-guard-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-guard-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "击破×12 + 完整度×25 − 漏怪×40。零泄漏的胜利 +300，漏过仍守住 +80。一次泄漏比三只击破更贵。中止为 0。",
+        "en": "Kills×12 + integrity×25 − leaks×40. A leak-free win adds 300; a win that leaked adds 80. One leak costs more than three kills. Abort is 0."
       }
     },
     {
       "id": "shrimp-heist",
       "name": "虾潜",
       "englishName": "Shrimp Heist",
-      "tagline": "网格潜行与撤离压力的 CLI heist",
+      "tagline": "网格潜行。安静撤离才有倍率",
       "summary": "读巡逻、摄像头与噪音，取走目标后在封锁前撤离。三套 profile、设施、安保、目标与复杂化包交叉生成任务。",
       "genres": [
         "stealth",
@@ -111,35 +57,10 @@
         "tactics"
       ],
       "source_dir": "games/shrimp-heist",
-      "binary": "shrimp-heist",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-heist-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-heist-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-heist-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-heist-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-heist-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "带走的目标分按警戒倍率计算：0 警戒 ×4，1 警戒 ×2，更高 ×1，再 ×25，加上剩余时间，减去认错的货格。死在里面只留目标分的五分之一。吵着撤出去赢不了安静的一局。",
+        "en": "Loot is multiplied by alert: ×4 at 0, ×2 at 1, ×1 above that, then ×25, plus time left, minus wrong crates. Dying keeps one fifth of the loot. A loud extract cannot beat a quiet one."
       }
     },
     {
@@ -154,42 +75,17 @@
         "roguelike"
       ],
       "source_dir": "games/shrimp-catch",
-      "binary": "shrimp-catch",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-catch-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-catch-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-catch-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-catch-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-catch-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "最深层数×25。到达通关层 +400。图鉴和捕捉只加一点。每只永久死亡 −40，大约一层的分数。表面刷宠堆不满深渊的榜。",
+        "en": "Deepest floor×25. Reaching the clear floor adds 400. The dex and captures add a little. Each permadeath is −40, about a floor. Surface grinding cannot fill an abyss score."
       }
     },
     {
       "id": "shrimp-look",
       "name": "虾看",
       "englishName": "Shrimp Look",
-      "tagline": "单步观察的 CLI 视觉恐怖",
+      "tagline": "侧眼观察。错误记录能出门，分很低",
       "summary": "横向观察异常房间，记录现象，带着一份记录撤离。四个案件、事件表驱动，真记录与错记录只差你验证了多少。",
       "genres": [
         "horror",
@@ -197,35 +93,10 @@
         "mystery"
       ],
       "source_dir": "games/shrimp-look",
-      "binary": "shrimp-look",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-look-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-look-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-look-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-look-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-look-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "带着验明的档案离开：640 + 神经×14 + 冷静×12 + 证据×15 − 回合×5。错误记录：60 + 证据×4，并且出门前再 +2 恐惧。崩溃只按证据×6。中止为 0。",
+        "en": "Leave with a verified file: 640 + nerve×14 + calm×12 + evidence×15 − turns×5. A wrong record is 60 + evidence×4, and costs 2 extra dread at the door. A collapse is evidence×6. Abort is 0."
       }
     },
     {
@@ -240,35 +111,10 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-rampage",
-      "binary": "shrimp-rampage",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-rampage-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-rampage-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-rampage-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-rampage-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-rampage-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "安抚×45 + 收成×30 + 特殊南瓜×40 − 盲抚×18 − 安抚失败×22 − 踩田×15 − 休息×6。两项目标都达成 +280。没看清就上手，会把收成抹掉。",
+        "en": "Soothes×45 + harvest×30 + special pumpkins×40 − blind soothes×18 − failed soothes×22 − tramples×15 − rests×6. Clearing both quotas adds 280. Soothing blind wipes out harvest points."
       }
     },
     {
@@ -283,35 +129,10 @@
         "narrative"
       ],
       "source_dir": "games/shrimp-ink",
-      "binary": "shrimp-ink",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-ink-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-ink-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-ink-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-ink-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-ink-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "证笔 520，无债封笔 480 再 +160，卖笔 220，没验就信 140。寻笔和劝世更低。墨债每点 −40。卖笔或盲信到不了封笔和证笔的分数。",
+        "en": "Verified keep 520. A debt-free seal is 480 plus 160. Selling is 220. Believing it unverified is 140. Seeking and preaching pay less. Each point of ink debt is −40. Selling or blind faith cannot catch a seal or a verified keep."
       }
     },
     {
@@ -326,35 +147,10 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-greens",
-      "binary": "shrimp-greens",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-greens-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-greens-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-greens-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-greens-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-greens-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "自席 460、分席 380、外席 320、同桌 240。只是把十六席坐完大约 50。咬肉每次 −30。守住立场去办自己的席，才是这张榜。",
+        "en": "Host 460, split 380, outside table 320, truce 240. Lasting all sixteen meals without an ending is about 50. Each bite of meat is −30. Holding your line and hosting your own table is the board."
       }
     },
     {
@@ -369,35 +165,10 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-conquest",
-      "binary": "shrimp-conquest",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-conquest-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-conquest-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-conquest-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-conquest-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-conquest-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "镜面 500、盟约 380、开战 260，再加上控制、情报和救援。被俘很贵。饿死、错过一年或一直被关，分数是 0。",
+        "en": "Mirror 500, pact 380, war 260, plus control, intel, and rescues. Captures are expensive. Starving, missing the year, or staying captive scores 0."
       }
     },
     {
@@ -412,35 +183,10 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-leap",
-      "binary": "shrimp-leap",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-leap-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-leap-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-leap-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-leap-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-leap-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "过关×40 + 完美×20 + 最佳完美连段×30 + 救援×80 − 摔落×70。只有完美落地才延续连段，擦边和干净落地都会打断。天亮 +500。",
+        "en": "Clears×40 + perfects×20 + best perfect streak×30 + rescues×80 − falls×70. Only a perfect extends the streak; a clean or edge landing breaks it. Reaching dawn adds 500."
       }
     },
     {
@@ -455,35 +201,10 @@
         "turn-based"
       ],
       "source_dir": "games/shrimp-burger",
-      "binary": "shrimp-burger",
       "status": "stable",
-      "observer": true,
-      "reports": true,
-      "platforms": [
-        "darwin-arm64",
-        "darwin-x64",
-        "linux-x64",
-        "linux-arm64",
-        "windows-x64"
-      ],
-      "release_assets": {
-        "darwin-arm64": "shrimp-burger-darwin-arm64.tar.gz",
-        "darwin-x64": "shrimp-burger-darwin-x64.tar.gz",
-        "linux-x64": "shrimp-burger-linux-x64.tar.gz",
-        "linux-arm64": "shrimp-burger-linux-arm64.tar.gz",
-        "windows-x64": "shrimp-burger-windows-x64.zip"
-      },
-      "run": {
-        "unix": [
-          "tar -xzf <asset>",
-          "cd <id>-<platform>",
-          "./<binary> --version"
-        ],
-        "windows": [
-          "Expand-Archive <asset>",
-          "cd <id>-<platform>",
-          ".\\<binary>.exe --version"
-        ]
+      "score": {
+        "zh": "美味×180 + 幸运×40 + 最佳美味连段×50。幸运不延续连段。离店 −120，比一份幸运更贵。交班成功 +200，再加剩余时间。",
+        "en": "Tasty×180 + lucky×40 + best tasty streak×50. A lucky bite does not extend the streak. A walkout is −120, more than a lucky serve. Finishing the shift adds 200 plus time left."
       }
     }
   ]

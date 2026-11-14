@@ -19,7 +19,7 @@ import {
 } from './content';
 
 export const GAME_ID = 'shrimp-heist';
-export const GAME_VERSION = '3.1.0';
+export const GAME_VERSION = '4.0.0';
 
 export type Phase = 'setup' | 'infiltrate' | 'extraction' | 'ended';
 export type Difficulty = 'easy' | 'normal' | 'hard';
@@ -1478,14 +1478,29 @@ export const MAP_LEGEND = [
   'X 出口 · T 终端 · $ 缓存 · O 真目标 · ? 货格 · E 空货格 · V 通风 · # 掩体 · : 暗格 · . 开阔 · ~ 蒸汽',
 ];
 
+/**
+ * Loot is `state.score`. A quiet extract multiplies it (alert 0 → ×4, alert 1 → ×2, else ×1),
+ * then ×25, plus leftover time and minus wrong crates. Dying after touching loot keeps floor(loot/5).
+ * Abort and unfinished runs publish 0. A loud grab cannot outscore a verified quiet extract.
+ */
 export function settlementScore(state: HeistState): number {
-  let score = state.score;
-  if (state.cacheOpened) score += 2;
-  score -= state.alert;
-  score -= Math.max(0, state.turn - 8);
-  score -= state.inspected.filter((site) => !samePos(site, state.mission.trueSite)).length;
-  if (state.outcome === 'won') score += 4;
-  return Math.max(0, score);
+  const loot = Math.max(0, state.score);
+  const falseCrates = state.inspected.filter(
+    (site) => !samePos(site, state.mission.trueSite),
+  ).length;
+  if (state.outcome === 'lost') return Math.min(999_999, Math.floor(loot / 5));
+  const mul = state.alert <= 0 ? 4 : state.alert === 1 ? 2 : 1;
+  const speed = Math.max(0, 24 - state.turn) * 12;
+  return Math.max(
+    0,
+    Math.min(999_999, loot * mul * 25 + speed - falseCrates * 30 - state.alert * 8),
+  );
+}
+
+/** Published points. Unfinished and aborted runs stay at 0; the projection stays on the sheet. */
+export function ladderScore(state: HeistState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return settlementScore(state);
 }
 
 export function finalNotes(state: HeistState): string[] {

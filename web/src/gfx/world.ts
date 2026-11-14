@@ -1,6 +1,6 @@
 import { glow } from './fx';
 import { type Ctx, ellipse, mix, rect, VW, withAlpha } from './pixel';
-import { drawText, fitText, textWidth } from './text';
+import { drawText, textWidth, wrapPixelText } from './text';
 
 /** Shared actor helpers used by the per-game scenes. */
 export interface BlitOptions {
@@ -78,21 +78,24 @@ export function shadow(g: Ctx, x: number, y: number, w: number): void {
   ellipse(g, x, y, Math.max(2, w / 2), Math.max(1, w / 8), withAlpha('#000000', 0.45));
 }
 
-/** Small floating name plate. */
+/** Small floating name plate. Wraps to two lines before it will ellipsize. */
 export function plate(
   g: Ctx,
   text: string,
   x: number,
   y: number,
   color = '#fff4d6',
-  max = 120,
+  max = 160,
 ): void {
-  const t = fitText(text, max);
-  const w = textWidth(t) + 8;
+  const lines = wrapPixelText(text, max, 2);
+  const w = Math.max(8, ...lines.map((line) => textWidth(line))) + 8;
+  const h = 4 + lines.length * 13;
   x = Math.max(w / 2 + 3, Math.min(VW - w / 2 - 3, x));
-  rect(g, Math.round(x - w / 2), y - 1, w, 14, withAlpha('#05030c', 0.78));
-  rect(g, Math.round(x - w / 2), y + 13, w, 1, withAlpha(color, 0.5));
-  drawText(g, t, x, y, { color, align: 'center', outline: null });
+  rect(g, Math.round(x - w / 2), y - 1, w, h, withAlpha('#05030c', 0.78));
+  rect(g, Math.round(x - w / 2), y - 1 + h, w, 1, withAlpha(color, 0.5));
+  lines.forEach((line, i) => {
+    drawText(g, line, x, y + i * 13, { color, align: 'center', outline: null });
+  });
 }
 
 /** Swaying kelp strand. */

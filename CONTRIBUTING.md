@@ -12,7 +12,7 @@ pnpm check
 pnpm test
 ```
 
-Requirements: Node.js ≥ 22, pnpm 10, Bun ≥ 1.3 (only for building binaries).
+Requirements: Node.js ≥ 22, pnpm 10.
 
 ## What we want
 
@@ -21,14 +21,14 @@ Requirements: Node.js ≥ 22, pnpm 10, Bun ≥ 1.3 (only for building binaries).
   deterministic, so a failing run can be replayed exactly.
 - **Docs that match reality.** If behaviour changes, the docs change in the same
   PR.
-- **Small, honest claims.** Binaries reduce source visibility; they are not
-  anti-cheat.
+- **Small, honest claims.** Leaderboard scores are submitted by the page.
+  The relay rate-limits and caps them. It does not replay the engine.
 
 ## Before a large PR
 
 Read [`AGENTS.md`](AGENTS.md) and write a plan under `docs/plans/`. A large change
-includes: a new game, an engine rewrite, a CLI contract change, a release
-workflow change, or a docs restructure.
+includes: a new game, an engine rewrite, an MCP or leaderboard change, or a
+docs restructure.
 
 The order is mandatory:
 
@@ -42,23 +42,22 @@ The order is mandatory:
 
 Follow [`docs/NAMING.md`](docs/NAMING.md): every game uses the Shrimp-series
 display form and a matching `shrimp-<word>` id across the catalog, runtime,
-package, binary, and release assets.
+and package.
 
 1. Copy the structure of an existing game under `games/`.
-2. Implement `GameDefinition` from `@gameclaw/gamekit`.
-3. Add engine + CLI tests (`tests/engine.test.ts`, `tests/cli.test.ts`).
-4. Write a Chinese `games/<id>/README.md`.
-5. Add an entry to `catalog/games.json`.
-6. Run `node scripts/test-game.mjs <id>` and build one binary.
-7. Update the root README game table and `catalog/games.json`. Do not add the
-   game to `SKILL.md`; that skill looks the list up from Releases and the catalog.
+2. Implement `GameDefinition` from `@gameclaw/gamekit`, including `recap.score`.
+3. Add engine tests (`tests/engine.test.ts`, `tests/ladder.test.ts`).
+4. Add a scene in `web/src/games/<id>.ts` and zh/en catalog strings.
+5. Write `games/<id>/README.md` and a catalog entry with `score.zh` and `score.en`.
+6. Run `node scripts/test-game.mjs <id>`.
+7. Update the root README game table. Do not add the game to `SKILL.md`.
 
 ## PR checklist
 
 - [ ] `pnpm lint` clean
 - [ ] `pnpm check` clean
 - [ ] `pnpm test` clean
-- [ ] real binary built and smoke-tested when runtime/packaging changed
+- [ ] portal built when the bundle changed
 - [ ] docs and `catalog/games.json` updated
 - [ ] no secrets, no generated binaries committed
 - [ ] commit messages follow `type(scope): summary`
@@ -67,10 +66,9 @@ package, binary, and release assets.
 
 Include:
 
-- game id and version (`<game> --version`)
-- platform (`darwin-arm64`, `linux-x64`, ...)
-- `--seed` and the action ids you used
-- the exact `--json` output of the failing turn, if possible
+- game id and the portal version
+- seed and the action ids you used
+- the `get_state` / `recap` JSON of the failing turn, if you have it
 
 ## Code of conduct
 

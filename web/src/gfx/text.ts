@@ -156,22 +156,57 @@ export function fitText(text: string, maxWidth: number): string {
   return `${text.slice(0, lo)}…`;
 }
 
-/** Greedy wrap (CJK-aware: breaks anywhere). */
+/**
+ * Wrap to `maxWidth`. Prefers spaces and hyphens so English labels stay whole
+ * words. CJK still breaks per character. The last line ellipsizes only if a
+ * single token cannot fit.
+ */
 export function wrapPixelText(text: string, maxWidth: number, maxLines = 4): string[] {
+  const units = text.split(/(\s+|(?<=-))/u).filter((unit) => unit.length > 0);
   const lines: string[] = [];
   let current = '';
-  for (const ch of text) {
-    const next = current + ch;
-    if (textWidth(next) > maxWidth && current) {
-      lines.push(current);
-      current = ch.trimStart();
-      if (lines.length === maxLines) break;
-    } else current = next;
+  const commit = (): boolean => {
+    const full = lines.length + 1 >= maxLines;
+    if (full && textWidth(current) > maxWidth) current = fitText(current.trimEnd(), maxWidth);
+    lines.push(current.trimEnd());
+    current = '';
+    return lines.length >= maxLines;
+  };
+  for (const unit of units) {
+    if (/^\s+$/.test(unit)) {
+      if (current && textWidth(`${current} `) <= maxWidth) current += ' ';
+      continue;
+    }
+    const chunks = textWidth(unit) <= maxWidth ? [unit] : [...unit];
+    for (const chunk of chunks) {
+      const next = current + chunk;
+      if (current && textWidth(next) > maxWidth) {
+        if (commit()) return lines;
+      }
+      current += chunk;
+    }
   }
-  if (lines.length < maxLines && current) lines.push(current);
-  if (lines.length === maxLines && textWidth(lines[maxLines - 1]!) > maxWidth - 6)
-    lines[maxLines - 1] = fitText(lines[maxLines - 1]!, maxWidth);
-  return lines;
+  if (current.trim()) {
+    if (lines.length >= maxLines) lines[maxLines - 1] = fitText(lines[maxLines - 1]!, maxWidth);
+    else commit();
+  }
+  return lines.filter((line) => line.length > 0);
+}
+
+/** Draws up to `maxLines` wrapped lines. Returns the block height in pixels. */
+export function drawBlock(
+  g: Ctx,
+  text: string,
+  x: number,
+  y: number,
+  maxWidth: number,
+  opts: TextOptions & { maxLines?: number } = {},
+): number {
+  const lines = wrapPixelText(text, maxWidth, opts.maxLines ?? 2);
+  lines.forEach((line, i) => {
+    drawText(g, line, x, y + i * LINE, opts);
+  });
+  return lines.length * LINE;
 }
 
 export const TEXT_LINE = LINE;

@@ -13,6 +13,9 @@ export const TOOL_NAMES = [
   'list_actions',
   'act',
   'recap',
+  'get_leaderboard',
+  'submit_score',
+  'set_language',
 ] as const;
 
 export type ToolName = (typeof TOOL_NAMES)[number];

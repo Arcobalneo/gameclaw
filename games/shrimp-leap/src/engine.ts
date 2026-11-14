@@ -98,6 +98,9 @@ export interface LeapState {
   bond: number;
   jumps: number;
   perfect: number;
+  /** Consecutive perfect landings. Only a perfect continues it. */
+  streak: number;
+  bestStreak: number;
   rests: number;
   trained: number;
   rescues: number;
@@ -278,6 +281,8 @@ export function createRun(options: {
     bond: 0,
     jumps: 0,
     perfect: 0,
+    streak: 0,
+    bestStreak: 0,
     rests: 0,
     trained: 0,
     rescues: 0,
@@ -621,18 +626,27 @@ function advanceBeat(state: LeapState): void {
   state.beat = (state.beat + speedOf(state.level)) % TIMING_IDS.length;
 }
 
+/**
+ * Clears and perfects, plus the best perfect streak.
+ * A clean or edge landing breaks the streak. Falls cost more than a perfect pays.
+ */
 export function scoreOf(state: LeapState): number {
   return Math.max(
     0,
-    state.cleared * 100 +
-      state.perfect * 25 +
+    state.cleared * 40 +
+      state.perfect * 20 +
+      (state.bestStreak ?? 0) * 30 +
       state.rescues * 80 +
-      state.sparks * 5 +
-      state.stamina * 2 -
-      state.falls * 60 -
-      state.rests * 4 +
+      state.sparks * 2 -
+      state.falls * 70 -
+      state.rests * 5 +
       (state.ending === 'dawn' ? 500 : 0),
   );
+}
+
+export function ladderScore(state: LeapState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return Math.min(999_999, scoreOf(state));
 }
 
 function finish(state: LeapState, ending: EndingId, cause: string): void {
@@ -764,7 +778,13 @@ function performJump(
   };
   const landed =
     preview.result === 'perfect' || preview.result === 'clean' || preview.result === 'edge';
-  if (preview.result === 'perfect') state.perfect += 1;
+  if (preview.result === 'perfect') {
+    state.perfect += 1;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+  } else {
+    state.streak = 0;
+  }
   const landingText = `第 ${level} 关 · ${actionId}：预计落点 ${preview.landing}m，间距 ${targetOf(state).gap}m，误差 ${signed(preview.error)}m（容差 ±${preview.tolerance}m）。`;
   log.push(`${landingText}${RESULT_NAMES[preview.result]}。体力 -${preview.cost}。`);
   events.push({
@@ -1229,6 +1249,7 @@ export function recapOf(state: LeapState): RecapView {
     lessons: lessonsOf(state),
     memoryPrompt:
       '把本局的性格、颜色、训练、最远关卡、最后一次跳跃的三档与落点误差写进你自己的 memory；若有救援，也记下进度和拉力。只把这些当作这个 seed 与这套 build 的观察，换地图、体型或属性后重新验证，不要把固定档位当成万能攻略。',
+    score: ladderScore(state),
   };
 }
 

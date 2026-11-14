@@ -191,7 +191,10 @@
     "监控画面延迟与反向凝视": "Delayed camera feeds and a reversed gaze",
     "监控画面延迟与反向凝视。": "Delayed camera feeds and a reversed gaze.",
     "海边废弃观察站": "An abandoned observation post by the sea",
-    "海边废弃观察站。": "An abandoned observation post by the sea."
+    "海边废弃观察站。": "An abandoned observation post by the sea.",
+    "act choose:<case-id> 进入一个副本；之后每个动作都是一回合。": "act choose:<case-id> enters a case. Every action after that is one turn.",
+    "侧眼观察，直到档案承认你看见的东西": "Look sideways until the file admits what you saw.",
+    "每个动作都是一回合。每次 inspect 都会让侧视面板多看你一眼。四个短副本：记录、取证、带着验明的档案离开，或者带着错误记录走出门。错误记录能过门，但天梯分有硬顶。": "Every action is one turn. Each inspect lets the side panel look back at you. Four short cases: record, gather proof, leave with a verified file, or walk out with the wrong record. A wrong record opens the door, and its ladder score has a hard ceiling."
   },
   "patterns": [
     {

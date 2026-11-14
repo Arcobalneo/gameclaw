@@ -5,14 +5,13 @@ const r = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
 /**
  * The portal bundles each game's deterministic state machine straight from
- * `games/<id>/src`. `@gameclaw/gamekit` is aliased to its browser-safe `core`
- * entry so no `node:*` module ever reaches the bundle.
+ * `games/<id>/src`. `@gameclaw/gamekit` is the browser-safe runtime.
  */
 export default defineConfig({
   base: process.env.GAMECLAW_BASE ?? '/gameclaw/',
   resolve: {
     alias: [
-      { find: /^@gameclaw\/gamekit$/, replacement: r('../packages/gamekit/src/core.ts') },
+      { find: /^@gameclaw\/gamekit$/, replacement: r('../packages/gamekit/src/index.ts') },
       { find: /^@games\//, replacement: `${r('../games')}/` },
     ],
   },

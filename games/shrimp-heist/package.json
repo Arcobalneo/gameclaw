@@ -1,15 +1,13 @@
 {
   "name": "@gameclaw/shrimp-heist",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "Shrimp Heist: compact stealth heist for coding agents.",
+  "description": "Shrimp Heist: a GameClaw web game.",
   "scripts": {
-    "start": "bun src/main.ts",
     "check": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "vitest run",
-    "build": "node ../../scripts/build-game.mjs shrimp-heist"
+    "test": "vitest run"
   },
   "dependencies": {
     "@gameclaw/gamekit": "workspace:*"

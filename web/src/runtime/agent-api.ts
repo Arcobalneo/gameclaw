@@ -1,8 +1,9 @@
-import type { ActionView, StatusView } from '@gameclaw/gamekit';
+import { type ActionView, normalizePlayerName, type StatusView } from '@gameclaw/gamekit';
 import { GAMES, gameName } from '../catalog';
-import { lang } from '../i18n';
+import { lang, setLang } from '../i18n';
 import { localizeActions, localizeLines, localizeRecap, localizeStatus } from '../i18n/localize';
 import type { GameHost } from './host';
+import { refreshBoard, rowsFor, submitScore } from './leaderboard';
 import { hasGame } from './registry';
 
 /**
@@ -57,6 +58,9 @@ export interface GameclawApi {
   act(args: { action_id: string; game_id?: string }): Promise<Json>;
   recap(args?: { game_id?: string }): Promise<Json>;
   closeGame(args?: { game_id?: string }): Promise<Json>;
+  getLeaderboard(args?: { game_id?: string }): Promise<Json>;
+  submitScore(args: { name: string; game_id?: string }): Promise<Json>;
+  setLanguage(args: { lang: string }): Promise<Json>;
 }
 
 export function createApi(portal: PortalController, version: string): GameclawApi {
@@ -187,6 +191,64 @@ export function createApi(portal: PortalController, version: string): GameclawAp
       portal.close(args.game_id);
       return { ok: true, focused: portal.focused() };
     },
+    async getLeaderboard(args = {}) {
+      await refreshBoard();
+      const id = args.game_id?.trim();
+      if (!id || id === 'total') {
+        return { ok: true, scope: 'total', rule: 'best-per-game', entries: rowsFor('total') };
+      }
+      if (!hasGame(id)) {
+        return { ok: false, error: `Unknown game_id: ${id}` };
+      }
+      return { ok: true, scope: id, rule: 'best-per-game', entries: rowsFor(id) };
+    },
+    async submitScore(args) {
+      const name = normalizePlayerName(args?.name ?? '');
+      if (!name) {
+        return {
+          ok: false,
+          error: 'Name is not allowed.',
+          hint: 'Use 1–16 letters, numbers, spaces, or _ - . ·',
+        };
+      }
+      const host = await resolve(args.game_id);
+      if (isErr(host)) return host;
+      const recap = host.recap();
+      const turn = host.status().turn;
+      if ((recap.outcome !== 'won' && recap.outcome !== 'lost') || recap.score < 1) {
+        return {
+          ok: false,
+          error: 'This run cannot be submitted.',
+          hint: 'Finish a win or a loss with a score above 0. Aborted runs are not scored.',
+        };
+      }
+      const posted = await submitScore({
+        name,
+        game: host.id,
+        score: recap.score,
+        outcome: recap.outcome,
+        turn,
+        run: `${host.id}:${host.seed}:${host.session.snapshot.createdAt}:${turn}:${recap.score}`,
+      });
+      if (!posted.ok) return posted;
+      return {
+        ok: true,
+        accepted: posted.accepted,
+        reason: posted.reason,
+        game_id: host.id,
+        name,
+        score: recap.score,
+        best: posted.best,
+        attempts: posted.attempts,
+      };
+    },
+    async setLanguage(args) {
+      if (args.lang !== 'zh' && args.lang !== 'en') {
+        return { ok: false, error: 'lang must be zh or en.' };
+      }
+      setLang(args.lang);
+      return { ok: true, lang: args.lang };
+    },
   };
 }
 
@@ -294,6 +356,46 @@ export function toolDescriptors(api: GameclawApi): ToolDescriptor[] {
       inputSchema: { type: 'object', properties: { game_id: gameIdProp } },
       annotations: { readOnlyHint: true },
       execute: (i) => api.recap(i.game_id ? { game_id: String(i.game_id) } : {}),
+    },
+    {
+      name: 'get_leaderboard',
+      description:
+        'Read the public leaderboard. Omit game_id for the site total (sum of each name’s best per game).',
+      inputSchema: { type: 'object', properties: { game_id: gameIdProp } },
+      annotations: { readOnlyHint: true },
+      execute: (i) => api.getLeaderboard(i.game_id ? { game_id: String(i.game_id) } : {}),
+    },
+    {
+      name: 'submit_score',
+      description:
+        'Submit this page’s finished run under a display name. The score comes from the run. A lower resubmit does not change rank.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string',
+            description: 'Display name, 1–16 letters, numbers, spaces, or _ - . ·',
+          },
+          game_id: gameIdProp,
+        },
+        required: ['name'],
+      },
+      execute: (i) =>
+        api.submitScore({
+          name: String(i.name ?? ''),
+          ...(i.game_id ? { game_id: String(i.game_id) } : {}),
+        }),
+    },
+    {
+      name: 'set_language',
+      description:
+        'Switch the shared page language so the human and the agent see the same locale.',
+      inputSchema: {
+        type: 'object',
+        properties: { lang: { type: 'string', enum: ['zh', 'en'] } },
+        required: ['lang'],
+      },
+      execute: (i) => api.setLanguage({ lang: String(i.lang ?? '') }),
     },
   ];
 }

@@ -9,7 +9,7 @@ import type {
   StatusView,
 } from './types';
 
-/** Mirrors the CLI's universal `abort` action so web and CLI stay in lockstep. */
+/** Universal abort, appended whenever a game implements `abort`. */
 export const ABORT_ACTION: ActionView = {
   id: 'abort',
   label: 'Abort this run and settle honestly',
@@ -40,8 +40,8 @@ export interface MemoryActOutcome<S = unknown> {
 }
 
 /**
- * Filesystem-free session with the same act semantics as `Session`:
- * clone → act → bump turn, prefix / 1-based index action resolution, `abort`.
+ * In-memory session used by the web portal.
+ * Clone → act → bump turn, prefix / 1-based index resolution, `abort`.
  */
 export class MemorySession<S = unknown> {
   readonly game: GameDefinition<S>;

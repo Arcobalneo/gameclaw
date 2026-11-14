@@ -1,176 +1,44 @@
-# Release flow
+# Release flow (v4)
 
-GameClaw ships **compiled single-file binaries** through GitHub Releases. Source
-stays open; players never need a toolchain.
+v4.0.0 is a web release. There are no CLI binaries and no platform archives.
 
-## Philosophy
+## What a human publishes
 
-- One tag releases the whole catalog, not one game at a time.
-- Every artifact is built from the same commit and the same gamekit version.
-- Asset names are stable and machine-derivable: `<game-id>-<platform>.<ext>`.
-- Every archive carries `SHA256SUMS`; every release carries an aggregate one.
-- Unsigned binaries are stated honestly, not hidden.
-
-## Prerequisites
-
-Maintainers need Node.js ≥ 22, pnpm 10 and Bun ≥ 1.3 (Bun compiles the binaries).
-
-```bash
-node --version
-pnpm --version
-bun --version
-```
-
-## Local workflow
-
-### Test one game
-
-```bash
-node scripts/test-game.mjs shrimp-heist
-# equivalent to:
-pnpm --filter @gameclaw/shrimp-heist check
-pnpm --filter @gameclaw/shrimp-heist test
-```
-
-### Test everything
-
-```bash
-pnpm lint
-pnpm check
-pnpm test
-```
-
-### Build one game for the host platform
-
-```bash
-node scripts/build-game.mjs shrimp-heist
-```
-
-Outputs:
-
-```
-games/shrimp-heist/dist/
-├── shrimp-heist
-└── shrimp-heist-darwin-arm64.tar.gz
-```
-
-The build script runs `--version` on the produced binary when the target matches
-the host, then packages the archive.
-
-### Build for another platform
-
-```bash
-node scripts/build-game.mjs shrimp-heist --platform windows-x64
-node scripts/build-game.mjs shrimp-heist --platform linux-arm64
-```
-
-Allowed platforms: `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`,
-`windows-x64`. Cross-compilation is supported by Bun; the script skips the host
-smoke run for foreign targets.
-
-## Release matrix
-
-The matrix is derived from `games/*/package.json` by
-`scripts/release-matrix.mjs`, so onboarding a game does not require editing a
-workflow.
-
-| Platform | Runner | Build mode | Archive |
-|---|---|---|---|
-| `linux-x64` | `ubuntu-latest` | native | `.tar.gz` |
-| `linux-arm64` | `ubuntu-latest` | cross | `.tar.gz` |
-| `darwin-arm64` | `macos-15` | native | `.tar.gz` |
-| `darwin-x64` | `macos-15` | cross | `.tar.gz` |
-| `windows-x64` | `windows-latest` | native | `.zip` |
-
-Eleven games × five platforms = 55 artifacts per release.
-
-## Release process
-
-1. Update `version` in every `games/<id>/package.json` you changed, and the
-   matching `GAME_VERSION` constant in its `definition.ts`.
-2. Update `CHANGELOG.md` (user-visible changes only).
-3. Run the full local validation:
+1. **Portal.** From a clean tree:
 
    ```bash
-   pnpm lint && pnpm check && pnpm test
-   node scripts/build-game.mjs <each changed game>
+   GAMECLAW_BASE=/gameclaw/ pnpm --filter @gameclaw/web build
    ```
 
-4. Commit, tag, push:
+   Publish `web/dist` to the `gh-pages` branch that serves
+   <https://arcobalneo.github.io/gameclaw/>.
+
+2. **Relay.** In `relay/`:
 
    ```bash
-   git tag v2.0.0
-   git push origin main --tags
+   pnpm --filter @gameclaw/relay test
+   wrangler deploy
    ```
 
-5. `release.yml` fans out to the matrix, builds 55 artifacts, uploads them as
-   workflow artifacts, writes `SHA256SUMS`, and publishes the GitHub Release.
-6. Verify the release from a clean directory (see below).
+   `wrangler.toml` migration `v3` adds the `Leaderboard` Durable Object.
+   `v1` (`SessionRoom`, `CodeRegistry`) and `v2` (`PlayStats`) stay. Do not
+   edit or delete old migration tags. Deploy once; existing play counts and
+   rooms stay on their objects.
 
-## Verification checklist
+The worker needs the existing account auth in the maintainer's environment.
+Do not commit tokens.
 
-After the workflow finishes:
+## What not to do
 
-```bash
-mkdir -p /tmp/gc-verify && cd /tmp/gc-verify
-gh release download v2.0.0 --repo Arcobalneo/gameclaw
-sha256sum -c SHA256SUMS
+`.github/workflows/ci.yml` and `release.yml` still describe CLI builds. This
+repository's automation token cannot edit workflow files. `scripts/release-matrix.mjs`
+prints a `__none__` sentinel so the CI build job skips.
 
-tar -xzf shrimp-heist-darwin-arm64.tar.gz
-./shrimp-heist-darwin-arm64/shrimp-heist --version
+Do **not** push a `v*` tag until those workflows are replaced. `release.yml`
+would try to compile binaries and fail the release.
 
-./shrimp-heist-darwin-arm64/shrimp-heist new \
-  --seed 7 --state-dir /tmp/gc-verify/state --no-observer --no-report
-./shrimp-heist-darwin-arm64/shrimp-heist actions \
-  --state-dir /tmp/gc-verify/state --no-observer --no-report
-```
+## Version
 
-For observer changes, also verify:
-
-1. the page responds on the printed URL (`curl --noproxy '*'`)
-2. the port is released when the run ends
-3. `reports/latest.html` exists and opens offline
-
-## Archive contents
-
-Every archive extracts into a directory named `<game-id>-<platform>` containing:
-
-- the binary (`<game-id>` or `<game-id>.exe`)
-- `README.md`
-- `LICENSE`
-- `SHA256SUMS`
-
-## Asset naming
-
-```
-<game-id>-<platform>.tar.gz   # darwin-*, linux-*
-<game-id>-<platform>.zip      # windows-*
-```
-
-Example: `shrimp-catch-linux-arm64.tar.gz`.
-
-## Platform notes
-
-- **macOS**: binaries are ad-hoc signed (`codesign --sign -`) at build time.
-  Browser downloads may still carry a quarantine flag; `xattr -d
-  com.apple.quarantine ./<game>` clears it.
-- **Windows**: binaries are not Authenticode-signed, so SmartScreen may warn.
-- **Linux**: glibc-based Bun binaries; no extra runtime packages required.
-
-## Rollback
-
-Releases are immutable in practice. If an artifact is broken:
-
-1. Publish a patch tag (`v2.0.1`) with the fix.
-2. Mark the broken release as "pre-release" or delete it if it never reached
-   players.
-3. Never silently replace an asset under the same tag.
-
-## Truthful positioning
-
-Binary distribution:
-
-- makes downloads simple
-- reduces casual source visibility in the player path
-
-It does **not** guarantee anti-reversing or anti-tamper. Do not claim otherwise.
+Root `package.json`, `web`, `relay`, `gamekit`, and every game package share
+one version. Each game's `GAME_VERSION` is `4.0.0`. `MemorySession.restore`
+rejects a save from another game version, so v3 saves do not load into v4.

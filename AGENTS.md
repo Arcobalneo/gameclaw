@@ -1,7 +1,7 @@
 # AGENTS.md — GameClaw repo rules
 
-This repository is a **GameClaw distribution monorepo**: eleven agent-first
-terminal games, one shared TypeScript runtime, one release pipeline.
+This repository is a **GameClaw distribution monorepo**: eleven agent-and-human
+web games, one shared TypeScript runtime, one static portal, one relay.
 
 ## Mandatory change protocol for broad modifications
 
@@ -18,7 +18,7 @@ order:
    - Keep user-facing and maintainer-facing docs in sync with reality
 4. **Then review diff / test / validate**
    - `pnpm lint && pnpm check && pnpm test`
-   - build the real binary when packaging or runtime behaviour changed
+   - build the portal when the bundle or runtime behaviour changed
 5. **Only then create the git commit**
 
 Do not skip this order unless the user explicitly asks you to. If that happens,
@@ -48,24 +48,25 @@ that single document instead of creating a competing canon.
 
 `games/* → gamekit` only. Never import a game from gamekit or one game from another.
 
-### 2. The CLI contract is owned by gamekit
+### 2. The play contract is owned by the portal and the relay
 
-Every game exposes exactly:
+Humans and agents share one page. Agents use Web MCP, in-page or through the
+relay:
 
 ```
-new / status / actions / act / recap / saves / play / observer / doctor
+list_games / open_game / new_game / get_state / list_actions / act / recap
+get_leaderboard / submit_score / set_language
 ```
 
-plus `--json`, `--state-dir`, `--slot`, `--seed`, `--no-observer`,
-`--no-report`, `--no-color`, `--force`, `--verbose`.
-
-A game must not parse `process.argv`, call `process.exit`, or write its own
-observer/report implementation. It implements `GameDefinition<S>` from
-`@gameclaw/gamekit`:
+A game must not parse `process.argv`, call `process.exit`, or open sockets.
+It implements `GameDefinition<S>` from `@gameclaw/gamekit`:
 
 ```ts
 create / status / actions / act / recap / abort?
 ```
+
+`recap.score` is the integer a finished win or loss may publish. Ongoing and
+aborted runs score 0.
 
 ### 3. One action per `act`, one call per turn
 
@@ -105,17 +106,17 @@ Do not scatter one game's implementation across unrelated root folders.
 
 ### 1. Stable repo-level entrypoints
 
-- build via `node scripts/build-game.mjs <game-id> [--platform <os>-<arch>]`
-- test via `node scripts/test-game.mjs <game-id>`
+- test one game via `node scripts/test-game.mjs <game-id>`
 - discover games via `catalog/games.json` and `games/*/package.json`
-- release matrix via `node scripts/release-matrix.mjs`
+- portal via `pnpm --filter @gameclaw/web dev` and `pnpm --filter @gameclaw/web build`
+- relay via `pnpm --filter @gameclaw/relay test` (deploy is `wrangler deploy` in `relay/`)
 
 A game can have internal scripts, but repo automation should stay predictable.
 
 ### 2. Toolchain
 
 - TypeScript strict, ESM, `moduleResolution: bundler`, extensionless imports
-- pnpm workspace, Node ≥ 22, Bun ≥ 1.3 for binary compilation
+- pnpm workspace, Node ≥ 22
 - Vitest for tests, Biome for lint/format
 - `pnpm lint`, `pnpm check`, `pnpm test` must pass before commit
 
@@ -146,40 +147,30 @@ If you change any of these, update docs before commit:
 
 Do not push per-game gameplay churn back into the root README.
 
-### 4. Be honest about binary security posture
+### 4. Be honest about the client
 
-Say:
-- binaries reduce casual source visibility
-- binaries do not guarantee perfect anti-reversing
+Scores are computed in the page and submitted to the relay. Say that caps,
+run-id dedupe, and rate limits blunt abuse. Do not claim the relay replays the
+engine.
 
-Do **not** claim impossible-to-reverse binaries unless that is actually true and
-documented.
+### 5. Validate real artifacts when the portal or relay changes
 
-### 5. Validate real artifacts when packaging or runtime changes
+If you change the portal, the relay, or a game's published score:
 
-If you change packaging, the build script, the observer or the release workflow:
-
-- run `pnpm test`
-- build a real binary with `node scripts/build-game.mjs <game-id>`
-- run `./<binary> --version` and at least one full `new → act → recap` loop
-- verify observer behaviour explicitly: the page responds, the server stops at
-  run end, and a static HTML settlement is written
-- for cross-platform changes, build at least one foreign target
+- run `pnpm lint && pnpm check && pnpm test`
+- build the portal with `pnpm --filter @gameclaw/web build` when the bundle changes
+- play one `new → act → recap` loop through the dev server
+- for relay changes, run `pnpm --filter @gameclaw/relay test`
 
 If local HTTP proxy settings can interfere with localhost checks, bypass them
 explicitly (`curl --noproxy '*'`) instead of treating proxy-caused failures as
 game bugs.
 
-### 6. New GameClaw games must ship the default observer + report flow
+### 6. New games ship in the portal
 
-gamekit provides both, so a new game only needs to implement the contract. Do not
-disable or reimplement them. A run must:
-
-- start a local observer page on the first free port from 8000
-- print the exact URL
-- stop the server when the run ends
-- preserve a static HTML settlement report
-- degrade honestly if the observer cannot start
+A new game implements `GameDefinition`, a scene in `web/src/games/`, catalog
+rows (including `score.zh` and `score.en`), and zh/en strings. Do not add a CLI
+entrypoint. The human and the agent already share the portal.
 
 ### 7. If the coding agent is unavailable, use a strict single-agent fallback loop
 
@@ -187,8 +178,8 @@ If Codex / ACP is clearly unavailable but the user still wants the task complete
 do not pretend the delegation happened:
 
 - still follow `plan → implement → docs → validate → commit`
-- prefer repo-level validation: `pnpm test`, then build the real binary
-- replay at least one genuine CLI run through the real entrypoint
+- prefer repo-level validation: `pnpm lint && pnpm check && pnpm test`, then build the portal
+- replay at least one genuine `new → act → recap` loop in the dev server
 - only then commit, tag, push and confirm the GitHub release / workflow result
 
 ## Minimum expectations before commit

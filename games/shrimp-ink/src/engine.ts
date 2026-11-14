@@ -513,18 +513,27 @@ export function scoreOf(state: InkState): number {
   const ending = state.ending ?? 'aborted';
   const base = ENDING_BASE[ending];
   const leftover = Math.max(0, state.maxTurns - state.turn);
-  const sealBonus = ending === 'sealed' && state.debt === 0 ? 12 : 0;
-  return (
-    base +
-    Math.floor(state.silver / 2) +
-    state.renown * 2 +
-    state.manuscript * 4 +
-    state.proof * 2 +
-    leftover +
-    state.life * 2 -
-    state.debt * 5 +
-    sealBonus
+  const sealBonus = ending === 'sealed' && state.debt === 0 ? 160 : 0;
+  return Math.min(
+    999_999,
+    Math.max(
+      0,
+      base +
+        Math.floor(state.silver / 4) +
+        state.renown * 8 +
+        state.manuscript * 20 +
+        state.proof * 15 +
+        Math.floor(leftover / 2) +
+        state.life * 6 -
+        state.debt * 40 +
+        sealBonus,
+    ),
   );
+}
+
+export function ladderScore(state: InkState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return scoreOf(state);
 }
 
 function endOfRun(state: InkState): void {
@@ -713,6 +722,7 @@ export function recapOf(state: InkState): {
   timeline: string[];
   lessons: string[];
   memoryPrompt: string;
+  score: number;
 } {
   const ending = state.ending ?? 'aborted';
   const lessons: string[] = [];
@@ -729,7 +739,7 @@ export function recapOf(state: InkState): {
     lessons.push('这一局没有留下可验的线索：信能让你更快下决定，也会让你更快走错。');
   }
   if (state.penVerified && ending === 'sold') {
-    lessons.push('验明之后卖掉，是最安全的变现方式，也是最低分的结局。');
+    lessons.push('验明之后卖掉，是把笔换成银子的退路，天梯分远低于封笔或带着验明的笔走。');
   }
   if (lessons.length === 0) lessons.push('这一局没有明显失误，也没有明显侥幸。');
 
@@ -751,6 +761,7 @@ export function recapOf(state: InkState): {
     memoryPrompt: state.hasPen
       ? '写下这一局你信了什么、验了什么，以及用笔那一下换来了什么。'
       : '写下这一局你追的线索、信与证的差距，以及最后为什么停在这里。',
+    score: ladderScore(state),
   };
 }
 

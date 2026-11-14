@@ -900,14 +900,33 @@ export function abort(state: PumpkinState): void {
 
 /* ------------------------------------------------------------------ recap */
 
+/**
+ * Right soothes and a real harvest. Blind soothes and trampling erase points.
+ * Winning both quotas is the only large bonus.
+ */
+export function ladderScore(state: PumpkinState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  const raw =
+    state.captured * 45 +
+    state.pumpkins * 30 +
+    state.variants * 40 -
+    state.blindSoothes * 18 -
+    state.failedSoothes * 22 -
+    state.trampled * 15 -
+    state.rests * 6 +
+    (state.outcome === 'won' ? 280 : 0);
+  return Math.max(0, Math.min(999_999, raw));
+}
+
 export function recapOf(state: PumpkinState): {
   title: string;
   outcome: Outcome;
   cause: string;
-  metrics: { label: string; value: string; hint?: string }[];
+  metrics: { label: string; value: string | number; hint?: string }[];
   timeline: string[];
   lessons: string[];
   memoryPrompt: string;
+  score: number;
 } {
   const lessons: string[] = [];
 
@@ -965,11 +984,12 @@ export function recapOf(state: PumpkinState): {
       { label: '安抚', value: `${state.captured}/${WIN_CAPTURED}` },
       { label: '特殊南瓜', value: String(state.variants) },
       { label: '体力上限', value: String(state.staminaCap) },
-      { label: '得分', value: String(state.score) },
+      { label: '得分', value: ladderScore(state) },
     ],
     timeline: [...state.timeline],
     lessons,
     memoryPrompt:
       '写下这局你把六个动作分给了“找怪 / 安抚 / 种田”的哪几条，以及下一次第一夜会先做什么。',
+    score: ladderScore(state),
   };
 }
