@@ -1,9 +1,11 @@
+import { HeadlessDesk } from './headless';
 import {
   type Json,
   PAGE_CLOSED_ERROR,
   pageClosedHint,
   parseClientMessage,
   type ServerMessage,
+  type StoredDesk,
   type ToolName,
 } from './protocol';
 
@@ -24,8 +26,8 @@ interface Pending {
 }
 
 /**
- * One live room: browser tabs attached as sockets, MCP tool calls forwarded
- * to the most recently attached tab (the executor). Engines stay in the browser.
+ * One live room. When a browser is attached, MCP calls run there so the human
+ * sees them. When none is attached, the same calls run on the stored desk.
  */
 export class SessionRoomCore {
   readonly sessionId: string;
@@ -34,6 +36,8 @@ export class SessionRoomCore {
   #seq = 0;
   readonly #sockets: SocketLike[] = [];
   readonly #pending = new Map<string, Pending>();
+  readonly #desk = new HeadlessDesk();
+  #onDesk: ((desk: StoredDesk) => void) | null = null;
 
   constructor(sessionId: string, siteUrl: string, code: string | null = null) {
     this.sessionId = sessionId;
@@ -56,6 +60,16 @@ export class SessionRoomCore {
     }
     this.#sockets.push(socket);
     if (this.code) this.#send(socket, { type: 'welcome', code: this.code });
+    if (!this.#desk.empty) this.#send(socket, { type: 'run', desk: this.#desk.exportDesk() });
+  }
+
+  /** Restore a desk persisted by the Durable Object. Does not notify listeners. */
+  loadDesk(desk: StoredDesk): void {
+    this.#desk.load(desk);
+  }
+
+  onDesk(fn: (desk: StoredDesk) => void): void {
+    this.#onDesk = fn;
   }
 
   welcome(code: string): void {
@@ -77,6 +91,10 @@ export class SessionRoomCore {
       if (!pending) return;
       this.#pending.delete(message.id);
       clearTimeout(pending.timer);
+      if (message.desk) {
+        this.#desk.merge(message.desk);
+        this.#publish();
+      }
       pending.resolve(message.payload);
       return;
     }
@@ -90,9 +108,9 @@ export class SessionRoomCore {
   async call(tool: ToolName, args: Json): Promise<unknown> {
     const socket = this.#executor();
     if (!socket) {
-      const error = new Error(PAGE_CLOSED_ERROR);
-      (error as Error & { hint?: string }).hint = pageClosedHint(this.siteUrl);
-      throw error;
+      const result = this.#desk.call(tool, args);
+      this.#publish();
+      return result;
     }
     const id = `${++this.#seq}-${Date.now().toString(36)}`;
     const payload: ServerMessage = { type: 'call', id, tool, args };
@@ -112,6 +130,10 @@ export class SessionRoomCore {
         reject(error instanceof Error ? error : new Error(String(error)));
       }
     });
+  }
+
+  #publish(): void {
+    this.#onDesk?.(this.#desk.exportDesk());
   }
 
   #executor(): SocketLike | undefined {

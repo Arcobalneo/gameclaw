@@ -18,6 +18,7 @@
     "@gameclaw/gamekit": "workspace:*"
   },
   "devDependencies": {
+    "happy-dom": "^21.0.4",
     "playwright-core": "^1.56.0",
     "vite": "^7.2.0"
   }

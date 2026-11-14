@@ -4,6 +4,8 @@ import { loadPixelFont } from './gfx/text';
 import { lang, onLang, t } from './i18n';
 import { createApi, registerWebMcp, toolDescriptors } from './runtime/agent-api';
 import { mcpUrl, relayBaseUrl, roomLookupUrl } from './runtime/config';
+import { applyDesk, watchCodeFromHash } from './runtime/follow';
+import { getHost } from './runtime/host';
 import { startLeaderboard } from './runtime/leaderboard';
 import { connectRelay } from './runtime/relay';
 import {
@@ -77,13 +79,29 @@ function boot(): void {
     session: () => session,
     execute: async (name, args) => {
       const tool = tools.get(name);
-      if (!tool) return { ok: false, error: `Unknown tool ${name}` };
-      return tool.execute(args);
+      if (!tool) return { payload: { ok: false, error: `Unknown tool ${name}` } };
+      const payload = await tool.execute(args);
+      const id = portal.focused();
+      if (!id) return { payload };
+      try {
+        const host = await getHost(id);
+        return {
+          payload,
+          desk: {
+            focused: id,
+            lang: lang(),
+            games: { [id]: { snapshot: host.session.snapshot, log: host.log } },
+          },
+        };
+      } catch {
+        return { payload };
+      }
     },
     onWelcome: (code) => {
       session = rememberCode(code);
       chip.setSession(session);
     },
+    onRun: (desk) => applyDesk(portal, desk),
     onStatus: (status) => {
       chip.setStatus(status);
       banner.setStatus(status);
@@ -119,9 +137,10 @@ function boot(): void {
   chip.onJoin = joinByCode;
 
   const route = () => {
+    const watch = watchCodeFromHash(location.hash);
     const roomHash = /^#\/room\/([A-Za-z0-9_-]+)/.exec(location.hash);
     const roomQuery = new URLSearchParams(location.search).get('room');
-    const room = roomHash?.[1] ?? roomQuery;
+    const room = watch ?? roomHash?.[1] ?? roomQuery;
     if (room) void joinByCode(room);
     const play = /^#\/play\/([a-z0-9-]+)/.exec(location.hash);
     if (play && findGame(play[1]!)) void portal.open(play[1]!, 'human');

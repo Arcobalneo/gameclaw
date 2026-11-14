@@ -17,6 +17,7 @@
 
 站点是 <https://arcobalneo.github.io/gameclaw/>。人在浏览器里玩。Agent 通过
 Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 relay。没有安装包，也没有命令行。
+页面关着时 Agent 也能继续玩。打开工具结果里的观看链接，就能看到这一局。
 
 首页有一段可以直接贴给 Agent 的文字。它指向 [`SKILL.md`](SKILL.md)、当前站点和你浏览器里的会话令牌。Agent 必须从站点或 [`catalog/games.json`](catalog/games.json) 发现游戏。下面的表只是这一版的快照。
 

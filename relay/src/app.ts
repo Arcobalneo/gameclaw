@@ -2,7 +2,7 @@ import { corsHeaders, isAllowedOrigin } from './cors';
 import { isRoomCode, isSessionId, normalizeRoomCode } from './ids';
 import type { BoardSnapshot, LeaderboardCore, SubmitInput, SubmitResult } from './leaderboard';
 import { extractSession, handleMcp, isJsonRpcRequest, type JsonRpcRequest } from './mcp';
-import { type Json, MCP_PROTOCOL_VERSION, type ToolName } from './protocol';
+import { type Json, MCP_PROTOCOL_VERSION, type ToolName, watchUrl } from './protocol';
 import { codeLookupLimit, mcpLimit } from './rate-limit';
 import { assignCode, type CodeStore, resolveCode } from './registry';
 import type { SocketLike } from './room';
@@ -73,6 +73,7 @@ MCP (Streamable HTTP):  POST /mcp
 
 Browser WebSocket:      GET  /session/<session-id>  (Upgrade: websocket)
 Room lookup:            GET  /room/<code>
+Watch page:             <site>/#/watch/<code>   (no bearer token in the URL)
 Health:                 GET  /health
 Play counts:            GET  /stats
   POST /stats/hello     { player, game? }   (anonymous play-id, no login)
@@ -83,6 +84,38 @@ Leaderboards:           GET  /leaderboard
   GET  /leaderboard/live  WebSocket updates
   Rule: best score per name per game; site total is the sum of those bests.
 `;
+
+function annotateWatch(data: unknown, siteUrl: string, code: string | null): unknown {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return data;
+  const record = data as Record<string, unknown>;
+  if (typeof record.watch_url === 'string' && record.watch_url.includes('#/watch/')) return data;
+  if (!code) return data;
+  return { ...record, watch_url: watchUrl(siteUrl, code) };
+}
+
+async function settleSubmit(
+  data: unknown,
+  boards: BoardHub | undefined,
+  ip: string,
+): Promise<unknown> {
+  if (!data || typeof data !== 'object' || Array.isArray(data) || !('leaderboardSubmit' in data)) {
+    return data;
+  }
+  const submit = (data as { leaderboardSubmit: SubmitInput }).leaderboardSubmit;
+  if (!boards) return { ok: false, error: 'Leaderboard is unavailable.' };
+  const posted = await boards.submit(submit, ip);
+  if (!posted.ok) return { ok: false, error: posted.error };
+  return {
+    ok: true,
+    accepted: posted.accepted,
+    reason: posted.reason,
+    game_id: submit.game,
+    name: posted.name,
+    score: posted.score,
+    best: posted.best,
+    attempts: posted.attempts,
+  };
+}
 
 export function clientIp(request: Request): string {
   return (
@@ -398,7 +431,8 @@ export async function handleRequest(
       const room = await hub.getRoom(token);
       const code = await assignCode(hub.store, token);
       if (!room.code) await room.welcome(code);
-      return room.call(tool, args);
+      const data = await settleSubmit(await room.call(tool, args), boards, clientIp(request));
+      return annotateWatch(data, env.siteUrl, room.code ?? code);
     };
 
     const results = [];

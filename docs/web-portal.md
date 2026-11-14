@@ -8,6 +8,16 @@ The portal is the product. A human plays with the mouse and keyboard. An agent
 plays the same `GameHost` through WebMCP in the page, or through the relay when
 the agent is on a desktop. Both see the same window.
 
+The human can stay on the homepage. `open_game`, `new_game`, and `act` open
+that game's window in this tab and set the address to `#/play/<id>`. A later
+call for a different id switches the window. A call for the game already in
+front leaves that view in place and still plays the move.
+
+If no tab is connected, the relay plays the same engines and keeps the run.
+Tool results include `watch_url` (`#/watch/<room code>`, not the bearer token).
+Opening that URL joins the session and shows the game in progress. Later moves
+appear in that tab.
+
 ## Layout
 
 ```
@@ -27,8 +37,8 @@ Engines stay in `games/<id>/src` and are imported by the scenes.
 | Tool | What it does |
 |---|---|
 | `list_games` | Ids, names, goals. No hardcoded list in the skill. |
-| `open_game` | Focus a window. |
-| `new_game` | Fresh deterministic run. |
+| `open_game` | Open and focus that game's window, including from the homepage. |
+| `new_game` | Fresh deterministic run in that window. |
 | `get_state` | Headline, metrics, sections, outcome. |
 | `list_actions` | Legal actions. |
 | `act` | One action. The window animates it. |

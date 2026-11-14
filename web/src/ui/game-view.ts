@@ -266,6 +266,11 @@ export class GameView {
   }
 
   #onHost(e: HostEvent): void {
+    if (e.kind === 'sync') {
+      this.#selected = 0;
+      this.render(false);
+      return;
+    }
     if (e.kind === 'act') {
       const o = e.outcome;
       if (o.status.outcome === 'won') sfx('win');

@@ -122,6 +122,7 @@ describe('prompt', () => {
       expect(text).toContain(`#/play/${game.id}`);
       expect(text).toContain('list_actions');
       expect(text).toContain('Authorization');
+      expect(text).toContain('watch_url');
     }
     expect(zh).toMatch(/[\u4e00-\u9fff]/);
     expect(zh).toContain('先看状态');

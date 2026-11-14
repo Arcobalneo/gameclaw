@@ -20,16 +20,38 @@ export const TOOL_NAMES = [
 
 export type ToolName = (typeof TOOL_NAMES)[number];
 
+/** One game's engine snapshot and the log the watch page renders. */
+export interface StoredSlot {
+  snapshot: unknown;
+  log: { turn: number; source: string; action?: string; lines: string[] }[];
+}
+
+/**
+ * The run a session can keep playing with no browser attached.
+ * `lang` is null until someone calls set_language.
+ */
+export interface StoredDesk {
+  focused: string | null;
+  lang: 'zh' | 'en' | null;
+  games: Record<string, StoredSlot>;
+}
+
 export type ClientMessage =
   | { type: 'hello' }
-  | { type: 'result'; id: string; payload: unknown }
+  | { type: 'result'; id: string; payload: unknown; desk?: StoredDesk }
   | { type: 'pong'; id?: string };
 
 export type ServerMessage =
   | { type: 'welcome'; code: string }
+  | { type: 'run'; desk: StoredDesk }
   | { type: 'call'; id: string; tool: string; args: Json }
   | { type: 'ping'; id?: string }
   | { type: 'error'; error: string; hint?: string };
+
+/** Public page for this session. Uses the room code, not the bearer token. */
+export function watchUrl(siteUrl: string, code: string): string {
+  return `${siteUrl.replace(/\/?$/, '/')}#/watch/${code}`;
+}
 
 export const PAGE_CLOSED_ERROR = 'The GameClaw page is not connected.';
 

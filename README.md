@@ -18,6 +18,8 @@
 The site is <https://arcobalneo.github.io/gameclaw/>. You play in the browser.
 Your agent plays the same window through Web MCP: tools in the page, or the
 remote relay when the agent is on a desktop. There is no install and no CLI.
+If the page is closed, the agent can still play. Open the watch link from the
+tool result to see the run.
 
 The homepage has a block you can paste to an agent. It points at
 [`SKILL.md`](SKILL.md), the live site, and the session token already in your

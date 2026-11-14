@@ -44,14 +44,16 @@ Cloudflare Worker + Durable Objects:
 
 | Class | Role |
 |---|---|
-| `SessionRoom` | Forwards MCP tool calls to the open tab |
+| `SessionRoom` | Plays the run. Forwards tool calls to the open tab, or runs the engines when no tab is connected |
 | `CodeRegistry` | Room code ↔ session token |
 | `PlayStats` | Anonymous play counts (migration `v2`) |
 | `Leaderboard` | Best-per-game scores and the site total (migration `v3`) |
 
 `GET /leaderboard` is the cheap first paint. `/leaderboard/live` pushes updates.
 `POST /mcp` is Streamable HTTP. `get_leaderboard` is answered by the worker.
-`submit_score` is forwarded to the page, which posts the run's `recap.score`.
+When a tab is open, `submit_score` is forwarded to that page, which posts
+`recap.score`. When no tab is open, the room posts the score itself. A stored
+run is what `#/watch/<room code>` shows.
 
 ### 5. Catalog — `catalog/games.json`
 
@@ -60,5 +62,7 @@ no release assets. `SKILL.md` does not list games.
 
 ## Dependency direction
 
-`web` and `games` import `gamekit`. `relay` imports `gamekit` for name rules.
-`gamekit` imports nothing from `web`, `games`, or `relay`.
+`web` and `games` import `gamekit`. `relay` imports `gamekit`, the game engines,
+and the portal catalogs used to describe a run when no tab is connected.
+`games` do not import `relay` or `web`. `gamekit` imports nothing from `web`,
+`games`, or `relay`.
