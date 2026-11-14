@@ -188,7 +188,7 @@ export function suggest(state: RaftState): string {
   return best;
 }
 
-function gustWord(gust: number): string {
+export function gustWord(gust: number): string {
   if (gust <= -2) return '大风向左';
   if (gust < 0) return '向左';
   if (gust >= 2) return '大风向右';

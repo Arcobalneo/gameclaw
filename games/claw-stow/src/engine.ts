@@ -289,7 +289,7 @@ export function actionsOf(state: StowState): ActionView[] {
           id: `mark:${open}`,
           label: `贴标 ${open + 1}`,
           detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格并贴标签。${hint}`,
-          risk: 'low',
+          risk: needsMark(state, slip.glyph) ? 'low' : 'high',
           cost: '1 标签',
         });
       }
@@ -332,7 +332,7 @@ export function actionsOf(state: StowState): ActionView[] {
 
 function shelfHint(state: StowState, glyph: number): string {
   const delay = orderDelay(state, glyph);
-  if (delay < 0) return '后面三张没有这箱的提取单。';
+  if (delay < 0) return '后面三张没有提取单，贴标签会浪费。';
   if (delay >= state.spoil) return `第 ${delay} 张才提取。不贴标签会先腾掉。`;
   return `第 ${delay} 张就提取，可以不贴。`;
 }

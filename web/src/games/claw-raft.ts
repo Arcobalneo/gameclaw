@@ -1,5 +1,5 @@
 import { definition } from '@games/claw-raft/src/definition';
-import { type RaftState, type Side, sideLabel } from '@games/claw-raft/src/engine';
+import { gustWord, type RaftState, type Side, sideLabel } from '@games/claw-raft/src/engine';
 import type { Grade } from '../gfx/art';
 import { moon, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
@@ -207,12 +207,12 @@ function createScene(): GameScene<RaftState> {
     },
     hud(f) {
       const { g, state } = f;
-      const now = say(f, state.gust < 0 ? '向左' : state.gust > 0 ? '向右' : '正中');
+      const now = say(f, gustWord(state.gust));
       rect(g, 8, 6, 120, 18, withAlpha('#1a1020', 0.72));
       if (now) drawText(g, now, 14, 8, { color: '#fff6dc', outline: '#1a1020' });
       pips(g, 250, 10, 8, state.index, '#ffd27a', state.index, f.t);
       pips(g, 250, 20, Math.max(state.hands, 1), state.hands, '#e8d0a0');
-      const hint = say(f, '先看这一阵，再看下一阵。箱子想去的一侧不会额外偏。');
+      const hint = say(f, '先看这一阵，再看下一阵。');
       if (hint && state.notes.length === 0 && state.outcome === 'ongoing') {
         plate(g, hint, 180, 198, '#ffe0c0', 300);
       }

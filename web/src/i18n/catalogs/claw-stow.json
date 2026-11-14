@@ -42,7 +42,9 @@
     "提取单写的是字。取出别的字，或者放过这张单，都算取错。": "An order names a glyph. Pulling another glyph, or holding the slip, is a mispick.",
     "提取单写的是字。后面三张里看得到的提取单，来得及才不用贴标签。": "An order names a glyph. Skip the mark only when that order arrives inside the spoil age.",
     "后面三张没有这箱的提取单。": "The next three slips have no order for this crate.",
+    "后面三张没有提取单，贴标签会浪费。": "No order in the next three slips, so a mark is wasted.",
     "先看后三张。来不及的那箱才值得贴标签。": "Read the next three slips. Spend a mark on the crate that would spoil.",
+    "只给会腾掉的那箱贴标签。": "Mark only the crate that would spoil.",
     "没人点的货放久了会自己腾出格子，那一次不算取错。标签让一格放得更久。": "A crate nobody ordered eventually leaves the bay, and that is not a mispick. A mark lets a bay stay longer.",
     "把本局哪一张提取单来的时候货已经不在架上写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which order arrived after its crate had already left the shelf into your own memory. Treat that as an observation of this seed and check it again on the next seed."
   },

@@ -119,10 +119,12 @@ function createScene(): GameScene<StowState> {
         const order = slip.kind === 'order';
         rect(g, 16, 48, 78, 52, '#efe4cf');
         rect(g, 16, 48, 78, 3, order ? '#c45a48' : '#3a6a48');
-        rect(g, 20, 64, 70, 28, order ? '#f0c8b8' : '#d8ead0');
-        if (label) drawText(g, label, 55, 70, { color: '#1a1008', align: 'center' });
+        const chip = COLORS[slip.glyph] ?? '#fff6dc';
+        rect(g, 22, 58, 22, 22, chip);
+        rect(g, 22, 58, 22, 2, '#ffffff');
+        if (label) drawText(g, label, 62, 64, { color: '#1a1008', align: 'left' });
         const kind = say(f, order ? '提取' : '进货');
-        if (kind) drawText(g, kind, 55, 52, { color: '#6a4030', align: 'center' });
+        if (kind) drawText(g, kind, 55, 86, { color: '#6a4030', align: 'center' });
       }
       const focus = f.focus?.id ?? '';
       state.bays.forEach((bay, index) => {
@@ -178,7 +180,7 @@ function createScene(): GameScene<StowState> {
       for (let i = 0; i < state.cap; i += 1) {
         rect(g, 256 + i * 10, 22, 7, 4, i < state.mispicks ? '#ff6a6a' : '#3a2818');
       }
-      const hint = say(f, '先看后三张。来不及的那箱才值得贴标签。');
+      const hint = say(f, '只给会腾掉的那箱贴标签。');
       if (hint && state.notes.length === 0 && state.outcome === 'ongoing') {
         plate(g, hint, 190, 198, '#fff0d0', 280);
       }
