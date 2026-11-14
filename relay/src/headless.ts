@@ -8,13 +8,17 @@ import {
 import { definition as clawBeat } from '../../games/claw-beat/src/definition';
 import { definition as clawBurger } from '../../games/claw-burger/src/definition';
 import { definition as clawCatch } from '../../games/claw-catch/src/definition';
+import { definition as clawClock } from '../../games/claw-clock/src/definition';
 import { definition as clawConquest } from '../../games/claw-conquest/src/definition';
+import { definition as clawCount } from '../../games/claw-count/src/definition';
+import { definition as clawFlip } from '../../games/claw-flip/src/definition';
 import { definition as clawGreens } from '../../games/claw-greens/src/definition';
 import { definition as clawGuard } from '../../games/claw-guard/src/definition';
 import { definition as clawHeist } from '../../games/claw-heist/src/definition';
 import { definition as clawInk } from '../../games/claw-ink/src/definition';
 import { definition as clawLeap } from '../../games/claw-leap/src/definition';
 import { definition as clawLook } from '../../games/claw-look/src/definition';
+import { definition as clawMask } from '../../games/claw-mask/src/definition';
 import { definition as clawMelt } from '../../games/claw-melt/src/definition';
 import { definition as clawNet } from '../../games/claw-net/src/definition';
 import { definition as clawRampage } from '../../games/claw-rampage/src/definition';
@@ -76,6 +80,10 @@ const DEFINITIONS = new Map<string, GameDefinition<any>>(
     clawMelt,
     clawNet,
     clawBeat,
+    clawCount,
+    clawMask,
+    clawClock,
+    clawFlip,
   ].map((definition) => [definition.meta.id, definition]),
 );
 

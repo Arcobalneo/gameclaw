@@ -161,6 +161,38 @@ const LOOK: Record<
     tagZh: '四拍一句，每轮只改两拍。',
     tagEn: 'Four beats. Two edits a round.',
   },
+  'claw-count': {
+    accent: '#ffc24a',
+    ink: '#101820',
+    goal: '用一个数字走完桥，改数很少，磁铁更少。',
+    goalEn: 'Cross the bridge with one number. Changes are scarce, and so are magnets.',
+    tagZh: '一个数字，决定哪块板还在。',
+    tagEn: 'One number. The planks appear or vanish.',
+  },
+  'claw-mask': {
+    accent: '#c49aff',
+    ink: '#120818',
+    goal: '滑动三格面罩，踩上当前可见的那一层。',
+    goalEn: 'Slide a three-cell mask and step on whichever layer is showing.',
+    tagZh: '面罩盖住的地方看墨层。',
+    tagEn: 'The mask shows the ink layer.',
+  },
+  'claw-clock': {
+    accent: '#ff5d73',
+    ink: '#160810',
+    goal: '转环，让指针吃掉敌，别吃到珠和自己。',
+    goalEn: 'Turn the ring so the hand eats foes, not gems or you.',
+    tagZh: '先转环，指针再吃下一格。',
+    tagEn: 'Turn the ring. Then the hand eats.',
+  },
+  'claw-flip': {
+    accent: '#7ee0a0',
+    ink: '#081410',
+    goal: '拨一次开关，所有板和空对调。石头只能跳。',
+    goalEn: 'One flip swaps every plate and gap. Stones can only be hopped.',
+    tagZh: '一拨，板和空对调。',
+    tagEn: 'One flip. Plates and gaps trade places.',
+  },
 };
 
 export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])

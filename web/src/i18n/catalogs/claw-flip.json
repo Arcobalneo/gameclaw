@@ -1,0 +1,85 @@
+{
+  "terms": {},
+  "exact": {
+    "虾拨 · 拨桥结算": "Claw Flip · switch recap",
+    "拨桥进行中": "The switch is still live",
+    "桥拨完了": "The bridges are crossed",
+    "伤太重": "Too many wounds",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "拨桥": "Switch",
+    "段": "Stage",
+    "开关": "Switch",
+    "簧": "Springs",
+    "拨动": "Flips",
+    "伤": "Wounds",
+    "位置": "Place",
+    "下一格": "Next cell",
+    "桥": "Bridge",
+    "记录": "Notes",
+    "结局": "Result",
+    "正位": "Upright",
+    "反位": "Flipped",
+    "板": "Plate",
+    "空": "Gap",
+    "石": "Stone",
+    "可走": "open",
+    "不可走": "closed",
+    "迈步": "Step",
+    "跳过": "Hop",
+    "这段已经走完": "This stage is finished",
+    "开关还是正位": "The switch is still upright",
+    "还没有走完一段": "No stage cleared yet",
+    "1 簧": "1 spring",
+    "拨回正位。板可走，空不可走。石头不变。": "Flip back upright. Plates are open, gaps are closed. Stones stay shut.",
+    "拨到反位。空可走，板不可走。石头不变。": "Flip to the other side. Gaps are open, plates are closed. Stones stay shut.",
+    "下一格可走。": "The next cell is open.",
+    "下一格不可走，迈步会受伤并停住。": "The next cell is closed. Stepping wounds you and you stay put.",
+    "跳过下一格，直接离开这段。": "Hop the next cell and leave the stage.",
+    "跳过下一格，落在可走的那一格。花 1 簧。": "Hop the next cell onto an open one. Costs 1 spring.",
+    "拨到反位。": "Flipped to the other side.",
+    "拨回正位。": "Flipped back upright.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "拨动让所有板变空、所有空变板。石头两边都不安全，只能跳。": "A flip turns every plate into a gap and every gap into a plate. A stone is never open. Hop it.",
+    "簧要留给石头，不要拿去跳普通的空。": "Save springs for stones. Do not spend them hopping an ordinary gap.",
+    "把本局石头在第几格、正位和反位哪一段更长写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which cell held the stone, and whether the upright or flipped run was longer, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "拨桥结束 · {0}", "en": "Switch closed · {0}", "slots": ["text"] },
+    { "zh": "拨桥结束：{0}", "en": "Switch over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 段 · {2} · 簧 {3}",
+      "en": "Stage {0}/{1} · {2} · springs {3}",
+      "slots": ["n", "n", "text", "n"]
+    },
+    { "zh": "{0}，{1}", "en": "{0}, {1}", "slots": ["text", "text"] },
+    { "zh": "迈上第 {0} 格。", "en": "Stepped onto cell {0}.", "slots": ["n"] },
+    {
+      "zh": "跳过一格，落在第 {0} 格。簧 {1}。",
+      "en": "Hopped one cell and landed on {0}. Springs {1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "踩伤，停在原地。伤 {0}。",
+      "en": "Wounded, and you stay put. Wounds {0}.",
+      "slots": ["n"]
+    },
+    { "zh": "第 {0} 段过去了。", "en": "Stage {0} cleared.", "slots": ["n"] },
+    {
+      "zh": "本局走完 {0} 段，拨了 {1} 次，受伤 {2}。",
+      "en": "This run cleared {0} stages, flipped {1} times, and took {2} wounds.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "簧还剩 {0}。簧要留给石头，不要拿去跳普通的空。",
+      "en": "Springs left {0}. Save them for stones. Do not spend them hopping an ordinary gap.",
+      "slots": ["n"]
+    }
+  ]
+}

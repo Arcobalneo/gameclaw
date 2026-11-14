@@ -1,0 +1,90 @@
+{
+  "terms": {},
+  "exact": {
+    "虾数 · 数桥结算": "Claw Count · bridge recap",
+    "数桥进行中": "The bridge is open",
+    "桥走完了": "The bridge is crossed",
+    "坠落过多": "Too many falls",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "数桥": "Bridge",
+    "段": "Stage",
+    "数字": "Number",
+    "改数": "Changes",
+    "磁铁": "Magnet",
+    "坠落": "Falls",
+    "位置": "Place",
+    "下一块": "Next plank",
+    "桥面": "Planks",
+    "记录": "Notes",
+    "结局": "Result",
+    "这段已经走完": "This stage is finished",
+    "还没有迈步": "No step yet",
+    "还没有走完一段": "No stage cleared yet",
+    "迈步": "Step",
+    "1 改数": "1 change",
+    "1 磁铁": "1 magnet",
+    "无": "none",
+    "下一块在这个数字下可走。": "The next plank exists at this number.",
+    "下一块不可走，迈步会坠落回段首。": "The next plank is missing. Stepping falls back to the start.",
+    "花一块磁铁，不管数字，走上这一格。": "Spend a magnet and cross this plank whatever the number is.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "改数不够把每格都换成新数字。要选能连着走最远的那个数字。": "There are not enough changes to retune every plank. Pick the number that carries you the farthest.",
+    "把本局哪一段的数字连不上、磁铁用在第几格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which stage's numbers would not connect, and which plank took the magnet, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "数桥结束 · {0}", "en": "Bridge closed · {0}", "slots": ["text"] },
+    { "zh": "数桥结束：{0}", "en": "Bridge over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 段 · 数字 {2} · 改数 {3}",
+      "en": "Stage {0}/{1} · number {2} · changes {3}",
+      "slots": ["n", "n", "n", "n"]
+    },
+    { "zh": "可走数字 {0}", "en": "Walkable at {0}", "slots": ["text"] },
+    { "zh": "第 {0} 格 {1}", "en": "Plank {0} {1}", "slots": ["n", "text"] },
+    { "zh": "设为 {0}", "en": "Set {0}", "slots": ["n"] },
+    {
+      "zh": "把数字设为 {0}。下一块可走，还能连着走 {1} 格。",
+      "en": "Set the number to {0}. The next plank exists, and this number covers {1} planks.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "把数字设为 {0}。下一块仍然不可走。",
+      "en": "Set the number to {0}. The next plank is still missing.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "数字改为 {0}。剩余改数 {1}。",
+      "en": "Number is now {0}. Changes left {1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "磁铁吸住第 {0} 格。磁铁剩余 {1}。",
+      "en": "Magnet locked plank {0}. Magnets left {1}.",
+      "slots": ["n", "n"]
+    },
+    { "zh": "迈上第 {0} 格。", "en": "Stepped onto plank {0}.", "slots": ["n"] },
+    {
+      "zh": "坠落，回到段首。坠落 {0}。",
+      "en": "Fell back to the start. Falls {0}.",
+      "slots": ["n"]
+    },
+    { "zh": "第 {0} 段走完。", "en": "Stage {0} cleared.", "slots": ["n"] },
+    {
+      "zh": "本局走完 {0} 段，坠落 {1}，改了 {2} 次数字。",
+      "en": "This run cleared {0} stages, fell {1} times, and changed the number {2} times.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "磁铁还剩 {0}。磁铁能走过一块对不上的板。",
+      "en": "Magnets left {0}. A magnet crosses one plank that does not match.",
+      "slots": ["n"]
+    }
+  ]
+}
