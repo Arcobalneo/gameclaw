@@ -181,7 +181,7 @@ function createScene(): GameScene<FairState> {
       });
       if (focus) {
         const detail = say(f, focus.detail ?? '');
-        if (detail) plate(g, detail, 192, 142, '#fff4d6', 220);
+        if (detail) plate(g, detail, 192, 108, '#fff4d6', 200);
       }
     },
     hud(f) {

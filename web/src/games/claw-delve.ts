@@ -107,9 +107,9 @@ function createScene(): GameScene<DelveState> {
     hits(state, actions): HitRegion[] {
       const regions: HitRegion[] = [];
       const y = 16 + state.layer * ROW;
-      const left = actions.find((action) => action.id === 'shift:-1');
-      const right = actions.find((action) => action.id === 'shift:1');
-      const down = actions.find((action) => action.id === 'cut');
+      const left = actions.find((action) => action.id === 'step:w');
+      const right = actions.find((action) => action.id === 'step:e');
+      const down = actions.find((action) => action.id === 'step:s');
       const brace = actions.find((action) => action.id === 'brace');
       if (left) {
         const x = COLS[state.col - 1] ?? 108;
@@ -181,12 +181,12 @@ function createScene(): GameScene<DelveState> {
             outline: '#07040f',
           });
       }
-      if (focus?.id.startsWith('shift')) {
-        const dir = focus.id.endsWith('1') && !focus.id.includes('-') ? 1 : -1;
+      if (focus?.id === 'step:w' || focus?.id === 'step:e') {
+        const dir = focus.id === 'step:e' ? 1 : -1;
         const x = COLS[state.col + dir];
         if (x !== undefined) rect(g, x, 16 + state.layer * ROW, 48, 2, '#9fe4ff');
       }
-      if (focus?.id === 'cut') {
+      if (focus?.id === 'step:s') {
         const x = COLS[state.col];
         if (x !== undefined) rect(g, x, 16 + (state.layer + 1) * ROW, 48, 2, '#ff8a6a');
       }

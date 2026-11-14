@@ -68,7 +68,7 @@ function rules(difficulty: Difficulty): {
     return { turnCap: 14, quota: 10, tugs: 3, angryLimit: 4, incidentLimit: 3 };
   if (difficulty === 'hard')
     return { turnCap: 12, quota: 18, tugs: 1, angryLimit: 2, incidentLimit: 1 };
-  return { turnCap: 12, quota: 14, tugs: 2, angryLimit: 3, incidentLimit: 2 };
+  return { turnCap: 12, quota: 14, tugs: 2, angryLimit: 3, incidentLimit: 1 };
 }
 
 function drawShip(rng: Rng): Ship {

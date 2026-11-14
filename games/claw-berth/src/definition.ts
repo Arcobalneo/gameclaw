@@ -8,7 +8,7 @@ export const definition: GameDefinition<BerthState> = {
     englishName: 'Claw Berth',
     tagline: '吃水要进得去，危货不能挨着',
     description:
-      '四个泊位水深不同。船的吃水不能超过水深，拖船可以多塞深一档。危货挨在一起算事故。等待让已靠的船继续装货，也让还在港外的船失去耐心。',
+      '四个泊位水深不同。船的吃水不能超过水深，拖船可以多塞深一档。危货挨在一起算一次事故，这一局就收场。等待让已靠的船继续装货，也让还在港外的船失去耐心。',
     version: '4.0.0',
     repo: 'https://github.com/Arcobalneo/gameclaw',
     license: 'MIT',

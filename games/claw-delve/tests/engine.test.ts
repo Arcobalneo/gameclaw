@@ -20,6 +20,15 @@ describe('claw-delve engine', () => {
     expect(JSON.parse(JSON.stringify(again))).toEqual(again);
   });
 
+  it('lists compass steps so WASD digs', () => {
+    const ids = actionsOf(createRun({ seed: 1 })).map((action) => action.id);
+    expect(ids).toEqual(expect.arrayContaining(['step:w', 'step:e', 'step:s']));
+    expect(ids).not.toContain('cut');
+    const state = createRun({ seed: 1 });
+    act(state, 'cut');
+    expect(state.layer).toBe(1);
+  });
+
   it('collapses an unbraced layer and loses on the next one', () => {
     const state = createRun({ seed: 1 });
     state.collapseLimit = 1;
@@ -36,8 +45,8 @@ describe('claw-delve engine', () => {
     const state = createRun({ seed: 1 });
     state.oreCol[0] = 2;
     state.col = 1;
-    const right = actionsOf(state).find((action) => action.id === 'shift:1');
-    const left = actionsOf(state).find((action) => action.id === 'shift:-1');
+    const right = actionsOf(state).find((action) => action.id === 'step:e');
+    const left = actionsOf(state).find((action) => action.id === 'step:w');
     expect(right?.detail).toBe('向右一格有矿。横挖不会塌。');
     expect(left?.detail).toBe('在这一层向左挖开一格。横挖不会塌。');
   });
