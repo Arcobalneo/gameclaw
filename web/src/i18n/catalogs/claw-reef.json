@@ -75,6 +75,26 @@
       "slots": ["text", "n", "n"]
     },
     {
+      "zh": "先向{0}，潮推两格，把你顶在墙上。",
+      "en": "Step {0}, then the tide pushes two cells and pins you to the wall.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "先向{0}，潮推两格，到 {1},{2} 的海胆上。",
+      "en": "Step {0}, then the tide pushes two cells onto the urchin at {1},{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "先向{0}，潮推两格，到 {1},{2}。那一格是还没踩的标。",
+      "en": "Step {0}, then the tide pushes two cells to {1},{2}. That cell is an open mark.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "先向{0}，潮推两格，到 {1},{2}。那一格没有标。",
+      "en": "Step {0}, then the tide pushes two cells to {1},{2}. That cell has no mark.",
+      "slots": ["text", "n", "n"]
+    },
+    {
       "zh": "{0},{1} 海胆。潮推上去算一次被冲，下锚可以压住。",
       "en": "Urchin at {0},{1}. Landing there after the push is a sweep. An anchor braces it.",
       "slots": ["n", "n"]

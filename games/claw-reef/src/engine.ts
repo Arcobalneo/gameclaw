@@ -88,6 +88,30 @@ function push(x: number, y: number, dir: Dir): { x: number; y: number; blocked: 
   return { x: nx, y: ny, blocked: false };
 }
 
+/** After half the tides, the current pushes two cells instead of one. */
+export function pushCount(state: ReefState, tide = state.tide): number {
+  return tide >= Math.floor(state.tideCap / 2) ? 2 : 1;
+}
+
+function drift(
+  x: number,
+  y: number,
+  dir: Dir,
+  steps: number,
+): { x: number; y: number; blocked: boolean } {
+  let blocked = false;
+  for (let i = 0; i < steps; i += 1) {
+    const landed = push(x, y, dir);
+    x = landed.x;
+    y = landed.y;
+    if (landed.blocked) {
+      blocked = true;
+      break;
+    }
+  }
+  return { x, y, blocked };
+}
+
 export function onUrchin(state: ReefState, x = state.x, y = state.y): boolean {
   return state.urchins.some((cell) => cell[0] === x && cell[1] === y);
 }
@@ -149,7 +173,7 @@ function solve(state: ReefState): string | null {
         const [dx, dy] = DELTA[step];
         x += dx;
         y += dy;
-        const landed = push(x, y, dir);
+        const landed = drift(x, y, dir, pushCount(state, node.tide));
         x = landed.x;
         y = landed.y;
         if (landed.blocked) swept += 1;
@@ -269,7 +293,7 @@ export function forecastStep(
 ): { x: number; y: number; kind: 'wall' | 'urchin' | 'open' } | null {
   const [dx, dy] = DELTA[step];
   if (!inside(state.x + dx, state.y + dy)) return null;
-  const landed = push(state.x + dx, state.y + dy, coming(state));
+  const landed = drift(state.x + dx, state.y + dy, coming(state), pushCount(state));
   if (landed.blocked) return { x: landed.x, y: landed.y, kind: 'wall' };
   if (onUrchin(state, landed.x, landed.y)) return { x: landed.x, y: landed.y, kind: 'urchin' };
   return { x: landed.x, y: landed.y, kind: 'open' };
@@ -282,12 +306,22 @@ function landingDetail(
   landed: { x: number; y: number; blocked: boolean },
   urchin: boolean,
 ): string {
-  if (landed.blocked) return `先向${DIR_LABEL[step]}，潮再向${DIR_LABEL[dir]}。潮会把你顶在墙上。`;
-  if (urchin) return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y} 的海胆上。`;
+  const doubled = pushCount(state) > 1;
+  if (landed.blocked) {
+    return doubled
+      ? `先向${DIR_LABEL[step]}，潮推两格，把你顶在墙上。`
+      : `先向${DIR_LABEL[step]}，潮再向${DIR_LABEL[dir]}。潮会把你顶在墙上。`;
+  }
+  if (urchin) {
+    return doubled
+      ? `先向${DIR_LABEL[step]}，潮推两格，到 ${landed.x},${landed.y} 的海胆上。`
+      : `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y} 的海胆上。`;
+  }
   const key = `${landed.x},${landed.y}`;
   const mark = state.goals.some((goal) => keyOf(goal) === key) && !state.got.includes(key);
   const tail = mark ? '那一格是还没踩的标。' : '那一格没有标。';
-  return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y}。${tail}`;
+  const motion = doubled ? '潮推两格，到' : '潮再把你推到';
+  return `先向${DIR_LABEL[step]}，${motion} ${landed.x},${landed.y}。${tail}`;
 }
 
 export function actionsOf(state: ReefState): ActionView[] {
@@ -297,7 +331,7 @@ export function actionsOf(state: ReefState): ActionView[] {
   for (const step of STEPS) {
     const [dx, dy] = DELTA[step];
     if (!inside(state.x + dx, state.y + dy)) continue;
-    const landed = push(state.x + dx, state.y + dy, dir);
+    const landed = drift(state.x + dx, state.y + dy, dir, pushCount(state));
     const urchin = !landed.blocked && onUrchin(state, landed.x, landed.y);
     actions.push({
       id: `step:${step}`,
@@ -349,7 +383,7 @@ export function act(state: ReefState, actionId: string): ActionResult {
     const [dx, dy] = DELTA[step];
     state.x += dx;
     state.y += dy;
-    const landed = push(state.x, state.y, dir);
+    const landed = drift(state.x, state.y, dir, pushCount(state));
     state.x = landed.x;
     state.y = landed.y;
     if (landed.blocked) {
