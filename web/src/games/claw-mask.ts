@@ -102,13 +102,15 @@ function createScene(): GameScene<MaskState> {
       const px = state.pos < 0 ? 18 : 49 + state.pos * 40;
       shadow(g, px, 158, 14);
       blit(g, shrimp, px, 150 + Math.round(Math.sin(t * 3)), { scale: 2, anchor: 'bc' });
-      if (state.flood >= 0) {
-        const w = Math.min(8, state.flood + 1) * 40;
-        const pulse = Math.round(Math.sin(t * 6) * 2);
-        rect(g, 32, 160 + pulse, w, 8, '#ff5d73');
-        rect(g, 32, 160 + pulse, w, 2, '#ffd0d4');
-        for (let i = 0; i < w; i += 8) rect(g, 32 + i, 156 + pulse, 3, 4, '#ff5d73');
-      }
+      const rise = state.flood + 4;
+      const gauge = Math.max(12, rise * 16);
+      rect(g, 8, 168 - gauge, 14, gauge, '#ff5d73');
+      rect(g, 8, 168 - gauge, 14, 3, '#ffd0d4');
+      const lip = Math.min(VW - 48, 24 + rise * 36);
+      const pulse = Math.round(Math.sin(t * 6) * 2);
+      rect(g, 32, 160 + pulse, lip, 8, '#c44860');
+      rect(g, 32, 160 + pulse, lip, 2, '#ffd0d4');
+      for (let i = 0; i < lip; i += 10) rect(g, 32 + i, 154 + pulse, 3, 6, '#ff5d73');
       f.actions
         .filter((action) => action.id === 'step' || action.id.startsWith('mask:'))
         .forEach((action, index) => {

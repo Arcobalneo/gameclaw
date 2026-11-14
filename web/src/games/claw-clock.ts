@@ -25,6 +25,7 @@ const GEAR: SpriteDef = {
 };
 
 let chamber: HTMLCanvasElement | null = null;
+let spun = 0;
 
 function tower(): HTMLCanvasElement {
   if (chamber) return chamber;
@@ -85,8 +86,9 @@ function createScene(): GameScene<ClockState> {
       const spin = Math.floor(t * 2) % 2;
       blit(g, gear, 48, 48 + spin, { scale: 2, anchor: 'c' });
       blit(g, gear, 336, 160 - spin, { scale: 2, anchor: 'c' });
+      const slide = spun * Math.max(0, 1 - f.since / 0.45) * ((Math.PI * 2) / 8);
       state.ring.forEach((token, index) => {
-        const angle = (index / 8) * Math.PI * 2 - Math.PI / 2;
+        const angle = (index / 8) * Math.PI * 2 - Math.PI / 2 - slide;
         const x = 192 + Math.round(Math.cos(angle) * 52);
         const y = 100 + Math.round(Math.sin(angle) * 52);
         const bob = Math.round(Math.sin(t * 3 + index) * 1);
@@ -97,12 +99,19 @@ function createScene(): GameScene<ClockState> {
         else disc(g, x, y, 4, '#2a2430');
       });
       state.ring.forEach((_token, index) => {
-        const angle = (index / 8) * Math.PI * 2 - Math.PI / 2;
+        const angle = (index / 8) * Math.PI * 2 - Math.PI / 2 - slide;
         const x = 192 + Math.round(Math.cos(angle) * 74);
         const y = 100 + Math.round(Math.sin(angle) * 74);
         drawText(g, String(index + 1), x, y - 4, { color: '#e8d0a0', align: 'center' });
       });
       const hand = (state.hand / 8) * Math.PI * 2 - Math.PI / 2;
+      const slot = (Math.PI * 2) / 8;
+      for (let i = 0; i <= 7; i += 1) {
+        const angle = hand - slot + (slot * i) / 7;
+        const x = 192 + Math.round(Math.cos(angle) * 34);
+        const y = 100 + Math.round(Math.sin(angle) * 34);
+        rect(g, x, y, 3, 3, i === 7 ? '#fff6dc' : '#ffc24a');
+      }
       for (let r = 8; r <= 40; r += 4) {
         const x = 192 + Math.round(Math.cos(hand) * r);
         const y = 100 + Math.round(Math.sin(hand) * r);
@@ -120,6 +129,8 @@ function createScene(): GameScene<ClockState> {
       });
     },
     react(f, outcome) {
+      const kind = String(outcome.events[0]?.type ?? '');
+      spun = kind === 'rotate:1' ? 1 : kind === 'rotate:-1' ? -1 : 0;
       const tick = outcome.events.find((event) => event.type === 'tick');
       if (!tick) return;
       const wounded = outcome.result.log.some((line) => line.includes('击中了你'));

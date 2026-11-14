@@ -1,7 +1,7 @@
 import { definition } from '@games/claw-flip/src/definition';
 import { type FlipState, isSafe } from '@games/claw-flip/src/engine';
 import type { Grade } from '../gfx/art';
-import { sky } from '../gfx/backdrop';
+import { fog, godRays, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
 import { ctx2d, hash01, makeCanvas, rect, VH, VW, withAlpha } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
@@ -40,20 +40,34 @@ function cliffs(): HTMLCanvasElement {
   if (gorge) return gorge;
   const c = makeCanvas(VW, VH);
   const g = ctx2d(c);
-  sky(g, ['#1a3830', '#0c2018', '#081410'], 0, VH, 8);
-  for (let y = 0; y < 170; y += 8) {
-    const w = 28 + ((y * 5) % 26);
-    rect(g, 0, y, w, 6, y % 16 === 0 ? '#245040' : '#1a3028');
-    rect(g, VW - w, y + 3, w, 6, '#143028');
+  sky(g, ['#163028', '#0c1814', '#081018'], 0, VH, 8);
+  rect(g, 72, 24, VW - 144, 150, '#061410');
+  rect(g, 176, 8, 10, 150, '#143048');
+  rect(g, 180, 8, 3, 150, '#7ec8ff');
+  for (let y = 20; y < 150; y += 8) rect(g, 184, y, 6, 2, withAlpha('#fff6dc', 0.35));
+  for (let y = 0; y < 168; y += 8) {
+    const left = 56 + ((y * 7) % 22);
+    const right = 52 + ((y * 5) % 24);
+    rect(g, 0, y, left, 7, y % 16 === 0 ? '#2a5840' : '#1a3028');
+    rect(g, left - 6, y, 6, 3, '#3a6848');
+    rect(g, VW - right, y, right, 7, '#143028');
+    rect(g, VW - right, y + 3, 5, 2, '#245040');
     if (y % 24 === 0) {
-      rect(g, w - 2, y, 2, 16, '#3a6848');
-      rect(g, VW - w, y + 4, 2, 14, '#2a5840');
+      rect(g, left - 4, y, 3, 18, '#3a6848');
+      rect(g, VW - right - 2, y, 3, 16, '#2a5840');
     }
   }
-  rect(g, 0, 156, VW, 60, '#0a1814');
-  rect(g, 0, 156, VW, 4, '#1a4060');
-  for (let i = 0; i < 24; i += 1) {
-    rect(g, hash01(i, 3) * VW, 164 + hash01(i, 4) * 40, 10, 2, withAlpha('#7ec8ff', 0.35));
+  for (let x = 80; x < 300; x += 18) {
+    const h = 8 + (x % 22);
+    rect(g, x, 0, 6, h, '#1a3028');
+    rect(g, x + 1, h, 4, 4, '#3a6848');
+  }
+  rect(g, 64, 148, VW - 128, 8, '#3a2414');
+  rect(g, 64, 148, VW - 128, 2, '#c4a060');
+  rect(g, 0, 168, VW, 48, '#061018');
+  rect(g, 0, 168, VW, 3, '#1a4060');
+  for (let i = 0; i < 18; i += 1) {
+    rect(g, 70 + hash01(i, 3) * 240, 176 + hash01(i, 4) * 28, 12, 2, withAlpha('#7ec8ff', 0.4));
   }
   gorge = c;
   return c;
@@ -77,6 +91,8 @@ function createScene(): GameScene<FlipState> {
     draw(f) {
       const { g, t, state } = f;
       g.drawImage(cliffs(), 0, 0);
+      godRays(g, t, '#c8ffd8', 3, 0.05);
+      fog(g, t, 128, 22, '#9ec8ff', 0.22, 8);
       for (let x = 0; x < VW; x += 16) {
         const y = 166 + Math.round(Math.sin(t * 1.6 + x * 0.05) * 2);
         rect(g, x, y, 10, 2, withAlpha('#7ec8ff', 0.35));
