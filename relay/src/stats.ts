@@ -1,4 +1,4 @@
-import { GAME_IDS, isGameId } from './games';
+import { GAME_IDS, type GameId, legacyGameId, resolveGameId } from './games';
 import { isSessionId } from './ids';
 import { TokenBucket } from './rate-limit';
 import type { SocketLike } from './room';
@@ -57,7 +57,20 @@ export class PlayStatsCore {
 
   constructor(readonly store: StatsStore) {}
 
+  /** Move counts stored under a former id onto the current id. Seen-keys stay. */
+  async #fold(): Promise<void> {
+    for (const id of GAME_IDS) {
+      const old = legacyGameId(id);
+      if (!old) continue;
+      const n = await this.store.getGame(old);
+      if (n <= 0) continue;
+      await this.store.setGame(id, (await this.store.getGame(id)) + n);
+      await this.store.setGame(old, 0);
+    }
+  }
+
   async get(): Promise<PlayCounts> {
+    await this.#fold();
     const games: Record<string, number> = {};
     for (const id of GAME_IDS) {
       const n = await this.store.getGame(id);
@@ -76,11 +89,16 @@ export class PlayStatsCore {
     ip: string,
   ): Promise<{ ok: true; counts: PlayCounts } | { ok: false; error: string; status: number }> {
     if (!isSessionId(playerId)) return { ok: false, error: 'Invalid player id.', status: 400 };
-    if (game !== undefined && !isGameId(game))
-      return { ok: false, error: 'Unknown game.', status: 400 };
+    let gameId: GameId | undefined;
+    if (game !== undefined) {
+      const resolved = resolveGameId(game);
+      if (!resolved) return { ok: false, error: 'Unknown game.', status: 400 };
+      gameId = resolved;
+    }
     if (!this.#helloLimit.take(`hello:${ip}`))
       return { ok: false, error: 'Too many requests. Try again in a minute.', status: 429 };
 
+    await this.#fold();
     const hash = await hashPlayer(playerId);
     const siteKey = `p:${hash}`;
     let changed = false;
@@ -94,11 +112,15 @@ export class PlayStatsCore {
       await this.store.setSite((await this.store.getSite()) + 1);
       changed = true;
     }
-    if (game) {
-      const gameKey = `p:${hash}:${game}`;
-      if (!(await this.store.hasSeen(gameKey))) {
+    if (gameId) {
+      const old = legacyGameId(gameId);
+      const gameKey = `p:${hash}:${gameId}`;
+      const seen =
+        (await this.store.hasSeen(gameKey)) ||
+        (old !== undefined && (await this.store.hasSeen(`p:${hash}:${old}`)));
+      if (!seen) {
         await this.store.markSeen(gameKey);
-        await this.store.setGame(game, (await this.store.getGame(game)) + 1);
+        await this.store.setGame(gameId, (await this.store.getGame(gameId)) + 1);
         changed = true;
       }
     }

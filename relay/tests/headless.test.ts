@@ -85,10 +85,10 @@ describe('headless play', () => {
     const session = generateSessionId();
     const rooms = new Map<string, SessionRoomCore>();
     const hub = hubFor(rooms);
-    const started = await call(hub, session, 'new_game', { game_id: 'shrimp-leap', seed: 7 }, 1);
+    const started = await call(hub, session, 'new_game', { game_id: 'claw-leap', seed: 7 }, 1);
     expect(started.result.isError).toBe(false);
     expect(started.result.structuredContent.ok).toBe(true);
-    expect(started.result.structuredContent.game_id).toBe('shrimp-leap');
+    expect(started.result.structuredContent.game_id).toBe('claw-leap');
     expect(started.result.structuredContent.state?.outcome).toBe('ongoing');
     expect(started.result.structuredContent.watch_url).toMatch(
       /^https:\/\/arcobalneo\.github\.io\/gameclaw\/#\/watch\/[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{7}$/,
@@ -99,7 +99,7 @@ describe('headless play', () => {
       hub,
       session,
       'act',
-      { game_id: 'shrimp-leap', action_id: action!.id },
+      { game_id: 'claw-leap', action_id: action!.id },
       2,
     );
     expect(moved.result.structuredContent.ok).toBe(true);
@@ -120,8 +120,8 @@ describe('headless play', () => {
           },
       )
       .find((message) => message.type === 'run');
-    expect(run?.desk?.focused).toBe('shrimp-leap');
-    expect(run?.desk?.games['shrimp-leap']?.snapshot.turn).toBe(
+    expect(run?.desk?.focused).toBe('claw-leap');
+    expect(run?.desk?.games['claw-leap']?.snapshot.turn).toBe(
       moved.result.structuredContent.state?.turn,
     );
   });

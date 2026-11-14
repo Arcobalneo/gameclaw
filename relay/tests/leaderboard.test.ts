@@ -59,7 +59,7 @@ describe('leaderboard rule', () => {
     const first = await submit(
       {
         name: '  Ace  ',
-        game: 'shrimp-trek',
+        game: 'claw-trek',
         score: 400,
         outcome: 'won',
         turn: 12,
@@ -75,7 +75,7 @@ describe('leaderboard rule', () => {
     const worse = await submit(
       {
         name: 'ace',
-        game: 'shrimp-trek',
+        game: 'claw-trek',
         score: 100,
         outcome: 'lost',
         turn: 4,
@@ -96,7 +96,7 @@ describe('leaderboard rule', () => {
     await submit(
       {
         name: 'Ace',
-        game: 'shrimp-guard',
+        game: 'claw-guard',
         score: 250,
         outcome: 'won',
         turn: 8,
@@ -107,7 +107,7 @@ describe('leaderboard rule', () => {
     await submit(
       {
         name: '贝',
-        game: 'shrimp-guard',
+        game: 'claw-guard',
         score: 900,
         outcome: 'won',
         turn: 9,
@@ -117,7 +117,7 @@ describe('leaderboard rule', () => {
     );
 
     const snap = await b.get();
-    expect(snap.games['shrimp-trek']?.[0]).toMatchObject({ name: 'Ace', score: 400 });
+    expect(snap.games['claw-trek']?.[0]).toMatchObject({ name: 'Ace', score: 400 });
     expect(snap.total.map((row) => [row.name, row.score])).toEqual([
       ['贝', 900],
       ['Ace', 650],
@@ -128,7 +128,7 @@ describe('leaderboard rule', () => {
     const b = boards();
     const body = {
       name: '虾王',
-      game: 'shrimp-leap',
+      game: 'claw-leap',
       score: 80,
       outcome: 'won',
       turn: 3,
@@ -150,7 +150,7 @@ describe('leaderboard rule', () => {
     await submit(
       {
         name: 'Neo',
-        game: 'shrimp-ink',
+        game: 'claw-ink',
         score: 500,
         outcome: 'lost',
         turn: 6,

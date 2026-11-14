@@ -2,15 +2,40 @@
 
 ## Unreleased
 
-- Added four games on the new `Claw <Word>` / `claw-<word>` identity. The eleven
-  already shipped stay `shrimp-*` until a separate rename.
-  - `虾印 (Claw Stamp)`: a night-ferry window. Edge fares pay more and cost a strike.
-  - `虾熔 (Claw Melt)`: a six-column well. Only side-by-side shells melt, and a full column plugs the mouth.
-  - `虾网 (Claw Net)`: tie tears before they spread, then haul.
-  - `虾节 (Claw Beat)`: a four-beat phrase, two edits a round, then commit.
-- A working slate of nineteen concepts is in `docs/plans/2026-11-14-jam-slate.md`.
-  The other fifteen are not implemented.
-- The four ids are registered for play counts, score submit, and headless play.
+- Added four games: `虾印 (Claw Stamp)`, `虾熔 (Claw Melt)`, `虾网 (Claw Net)`,
+  and `虾节 (Claw Beat)`. A working slate of nineteen concepts is in
+  `docs/plans/2026-11-14-jam-slate.md`. The other fifteen are not implemented.
+
+### Changed
+
+English display names are `Claw <Word>` and machine ids are `claw-<word>`.
+Chinese `虾×` titles are unchanged. The paired form is `虾× (Claw <Word>)`.
+`GAME_VERSION` stays `4.0.0`. The four games above already used this identity.
+
+| Former id | Current id | English name |
+| --- | --- | --- |
+| `shrimp-trek` | `claw-trek` | Claw Trek |
+| `shrimp-guard` | `claw-guard` | Claw Guard |
+| `shrimp-heist` | `claw-heist` | Claw Heist |
+| `shrimp-catch` | `claw-catch` | Claw Catch |
+| `shrimp-look` | `claw-look` | Claw Look |
+| `shrimp-rampage` | `claw-rampage` | Claw Rampage |
+| `shrimp-ink` | `claw-ink` | Claw Ink |
+| `shrimp-greens` | `claw-greens` | Claw Greens |
+| `shrimp-conquest` | `claw-conquest` | Claw Conquest |
+| `shrimp-leap` | `claw-leap` | Claw Leap |
+| `shrimp-burger` | `claw-burger` | Claw Burger |
+
+- `#/play/<former id>` opens the game and replaces the address with
+  `#/play/<current id>`.
+- Web MCP and the headless desk accept a former id and return the current id.
+  A `#/watch/<room code>` page restores a run stored under a former id into
+  the current id. The room code itself is unchanged.
+- Leaderboard rows and play counts stored under a former id are folded into
+  the current id on read. No Durable Object migration tag was added.
+- A browser save under `gameclaw:v3:<former id>` restores into the current id.
+
+The alias map is `catalog/legacy-ids.json`.
 
 ## v4.0.1 — 2026-11-14
 

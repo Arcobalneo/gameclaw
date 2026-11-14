@@ -1,4 +1,5 @@
 import catalogJson from '../../catalog/games.json';
+import { canonicalGameId } from '../../relay/src/games';
 
 /**
  * Static game metadata for the home grid. Engines + renderers are lazy chunks
@@ -40,7 +41,7 @@ const LOOK: Record<
   string,
   Pick<GameEntry, 'accent' | 'ink' | 'goal' | 'goalEn' | 'tagZh' | 'tagEn'>
 > = {
-  'shrimp-trek': {
+  'claw-trek': {
     accent: '#ff7a59',
     ink: '#0b1430',
     goal: '选谱系后穿越潮段遭遇与归海闸口，活得越深名声越高。',
@@ -48,7 +49,7 @@ const LOOK: Record<
     tagZh: '潮水深处，一只虾要活下去。',
     tagEn: 'One shrimp, one tide. Survive the deep.',
   },
-  'shrimp-guard': {
+  'claw-guard': {
     accent: '#4fd1ff',
     ink: '#08182a',
     goal: '布置虾兵守住三条水道，撑过全部 pulse 不让归海线破防。',
@@ -56,7 +57,7 @@ const LOOK: Record<
     tagZh: '三条水道，守住归海线。',
     tagEn: 'Three lanes. Hold the sea line.',
   },
-  'shrimp-heist': {
+  'claw-heist': {
     accent: '#b28dff',
     ink: '#120c26',
     goal: '潜入设施，找到真目标并带出出口，暴露值不能爆表。',
@@ -64,7 +65,7 @@ const LOOK: Record<
     tagZh: '潜入，得手，全身而退。',
     tagEn: 'Sneak in, grab it, get out.',
   },
-  'shrimp-catch': {
+  'claw-catch': {
     accent: '#5ee08f',
     ink: '#0a1d1a',
     goal: '探索、对战、捕捉虾宠，扩充图鉴并挑战深渊层数。',
@@ -72,7 +73,7 @@ const LOOK: Record<
     tagZh: '捕捉虾宠，一路潜进深渊。',
     tagEn: 'Catch critters, dive the abyss.',
   },
-  'shrimp-look': {
+  'claw-look': {
     accent: '#9fc4ff',
     ink: '#070a18',
     goal: '调查怪谈房间，记录足够证据并带着神智离开。',
@@ -80,7 +81,7 @@ const LOOK: Record<
     tagZh: '怪谈房间：记下异象再离开。',
     tagEn: 'Strange rooms. Record, then leave.',
   },
-  'shrimp-rampage': {
+  'claw-rampage': {
     accent: '#ff9a2e',
     ink: '#160a1c',
     goal: '四夜之内收成 4 个南瓜并安抚 3 只南瓜怪。',
@@ -88,7 +89,7 @@ const LOOK: Record<
     tagZh: '四个夜晚，安抚南瓜怪。',
     tagEn: 'Four nights in the pumpkin patch.',
   },
-  'shrimp-ink': {
+  'claw-ink': {
     accent: '#e8c27a',
     ink: '#14100c',
     goal: '寻访线索、找到真遗址，写成书稿而不饿死。',
@@ -96,7 +97,7 @@ const LOOK: Record<
     tagZh: '一支笔，一卷书稿，一条远路。',
     tagEn: 'One brush, one manuscript, one road.',
   },
-  'shrimp-greens': {
+  'claw-greens': {
     accent: '#7ee07a',
     ink: '#0c160e',
     goal: '在十六席饭局里守住素食立场，同时别让身体与家人归零。',
@@ -104,7 +105,7 @@ const LOOK: Record<
     tagZh: '十六顿饭，守住你的素食。',
     tagEn: 'Sixteen meals. Keep your plate green.',
   },
-  'shrimp-conquest': {
+  'claw-conquest': {
     accent: '#ff5d73',
     ink: '#1a0a14',
     goal: '一年内选一个大人国，用战争或外交让它低头。',
@@ -112,7 +113,7 @@ const LOOK: Record<
     tagZh: '小人国使者，让巨人低头。',
     tagEn: 'A tiny envoy versus a giant kingdom.',
   },
-  'shrimp-leap': {
+  'claw-leap': {
     accent: '#7cf0a0',
     ink: '#0a1020',
     goal: '养成史莱姆，选力度/角度/时机跳过 45 关灯柱。',
@@ -120,7 +121,7 @@ const LOOK: Record<
     tagZh: '史莱姆，一根灯柱接一根。',
     tagEn: 'A slime, a lamp post, a leap. Repeat.',
   },
-  'shrimp-burger': {
+  'claw-burger': {
     accent: '#ffc24a',
     ink: '#1a100a',
     goal: '限时接料、控火候、赶害虫，送出足够份美味汉堡。',
@@ -185,5 +186,6 @@ export function gameTag(game: GameEntry, l: 'zh' | 'en'): string {
 }
 
 export function findGame(id: string): GameEntry | undefined {
-  return GAMES.find((game) => game.id === id);
+  const canon = canonicalGameId(id);
+  return GAMES.find((game) => game.id === canon);
 }

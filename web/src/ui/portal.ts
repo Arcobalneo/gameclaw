@@ -139,9 +139,10 @@ export class Portal implements PortalController {
     return this.#focused !== null;
   }
 
-  async open(id: string, source: 'agent' | 'human' = 'human'): Promise<GameHost> {
-    const entry = findGame(id);
-    if (!entry) throw new Error(`Unknown game: ${id}`);
+  async open(rawId: string, source: 'agent' | 'human' = 'human'): Promise<GameHost> {
+    const entry = findGame(rawId);
+    if (!entry) throw new Error(`Unknown game: ${rawId}`);
+    const id = entry.id;
     reportGame(id);
     const existing = this.#views.get(id);
     if (existing) {
@@ -172,7 +173,7 @@ export class Portal implements PortalController {
   }
 
   close(id?: string): void {
-    const target = id ?? this.#focused;
+    const target = id === undefined ? this.#focused : (findGame(id)?.id ?? id);
     if (!target) return;
     const view = this.#views.get(target);
     if (!view) return;

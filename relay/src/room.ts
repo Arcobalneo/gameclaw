@@ -64,8 +64,12 @@ export class SessionRoomCore {
   }
 
   /** Restore a desk persisted by the Durable Object. Does not notify listeners. */
-  loadDesk(desk: StoredDesk): void {
-    this.#desk.load(desk);
+  loadDesk(desk: StoredDesk): boolean {
+    return this.#desk.load(desk);
+  }
+
+  currentDesk(): StoredDesk {
+    return this.#desk.exportDesk();
   }
 
   onDesk(fn: (desk: StoredDesk) => void): void {

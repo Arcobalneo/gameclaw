@@ -27,6 +27,60 @@ importers:
         specifier: workspace:*
         version: link:../../packages/gamekit
 
+  games/claw-burger:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-catch:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-conquest:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-greens:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-guard:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-heist:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-ink:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-leap:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
+  games/claw-look:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/claw-melt:
     dependencies:
       '@gameclaw/gamekit':
@@ -39,73 +93,19 @@ importers:
         specifier: workspace:*
         version: link:../../packages/gamekit
 
+  games/claw-rampage:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../../packages/gamekit
+
   games/claw-stamp:
     dependencies:
       '@gameclaw/gamekit':
         specifier: workspace:*
         version: link:../../packages/gamekit
 
-  games/shrimp-burger:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-catch:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-conquest:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-greens:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-guard:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-heist:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-ink:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-leap:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-look:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-rampage:
-    dependencies:
-      '@gameclaw/gamekit':
-        specifier: workspace:*
-        version: link:../../packages/gamekit
-
-  games/shrimp-trek:
+  games/claw-trek:
     dependencies:
       '@gameclaw/gamekit':
         specifier: workspace:*

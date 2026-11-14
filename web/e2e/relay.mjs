@@ -22,7 +22,7 @@ const shotsIdx = args.indexOf('--shots');
 const shots = shotsIdx >= 0 ? args[shotsIdx + 1] : null;
 const relayIdx = args.indexOf('--relay');
 const relay = relayIdx >= 0 ? args[relayIdx + 1] : process.env.GAMECLAW_RELAY ?? 'http://127.0.0.1:8787';
-const gameId = 'shrimp-leap';
+const gameId = 'claw-leap';
 
 const candidates = [
   process.env.CHROME_PATH,

@@ -1,3 +1,4 @@
+import { canonicalGameId } from '../../../relay/src/games';
 import type { AnyGameModule } from '../gfx/scene';
 
 /**
@@ -5,17 +6,17 @@ import type { AnyGameModule } from '../gfx/scene';
  * only downloads when that game is opened.
  */
 const loaders: Record<string, () => Promise<{ default: AnyGameModule }>> = {
-  'shrimp-trek': () => import('../games/shrimp-trek'),
-  'shrimp-guard': () => import('../games/shrimp-guard'),
-  'shrimp-heist': () => import('../games/shrimp-heist'),
-  'shrimp-catch': () => import('../games/shrimp-catch'),
-  'shrimp-look': () => import('../games/shrimp-look'),
-  'shrimp-rampage': () => import('../games/shrimp-rampage'),
-  'shrimp-ink': () => import('../games/shrimp-ink'),
-  'shrimp-greens': () => import('../games/shrimp-greens'),
-  'shrimp-conquest': () => import('../games/shrimp-conquest'),
-  'shrimp-leap': () => import('../games/shrimp-leap'),
-  'shrimp-burger': () => import('../games/shrimp-burger'),
+  'claw-trek': () => import('../games/claw-trek'),
+  'claw-guard': () => import('../games/claw-guard'),
+  'claw-heist': () => import('../games/claw-heist'),
+  'claw-catch': () => import('../games/claw-catch'),
+  'claw-look': () => import('../games/claw-look'),
+  'claw-rampage': () => import('../games/claw-rampage'),
+  'claw-ink': () => import('../games/claw-ink'),
+  'claw-greens': () => import('../games/claw-greens'),
+  'claw-conquest': () => import('../games/claw-conquest'),
+  'claw-leap': () => import('../games/claw-leap'),
+  'claw-burger': () => import('../games/claw-burger'),
   'claw-stamp': () => import('../games/claw-stamp'),
   'claw-melt': () => import('../games/claw-melt'),
   'claw-net': () => import('../games/claw-net'),
@@ -25,17 +26,18 @@ const loaders: Record<string, () => Promise<{ default: AnyGameModule }>> = {
 const loaded = new Map<string, Promise<AnyGameModule>>();
 
 export function hasGame(id: string): boolean {
-  return id in loaders;
+  return canonicalGameId(id) in loaders;
 }
 
 export function loadGame(id: string): Promise<AnyGameModule> {
-  const loader = loaders[id];
+  const canon = canonicalGameId(id);
+  const loader = loaders[canon];
   if (!loader) return Promise.reject(new Error(`Unknown game: ${id}`));
-  let p = loaded.get(id);
+  let p = loaded.get(canon);
   if (!p) {
     p = loader().then((m) => m.default);
-    p.catch(() => loaded.delete(id));
-    loaded.set(id, p);
+    p.catch(() => loaded.delete(canon));
+    loaded.set(canon, p);
   }
   return p;
 }

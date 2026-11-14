@@ -1,0 +1,436 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "专注": "Focus",
+    "神经": "Nerve",
+    "恐惧": "Dread",
+    "证据": "Evidence",
+    "case-select": "Case",
+    "exploring": "Exploring",
+    "归档长廊": "Archive Corridor",
+    "返潮招待所": "Damp Inn",
+    "盲屏机房": "Blind Server Room",
+    "封潮观察站": "Sealed Tide Station",
+    "检查": "Inspect",
+    "操作": "Use",
+    "移向": "Go to",
+    "稳住呼吸": "Steady your breath",
+    "记录当前现象": "Record the anomaly",
+    "取得目标档案": "Take the file",
+    "尝试撤离": "Try to leave",
+    "现象被命名为": "The anomaly is named",
+    "已记录": "recorded",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "数值无变化": "No stat change",
+    " 房间稳了一点。": " The room steadies a little.",
+    "本次不触发事件表。": "This action does not trigger the event table.",
+    "尚未进入副本": "No case entered",
+    "仍在观察": "Still watching",
+    "成功撤离": "Clean extraction",
+    "错误记录": "False record",
+    "神经崩溃": "Nerve collapse",
+    "恐惧封顶": "Dread cap",
+    "主动中止": "Voluntary abort",
+    "未取得": "Not claimed",
+    "恐惧 +2": "Dread +2",
+    "选择要进入的副本": "Choose a case to enter",
+    "四个副本入口": "Four case doors",
+    "怎么玩": "How to play",
+    "侧视面板": "Side panel",
+    "当前现象": "Current anomaly",
+    "发现与目标": "Finds and target",
+    "· 还没有留下任何发现。": "· No finds yet.",
+    "上一次结果": "Last result",
+    "刚进入副本，还没有动作。": "You just entered the case; no action yet.",
+    "目标": "Target",
+    "记录": "Record",
+    "虾看": "Claw Look",
+    "标签错位、目录污染": "Misfiled labels, a polluted catalog",
+    "标签错位、目录污染。": "Misfiled labels, a polluted catalog.",
+    "门缝、床尾、镜面": "Door cracks, bed ends, mirrors",
+    "门缝、床尾、镜面。": "Door cracks, bed ends, mirrors.",
+    "监控画面延迟与反向凝视": "Delayed camera feeds and a reversed gaze",
+    "监控画面延迟与反向凝视。": "Delayed camera feeds and a reversed gaze.",
+    "海边废弃观察站": "An abandoned observation post by the sea",
+    "海边废弃观察站。": "An abandoned observation post by the sea."
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "数值无变化": "No stat change",
+    "尚未选择副本。先 choose:<case-id>，或者用 new --content <case-id> 直接进入。": "No case selected. Use choose:<case-id>, or start directly with new --content <case-id>.",
+    "神经归零：你还在看，但已经没有人替你处理看见的东西。侧视面板合上之前，房间先一步结束了你。": "Nerve hit zero: you are still looking, but no one is left to process what you see. The room ends you before the side panel can close.",
+    "恐惧封顶：侧视不再是观察，而是互相凝视。画面没有动，你却已经不在原来的位置。": "Dread maxed out: the side glance is no longer observation, it is mutual staring. The picture did not move, but you are no longer where you were.",
+    " 房间稳了一点。": " The room steadies a little.",
+    "目标记录已经 verified，可以寻找出口。": "The target file is verified; you can look for the exit.",
+    "目标记录仍是 uncertain：继续 inspect + record，直到证据达标。": "The target file is still uncertain: keep inspecting and recording until the evidence meets the mark.",
+    "证据已经够了：去取得目标档案，然后从出口撤离。": "You have enough evidence: claim the target file, then leave through the exit.",
+    "你停下动作，把侧视面板当成一扇需要呼吸的窗，而不是一场挑战。": "You stop and treat the side panel as a window that needs a breath, not a challenge.",
+    "本次不触发事件表。": "This action does not trigger the event table.",
+    "你推了推出门。门没有动：它要一份档案，不是你的决心。": "You push the door. It does not move: it wants a file, not your resolve.",
+    "尚未进入副本": "No case entered",
+    "仍在观察": "Still watching",
+    "成功撤离": "Clean extraction",
+    "错误记录": "False record",
+    "神经崩溃": "Nerve collapse",
+    "恐惧封顶": "Dread cap",
+    "主动中止": "Voluntary abort",
+    "未取得": "Not claimed",
+    "取得目标档案": "Claim the target file",
+    "恐惧 +2": "Dread +2",
+    "记录当前现象": "Record the anomaly",
+    "稳住呼吸": "Steady your breath",
+    "专注 +2、神经 +1、恐惧 -1（按上限截断），不触发事件。": "Focus +2, nerve +1, dread -1 (capped). No event is triggered.",
+    "尝试撤离": "Try to leave",
+    "出口只接受档案；现在还没有取得目标，尝试会被拒绝并增加恐惧。": "The exit only accepts a file. You have not claimed the target yet; trying will be refused and raise dread.",
+    "带着 verified 档案离开，结束本局并记作成功撤离。": "Leave with a verified file, end the run, and count it as a clean extraction.",
+    "带着 uncertain 档案离开：会结束本局，但结局是错误记录。": "Leave with an uncertain file: the run ends, but the outcome is a false record.",
+    "选择要进入的副本": "Choose a case to enter",
+    "四个副本入口": "Four case doors",
+    "怎么玩": "How to play",
+    "act choose:<case-id> 进入一个副本；之后每个动作都是一条 CLI 命令。": "Use act choose:<case-id> to enter a case; every action after that is a CLI command.",
+    "inspect 命名现象，record 把它写成证据；证据足够后取得目标并 extract。": "inspect names the anomaly, record writes it as evidence; once you have enough, claim the target and extract.",
+    "神经归零或恐惧达到 10 即失败；abort 随时可以诚实中止。": "Nerve at zero or dread at 10 is a loss; abort can stop the run honestly at any time.",
+    "侧视面板": "Side panel",
+    "当前现象": "Current anomaly",
+    "没有可命名的现象。inspect 一个目标，让它先看见你。": "Nothing to name yet. Inspect a target and let it see you first.",
+    "发现与目标": "Finds and target",
+    "· 还没有留下任何发现。": "· No finds yet.",
+    "上一次结果": "Last result",
+    "刚进入副本，还没有动作。": "You just entered the case; no action yet.",
+    "有效路线：先 inspect 命名现象、record 攒证据，再取得目标并撤离；这条路线值得写进 memory。": "A route that works: inspect to name the anomaly, record to bank evidence, then claim the target and leave. Worth writing into memory.",
+    "神经归零即失败：inspect/move/interact 的事件都可能扣神经，brace 只回 1 点，撤离路线要更早规划。": "Nerve at zero is a loss: inspect/move/interact events can all cut nerve, and brace only returns 1. Plan the exit earlier.",
+    "恐惧到 10 即失败：inspect/move/interact 的事件多数会加恐惧，brace 能压回 1 点，别把它留到最后一回合。": "Dread at 10 is a loss: most inspect/move/interact events raise dread, and brace only shaves 1. Do not save it for the last turn.",
+    "中止既不是胜利也不是失败：这份侦察笔记可以保留，下次用 --content <case-id> 直接进入。": "An abort is neither a win nor a loss. Keep these notes and enter next time with --content <case-id>.",
+    "本局还没结束；目前的结论只是阶段性观察，不要当成规则。": "The run is not over; these conclusions are interim notes, not rules.",
+    "还没有选择副本；这份结算只记录了一个空的开场。": "No case was chosen; this settlement only records an empty opening.",
+    "这轮不是白看：把 1-3 条“本局有效”的观察写进你自己的 memory，并标明下局继续验证。": "This watch was not wasted: write 1–3 observations that worked into memory, and mark them for the next run.",
+    "这轮不是白走：把“证据不足就取档”的教训写进 memory，下次在 claim 前先数证据。": "This exit was not wasted: write the lesson about claiming too early into memory, and count evidence before you claim next time.",
+    "这轮不是白怕：把 1-3 条“本局最伤”的教训写进 memory，并标明下局继续验证。": "This scare was not wasted: write 1–3 lessons that hurt most into memory, and test them next run.",
+    "这轮还在继续：把已经确认的现象写进 memory，但要标明它还没有经过撤离验证。": "The run is still going: store the anomalies you have confirmed, and mark that they have not been verified by an exit.",
+    "这轮先收壳：把已经冒头的观察写进 memory，并注明这是一次中止结算。": "Shell out for now: store the observations that already surfaced, and mark this as an aborted settlement.",
+    "目标": "Target",
+    "记录": "Record",
+    "虾看": "Claw Look",
+    "用一条条命令侧眼观察，直到档案承认你看见的东西": "Watch sideways, one command at a time, until the file admits what you saw",
+    "一款单步命令式的 CLI 视觉恐怖：每个动作都是一条命令，每次 inspect 都会让侧视面板多看你一眼。四个短副本入口，记录、取证、撤离，或者带着错误记录走出门。": "A turn-by-turn CLI visual horror: every action is a command, and every inspect lets the side panel look back a little longer. Four short cases — record, claim, extract, or walk out with a false record.",
+    "省略 --content 时先进入副本选择，用 act choose:<case-id> 进入；--content <case-id> 可直接开局。": "Without --content you start at case select and enter with act choose:<case-id>; --content <case-id> starts in the case.",
+    "inspect:<target-id> 命名当前现象；record 把现象写成证据。": "inspect:<target-id> names the current anomaly; record writes it as evidence.",
+    "证据达到 requiredEvidence 后取得目标才是 verified；未验证就 extract 会得到错误记录。": "Claiming the target is verified only after requiredEvidence is met; extracting earlier yields a false record.",
+    "move:<room-id> 横移，interact:<id> 操作稳定/揭露/取证，brace 恢复专注与神经。": "move:<room-id> sidesteps, interact:<id> steadies / reveals / supports evidence, and brace restores focus and nerve.",
+    "神经归零或恐惧达到 10 即失败；abort 可以随时诚实中止。": "Nerve at zero or dread at 10 is a loss; abort can stop the run honestly at any time.",
+    "专注": "Focus",
+    "神经": "Nerve",
+    "恐惧": "Dread",
+    "证据": "Evidence",
+    "归档长廊": "Archive Corridor",
+    "返潮招待所": "Damp Inn",
+    "盲屏机房": "Blind Server Room",
+    "封潮观察站": "Sealed Tide Station",
+    "检查": "Inspect",
+    "操作": "Use",
+    "移向": "Go to",
+    "标签错位、目录污染": "Misfiled labels, a polluted catalog",
+    "标签错位、目录污染。": "Misfiled labels, a polluted catalog.",
+    "门缝、床尾、镜面": "Door cracks, bed ends, mirrors",
+    "门缝、床尾、镜面。": "Door cracks, bed ends, mirrors.",
+    "监控画面延迟与反向凝视": "Delayed camera feeds and a reversed gaze",
+    "监控画面延迟与反向凝视。": "Delayed camera feeds and a reversed gaze.",
+    "海边废弃观察站": "An abandoned observation post by the sea",
+    "海边废弃观察站。": "An abandoned observation post by the sea.",
+    "act choose:<case-id> 进入一个副本；之后每个动作都是一回合。": "act choose:<case-id> enters a case. Every action after that is one turn.",
+    "侧眼观察，直到档案承认你看见的东西": "Look sideways until the file admits what you saw.",
+    "每个动作都是一回合。每次 inspect 都会让侧视面板多看你一眼。四个短副本：记录、取证、带着验明的档案离开，或者带着错误记录走出门。错误记录能过门，但天梯分有硬顶。": "Every action is one turn. Each inspect lets the side panel look back at you. Four short cases: record, gather proof, leave with a verified file, or walk out with the wrong record. A wrong record opens the door, and its ladder score has a hard ceiling."
+  },
+  "patterns": [
+    {
+      "zh": "你横着走进{0}。先 inspect，再决定要不要 record。",
+      "en": "You sidestep into {0}. Inspect first, then decide whether to record.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "目标：记录至少 {0} 条证据，取得档案，再从出口撤离。",
+      "en": "Goal: record at least {0} pieces of evidence, claim the file, then leave through the exit.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "入口：{0}。",
+      "en": "Entrance: {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你侧眼检查 {0}。{1} 现象被命名为「{2}」。",
+      "en": "You glance at {0}. {1} The anomaly is named \"{2}\".",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "目击：{0}",
+      "en": "Witnessed: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "数值：{0}{1}",
+      "en": "Stats: {0}{1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "本局结束：{0}",
+      "en": "Run over: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你横着移向 {0}。{1}",
+      "en": "You sidestep toward {0}. {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "数值：{0}",
+      "en": "Stats: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你取走目标档案（{0}）。证据够了，这份档案对得上你看见的东西。",
+      "en": "You claim the target file ({0}). The evidence is enough; this file matches what you saw.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你取走目标档案（{0}）。它还只是 uncertain：证据 {1}/{2}，不够让档案承认你。",
+      "en": "You claim the target file ({0}). It is still uncertain: evidence {1}/{2}, not enough for the file to admit you.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "你操作「{0}」。{1}",
+      "en": "You use \"{0}\". {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": " 它把「{0}」暴露在你面前，现在可以 record。",
+      "en": " It lays \"{0}\" out in front of you; you can record it now.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你把「{0}」写进档案。证据 {1}/{2}。",
+      "en": "You write \"{0}\" into the file. Evidence {1}/{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "还需要 {0} 条证据才能验证目标。",
+      "en": "You still need {0} more piece(s) of evidence to verify the target.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你在证据 {0}/{1} 时带着 verified 档案走出{2}。这份记录对得上你看见过的东西。",
+      "en": "At evidence {0}/{1} you leave {2} with a verified file. The record matches what you saw.",
+      "slots": ["n", "n", "text"]
+    },
+    {
+      "zh": "你走出了{0}，但档案对不上证据（{1}/{2}）。你带出去的是错误记录：它能通过门，却解释不了门后面发生过什么。",
+      "en": "You leave {0}, but the file does not match the evidence ({1}/{2}). You walk out with a false record: it can pass the door, but it cannot explain what happened behind it.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "这轮先在这里收壳（{0}）：输入停下，但观察已经留下。",
+      "en": "You shell out here ({0}): input stops, but the notes remain.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "{0}（{1}）：{2}。 需要 {3} 条证据，{4} 个房间。",
+      "en": "{0} ({1}): {2}. Needs {3} pieces of evidence and has {4} rooms.",
+      "slots": ["text", "text", "text", "text", "text"]
+    },
+    {
+      "zh": "检查 {0}",
+      "en": "Inspect {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "观察 {0}：触发 inspect 事件，可能改变专注/神经/恐惧/证据，并把当前现象命名。每次消耗 {1} 专注；专注为 0 时继续观察会额外 +1 恐惧。",
+      "en": "Inspect {0}: triggers an inspect event, may change focus / nerve / dread / evidence, and names the current anomaly. Costs {1} focus each time; inspecting at 0 focus also adds +1 dread.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "专注 {0}",
+      "en": "Focus {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "取得目标档案（{0}）：证据达到 {1} 条时目标为 verified，否则为 uncertain；撤离时未验证会变成错误记录。取得时恐惧 +2。",
+      "en": "Claim the target file ({0}): verified at {1} evidence, otherwise uncertain. Extracting unverified yields a false record. Claiming adds +2 dread.",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "操作{0}：触发 interact 事件，并恢复专注 +1、神经 +1、恐惧 -1。",
+      "en": "Use {0}: triggers an interact event and restores focus +1, nerve +1, dread -1.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "操作{0}：触发 interact 事件，并揭露一个可 record 的现象。",
+      "en": "Use {0}: triggers an interact event and reveals an anomaly you can record.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "操作 {0}",
+      "en": "Use {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "移向 {0}",
+      "en": "Go to {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "移动到 {0}：触发该房间的 move 事件，并清空当前现象。",
+      "en": "Move to {0}: triggers that room's move event and clears the current anomaly.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "把「{0}」写入档案：证据 +1，当前 {1}/{2}。记录本身不掷骰、不触发事件。",
+      "en": "Write \"{0}\" into the file: evidence +1, now {1}/{2}. Recording itself does not roll or trigger an event.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "{0}。 需要 {1} 条证据；入口 {2}，共 {3} 个房间。",
+      "en": "{0}. Needs {1} pieces of evidence; entrance {2}, {3} rooms in all.",
+      "slots": ["text", "text", "text", "text"]
+    },
+    {
+      "zh": "结算 · {0}",
+      "en": "Settlement · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "房间 · {0}",
+      "en": "Room · {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "出口：{0}",
+      "en": "Exit: {0}",
+      "slots": ["text"]
+    },
+    {
+      "zh": "线索 {0}：{1}",
+      "en": "Clue {0}: {1}",
+      "slots": ["text", "text"]
+    },
+    {
+      "zh": "目标：{0} · 证据 {1}/{2} · 已记录 {3} 条",
+      "en": "Target: {0} · evidence {1}/{2} · {3} recorded",
+      "slots": ["text", "n", "n", "text"]
+    },
+    {
+      "zh": "{0} · {1} · 回合 {2}",
+      "en": "{0} · {1} · turn {2}",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "本局在{0}用了 {1} 回合，记录 {2} 条线索，证据 {3}/{4}。",
+      "en": "This run spent {1} turns in {0}, recorded {2} clues, evidence {3}/{4}.",
+      "slots": ["text", "text", "text", "n", "n"]
+    },
+    {
+      "zh": "证据 {0}/{1} 时取档并撤离会得到错误记录；下次先攒够证据再 claim，或者 claim 后继续 record 把 uncertain 升到 verified。",
+      "en": "Claiming and leaving at evidence {0}/{1} yields a false record. Next time, bank enough evidence before you claim, or keep recording after a claim until uncertain becomes verified.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "专注上限 {0}，每回合 inspect 消耗 1 点；专注为 0 后继续 inspect 会额外 +1 恐惧。神经上限 {1}，恐惧上限 {2}。",
+      "en": "Focus cap {0}; inspect costs 1 per turn, and inspecting at 0 focus also adds +1 dread. Nerve cap {1}, dread cap {2}.",
+      "slots": ["text", "text", "text"]
+    },
+    {
+      "zh": "本局看见过：{0}。",
+      "en": "Seen this run: {0}.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "本局仍在进行中：{0} / {1}，证据 {2}/{3}。",
+      "en": "This run is still going: {0} / {1}, evidence {2}/{3}.",
+      "slots": ["text", "text", "n", "n"]
+    },
+    {
+      "zh": "现象被命名为「{0}」",
+      "en": "The anomaly is named \"{0}\"",
+      "slots": ["text"]
+    },
+    {
+      "zh": "（已记录）",
+      "en": "(recorded)",
+      "slots": []
+    },
+    {
+      "zh": "{0}（已记录）",
+      "en": "{0} (recorded)",
+      "slots": ["text"]
+    },
+    {
+      "zh": "它把「{0}」暴露在你面前，现在可以 record。",
+      "en": "It puts \"{0}\" in front of you. You can record it now.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你侧眼检查 {0}。",
+      "en": "You glance at {0} from the side.",
+      "slots": ["text"]
+    },
+    {
+      "zh": "你操作「{0}」。",
+      "en": "You operate \"{0}\".",
+      "slots": ["text"]
+    }
+  ]
+}

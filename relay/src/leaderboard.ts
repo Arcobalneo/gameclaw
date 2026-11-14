@@ -1,5 +1,5 @@
 import { normalizePlayerName, playerNameKey } from '@gameclaw/gamekit';
-import { GAME_IDS, isGameId } from './games';
+import { GAME_IDS, legacyGameId, resolveGameId } from './games';
 import { TokenBucket } from './rate-limit';
 import type { SocketLike } from './room';
 
@@ -81,6 +81,45 @@ function byRank(a: StoredRow, b: StoredRow): number {
   return b.score - a.score || a.updatedAt - b.updatedAt || a.key.localeCompare(b.key);
 }
 
+/** Fold rows stored under a former id into the current id. Mutates `file`. */
+export function migrateBoard(file: BoardFile): boolean {
+  let changed = false;
+  for (const id of GAME_IDS) {
+    const old = legacyGameId(id);
+    if (!old) continue;
+    const oldRows = file.games[old];
+    if (!oldRows) continue;
+    if (oldRows.length === 0) {
+      delete file.games[old];
+      changed = true;
+      continue;
+    }
+    const rows = file.games[id] ? [...file.games[id]] : [];
+    for (const row of oldRows) {
+      const index = rows.findIndex((item) => item.key === row.key);
+      if (index < 0) {
+        rows.push({ ...row });
+        continue;
+      }
+      const current = rows[index]!;
+      current.attempts += row.attempts;
+      if (
+        row.score > current.score ||
+        (row.score === current.score && row.updatedAt > current.updatedAt)
+      ) {
+        current.score = row.score;
+        current.name = row.name;
+        current.updatedAt = row.updatedAt;
+      }
+    }
+    rows.sort(byRank);
+    file.games[id] = rows.slice(0, BOARD_STORE);
+    delete file.games[old];
+    changed = true;
+  }
+  return changed;
+}
+
 export function snapshotOf(file: BoardFile): BoardSnapshot {
   const games: Record<string, BoardRow[]> = {};
   const totals = new Map<string, StoredRow>();
@@ -115,8 +154,14 @@ export class LeaderboardCore {
     private readonly now: () => number = () => Date.now(),
   ) {}
 
+  async #file(): Promise<BoardFile> {
+    const file = await this.store.load();
+    if (migrateBoard(file)) await this.store.save(file);
+    return file;
+  }
+
   async get(): Promise<BoardSnapshot> {
-    return snapshotOf(await this.store.load());
+    return snapshotOf(await this.#file());
   }
 
   attach(socket: SocketLike): void {
@@ -150,7 +195,8 @@ export class LeaderboardCore {
   async submit(input: SubmitInput, ip: string): Promise<SubmitResult> {
     const name = normalizePlayerName(input.name);
     if (!name) return { ok: false, error: 'Name is not allowed.', status: 400 };
-    if (!isGameId(input.game)) return { ok: false, error: 'Unknown game.', status: 400 };
+    const game = resolveGameId(input.game);
+    if (!game) return { ok: false, error: 'Unknown game.', status: 400 };
     if (input.outcome !== 'won' && input.outcome !== 'lost') {
       return { ok: false, error: 'Only a finished win or loss can be submitted.', status: 400 };
     }
@@ -172,14 +218,14 @@ export class LeaderboardCore {
       return { ok: false, error: 'Too many submits for this name. Try again later.', status: 429 };
     }
 
-    const file = await this.store.load();
+    const file = await this.#file();
     if (file.seen.includes(run)) {
-      const existing = (file.games[input.game] ?? []).find((row) => row.key === key);
+      const existing = (file.games[game] ?? []).find((row) => row.key === key);
       return {
         ok: true,
         accepted: false,
         reason: 'duplicate',
-        game: input.game,
+        game,
         name: existing?.name ?? name,
         score: input.score,
         best: existing?.score ?? 0,
@@ -188,7 +234,7 @@ export class LeaderboardCore {
       };
     }
 
-    const rows = file.games[input.game] ?? [];
+    const rows = file.games[game] ?? [];
     const index = rows.findIndex((row) => row.key === key);
     const current = index >= 0 ? rows[index]! : null;
     const at = this.now();
@@ -217,19 +263,19 @@ export class LeaderboardCore {
     }
 
     rows.sort(byRank);
-    file.games[input.game] = rows.slice(0, BOARD_STORE);
+    file.games[game] = rows.slice(0, BOARD_STORE);
     file.seen.push(run);
     if (file.seen.length > 4000) file.seen.splice(0, file.seen.length - 4000);
     await this.store.save(file);
 
     const boards = snapshotOf(file);
     if (accepted) this.broadcast(boards);
-    const stored = (file.games[input.game] ?? []).find((row) => row.key === key);
+    const stored = (file.games[game] ?? []).find((row) => row.key === key);
     return {
       ok: true,
       accepted,
       reason,
-      game: input.game,
+      game,
       name: stored?.name ?? name,
       score: input.score,
       best: stored?.score ?? 0,

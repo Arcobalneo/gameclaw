@@ -72,17 +72,17 @@ describe('play counts', () => {
     const again = await hello({ player });
     expect(await again.json()).toEqual({ ok: true, site: 1, games: {} });
 
-    const game = await hello({ player, game: 'shrimp-guard' });
-    expect(await game.json()).toEqual({ ok: true, site: 1, games: { 'shrimp-guard': 1 } });
+    const game = await hello({ player, game: 'claw-guard' });
+    expect(await game.json()).toEqual({ ok: true, site: 1, games: { 'claw-guard': 1 } });
 
-    const gameAgain = await hello({ player, game: 'shrimp-guard' });
-    expect(await gameAgain.json()).toEqual({ ok: true, site: 1, games: { 'shrimp-guard': 1 } });
+    const gameAgain = await hello({ player, game: 'claw-guard' });
+    expect(await gameAgain.json()).toEqual({ ok: true, site: 1, games: { 'claw-guard': 1 } });
 
-    const other = await hello({ player: generateSessionId(), game: 'shrimp-leap' });
+    const other = await hello({ player: generateSessionId(), game: 'claw-leap' });
     expect(await other.json()).toEqual({
       ok: true,
       site: 2,
-      games: { 'shrimp-guard': 1, 'shrimp-leap': 1 },
+      games: { 'claw-guard': 1, 'claw-leap': 1 },
     });
   });
 
@@ -125,7 +125,7 @@ describe('play counts', () => {
       new Request('https://relay/stats/hello', {
         method: 'POST',
         headers: { Origin: origin, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player: generateSessionId(), game: 'shrimp-ink' }),
+        body: JSON.stringify({ player: generateSessionId(), game: 'claw-ink' }),
       }),
       hub(),
       env(),
@@ -140,6 +140,6 @@ describe('play counts', () => {
     };
     expect(last.type).toBe('stats');
     expect(last.site).toBe(1);
-    expect(last.games['shrimp-ink']).toBe(1);
+    expect(last.games['claw-ink']).toBe(1);
   });
 });

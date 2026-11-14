@@ -10,9 +10,9 @@
   },
   "games": [
     {
-      "id": "shrimp-trek",
+      "id": "claw-trek",
       "name": "虾走",
-      "englishName": "Shrimp Trek",
+      "englishName": "Claw Trek",
       "tagline": "无限潮段。收壳，或者把闸口活过去",
       "summary": "九场遭遇加一道归海闸口的无限潮段肉鸽：三种谱系、七种突变、潮势节奏与海压递增。死亡给出可归因死因，结算输出本局观察。",
       "genres": [
@@ -20,7 +20,7 @@
         "turn-based",
         "survival"
       ],
-      "source_dir": "games/shrimp-trek",
+      "source_dir": "games/claw-trek",
       "status": "stable",
       "score": {
         "zh": "收壳：名声×3 + 深度×18 + 壳 + 能。活过闸口：名声×6 + 潮段×160 + 深度×8 + 海压×20。死亡只留名声的一部分加深度×4。中止为 0。",
@@ -28,9 +28,9 @@
       }
     },
     {
-      "id": "shrimp-guard",
+      "id": "claw-guard",
       "name": "虾守",
-      "englishName": "Shrimp Guard",
+      "englishName": "Claw Guard",
       "tagline": "三条水道，漏一次比杀掉三只更贵",
       "summary": "三路线、六个部署位、三条 doctrine 的 pulse 制塔防。每 pulse 只做一个关键动作，随后自动结算推进、卡位与漏怪。",
       "genres": [
@@ -38,7 +38,7 @@
         "tactics",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-guard",
+      "source_dir": "games/claw-guard",
       "status": "stable",
       "score": {
         "zh": "击破×12 + 完整度×25 − 漏怪×40。零泄漏的胜利 +300，漏过仍守住 +80。一次泄漏比三只击破更贵。中止为 0。",
@@ -46,9 +46,9 @@
       }
     },
     {
-      "id": "shrimp-heist",
+      "id": "claw-heist",
       "name": "虾潜",
-      "englishName": "Shrimp Heist",
+      "englishName": "Claw Heist",
       "tagline": "网格潜行。安静撤离才有倍率",
       "summary": "读巡逻、摄像头与噪音，取走目标后在封锁前撤离。三套 profile、设施、安保、目标与复杂化包交叉生成任务。",
       "genres": [
@@ -56,7 +56,7 @@
         "heist",
         "tactics"
       ],
-      "source_dir": "games/shrimp-heist",
+      "source_dir": "games/claw-heist",
       "status": "stable",
       "score": {
         "zh": "带走的目标分按警戒倍率计算：0 警戒 ×4，1 警戒 ×2，更高 ×1，再 ×25，加上剩余时间，减去认错的货格。死在里面只留目标分的五分之一。吵着撤出去赢不了安静的一局。",
@@ -64,9 +64,9 @@
       }
     },
     {
-      "id": "shrimp-catch",
+      "id": "claw-catch",
       "name": "虾抓",
-      "englishName": "Shrimp Catch",
+      "englishName": "Claw Catch",
       "tagline": "捕捉、养成、洗词条与无尽深渊",
       "summary": "捕捉虾米、编队、战斗、洗词条，再下会永久死亡的深渊。数据由 JSON 内容层驱动，深渊污染会转化为疫病。",
       "genres": [
@@ -74,7 +74,7 @@
         "rpg",
         "roguelike"
       ],
-      "source_dir": "games/shrimp-catch",
+      "source_dir": "games/claw-catch",
       "status": "stable",
       "score": {
         "zh": "最深层数×25。到达通关层 +400。图鉴和捕捉只加一点。每只永久死亡 −40，大约一层的分数。表面刷宠堆不满深渊的榜。",
@@ -82,9 +82,9 @@
       }
     },
     {
-      "id": "shrimp-look",
+      "id": "claw-look",
       "name": "虾看",
-      "englishName": "Shrimp Look",
+      "englishName": "Claw Look",
       "tagline": "侧眼观察。错误记录能出门，分很低",
       "summary": "横向观察异常房间，记录现象，带着一份记录撤离。四个案件、事件表驱动，真记录与错记录只差你验证了多少。",
       "genres": [
@@ -92,7 +92,7 @@
         "exploration",
         "mystery"
       ],
-      "source_dir": "games/shrimp-look",
+      "source_dir": "games/claw-look",
       "status": "stable",
       "score": {
         "zh": "带着验明的档案离开：640 + 神经×14 + 冷静×12 + 证据×15 − 回合×5。错误记录：60 + 证据×4，并且出门前再 +2 恐惧。崩溃只按证据×6。中止为 0。",
@@ -100,9 +100,9 @@
       }
     },
     {
-      "id": "shrimp-rampage",
+      "id": "claw-rampage",
       "name": "虾闹",
-      "englishName": "Shrimp Rampage",
+      "englishName": "Claw Rampage",
       "tagline": "四夜六动作，找怪、安抚、收成",
       "summary": "四夜田园动作短局：探明六畦田里会滚会跑会弹会飞的怪物，用糖果、小调或轻拍安抚它们，同时种植、浇水、收成。第三夜全体暴走，每做一个动作它们就换一次畦。",
       "genres": [
@@ -110,7 +110,7 @@
         "farming",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-rampage",
+      "source_dir": "games/claw-rampage",
       "status": "stable",
       "score": {
         "zh": "安抚×45 + 收成×30 + 特殊南瓜×40 − 盲抚×18 − 安抚失败×22 − 踩田×15 − 休息×6。两项目标都达成 +280。没看清就上手，会把收成抹掉。",
@@ -118,9 +118,9 @@
       }
     },
     {
-      "id": "shrimp-ink",
+      "id": "claw-ink",
       "name": "虾写",
-      "englishName": "Shrimp Ink",
+      "englishName": "Claw Ink",
       "tagline": "十八幕游历，一支写下即成真的笔",
       "summary": "十八幕游历调查：六处水陆、三条信证路线、九种收尾。传闻有一支写下即成真的笔——先决定你信不信它存在，再决定往哪里找。",
       "genres": [
@@ -128,7 +128,7 @@
         "mystery",
         "narrative"
       ],
-      "source_dir": "games/shrimp-ink",
+      "source_dir": "games/claw-ink",
       "status": "stable",
       "score": {
         "zh": "证笔 520，无债封笔 480 再 +160，卖笔 220，没验就信 140。寻笔和劝世更低。墨债每点 −40。卖笔或盲信到不了封笔和证笔的分数。",
@@ -136,9 +136,9 @@
       }
     },
     {
-      "id": "shrimp-greens",
+      "id": "claw-greens",
       "name": "虾素",
-      "englishName": "Shrimp Greens",
+      "englishName": "Claw Greens",
       "tagline": "十六席，把自己的盘子吃完",
       "summary": "十六席的素食者人生。开局随机性别、性格和家庭。你自己吃素，不是胎内素。家里可能无肉不欢，也可能同素不同理。守盘、同席、把话说清、备菜，或为场面咬一口——那一口不提供体力。立席要自己收束，只是活到最后不算赢。",
       "genres": [
@@ -146,7 +146,7 @@
         "narrative",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-greens",
+      "source_dir": "games/claw-greens",
       "status": "stable",
       "score": {
         "zh": "自席 460、分席 380、外席 320、同桌 240。只是把十六席坐完大约 50。咬肉每次 −30。守住立场去办自己的席，才是这张榜。",
@@ -154,9 +154,9 @@
       }
     },
     {
-      "id": "shrimp-conquest",
+      "id": "claw-conquest",
       "name": "虾征",
-      "englishName": "Shrimp Conquest",
+      "englishName": "Claw Conquest",
       "tagline": "五十二週，小武器，一場不一定屬於誰的勝利",
       "summary": "小人國的璿芃受國王召令，要在一年內選一個大人國攻陷，戰爭或外交都行。補給、日常奇遇、部件組合武器、暴露風險，以及逃跑閃躲與迎戰連擊小遊戲；被俘後仍有救援機會，鏡面國藏著指向自家王城的反轉。",
       "genres": [
@@ -164,7 +164,7 @@
         "narrative",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-conquest",
+      "source_dir": "games/claw-conquest",
       "status": "stable",
       "score": {
         "zh": "镜面 500、盟约 380、开战 260，再加上控制、情报和救援。被俘很贵。饿死、错过一年或一直被关，分数是 0。",
@@ -172,9 +172,9 @@
       }
     },
     {
-      "id": "shrimp-leap",
+      "id": "claw-leap",
       "name": "虾跃",
-      "englishName": "Shrimp Leap",
+      "englishName": "Claw Leap",
       "tagline": "四十五根灯柱，把果冻跳到天亮",
       "summary": "四十五关灯柱跳跃：性格与颜色塑造果冻属性，三档离散物理、连续街图、视野与街速递增，每十五关成长；同性格离线同伴可能黏连并触发救援。",
       "genres": [
@@ -182,7 +182,7 @@
         "growth",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-leap",
+      "source_dir": "games/claw-leap",
       "status": "stable",
       "score": {
         "zh": "过关×40 + 完美×20 + 最佳完美连段×30 + 救援×80 − 摔落×70。只有完美落地才延续连段，擦边和干净落地都会打断。天亮 +500。",
@@ -190,9 +190,9 @@
       }
     },
     {
-      "id": "shrimp-burger",
+      "id": "claw-burger",
       "name": "虾堡",
-      "englishName": "Shrimp Burger",
+      "englishName": "Claw Burger",
       "tagline": "限时接料，错料照吃，害虫来了腾出另一只手",
       "summary": "混乱汉堡站台：接住食材与火候球，错料照样入栈并靠确定性味觉阈值出餐；落物可融合，小动物间歇偷吃需驱赶，过生过熟要安抚客人。",
       "genres": [
@@ -200,7 +200,7 @@
         "timing",
         "turn-based"
       ],
-      "source_dir": "games/shrimp-burger",
+      "source_dir": "games/claw-burger",
       "status": "stable",
       "score": {
         "zh": "美味×180 + 幸运×40 + 最佳美味连段×50。幸运不延续连段。离店 −120，比一份幸运更贵。交班成功 +200，再加剩余时间。",

@@ -136,8 +136,8 @@ def merge_catalog(game: str, terms: dict, mod, extras=None) -> dict:
         exact.update(getattr(mod, "EXACT", {}))
         pats.update(getattr(mod, "PATTERNS", {}))
         glossary.update(getattr(mod, "TERMS", {}))
-        extra = SCRIPTS / ("catch_data.json" if game == "shrimp-catch" else "")
-        if game == "shrimp-catch":
+        extra = SCRIPTS / ("catch_data.json" if game == "claw-catch" else "")
+        if game == "claw-catch":
             extra = SCRIPTS / "catch_data.json"
             if extra.exists():
                 glossary.update(json.loads(extra.read_text(encoding="utf-8")))
@@ -175,7 +175,7 @@ def merge_catalog(game: str, terms: dict, mod, extras=None) -> dict:
 def main() -> None:
     terms_all = json.loads(TERMS_PATH.read_text()) if TERMS_PATH.exists() else {}
     OUT.mkdir(parents=True, exist_ok=True)
-    games = sorted(set(terms_all) | {p.stem.replace("_", "-") for p in SCRIPTS.glob("shrimp_*.py")})
+    games = sorted(set(terms_all) | {p.stem.replace("_", "-") for p in SCRIPTS.glob("claw_*.py")})
     index_imports = []
     index_regs = []
     extras = load_leftovers()
