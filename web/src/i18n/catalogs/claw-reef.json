@@ -25,9 +25,12 @@
     "进行中": "In progress",
     "结局": "Result",
     "还没有踩到标": "No mark yet",
-    "标只在潮推完之后、你还站着的那一格算数。": "A mark counts only on the cell where you still stand after the push.",
-    "一次被冲比省下两只锚更贵。": "One sweep costs more than two saved anchors.",
-    "把下一步潮往哪边、标在被推之后落在哪一格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which way the next tide pushes, and which cell a mark lands on after the push, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+    "标只在潮推完之后、你还站着的那一格算数。海胆也要等潮推完才算。": "A mark counts only on the cell where you still stand after the push. An urchin counts only after the push too.",
+    "一次被冲比省下两只锚更贵。下锚可以压住脚下的海胆。": "One sweep costs more than two saved anchors. An anchor braces the urchin under you.",
+    "把下一步潮往哪边、标和海胆在被推之后落在哪一格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which way the next tide pushes, and which cell a mark or urchin lands on after the push, into your own memory. Treat that as an observation of this seed and check it again on the next seed.",
+    "海胆": "Urchin",
+    "这一盘没有海胆": "This chart has no urchins",
+    "先走，潮再推。下锚压住海胆。": "Step, then the tide. An anchor braces an urchin."
   },
   "patterns": [
     { "zh": "礁盘结束 · {0}", "en": "Reef closed · {0}", "slots": ["text"] },
@@ -36,6 +39,11 @@
       "zh": "第 {0}/{1} 潮 · 下一步{2} · 标 {3}/{4}",
       "en": "Tide {0}/{1} · next {2} · marks {3}/{4}",
       "slots": ["n", "n", "text", "n", "n"]
+    },
+    {
+      "zh": "第 {0}/{1} 潮 · 下一步{2}",
+      "en": "Tide {0}/{1} · next {2}",
+      "slots": ["n", "n", "text"]
     },
     { "zh": "标 {0}/{1}", "en": "Marks {0}/{1}", "slots": ["n", "n"] },
     { "zh": "冲 {0}/{1}", "en": "Sweeps {0}/{1}", "slots": ["n", "n"] },
@@ -50,6 +58,31 @@
       "zh": "先向{0}，潮再把你推到 {1},{2}。",
       "en": "Step {0}, then the tide pushes you to {1},{2}.",
       "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "先向{0}，潮再把你推到 {1},{2} 的海胆上。",
+      "en": "Step {0}, then the tide pushes you onto the urchin at {1},{2}.",
+      "slots": ["text", "n", "n"]
+    },
+    {
+      "zh": "{0},{1} 海胆。潮推上去算一次被冲，下锚可以压住。",
+      "en": "Urchin at {0},{1}. Landing there after the push is a sweep. An anchor braces it.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "下锚压住海胆，停在 {0},{1}。锚还剩 {2}。",
+      "en": "Anchor and brace the urchin at {0},{1}. Anchors left {2}.",
+      "slots": ["n", "n", "n"]
+    },
+    {
+      "zh": "下锚压住海胆。停在 {0},{1}。",
+      "en": "Anchored and braced the urchin. Held {0},{1}.",
+      "slots": ["n", "n"]
+    },
+    {
+      "zh": "潮把你推上海胆。冲 {0}。",
+      "en": "The tide pushed you onto an urchin. Sweeps {0}.",
+      "slots": ["n"]
     },
     {
       "zh": "这一潮停在 {0},{1}。锚还剩 {2}。",

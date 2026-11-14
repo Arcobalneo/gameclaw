@@ -30,8 +30,12 @@
     "还没有立灯": "No lamp yet",
     "还没有封上一段": "No stage sealed yet",
     "两根能互相看见的柱不能同时立着。收起灯笼要花一潮，并记一次挪灯。": "Two posts that see each other cannot both hold a lamp. Picking one up spends a tide and counts as a lift.",
+    "两根能互相看见的柱不能同时立着。照得最广的那根常常挡住封滩的柱。": "Two posts that see each other cannot both hold a lamp. The widest post often blocks the one that seals the shoal.",
     "能互相看见的两根柱不能同时立。先立照亮水洼最多的那根。": "Two posts that see each other cannot both stand. Place the post that lights the most new pools.",
+    "照得最广的那根常常挡住真正能封滩的柱。先看它挡住谁。": "The widest post often blocks the one that actually seals the shoal. Read who it blocks.",
     "潮不够把立错的灯都收回来。一次挪灯比两只省下的灯笼更贵。": "There is not enough tide to undo a bad post. One lift costs more than two saved lamps.",
+    "潮不够把立错的灯收回来再重立。一次挪灯比两只省下的灯笼更贵。": "There is not enough tide to lift a bad post and place again. One lift costs more than two saved lamps.",
+    "灯不能对视。宽柱会挡住封滩。": "Lamps must not face each other. A wide post blocks the seal.",
     "把本局哪一根柱挡住了真正照亮水洼的位置写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which post blocked the one that actually lights the pools into your own memory. Treat that as an observation of this seed and check it again on the next seed.",
     "这一局已经收尾。": "This run is already over.",
     "用 recap 看结算。": "Use recap for the settlement.",
@@ -46,10 +50,16 @@
       "en": "Stage {0}/{1} · pools {2}/{3} · tide {4}",
       "slots": ["n", "n", "n", "n", "n"]
     },
+    { "zh": "第 {0}/{1} 段", "en": "Stage {0}/{1}", "slots": ["n", "n"] },
     {
       "zh": "第 {0} 根 {1}，能照 {2}",
       "en": "Post {0} {1}, lights {2}",
       "slots": ["n", "text", "text"]
+    },
+    {
+      "zh": "第 {0} 根 {1}，能照 {2}，挡住 {3}",
+      "en": "Post {0} {1}, lights {2}, blocks {3}",
+      "slots": ["n", "text", "text", "text"]
     },
     { "zh": "立 {0}", "en": "Place {0}", "slots": ["n"] },
     { "zh": "收 {0}", "en": "Lift {0}", "slots": ["n"] },
@@ -57,6 +67,11 @@
       "zh": "把灯笼立在第 {0} 根。新照亮 {1} 个水洼。",
       "en": "Stand a lamp on post {0}. It lights {1} new pools.",
       "slots": ["n", "n"]
+    },
+    {
+      "zh": "把灯笼立在第 {0} 根。新照亮 {1} 个水洼。挡住 {2}。",
+      "en": "Stand a lamp on post {0}. It lights {1} new pools. Blocks {2}.",
+      "slots": ["n", "n", "text"]
     },
     {
       "zh": "收起第 {0} 根。灯笼回来，记一次挪灯。",

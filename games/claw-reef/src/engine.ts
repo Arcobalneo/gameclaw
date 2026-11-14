@@ -2,7 +2,8 @@
  * 虾礁 / Claw Reef.
  *
  * Step, or spend an anchor. Then the public current pushes anything that is
- * not anchored. A goal counts only where you stand after that push.
+ * not anchored. A mark counts only where you stand after that push. An urchin
+ * on that cell is a sweep unless the anchor is braced on it.
  */
 
 import {
@@ -24,6 +25,7 @@ export interface ReefState {
   x: number;
   y: number;
   goals: number[][];
+  urchins: number[][];
   got: string[];
   tide: number;
   tideCap: number;
@@ -36,20 +38,29 @@ export interface ReefState {
   cause: string;
 }
 
-export const WIDTH = 6;
-export const HEIGHT = 4;
+export const WIDTH = 8;
+export const HEIGHT = 5;
 const CYCLE: Dir[] = ['e', 's', 'w', 'n'];
 const DELTA: Record<Dir, [number, number]> = { n: [0, -1], s: [0, 1], e: [1, 0], w: [-1, 0] };
 const DIR_LABEL: Record<Dir, string> = { n: '北', e: '东', s: '南', w: '西' };
+const STEPS: Dir[] = ['n', 'e', 's', 'w'];
 
 function difficultyOf(value: string | undefined): Difficulty {
   return value === 'easy' || value === 'hard' ? value : 'normal';
 }
 
-function rules(difficulty: Difficulty): { anchors: number; sweepLimit: number; tideCap: number } {
-  if (difficulty === 'easy') return { anchors: 4, sweepLimit: 2, tideCap: 14 };
-  if (difficulty === 'hard') return { anchors: 2, sweepLimit: 1, tideCap: 10 };
-  return { anchors: 3, sweepLimit: 1, tideCap: 12 };
+function rules(difficulty: Difficulty): {
+  anchors: number;
+  sweepLimit: number;
+  tideCap: number;
+  marks: number;
+  urchins: number;
+} {
+  if (difficulty === 'easy')
+    return { anchors: 5, sweepLimit: 2, tideCap: 16, marks: 2, urchins: 1 };
+  if (difficulty === 'hard')
+    return { anchors: 3, sweepLimit: 1, tideCap: 12, marks: 4, urchins: 3 };
+  return { anchors: 4, sweepLimit: 1, tideCap: 14, marks: 3, urchins: 2 };
 }
 
 function note(state: ReefState, line: string): void {
@@ -77,7 +88,22 @@ function push(x: number, y: number, dir: Dir): { x: number; y: number; blocked: 
   return { x: nx, y: ny, blocked: false };
 }
 
-export function suggest(state: ReefState): string {
+export function onUrchin(state: ReefState, x = state.x, y = state.y): boolean {
+  return state.urchins.some((cell) => cell[0] === x && cell[1] === y);
+}
+
+interface Node {
+  x: number;
+  y: number;
+  tide: number;
+  got: number;
+  anchors: number;
+  swept: number;
+  first: string;
+}
+
+/** First action of a clear that stays inside the sweep cap, or null. */
+function solve(state: ReefState): string | null {
   const goalKeys = state.goals.map((goal) => keyOf(goal));
   const full = (1 << state.goals.length) - 1;
   let mask = 0;
@@ -85,15 +111,6 @@ export function suggest(state: ReefState): string {
     const index = goalKeys.indexOf(key);
     if (index >= 0) mask |= 1 << index;
   });
-  type Node = {
-    x: number;
-    y: number;
-    tide: number;
-    got: number;
-    anchors: number;
-    swept: number;
-    first: string;
-  };
   const queue: Node[] = [
     {
       x: state.x,
@@ -116,7 +133,7 @@ export function suggest(state: ReefState): string {
     seen.add(sig);
     const dir = CYCLE[node.tide % CYCLE.length] ?? 'e';
     const options: string[] = [];
-    for (const step of ['n', 'e', 's', 'w'] as const) {
+    for (const step of STEPS) {
       const [dx, dy] = DELTA[step];
       if (inside(node.x + dx, node.y + dy)) options.push(`step:${step}`);
     }
@@ -136,6 +153,7 @@ export function suggest(state: ReefState): string {
         x = landed.x;
         y = landed.y;
         if (landed.blocked) swept += 1;
+        else if (state.urchins.some((cell) => cell[0] === x && cell[1] === y)) swept += 1;
       }
       if (swept > state.sweepLimit) continue;
       let got = node.got;
@@ -144,13 +162,23 @@ export function suggest(state: ReefState): string {
       queue.push({ x, y, tide: node.tide + 1, got, anchors, swept, first: node.first || id });
     }
   }
-  return state.anchors > 0 ? 'anchor' : 'step:e';
+  return null;
 }
 
-export function createRun(options: { seed: number; difficulty?: string }): ReefState {
-  const difficulty = difficultyOf(options.difficulty);
-  const rng = Rng.fromSeed(options.seed);
-  const rule = rules(difficulty);
+export function suggest(state: ReefState): string {
+  return solve(state) ?? (state.anchors > 0 ? 'anchor' : 'step:e');
+}
+
+function shuffle<T>(rng: Rng, items: T[]): void {
+  for (let i = items.length - 1; i > 0; i -= 1) {
+    const j = rng.int(0, i);
+    const swap = items[i]!;
+    items[i] = items[j]!;
+    items[j] = swap;
+  }
+}
+
+function lay(state: ReefState, rng: Rng, rule: ReturnType<typeof rules>): void {
   const pool: number[][] = [];
   for (let y = 1; y < HEIGHT - 1; y += 1) {
     for (let x = 1; x < WIDTH - 1; x += 1) {
@@ -158,22 +186,32 @@ export function createRun(options: { seed: number; difficulty?: string }): ReefS
       pool.push([x, y]);
     }
   }
-  for (let i = pool.length - 1; i > 0; i -= 1) {
-    const j = rng.int(0, i);
-    const swap = pool[i]!;
-    pool[i] = pool[j]!;
-    pool[j] = swap;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    shuffle(rng, pool);
+    state.goals = pool
+      .slice(0, rule.marks)
+      .map((cell) => [cell[0]!, cell[1]!])
+      .sort((a, b) => (a[1] ?? 0) - (b[1] ?? 0) || (a[0] ?? 0) - (b[0] ?? 0));
+    state.urchins = pool
+      .slice(rule.marks, rule.marks + rule.urchins)
+      .map((cell) => [cell[0]!, cell[1]!]);
+    if (solve(state)) return;
   }
-  const goals = pool
-    .slice(0, 2)
-    .sort((a, b) => (a[1] ?? 0) - (b[1] ?? 0) || (a[0] ?? 0) - (b[0] ?? 0));
+  state.urchins = [];
+}
+
+export function createRun(options: { seed: number; difficulty?: string }): ReefState {
+  const difficulty = difficultyOf(options.difficulty);
+  const rng = Rng.fromSeed(options.seed);
+  const rule = rules(difficulty);
   const state: ReefState = {
     seed: options.seed >>> 0,
     difficulty,
-    rng: rng.serialize(),
+    rng: [],
     x: 1,
     y: 1,
-    goals,
+    goals: [],
+    urchins: [],
     got: [],
     tide: 0,
     tideCap: rule.tideCap,
@@ -185,6 +223,8 @@ export function createRun(options: { seed: number; difficulty?: string }): ReefS
     outcome: 'ongoing',
     cause: '',
   };
+  lay(state, rng, rule);
+  state.rng = rng.serialize();
   return state;
 }
 
@@ -212,40 +252,56 @@ export function statusOf(state: ReefState): StatusView {
           return state.got.includes(key) ? `${key} 已踩` : `${key} 还没踩`;
         }),
       },
+      {
+        title: '海胆',
+        lines: state.urchins.length
+          ? state.urchins.map((cell) => `${keyOf(cell)} 海胆。潮推上去算一次被冲，下锚可以压住。`)
+          : ['这一盘没有海胆'],
+      },
       { title: '记录', lines: state.notes.length ? [...state.notes] : ['潮还没推'] },
     ],
   };
+}
+
+function landingDetail(
+  step: Dir,
+  dir: Dir,
+  landed: { x: number; y: number; blocked: boolean },
+  urchin: boolean,
+): string {
+  if (landed.blocked) return `先向${DIR_LABEL[step]}，潮再向${DIR_LABEL[dir]}。潮会把你顶在墙上。`;
+  if (urchin) return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y} 的海胆上。`;
+  return `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y}。`;
 }
 
 export function actionsOf(state: ReefState): ActionView[] {
   if (state.outcome !== 'ongoing') return [];
   const dir = coming(state);
   const actions: ActionView[] = [];
-  for (const step of ['n', 'e', 's', 'w'] as const) {
+  for (const step of STEPS) {
     const [dx, dy] = DELTA[step];
     if (!inside(state.x + dx, state.y + dy)) continue;
     const landed = push(state.x + dx, state.y + dy, dir);
+    const urchin = !landed.blocked && onUrchin(state, landed.x, landed.y);
     actions.push({
       id: `step:${step}`,
       label: DIR_LABEL[step],
-      detail: landed.blocked
-        ? `先向${DIR_LABEL[step]}，潮再向${DIR_LABEL[dir]}。潮会把你顶在墙上。`
-        : `先向${DIR_LABEL[step]}，潮再把你推到 ${landed.x},${landed.y}。`,
-      risk: landed.blocked ? 'high' : 'low',
+      detail: landingDetail(step, dir, landed, urchin),
+      risk: landed.blocked || urchin ? 'high' : 'low',
     });
   }
   if (state.anchors > 0) {
+    const braced = onUrchin(state);
     actions.push({
       id: 'anchor',
       label: '下锚',
-      detail: `这一潮停在 ${state.x},${state.y}。锚还剩 ${state.anchors}。`,
+      detail: braced
+        ? `下锚压住海胆，停在 ${state.x},${state.y}。锚还剩 ${state.anchors}。`
+        : `这一潮停在 ${state.x},${state.y}。锚还剩 ${state.anchors}。`,
       risk: 'medium',
     });
   }
-  const pick = suggest(state);
-  const first = actions.find((action) => action.id === pick);
-  const rest = actions.filter((action) => action.id !== pick);
-  return first ? [first, ...rest] : actions;
+  return actions;
 }
 
 function claim(state: ReefState, log: string[]): void {
@@ -268,7 +324,10 @@ export function act(state: ReefState, actionId: string): ActionResult {
   const log: string[] = [];
   if (actionId === 'anchor') {
     state.anchors -= 1;
-    log.push(`下锚。停在 ${state.x},${state.y}。`);
+    const line = onUrchin(state)
+      ? `下锚压住海胆。停在 ${state.x},${state.y}。`
+      : `下锚。停在 ${state.x},${state.y}。`;
+    log.push(line);
   } else {
     const step = actionId.slice(5) as Dir;
     const [dx, dy] = DELTA[step];
@@ -280,6 +339,11 @@ export function act(state: ReefState, actionId: string): ActionResult {
     if (landed.blocked) {
       state.swept += 1;
       const line = `潮把你顶在墙上。冲 ${state.swept}。`;
+      log.push(line);
+      state.timeline.push(line);
+    } else if (onUrchin(state)) {
+      state.swept += 1;
+      const line = `潮把你推上海胆。冲 ${state.swept}。`;
       log.push(line);
       state.timeline.push(line);
     } else {
@@ -340,11 +404,11 @@ export function recapOf(state: ReefState) {
     timeline: state.timeline.length ? [...state.timeline] : ['还没有踩到标'],
     lessons: [
       `本局踩了 ${state.got.length} 个标，被冲 ${state.swept} 次。`,
-      '标只在潮推完之后、你还站着的那一格算数。',
-      '一次被冲比省下两只锚更贵。',
+      '标只在潮推完之后、你还站着的那一格算数。海胆也要等潮推完才算。',
+      '一次被冲比省下两只锚更贵。下锚可以压住脚下的海胆。',
     ],
     memoryPrompt:
-      '把下一步潮往哪边、标在被推之后落在哪一格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。',
+      '把下一步潮往哪边、标和海胆在被推之后落在哪一格写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。',
     score: ladderScore(state),
   };
 }

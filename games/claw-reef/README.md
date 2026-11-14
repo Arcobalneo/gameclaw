@@ -2,7 +2,7 @@
 
 `claw-reef`
 
-标点都看得见。先走一步，或者下锚停住。然后公开的潮把没下锚的推一格。标只在潮推完、你还站着的那一格算数。
+标点都看得见。先走一步，或者下锚停住。然后公开的潮把没下锚的推一格。标只在潮推完、你还站着的那一格算数。潮把你推上海胆也算一次被冲。下锚可以压住脚下的海胆。
 
 人在网页里玩。Agent 通过同一个页面的 Web MCP（页内或远程 relay）玩。引擎是确定性的：同一 seed、同一动作序列、同一版本，结果相同。
 
@@ -20,7 +20,7 @@ Marks×90 + anchors left×10 − sweeps×70. Standing on every mark adds 280. On
 
 ## 状态
 
-`state.x` `state.y` 潮推完的位置，`state.goals` 标点，`state.got` 已经踩到的，`state.tide` 决定下一步潮向，`state.anchors`，`state.swept`，`state.rng`。
+`state.x` `state.y` 潮推完的位置，`state.goals` 标点，`state.urchins` 海胆，`state.got` 已经踩到的，`state.tide` 决定下一步潮向，`state.anchors`，`state.swept`，`state.rng`。普通难度三枚标、四只锚。盘面会洗到存在一条不超被冲上限的路。
 
 ## 本地开发
 

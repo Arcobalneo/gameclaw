@@ -2,7 +2,8 @@
  * 虾灯 / Claw Lamp.
  *
  * Posts on a dark shoal light pools they can see. Two lanterns that see each
- * other cannot both stand. Tide is short, so picking a post back up is expensive.
+ * other cannot both stand. The widest post is usually the one that blocks
+ * the seal. Tide is too short to plant it and still recover.
  */
 
 import {
@@ -50,40 +51,51 @@ export interface LampState {
   cause: string;
 }
 
+/** Where each pool sits on the shoal. Shared with the scene. */
+export const POOL_CELLS: Array<[number, number]> = [
+  [1, 1],
+  [3, 0],
+  [5, 2],
+  [4, 4],
+  [2, 3],
+  [0, 2],
+];
+
 const A: StageDef[] = [
   {
     pools: 4,
     stock: 2,
-    tide: 4,
+    tide: 3,
     posts: [
-      { covers: [0], sees: [1, 2], x: 1, y: 1 },
-      { covers: [0, 1, 2], sees: [0], x: 3, y: 2 },
-      { covers: [3], sees: [0], x: 5, y: 3 },
-      { covers: [1], sees: [1], x: 2, y: 4 },
+      { covers: [0, 1, 2], sees: [3], x: 3, y: 1 },
+      { covers: [0, 1], sees: [], x: 1, y: 2 },
+      { covers: [1], sees: [], x: 4, y: 0 },
+      { covers: [2, 3], sees: [0], x: 4, y: 3 },
+      { covers: [0], sees: [], x: 0, y: 3 },
     ],
   },
   {
     pools: 5,
-    stock: 3,
-    tide: 5,
+    stock: 2,
+    tide: 3,
     posts: [
-      { covers: [0], sees: [1, 2, 3], x: 0, y: 2 },
-      { covers: [0, 1], sees: [0], x: 2, y: 1 },
-      { covers: [2, 3], sees: [0], x: 4, y: 1 },
-      { covers: [4], sees: [0], x: 5, y: 3 },
-      { covers: [1], sees: [1], x: 1, y: 4 },
+      { covers: [0, 1, 2], sees: [1, 2], x: 2, y: 1 },
+      { covers: [0, 3], sees: [], x: 1, y: 3 },
+      { covers: [1, 2, 4], sees: [], x: 4, y: 2 },
+      { covers: [4], sees: [0], x: 5, y: 0 },
+      { covers: [2], sees: [], x: 3, y: 4 },
     ],
   },
   {
     pools: 4,
     stock: 2,
-    tide: 4,
+    tide: 3,
     posts: [
-      { covers: [0], sees: [1, 2], x: 2, y: 0 },
-      { covers: [0, 1, 2], sees: [0], x: 4, y: 2 },
-      { covers: [3], sees: [0], x: 1, y: 3 },
-      { covers: [2], sees: [4], x: 5, y: 4 },
-      { covers: [1], sees: [1], x: 0, y: 1 },
+      { covers: [0, 1, 2], sees: [2], x: 2, y: 0 },
+      { covers: [0, 1], sees: [], x: 0, y: 2 },
+      { covers: [2, 3], sees: [0], x: 5, y: 2 },
+      { covers: [1], sees: [], x: 1, y: 4 },
+      { covers: [0], sees: [1], x: 3, y: 3 },
     ],
   },
   {
@@ -91,12 +103,12 @@ const A: StageDef[] = [
     stock: 3,
     tide: 5,
     posts: [
-      { covers: [0], sees: [1, 2, 3], x: 3, y: 0 },
-      { covers: [0, 1], sees: [0], x: 1, y: 2 },
-      { covers: [2, 3], sees: [0], x: 3, y: 2 },
-      { covers: [4, 5], sees: [0], x: 5, y: 2 },
-      { covers: [1], sees: [5], x: 0, y: 4 },
-      { covers: [2], sees: [1], x: 4, y: 4 },
+      { covers: [0, 1, 2, 3], sees: [4], x: 3, y: 1 },
+      { covers: [0, 1], sees: [], x: 1, y: 0 },
+      { covers: [2, 3], sees: [], x: 2, y: 3 },
+      { covers: [4], sees: [0], x: 5, y: 2 },
+      { covers: [3, 4, 5], sees: [0], x: 4, y: 4 },
+      { covers: [5], sees: [1], x: 0, y: 4 },
     ],
   },
 ];
@@ -104,7 +116,7 @@ const A: StageDef[] = [
 const B: StageDef[] = A.map((stage) => ({
   ...stage,
   posts: stage.posts.map((post) => ({
-    covers: post.covers[0] === 0 && post.covers.length === 1 ? [0] : [...post.covers],
+    covers: [...post.covers],
     sees: [...post.sees],
     x: (post.x + 2) % 6,
     y: post.y,
@@ -158,22 +170,88 @@ function freshCount(state: LampState, index: number): number {
   return post.covers.filter((pool) => !lit.has(pool)).length;
 }
 
+interface Sim {
+  placed: boolean[];
+  stock: number;
+  tide: number;
+}
+
+function litSim(state: LampState, sim: Sim): boolean {
+  const lit = new Set<number>();
+  state.posts.forEach((post, index) => {
+    if (!sim.placed[index]) return;
+    for (const pool of post.covers) lit.add(pool);
+  });
+  for (let i = 0; i < state.pools; i += 1) if (!lit.has(i)) return false;
+  return state.pools > 0;
+}
+
+function placeable(state: LampState, sim: Sim, index: number): boolean {
+  const post = state.posts[index];
+  if (!post || sim.placed[index] || sim.stock <= 0 || sim.tide <= 0) return false;
+  return !post.sees.some((other) => sim.placed[other] === true);
+}
+
+function solvable(state: LampState, sim: Sim, seen: Set<string>): boolean {
+  const key = `${sim.placed.map((on) => (on ? '1' : '0')).join('')}|${sim.tide}|${sim.stock}`;
+  if (seen.has(key)) return false;
+  seen.add(key);
+  if (litSim(state, sim)) return true;
+  if (sim.tide <= 0) return false;
+  for (let i = 0; i < state.posts.length; i += 1) {
+    if (!placeable(state, sim, i)) continue;
+    sim.placed[i] = true;
+    sim.stock -= 1;
+    sim.tide -= 1;
+    if (solvable(state, sim, seen)) {
+      sim.placed[i] = false;
+      sim.stock += 1;
+      sim.tide += 1;
+      return true;
+    }
+    sim.placed[i] = false;
+    sim.stock += 1;
+    sim.tide += 1;
+  }
+  for (let i = 0; i < sim.placed.length; i += 1) {
+    if (!sim.placed[i]) continue;
+    sim.placed[i] = false;
+    sim.stock += 1;
+    sim.tide -= 1;
+    if (solvable(state, sim, seen)) {
+      sim.placed[i] = true;
+      sim.stock -= 1;
+      sim.tide += 1;
+      return true;
+    }
+    sim.placed[i] = true;
+    sim.stock -= 1;
+    sim.tide += 1;
+  }
+  return false;
+}
+
 export function suggest(state: LampState): string {
   if (allLit(state)) return 'seal';
-  let best = -1;
-  let bestNew = 0;
+  const base = (): Sim => ({ placed: [...state.placed], stock: state.stock, tide: state.tide });
   for (let i = 0; i < state.posts.length; i += 1) {
-    if (!canPlace(state, i)) continue;
-    const added = freshCount(state, i);
-    if (added > bestNew) {
-      bestNew = added;
-      best = i;
-    }
+    const sim = base();
+    if (!placeable(state, sim, i)) continue;
+    sim.placed[i] = true;
+    sim.stock -= 1;
+    sim.tide -= 1;
+    if (solvable(state, sim, new Set())) return `place:${i}`;
   }
-  if (best >= 0 && bestNew > 0) return `place:${best}`;
-  const lift = state.placed.findIndex((on) => on);
-  if (lift >= 0 && state.tide > 0) return `lift:${lift}`;
-  return 'seal';
+  for (let i = 0; i < state.placed.length; i += 1) {
+    if (!state.placed[i] || state.tide <= 0) continue;
+    const sim = base();
+    sim.placed[i] = false;
+    sim.stock += 1;
+    sim.tide -= 1;
+    if (solvable(state, sim, new Set())) return `lift:${i}`;
+  }
+  const fallback = state.posts.findIndex((_, index) => canPlace(state, index));
+  return fallback >= 0 ? `place:${fallback}` : 'seal';
 }
 
 function note(state: LampState, line: string): void {
@@ -225,7 +303,8 @@ function postLine(state: LampState, index: number): string {
   const post = state.posts[index];
   if (!post) return '无';
   const flag = state.placed[index] ? '已立' : '空着';
-  return `第 ${index + 1} 根 ${flag}，能照 ${post.covers.map((pool) => pool + 1).join('/')}`;
+  const blocks = post.sees.length ? post.sees.map((other) => other + 1).join(', ') : '无';
+  return `第 ${index + 1} 根 ${flag}，能照 ${post.covers.map((pool) => pool + 1).join('/')}，挡住 ${blocks}`;
 }
 
 export function statusOf(state: LampState): StatusView {
@@ -250,11 +329,16 @@ export function statusOf(state: LampState): StatusView {
       { title: '柱', lines: state.posts.map((_, index) => postLine(state, index)) },
       {
         title: '视线',
-        lines: ['两根能互相看见的柱不能同时立着。收起灯笼要花一潮，并记一次挪灯。'],
+        lines: ['两根能互相看见的柱不能同时立着。照得最广的那根常常挡住封滩的柱。'],
       },
       { title: '记录', lines: state.notes.length ? [...state.notes] : ['还没有立灯'] },
     ],
   };
+}
+
+function blockWord(post: Post | undefined): string {
+  if (!post || post.sees.length === 0) return '无';
+  return post.sees.map((index) => index + 1).join(', ');
 }
 
 export function actionsOf(state: LampState): ActionView[] {
@@ -266,8 +350,8 @@ export function actionsOf(state: LampState): ActionView[] {
     actions.push({
       id: `place:${i}`,
       label: `立 ${i + 1}`,
-      detail: `把灯笼立在第 ${i + 1} 根。新照亮 ${added} 个水洼。`,
-      risk: added > 0 ? 'low' : 'high',
+      detail: `把灯笼立在第 ${i + 1} 根。新照亮 ${added} 个水洼。挡住 ${blockWord(state.posts[i])}。`,
+      risk: added > 0 ? 'medium' : 'high',
       cost: '1 潮',
     });
   }
@@ -289,10 +373,7 @@ export function actionsOf(state: LampState): ActionView[] {
       risk: 'low',
     });
   }
-  const pick = suggest(state);
-  const first = actions.find((action) => action.id === pick);
-  const rest = actions.filter((action) => action.id !== pick);
-  return first ? [first, ...rest] : actions;
+  return actions;
 }
 
 function fail(state: LampState, log: string[]): void {
@@ -347,7 +428,7 @@ export function act(state: LampState, actionId: string): ActionResult {
     if (state.tide <= 0 && !allLit(state)) fail(state, log);
   }
   state.rng = rng.serialize();
-  return { log, events: [{ type: actionId.startsWith('place:') ? 'place' : actionId }] };
+  return { log, events: [{ type: actionId, tide: state.tide, stock: state.stock }] };
 }
 
 export function abort(state: LampState): void {
@@ -384,8 +465,8 @@ export function recapOf(state: LampState) {
     timeline: state.timeline.length ? [...state.timeline] : ['还没有封上一段'],
     lessons: [
       `本局封上 ${state.cleared} 段，省下 ${state.saved} 只灯笼，挪灯 ${state.lifts} 次。`,
-      '能互相看见的两根柱不能同时立。先立照亮水洼最多的那根。',
-      '潮不够把立错的灯都收回来。一次挪灯比两只省下的灯笼更贵。',
+      '照得最广的那根常常挡住真正能封滩的柱。先看它挡住谁。',
+      '潮不够把立错的灯收回来再重立。一次挪灯比两只省下的灯笼更贵。',
     ],
     memoryPrompt:
       '把本局哪一根柱挡住了真正照亮水洼的位置写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。',
