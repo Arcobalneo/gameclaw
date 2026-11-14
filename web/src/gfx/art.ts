@@ -120,6 +120,8 @@ export interface Grade {
   strength?: number;
   /** Bloom intensity 0..1 (default 0.55). */
   bloom?: number;
+  /** Edge darkening 0..1 (default 0.9). */
+  vignette?: number;
 }
 
 const gradeCache = new Map<string, HTMLCanvasElement>();

@@ -1,12 +1,28 @@
 import { MATERIALS } from '@games/shrimp-burger/src/content';
 import { definition } from '@games/shrimp-burger/src/definition';
 import type { BurgerState } from '@games/shrimp-burger/src/engine';
+import { humanoid } from '../gfx/actors';
+import type { Grade } from '../gfx/art';
 import { sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { bar, type Ctx, dither, easeOutBack, hash01, mix, panel, rect, VH, VW } from '../gfx/pixel';
-import type { GameModule, GameScene, HitRegion } from '../gfx/scene';
+import {
+  bar,
+  type Ctx,
+  ctx2d,
+  dither,
+  easeOutBack,
+  hash01,
+  makeCanvas,
+  mix,
+  panel,
+  rect,
+  VH,
+  VW,
+} from '../gfx/pixel';
+import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { BUN_TOP, buildSprite, CAT, PIGEON, RACCOON, type SpriteDef } from '../gfx/sprites';
 import { drawText, fitText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, plate, shadow } from '../gfx/world';
 
 const MAT: Record<string, { color: string; h: number; wavy?: boolean }> = {
@@ -33,6 +49,62 @@ const COLS = [120, 190, 260];
 const CATCH_Y = 150;
 const PLATE_X = 52;
 const PLATE_Y = 184;
+
+const VERDICT: Record<string, [string, string]> = {
+  tasty: ['美味!', 'TASTY!'],
+  lucky: ['歪打正着!', 'LUCKY!'],
+  bad: ['难吃…', 'BLEH...'],
+  disaster: ['灾难!!', 'DISASTER!'],
+};
+
+let kitchen: HTMLCanvasElement | null = null;
+/** Diner kitchen, painted once: tiled wall, shelf with jars, grill hood, steel counter. */
+function kitchenBg(): HTMLCanvasElement {
+  if (kitchen) return kitchen;
+  const c = makeCanvas(VW, VH);
+  const g = ctx2d(c);
+  sky(g, ['#3a1a0e', '#2a1208', '#1a0a04'], 0, VH, 8);
+  for (let y = 0; y < 160; y += 10)
+    for (let x = 0; x < VW; x += 10) {
+      const k = hash01(x, y) * 0.15;
+      rect(g, x, y, 9, 9, mix('#a89878', '#8a7a60', k));
+      rect(g, x, y, 9, 1, '#c8b898');
+      rect(g, x, y + 9, 10, 1, '#5a4a38');
+      rect(g, x + 9, y, 1, 10, '#5a4a38');
+    }
+  // Warm grime toward the grill + darkening low.
+  for (let y = 0; y < 160; y += 1) {
+    g.fillStyle = `rgba(40,16,4,${(0.35 + (y / 160) * 0.35).toFixed(3)})`;
+    g.fillRect(0, y, VW, 1);
+  }
+  // Checkered trim.
+  for (let x = 0; x < VW; x += 6) rect(g, x, 100, 6, 6, (x / 6) % 2 ? '#c83a2a' : '#f0e8d8');
+  // Shelf with jars.
+  rect(g, 112, 18, 170, 4, '#6a3a1a');
+  rect(g, 112, 18, 170, 1, '#a06a3a');
+  const jars = ['#e83a2a', '#ffd23f', '#5fd35f', '#8ab84a', '#ff8a3a', '#c8c8d8'];
+  for (let i = 0; i < 9; i += 1) {
+    const x = 118 + i * 18;
+    const col = jars[i % jars.length]!;
+    rect(g, x, 6, 10, 12, mix(col, '#000000', 0.25));
+    rect(g, x + 1, 8, 8, 9, col);
+    rect(g, x + 2, 9, 2, 6, mix(col, '#ffffff', 0.5));
+    rect(g, x - 1, 4, 12, 3, '#3a3a4a');
+  }
+  // Grill hood behind the heat gauge.
+  rect(g, 318, 60, 56, 10, '#5a5a6a');
+  rect(g, 318, 60, 56, 1, '#a8a8b8');
+  for (let k = 0; k < 8; k += 1) rect(g, 322 + k, 70 + k, 48 - k * 2, 1, '#3a3a48');
+  // Counter: brushed steel top, wood front.
+  rect(g, 0, 158, VW, 6, '#9aa0b0');
+  rect(g, 0, 158, VW, 1, '#e0e4f0');
+  rect(g, 0, 164, VW, 2, '#4a4a58');
+  rect(g, 0, 166, VW, VH - 166, '#5a3018');
+  for (let x = 0; x < VW; x += 24) rect(g, x, 166, 1, VH - 166, '#3a1e0e');
+  dither(g, 0, 176, VW, VH - 176, '#2a1408', 0.3);
+  kitchen = c;
+  return c;
+}
 
 const layerCache = new Map<string, HTMLCanvasElement>();
 
@@ -140,24 +212,13 @@ function createScene(): GameScene<BurgerState> {
     },
     draw(f) {
       const { g, t, state } = f;
-      sky(g, ['#3a1a0e', '#2a1208', '#1a0a04'], 0, VH, 8);
-      // Back wall tiles + neon sign.
-      for (let y = 0; y < 150; y += 12)
-        for (let x = (y / 12) % 2 ? -8 : 0; x < VW; x += 16) {
-          rect(g, x, y, 15, 11, '#2e160a');
-          rect(g, x, y, 15, 1, '#3e2010');
-        }
-      glow(g, 190, 12, 70, '#ff7a2a', 0.15);
-      // Counter.
-      rect(g, 0, 160, VW, VH - 160, '#4a2a16');
-      rect(g, 0, 160, VW, 3, '#8a5a32');
-      dither(g, 0, 170, VW, VH - 170, '#2a1408', 0.35);
+      g.drawImage(kitchenBg(), 0, 0);
       // Drop columns.
       COLS.forEach((cx, slot) => {
         const item = state.falling.find((it) => it.slot === slot);
         const focus = f.focus?.id === `catch:${slot}`;
-        g.fillStyle = focus ? 'rgba(255,224,102,0.10)' : 'rgba(255,255,255,0.03)';
-        g.fillRect(cx - 24, 18, 48, CATCH_Y - 18);
+        g.fillStyle = focus ? 'rgba(255,224,102,0.12)' : 'rgba(255,240,220,0.05)';
+        g.fillRect(cx - 24, 26, 48, CATCH_Y - 26);
         rect(g, cx - 24, CATCH_Y + 4, 48, 2, focus ? '#ffe066' : '#6a4224');
         drawText(g, String(slot + 1), cx, CATCH_Y + 7, {
           color: focus ? '#ffe066' : '#a0784a',
@@ -186,10 +247,12 @@ function createScene(): GameScene<BurgerState> {
             state.recipe.optional.includes(id as never);
           if (!onRecipe && !unstable) glow(g, cx, y, 14, '#ff3a5a', 0.25);
           blit(g, layer(id, 20), cx, y, { anchor: 'c', scale: 2 });
-          drawText(g, fitText(item.name, 50), cx, y + 9, {
-            color: unstable ? '#ff9ae0' : onRecipe ? '#fff4d6' : '#ff9a9a',
-            align: 'center',
-          });
+          const nm = say(f, item.name);
+          if (nm)
+            drawText(g, fitText(nm, 50), cx, y + 9, {
+              color: unstable ? '#ff9ae0' : onRecipe ? '#fff4d6' : '#ff9a9a',
+              align: 'center',
+            });
         }
       });
       if (catchFx && t - catchFx.t < 0.3) {
@@ -222,7 +285,7 @@ function createScene(): GameScene<BurgerState> {
         shadow(g, px, 186, 14);
         blit(g, s, px, 186, { anchor: 'bc', scale: 1 });
         const danger = pest.stealsIn <= 1;
-        drawText(g, String(pest.stealsIn), px, 166, {
+        tiny(g, String(pest.stealsIn), px, 166, {
           color: danger ? '#ff4d6d' : '#ffe066',
           align: 'center',
         });
@@ -230,7 +293,11 @@ function createScene(): GameScene<BurgerState> {
       });
       // Heat gauge.
       drawHeatGauge(g, 346, 92, 80, state.heat, state.recipe.heatMin, state.recipe.heatMax, t);
-      drawText(g, '火候', 346, 178, { color: '#ffb347', align: 'center' });
+      for (let k = 0; k < 5; k += 1) {
+        const fh = 4 + Math.round(Math.abs(Math.sin(t * 9 + k * 1.7)) * 5);
+        rect(g, 338 + k * 4, 186 - fh, 3, fh, k % 2 ? '#ffb347' : '#ff6a2a');
+        rect(g, 338 + k * 4, 186 - fh, 3, 1, '#ffe066');
+      }
       // Guest.
       const mood = state.guest.mood;
       const gx = 330;
@@ -245,48 +312,76 @@ function createScene(): GameScene<BurgerState> {
         mood > 60 ? '#5a8a3a' : mood > 30 ? '#8a7a2a' : '#8a2a2a',
       );
       const face = mood > 60 ? '#ffe066' : mood > 30 ? '#ffb347' : '#ff6b6b';
-      rect(g, gx - 26, gy - 14, 16, 16, face);
-      rect(g, gx - 23, gy - 9, 2, 3, '#14081a');
-      rect(g, gx - 16, gy - 9, 2, 3, '#14081a');
-      rect(g, gx - 23, mood > 60 ? gy - 3 : gy - 2, 10, 1, '#14081a');
-      if (mood > 60) {
-        rect(g, gx - 24, gy - 4, 1, 1, '#14081a');
-        rect(g, gx - 13, gy - 4, 1, 1, '#14081a');
-      }
-      drawText(g, fitText(state.guest.name, 44), gx - 6, gy - 16, {
-        color: '#fff4d6',
-        outline: null,
+      const bust = buildSprite(
+        humanoid({
+          skin: '#f0c090',
+          hair: '#4a2a1a',
+          style: 'bob',
+          shirt: '#3a7ac0',
+          accent: '#ffe066',
+          bust: true,
+          angry: mood <= 30,
+          talk: mood > 60 && Math.sin(t * 3) > 0.6,
+          blink: Math.sin(t * 1.3) > 0.97,
+        }),
+      );
+      blit(g, bust, gx - 18, gy + 20 + (mood > 60 ? Math.round(Math.sin(t * 4)) : 0), {
+        anchor: 'bc',
+        scale: 2,
       });
-      bar(g, gx - 6, gy + 2, 42, 3, mood / 100, face);
-      drawText(g, `第 ${state.order} 单`, gx - 6, gy + 6, { color: '#c8a070', outline: null });
+      const gn = say(f, state.guest.name);
+      if (gn) drawText(g, fitText(gn, 40), gx + 2, gy - 16, { color: '#fff4d6', outline: null });
+      bar(g, gx + 2, gy + 2, 34, 3, mood / 100, face);
+      if (mood <= 30)
+        tiny(g, '!', gx - 4, gy - 18 + Math.round(Math.sin(t * 12)), {
+          color: '#ff4d6d',
+          scale: 2,
+        });
       // Recipe ticket.
       panel(
         g,
         8,
         22,
         92,
-        22 + state.recipe.required.length * 12 + 12,
-        '#fff4d6',
+        22 + state.recipe.required.length * 12 + 14,
+        '#d8c8a0',
         '#c8a070',
         '#3a2214',
       );
-      drawText(g, fitText(state.recipe.name, 84), 12, 25, { color: '#3a2214', outline: null });
+      const rn = say(f, state.recipe.name);
+      if (rn) drawText(g, fitText(rn, 84), 12, 25, { color: '#3a2214', outline: null });
       state.recipe.required.forEach((id, i) => {
         const have = state.stack.some((s) => s.id === id);
-        rect(g, 13, 41 + i * 12, 8, 6, MAT[id]?.color ?? '#999');
-        drawText(g, fitText(MATERIALS[id]?.name ?? String(id), 60), 24, 38 + i * 12, {
+        blit(g, layer(id, 14), 12, 40 + i * 12);
+        const mn = say(f, MATERIALS[id]?.name ?? String(id)) || String(id).toUpperCase();
+        drawText(g, fitText(mn, 56), 30, 38 + i * 12, {
           color: have ? '#2a8a2a' : '#5a3a24',
           outline: null,
         });
+        if (have) {
+          rect(g, 90, 43 + i * 12, 2, 2, '#2a8a2a');
+          rect(g, 92, 44 + i * 12, 2, 2, '#2a8a2a');
+          rect(g, 94, 40 + i * 12, 2, 4, '#2a8a2a');
+        }
       });
       drawText(
         g,
         `${state.recipe.heatMin}-${state.recipe.heatMax}°`,
         96,
-        24 + state.recipe.required.length * 12 + 6,
+        26 + state.recipe.required.length * 12 + 8,
         { color: '#c8402a', outline: null, align: 'right' },
       );
-      if (lastVerdict && f.since < 2) plate(g, lastVerdict, PLATE_X, 104, '#ffe066', 100);
+      if (lastVerdict && f.since < 2) {
+        const [zh, en] = VERDICT[lastVerdict] ?? ['出餐', 'SERVED'];
+        const k = easeOutBack(Math.min(1, f.since / 0.3));
+        if (f.lang === 'zh') plate(g, zh, PLATE_X + 4, Math.round(110 - k * 8), '#ffe066', 100);
+        else
+          tiny(g, en, PLATE_X + 4, Math.round(110 - k * 8), {
+            color: '#ffe066',
+            align: 'center',
+            scale: 2,
+          });
+      }
       // Ambient steam.
       if (hash01(Math.floor(t * 20), 3) > 0.6)
         f.fx.mote(
@@ -300,17 +395,7 @@ function createScene(): GameScene<BurgerState> {
           false,
         );
     },
-    hud(f) {
-      const { g, state } = f;
-      drawText(g, `出餐 ${state.served}/${state.goal}`, VW / 2, 20, {
-        color: '#ffe066',
-        align: 'center',
-      });
-      drawText(g, `剩 ${state.turnsRemaining} 拍`, VW / 2, 33, {
-        color: state.turnsRemaining < 10 ? '#ff6b6b' : '#ffd0a0',
-        align: 'center',
-      });
-    },
+    grade: (): Grade => ({ top: '#ffd8a0', bottom: '#1a0804', strength: 0.22, bloom: 0.3 }),
     react(f, o) {
       for (const e of o.events) {
         if (e.type === 'catch-ingredient' || e.type === 'catch-heat' || e.type === 'fusion-catch') {
@@ -321,7 +406,8 @@ function createScene(): GameScene<BurgerState> {
             colors: e.type === 'catch-heat' ? ['#ff7a2a', '#ffe066'] : ['#ffffff', '#ffe066'],
             speed: 70,
           });
-          f.fx.shake(1.5, 0.12);
+          f.fx.hit(COLS[slot] ?? 190, CATCH_Y, 'light', -Math.PI / 2, ['#ffffff', '#ffe066']);
+          f.cue(e.type === 'catch-heat' ? 'hit' : 'land');
         } else if (e.type === 'shoo') {
           f.fx.burst(100, 176, {
             count: 18,
@@ -329,15 +415,18 @@ function createScene(): GameScene<BurgerState> {
             speed: 110,
             shape: 'spark',
           });
-          f.fx.float(100, 156, '走开!', '#9fe4ff');
+          f.fx.float(100, 156, '!', '#9fe4ff', 1, true);
+          f.cue('whoosh');
         } else if (e.type === 'pest-theft') {
-          f.fx.shake(3, 0.3);
-          f.fx.float(PLATE_X, 120, '被偷吃!', '#ff8a8a');
+          f.fx.hit(PLATE_X, 150, 'medium', Math.PI, ['#ff8a8a', '#ffffff']);
+          f.fx.float(PLATE_X, 120, '-1', '#ff8a8a');
+          f.cue('bad');
         } else if (e.type === 'serve') {
           serveT = 0;
           const v = String(e.verdict ?? '');
-          lastVerdict =
-            { tasty: '美味!', lucky: '歪打正着!', bad: '难吃…', disaster: '灾难!!' }[v] ?? '出餐';
+          lastVerdict = v || 'served';
+          f.fx.steam(PLATE_X, 140, '#ffffff', 8);
+          f.cue(v === 'tasty' || v === 'lucky' ? 'good' : 'bad');
           f.fx.burst(PLATE_X, 150, {
             count: 40,
             colors:
@@ -348,8 +437,9 @@ function createScene(): GameScene<BurgerState> {
           });
           if (v === 'tasty') f.fx.flash('#fff6c0', 0.3);
         } else if (e.type === 'walkout') {
-          f.fx.shake(4, 0.4);
-          f.fx.float(330, 70, '客人走了!', '#ff8a8a');
+          f.fx.addTrauma(0.4);
+          f.fx.float(330, 70, '...', '#ff8a8a');
+          f.cue('bad');
         } else if (e.type === 'soothe') {
           f.fx.burst(310, 40, {
             count: 16,

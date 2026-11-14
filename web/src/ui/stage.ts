@@ -214,7 +214,7 @@ export class Stage {
     const grade = this.#scene.grade?.(f.state) ?? DEFAULT_GRADE;
     applyGrade(g, grade);
     this.#bloom.apply(g, this.#buffer, grade.bloom ?? 0.45);
-    vignette(g, 0.9);
+    vignette(g, grade.vignette ?? 0.9);
     if (isFontReady()) this.#scene.hud?.(f);
     this.#fx.drawFloats(g);
     this.#drawBanner(g);
