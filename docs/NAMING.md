@@ -13,7 +13,7 @@ machine id, source path, and package are one coordinated identity.
   final keyword matching the English title's second word. Current keywords are
   `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`,
   `conquest`, `leap`, `burger`, `stamp`, `melt`, `net`, `beat`, `count`,
-  `mask`, `clock`, and `flip`.
+  `mask`, `clock`, `flip`, `round`, `coil`, `sum`, and `berth`.
 - Whenever both display names appear, use **`虾× (English Name)`**, for example
   `虾走 (Claw Trek)` or `虾印 (Claw Stamp)`. This is the required per-game
   README title and the preferred paired form in user-facing documentation.
@@ -67,8 +67,9 @@ under a former id into that current id. Leaderboard rows, play counts, and
 saved runs stored under a former id are folded in on read. Do not add a
 Durable Object migration tag for that fold.
 
-`claw-stamp`, `claw-melt`, `claw-net`, and `claw-beat` were born on the current
-identity and have no former id.
+`claw-stamp`, `claw-melt`, `claw-net`, `claw-beat`, `claw-count`, `claw-mask`,
+`claw-clock`, `claw-flip`, `claw-round`, `claw-coil`, `claw-sum`, and
+`claw-berth` were born on the current identity and have no former id.
 
 ## Intentional identity refreshes
 

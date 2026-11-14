@@ -193,6 +193,38 @@ const LOOK: Record<
     tagZh: '一拨，板和空对调。',
     tagEn: 'One flip. Plates and gaps trade places.',
   },
+  'claw-round': {
+    accent: '#7ec8ff',
+    ink: '#081018',
+    goal: '六拍内把闸门要的两样装进袋。',
+    goalEn: 'Pocket the two items the gate asks for before six beats.',
+    tagZh: '潮退之后，只有袋子里的留下。',
+    tagEn: 'After the tide, only the pocket remains.',
+  },
+  'claw-coil': {
+    accent: '#8fd48a',
+    ink: '#08140c',
+    goal: '把箱子推进坞，别撞墙。',
+    goalEn: 'Push the crate onto the dock without hitting a wall.',
+    tagZh: '头走一格，尾巴补上。',
+    tagEn: 'The head steps. The tail follows.',
+  },
+  'claw-sum': {
+    accent: '#c49aff',
+    ink: '#140818',
+    goal: '把数字正好拉到目标。',
+    goalEn: 'Pull the number until it matches the target.',
+    tagZh: '正好相等才过釜。',
+    tagEn: 'Only an exact match clears the kettle.',
+  },
+  'claw-berth': {
+    accent: '#6ec8e0',
+    ink: '#081018',
+    goal: '把货装满，危货不要挨着。',
+    goalEn: 'Fill the quota. Keep hazard ships apart.',
+    tagZh: '吃水不能超过水深。',
+    tagEn: 'Draft cannot exceed the berth.',
+  },
 };
 
 export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])

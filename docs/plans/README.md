@@ -3,7 +3,9 @@
 Write a new plan here before a large change: a new game, an engine rewrite, an
 MCP or leaderboard change, or a docs restructure.
 
-Current working plans: [`2026-11-14-jam-slate.md`](2026-11-14-jam-slate.md), [`2026-11-14-jam-batch-2.md`](2026-11-14-jam-batch-2.md).
+Current working plan: [`2026-11-14-jam-batch-3.md`](2026-11-14-jam-batch-3.md).
+The slate is [`2026-11-14-jam-slate.md`](2026-11-14-jam-slate.md).
+Batch 2 is [`2026-11-14-jam-batch-2.md`](2026-11-14-jam-batch-2.md).
 
 Name the file `YYYY-MM-DD-short-title.md`. State the goal, scope, assumptions,
 risks, and a checklist. Update the plan if the scope changes.

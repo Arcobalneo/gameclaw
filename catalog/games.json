@@ -318,6 +318,62 @@
         "zh": "走完的段×100 + 剩余簧×20 − 伤×80 − 拨动×6。全部走完 +320。一次受伤比一段里的拨动更贵。中止为 0。",
         "en": "Stages×100 + springs left×20 − wounds×80 − flips×6. Clearing every stage adds 320. One wound costs more than a stage of flips. Abort is 0."
       }
+    },
+    {
+      "id": "claw-round",
+      "name": "虾循",
+      "englishName": "Claw Round",
+      "tagline": "六拍之后潮会退",
+      "summary": "桥上五样东西都看得见。六拍之后潮退，只有入袋的东西留得下来。闸门公开要其中两样。装错一件就浪费这一潮。",
+      "genres": ["puzzle", "timing", "turn-based"],
+      "source_dir": "games/claw-round",
+      "status": "stable",
+      "score": {
+        "zh": "齐了是 460 − 多花的潮×30 − 错袋×60。没齐只按带对的件数×40。错袋比多花一潮更贵。中止为 0。",
+        "en": "A full pocket is 460 − extra tides×30 − wrong pockets×60. A miss scores kept pieces×40. A wrong pocket costs more than an extra tide. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-coil",
+      "name": "虾绕",
+      "englishName": "Claw Coil",
+      "tagline": "尾巴跟着头，把箱子推进坞",
+      "summary": "头走一格，尾巴就补上。箱子在头前面会被推一格，前面是墙就推不动。撞墙或撞自己停在原地并记一次撞。箱子推进坞才算。",
+      "genres": ["puzzle", "snake", "turn-based"],
+      "source_dir": "games/claw-coil",
+      "status": "stable",
+      "score": {
+        "zh": "进坞×80 + 身长×8 − 撞×40。全部进坞 +300。一次撞比半箱更贵。中止为 0。",
+        "en": "Docked×80 + length×8 − bumps×40. Docking every crate adds 300. One bump costs more than half a crate. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-sum",
+      "name": "虾算",
+      "englishName": "Claw Sum",
+      "tagline": "拉杆，把数字对准目标",
+      "summary": "每一釜有一个公开目标。加二、加三、翻倍，或在偶数时对半。正好等于目标才过釜。拉杆用完还不相等算落空。",
+      "genres": ["puzzle", "arithmetic", "turn-based"],
+      "source_dir": "games/claw-sum",
+      "status": "stable",
+      "score": {
+        "zh": "对准×80 + 340 − 落空×60。没赢只按对准×40。一次落空比半釜更贵。中止为 0。",
+        "en": "Exact kettles×80 + 340 − misses×60. A loss scores exacts×40. One miss costs more than half a kettle. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-berth",
+      "name": "虾泊",
+      "englishName": "Claw Berth",
+      "tagline": "吃水要进得去，危货不能挨着",
+      "summary": "四个泊位水深不同。吃水不能超过水深，拖船可以多塞深一档。危货挨在一起算事故。等待让已靠的船装货，也让港外的船失去耐心。",
+      "genres": ["puzzle", "harbor", "turn-based"],
+      "source_dir": "games/claw-berth",
+      "status": "stable",
+      "score": {
+        "zh": "货×12 + 开航×15 − 怒×40 − 事故×70。装满 +320。一次事故比三次开航更贵。中止为 0。",
+        "en": "Cargo×12 + sailed×15 − anger×40 − incidents×70. Filling the quota adds 320. One incident costs more than three sailings. Abort is 0."
+      }
     }
   ]
 }

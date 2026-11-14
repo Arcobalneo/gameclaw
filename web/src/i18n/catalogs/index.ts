@@ -1,8 +1,10 @@
 import { canonicalGameId } from '../../../../relay/src/games';
 import claw_beat from './claw-beat.json';
+import claw_berth from './claw-berth.json';
 import claw_burger from './claw-burger.json';
 import claw_catch from './claw-catch.json';
 import claw_clock from './claw-clock.json';
+import claw_coil from './claw-coil.json';
 import claw_conquest from './claw-conquest.json';
 import claw_count from './claw-count.json';
 import claw_flip from './claw-flip.json';
@@ -16,7 +18,9 @@ import claw_mask from './claw-mask.json';
 import claw_melt from './claw-melt.json';
 import claw_net from './claw-net.json';
 import claw_rampage from './claw-rampage.json';
+import claw_round from './claw-round.json';
 import claw_stamp from './claw-stamp.json';
+import claw_sum from './claw-sum.json';
 import claw_trek from './claw-trek.json';
 import type { GameCatalog } from './types';
 
@@ -39,6 +43,10 @@ export function allCatalogs(): ReadonlyMap<string, GameCatalog> {
 }
 
 registerCatalog('claw-beat', claw_beat as GameCatalog);
+registerCatalog('claw-berth', claw_berth as GameCatalog);
+registerCatalog('claw-coil', claw_coil as GameCatalog);
+registerCatalog('claw-round', claw_round as GameCatalog);
+registerCatalog('claw-sum', claw_sum as GameCatalog);
 registerCatalog('claw-burger', claw_burger as GameCatalog);
 registerCatalog('claw-catch', claw_catch as GameCatalog);
 registerCatalog('claw-clock', claw_clock as GameCatalog);

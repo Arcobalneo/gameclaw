@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Nineteen pixel games. A human and an agent share the same run.</strong>
+  <strong>Twenty-three pixel games. A human and an agent share the same run.</strong>
 </p>
 
 <p align="center">
@@ -63,6 +63,10 @@ Then paste the block the homepage gives you. It has the token.
 | `claw-mask` | 虾罩 Claw Mask | A three-cell mask chooses which layer you step on. |
 | `claw-clock` | 虾钟 Claw Clock | Turn the ring, then the hand eats the next cell. |
 | `claw-flip` | 虾拨 Claw Flip | One flip swaps every plate and gap. Stones only hop. |
+| `claw-round` | 虾循 Claw Round | Six beats, then the tide takes anything not in the pocket. |
+| `claw-coil` | 虾绕 Claw Coil | The tail follows the head. Push the crate into the dock. |
+| `claw-sum` | 虾算 Claw Sum | Pull levers until the number matches the target. |
+| `claw-berth` | 虾泊 Claw Berth | Draft must fit the berth. Hazard ships cannot sit together. |
 
 Each game's ladder rule is in the catalog (`score`) and in the in-game help.
 
