@@ -1,5 +1,12 @@
 import { definition } from '@games/claw-reef/src/definition';
-import { coming, HEIGHT, onUrchin, type ReefState, WIDTH } from '@games/claw-reef/src/engine';
+import {
+  coming,
+  forecastStep,
+  HEIGHT,
+  onUrchin,
+  type ReefState,
+  WIDTH,
+} from '@games/claw-reef/src/engine';
 import type { Grade } from '../gfx/art';
 import { moon, sky, stars } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
@@ -230,6 +237,16 @@ function createScene(): GameScene<ReefState> {
                   : [state.x + 1, state.y];
         rect(g, cellX(spot[0]!) + 1, cellY(spot[1]!) + 1, CW - 4, 1, '#ffe08a');
         rect(g, cellX(spot[0]!) + 1, cellY(spot[1]!) + 1, 1, CH - 4, '#ffe08a');
+        if (focus.startsWith('step:')) {
+          const step = focus.slice(5) as 'n' | 'e' | 's' | 'w';
+          const land = forecastStep(state, step);
+          if (land) {
+            const color =
+              land.kind === 'urchin' ? '#e4b0ff' : land.kind === 'wall' ? '#ff6a6a' : '#e8fff8';
+            disc(g, cellX(land.x) + CW / 2, cellY(land.y) + CH / 2, 4, withAlpha(color, 0.85));
+            disc(g, cellX(land.x) + CW / 2, cellY(land.y) + CH / 2, 2, '#ffffff');
+          }
+        }
       }
       const k = Math.min(1, f.since / 0.32);
       const sx = shownX + (state.x - shownX) * easeOutCubic(k);

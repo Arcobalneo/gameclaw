@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { act, createRun, suggest } from '../src/engine';
+import { act, createRun, forecastStep, suggest } from '../src/engine';
 
 function play(seed: number, policy: (state: ReturnType<typeof createRun>) => string) {
   const state = createRun({ seed });
@@ -37,6 +37,16 @@ describe('claw-reef engine', () => {
     expect(state.got).toEqual(['1,1']);
     expect(state.x).toBe(1);
     expect(state.anchors).toBe(3);
+  });
+
+  it('forecasts the cell you occupy after the tide', () => {
+    const state = createRun({ seed: 1 });
+    state.x = 1;
+    state.y = 1;
+    state.tide = 0;
+    state.urchins = [[3, 1]];
+    expect(forecastStep(state, 'e')).toEqual({ x: 3, y: 1, kind: 'urchin' });
+    expect(forecastStep(state, 's')?.kind).toBe('open');
   });
 
   it('sweeps when the tide pushes into a wall', () => {

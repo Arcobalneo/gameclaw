@@ -163,6 +163,18 @@ export function canPlace(state: LampState, index: number): boolean {
   return !post.sees.some((other) => state.placed[other] === true);
 }
 
+function blocksUnlit(state: LampState, index: number): boolean {
+  const post = state.posts[index];
+  if (!post) return false;
+  const lit = litSet(state);
+  const mine = new Set(post.covers);
+  return post.sees.some((other) => {
+    const blocked = state.posts[other];
+    if (!blocked || state.placed[other]) return false;
+    return blocked.covers.some((pool) => !mine.has(pool) && !lit.has(pool));
+  });
+}
+
 function freshCount(state: LampState, index: number): number {
   const lit = litSet(state);
   const post = state.posts[index];
@@ -347,11 +359,13 @@ export function actionsOf(state: LampState): ActionView[] {
   for (let i = 0; i < state.posts.length; i += 1) {
     if (!canPlace(state, i)) continue;
     const added = freshCount(state, i);
+    const fresh = added === 1 ? '新照亮一个水洼' : `新照亮 ${added} 个水洼`;
+    const danger = added === 0 || blocksUnlit(state, i);
     actions.push({
       id: `place:${i}`,
       label: `立 ${i + 1}`,
-      detail: `把灯笼立在第 ${i + 1} 根。新照亮 ${added} 个水洼。挡住 ${blockWord(state.posts[i])}。`,
-      risk: added > 0 ? 'medium' : 'high',
+      detail: `把灯笼立在第 ${i + 1} 根。${fresh}。挡住 ${blockWord(state.posts[i])}。`,
+      risk: danger ? 'high' : 'low',
       cost: '1 潮',
     });
   }
