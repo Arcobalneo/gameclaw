@@ -277,18 +277,17 @@ export function actionsOf(state: StowState): ActionView[] {
   if (slip.kind === 'crate') {
     const open = emptyBay(state);
     if (open >= 0) {
-      const hint = shelfHint(state, slip.glyph);
       actions.push({
         id: `shelve:${open}`,
         label: `放入 ${open + 1}`,
-        detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格，不贴标签。${hint}`,
+        detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格，不贴标签。${shelfHint(state, slip.glyph, false)}`,
         risk: needsMark(state, slip.glyph) ? 'high' : 'low',
       });
       if (state.marks > 0) {
         actions.push({
           id: `mark:${open}`,
           label: `贴标 ${open + 1}`,
-          detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格并贴标签。${hint}`,
+          detail: `把${glyphName(slip.glyph)}放进第 ${open + 1} 格并贴标签。${shelfHint(state, slip.glyph, true)}`,
           risk: needsMark(state, slip.glyph) ? 'low' : 'high',
           cost: '1 标签',
         });
@@ -330,10 +329,16 @@ export function actionsOf(state: StowState): ActionView[] {
   return actions;
 }
 
-function shelfHint(state: StowState, glyph: number): string {
+function shelfHint(state: StowState, glyph: number, marking: boolean): string {
   const delay = orderDelay(state, glyph);
-  if (delay < 0) return '后面三张没有提取单，贴标签会浪费。';
-  if (delay >= state.spoil) return `第 ${delay} 张才提取。不贴标签会先腾掉。`;
+  if (delay < 0) {
+    return marking ? '后面三张没有提取单，贴标签会浪费。' : '后面三张没有提取单。';
+  }
+  if (delay >= state.spoil) {
+    return marking
+      ? `第 ${delay} 张才提取。贴标签才放得住。`
+      : `第 ${delay} 张才提取。不贴标签会先腾掉。`;
+  }
   return `第 ${delay} 张就提取，可以不贴。`;
 }
 

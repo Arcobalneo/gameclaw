@@ -54,6 +54,7 @@ describe('claw-stow engine', () => {
     const mark = actions.find((action) => action.id.startsWith('mark:'));
     const shelve = actions.find((action) => action.id.startsWith('shelve:'));
     expect(mark?.detail).toContain('浪费');
+    expect(shelve?.detail).not.toContain('浪费');
     expect(mark?.risk).toBe('high');
     expect(shelve?.risk).toBe('low');
   });

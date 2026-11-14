@@ -49,6 +49,17 @@ describe('claw-raft engine', () => {
     }
     expect(careful).toBeGreaterThanOrEqual(8);
     expect(blind).toBeLessThan(careful);
+    let calm = 0;
+    for (let seed = 1; seed <= 12; seed += 1) {
+      const greedy = play(seed, (state) => {
+        const actions = actionsOf(state);
+        const safe = actions.find((action) => action.risk === 'low' && action.id !== 'shift');
+        return safe?.id ?? actions[0]?.id ?? 'mid';
+      });
+      if (greedy.outcome === 'won') calm += 1;
+    }
+    expect(calm).toBeLessThan(careful);
+    expect(calm).toBeLessThanOrEqual(6);
     const order = ['port', 'mid', 'starboard'];
     let spin = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
