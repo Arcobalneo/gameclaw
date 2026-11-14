@@ -1,13 +1,24 @@
 import { definition } from '@games/shrimp-leap/src/definition';
 import type { LeapState } from '@games/shrimp-leap/src/engine';
-import { moon, sky, stars } from '../gfx/backdrop';
 import type { Grade } from '../gfx/art';
-import { tiny } from '../gfx/tiny';
+import { moon, sky, stars } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { type Ctx, ctx2d, easeInOut, hash01, makeCanvas, mix, rect, VH, VW, withAlpha } from '../gfx/pixel';
+import {
+  type Ctx,
+  ctx2d,
+  easeInOut,
+  hash01,
+  makeCanvas,
+  mix,
+  rect,
+  VH,
+  VW,
+  withAlpha,
+} from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, SLIME } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, pips, plate, shadow } from '../gfx/world';
 
 const PX_PER_M = 15;
@@ -37,7 +48,9 @@ function skylineLayer(zone: number, far: boolean): HTMLCanvasElement {
   if (hit) return hit;
   const c = makeCanvas(SKY_W, VH);
   const g = ctx2d(c);
-  const body = far ? ['#1c2050', '#2a1a48', '#12304a'][zone]! : ['#0c0e26', '#140a22', '#081624'][zone]!;
+  const body = far
+    ? ['#1c2050', '#2a1a48', '#12304a'][zone]!
+    : ['#0c0e26', '#140a22', '#081624'][zone]!;
   const lit = far ? '#3a3a6a' : '#b08850';
   const base = far ? 160 : 190;
   let x = 0;
@@ -59,13 +72,17 @@ function skylineLayer(zone: number, far: boolean): HTMLCanvasElement {
     // Sparse windows in a regular grid; most are dark.
     for (let wy = top + 6; wy < base - 6; wy += far ? 6 : 8)
       for (let wx = x + 3; wx < x + w - 4; wx += far ? 5 : 6)
-        if (hash01(wx * 7 + wy, i) > (far ? 0.9 : 0.9)) rect(g, wx, wy, far ? 1 : 2, far ? 2 : 3, lit);
+        if (hash01(wx * 7 + wy, i) > (far ? 0.9 : 0.9))
+          rect(g, wx, wy, far ? 1 : 2, far ? 2 : 3, lit);
     x += w + (far ? 1 : 2 + Math.floor(hash01(i, 13) * 6));
     i += 1;
   }
   // Haze toward the base so layers separate.
   for (let y = base - 40; y < VH; y += 1) {
-    g.fillStyle = withAlpha(far ? '#5a4a98' : '#1a1a3a', Math.min(0.55, ((y - base + 40) / 80) * (far ? 0.8 : 0.6)));
+    g.fillStyle = withAlpha(
+      far ? '#5a4a98' : '#1a1a3a',
+      Math.min(0.55, ((y - base + 40) / 80) * (far ? 0.8 : 0.6)),
+    );
     g.fillRect(0, y, SKY_W, 1);
   }
   skyline.set(key, c);
@@ -264,7 +281,12 @@ function createScene(): GameScene<LeapState> {
     },
     grade(state): Grade {
       const zone = Math.min(2, Math.floor((state.level - 1) / 15));
-      return { top: ['#c8a0ff', '#ff90c0', '#80d0ff'][zone]!, bottom: '#05030c', strength: 0.28, bloom: 0.7 };
+      return {
+        top: ['#c8a0ff', '#ff90c0', '#80d0ff'][zone]!,
+        bottom: '#05030c',
+        strength: 0.28,
+        bloom: 0.7,
+      };
     },
     hud(f) {
       const { g, t, state } = f;
@@ -284,7 +306,8 @@ function createScene(): GameScene<LeapState> {
         const k = Math.min(1, f.since / 0.18);
         const alpha = Math.min(1, 1.8 - f.since);
         const y = Math.round(58 - (1 - k) * 8);
-        if (f.lang === 'zh') drawText(g, zh, VW / 2, y, { color: col, align: 'center', scale: 2, alpha });
+        if (f.lang === 'zh')
+          drawText(g, zh, VW / 2, y, { color: col, align: 'center', scale: 2, alpha });
         else tiny(g, en, VW / 2, y, { color: col, align: 'center', scale: 3, alpha });
       }
     },

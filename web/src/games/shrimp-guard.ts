@@ -1,12 +1,23 @@
 import { ENEMIES, STAGE, UNITS } from '@games/shrimp-guard/src/content';
 import { definition } from '@games/shrimp-guard/src/definition';
 import type { TowerDefenseState } from '@games/shrimp-guard/src/engine';
-import { godRays, sky } from '../gfx/backdrop';
 import type { Grade } from '../gfx/art';
-import { tiny } from '../gfx/tiny';
-import { kelp } from '../gfx/world';
+import { godRays, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { bar, type Ctx, ctx2d, dither, ellipse, hash01, makeCanvas, mix, rect, VH, VW, withAlpha } from '../gfx/pixel';
+import {
+  bar,
+  type Ctx,
+  ctx2d,
+  dither,
+  ellipse,
+  hash01,
+  makeCanvas,
+  mix,
+  rect,
+  VH,
+  VW,
+  withAlpha,
+} from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import {
   buildSprite,
@@ -18,7 +29,8 @@ import {
   SHRIMP,
   type SpriteDef,
 } from '../gfx/sprites';
-import { blit, pips, plate, shadow } from '../gfx/world';
+import { tiny } from '../gfx/tiny';
+import { blit, kelp, pips, plate, shadow } from '../gfx/world';
 
 type P = { x: number; y: number };
 const NODES: Record<string, P> = {
@@ -188,7 +200,14 @@ function createScene(): GameScene<TowerDefenseState> {
           const b = NODES[path[i + 1]!]!;
           for (let k = 0; k < 3; k += 1) {
             const p = (t * 0.35 + k / 3 + i * 0.17) % 1;
-            rect(g, Math.round(a.x + (b.x - a.x) * p), Math.round(a.y + (b.y - a.y) * p), 2, 1, withAlpha('#9fe4ff', Math.sin(p * Math.PI) * 0.6));
+            rect(
+              g,
+              Math.round(a.x + (b.x - a.x) * p),
+              Math.round(a.y + (b.y - a.y) * p),
+              2,
+              1,
+              withAlpha('#9fe4ff', Math.sin(p * Math.PI) * 0.6),
+            );
           }
         }
       }

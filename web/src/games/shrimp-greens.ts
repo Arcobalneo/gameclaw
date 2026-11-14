@@ -1,7 +1,7 @@
 import { definition } from '@games/shrimp-greens/src/definition';
 import type { VegeState } from '@games/shrimp-greens/src/engine';
 import { HAIRS, type HairStyle, humanoid, SKINS } from '../gfx/actors';
-import { type Grade, LightMask, shift, Spring } from '../gfx/art';
+import { type Grade, LightMask, Spring, shift } from '../gfx/art';
 import { godRays, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
 import {
@@ -35,14 +35,23 @@ const RICE: SpriteDef = {
   pal: { w: '#f4efe4', h: '#ffffff' },
 };
 const PLATE: SpriteDef = {
-  rows: ['..ppppppppppp..', '.prrrrrrrrrrrp.', 'prrrrrrrrrrrrrp', '.pppppppppppppd', '...ddddddddd...'],
+  rows: [
+    '..ppppppppppp..',
+    '.prrrrrrrrrrrp.',
+    'prrrrrrrrrrrrrp',
+    '.pppppppppppppd',
+    '...ddddddddd...',
+  ],
   pal: { p: '#f0ecf8', r: '#d8d4ec', d: '#8a86a8' },
 };
 const BOWL: SpriteDef = {
   rows: ['wwwwwwwwwwwww', '.wbbbbbbbbbw.', '..wbbbbbbbw..', '...ddddddd...'],
   pal: { w: '#f4f0fc', b: '#b8c4ec', d: '#7a80a8' },
 };
-const CHOPSTICKS: SpriteDef = { rows: ['ww.........', '.ww........', '..www......', '....www....', '......wwww.'], pal: { w: '#c8925a' } };
+const CHOPSTICKS: SpriteDef = {
+  rows: ['ww.........', '.ww........', '..www......', '....www....', '......wwww.'],
+  pal: { w: '#c8925a' },
+};
 
 const SHIRTS = ['#e8604a', '#4f8fe0', '#e0b040', '#5ac08a', '#b070e0', '#ff8ab0'];
 const STYLES: HairStyle[] = ['short', 'bob', 'long', 'spiky', 'bun', 'cap'];
@@ -103,7 +112,8 @@ function paintRoom(phase: string): HTMLCanvasElement {
     }
     for (let x = -VW; x < VW * 2; x += 24) {
       g.fillStyle = '#9aa0b8';
-      for (let y = 124; y < VH; y += 1) g.fillRect(Math.round(VW / 2 + (x - VW / 2) * (1 + (y - 124) / 40)), y, 1, 1);
+      for (let y = 124; y < VH; y += 1)
+        g.fillRect(Math.round(VW / 2 + (x - VW / 2) * (1 + (y - 124) / 40)), y, 1, 1);
     }
   } else if (phase === 'out' || phase === 'work') {
     sky(g, ['#3a1018', '#2a0c14', '#1a080e'], 0, 124, 6);
@@ -129,7 +139,8 @@ function paintRoom(phase: string): HTMLCanvasElement {
       g.fillRect(0, y, VW, 1);
     }
     for (let x = 0; x < VW; x += 8)
-      for (let y = 0; y < 92; y += 1) if (bayer(x, y) < 0.5 && (y + x) % 8 < 2) rect(g, x + 3, y, 1, 1, '#8a4a34');
+      for (let y = 0; y < 92; y += 1)
+        if (bayer(x, y) < 0.5 && (y + x) % 8 < 2) rect(g, x + 3, y, 1, 1, '#8a4a34');
     // Window.
     rect(g, 34, 18, 74, 58, '#2a140e');
     sky(g, ['#0c1838', '#1a2a5a'], 0, 0, 2);
@@ -139,7 +150,14 @@ function paintRoom(phase: string): HTMLCanvasElement {
     g.fillStyle = win;
     g.fillRect(38, 22, 66, 50);
     for (let i = 0; i < 30; i += 1)
-      rect(g, 38 + Math.floor(hash01(i, 3) * 66), 50 + Math.floor(hash01(i, 4) * 20), 1, 1, i % 3 ? '#ffd36b' : '#9fe4ff');
+      rect(
+        g,
+        38 + Math.floor(hash01(i, 3) * 66),
+        50 + Math.floor(hash01(i, 4) * 20),
+        1,
+        1,
+        i % 3 ? '#ffd36b' : '#9fe4ff',
+      );
     rect(g, 70, 22, 2, 50, '#2a140e');
     rect(g, 38, 46, 66, 2, '#2a140e');
     rect(g, 34, 76, 74, 3, '#5a2e1e');
@@ -151,7 +169,10 @@ function paintRoom(phase: string): HTMLCanvasElement {
     // Wainscot.
     rect(g, 0, 92, VW, 32, '#3a1e14');
     rect(g, 0, 92, VW, 2, '#7a4a2a');
-    for (let x = 6; x < VW; x += 40) rect(g, x, 98, 30, 20, '#341a12'), rect(g, x, 98, 30, 1, '#5a321e');
+    for (let x = 6; x < VW; x += 40) {
+      rect(g, x, 98, 30, 20, '#341a12');
+      rect(g, x, 98, 30, 1, '#5a321e');
+    }
     for (let y = 124; y < VH; y += 1) {
       g.fillStyle = mix('#3a2016', '#1a0c08', (y - 124) / (VH - 124));
       g.fillRect(0, y, VW, 1);
@@ -194,7 +215,8 @@ function createScene(): GameScene<VegeState> {
   return {
     grade(state) {
       const phase = state.scenes[Math.min(state.turn, state.scenes.length - 1)]?.phase ?? 'home';
-      if (phase === 'school') return { top: '#fff4e0', bottom: '#5a6aa0', strength: 0.22, bloom: 0.35 };
+      if (phase === 'school')
+        return { top: '#fff4e0', bottom: '#5a6aa0', strength: 0.22, bloom: 0.35 };
       if (phase === 'out') return { top: '#ff6a5a', bottom: '#2a0a2a', strength: 0.3, bloom: 0.6 };
       return { top: '#ffb070', bottom: '#2a1030', strength: 0.3, bloom: 0.55 } satisfies Grade;
     },
@@ -237,7 +259,8 @@ function createScene(): GameScene<VegeState> {
       xs.forEach((x, i) => {
         const breath = Math.sin(t * 2.2 + i * 1.7) > 0.6 ? 1 : 0;
         const shocked = mood < 0 && f.since < 0.6 ? Math.round(Math.sin(f.since * 40) * 1.5) : 0;
-        const hop = mood > 0 && f.since < 0.5 ? -Math.round(Math.sin((f.since / 0.5) * Math.PI) * 3) : 0;
+        const hop =
+          mood > 0 && f.since < 0.5 ? -Math.round(Math.sin((f.since / 0.5) * Math.PI) * 3) : 0;
         const y = 128 + Math.round(Math.abs(i - (n - 1) / 2) * 2) - breath + hop;
         const s = buildSprite(diner(i, state.seed, t, heat));
         ellipse(g, x, y - 2, 16, 3, withAlpha('#000000', 0.25));
@@ -311,7 +334,12 @@ function createScene(): GameScene<VegeState> {
         rect(g, bx, by, bw, 16, '#fff4e0');
         rect(g, bx, by + 16, bw, 1, '#c8b8a0');
         rect(g, bx + 4, by + 17, 3, 3, '#fff4e0');
-        if (k > 0.9) tiny(g, lastAction === 'name' ? '!' : '...', bx + bw / 2, by + 6, { color: '#3a2a4a', outline: null, align: 'center' });
+        if (k > 0.9)
+          tiny(g, lastAction === 'name' ? '!' : '...', bx + bw / 2, by + 6, {
+            color: '#3a2a4a',
+            outline: null,
+            align: 'center',
+          });
       }
       // Night lighting pass for warm interiors.
       if (phase !== 'school') {
@@ -354,7 +382,11 @@ function createScene(): GameScene<VegeState> {
           const w = textWidth(text) + 14;
           g.globalAlpha = a;
           rect(g, VW / 2 - w / 2 + 40, VH - 22, w, 15, withAlpha('#05030c', 0.78));
-          drawText(g, text, VW / 2 + 40, VH - 21, { color: '#fff0d0', align: 'center', outline: null });
+          drawText(g, text, VW / 2 + 40, VH - 21, {
+            color: '#fff0d0',
+            align: 'center',
+            outline: null,
+          });
           g.globalAlpha = 1;
         }
       }
@@ -363,7 +395,8 @@ function createScene(): GameScene<VegeState> {
       const prev = o.previous as VegeState;
       const s = o.state;
       lastAction = o.action.id;
-      const delta = s.body + s.home + s.room + s.line - (prev.body + prev.home + prev.room + prev.line);
+      const delta =
+        s.body + s.home + s.room + s.line - (prev.body + prev.home + prev.room + prev.line);
       mood = Math.sign(delta);
       nod.impulse(mood >= 0 ? -3 : 4);
       if (delta < 0) {
@@ -375,7 +408,13 @@ function createScene(): GameScene<VegeState> {
       } else if (delta > 0) {
         f.cue('good');
         for (const x of dinerXs(3)) f.fx.float(x, 76, '♥', '#ff9ae0', 1.2);
-        f.fx.burst(VW / 2, 150, { count: 14, colors: ['#ffe9a8', '#ffffff'], speed: 40, gravity: -30, life: 1 });
+        f.fx.burst(VW / 2, 150, {
+          count: 14,
+          colors: ['#ffe9a8', '#ffffff'],
+          speed: 40,
+          gravity: -30,
+          life: 1,
+        });
       }
       if (lastAction === 'bring' || lastAction === 'stock') {
         f.fx.dust(VW / 2 + 116, 170, '#e8d0b0', 8);

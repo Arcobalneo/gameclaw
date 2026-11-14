@@ -464,7 +464,12 @@ export class GameView {
 export function dedupeHeadline(headline: string, metrics: readonly Metric[]): string {
   const parts = headline.split(/\s*·\s*/);
   const kept = parts.filter((part) => {
-    const hits = metrics.filter((m) => part.includes(`${m.label} ${m.value}`) || part.includes(`${m.label}${m.value}`) || part.includes(`${m.label} ${String(m.value).split('/')[0]}`));
+    const hits = metrics.filter(
+      (m) =>
+        part.includes(`${m.label} ${m.value}`) ||
+        part.includes(`${m.label}${m.value}`) ||
+        part.includes(`${m.label} ${String(m.value).split('/')[0]}`),
+    );
     return hits.length === 0;
   });
   return (kept.length ? kept : parts).join(' · ');

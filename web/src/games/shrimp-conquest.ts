@@ -39,17 +39,25 @@ const KINGDOM: Record<string, { wall: string; roof: string; sky: [string, string
 
 const roomCache = new Map<string, HTMLCanvasElement>();
 
-function castleSilhouette(g: Ctx, x: number, base: number, scale: number, k: (typeof KINGDOM)[string]): void {
+function castleSilhouette(
+  g: Ctx,
+  x: number,
+  base: number,
+  scale: number,
+  k: (typeof KINGDOM)[string],
+): void {
   const w = 36 * scale;
   const h = 26 * scale;
   rect(g, x, base - h, w, h, k.wall);
   rect(g, x + w - 6 * scale, base - h, 6 * scale, h, shift(k.wall, -1.2));
-  for (let i = 0; i < w; i += 5 * scale) rect(g, x + i, base - h - 3 * scale, 3 * scale, 3 * scale, k.wall);
+  for (let i = 0; i < w; i += 5 * scale)
+    rect(g, x + i, base - h - 3 * scale, 3 * scale, 3 * scale, k.wall);
   rect(g, x + w / 2 - 6 * scale, base - h - 14 * scale, 12 * scale, 14 * scale, k.wall);
   rect(g, x + w / 2 - 8 * scale, base - h - 18 * scale, 16 * scale, 4 * scale, k.roof);
   rect(g, x + w / 2 - 1, base - h - 24 * scale, 1, 6 * scale, '#2a1a2a');
   rect(g, x + w / 2, base - h - 24 * scale, 4 * scale, 2 * scale, '#ff5d73');
-  for (let i = 1; i < 4; i += 1) rect(g, x + (w * i) / 4 - scale, base - h / 2, 2 * scale, 3 * scale, '#ffd36b');
+  for (let i = 1; i < 4; i += 1)
+    rect(g, x + (w * i) / 4 - scale, base - h / 2, 2 * scale, 3 * scale, '#ffd36b');
 }
 
 function paintRoom(target: string): HTMLCanvasElement {
@@ -162,16 +170,25 @@ function drawEye(g: Ctx, cx: number, cy: number, t: number, lookX: number, open:
   if (lid > 0.2) {
     for (let i = 0; i < 6; i += 1) {
       const vx = cx + (i < 3 ? -rx + 6 + i * 4 : rx - 18 + (i - 3) * 4);
-      for (let k = 0; k < 6; k += 1) rect(g, vx + k, cy + Math.round(Math.sin(i + k) * 2), 1, 1, '#e08080');
+      for (let k = 0; k < 6; k += 1)
+        rect(g, vx + k, cy + Math.round(Math.sin(i + k) * 2), 1, 1, '#e08080');
     }
     // Iris tracks the hero.
     const ix = Math.round(cx + clamp(lookX, -1, 1) * 16);
     const ir = Math.min(14, Math.round(ry * lid));
     const rings = ['#4a1a1a', '#8a2a2a', '#c84a3a', '#e8803a', '#ffb050'];
-    rings.forEach((col, i) => ellipse(g, ix, cy, ir - i * 2.4, Math.min(ir - i * 2.4, ry * lid - 1), col));
+    for (const [i, col] of rings.entries())
+      ellipse(g, ix, cy, ir - i * 2.4, Math.min(ir - i * 2.4, ry * lid - 1), col);
     for (let a = 0; a < 16; a += 1) {
       const ang = (a / 16) * Math.PI * 2;
-      rect(g, ix + Math.round(Math.cos(ang) * ir * 0.7), cy + Math.round(Math.sin(ang) * ir * 0.6 * lid), 1, 1, '#5a1a10');
+      rect(
+        g,
+        ix + Math.round(Math.cos(ang) * ir * 0.7),
+        cy + Math.round(Math.sin(ang) * ir * 0.6 * lid),
+        1,
+        1,
+        '#5a1a10',
+      );
     }
     const pr = 5 + Math.round(Math.sin(t * 1.3) * 1.5);
     ellipse(g, ix, cy, pr, Math.min(pr, ry * lid - 2), '#0a0408');
@@ -187,7 +204,8 @@ function drawEye(g: Ctx, cx: number, cy: number, t: number, lookX: number, open:
     if (x % 6 === 0) rect(g, cx + x - 1, yy - 6, 1, 3, '#1a0a0a');
   }
   const lowY = Math.round(cy + ry * lid);
-  for (let x = -rx + 6; x <= rx - 6; x += 1) rect(g, cx + x, lowY - Math.round((x * x) / (rx * 6)), 1, 2, '#a85a3a');
+  for (let x = -rx + 6; x <= rx - 6; x += 1)
+    rect(g, cx + x, lowY - Math.round((x * x) / (rx * 6)), 1, 2, '#a85a3a');
 }
 
 const WIN = { x: 130, y: 8, w: 200, h: 110 };
@@ -204,7 +222,8 @@ function drawFace(g: Ctx, t: number, look: number, open: number, drop: number): 
     g.fillRect(WIN.x, WIN.y + y + oy, WIN.w, 1);
   }
   // Nose bridge + cheek shading.
-  for (let y = 40; y < WIN.h; y += 1) rect(g, 228 - (y - 40) * 0.15, WIN.y + y + oy, 6 + (y - 40) * 0.3, 1, '#c87a50');
+  for (let y = 40; y < WIN.h; y += 1)
+    rect(g, 228 - (y - 40) * 0.15, WIN.y + y + oy, 6 + (y - 40) * 0.3, 1, '#c87a50');
   rect(g, 236, WIN.y + 40 + oy, 2, WIN.h - 40, '#f0b890');
   dither(g, WIN.x, WIN.y + 80 + oy, WIN.w, 30, '#d0705a', 0.25);
   drawEye(g, 182, WIN.y + 58 + oy, t, look, open);
@@ -340,7 +359,11 @@ function createScene(): GameScene<TinyState> {
       let heroX = 110 + lunge;
       if (running) heroX = 90 + Math.sin(t * 0.8) * 20;
       const step = (running ? Math.floor(t * 12) : Math.floor(t * 1.5)) % 2 ? 1 : 0;
-      const bob = running ? -Math.abs(Math.round(Math.sin(t * 24) * 2)) : Math.sin(t * 2.4) > 0.7 ? -1 : 0;
+      const bob = running
+        ? -Math.abs(Math.round(Math.sin(t * 24) * 2))
+        : Math.sin(t * 2.4) > 0.7
+          ? -1
+          : 0;
 
       if (phase === 'workshop') {
         // Thimble anvil with a glowing part on top.
@@ -350,11 +373,13 @@ function createScene(): GameScene<TinyState> {
         rect(g, ax - 20, GROUND - 34, 40, 3, '#e0e4f0');
         rect(g, ax + 10, GROUND - 34, 10, 34, '#6a7090');
         for (let y = GROUND - 28; y < GROUND; y += 4)
-          for (let x = ax - 18; x < ax + 18; x += 4) rect(g, x + ((y >> 2) % 2) * 2, y, 1, 1, '#5a6080');
+          for (let x = ax - 18; x < ax + 18; x += 4)
+            rect(g, x + ((y >> 2) % 2) * 2, y, 1, 1, '#5a6080');
         const heat = 0.5 + 0.5 * Math.sin(t * 8);
         rect(g, ax - 8, GROUND - 38, 16, 4, mix('#ff7a2a', '#ffe066', heat));
         glow(g, ax, GROUND - 38, 26, '#ff9a3a', 0.45 + heat * 0.2);
-        if (f.t - forgeT < 0.5) glow(g, ax, GROUND - 40, 50, '#ffe066', 0.7 * (1 - (f.t - forgeT) * 2));
+        if (f.t - forgeT < 0.5)
+          glow(g, ax, GROUND - 40, 50, '#ffe066', 0.7 * (1 - (f.t - forgeT) * 2));
         if (Math.random() < dt * 10) f.fx.embers(ax, GROUND - 40, ['#ffb347', '#ffe066'], 1);
       }
 
@@ -395,13 +420,21 @@ function createScene(): GameScene<TinyState> {
       }
 
       // Hero.
-      if (running) for (let i = 0; i < 4; i += 1) rect(g, heroX - 20 - i * 9, GROUND - 14 - i * 3, 6, 1, withAlpha('#ffffff', 0.4));
+      if (running)
+        for (let i = 0; i < 4; i += 1)
+          rect(g, heroX - 20 - i * 9, GROUND - 14 - i * 3, 6, 1, withAlpha('#ffffff', 0.4));
       ellipse(g, heroX, GROUND + 1, 9, 2, withAlpha('#000000', 0.45));
-      blit(g, hero(step as 0 | 1, phase === 'ended' && state.outcome === 'won' ? 'up' : 'down'), heroX + shake, GROUND + 1 + bob, {
-        anchor: 'bc',
-        tint: '#ff2040',
-        tintAlpha: f.t - hurtT < 0.12 ? 0.7 : 0,
-      });
+      blit(
+        g,
+        hero(step as 0 | 1, phase === 'ended' && state.outcome === 'won' ? 'up' : 'down'),
+        heroX + shake,
+        GROUND + 1 + bob,
+        {
+          anchor: 'bc',
+          tint: '#ff2040',
+          tintAlpha: f.t - hurtT < 0.12 ? 0.7 : 0,
+        },
+      );
       if (state.weapon) {
         const wx = heroX + 9;
         rect(g, wx, GROUND - 22 + bob, 1, 10, '#c8d0e8');
@@ -455,7 +488,11 @@ function createScene(): GameScene<TinyState> {
           const focus = f.focus?.id === `target:${id}`;
           const w = textWidth(name) + 10;
           rect(g, x - w / 2, 122, w, 15, withAlpha('#05030c', focus ? 0.9 : 0.6));
-          drawText(g, name, x, 123, { color: focus ? '#ffe066' : '#ffe0e8', align: 'center', outline: null });
+          drawText(g, name, x, 123, {
+            color: focus ? '#ffe066' : '#ffe0e8',
+            align: 'center',
+            outline: null,
+          });
           if (focus) glow(g, x, 92, 40, '#ffe066', 0.25 + 0.1 * Math.sin(t * 6));
         });
       } else if (state.target) {
@@ -467,7 +504,8 @@ function createScene(): GameScene<TinyState> {
       }
       // Exposure creeps in as a red dithered edge.
       if (state.suspicion >= 5) {
-        g.globalAlpha = Math.min(0.55, (state.suspicion - 4) * 0.09) * (0.85 + 0.15 * Math.sin(t * 3));
+        g.globalAlpha =
+          Math.min(0.55, (state.suspicion - 4) * 0.09) * (0.85 + 0.15 * Math.sin(t * 3));
         g.drawImage(suspicionEdge(), 0, 0);
         g.globalAlpha = 1;
       }
@@ -481,10 +519,17 @@ function createScene(): GameScene<TinyState> {
         f.fx.flash('#ff2040', 0.2);
         f.cue('hit');
       }
-      if (o.action.id.startsWith('strike') || (s.combat && prev.combat && s.combat.enemy < prev.combat.enemy)) {
+      if (
+        o.action.id.startsWith('strike') ||
+        (s.combat && prev.combat && s.combat.enemy < prev.combat.enemy)
+      ) {
         hitT = f.t;
         const heavy = o.action.id === 'strike:heavy';
-        f.fx.hit(230, GROUND - 30, heavy ? 'heavy' : 'medium', 0, ['#ffffff', '#ffe066', '#ff9a3a']);
+        f.fx.hit(230, GROUND - 30, heavy ? 'heavy' : 'medium', 0, [
+          '#ffffff',
+          '#ffe066',
+          '#ff9a3a',
+        ]);
         f.cue(heavy ? 'heavy' : 'hit');
       }
       if (o.action.id === 'brace') {
@@ -505,13 +550,22 @@ function createScene(): GameScene<TinyState> {
         f.cue('heavy');
       }
       if (o.action.id.startsWith('dodge')) {
-        const dir = o.action.id.endsWith('left') ? Math.PI : o.action.id.endsWith('right') ? 0 : Math.PI / 2;
+        const dir = o.action.id.endsWith('left')
+          ? Math.PI
+          : o.action.id.endsWith('right')
+            ? 0
+            : Math.PI / 2;
         f.fx.dust(110, GROUND, '#c8a080', 10);
         f.fx.kick(Math.cos(dir) * 2, 0);
         f.cue('whoosh');
       }
       if (s.control > prev.control || s.influence > prev.influence) {
-        f.fx.burst(230, 90, { count: 26, colors: ['#ff5d73', '#ffe066', '#ffffff'], speed: 90, gravity: 40 });
+        f.fx.burst(230, 90, {
+          count: 26,
+          colors: ['#ff5d73', '#ffe066', '#ffffff'],
+          speed: 90,
+          gravity: 40,
+        });
         f.cue('good');
       }
       if (s.coins > prev.coins) f.cue('coin');

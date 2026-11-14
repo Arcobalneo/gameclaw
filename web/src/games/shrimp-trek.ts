@@ -1,19 +1,21 @@
 import { definition } from '@games/shrimp-trek/src/definition';
 import type { RoguelikeState } from '@games/shrimp-trek/src/engine';
+import type { Grade } from '../gfx/art';
 import { fog, godRays, ground, ridge, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
 import {
   type Ctx,
   easeOutBack,
   easeOutCubic,
+  ellipse,
   hashString,
   line,
   mix,
   rect,
   VH,
   VW,
+  withAlpha,
 } from '../gfx/pixel';
-import type { Grade } from '../gfx/art';
 import { type GameModule, type GameScene, say } from '../gfx/scene';
 import {
   buildSprite,
@@ -28,7 +30,6 @@ import {
 } from '../gfx/sprites';
 import { tiny } from '../gfx/tiny';
 import { blit, kelp, orb, pips, plate, shadow } from '../gfx/world';
-import { ellipse, withAlpha } from '../gfx/pixel';
 
 const FLOOR = 172;
 const LINEAGE_PAL: Record<string, Palette> = {
@@ -72,16 +73,42 @@ function drawNet(g: Ctx, x: number, y: number, t: number): void {
   const sway = (yy: number) => Math.sin(t * 1.6 + yy * 0.06) * (yy / h) * 6;
   const cols = 9;
   const rows = 9;
-  const px = (c: number, r: number) => x + (c / (cols - 1)) * w + sway(r * (h / rows)) + Math.sin(c * 0.8) * (r / rows) * 4;
-  const py = (c: number, r: number) => y + 6 + Math.sin((c / (cols - 1)) * Math.PI) * 8 + r * (h / rows);
+  const px = (c: number, r: number) =>
+    x + (c / (cols - 1)) * w + sway(r * (h / rows)) + Math.sin(c * 0.8) * (r / rows) * 4;
+  const py = (c: number, r: number) =>
+    y + 6 + Math.sin((c / (cols - 1)) * Math.PI) * 8 + r * (h / rows);
   for (let r = 0; r < rows; r += 1)
     for (let c = 0; c < cols; c += 1) {
-      if (c < cols - 1) line(g, Math.round(px(c, r)), Math.round(py(c, r)), Math.round(px(c + 1, r + (r % 2 ? -0.5 : 0.5))), Math.round(py(c + 1, r + (r % 2 ? -0.5 : 0.5))), '#7a8aa8');
-      if (r < rows - 1) line(g, Math.round(px(c, r)), Math.round(py(c, r)), Math.round(px(c, r + 1)), Math.round(py(c, r + 1)), '#5a6a88');
+      if (c < cols - 1)
+        line(
+          g,
+          Math.round(px(c, r)),
+          Math.round(py(c, r)),
+          Math.round(px(c + 1, r + (r % 2 ? -0.5 : 0.5))),
+          Math.round(py(c + 1, r + (r % 2 ? -0.5 : 0.5))),
+          '#7a8aa8',
+        );
+      if (r < rows - 1)
+        line(
+          g,
+          Math.round(px(c, r)),
+          Math.round(py(c, r)),
+          Math.round(px(c, r + 1)),
+          Math.round(py(c, r + 1)),
+          '#5a6a88',
+        );
       rect(g, Math.round(px(c, r)), Math.round(py(c, r)), 1, 1, '#c8d4e8');
     }
   // Head rope with orange floats.
-  for (let c = 0; c < cols - 1; c += 1) line(g, Math.round(px(c, 0)), Math.round(py(c, 0)), Math.round(px(c + 1, 0)), Math.round(py(c + 1, 0)), '#d8c8a0');
+  for (let c = 0; c < cols - 1; c += 1)
+    line(
+      g,
+      Math.round(px(c, 0)),
+      Math.round(py(c, 0)),
+      Math.round(px(c + 1, 0)),
+      Math.round(py(c + 1, 0)),
+      '#d8c8a0',
+    );
   for (let c = 0; c < cols; c += 2) {
     const fx = Math.round(px(c, 0));
     const fy = Math.round(py(c, 0)) - 4 + Math.round(Math.sin(t * 2 + c) * 1);
@@ -95,7 +122,15 @@ function drawNet(g: Ctx, x: number, y: number, t: number): void {
   line(g, sx - 6, sy, sx + 6, sy, '#e8e0d0');
   for (let i = -4; i <= 4; i += 2) line(g, sx + i, sy - 2, sx + i, sy + 2, '#c8c0b0');
   rect(g, sx + 6, sy - 2, 3, 4, '#e8e0d0');
-  for (let i = 0; i < 10; i += 1) rect(g, Math.round(px(2, 6)) + Math.round(Math.sin(t + i * 0.6) * 2), Math.round(py(2, 6)) + i * 2, 1, 2, '#3a9a5a');
+  for (let i = 0; i < 10; i += 1)
+    rect(
+      g,
+      Math.round(px(2, 6)) + Math.round(Math.sin(t + i * 0.6) * 2),
+      Math.round(py(2, 6)) + i * 2,
+      1,
+      2,
+      '#3a9a5a',
+    );
 }
 
 /** Drifting plastic: a billowing bag, a bottle and six-pack rings. */
@@ -106,7 +141,8 @@ function drawPlastic(g: Ctx, x: number, y: number, t: number): void {
   const by = y + 14 + Math.round(Math.cos(t * 0.9) * 4);
   g.globalAlpha = 0.55;
   for (let r = 0; r < 34; r += 1) {
-    const wv = 12 + Math.sin((r / 34) * Math.PI) * (8 + breath * 3) + Math.sin(r * 0.5 + t * 4) * 1.5;
+    const wv =
+      12 + Math.sin((r / 34) * Math.PI) * (8 + breath * 3) + Math.sin(r * 0.5 + t * 4) * 1.5;
     rect(g, Math.round(bx - wv), by + r, Math.round(wv * 2), 1, r < 4 ? '#f8f8ff' : '#d8e4f0');
   }
   g.globalAlpha = 1;
@@ -117,7 +153,8 @@ function drawPlastic(g: Ctx, x: number, y: number, t: number): void {
     line(g, bx + hx + 4, top, bx + hx + 6, by + 1, '#c8d4e4');
   }
   rect(g, bx - 6, by + 10, 3, 14, withAlpha('#ffffff', 0.6));
-  for (let i = 0; i < 4; i += 1) rect(g, bx - 10 + i * 6, by + 22 + (i % 2) * 3, 4, 1, withAlpha('#a8b8c8', 0.7));
+  for (let i = 0; i < 4; i += 1)
+    rect(g, bx - 10 + i * 6, by + 22 + (i % 2) * 3, 4, 1, withAlpha('#a8b8c8', 0.7));
   // Bottle tumbling slowly.
   const bt = x - 4;
   const btY = y + 60 + Math.round(Math.sin(t * 1.2) * 3);
@@ -155,7 +192,15 @@ function foreground(g: Ctx, scroll: number, t: number, color: string): void {
     } else {
       for (let k = 0; k < 4; k += 1) {
         const sway = Math.sin(t * 1.4 + i + k) * 4;
-        for (let yy = 0; yy < h; yy += 2) rect(g, Math.round(x + k * 9 + sway * (yy / h) ** 1.5), VH - yy, 5 - Math.floor((yy / h) * 3), 2, color);
+        for (let yy = 0; yy < h; yy += 2)
+          rect(
+            g,
+            Math.round(x + k * 9 + sway * (yy / h) ** 1.5),
+            VH - yy,
+            5 - Math.floor((yy / h) * 3),
+            2,
+            color,
+          );
       }
     }
   }
@@ -353,13 +398,27 @@ function createScene(): GameScene<RoguelikeState> {
     },
     grade(state): Grade {
       const deep = Math.min(1, (state.cycle - 1) * 0.25 + state.localDepth * 0.03);
-      return { top: mix('#9fe4ff', '#5a7aff', deep), bottom: '#020818', strength: 0.3, bloom: 0.55 + deep * 0.2 };
+      return {
+        top: mix('#9fe4ff', '#5a7aff', deep),
+        bottom: '#020818',
+        strength: 0.3,
+        bloom: 0.55 + deep * 0.2,
+      };
     },
     hud(f) {
       const { g, t, state } = f;
       if (state.phase === 'lineage') return;
       tiny(g, `C${state.cycle}`, 10, 10, { color: '#9fe4ff' });
-      pips(g, 26, 9, 10, Math.min(10, state.localDepth), '#5ad1ff', Math.min(9, state.localDepth), t);
+      pips(
+        g,
+        26,
+        9,
+        10,
+        Math.min(10, state.localDepth),
+        '#5ad1ff',
+        Math.min(9, state.localDepth),
+        t,
+      );
     },
     react(f, o) {
       const ev = o.events[0];
