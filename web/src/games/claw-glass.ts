@@ -72,7 +72,7 @@ function createScene(): GameScene<GlassState> {
         return [{ x: pos.x - 16, y: pos.y - 16, w: 32, h: 32, actionId: id }];
       });
       if (actions.some((action) => action.id === 'fire')) {
-        regions.push({ x: 300, y: 168, w: 72, h: 32, actionId: 'fire' });
+        regions.push({ x: 300, y: 186, w: 72, h: 24, actionId: 'fire' });
       }
       return regions;
     },
@@ -110,8 +110,9 @@ function createScene(): GameScene<GlassState> {
         const a = at(points[i - 1]!.x, points[i - 1]!.y);
         const b = at(points[i]!.x, points[i]!.y);
         const flick = 0.45 + Math.sin(t * 10 + i) * 0.2;
-        line(g, a.x, a.y + 1, b.x, b.y + 1, withAlpha('#fff6dc', 0.25));
+        line(g, a.x, a.y + 1, b.x, b.y + 1, withAlpha(beam, 0.35));
         line(g, a.x, a.y, b.x, b.y, withAlpha(beam, flick + (flash > 0 ? 0.4 : 0)));
+        line(g, a.x, a.y - 1, b.x, b.y - 1, withAlpha('#ffffff', 0.28));
       }
       if (flash > 0) {
         glow(g, shrine.x, shrine.y, 22, '#fff6dc', flash);
@@ -158,9 +159,9 @@ function createScene(): GameScene<GlassState> {
       if (fire && f.actions.some((action) => action.id === 'fire')) {
         const on = f.focus?.id === 'fire';
         const ready = beamEnd(state) === 'shrine';
-        rect(g, 300, 168, 72, 30, on ? '#24345a' : '#141a2c');
-        rect(g, 300, 168, 72, 2, ready ? '#fff6dc' : '#6a7898');
-        drawText(g, fire, 336, 176, { color: '#fff6dc', align: 'center' });
+        rect(g, 300, 186, 72, 24, on ? '#24345a' : '#141a2c');
+        rect(g, 300, 186, 72, 2, ready ? '#fff6dc' : '#6a7898');
+        drawText(g, fire, 336, 192, { color: '#fff6dc', align: 'center' });
       }
     },
     hud(f) {
@@ -169,9 +170,9 @@ function createScene(): GameScene<GlassState> {
       for (let i = 0; i < Math.min(state.beatMax, 8); i += 1) {
         rect(g, 256 + i * 10, 9, 7, 7, i < state.beats ? '#d8e4ff' : '#2a3450');
       }
-      const hint = say(f, '转镜子要花一拍。云盖住的镜子转不了。');
+      const hint = say(f, '云盖住的镜子转不了。');
       if (hint && state.notes.length === 0 && state.outcome === 'ongoing') {
-        plate(g, hint, 180, 198, '#d8e4ff', 280);
+        plate(g, hint, 150, 192, '#d8e4ff', 200);
       }
     },
     react(f, outcome) {
