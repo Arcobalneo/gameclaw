@@ -18,8 +18,10 @@ web/
   src/runtime/session.ts    local session token + room code (localStorage)
   src/runtime/relay.ts      WebSocket to the remote MCP relay
   src/runtime/prompt.ts     copyable agent prompt (MCP URL + token, current language)
-  src/i18n/index.ts         typed zh/en dictionary, lang()/setLang()/t()
-  src/i18n/terms.ts         per-game glossary: engine labels/metrics/phases → English
+  src/i18n/index.ts         typed zh/en UI dictionary, lang()/setLang()/t()
+  src/i18n/catalogs/        compiled per-game exact + pattern + glossary catalogs
+  src/i18n/translate.ts     loc layer at the host / prompt / recap / canvas boundary
+  src/runtime/stats.ts      anonymous play-count client (GET /stats, POST /stats/hello, WS /stats/live)
   src/gfx/art.ts            art bible: hue-shifted ramps, grade, bloom, light mask, springs
   src/gfx/fx.ts             pooled particles, trauma shake + kick, hit-stop, impact frames
   src/gfx/actors.ts         layered humanoid sprite generator (front/back/bust, blink, talk)
@@ -39,10 +41,12 @@ web/
 - **HUD**: numbers live in the DOM side panel (with animated deltas); the canvas
   keeps only in-world cues, so floats never collide with the HUD.
 - **Language**: 中 / EN switch in the top bar, saved in `localStorage`
-  (`gameclaw:lang`), default from `navigator.language`. UI strings, game names,
-  taglines, HUD labels, action labels and the agent prompt switch together.
-  Engine narrative (headline / log / details) stays in the engine's Chinese.
-  WebMCP tool descriptions are English.
+  (`gameclaw:lang`), default from `navigator.language`. The loc layer maps
+  engine-authored Chinese (headlines, logs, action details, recap, lessons)
+  plus UI chrome, names, HUD, banners and canvas-drawn signs into the active
+  locale. Engines themselves stay deterministic and still emit canonical
+  Chinese, so CLI output and tests do not change. WebMCP tool descriptions
+  stay English. Missing catalog keys fail type-checking or the EN smoke test.
 - **Font**: a subset of Fusion Pixel 12px (OFL, `web/public/fonts`), regenerate with
   `pnpm --filter @gameclaw/web font`.
 - **State**: one `GameHost` per game id. Human clicks/keys and agent tool calls go
@@ -119,6 +123,23 @@ bun relay/src/node-server.ts          # http://127.0.0.1:8787/mcp
 # e2e (page open + remote MCP act):
 node web/e2e/relay.mjs http://localhost:4173/gameclaw/ --relay http://127.0.0.1:8787
 ```
+
+## Player counts
+
+No login. Each browser mints one durable anonymous play id (`gameclaw:player`
+in `localStorage`), separate from the room/session token. The first visit
+counts once for the site total; opening a game counts that game once per id
+(refreshing does not increment again). The relay stores only SHA-256 hashes
+of the ids plus integer counters — no PII.
+
+- First paint: cached counts from `localStorage`, then `GET /stats`.
+- Hello: `POST /stats/hello` with the play id and any newly opened game ids.
+- Live: `GET /stats/live` (WebSocket) broadcasts updates to every open page.
+- Limits: 30 hellos per minute per id; at most 8 new player ids per IP in
+  10 minutes (further spoofed ids are ignored and do not increment).
+
+The site total is a chip in the bottom-right corner (“N 人已玩过” /
+“N have played”). Each home card and game window repeats the per-game count.
 
 ## Development
 

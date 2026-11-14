@@ -6,6 +6,7 @@ import { buildSprite, CRAB, SHRIMP, SHRIMP_WALK, SLIME } from '../gfx/sprites';
 import { lang, onLang, t } from '../i18n';
 import { h } from './dom';
 import { logo } from './logo';
+import { gameCountEl } from './play-counts';
 import { sfx } from './sfx';
 
 const HERO_H = 112;
@@ -100,7 +101,7 @@ export class Home {
         cover,
         h('span', { class: 'card-play', 'aria-hidden': 'true' }, '▶'),
       ),
-      h('span', { class: 'card-text' }, name, tag),
+      h('span', { class: 'card-text' }, name, tag, gameCountEl(game.id)),
     );
     const entry: Cover = { id: game.id, name, tag, btn, game };
     this.#covers.push(entry);

@@ -217,9 +217,9 @@ export function outcomeLabel(outcome: string): string {
     (
       {
         ongoing: '进行中',
-        won: '胜利 WIN',
-        lost: '失败 LOST',
-        aborted: '已中止 ABORTED',
+        won: '胜利',
+        lost: '失败',
+        aborted: '已中止',
       } as Record<string, string>
     )[outcome] ?? outcome
   );

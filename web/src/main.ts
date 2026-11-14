@@ -12,7 +12,9 @@ import {
   normalizeRoomCode,
   rememberCode,
 } from './runtime/session';
+import { startStats } from './runtime/stats';
 import { Home } from './ui/home';
+import { siteCountChip } from './ui/play-counts';
 import { Portal } from './ui/portal';
 import { relayBanner, SessionChip } from './ui/session-chip';
 import { topbar } from './ui/topbar';
@@ -32,7 +34,7 @@ declare global {
   }
 }
 
-const VERSION = '3.2.0';
+const VERSION = '3.3.0';
 
 function boot(): void {
   const app = document.getElementById('app');
@@ -53,6 +55,8 @@ function boot(): void {
   const portal = new Portal(document.body);
   document.body.prepend(banner.root);
   document.body.prepend(topbar(() => portal.closeAll(), chip.root));
+  document.body.append(siteCountChip());
+  startStats();
   onLang(syncDoc);
   syncDoc();
   const home = new Home((id) => {

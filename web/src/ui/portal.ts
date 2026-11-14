@@ -2,8 +2,10 @@ import { findGame, GAMES, gameName } from '../catalog';
 import { lang, onLang, t } from '../i18n';
 import type { PortalController } from '../runtime/agent-api';
 import { type GameHost, getHost } from '../runtime/host';
+import { reportGame } from '../runtime/stats';
 import { clear, h } from './dom';
 import { GameView } from './game-view';
+import { gameCountEl } from './play-counts';
 import { isMuted, setMuted, sfx } from './sfx';
 
 /**
@@ -19,6 +21,7 @@ export class Portal implements PortalController {
   readonly #tabs: HTMLElement;
   readonly #body: HTMLElement;
   readonly #title: HTMLElement;
+  readonly #plays: HTMLElement;
   readonly #loading: HTMLElement;
   readonly #loadingText: HTMLElement;
   readonly #muteBtn: HTMLButtonElement;
@@ -31,6 +34,7 @@ export class Portal implements PortalController {
   constructor(mount: HTMLElement) {
     this.#tabs = h('nav', { class: 'pw-tabs' });
     this.#title = h('h2', { class: 'pw-title', id: 'pw-title' });
+    this.#plays = h('div', { class: 'pw-plays' });
     this.#body = h('div', { class: 'pw-body' });
     this.#loadingText = h('span', {});
     this.#loading = h(
@@ -94,7 +98,7 @@ export class Portal implements PortalController {
         h(
           'header',
           { class: 'pw-bar' },
-          this.#title,
+          h('div', { class: 'pw-heading' }, this.#title, this.#plays),
           this.#tabs,
           h('div', { class: 'pw-tools' }, newBtn, helpBtn, muteBtn, fsBtn, closeBtn),
         ),
@@ -137,6 +141,7 @@ export class Portal implements PortalController {
   async open(id: string, source: 'agent' | 'human' = 'human'): Promise<GameHost> {
     const entry = findGame(id);
     if (!entry) throw new Error(`Unknown game: ${id}`);
+    reportGame(id);
     const existing = this.#views.get(id);
     if (existing) {
       if (this.#focused !== id) this.#focus(id);
@@ -193,6 +198,7 @@ export class Portal implements PortalController {
     this.#focused = id;
     const entry = findGame(id)!;
     this.#title.textContent = gameName(entry, lang());
+    this.#plays.replaceChildren(gameCountEl(id, 'play-count play-count-window'));
     this.#frame.style.setProperty('--accent', entry.accent);
     this.#renderTabs();
     const hash = `#/play/${id}`;

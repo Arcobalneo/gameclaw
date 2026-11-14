@@ -1,6 +1,6 @@
 {
   "name": "@gameclaw/relay",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "type": "module",
   "description": "GameClaw realtime relay: WebSocket sessions + remote Streamable HTTP MCP.",

@@ -65,6 +65,8 @@ const ZH = {
   'session.joinBad': '找不到这个房间码',
   'session.reconnecting': '连接已断开，正在重连…',
   'action.abort': '放弃本局',
+  'stats.played': '{n} 人已玩过',
+  'stats.site': '{n} 人已玩过',
 } as const;
 
 export type MsgKey = keyof typeof ZH;
@@ -131,6 +133,8 @@ const EN: Record<MsgKey, string> = {
   'session.joinBad': 'That room code was not found',
   'session.reconnecting': 'Connection lost, reconnecting…',
   'action.abort': 'Abort run',
+  'stats.played': '{n} have played',
+  'stats.site': '{n} have played',
 };
 
 const DICTS: Record<Lang, Record<MsgKey, string>> = { zh: ZH, en: EN };

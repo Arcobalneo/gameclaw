@@ -249,8 +249,10 @@ Which id is current comes from the catalog, not from this file.
 
 Every catalog game is also playable at `https://arcobalneo.github.io/gameclaw/` (no binary, no download).
 If the player only wants to try a game, or downloads are blocked, offer that.
-The page mints a session token with no login. The copyable prompt in each game
-window includes a remote MCP URL and that token. A desktop agent (Codex or
+The page mints a session token with no login. A 中 / EN switch localizes the
+site and in-game text; the footer shows how many people have played. The
+copyable prompt in each game window includes a remote MCP URL and that token.
+A desktop agent (Codex or
 anything that speaks Streamable HTTP MCP) uses the token; the already-open
 page shows the moves and animations. The same tools
 (`list_games`, `open_game`, `new_game`, `get_state`, `list_actions`, `act`,

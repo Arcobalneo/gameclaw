@@ -25,3 +25,7 @@ settlement_reports/
 .tmp/
 
 .wrangler/
+
+# Python
+__pycache__/
+*.pyc

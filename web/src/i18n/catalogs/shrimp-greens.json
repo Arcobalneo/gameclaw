@@ -1,0 +1,739 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "断席": "Left the table",
+    "没收束": "Unresolved",
+    "身体": "Body",
+    "家人": "Family",
+    "场面": "Mood",
+    "立场": "Stance",
+    "备菜": "Backup",
+    "冲突": "Clash",
+    "家里": "Home",
+    "校园": "School",
+    "出门": "Out",
+    "立席": "Own Table",
+    "守自己的盘子": "Guard my plate",
+    "同席只夹素": "Veggies only",
+    "把话说清": "Say it plainly",
+    "离席": "Leave the table",
+    "说开分歧": "Talk it out",
+    "为场面咬一口": "One bite for peace",
+    "把话带过去": "Change the subject",
+    "不接这个话": "Don't take the bait",
+    "把备菜摆上": "Serve my dish",
+    "自己吃一顿": "Eat on my own",
+    "收束": "Finale",
+    "自席": "Own Table",
+    "分席": "Split Table",
+    "外席": "Eat Out",
+    "同桌": "Same Table",
+    "说动": "convince",
+    "没说动": "did not convince",
+    "过了": "cleared",
+    "需要": "need",
+    "约": "about",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "女": "Female",
+    "男": "Male",
+    "非二元": "Non-binary",
+    "娇气": "fussy",
+    "不够意思": "a poor sport",
+    "又一套身份": "just another identity",
+    "同学": "Classmates",
+    "外面的人": "People outside",
+    "你自己": "Yourself",
+    "稳": "Steady",
+    "软": "Soft",
+    "烈": "Fierce",
+    "无肉不欢": "Meat-first household",
+    "素食家庭": "Vegetarian household",
+    "伦理": "Ethics",
+    "信仰": "Faith",
+    "养生": "Health",
+    "口味": "Taste",
+    "你不想把动物当食物。": "You do not want to treat animals as food.",
+    "有些东西你不往嘴里放。": "There are things you will not put in your mouth.",
+    "你的身体不接受肉。": "Your body does not accept meat.",
+    "厌食": "Starved",
+    "标签": "Labeled",
+    "随席": "Went along",
+    "早饭": "Breakfast",
+    "红烧": "Red-braised",
+    "亲戚上桌": "Relatives at the table",
+    "年夜饭": "New Year's Eve dinner",
+    "食堂窗口": "Canteen window",
+    "同学火锅": "Classmate hotpot",
+    "班主任的问题": "The head teacher's question",
+    "春游便当": "Spring outing lunchbox",
+    "出租屋的灶": "The stove in a rented room",
+    "同事午饭": "Lunch with colleagues",
+    "客户应酬": "Client dinner",
+    "朋友局": "A night with friends",
+    "回一趟家": "A trip home",
+    "自己的灶": "Your own stove",
+    "介绍你的人": "Someone introducing you",
+    "收束的这一席": "The closing meal",
+    "无数值变化": "No stat change",
+    "这一局没有席面。": "This run has no meal yet.",
+    "1 次判定": "1 check",
+    "收束·自席": "Finale · Own Table",
+    "1 备菜": "1 prep",
+    "收束·同桌": "Finale · Same Table",
+    "收束·外席": "Finale · Eat Out",
+    "收束·分席": "Finale · Split Table",
+    "你在自己的桌上吃完了一顿": "You finished a meal at your own table",
+    "你吃了自己的那一盘": "You ate your own plate",
+    "你把这个称呼笑过去了": "You laughed that label off",
+    "你不接这个话": "You did not take that bait",
+    "你离席": "You left the table",
+    "守盘": "Guard the plate",
+    "同席": "Share the table",
+    "说清": "Say it plainly",
+    "摆菜": "Serve a dish",
+    "咬一口": "Take a bite",
+    "说开": "Talk it out",
+    "可走": "Open",
+    "未到": "Not yet",
+    "没有单独的理由": "No separate reason",
+    "和你不一样。": "Not the same as yours.",
+    "和你一样。": "The same as yours.",
+    "这句话你已经说开了。": "You have already talked this sentence out.",
+    "还没说开，分席不会出现。": "It has not been talked out yet, so Split Table will not appear.",
+    "这一席": "This meal",
+    "你是谁": "Who you are",
+    "记下": "Notes",
+    "到 0 为厌食": "Hits 0: Starved",
+    "到 0 为断席": "Hits 0: Left the table",
+    "到 0 为标签": "Hits 0: Labeled",
+    "到 0 为随席": "Hits 0: Went along",
+    "肉食家庭叠满会爆": "A meat-eating household blows when the stack is full",
+    "这一局还没收尾。": "This run is not over yet.",
+    "结局": "Ending",
+    "得分": "Score",
+    "家庭": "Household",
+    "理由": "Reason",
+    "虾素": "Shrimp Greens",
+    "十六席，把自己的盘子吃完": "Sixteen meals, finish your own plate",
+    "桌上有你能吃的。": "There is something on the table you can eat.",
+    "桌上有你能吃的": "There is something on the table you can eat",
+    "桌上没有你的菜。": "There is no dish of yours on the table.",
+    "桌上没有你的菜": "There is no dish of yours on the table",
+    "和你不一样": "Not the same as yours",
+    "和你一样": "The same as yours",
+    "立场很清楚": "Your stance is clear"
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "女": "Female",
+    "男": "Male",
+    "非二元": "Non-binary",
+    "娇气": "fussy",
+    "不够意思": "a poor sport",
+    "又一套身份": "just another identity",
+    "你开始在学校吃饭。家人还在，但场面从这里起算。": "You start eating at school. Family is still there, but mood starts counting from here.",
+    "你出门了。应酬、同事和朋友局不会因为你解释过一次就结束。": "You are out in the world. Work dinners, colleagues, and friend gatherings will not end just because you explained once.",
+    "你可以收束了。门槛写在「收束」里，不够的不会出现在动作列表中。": "You can close this out. The thresholds are written under Finale; anything you have not met will not appear in the action list.",
+    "同学": "Classmates",
+    "外面的人": "People outside",
+    "你自己": "Yourself",
+    "稳": "Steady",
+    "说话留余地。离席伤关系较轻，解释更容易被听见。": "You leave room when you speak. Leaving the table hurts the relationship less, and explanations are easier to hear.",
+    "软": "Soft",
+    "不爱把桌子掀了。同席时不太掉立场，但开局立场就低。": "You do not like flipping the table. Sharing a meal costs less stance, but you start with a low stance.",
+    "烈": "Fierce",
+    "立场很清楚。对家里人说话像宣判，对外面的人反而说得动。": "Your stance is clear. Talking to family sounds like a verdict; with people outside, you are more convincing.",
+    "无肉不欢": "Meat-first household",
+    "素食家庭": "Vegetarian household",
+    "家里的菜默认有肉。他们爱你，你也爱他们，但这张桌子不按你的盘子摆。": "The household dishes default to meat. They love you, and you love them, but this table is not set around your plate.",
+    "家里也吃素。这是运气，不是免战。理由若不一样，摩擦还在。": "The household also eats vegetarian. That is luck, not a truce. If the reasons differ, the friction is still there.",
+    "伦理": "Ethics",
+    "信仰": "Faith",
+    "养生": "Health",
+    "口味": "Taste",
+    "你不想把动物当食物。": "You do not want to treat animals as food.",
+    "有些东西你不往嘴里放。": "There are things you will not put in your mouth.",
+    "你的身体不接受肉。": "Your body does not accept meat.",
+    "你就是不爱吃，也不打算为了场面学会爱。": "You simply do not like it, and you do not plan to learn to like it for the mood of the table.",
+    "厌食": "Starved",
+    "标签": "Labeled",
+    "随席": "Went along",
+    "中止": "Aborted",
+    "你摆出自己的一桌。没人必须改口，但这张桌子默认你的盘子。": "You set a table of your own. No one has to change how they speak, but this table defaults to your plate.",
+    "家里的菜还是家里的菜。你的位子还在，你的盘子也还在。": "Home food is still home food. Your seat is still there, and so is your plate.",
+    "同事和朋友记住了你怎么吃饭。应酬还在，但不再每次都从零解释。": "Colleagues and friends remember how you eat. The dinners are still there, but you no longer start the explanation from zero every time.",
+    "家里也吃素，理由和你不一样。你们把这句话说开了，仍然坐在同一间屋子里。": "The household also eats vegetarian, for a reason that is not yours. You talked that sentence out, and you still sit in the same house.",
+    "你连着几顿没有吃下东西，身体先停了。这一局结束在吃不下，不是结束在说服了谁。": "You go several meals without keeping anything down, and the body stops first. This run ends in not being able to eat, not in having convinced anyone.",
+    "家里这桌不再给你留位子。冲突没有变成商量，位子先没了。": "This table at home no longer keeps a seat for you. The clash never turned into a talk, and the seat was gone first.",
+    "外面的人只剩下一个称呼。没有人再跟你约一顿能吃的饭。": "People outside are left with only a label. No one asks you to a meal you can actually eat.",
+    "你还能坐下，但已经说不清自己为什么不吃肉。立场归零，这一局的素食者身份散了。": "You can still sit down, but you can no longer say why you do not eat meat. Stance hits zero, and this run's vegetarian identity unravels.",
+    "肉食家里的硬碰硬叠满了：冲突到了线，身体和家人都已经很低。这一席是吵崩的，也是吃崩的。": "The hard collisions at a meat-eating home have stacked to the line: clash is at the cap, and body and family are already low. This meal broke in the argument, and in the eating.",
+    "十六席过完了，盘子还没放稳。活到最后不算收束。": "Sixteen meals are over, and the plate was never set steady. Lasting to the end is not a finale.",
+    "你把这一席推开了，日子还没过完。": "You pushed this meal aside. The days are not over yet.",
+    "早饭": "Breakfast",
+    "粥、咸菜、一个鸡蛋。肉不在这顿。": "Congee, pickles, an egg. There is no meat in this meal.",
+    "红烧": "Red-braised",
+    "锅里是红烧。素食家里是素的，肉食家里没有第二盘。": "The pot is red-braised. In a vegetarian household it is vegetarian; in a meat-eating household there is no second dish.",
+    "亲戚上桌": "Relatives at the table",
+    "亲戚把筷子递过来，问你怎么还不夹。": "A relative holds out chopsticks and asks why you have not taken a piece yet.",
+    "年夜饭": "New Year's Eve dinner",
+    "一年里最吵的一桌。位子是留给你的，菜不一定是。": "The loudest table of the year. The seat is saved for you. The dishes may not be.",
+    "食堂窗口": "Canteen window",
+    "素窗口还开着。分量小，味道一般，但确实是素的。": "The vegetarian window is still open. The portion is small and the taste is ordinary, but it is genuinely vegetarian.",
+    "同学火锅": "Classmate hotpot",
+    "锅底已经红了。清汤锅在菜单最后一行，今天没人点。": "The pot base is already red. The clear-broth pot is on the last line of the menu, and no one ordered it today.",
+    "班主任的问题": "The head teacher's question",
+    "老师把你留下来，问你是不是在家里闹别扭。": "The teacher keeps you after class and asks if you are having a fight at home.",
+    "春游便当": "Spring outing lunchbox",
+    "别人的盒子里有鸡腿。你的位子空着。": "Someone else's box has a chicken leg. Your seat is empty.",
+    "出租屋的灶": "The stove in a rented room",
+    "一间灶，两口锅。这是你自己的饭点。": "One stove, two pots. This is your own mealtime.",
+    "同事午饭": "Lunch with colleagues",
+    "有人订了套餐。有没有素菜，看这家店今天做不做。": "Someone ordered a set meal. Whether there is a vegetarian dish depends on whether this place made one today.",
+    "客户应酬": "Client dinner",
+    "转盘上的肉先转到你面前。没人先问你吃不吃。": "The meat on the lazy Susan turns to you first. No one asks first whether you eat it.",
+    "朋友局": "A night with friends",
+    "朋友说随便吃点。菜单上没有随便。": "A friend says just eat whatever. There is no whatever on the menu.",
+    "回一趟家": "A trip home",
+    "门还开着。菜按家里的习惯摆，不是按你的。": "The door is still open. The dishes are set by the household's habit, not by yours.",
+    "自己的灶": "Your own stove",
+    "还是那两口锅。你可以吃，也可以再备一盒。": "Still those two pots. You can eat, or you can pack another box.",
+    "介绍你的人": "Someone introducing you",
+    "有人说：这是那个吃素的。后面的话还没出口。": "Someone says: this is the one who eats vegetarian. The rest of the sentence is not out yet.",
+    "收束的这一席": "The closing meal",
+    "桌子是你的。这一席用来决定以后怎么吃饭。": "The table is yours. This meal is for deciding how you will eat from here.",
+    "无数值变化": "No stat change",
+    "十六席。活到最后不算赢，立席要自己收束。": "Sixteen meals. Lasting to the end is not a win. At the finale you have to close it yourself.",
+    "这一局没有席面。": "This run has no meal yet.",
+    "自己的桌子。吃完这顿，不处理别人的眼光。": "A table of your own. Finish this meal without managing anyone else's gaze.",
+    "有素，但分量小。身体 +1，立场不动。": "There is a vegetarian dish, but the portion is small. Body +1, stance unchanged.",
+    "桌上有你的菜，没人逼你。身体 +2。这顿不涨立场。": "Your dish is on the table, and no one pushes you. Body +2. This meal does not raise stance.",
+    "桌上有你的菜，但这桌很吵。身体 +2，立场 +1，关系 -1。": "Your dish is on the table, but this table is loud. Body +2, stance +1, relationship -1.",
+    "男客在这桌守空盘，场面再掉 1。": "A male guest guarding an empty plate at this table loses 1 more mood.",
+    "不反驳这个称呼。关系涨一点，立场掉一点。": "You do not push back on that label. Relationship rises a little, stance drops a little.",
+    "热度 3 的空桌不给你加分。身体 -1，立场 -1，关系不动。": "An empty table at heat 3 gives you no bonus. Body -1, stance -1, relationship unchanged.",
+    "热度不高。关系 +1，软的人不掉立场，这顿也不扣身体。": "The heat is not high. Relationship +1. A soft person does not lose stance, and this meal does not cost body.",
+    "热度不高。关系 +1，立场 -1，这顿不扣身体。": "The heat is not high. Relationship +1, stance -1, and this meal does not cost body.",
+    "桌上有素。身体和关系都涨。软的人在吵桌上也不掉立场。": "There is a vegetarian dish on the table. Body and relationship both rise. A soft person does not lose stance even at a loud table.",
+    "桌上有素。身体和关系都涨。热度 3 时立场 -1。": "There is a vegetarian dish on the table. Body and relationship both rise. At heat 3, stance -1.",
+    "1 次判定": "1 check",
+    "消耗 1 备菜，摆上一盘大家都能夹的。不叠冲突。": "Spend 1 prep to put down a dish everyone can take from. Does not stack clash.",
+    "把话放下就走。吃饭的席才会扣身体；这一席不扣。": "Set the words down and go. Only meals where you eat cost body; this one does not.",
+    "离开。稳的人关系只 -1，但这顿没吃。": "Leave. A steady person only loses 1 relationship, but this meal was not eaten.",
+    "离开。烈的人立场 +2，关系 -2，这顿没吃。": "Leave. A fierce person gains 2 stance and loses 2 relationship, but this meal was not eaten.",
+    "离开。关系 -2，立场 +1，这顿没吃。": "Leave. Relationship -2, stance +1, but this meal was not eaten.",
+    "花这一席做菜，自己也吃一点。备菜留给后面没有素菜的桌子。": "Spend this meal cooking, and eat a little yourself. The prep is saved for later tables with no vegetarian dish.",
+    "承认家里和你素的理由不一样。说开之后，立席才可能走分席。": "Admit that the household's reason for eating vegetarian is not yours. Only after talking it out can the finale take Split Table.",
+    "收束·自席": "Finale · Own Table",
+    "1 备菜": "1 prep",
+    "收束·同桌": "Finale · Same Table",
+    "收束·外席": "Finale · Eat Out",
+    "收束·分席": "Finale · Split Table",
+    "这一局已经收尾了，用 recap 查看结算。": "This run has ended; use recap to read the settlement.",
+    "你在自己的桌上吃完了一顿": "You finished a meal at your own table",
+    "你吃了自己的那一盘": "You ate your own plate",
+    "桌上没有你的菜，你守着空盘子": "There was no dish of yours, and you guarded an empty plate",
+    "你把这个称呼笑过去了": "You laughed that label off",
+    "你坐下，只夹能吃的，没把理由摊开": "You sat down, took only what you could eat, and did not spread the reason out",
+    "你不接这个话": "You did not take that bait",
+    "你离席": "You left the table",
+    "分歧已经说开。立席若门槛够，可以走分席。": "The difference has been talked out. If the finale thresholds are met, Split Table is open.",
+    "守盘": "Guard the plate",
+    "同席": "Share the table",
+    "说清": "Say it plainly",
+    "摆菜": "Serve a dish",
+    "咬一口": "Take a bite",
+    "说开": "Talk it out",
+    "可走": "Open",
+    "未到": "Not yet",
+    "身体到 0 是厌食，家人到 0 是断席，场面到 0 是标签，立场到 0 是随席。": "Body at 0 is Starved, family at 0 is Left the table, mood at 0 is Labeled, stance at 0 is Went along.",
+    "这户人家不走肉食家庭的冲突条。": "This household does not use the meat-eating clash track.",
+    "十六席结束仍没收束，是没收束。": "If sixteen meals end without a finale, that is Unresolved.",
+    "没有单独的理由": "No separate reason",
+    "和你不一样。": "Not the same as yours.",
+    "和你一样。": "The same as yours.",
+    "这句话你已经说开了。": "You have already talked this sentence out.",
+    "还没说开，分席不会出现。": "It has not been talked out yet, so Split Table will not appear.",
+    "你是男的。这桌守空盘或离席，场面多掉 1。": "You are male. Guarding an empty plate or leaving this table costs 1 more mood.",
+    "这一席": "This meal",
+    "你是谁": "Who you are",
+    "你是自己选的素食者，不是「胎内素」：不是母亲孕期吃素，所以你天生不吃。": "You chose to be vegetarian yourself, not \"vegetarian from the womb\": it is not that your mother ate vegetarian while pregnant, so you were born not eating meat.",
+    "记下": "Notes",
+    "到 0 为厌食": "Hits 0: Starved",
+    "到 0 为断席": "Hits 0: Left the table",
+    "到 0 为标签": "Hits 0: Labeled",
+    "到 0 为随席": "Hits 0: Went along",
+    "肉食家庭叠满会爆": "A meat-eating household blows when the stack is full",
+    "守立场如果靠空肚子，身体会先结束这一局。有素菜就吃，没素菜就靠事先备的菜。": "If you hold stance on an empty stomach, the body will end this run first. Eat when there is a vegetarian dish; when there is not, lean on a dish you prepped ahead.",
+    "肉食家里，硬守和离席会叠冲突。冲突到 3 并且身体、家人都低时，会走「冲突」。": "At a meat-eating home, hard-guarding and leaving stack clash. When clash hits 3 and both body and family are low, the run goes to Clash.",
+    "家人先归零是「断席」。要留在这张桌子上，得有同席、说动或备菜。": "Family hitting zero first is Left the table. To stay at this table you need sharing, convincing, or prep.",
+    "立场归零是「随席」。关系也许还在，但这一局已经说不清自己为什么不吃肉。": "Stance hitting zero is Went along. The relationship may still be there, but this run can no longer say why you do not eat meat.",
+    "场面归零是「标签」。只离席、不备菜、也不把话说清，外面会只剩一个称呼。": "Mood hitting zero is Labeled. If you only leave, never prep, and never say it plainly, people outside will be left with only a name for you.",
+    "素食家庭但理由不同。这一局没有把分歧说开，所以走不到「分席」。": "A vegetarian household, but the reasons differ. This run never talked the difference out, so it cannot reach Split Table.",
+    "你把「我们都吃素，但理由不同」说开了。这是这一家里的观察，不是下一户人家的规律。": "You talked out \"we all eat vegetarian, but not for the same reason.\" This is an observation about this household, not a rule for the next one.",
+    "这一局没有备菜。空桌时守盘子会直接扣身体。": "This run had no prep. Guarding the plate at an empty table costs body directly.",
+    "这一局没有单一的崩点。把开局的家庭和你实际选的动作对照一下，再决定下局要不要换打法。": "This run had no single breaking point. Compare the starting household with the actions you actually took, then decide whether to change the approach next run.",
+    "进行中": "In progress",
+    "这一局还没收尾。": "This run is not over yet.",
+    "结局": "Ending",
+    "得分": "Score",
+    "家庭": "Household",
+    "理由": "Reason",
+    "把这一局的开局写进你自己的 memory：性别、性格、家里吃不吃肉、你的理由、有没有说开分歧。再记下你靠守盘、备菜、同席还是咬一口走到这个结局。这是这一局的观察，换一个家庭或性格要重新验证，不要写成所有素食者的规律。": "Write this run's opening into your own memory: gender, temperament, whether the household eats meat, your reason, and whether the difference was talked out. Then note whether you reached this ending by guarding the plate, prepping, sharing, or taking a bite. These are observations from this run. A different household or temperament needs to be tested again; do not write them as a law for every vegetarian.",
+    "虾素": "Shrimp Greens",
+    "十六席，把自己的盘子吃完": "Sixteen meals, finish your own plate",
+    "你自己是素食者，不是因为母亲孕期吃素才不吃肉。开局随机性别、性格和家庭：家里可能无肉不欢，也可能同素不同理。十六席从饭桌吃到校园、应酬和你自己的灶。守盘、同席、把话说清、备菜，或者为了场面咬一口——那一口不提供体力。立席要把一种活法收束下来，只是活到最后不算赢。": "You are vegetarian by your own choice, not because your mother ate vegetarian while pregnant. The opening rolls gender, temperament, and household: the home may be meat-first, or vegetarian for a different reason. Sixteen meals run from the family table to school, work dinners, and your own stove. Guard the plate, share the table, say it plainly, prep a dish, or take a bite for the mood of the table — that bite gives no stamina. At the finale you have to close out a way of living. Just lasting to the end is not a win.",
+    "你是自己选的素食者，不是「胎内素」。性别、性格、家庭和理由写在「你是谁」。": "You chose to be vegetarian yourself, not \"vegetarian from the womb.\" Gender, temperament, household, and reason are written under Who you are.",
+    "十六席，每席一个动作。家里、校园、出门、立席各四席。当前席的热度和有没有素菜，行动前就看得到。": "Sixteen meals, one action each. Home, school, out, and the finale are four meals each. The current meal's heat and whether there is a vegetarian dish are visible before you act.",
+    "hold 守自己的盘子。没素就扣身体。安静的素菜桌只回身体，不涨立场；吵的素菜桌才涨立场，并掉关系。": "hold guards your own plate. No vegetarian dish costs body. A quiet vegetarian table only restores body and does not raise stance; a loud vegetarian table raises stance and drops relationship.",
+    "share 在热度 ≤ 2 的空桌涨关系。热度 3 不涨关系，还扣身体和立场。软的人在低热度不掉立场。": "share raises relationship at an empty table with heat ≤ 2. At heat 3 it does not raise relationship, and it costs body and stance. A soft person does not lose stance at low heat.",
+    "name 是一次掷骰。日志里有点数、修正和需要的线。成功率是 0 的席不会出现这个动作。": "name is a dice roll. The log has the roll, the modifiers, and the line you need. Meals with a 0% success rate will not show this action.",
+    "stock 在自己的灶备菜（上限 3）。bring 把备菜摆上没有素菜的桌子，不叠冲突。": "stock preps a dish at your own stove (cap 3). bring puts the prep on a table with no vegetarian dish, and does not stack clash.",
+    "bite 为场面咬一口肉：关系 +2，身体 -2，立场 -2。这一口不提供体力。": "bite takes a bite of meat for the mood of the table: relationship +2, body -2, stance -2. This bite gives no stamina.",
+    "leave 离席。稳的人关系伤得轻，烈的人立场涨得多。": "leave leaves the table. A steady person hurts the relationship less; a fierce person gains more stance.",
+    "肉食家庭：没素菜且热度≥2 的家里，硬守、离席或没说动会叠冲突。冲突到 3 且身体≤2、家人≤2 会爆。家人先归零则是断席。": "Meat-first household: at a home with no vegetarian dish and heat≥2, hard-guarding, leaving, or failing to convince stacks clash. Clash at 3 with body≤2 and family≤2 blows. Family hitting zero first is Left the table.",
+    "素食家庭若理由不同，differ 把分歧说开，之后才可能分席。": "If a vegetarian household has a different reason, differ talks it out; only then can Split Table open.",
+    "立席只列出你已经够到的收束：自席、同桌、外席、分席。十六席仍不收束就是输。": "The finale only lists closings you already meet: Own Table, Same Table, Eat Out, Split Table. Sixteen meals without a closing is a loss.",
+    "桌上有你能吃的。": "There is something on the table you can eat.",
+    "桌上有你能吃的": "There is something on the table you can eat",
+    "桌上没有你的菜。": "There is no dish of yours on the table.",
+    "桌上没有你的菜": "There is no dish of yours on the table",
+    "和你不一样": "Not the same as yours",
+    "和你一样": "The same as yours",
+    "立场很清楚": "Your stance is clear",
+    "对家里人说话像宣判，对外面的人反而说得动。": "Talking to family sounds like a verdict; with people outside, you are more convincing.",
+    "对家里人说话像宣判，对外面的人反而说得动": "Talking to family sounds like a verdict; with people outside, you are more convincing",
+    "桌上没有你的菜。守着空盘子会掉身体，家里还可能叠冲突。": "There is no dish of yours on the table. Guarding an empty plate costs body, and at home it may also stack clash.",
+    "介绍你的人：有人说：这是那个吃素的。后面的话还没出口。": "Someone introducing you: someone says: this is the one who eats vegetarian. The rest of the sentence is not out yet."
+  },
+  "patterns": [
+    {
+      "zh": "身体 {0}",
+      "en": "Body {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "家人 {0}",
+      "en": "Family {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "场面 {0}",
+      "en": "Mood {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "立场 {0}",
+      "en": "Stance {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "备菜 {0}",
+      "en": "Prep {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "冲突 {0}",
+      "en": "Clash {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "桌上没有你的菜。守着空盘子会掉身体，家里还可能叠冲突。{0}",
+      "en": "There is no dish of yours on the table. Guarding an empty plate costs body, and at home it may also stack clash. {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "掷 1d6{0}，需要 {1}，约 {2}/6。说动：{3} +2，立场 +1{4}。没说动：{5} -1{6}。",
+      "en": "Roll 1d6{0}, need {1}, about {2}/6. If you convince: {3} +2, stance +1{4}. If not: {5} -1{6}.",
+      "slots": [
+        "text",
+        "text",
+        "n",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "这一口不提供体力。{0} +2，身体 -2，立场 -2。",
+      "en": "This bite gives no stamina. {0} +2, body -2, stance -2.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "家里的冲突叠到 {0}。到 3 且身体≤2、家人≤2 会爆。",
+      "en": "Clash at home stacks to {0}. At 3, if body≤2 and family≤2, it blows.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "身体只剩 {0}。空肚子再守一次就危险。",
+      "en": "Body is down to {0}. One more watch on an empty stomach is dangerous.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "立场只剩 {0}。再沉默或再咬，身份会散。",
+      "en": "Stance is down to {0}. One more silence or one more bite, and the identity unravels.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "判定 {0}{1}={2}，{3} {4}",
+      "en": "Check {0}{1}={2}, {3} {4}",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "你把话说清了。{0}。（{1}）",
+      "en": "You said it plainly. {0}. ({1})",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "你说了，没说动。{0}。（{1}）",
+      "en": "You spoke, and did not convince. {0}. ({1})",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "你把备好的菜摆上去。这一桌终于有你能吃的。（{0}）",
+      "en": "You put your prepared dish on the table. This meal finally has something you can eat. ({0})",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "你为了这一桌咬了一口。恶心是真的，立场也掉了。这一口不提供体力。（{0}）",
+      "en": "You took a bite for this table. The nausea is real, and stance drops too. This bite gives no stamina. ({0})",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "你备了菜，自己也吃了一点。备菜现在是 {0}。（{1}）",
+      "en": "You prepped a dish and ate a little of it yourself. Prep is now {0}. ({1})",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "你说：我们都吃素，但不是为了同一件事。（{0}）",
+      "en": "You say: we all eat vegetarian, but not for the same reason. ({0})",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "不认识的动作：{0}",
+      "en": "Unknown action: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "这一席不能做：{0}",
+      "en": "You cannot do this at this meal: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "第 {0} 席 · {1} · {2}{3}",
+      "en": "Meal {0} · {1} · {2}{3}",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 自席：立场≥{1}（现 {2}），身体≥{3}（现 {4}），备菜≥{5}（现 {6}），且在立席",
+      "en": "{0} Own Table: stance≥{1} (now {2}), body≥{3} (now {4}), prep≥{5} (now {6}), and you are at the finale meals",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 同桌：家人≥{1}（现 {2}），身体≥{3}（现 {4}），立场≥{5}（现 {6}），且在立席",
+      "en": "{0} Same Table: family≥{1} (now {2}), body≥{3} (now {4}), stance≥{5} (now {6}), and you are at the finale meals",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 外席：场面≥{1}（现 {2}），身体≥{3}（现 {4}），立场≥{5}（现 {6}），且在立席",
+      "en": "{0} Eat Out: mood≥{1} (now {2}), body≥{3} (now {4}), stance≥{5} (now {6}), and you are at the finale meals",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 分席：素食家庭、理由不同且已说开，家人≥{1}（现 {2}），立场≥{3}（现 {4}），身体≥{5}（现 {6}），且在立席",
+      "en": "{0} Split Table: a vegetarian household, reasons differ and have been talked out, family≥{1} (now {2}), stance≥{3} (now {4}), body≥{5} (now {6}), and you are at the finale meals",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "冲突到 {0} 且身体≤{1}、家人≤{2} 是冲突。家人先到 0 则算断席。",
+      "en": "Clash at {0} with body≤{1} and family≤{2} is a blow-up. If family hits 0 first, it counts as leaving the table.",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "备菜 {0}/{1}。",
+      "en": "Prep {0}/{1}.",
+      "slots": [
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "家人的理由是{0}。{1}{2}",
+      "en": "The family's reason is {0}. {1}{2}",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "冲突 {0}/{1}。没素菜且热度≥2 的家里，硬守、离席或没说动会 +1。",
+      "en": "Clash {0}/{1}. At a meat-eating home with no vegetarian dish and heat≥2, hard-guarding, leaving, or failing to convince adds +1.",
+      "slots": [
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "{0} · 第 {1}/{2} 席 · {3}·{4} · {5} · 身体 {6} 家人 {7} 场面 {8} 立场 {9}",
+      "en": "{0} · Meal {1}/{2} · {3}·{4} · {5} · body {6} family {7} mood {8} stance {9}",
+      "slots": [
+        "text",
+        "n",
+        "n",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "热度 {0}/3。{1}",
+      "en": "Heat {0}/3. {1}",
+      "slots": [
+        "n",
+        "text"
+      ]
+    },
+    {
+      "zh": "这一席算在{0}上。",
+      "en": "This meal counts toward {0}.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "别人会用的词是「{0}」。",
+      "en": "The word other people will use is \"{0}\".",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "理由：{0}。{1}",
+      "en": "Reason: {0}. {1}",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "这一局咬了 {0} 口。那一口换来关系，不提供体力，还掉立场。",
+      "en": "This run took {0} bite(s). That bite buys relationship, gives no stamina, and drops stance.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "虾素 · {0}",
+      "en": "Shrimp Greens · {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "家人的理由是{0}",
+      "en": "The family's reason is {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "你把话说清了。判定 {0}，{1}。（{2}）",
+      "en": "You said it plainly. Check {0}, {1}. ({2})",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "你说了，没说动。判定 {0}，需要 {1}。（{2}）",
+      "en": "You spoke, and did not convince. Check {0}, need {1}. ({2})",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "掷 1d6{0}，需要 {1}，约 {2}/6。说动：{3}。没说动：{4}。",
+      "en": "Roll 1d6{0}, need {1}, about {2}/6. If you convince: {3}. If not: {4}.",
+      "slots": [
+        "text",
+        "text",
+        "n",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "过了 {0}",
+      "en": "cleared {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "说动：{0}",
+      "en": "If you convince: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "没说动：{0}",
+      "en": "If not: {0}",
+      "slots": [
+        "text"
+      ]
+    }
+  ]
+}

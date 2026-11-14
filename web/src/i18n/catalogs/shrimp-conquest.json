@@ -1,0 +1,822 @@
+{
+  "terms": {
+    "进行中": "In progress",
+    "胜利": "Victory",
+    "失败": "failure",
+    "已中止": "Aborted",
+    "中止": "Aborted",
+    "放弃本局": "Abort run",
+    "回合": "Turn",
+    "种子": "Seed",
+    "未知动作": "Unknown action",
+    "合法动作": "Legal actions",
+    "暂无": "none",
+    "壳": "shell",
+    "攻": "atk",
+    "拦": "block",
+    "拦口": "block",
+    "再编": "reform",
+    "视野": "vision",
+    "压力": "pressure",
+    "破甲": "sunder",
+    "减速": "slow",
+    "易伤": "vulnerable",
+    "击退": "knockback",
+    "返还": "refund",
+    "冷却": "cooldown",
+    "潮令": "orders",
+    "完整度": "integrity",
+    "第": "No.",
+    "关": "Lv",
+    "步": "step",
+    "拍": "beat",
+    "判定": "check",
+    "成功": "success",
+    "能": "energy",
+    "盐": "salt",
+    "名": "fame",
+    "势": "momentum",
+    "蜕": "molt",
+    "基础": "base",
+    "实际": "actual",
+    "误差": "error",
+    "糧草": "Rations",
+    "銀幣": "Silver",
+    "部件": "Parts",
+    "情報": "intel",
+    "善意": "goodwill",
+    "暴露": "Exposure",
+    "體力": "Stamina",
+    "控制": "control",
+    "影響": "influence",
+    "受命": "Orders",
+    "野外": "Field",
+    "被俘": "Captured",
+    "被發現": "Spotted",
+    "迎戰": "Duel",
+    "工坊": "Workshop",
+    "逃跑": "Escape",
+    "鐵壁國": "Ironwall",
+    "豐穗國": "Goldgrain",
+    "鏡面國": "Mirrorland",
+    "沿桌腳偵察": "Scout the table legs",
+    "幫大人解決小麻煩": "Help a giant",
+    "在縫隙裡打零工": "Odd jobs",
+    "偷大人剩下的物資": "Pilfer leftovers",
+    "回本國購入糧草": "Buy rations at home",
+    "躲回牆縫休整": "Rest in the wall",
+    "設計小體型武器": "Design a tiny weapon",
+    "遞出小人國的盟約草案": "Offer a treaty",
+    "向認識的大人發出求救訊號": "Signal a friendly giant",
+    "請獄卒收下銀幣": "Bribe the jailer",
+    "留下記號等待救援": "Leave a mark & wait",
+    "逃跑：選路線並閃躲": "Escape: route & dodge",
+    "迎戰：抓準時機並連擊": "Fight: time your combo",
+    "快擊": "Quick strike",
+    "重擊": "Heavy strike",
+    "守住這一拍": "Hold this beat",
+    "骨架": "Frame",
+    "火柴框": "Matchstick",
+    "線軸框": "Spool",
+    "頂針框": "Thimble",
+    "重新選擇部件": "Repick parts",
+    "收起設計圖": "Fold the plans",
+    "頭部": "Head",
+    "繡花針": "Needle",
+    "胡椒囊": "Pepper Pod",
+    "羽絨槌": "Down Mallet",
+    "驅動": "Drive",
+    "發條": "Clockspring",
+    "橡皮筋": "Rubber Band",
+    "小風箱": "Bellows",
+    "排水溝": "Gutter",
+    "麵包屑小徑": "Crumb Trail",
+    "衣擺暗縫": "Hem Seam",
+    "向左閃": "Dodge left",
+    "向右閃": "Dodge right",
+    "伏低躲過": "Duck",
+    "逃跑拍數": "Beats left",
+    "備戰": "Prep",
+    "交涉": "Talks",
+    "戰爭": "War",
+    "外交": "Diplomacy",
+    "日常": "Daily",
+    "好人": "kind stranger",
+    "壞蛋": "scoundrel",
+    "武器威力": "weapon power",
+    "可簽約": "Can sign",
+    "鏡國": "Mirror",
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "本局已经结束。": "This run is over.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "征服": "Conquest",
+    "盟約": "Pact",
+    "逾期": "Overdue",
+    "俘虜": "Captive",
+    "斷糧": "Starved",
+    "收令": "Orders withdrawn",
+    "結算": "Settlement",
+    "1 週 · 1 糧草": "1 week · 1 ration",
+    "回到野外，不消耗一週。": "Return to the field. Does not cost a week.",
+    "反擊耗盡了體力。": "The counter spends the last of the stamina.",
+    "日常事故耗盡了體力。": "A daily mishap spends the last of the stamina.",
+    "被發現了": "Spotted",
+    "迎戰時機": "Duel timing",
+    "玻璃罐": "Glass jar",
+    "尚未選擇大人國": "No giant kingdom chosen yet",
+    "王令": "Royal orders",
+    "武器設計": "Weapon design",
+    "記下": "Notes",
+    "每週消耗 1": "Costs 1 each week",
+    "提高發現率": "Raises detection",
+    "進行中": "In progress",
+    "結局": "Ending",
+    "得分": "Score",
+    "目標": "Target",
+    "未選": "Unchosen",
+    "週": "Week",
+    "獲救": "Rescued",
+    "虾征": "Shrimp Conquest"
+  },
+  "exact": {
+    "放弃本局并诚实结算": "Abort this run and settle honestly",
+    "运行 recap 查看结算。": "Run recap to read the settlement.",
+    "运行 `actions` 查看当前合法动作。": "Run `actions` to see the legal moves.",
+    "本局已经结束。": "This run is over.",
+    "这一局还没有结束，以下只是当前局面。": "This run is still going; what follows is the current situation only.",
+    "— 胜利 —": "— Victory —",
+    "— 失败 —": "— Defeat —",
+    "— 已中止 —": "— Aborted —",
+    "— 胜利 WIN —": "— Victory —",
+    "— 失败 LOST —": "— Defeat —",
+    "— 已中止 ABORTED —": "— Aborted —",
+    "城牆像一排書立，衛兵把每一次震動都記進冊裡。": "The walls stand like a row of bookends, and the guards write every tremor into a ledger.",
+    "麵包屑比屋頂還大，倉房守衛願意聽一場好交易。": "Breadcrumbs are larger than rooftops, and the granary guards will listen to a good bargain.",
+    "所有窗戶都映出同一座小王城，地圖上的街道熟悉得過分。": "Every window reflects the same small capital, and the streets on the map are too familiar.",
+    "輕巧的火柴骨，威力 +1、機動 +1。": "A light matchstick frame: power +1, mobility +1.",
+    "帶線軸的骨架，機動 +2，適合逃跑。": "A frame with a spool: mobility +2, good for escaping.",
+    "頂針做成的重架，威力 +2、噪音 +1。": "A heavy frame made from a thimble: power +2, noise +1.",
+    "針尖只夠刺進大人的指甲縫，威力 +2。": "The point is only long enough to slip under a giant's nail: power +2.",
+    "一點胡椒就能換一聲噴嚏，威力 +1、噪音 +1。": "A pinch of pepper can buy a sneeze: power +1, noise +1.",
+    "對大人可能只是抓癢，噪音 -1、機動 +1。": "To a giant it may only be a tickle: noise -1, mobility +1.",
+    "從玩具拆下的發條，威力 +2、噪音 +1。": "A clockspring taken from a toy: power +2, noise +1.",
+    "回彈快而安靜，威力 +1、機動 +1。": "It snaps back fast and quiet: power +1, mobility +1.",
+    "吹氣推動，噪音 +1，本身不添威力。": "Driven by a puff of air: noise +1, and it adds no power of its own.",
+    "好心的鞋匠看見了璿芃，只把一塊麵包皮推過來：「慢慢走。」": "A kind cobbler sees Xuanpeng and only pushes over a crust of bread: \"Go slowly.\"",
+    "退休裁縫把線頭與鈕釦留給小人國，還指了一條不被看見的縫。": "A retired tailor leaves thread ends and buttons for Lilliput, and points out a seam that will not be seen.",
+    "守夜人願意替你保守祕密，還說出衛兵換崗的空隙。": "A night watchman is willing to keep your secret, and even names the gap in the guard change.",
+    "廚娘以為你是來討食物的精靈，故意把餅乾屑掃到桌腳。": "A cook takes you for a spirit come to beg food, and deliberately sweeps biscuit crumbs to the table leg.",
+    "壞蛋學徒拿杯子追著你罩，還順走了行囊裡的銀幣。": "A scoundrel of an apprentice chases you with a cup and also lifts the silver from your pack.",
+    "宮廷貓一掌拍碎了掩護，璿芃在灰塵裡跌得發昏。": "The palace cat smashes the cover with one paw, and Xuanpeng goes dizzy in the dust.",
+    "有人在牆腳放了捕鼠夾；你掙脫了，但留下了一小片衣角。": "Someone set a mousetrap at the foot of the wall. You tear free, but leave a scrap of hem.",
+    "書記官把所有失竊都記成「老鼠」，卻開始在夜裡撒下石灰。": "The clerk writes every theft down as \"mice,\" but starts scattering lime at night.",
+    "征服": "Conquest",
+    "盟約": "Pact",
+    "鏡國": "Mirror",
+    "逾期": "Overdue",
+    "俘虜": "Captive",
+    "斷糧": "Starved",
+    "收令": "Orders withdrawn",
+    "城門終於承認小人國的旗幟。璿芃把國王召令釘在比自己還高的門上。": "The gate at last recognizes Lilliput's banner. Xuanpeng pins the king's orders to a door taller than himself.",
+    "大人國簽下歸附盟約。沒有破城，但印章落下的聲音一樣像雷。": "The giant kingdom signs a pact of allegiance. The walls were not broken, but the seal coming down still sounds like thunder.",
+    "塵土散開後，被攻陷的好像是自己的小人國：那面旗、那道牆，連璿芃的家都在裡面。": "When the dust settles, the place that fell seems to be Lilliput itself: that flag, that wall, even Xuanpeng's home inside it.",
+    "第五十二週過去了，國王等不到攻陷的消息，召令在燭火裡捲了邊。": "Week 52 has passed. The king receives no news of a conquest, and the orders curl at the edges in the candlelight.",
+    "最後一次救援也沒有抵達。璿芃成了玻璃罐裡的「稀有老鼠」。": "The last rescue never arrives. Xuanpeng becomes a \"rare mouse\" in a glass jar.",
+    "行囊空了，最後一點體力也用完。遠征先輸給了肚子。": "The pack is empty, and the last of the stamina is gone. The expedition loses first to the stomach.",
+    "璿芃主動收起召令，這一年在這裡中止。": "Xuanpeng puts the orders away on purpose. This year ends here.",
+    "結算": "Settlement",
+    "四拍內閃對三次；成功後暴露 -2。": "Three clean dodges in four beats; on success, exposure -2.",
+    "三拍內閃對兩次；沿路會丟掉 2 糧草。": "Two clean dodges in three beats; you will drop 2 rations along the way.",
+    "四拍內閃對三次；成功後暴露 -3。": "Three clean dodges in four beats; on success, exposure -3.",
+    "左側靴底橫掃過來，右邊還留著一道縫。": "A boot sole sweeps in from the left; a seam remains on the right.",
+    "右側手指併攏壓下，左邊的桌腳可以藏身。": "Fingers close and press down from the right; the table leg on the left can hide you.",
+    "整隻手掌從上方罩落，只有伏低才能躲過。": "A whole palm drops from above. Only ducking low will get you past it.",
+    "國王只給一年：選一個大人國，用戰爭或外交讓它低頭。": "The king gives only one year: choose a giant kingdom, and make it bow by war or by diplomacy.",
+    "1 週 · 1 糧草": "1 week · 1 ration",
+    "善意 +2；會遇到好人或壞蛋。沒有主動發現判定。": "Goodwill +2; you may meet a kind stranger or a scoundrel. No active detection check.",
+    "銀幣 +3；會遇到日常事件，適合籌措買糧或贖身費。": "Silver +3; a daily event may occur. Good for raising money to buy rations or pay a ransom.",
+    "體力 +1、暴露 -2，不觸發日常事件。": "Stamina +1, exposure -2, and it does not trigger a daily event.",
+    "進入工坊，分別選擇骨架、頭部與驅動；組裝才消耗一週。": "Enter the workshop and choose a frame, a head, and a drive; only assembly costs a week.",
+    "糧草 +7、暴露 -2。銀幣不足時不會出現。": "Rations +7, exposure -2. It does not appear if you are short of silver.",
+    "1 週 · 3 銀幣 · 1 糧草": "1 week · 3 silver · 1 ration",
+    "1 週 · 1 銀幣 · 1 糧草": "1 week · 1 silver · 1 ration",
+    "控制、武器威力與情報均已達標；立即結算戰爭結局。": "Control, weapon power, and intel all meet their marks; settle the war ending at once.",
+    "影響、善意與情報均已達標；立即結算外交結局。": "Influence, goodwill, and intel all meet their marks; settle the diplomatic ending at once.",
+    "清空這張設計圖，不消耗一週。": "Clear this blueprint. Does not cost a week.",
+    "回到野外，不消耗一週。": "Return to the field. Does not cost a week.",
+    "先選排水溝、麵包屑小徑或衣擺暗縫，再在拍數內輸入閃躲方向。": "First choose the gutter, the crumb trail, or the hem seam, then enter dodge directions within the beats.",
+    "五拍內削弱追兵。游標越接近出手點，傷害越高；連續命中會累積 combo。": "Wear the pursuer down in five beats. The closer the cursor is to the strike point, the higher the damage; consecutive hits build combo.",
+    "距離出手點越近越痛；命中後 combo +1。完全失手會挨反擊。": "The closer to the strike point, the more it hurts; a hit adds 1 combo. A complete miss draws a counter.",
+    "保留 combo，不造成傷害，也不受這拍反擊；仍會消耗一回合。": "Keep the combo, deal no damage, and take no counter this beat; it still costs a round.",
+    "消耗善意 2、情報 1，必定獲救。": "Spend 2 goodwill and 1 intel. Rescue is certain.",
+    "花 4 銀幣換自由，必定成功。": "Spend 4 silver for freedom. Success is certain.",
+    "行囊已空，這週只能挨餓：體力 -1。": "The pack is empty. This week you can only go hungry: stamina -1.",
+    "第二次閃躲失誤，手指在面前合攏。": "A second missed dodge, and the fingers close in front of you.",
+    "路線已到盡頭，但閃躲次數不夠。": "The route has run out, but you do not have enough clean dodges.",
+    "小武器落在拇指上，說穿了還是像抓癢；這次靠的是時機與連擊。": "The tiny weapon lands on a thumb. Truth be told, it still feels like a tickle; this time it is timing and the combo that carry it.",
+    "重擊太早或太晚，大人只覺得被抓癢。combo 歸零。": "The heavy strike is too early or too late. The giant only feels a tickle. Combo resets.",
+    "快擊落空，連武器碰沒碰到都沒人確定。combo 歸零。": "The quick strike misses. No one can even tell whether the weapon connected. Combo resets.",
+    "追兵終於縮回手。璿芃贏得這次迎戰，控制 +2、暴露 +1。": "The pursuer finally draws the hand back. Xuanpeng wins this duel: control +2, exposure +1.",
+    "反擊耗盡了體力。": "The counter spends the last of the stamina.",
+    "五拍已盡，追兵仍然站在面前。": "Five beats are gone, and the pursuer is still standing in front of you.",
+    "曾受幫助的大人認出了記號，悄悄把玻璃罐打開。": "A giant who was once helped recognizes the mark, and quietly opens the jar.",
+    "獄卒數著四枚銀幣，故意轉過頭去。": "The jailer counts four coins and deliberately turns away.",
+    "牆縫裡伸來一根細線，小人國的同伴終於找到了玻璃罐。": "A thin thread comes out of a crack in the wall. Companions from Lilliput have finally found the jar.",
+    "璿芃回本國買進七份糧草，再沿舊路潛回大人國。": "Xuanpeng returns home, buys seven rations, and slips back into the giant kingdom by the old road.",
+    "大人只看見剩下的麵包又少了一角，嘟囔著：「又是老鼠。」": "The giant only sees that another corner of the leftover bread is gone, and mutters, \"Mice again.\"",
+    "璿芃把巡邏空隙與倉房位置畫進小地圖：情報 +2、部件 +1。": "Xuanpeng sketches the gap in the patrol and the granary's place onto a tiny map: intel +2, parts +1.",
+    "你替大人找回滾進縫裡的鈕釦。他沒看清你的臉，只記得這份善意。": "You fetch a button that rolled into a crack for a giant. He never sees your face clearly, and only remembers the goodwill.",
+    "小人國最擅長修補大人看不見的小地方：銀幣 +3。": "Lilliput is best at mending the small places giants never see: silver +3.",
+    "牆縫很窄，卻夠安全。體力 +1、暴露 -2。": "The crack in the wall is narrow, but safe enough. Stamina +1, exposure -2.",
+    "日常事故耗盡了體力。": "A daily mishap spends the last of the stamina.",
+    "攤開設計圖：先選骨架，再選頭部與驅動。": "Spread the blueprint: choose the frame first, then the head and the drive.",
+    "把設計圖擦乾淨，重新選三個部件。": "Wipe the blueprint clean and choose the three parts again.",
+    "設計圖先收起來，這一週還沒有花掉。": "Fold the blueprint away for now. This week has not been spent.",
+    "對大人國而言，這可能真的只是一次抓癢。": "To a giant kingdom, this may truly be nothing more than a tickle.",
+    "這件小東西至少有機會讓大人認真眨眼。": "This little thing at least has a chance of making a giant blink in earnest.",
+    "璿芃轉身就跑。先選一條路線，之後每個 dodge 都是一拍。": "Xuanpeng turns and runs. First choose a route; after that, each dodge is one beat.",
+    "先選一個大人國；戰爭或外交都可以完成召令。": "First choose a giant kingdom. War or diplomacy can both complete the orders.",
+    "尚未組裝武器。沒有武器也能迎戰，但重擊少了威力。": "No weapon has been assembled yet. You can still duel without one, but a heavy strike will lack power.",
+    "被發現了": "Spotted",
+    "巨大的影子停在頭頂。逃跑進入路線/閃躲，迎戰進入時機/連擊。": "A huge shadow stops over your head. Escape goes into route / dodge; a fight goes into timing / combo.",
+    "先選路線。每條路線的拍數與所需閃躲次數不同。": "Choose a route first. Each route has a different beat count and a different number of required dodges.",
+    "武器機動 ≥3 時，路線所需成功數 -1。": "When weapon mobility is ≥3, the route's required successes drop by 1.",
+    "迎戰時機": "Duel timing",
+    "玻璃罐": "Glass jar",
+    "尚未選擇大人國": "No giant kingdom chosen yet",
+    "國王召令 · 璿芃必須在一年內攻陷一個大人國": "The king's orders · Xuanpeng must conquer a giant kingdom within one year",
+    "王令": "Royal orders",
+    "武器設計": "Weapon design",
+    "記下": "Notes",
+    "每週消耗 1": "Costs 1 each week",
+    "提高發現率": "Raises detection",
+    "這局把週數花在補給或準備上，卻沒有在第五十二週前主動攻陷。下局要更早對照門檻。": "This run spent its weeks on supply or preparation, and never moved to conquer before week 52. Next run, check the thresholds earlier.",
+    "鏡面國的攻陷會翻到自家王城；這是本局目標帶來的反轉，不是所有種子的固定結局。": "Conquering Mirrorland flips onto your own capital. This reversal comes from this run's target, and is not a fixed ending for every seed.",
+    "這局沒有單一崩點。把目標、武器部件、補給與攻陷路線一起比較，再調整下局順序。": "This run had no single breaking point. Compare the target, weapon parts, supply choices, and conquest route together, then adjust the order next run.",
+    "進行中": "In progress",
+    "國王召令還在桌上，這一年尚未收尾。": "The king's orders are still on the table. This year is not over yet.",
+    "結局": "Ending",
+    "得分": "Score",
+    "目標": "Target",
+    "未選": "Unchosen",
+    "週": "Week",
+    "獲救": "Rescued",
+    "把這局的目標、戰爭或外交路線、補給選擇、武器部件、暴露與關鍵判定寫進你自己的 memory。這些只是這個 seed 與這套打法的觀察；換目標、難度或種子要重新驗證，不要把一次好運寫成永遠成立的攻略。": "Write this run's target, war or diplomacy route, supply choices, weapon parts, exposure, and key checks into your own memory. These are only observations from this seed and this approach. A different target, difficulty, or seed has to be tested again; do not write one stroke of luck as a guide that always holds.",
+    "虾征": "Shrimp Conquest",
+    "五十二週，小武器，一場不一定屬於誰的勝利": "Fifty-two weeks, a tiny weapon, and a victory that may not belong to anyone",
+    "小人國的璿芃受國王召令，要在一年內選一個大人國攻陷，戰爭或外交都行。買糧或偷取被當成老鼠吃掉的物資，遇見好人與壞蛋，用火柴、頂針、繡花針與發條設計小體型武器。被發現時進入路線閃躲或時機連擊；失敗會被俘，也可能獲救。鏡面國藏著一個指向自家王城的反轉。": "Xuanpeng of Lilliput is under the king's orders: within one year, choose a giant kingdom and conquer it, by war or by diplomacy. Buy rations, or steal supplies the giants will blame on mice. Meet kind strangers and scoundrels. Design a tiny weapon from matchsticks, a thimble, a needle, and a clockspring. When you are spotted, you enter route-and-dodge or timing-and-combo; failure can mean capture, and capture can still mean rescue. Mirrorland hides a reversal that points back at your own capital.",
+    "先用 target:bastion|harvest|mirror 選大人國；--content mirror 可直接選定鏡面國。": "First use target:bastion|harvest|mirror to choose a giant kingdom; --content mirror can select Mirrorland directly.",
+    "野外行動各花一週與一份糧草。buy 花 3 銀幣回本國買糧；steal 補給較多但會提高暴露與發現率。": "Field actions each cost one week and one ration. buy spends 3 silver to purchase rations at home; steal yields more supply but raises exposure and detection.",
+    "scout 取情報與部件，aid 攢善意，earn 賺銀幣；日常會遇到好人或壞蛋，結果寫進 events。": "scout gathers intel and parts, aid builds goodwill, earn makes silver. Daily life may bring a kind stranger or a scoundrel; the results go into events.",
+    "design 進工坊，依次 part:frame / part:head / part:drive，再 assemble。威力太低的武器對大人只是抓癢。": "design enters the workshop; take part:frame / part:head / part:drive in order, then assemble. A weapon with too little power is only a tickle to a giant.",
+    "raid 走戰爭，negotiate 走外交；status 公開兩條攻陷門檻，達標後用 conquer:war 或 conquer:pact。": "raid takes the war path, negotiate the diplomatic one; status shows both conquest thresholds. Once they are met, use conquer:war or conquer:pact.",
+    "被發現用 respond:flee 或 respond:fight。逃跑選 route 再按預告 dodge；迎戰看游標與出手點，用 strike 連擊或 brace。": "When spotted, use respond:flee or respond:fight. To escape, pick a route and then dodge by the warnings; to fight, watch the cursor and the strike point, and use strike for a combo or brace.",
+    "小遊戲的時限是狀態內的決策拍數，不讀真實時鐘；非交互 agent 與 seed 回放使用相同輸入。": "The minigame timer is the decision beats inside the state, not a real-world clock. A non-interactive agent and a seeded replay use the same inputs.",
+    "被俘後可用 rescue:signal / rescue:ransom / rescue:wait；三次等待失敗才進入俘虜結局。": "After capture, use rescue:signal / rescue:ransom / rescue:wait. Only three failed waits lead to the captive ending.",
+    "第五十二週行動後仍未攻陷為逾期。鏡面國的戰爭與外交都會進入鏡國反轉。": "If you have still not conquered after the week-52 action, you are overdue. Both war and diplomacy against Mirrorland enter the Mirror reversal."
+  },
+  "patterns": [
+    {
+      "zh": "情報 +2、部件 +1、暴露 +1；會遇到日常事件。發現率 {0}%。",
+      "en": "Intel +2, parts +1, exposure +1; a daily event may occur. Detection {0}%.",
+      "slots": [
+        "n"
+      ]
+    },
+    {
+      "zh": "糧草 +5、部件 +1、暴露 +1。未被發現時，他們只會以為是老鼠。發現率 {0}%。",
+      "en": "Rations +5, parts +1, exposure +1. If you are not spotted, they will only think it was a mouse. Detection {0}%.",
+      "slots": [
+        "n"
+      ]
+    },
+    {
+      "zh": "襲擾{0}",
+      "en": "Raid {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "依武器威力與城防增加控制；暴露 +2。發現率 {0}%。",
+      "en": "Raise control by weapon power and the city's defense; exposure +2. Detection {0}%.",
+      "slots": [
+        "n"
+      ]
+    },
+    {
+      "zh": "影響 +2；情報或善意達標時各再 +1。門檻：影響 {0}、善意 {1}、情報 {2}。",
+      "en": "Influence +2; +1 more each if intel or goodwill already meets its mark. Thresholds: influence {0}, goodwill {1}, intel {2}.",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "攻陷{0}",
+      "en": "Conquer {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "讓{0}簽下歸附盟約",
+      "en": "Have {0} sign a pact of allegiance",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "骨架：{0}",
+      "en": "Frame: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 部件",
+      "en": "{0} parts",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "頭部：{0}",
+      "en": "Head: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "驅動：{0}",
+      "en": "Drive: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "組裝 {0}",
+      "en": "Assemble {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "威力 {0}、噪音 {1}、機動 {2}。威力太低時，大人可能只覺得被抓癢。",
+      "en": "Power {0}, noise {1}, mobility {2}. If the power is too low, a giant may only feel a tickle.",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "1 週 · {0} 部件 · 1 糧草",
+      "en": "1 week · {0} parts · 1 ration",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "選擇{0}",
+      "en": "Choose {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 戰爭：控制 {1} / 威力 {2} / 情報 {3}；外交：影響 {4} / 善意 {5} / 情報 {6}。",
+      "en": "{0} war: control {1} / power {2} / intel {3}; diplomacy: influence {4} / goodwill {5} / intel {6}.",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "這一拍輸入方向；剩 {0} 拍。看上方危險預告再選。",
+      "en": "Enter a direction this beat; {0} beat(s) left. Read the hazard warning above, then choose.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "需要時機值 ≥2；加入武器威力 {0} 與雙倍 combo，失手會挨反擊。",
+      "en": "Needs timing ≥2; adds weapon power {0} and double combo. A miss draws a counter.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "本次救援率 {0}%；失敗會用掉一次機會。剩 {1} 次。",
+      "en": "This rescue chance is {0}%; a failure spends one attempt. {1} left.",
+      "slots": [
+        "n",
+        "text"
+      ]
+    },
+    {
+      "zh": "發現判定 {0} ≤ {1}：大人彎下腰，正好看見璿芃。選逃跑或迎戰！",
+      "en": "Detection check {0} ≤ {1}: a giant bends down and sees Xuanpeng clearly. Choose escape or fight!",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "發現判定 {0} > {1}：這一次仍沒有人看清你。",
+      "en": "Detection check {0} > {1}: once again, no one gets a clear look at you.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 璿芃被關進玻璃罐，還有三次求救機會。",
+      "en": "{0} Xuanpeng is shut in a glass jar, with three chances left to call for help.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "璿芃鑽進{0}。機動 {1}，需要閃對 {2} 次。",
+      "en": "Xuanpeng slips into {0}. Mobility {1}, need {2} clean dodges.",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "閃對了：{0}。進度 {1}/{2}，剩 {3} 拍。",
+      "en": "Clean dodge: {0}. Progress {1}/{2}, {3} beat(s) left.",
+      "slots": [
+        "text",
+        "n",
+        "n",
+        "text"
+      ]
+    },
+    {
+      "zh": "閃錯了：應對是 {0}，不是 {1}。捕獲值 {2}/2。",
+      "en": "Missed dodge: the answer was {0}, not {1}. Capture {2}/2.",
+      "slots": [
+        "text",
+        "text",
+        "n"
+      ]
+    },
+    {
+      "zh": "最後一拍穿過{0}，大人的手只抓到一把灰。",
+      "en": "On the last beat you pass through {0}. The giant's hand closes on a fistful of dust.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "璿芃縮進線軸後，combo 保持 {0}，這一拍不會被反擊。",
+      "en": "Xuanpeng ducks behind a spool. Combo stays at {0}, and there is no counter this beat.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "{0}命中：時機 {1}，傷害 {2}，追兵耐性剩 {3}，combo {4}。",
+      "en": "{0} hits: timing {1}, damage {2}, pursuer stamina {3} left, combo {4}.",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "追兵反手一掃：體力 -1，剩 {0}。",
+      "en": "The pursuer backhands a sweep: stamina -1, {0} left.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "下一拍：游標 {0}，出手點 {1}。",
+      "en": "Next beat: cursor {0}, strike point {1}.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "救援判定 {0} {1} {2}。",
+      "en": "Rescue check {0} {1} {2}.",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "玻璃罐外沒有腳步聲，還剩 {0} 次機會。",
+      "en": "No footsteps outside the jar. {0} chance(s) left.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "{0}彈在城門上，守衛只覺得被抓癢；控制仍 +{1}，但這不是重炮。",
+      "en": "{0} bounces off the gate. The guards only feel a tickle. Control still +{1}, but this is no heavy gun.",
+      "slots": [
+        "text",
+        "n"
+      ]
+    },
+    {
+      "zh": "{0}切開了{1}的一處補給結：控制 +{2}。",
+      "en": "{0} cuts a supply knot in {1}: control +{2}.",
+      "slots": [
+        "text",
+        "text",
+        "n"
+      ]
+    },
+    {
+      "zh": "盟約草案被放上巨大的桌面：影響 +{0}。",
+      "en": "The draft pact is set on a giant tabletop: influence +{0}.",
+      "slots": [
+        "n"
+      ]
+    },
+    {
+      "zh": "現在不能執行「{0}」。",
+      "en": "\"{0}\" cannot be done now.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "合法動作：{0}",
+      "en": "Legal actions: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "目標：{0}。{1}",
+      "en": "Target: {0}. {1}",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "國王的地圖釘在{0}。一年從這一週開始。",
+      "en": "The king's map is pinned on {0}. The year begins this week.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "設計圖寫上{0}。選好三個部件後就能組裝。",
+      "en": "The blueprint is marked {0}. Once three parts are chosen, you can assemble.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "組裝完成：{0}。威力 {1}、噪音 {2}、機動 {3}。",
+      "en": "Assembly complete: {0}. Power {1}, noise {2}, mobility {3}.",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "璿芃舉起武器迎戰。游標 {0}，最佳出手點 {1}。",
+      "en": "Xuanpeng raises the weapon and meets the fight. Cursor {0}, best strike point {1}.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} 戰爭：控制 {1}/{2}，武器威力 {3}/{4}，情報 {5}/{6}。",
+      "en": "{0} war: control {1}/{2}, weapon power {3}/{4}, intel {5}/{6}.",
+      "slots": [
+        "text",
+        "n",
+        "n",
+        "n",
+        "n",
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "{0} 外交：影響 {1}/{2}，善意 {3}/{4}，情報 {5}/{6}。",
+      "en": "{0} diplomacy: influence {1}/{2}, goodwill {3}/{4}, intel {5}/{6}.",
+      "slots": [
+        "text",
+        "n",
+        "n",
+        "n",
+        "n",
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "國王期限：第 {0}/{1} 週。第五十二週行動後仍未攻陷就是逾期。",
+      "en": "The king's deadline: week {0}/{1}. If you have not conquered after the week-52 action, you are overdue.",
+      "slots": [
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "{0}：威力 {1}、噪音 {2}、機動 {3}。",
+      "en": "{0}: power {1}, noise {2}, mobility {3}.",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "設計圖：骨架 {0} / 頭部 {1} / 驅動 {2}；目前成本 {3} 部件，持有 {4}。",
+      "en": "Blueprint: frame {0} / head {1} / drive {2}; current cost {3} parts, you hold {4}.",
+      "slots": [
+        "text",
+        "text",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "{0} · 剩 {1} 拍 · 閃對 {2}/{3} · 捕獲值 {4}/2。",
+      "en": "{0} · {1} beat(s) left · clean dodges {2}/{3} · capture {4}/2.",
+      "slots": [
+        "text",
+        "text",
+        "n",
+        "n",
+        "n"
+      ]
+    },
+    {
+      "zh": "回合 {0}/{1} · 游標 {2} · 出手點 {3} · 距離 {4}。",
+      "en": "Round {0}/{1} · cursor {2} · strike point {3} · distance {4}.",
+      "slots": [
+        "n",
+        "n",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "追兵耐性 {0} · combo {1} · 體力 {2}。時機值 = max(0, 3-距離)。",
+      "en": "Pursuer stamina {0} · combo {1} · stamina {2}. Timing = max(0, 3-distance).",
+      "slots": [
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "剩 {0} 次救援機會。善意 ≥4 且情報 ≥2 可發訊號；銀幣 ≥4 可贖身。",
+      "en": "{0} rescue chance(s) left. Goodwill ≥4 and intel ≥2 can send a signal; silver ≥4 can buy a ransom.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "等待救援每次判定 {0}%；三次都失敗就進入俘虜結局。",
+      "en": "Waiting for rescue is a {0}% check each time; failing all three leads to the captive ending.",
+      "slots": [
+        "n"
+      ]
+    },
+    {
+      "zh": "第 {0}/{1} 週 · {2} · 糧草 {3} · 暴露 {4}",
+      "en": "Week {0}/{1} · {2} · rations {3} · exposure {4}",
+      "slots": [
+        "n",
+        "n",
+        "text",
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "工坊 · {0} · 部件 {1}",
+      "en": "Workshop · {0} · parts {1}",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "逃跑 · 剩 {0} 拍 · {1}",
+      "en": "Escape · {0} beat(s) left · {1}",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "迎戰 · 第 {0}/{1} 拍 · combo {2}",
+      "en": "Duel · beat {0}/{1} · combo {2}",
+      "slots": [
+        "n",
+        "n",
+        "text"
+      ]
+    },
+    {
+      "zh": "被俘 · 還有 {0} 次救援機會",
+      "en": "Captured · {0} rescue chance(s) left",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "被發現 · {0} · 逃跑或迎戰",
+      "en": "Spotted · {0} · escape or fight",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "這局偷了 {0} 次物資；暴露每次 +1，也會抬高之後的發現率。",
+      "en": "This run stole supplies {0} time(s); each time adds 1 exposure and also raises later detection.",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "「{0}」威力只有 {1}；對大人更像抓癢，重擊很依賴時機與連擊。",
+      "en": "\"{0}\" has only {1} power; to a giant it feels more like a tickle, and a heavy strike leans hard on timing and combos.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "這局被俘 {0} 次、獲救 {1} 次。善意/情報或銀幣能把一次失誤留在局中，而不是直接結束。",
+      "en": "This run was captured {0} time(s) and rescued {1} time(s). Goodwill/intel or silver can keep a mistake inside the run, instead of ending it at once.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "這局遇到 {0} 次好人、{1} 次壞蛋；日常事件由 seed 決定，換局要重新驗證。",
+      "en": "This run met {0} kind stranger(s) and {1} scoundrel(s). Daily events are decided by the seed; a new run has to be tested again.",
+      "slots": [
+        "text",
+        "text"
+      ]
+    },
+    {
+      "zh": "虾征 · {0}",
+      "en": "Shrimp Conquest · {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "日常·好人：{0}",
+      "en": "Daily · kind stranger: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "日常·壞蛋：{0}",
+      "en": "Daily · scoundrel: {0}",
+      "slots": [
+        "text"
+      ]
+    },
+    {
+      "zh": "鏡國 · {0}",
+      "en": "Mirror · {0}",
+      "slots": [
+        "text"
+      ]
+    }
+  ]
+}

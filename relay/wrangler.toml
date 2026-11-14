@@ -7,11 +7,16 @@ workers_dev = true
 bindings = [
   { name = "SESSION", class_name = "SessionRoom" },
   { name = "REGISTRY", class_name = "CodeRegistry" },
+  { name = "STATS", class_name = "PlayStats" },
 ]
 
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["SessionRoom", "CodeRegistry"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["PlayStats"]
 
 [vars]
 GAMECLAW_SITE_URL = "https://arcobalneo.github.io/gameclaw/"

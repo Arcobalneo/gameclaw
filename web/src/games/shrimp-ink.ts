@@ -166,7 +166,11 @@ function createScene(): GameScene<InkState> {
       g.drawImage(paperMap(), 0, 0);
       seal(g, VW - 40, 12, f.lang === 'zh');
       if (f.lang === 'zh')
-        drawText(g, '墨', VW - 29, 16, { color: '#f4e0c0', outline: null, align: 'center' });
+        drawText(g, f.lang === 'zh' ? '墨' : 'INK', VW - 29, 16, {
+          color: '#f4e0c0',
+          outline: null,
+          align: 'center',
+        });
       // Roads.
       g.strokeStyle = withAlpha('#2a2014', 0.6);
       g.setLineDash([3, 3]);
