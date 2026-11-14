@@ -35,6 +35,7 @@ import {
   enemyNode,
   GAME_ID,
   GAME_VERSION,
+  ladderScore,
   laneHasBlocker,
   pulseLabel,
   recallOptions,
@@ -409,6 +410,7 @@ function recapOf(state: TowerDefenseState): RecapView {
     timeline: state.timeline.slice(-10),
     lessons,
     memoryPrompt,
+    score: ladderScore(state),
   };
 }
 

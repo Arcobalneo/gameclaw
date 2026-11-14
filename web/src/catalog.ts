@@ -21,6 +21,9 @@ export interface GameEntry {
   /** Short card taglines. */
   tagZh: string;
   tagEn: string;
+  /** Documented ladder rule. */
+  scoreZh: string;
+  scoreEn: string;
 }
 
 interface CatalogGame {
@@ -30,6 +33,7 @@ interface CatalogGame {
   tagline: string;
   summary: string;
   genres: string[];
+  score?: { zh: string; en: string };
 }
 
 const LOOK: Record<
@@ -135,6 +139,8 @@ export const GAMES: readonly GameEntry[] = (catalogJson.games as CatalogGame[])
     tagline: game.tagline,
     summary: game.summary,
     genres: game.genres,
+    scoreZh: game.score?.zh ?? '',
+    scoreEn: game.score?.en ?? '',
     ...LOOK[game.id]!,
   }));
 

@@ -1,5 +1,54 @@
 # Changelog
 
+## v4.0.0 — 2026-11-14
+
+Breaking product change. The browser is the only GameClaw. The CLI, the
+single-file binaries, and the multi-platform release assets are gone.
+
+### Play
+
+- Humans play the portal. Agents play the same session through in-page WebMCP
+  or the remote relay. New tools: `get_leaderboard`, `submit_score`,
+  `set_language`.
+- The homepage has a paste-in for an agent (skill URL, live site, this
+  visitor's token and MCP URL), the site leaderboard, and the game list.
+- Each game shows its own board. A finished win or loss can be submitted under
+  a display name.
+
+### Leaderboards
+
+- Best score per name per game. A lower resubmit does not change rank.
+- The site board is the sum of those bests.
+- Stored on a new `Leaderboard` Durable Object (wrangler migration `v3`).
+  First paint is `GET /leaderboard`. Open pages subscribe to
+  `/leaderboard/live`. Names are validated and submits are rate-limited. No
+  PII beyond the chosen display name and the scores.
+- The page, not the agent, supplies the score from `recap.score`.
+
+### Games
+
+- All eleven games have a new ladder formula. Abort and unfinished runs score 0.
+  Formulas are in each engine, in `catalog/games.json` `score`, and in the help
+  panel. 虾走 can bank fame before the sea gate. 虾跃 tracks a perfect streak.
+  虾堡 tracks a tasty streak (a lucky bite does not extend it). 虾守 leaks cost
+  an extra point of integrity. 虾看 charges extra dread for a wrong record.
+- English canvas labels wrap onto a second line instead of truncating
+  (burger ticket, falling names, species plates, floating plates).
+
+### Removed
+
+- CLI entrypoints (`games/*/src/main.ts`), CLI tests, Bun `start`/`build`
+  scripts, `scripts/build-game.mjs`, and the gamekit CLI (argv, saves, observer,
+  reports).
+- `scripts/release-matrix.mjs` now reports no CLI products so the existing CI
+  build job skips. `.github/workflows` was not edited. Do not tag a release
+  until those workflows are retired.
+
+### Catalog
+
+- `catalog/games.json` is schema 2: web product, no platforms, no release assets.
+  Each game has `score.zh` and `score.en`.
+
 ## v3.3.0 — 2026-11-14
 
 ### Added — full localization and anonymous play counts

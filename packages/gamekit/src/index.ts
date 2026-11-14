@@ -1,15 +1,13 @@
-export * from './cli/args';
-export * from './cli/output';
-export * from './cli/run';
-export * from './color';
+/**
+ * GameClaw runtime library.
+ *
+ * Browser-safe: no `node:` imports. Games implement `GameDefinition` and are
+ * bundled by the web portal. The portal and the relay own sessions, MCP, and
+ * persistence. A game must not parse argv, exit the process, or open sockets.
+ */
 export * from './errors';
-export * from './journal';
 export * from './memory-session';
-export { ensureObserver, runForegroundObserver, stopObserver } from './observer';
-export * from './paths';
-export * from './report';
+export * from './player-name';
 export * from './rng';
-export * from './session';
-export * from './store';
 export * from './text';
 export * from './types';

@@ -369,7 +369,8 @@
     "本拍喷发": "venting this beat",
     "已开": "opened",
     "封锁看闸员 @ 下6 朝左 3 格。": "Lockdown gate watcher @ lower 6 facing left, 3 tiles.",
-    "封锁看闸员 @ 下6 朝右 3 格。": "Lockdown gate watcher @ lower 6 facing right, 3 tiles."
+    "封锁看闸员 @ 下6 朝右 3 格。": "Lockdown gate watcher @ lower 6 facing right, 3 tiles.",
+    "读巡逻，取真目标，安静地离开": "Read the patrols, take the real target, leave quietly."
   },
   "patterns": [
     {

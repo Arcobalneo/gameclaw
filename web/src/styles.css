@@ -1348,3 +1348,95 @@ a {
 body.has-window .play-count-site {
   bottom: 12px;
 }
+
+.agent-card,
+.site-board {
+  width: min(920px, calc(100% - 32px));
+  margin: 18px auto 0;
+  padding: 14px 16px;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.agent-card {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.agent-title,
+.board-title {
+  margin: 0 0 6px;
+  font-family: var(--px);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.agent-hint,
+.board-rule,
+.board-empty,
+.board-note {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.agent-pre {
+  margin: 0 0 10px;
+  max-height: 220px;
+  overflow: auto;
+  padding: 10px;
+  background: #070510;
+  color: var(--text);
+  font-family: var(--px);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-rank,
+.board-score {
+  font-family: var(--px);
+}
+
+.board-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-form {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.board-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 0;
+  background: #070510;
+  color: var(--text);
+  font: inherit;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.gv-score {
+  margin: 4px 0;
+  font-family: var(--px);
+}

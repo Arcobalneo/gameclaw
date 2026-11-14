@@ -16,6 +16,7 @@ import {
   createRun,
   GAME_ID,
   GAME_VERSION,
+  ladderScore,
   MAX_DREAD,
   MAX_FOCUS,
   MAX_NERVE,
@@ -227,7 +228,7 @@ function caseSelectStatus(state: LookState): StatusView {
       {
         title: '怎么玩',
         lines: [
-          'act choose:<case-id> 进入一个副本；之后每个动作都是一条 CLI 命令。',
+          'act choose:<case-id> 进入一个副本；之后每个动作都是一回合。',
           'inspect 命名现象，record 把它写成证据；证据足够后取得目标并 extract。',
           '神经归零或恐惧达到 10 即失败；abort 随时可以诚实中止。',
         ],
@@ -401,6 +402,7 @@ function recapOf(state: LookState): RecapView {
       .map((entry) => `T${entry.turn} ${entry.action} → ${shorten(entry.result)}`),
     lessons: lessonsOf(state),
     memoryPrompt,
+    score: ladderScore(state),
   };
 }
 
@@ -409,9 +411,9 @@ export const definition: GameDefinition<LookState> = {
     id: GAME_ID,
     name: '虾看',
     englishName: 'Shrimp Look',
-    tagline: '用一条条命令侧眼观察，直到档案承认你看见的东西',
+    tagline: '侧眼观察，直到档案承认你看见的东西',
     description:
-      '一款单步命令式的 CLI 视觉恐怖：每个动作都是一条命令，每次 inspect 都会让侧视面板多看你一眼。四个短副本入口，记录、取证、撤离，或者带着错误记录走出门。',
+      '每个动作都是一回合。每次 inspect 都会让侧视面板多看你一眼。四个短副本：记录、取证、带着验明的档案离开，或者带着错误记录走出门。错误记录能过门，但天梯分有硬顶。',
     version: GAME_VERSION,
     repo: 'https://github.com/Arcobalneo/gameclaw',
     license: 'MIT',

@@ -1,7 +1,15 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { handleRequest, RELAY_VERSION, type RoomHandle, type RoomHub, type StatsHub } from './app';
+import {
+  type BoardHub,
+  handleRequest,
+  RELAY_VERSION,
+  type RoomHandle,
+  type RoomHub,
+  type StatsHub,
+} from './app';
 import { isSessionId } from './ids';
+import { type BoardFile, type BoardStore, LeaderboardCore, type SubmitInput } from './leaderboard';
 import type { Json, ToolName } from './protocol';
 import type { CodeStore } from './registry';
 import { SessionRoomCore, type SocketLike } from './room';
@@ -11,6 +19,7 @@ export interface Env {
   SESSION: DurableObjectNamespace;
   REGISTRY: DurableObjectNamespace;
   STATS: DurableObjectNamespace;
+  BOARD: DurableObjectNamespace;
   GAMECLAW_SITE_URL?: string;
 }
 
@@ -281,6 +290,97 @@ export class PlayStats implements DurableObject {
   }
 }
 
+class DoBoardStore implements BoardStore {
+  constructor(private readonly state: DurableObjectState) {}
+
+  async load(): Promise<BoardFile> {
+    return (
+      (await this.state.storage.get<BoardFile>('board')) ?? {
+        games: {},
+        seen: [],
+      }
+    );
+  }
+
+  async save(file: BoardFile): Promise<void> {
+    await this.state.storage.put('board', file);
+  }
+}
+
+export class Leaderboard implements DurableObject {
+  #core: LeaderboardCore | null = null;
+  readonly #sockets = new WeakMap<WebSocket, SocketLike>();
+
+  constructor(private readonly state: DurableObjectState) {}
+
+  #ensure(): LeaderboardCore {
+    if (!this.#core) {
+      this.#core = new LeaderboardCore(new DoBoardStore(this.state));
+      for (const ws of this.state.getWebSockets()) {
+        const socket = wrapSocket(ws);
+        this.#sockets.set(ws, socket);
+        this.#core.attach(socket);
+      }
+    }
+    return this.#core;
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    const core = this.#ensure();
+    const url = new URL(request.url);
+    if (request.headers.get('Upgrade')?.toLowerCase() === 'websocket') {
+      const pair = new WebSocketPair();
+      const client = pair[0];
+      const server = pair[1];
+      this.state.acceptWebSocket(server);
+      const socket = wrapSocket(server);
+      this.#sockets.set(server, socket);
+      await core.welcome(socket);
+      return new Response(null, { status: 101, webSocket: client });
+    }
+    if (url.pathname === '/get') return Response.json(await core.get());
+    if (url.pathname === '/submit' && request.method === 'POST') {
+      const body = (await request.json()) as { input: SubmitInput; ip: string };
+      return Response.json(await core.submit(body.input, body.ip));
+    }
+    return new Response('not found', { status: 404 });
+  }
+
+  async webSocketClose(ws: WebSocket): Promise<void> {
+    const socket = this.#sockets.get(ws);
+    if (socket) this.#core?.detach(socket);
+  }
+}
+
+class WorkerBoardHub implements BoardHub {
+  readonly core: LeaderboardCore;
+
+  constructor(private readonly stub: DurableObjectStub) {
+    this.core = new LeaderboardCore({
+      load: () => ({ games: {}, seen: [] }),
+      save: () => {},
+    });
+  }
+
+  async get() {
+    const res = await this.stub.fetch('https://board/get');
+    return (await res.json()) as Awaited<ReturnType<LeaderboardCore['get']>>;
+  }
+
+  async submit(input: SubmitInput, ip: string) {
+    const res = await this.stub.fetch('https://board/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input, ip }),
+    });
+    return (await res.json()) as Awaited<ReturnType<LeaderboardCore['submit']>>;
+  }
+
+  async connect(request: Request): Promise<Response> {
+    return this.stub.fetch(new Request('https://board/live', { headers: request.headers }));
+  }
+}
+
 class WorkerStatsHub implements StatsHub {
   readonly core: PlayStatsCore;
 
@@ -336,6 +436,7 @@ export default {
     };
 
     const statsHub = new WorkerStatsHub(env.STATS.get(env.STATS.idFromName('global')));
+    const boardHub = new WorkerBoardHub(env.BOARD.get(env.BOARD.idFromName('global')));
     return handleRequest(
       request,
       hub,
@@ -355,8 +456,13 @@ export default {
           const response = await statsHub.connect(request);
           return { socket: { send() {}, close() {}, readyState: 1 }, response };
         },
+        async acceptBoard() {
+          const response = await boardHub.connect(request);
+          return { socket: { send() {}, close() {}, readyState: 1 }, response };
+        },
       },
       statsHub,
+      boardHub,
     );
   },
 };

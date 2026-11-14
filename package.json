@@ -1,9 +1,9 @@
 {
   "name": "gameclaw",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "Agent-first terminal games, distributed as single-file binaries.",
+  "description": "Agent-and-human web games. Play in the browser; agents use Web MCP.",
   "license": "MIT",
   "packageManager": "pnpm@10.33.0",
   "engines": {
@@ -16,7 +16,6 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
-    "build:game": "node scripts/build-game.mjs",
     "test:game": "node scripts/test-game.mjs",
     "validate:catalog": "node scripts/validate-catalog.mjs"
   },

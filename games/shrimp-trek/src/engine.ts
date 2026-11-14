@@ -43,12 +43,14 @@ export interface RoguelikeState {
   lastResult: string | null;
   outcome: Outcome;
   cause: string;
+  /** True when the run ended by banking fame before the sea gate. */
+  banked: boolean;
   turn: number;
   recentEncounters: string[];
 }
 
 export const GAME_ID = 'shrimp-trek';
-export const GAME_VERSION = '3.1.0';
+export const GAME_VERSION = '4.0.0';
 
 export function parseContentPreset(content: string | undefined): number | null {
   if (!content || content === 'endless') return null;
@@ -93,6 +95,7 @@ export function createRun(options: {
     lastResult: null,
     outcome: 'ongoing',
     cause: '',
+    banked: false,
     turn: 0,
     recentEncounters: [],
   };
@@ -271,6 +274,22 @@ export function offeredMutations(state: RoguelikeState): Mutation[] {
     .filter((mutation): mutation is Mutation => mutation !== undefined);
 }
 
+/**
+ * Published ladder points.
+ * Banking before the gate: fame×3 + depth×18 + shell + energy.
+ * Clearing a gate (or the agreed cycles): fame×6 + cycle×160 + depth×8 + pressure×20.
+ * Dying: floor(fame×0.35) + depth×4. Abort and unfinished runs are 0.
+ */
+export function ladderScore(state: RoguelikeState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  const fame = Math.max(0, state.score);
+  if (state.outcome === 'lost') return Math.floor(fame * 0.35) + state.depth * 4;
+  if (state.banked) {
+    return fame * 3 + state.depth * 18 + state.stats.shell + state.stats.energy;
+  }
+  return fame * 6 + state.cycle * 160 + state.depth * 8 + state.pressure * 20;
+}
+
 function endRun(state: RoguelikeState, outcome: Outcome, cause: string): void {
   state.phase = 'ended';
   state.outcome = outcome;
@@ -337,6 +356,15 @@ export function act(state: RoguelikeState, actionId: string): ActionResolution {
   }
 
   const encounter = currentEncounter(state);
+  if (actionId === 'bank') {
+    if (encounter.key === FINALE.key) throw new Error('闸口上不能收壳，只能把最后一步走完。');
+    state.banked = true;
+    endRun(state, 'won', '你在闸口前收壳。天梯分按深度和名声结算，没有闸口倍率。');
+    log.push(state.cause);
+    events.push({ type: 'bank', fame: state.score, depth: state.depth, cycle: state.cycle });
+    state.rng = rng.serialize();
+    return { log, events };
+  }
   const index = Number(actionId.replace(/^enc:/, '')) - 1;
   const action = encounter.actions[index];
   if (!action) throw new Error(`Unknown encounter action: ${actionId}`);

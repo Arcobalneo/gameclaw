@@ -9,6 +9,7 @@ import {
   describeDeltas,
   GAME_ID,
   GAME_VERSION,
+  ladderScore,
   offeredMutations,
   type RoguelikeState,
 } from './engine';
@@ -140,7 +141,7 @@ function actionsOf(state: RoguelikeState): ActionView[] {
   if (state.phase === 'encounter') {
     const encounter = currentEncounter(state);
     const lineage = state.lineage ?? 'gambler';
-    return encounter.actions.map((action) => {
+    const actions = encounter.actions.map((action) => {
       const base = action.base(state.stats, lineage);
       // The engine's tag bonus is internal; expose the roll threshold only.
       const threshold = action.difficulty + state.pressure;
@@ -153,6 +154,16 @@ function actionsOf(state: RoguelikeState): ActionView[] {
         tags: action.tags,
       };
     });
+    if (encounter.key !== 'finale') {
+      actions.push({
+        id: 'bank',
+        label: '收壳记名',
+        detail: '以当前名声离开。活过归海闸口才乘倍率；现在离开没有闸口倍率。',
+        risk: 'medium',
+        tags: [],
+      });
+    }
+    return actions;
   }
 
   return [];
@@ -183,6 +194,7 @@ function recapOf(state: RoguelikeState): RecapView {
     timeline: state.timeline.slice(-10),
     lessons: state.notes.slice(-5),
     memoryPrompt,
+    score: ladderScore(state),
   };
 }
 
@@ -191,7 +203,7 @@ export const definition: GameDefinition<RoguelikeState> = {
     id: GAME_ID,
     name: '虾走',
     englishName: 'Shrimp Trek',
-    tagline: '只给虾玩的无限潮段 CLI 肉鸽',
+    tagline: '无限潮段。收壳，或者把闸口活过去',
     description:
       '你从拖网、储冰箱和厨房阴影里活了下来，现在要一路横着逃、横着学。每个潮段 9 场遭遇加 1 道归海闸口，失败会死，穿过去就继续深潜。',
     version: GAME_VERSION,
@@ -201,8 +213,8 @@ export const definition: GameDefinition<RoguelikeState> = {
       'new 之后先 act lineage:<crusher|oracle|gambler> 选择谱系。',
       '遭遇里用 act enc:1|2|3 选择动作；判定是 d6 + 基础值 vs 难度 + 海压。',
       '第 2/5/8 场后进入突变潮，用 act mutation:<key> 三选一。',
-      '潮段数可用 --content one-cycle 或 three-cycles 限制，默认 endless。',
-      '--difficulty easy|normal|hard 调整每潮段的海压。',
+      '非闸口回合可以 act bank 收壳。活过归海闸口的天梯倍率更高，死在路上只留一部分名声。',
+      'difficulty 用 easy、normal 或 hard，每潮段海压不同。content 可用 one-cycle 或 three-cycles。',
     ],
   },
   create: createRun,

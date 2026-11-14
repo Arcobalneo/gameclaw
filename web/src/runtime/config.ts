@@ -62,3 +62,14 @@ export function statsWsUrl(base = relayBaseUrl()): string {
   const path = http.pathname.replace(/\/+$/, '');
   return `${protocol}//${http.host}${path}/stats/live`;
 }
+
+export function leaderboardUrl(base = relayBaseUrl()): string {
+  return `${base}/leaderboard`;
+}
+
+export function leaderboardWsUrl(base = relayBaseUrl()): string {
+  const http = new URL(base, typeof location === 'undefined' ? 'http://localhost' : location.href);
+  const protocol = http.protocol === 'https:' ? 'wss:' : 'ws:';
+  const path = http.pathname.replace(/\/+$/, '');
+  return `${protocol}//${http.host}${path}/leaderboard/live`;
+}

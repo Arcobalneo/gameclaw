@@ -4,7 +4,7 @@ import type { InkState } from './engine';
 import { abort, act, actionsOf, createRun, recapOf, statusOf } from './engine';
 
 const GAME_ID = 'shrimp-ink';
-const GAME_VERSION = '3.1.0';
+const GAME_VERSION = '4.0.0';
 
 function recapView(state: InkState): RecapView {
   const recap = recapOf(state);
@@ -16,6 +16,7 @@ function recapView(state: InkState): RecapView {
     timeline: recap.timeline.slice(-10),
     lessons: recap.lessons,
     memoryPrompt: recap.memoryPrompt,
+    score: recap.score,
   };
 }
 

@@ -1,5 +1,6 @@
 import { corsHeaders, isAllowedOrigin } from './cors';
 import { isRoomCode, isSessionId, normalizeRoomCode } from './ids';
+import type { BoardSnapshot, LeaderboardCore, SubmitInput, SubmitResult } from './leaderboard';
 import { extractSession, handleMcp, isJsonRpcRequest, type JsonRpcRequest } from './mcp';
 import { type Json, MCP_PROTOCOL_VERSION, type ToolName } from './protocol';
 import { codeLookupLimit, mcpLimit } from './rate-limit';
@@ -7,7 +8,7 @@ import { assignCode, type CodeStore, resolveCode } from './registry';
 import type { SocketLike } from './room';
 import type { PlayCounts, PlayStatsCore } from './stats';
 
-export const RELAY_VERSION = '3.3.0';
+export const RELAY_VERSION = '4.0.0';
 
 export interface AppEnv {
   siteUrl: string;
@@ -40,6 +41,12 @@ export interface UpgradeHooks {
   ):
     | Promise<{ socket: SocketLike; response: Response }>
     | { socket: SocketLike; response: Response };
+  /** WebSocket upgrade for the public leaderboard channel. */
+  acceptBoard?(
+    core: LeaderboardCore,
+  ):
+    | Promise<{ socket: SocketLike; response: Response }>
+    | { socket: SocketLike; response: Response };
 }
 
 export interface StatsHub {
@@ -50,6 +57,12 @@ export interface StatsHub {
     game: string | undefined,
     ip: string,
   ): Promise<{ ok: true; counts: PlayCounts } | { ok: false; error: string; status: number }>;
+}
+
+export interface BoardHub {
+  core: LeaderboardCore;
+  get(): Promise<BoardSnapshot>;
+  submit(input: SubmitInput, ip: string): Promise<SubmitResult>;
 }
 
 const INDEX_BODY = `GameClaw relay
@@ -64,6 +77,11 @@ Health:                 GET  /health
 Play counts:            GET  /stats
   POST /stats/hello     { player, game? }   (anonymous play-id, no login)
   GET  /stats/live      WebSocket updates
+
+Leaderboards:           GET  /leaderboard
+  POST /leaderboard     { name, game, score, outcome, turn, run }
+  GET  /leaderboard/live  WebSocket updates
+  Rule: best score per name per game; site total is the sum of those bests.
 `;
 
 export function clientIp(request: Request): string {
@@ -143,6 +161,7 @@ export async function handleRequest(
   env: AppEnv,
   upgrade?: UpgradeHooks,
   stats?: StatsHub,
+  boards?: BoardHub,
 ): Promise<Response> {
   const origin = request.headers.get('Origin');
   const extra = env.extraOrigins ?? [];
@@ -195,6 +214,54 @@ export async function handleRequest(
     if (!stats || !upgrade?.acceptStats)
       return text('Play-count stream is not available here.', 426, origin, extra);
     const accepted = await upgrade.acceptStats(stats.core);
+    return accepted.response;
+  }
+
+  if (path === '/leaderboard' && request.method === 'GET') {
+    if (!boards) {
+      return json({ ok: true, rule: 'best-per-game', games: {}, total: [] }, 200, origin, extra);
+    }
+    const snap = await boards.get();
+    return json({ ok: true, ...snap }, 200, origin, extra);
+  }
+
+  if (path === '/leaderboard' && request.method === 'POST') {
+    if (origin && !isAllowedOrigin(origin, extra)) {
+      return json({ ok: false, error: 'Origin not allowed.' }, 403, origin, extra);
+    }
+    if (!boards)
+      return json({ ok: false, error: 'Leaderboard is unavailable.' }, 503, origin, extra);
+    let body: Partial<SubmitInput> = {};
+    try {
+      const raw = await request.text();
+      if (raw) body = JSON.parse(raw) as Partial<SubmitInput>;
+    } catch {
+      return json({ ok: false, error: 'Invalid JSON.' }, 400, origin, extra);
+    }
+    const result = await boards.submit(
+      {
+        name: typeof body.name === 'string' ? body.name : '',
+        game: typeof body.game === 'string' ? body.game : '',
+        score: typeof body.score === 'number' ? body.score : Number.NaN,
+        outcome: typeof body.outcome === 'string' ? body.outcome : '',
+        turn: typeof body.turn === 'number' ? body.turn : Number.NaN,
+        run: typeof body.run === 'string' ? body.run : '',
+      },
+      clientIp(request),
+    );
+    if (!result.ok) return json({ ok: false, error: result.error }, result.status, origin, extra);
+    return json(result, 200, origin, extra);
+  }
+
+  if (
+    path === '/leaderboard/live' &&
+    request.headers.get('Upgrade')?.toLowerCase() === 'websocket'
+  ) {
+    if (origin && !isAllowedOrigin(origin, extra))
+      return text('Origin not allowed.', 403, origin, extra);
+    if (!boards || !upgrade?.acceptBoard)
+      return text('Leaderboard stream is not available here.', 426, origin, extra);
+    const accepted = await upgrade.acceptBoard(boards.core);
     return accepted.response;
   }
 
@@ -309,6 +376,21 @@ export async function handleRequest(
     }
 
     const call = async (tool: ToolName, args: Json) => {
+      if (tool === 'get_leaderboard') {
+        const snap = boards
+          ? await boards.get()
+          : { rule: 'best-per-game' as const, games: {}, total: [] };
+        const gameId = typeof args.game_id === 'string' ? args.game_id : '';
+        if (!gameId || gameId === 'total') {
+          return { ok: true, scope: 'total', rule: snap.rule, entries: snap.total };
+        }
+        return {
+          ok: true,
+          scope: gameId,
+          rule: snap.rule,
+          entries: snap.games[gameId] ?? [],
+        };
+      }
       if (!token) {
         const error = new Error('Missing session token.');
         throw error;

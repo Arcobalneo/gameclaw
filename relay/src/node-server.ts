@@ -2,8 +2,9 @@
  * Local / fallback relay. Same HTTP + WebSocket contract as the Cloudflare Worker.
  * Run with: bun relay/src/node-server.ts
  */
-import { handleRequest, RELAY_VERSION, type RoomHub, type StatsHub } from './app';
+import { type BoardHub, handleRequest, RELAY_VERSION, type RoomHub, type StatsHub } from './app';
 import { isSessionId } from './ids';
+import { LeaderboardCore, MemoryBoardStore } from './leaderboard';
 import { MemoryStore } from './registry';
 import { SessionRoomCore, type SocketLike } from './room';
 import { MemoryStatsStore, PlayStatsCore } from './stats';
@@ -22,6 +23,12 @@ const statsHub: StatsHub = {
   core: statsCore,
   get: () => statsCore.get(),
   hello: (playerId, game, ip) => statsCore.hello(playerId, game, ip),
+};
+const boardCore = new LeaderboardCore(new MemoryBoardStore());
+const boardHub: BoardHub = {
+  core: boardCore,
+  get: () => boardCore.get(),
+  submit: (input, ip) => boardCore.submit(input, ip),
 };
 
 const hub: RoomHub = {
@@ -55,7 +62,8 @@ function bunSocket(ws: {
 
 type WsData =
   | { kind: 'room'; room: SessionRoomCore; socket?: SocketLike }
-  | { kind: 'stats'; socket?: SocketLike };
+  | { kind: 'stats'; socket?: SocketLike }
+  | { kind: 'board'; socket?: SocketLike };
 
 const server = Bun.serve<WsData>({
   port: PORT,
@@ -100,6 +108,7 @@ const server = Bun.serve<WsData>({
           },
         },
         statsHub,
+        boardHub,
       );
     }
     if (isWs && url.pathname.replace(/\/+$/, '') === '/stats/live') {
@@ -123,19 +132,45 @@ const server = Bun.serve<WsData>({
           },
         },
         statsHub,
+        boardHub,
       );
     }
-    return handleRequest(request, hub, env, undefined, statsHub);
+    if (isWs && url.pathname.replace(/\/+$/, '') === '/leaderboard/live') {
+      return handleRequest(
+        request,
+        hub,
+        env,
+        {
+          acceptBoard() {
+            const upgraded = serverRef.upgrade(request, { data: { kind: 'board' } });
+            if (!upgraded) {
+              return {
+                socket: { send() {}, close() {}, readyState: 3 },
+                response: new Response('Upgrade failed.', { status: 500 }),
+              };
+            }
+            return {
+              socket: { send() {}, close() {}, readyState: 0 },
+              response: new Response(null, { status: 101 }),
+            };
+          },
+        },
+        statsHub,
+        boardHub,
+      );
+    }
+    return handleRequest(request, hub, env, undefined, statsHub, boardHub);
   },
   websocket: {
     open(ws) {
       const socket = bunSocket(ws);
       ws.data.socket = socket;
       if (ws.data.kind === 'stats') void statsCore.welcome(socket);
+      else if (ws.data.kind === 'board') void boardCore.welcome(socket);
       else ws.data.room.attach(socket);
     },
     message(ws, message) {
-      if (ws.data.kind === 'stats') return;
+      if (ws.data.kind === 'stats' || ws.data.kind === 'board') return;
       const socket = ws.data.socket;
       if (!socket) return;
       const raw = typeof message === 'string' ? message : new TextDecoder().decode(message);
@@ -145,6 +180,7 @@ const server = Bun.serve<WsData>({
       const socket = ws.data.socket;
       if (!socket) return;
       if (ws.data.kind === 'stats') statsCore.detach(socket);
+      else if (ws.data.kind === 'board') boardCore.detach(socket);
       else ws.data.room.detach(socket);
     },
   },

@@ -6,7 +6,7 @@ const r = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 export default defineConfig({
   resolve: {
     alias: [
-      { find: /^@gameclaw\/gamekit$/, replacement: r('../packages/gamekit/src/core.ts') },
+      { find: /^@gameclaw\/gamekit$/, replacement: r('../packages/gamekit/src/index.ts') },
       { find: /^@games\//, replacement: `${r('../games')}/` },
     ],
   },

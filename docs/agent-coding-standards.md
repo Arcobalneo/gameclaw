@@ -18,19 +18,11 @@ If a change touches all three, split the commits and say so in the PR.
 
 ## 2. Game contract
 
-A game implements `GameDefinition<S>` and exports `definition`. `src/main.ts` is
-only:
-
-```ts
-import process from 'node:process';
-import { runCli } from '@gameclaw/gamekit';
-import { definition } from './definition';
-
-process.exitCode = await runCli(definition);
-```
+A game implements `GameDefinition<S>` and exports `definition`. There is no CLI
+entrypoint. The portal imports the definition.
 
 Do not parse argv, exit the process, open files/sockets, or render HTML inside a
-game.
+game. `recap` includes `score`.
 
 ### State
 
@@ -76,34 +68,28 @@ Each game needs:
 - a determinism test (same seed + action sequence = same state)
 - a terminal-path test (win or lose) that runs the real engine
 - an illegal-action test
-- a CLI smoke test using `runCli` with `--state-dir <tmp> --no-observer --no-report`
+- a ladder test: `recap.score` is 0 while ongoing and a finite integer otherwise
 - content integrity tests where the data is non-trivial
 
-Tests must not touch `~/.gameclaw` or open ports.
+Tests must not open ports or write outside the temp directory.
 
-## 6. CLI and output
+## 6. Agent output
 
-- Text mode uses the gamekit anchors; don't invent new formats.
-- JSON mode is one object per invocation; never log extra lines to stdout.
+- `act` returns the log, the new state, and the next actions.
 - Errors surface as `GameError` with a stable code and an actionable hint.
-- Token economy: compact by default, `detail` in JSON, `--verbose` for humans.
+- Token economy: compact by default, numbers in `detail` and JSON.
 
 ## 7. Documentation
 
-- Each game has exactly one `README.md` (Chinese) with: identity, why
-  agent-first, platform matrix, mechanics, action ids, CLI reference, state
-  paths, local dev, security boundary.
+- Each game has exactly one `README.md` (Chinese) with identity, the score rule, and how to test.
 - Root README does not grow per-game walkthroughs.
-- `SKILL.md` is a stable entrypoint and must not hardcode the game list. Update
-  it when the lookup procedure, platforms, asset names or the CLI contract change.
-- Update `catalog/games.json` whenever a game id, platform or asset name changes.
+- `SKILL.md` must not hardcode the game list. Agents discover games from the site or the catalog.
+- Update `catalog/games.json` when an id or a score rule changes. Include `score.zh` and `score.en`.
 
 ## 8. Validation checklist
 
 - `pnpm lint` clean
 - `pnpm check` clean
 - `pnpm test` clean
-- `node scripts/build-game.mjs <game-id>` produces a working binary
-- `./<game> --version` and one `new → act → recap` loop verified
-- observer: page responds, server stops, report written
+- portal build when `web/` changed
 - docs and catalog match reality

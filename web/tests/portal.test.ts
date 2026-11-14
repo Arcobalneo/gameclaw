@@ -97,6 +97,9 @@ describe('agent api', () => {
       'list_actions',
       'act',
       'recap',
+      'get_leaderboard',
+      'submit_score',
+      'set_language',
     ]);
   });
 });

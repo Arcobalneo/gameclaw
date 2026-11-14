@@ -1,12 +1,11 @@
 {
   "name": "@gameclaw/gamekit",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "Shared runtime for GameClaw agent-first terminal games.",
+  "description": "Shared deterministic runtime for GameClaw web games.",
   "exports": {
-    ".": "./src/index.ts",
-    "./core": "./src/core.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "check": "tsc -p tsconfig.json",

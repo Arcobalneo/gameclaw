@@ -279,13 +279,13 @@ export const ENDING_NAMES = {
 export type EndingId = keyof typeof ENDING_NAMES;
 
 export const ENDING_BASE: Record<EndingId, number> = {
-  keep_believer: 60,
-  keep_verified: 72,
-  sold: 58,
-  sealed: 68,
-  seek: 44,
-  preach: 48,
-  starved: 8,
-  devoured: 4,
+  keep_believer: 140,
+  keep_verified: 520,
+  sold: 220,
+  sealed: 480,
+  seek: 80,
+  preach: 60,
+  starved: 20,
+  devoured: 10,
   aborted: 0,
 };

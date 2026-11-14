@@ -1,9 +1,9 @@
 /**
- * Shared types for the GameClaw v2 runtime contract.
+ * Shared types for the GameClaw runtime.
  *
- * A game owns a serialisable state machine. gamekit owns everything around it:
- * argument parsing, slot persistence, observer page, settlement reports and the
- * text/JSON rendering contract that agents rely on.
+ * A game owns a serialisable state machine. The web portal and the relay own
+ * sessions, rendering, and the agent tool surface. `recap.score` is the
+ * integer a finished run may publish to the leaderboard.
  */
 
 export type Outcome = 'ongoing' | 'won' | 'lost' | 'aborted';
@@ -11,9 +11,9 @@ export type Outcome = 'ongoing' | 'won' | 'lost' | 'aborted';
 export type Risk = 'low' | 'medium' | 'high';
 
 export interface GameMeta {
-  /** Stable machine id, e.g. `shrimp-heist`. Also the binary name. */
+  /** Stable machine id, e.g. `shrimp-heist`. */
   id: string;
-  /** Display name used in the terminal header. */
+  /** Chinese display name (虾×). */
   name: string;
   /** Latin name used in English docs and summaries. */
   englishName: string;
@@ -27,7 +27,7 @@ export interface GameMeta {
   repo: string;
   /** SPDX licence id. */
   license: string;
-  /** Short agent-facing guide lines printed by `help`. */
+  /** Short agent-facing guide lines. */
   guide: string[];
 }
 
@@ -83,13 +83,18 @@ export interface RecapView {
   /** Honest, single-run observations the agent may write into its own memory. */
   lessons: string[];
   memoryPrompt: string;
+  /**
+   * Leaderboard points for this run.
+   * 0 while the run is ongoing or aborted. A win or a loss may be above 0.
+   */
+  score: number;
 }
 
 export interface CreateOptions {
   seed: number;
-  /** Optional scenario / case / lineage preset supplied by `--content`. */
+  /** Optional scenario / case / lineage preset. */
   content?: string;
-  /** Optional difficulty preset supplied by `--difficulty`. */
+  /** Optional difficulty preset. */
   difficulty?: string;
   /** ISO timestamp, injectable for deterministic tests. */
   now: string;

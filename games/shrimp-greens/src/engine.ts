@@ -915,17 +915,26 @@ export function act(state: VegeState, actionId: string): ActionResult {
   return { log, events };
 }
 
+/**
+ * Hosting your own table is the ladder. Biting meat is a large penalty.
+ * Surviving all sixteen meals without an ending (loose) stays low.
+ */
 export function scoreOf(state: VegeState): number {
   const ending = state.ending ?? 'aborted';
   const raw =
     ENDING_BASE[ending] +
-    state.body * 2 +
-    state.home +
-    state.room +
-    state.line * 2 +
-    state.prep * 2 -
-    state.bites * 3;
+    state.body * 3 +
+    state.home * 2 +
+    state.room * 2 +
+    state.line * 8 +
+    state.prep * 6 -
+    state.bites * 30;
   return Math.max(0, raw);
+}
+
+export function ladderScore(state: VegeState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return scoreOf(state);
 }
 
 function gateLines(state: VegeState): string[] {
@@ -1075,6 +1084,7 @@ export function recapOf(state: VegeState): {
   timeline: string[];
   lessons: string[];
   memoryPrompt: string;
+  score: number;
 } {
   const ending = state.ending ?? 'aborted';
   const name = state.outcome === 'ongoing' ? '进行中' : ENDING_NAMES[ending];
@@ -1096,6 +1106,7 @@ export function recapOf(state: VegeState): {
     lessons: lessonsOf(state),
     memoryPrompt:
       '把这一局的开局写进你自己的 memory：性别、性格、家里吃不吃肉、你的理由、有没有说开分歧。再记下你靠守盘、备菜、同席还是咬一口走到这个结局。这是这一局的观察，换一个家庭或性格要重新验证，不要写成所有素食者的规律。',
+    score: ladderScore(state),
   };
 }
 

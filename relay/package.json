@@ -1,9 +1,12 @@
 {
   "name": "@gameclaw/relay",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "GameClaw realtime relay: WebSocket sessions + remote Streamable HTTP MCP.",
+  "description": "GameClaw relay: session WebSocket, remote MCP, play counts, and leaderboards.",
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  },
   "scripts": {
     "dev": "bun src/node-server.ts",
     "start": "bun src/node-server.ts",

@@ -1,140 +1,28 @@
 # 虾走 (Shrimp Trek)
 
-只给虾玩的 CLI 肉鸽。一款给 coding agent 玩的无限潮段终端肉鸽。
+`shrimp-trek`
 
-你从拖网、储冰箱和厨房阴影里活了下来，现在要一路横着逃、横着学。每一局都该让你的下一次横移更聪明一点——但游戏不会替你记住任何事，记忆得由你自己写。
+九场遭遇加一道归海闸口的无限潮段肉鸽：三种谱系、七种突变、潮势节奏与海压递增。死亡给出可归因死因，结算输出本局观察。
 
-```bash
-shrimp-trek new --seed 7
-shrimp-trek act lineage:oracle
-shrimp-trek act enc:2
-shrimp-trek recap
-```
+人在网页里玩。Agent 通过同一个页面的 Web MCP（页内或远程 relay）玩。引擎是确定性的：同一 seed、同一动作序列、同一版本，结果相同。
 
-## 为什么它是 agent-first 的
+## 计分
 
-- **一次调用 = 一个回合**。`act` 返回本回合日志、完整状态和下一步合法动作，agent 不需要额外查询。
-- **稳定文本锚点**。`GAME / STATE / STAT / ACTIONS / NEXT` 五行结构，正则就能解析。
-- **`--json` 输出**。每回合一个 JSON 对象，包含状态、动作、事件、结算路径。
-- **确定性**。同一 seed + 同一动作序列 = 完全相同的结局，可回放、可回归测试。
-- **诚实结算**。死亡会给出可归因的死因和单局限定的观察草稿，鼓励写进 agent 自己的 memory。
+收壳：名声×3 + 深度×18 + 壳 + 能。活过闸口：名声×6 + 潮段×160 + 深度×8 + 海压×20。死亡只留名声的一部分加深度×4。中止为 0。
 
-## 安装（推荐：GitHub Releases）
+Bank: fame×3 + depth×18 + shell + energy. Survive the gate: fame×6 + cycle×160 + depth×8 + pressure×20. A death keeps a fraction of fame plus depth×4. Abort is 0.
 
-从 [GameClaw Releases](https://github.com/Arcobalneo/gameclaw/releases/latest) 下载对应平台的单文件二进制：
+中止和未结束的局分数是 0。胜或负可以提交到这款游戏的榜。同一名字只保留最高分。站点总榜是各游戏最高分之和。
 
-| 平台 | 资产 |
-|---|---|
-| macOS Apple Silicon | `shrimp-trek-darwin-arm64.tar.gz` |
-| macOS Intel | `shrimp-trek-darwin-x64.tar.gz` |
-| Linux x64 | `shrimp-trek-linux-x64.tar.gz` |
-| Linux arm64 | `shrimp-trek-linux-arm64.tar.gz` |
-| Windows x64 | `shrimp-trek-windows-x64.zip` |
+## 动作
 
-```bash
-# macOS / Linux
-tar -xzf shrimp-trek-<platform>.tar.gz
-cd shrimp-trek-<platform>
-./shrimp-trek --version
-```
-
-```powershell
-# Windows
-Expand-Archive shrimp-trek-windows-x64.zip
-.\shrimp-trek-windows-x64\shrimp-trek.exe --version
-```
-
-二进制不需要 Node、Python 或任何运行时依赖。
-
-## 玩法
-
-### 一局的结构
-
-1. 选择一条龙虾谱系（3 选 1）。
-2. 每个**潮段**包含 9 场随机遭遇。
-3. 第 2 / 5 / 8 场遭遇后进入**突变潮**，3 选 1 获得永久强化。
-4. 第 10 步是**归海闸口**：判定失败即死亡，成功则进入更深、海压更高的下一潮段。
-5. 默认无限深潜，直到死亡；也可用 `--content one-cycle` / `three-cycles` 主动收束。
-
-### 属性
-
-| 属性 | 作用 |
-|---|---|
-| 壳 `壳` | 主要生命线与硬解基础值，归零即死 |
-| 能 `能` | 体力与冲刺基础值，归零即死 |
-| 盐 `盐` | 环境适应，归零即死 |
-| 左钳 / 右钳 | 硬解 / 细解的基础值 |
-| 须 | 感知、预判、绕行 |
-| 蜕 | 脱壳类动作的次数 |
-| 潮势 | 0–2，细解成功积累，硬解与脱壳消耗；直接影响判定 |
-
-### 判定
-
-```
-d6 + 动作基础值 + 谱系/潮势加成  >=  动作难度 + 海压
-```
-
-- 海压 = `max(0, 潮段 - 1)`，可用 `--difficulty easy|normal|hard` 调整。
-- 成功与失败都有明确的属性变化；失败不一定立刻死亡，但会消耗资源。
-- 每次判定都会写进本局观察，结算时作为 `LESSONS` 输出。
-
-### 谱系
-
-- **沟壑碎壳者**：壳 7 / 左钳 4，硬解 +2，适合正面顶穿。
-- **触须预言家**：须 4 / 能 6，感知与伪装 +1，适合读潮和绕行。
-- **脱壳赌徒**：蜕 2，脱壳 +2，适合用次数换机会。
-
-### 遭遇与突变
-
-6 种基础遭遇（章鱼讨债者、拖网阴影、电鳗裂隙、塑料垃圾流、觅食洼地、厨师灯影）+ 归海闸口，每种 3 个动作。7 种突变覆盖左钳、右钳、甲壳、触须、冲刺、脱壳、伪装七条 build 线。
-
-## CLI 参考
-
-```bash
-shrimp-trek new      [--slot N] [--seed N] [--content endless|one-cycle|three-cycles]
-                               [--difficulty easy|normal|hard] [--json]
-shrimp-trek status   [--slot N] [--json]
-shrimp-trek actions  [--slot N] [--json]
-shrimp-trek act <id> [--slot N] [--json]
-shrimp-trek recap    [--slot N] [--format text|markdown|html] [--json]
-shrimp-trek saves    [--json]
-shrimp-trek play     [--slot N]
-shrimp-trek observer [--port N]
-shrimp-trek doctor
-```
-
-动作 id：
-
-- `lineage:crusher|oracle|gambler`
-- `enc:1|2|3`
-- `mutation:left|right|shell|sense|dash|molt|camo`
-- `abort`（任何时候都能诚实收尾）
-
-全局参数：`--state-dir`、`--json`、`--no-color`、`--no-observer`、`--no-report`、`--force`、`--verbose`。
-
-## 运行时输出
-
-- 存档：`~/.gameclaw/shrimp-trek/saves/slot-<n>.json`
-- 日志：`~/.gameclaw/shrimp-trek/journals/<run-id>.ndjson`
-- 结算：`~/.gameclaw/shrimp-trek/reports/latest.html` 与 `latest.md`
-- 观察者：`new` / `play` 时自动在 `127.0.0.1:8000+` 启动，结束时关闭
-
-用 `--state-dir <path>` 或 `GAMECLAW_HOME` 可以把状态放进沙箱目录，适合并行评测。
+合法动作由当前局面决定，`list_actions` / 页面按钮给出 id。一次 `act` 只做一步，并返回日志、新状态和下一组动作。
 
 ## 本地开发
 
 ```bash
-pnpm install
 pnpm --filter @gameclaw/shrimp-trek test
 pnpm --filter @gameclaw/shrimp-trek check
-bun games/shrimp-trek/src/main.ts new --seed 7
-node scripts/build-game.mjs shrimp-trek
 ```
 
-## 防逆向边界
-
-二进制减少普通玩家直接翻源码的便利度，但不保证不可逆向、不可篡改。它不是强对抗反作弊系统。
-
-## License
-
-MIT
+状态机在 `src/`。网页场景在 `web/src/games/shrimp-trek.ts`。不要再添加 CLI 入口。

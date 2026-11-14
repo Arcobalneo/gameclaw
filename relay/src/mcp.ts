@@ -79,11 +79,41 @@ const TOOL_SCHEMA: Record<
   },
   recap: {
     description:
-      'Settlement for the run: outcome, cause, metrics, timeline and lessons worth remembering.',
+      'Settlement for the run: outcome, cause, score, metrics, timeline and lessons worth remembering.',
     properties: {
       game_id: { type: 'string', description: 'Game id. Defaults to the focused window.' },
     },
     readOnly: true,
+  },
+  get_leaderboard: {
+    description:
+      'Read the public leaderboard. Omit game_id for the site-wide total (sum of each name’s best per game). Pass a game id for that game’s board. Same numbers the page shows.',
+    properties: {
+      game_id: {
+        type: 'string',
+        description: 'Game id for one board. Omit for the site total.',
+      },
+    },
+    readOnly: true,
+  },
+  submit_score: {
+    description:
+      'Submit the open page’s finished run to that game’s leaderboard under a display name. The score comes from the run, not from this call. A lower resubmit does not change rank. The site total is the sum of bests.',
+    properties: {
+      name: {
+        type: 'string',
+        description: 'Display name, 1–16 letters, numbers, spaces, or _ - . ·',
+      },
+      game_id: { type: 'string', description: 'Game id. Defaults to the focused window.' },
+    },
+    required: ['name'],
+  },
+  set_language: {
+    description: 'Switch the shared page language. The human and the agent see the same locale.',
+    properties: {
+      lang: { type: 'string', enum: ['zh', 'en'] },
+    },
+    required: ['lang'],
   },
 };
 
@@ -178,13 +208,13 @@ export async function handleMcp(
     case 'tools/list':
       return { jsonrpc: '2.0', id, result: { tools: toolList() } };
     case 'tools/call': {
-      if (!opts.token) {
+      const params = (request.params ?? {}) as Json;
+      const name = typeof params.name === 'string' ? params.name : '';
+      if (!opts.token && name !== 'get_leaderboard') {
         return fail(-32001, 'Missing session token.', {
           hint: 'Set Authorization: Bearer <token> (the token is in the GameClaw agent prompt) or pass session in the tool arguments.',
         });
       }
-      const params = (request.params ?? {}) as Json;
-      const name = typeof params.name === 'string' ? params.name : '';
       if (!isToolName(name)) return fail(-32602, `Unknown tool: ${name || '(none)'}`);
       const args = (
         params.arguments && typeof params.arguments === 'object' ? (params.arguments as Json) : {}

@@ -119,6 +119,11 @@ export interface BurgerState {
   goal: number;
   served: number;
   score: number;
+  /** Tasty serves only. A lucky bite does not count and does not extend the streak. */
+  tasty: number;
+  lucky: number;
+  tastyStreak: number;
+  bestTasty: number;
   order: number;
   recipe: RecipeView;
   stack: StackEntry[];
@@ -397,6 +402,10 @@ export function createRun(options: {
     goal: spec.goal,
     served: 0,
     score: 0,
+    tasty: 0,
+    lucky: 0,
+    tastyStreak: 0,
+    bestTasty: 0,
     order: 0,
     recipe: cloneRecipe(RECIPES[0]!),
     stack: [],
@@ -434,18 +443,27 @@ export function createRun(options: {
   return state;
 }
 
+/**
+ * Tasty serves and a tasty streak. Lucky bites pay less and reset the streak.
+ * A walkout costs more than a lucky serve. Finishing the shift is the bonus.
+ */
 export function scoreOf(state: BurgerState): number {
   return Math.max(
     0,
-    state.served * 250 +
-      state.order * 12 +
-      state.fusionsCaught * 15 -
+    (state.tasty ?? 0) * 180 +
+      (state.lucky ?? 0) * 40 +
+      (state.bestTasty ?? 0) * 50 +
+      state.fusionsCaught * 25 -
       state.walkouts * 120 -
       state.ruined * 140 -
-      state.pestThefts * 12 -
-      state.soothed * 15 +
-      (state.ending === 'shift-done' ? state.turnsRemaining * 4 : 0),
+      state.pestThefts * 20 +
+      (state.ending === 'shift-done' ? 200 + state.turnsRemaining * 8 : 0),
   );
+}
+
+export function ladderScore(state: BurgerState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return Math.min(999_999, scoreOf(state));
 }
 
 function finish(state: BurgerState, ending: EndingId, cause: string): void {
@@ -692,6 +710,16 @@ function performServe(state: BurgerState, rng: Rng, log: string[], events: GameE
   events.push({ type: 'serve', ...taste, recipeId: state.recipe.id, guest: guestName });
   pushTimeline(state, `#${state.order} ${verdict} q=${taste.quality} roll=${taste.roll}`);
 
+  if (verdict === 'tasty') {
+    state.tasty += 1;
+    state.tastyStreak += 1;
+    state.bestTasty = Math.max(state.bestTasty, state.tastyStreak);
+  } else if (verdict === 'lucky') {
+    state.lucky += 1;
+    state.tastyStreak = 0;
+  } else {
+    state.tastyStreak = 0;
+  }
   if (verdict === 'tasty' || verdict === 'lucky') {
     state.served += 1;
     state.guest.mood = 100;
@@ -1111,5 +1139,6 @@ export function recapOf(state: BurgerState): RecapView {
     lessons,
     memoryPrompt:
       '把本局可复验的观察写进 memory：seed、难度、关键动作序列、出餐阈值与判定值、错料组合、火候偏差、害虫偷吃。标注“需换 seed 再验证”，不要把单次幸运写成规律。',
+    score: ladderScore(state),
   };
 }

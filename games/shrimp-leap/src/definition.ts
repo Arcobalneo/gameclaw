@@ -4,7 +4,7 @@ import type { LeapState } from './engine';
 import { abort, act, actionsOf, createRun, recapOf, statusOf } from './engine';
 
 const GAME_ID = 'shrimp-leap';
-const GAME_VERSION = '3.1.0';
+const GAME_VERSION = '4.0.0';
 
 export const definition: GameDefinition<LeapState> = {
   meta: {

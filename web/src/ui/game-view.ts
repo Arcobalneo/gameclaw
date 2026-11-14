@@ -1,12 +1,14 @@
-import type { ActionView, Metric } from '@gameclaw/gamekit';
+import { type ActionView, type Metric, normalizePlayerName } from '@gameclaw/gamekit';
 import { type GameEntry, gameName } from '../catalog';
 import { metricNumber } from '../gfx/pixel';
 import { lang, type MsgKey, onLang, t } from '../i18n';
 import { localizeActions, localizeLine, localizeRecap, localizeStatus } from '../i18n/localize';
 import { term } from '../i18n/terms';
 import type { GameHost, HostEvent } from '../runtime/host';
+import { submitScore } from '../runtime/leaderboard';
 import { buildPrompt } from '../runtime/prompt';
 import { onSession } from '../runtime/session';
+import { boardList } from './board-list';
 import { clear, copyText, h } from './dom';
 import { sfx } from './sfx';
 import { Stage } from './stage';
@@ -42,6 +44,8 @@ export class GameView {
   };
   readonly #unsubs: (() => void)[] = [];
   onRequestNew: (() => void) | null = null;
+  #playerName = '';
+  #submitNote = '';
 
   constructor(entry: GameEntry, host: GameHost) {
     this.entry = entry;
@@ -129,6 +133,12 @@ export class GameView {
             abort,
           ),
           h('details', { class: 'gv-fold gv-logbox' }, label('summary', 'gv.log'), log),
+          h(
+            'details',
+            { class: 'gv-fold gv-board' },
+            label('summary', 'board.title'),
+            boardList(entry.id, 8),
+          ),
         ),
       ),
       help,
@@ -416,11 +426,33 @@ export class GameView {
         this.onRequestNew?.();
       });
       const key = `outcome.${recap.outcome}` as MsgKey;
-      els.recap.append(
+      const scoreLine = h('p', { class: 'gv-score' }, t('board.points', { n: recap.score }));
+      const kids = [
         h('h4', { class: `recap-${recap.outcome}` }, t(key)),
         h('p', { lang: CJK.test(recap.cause) ? 'zh-CN' : 'en' }, recap.cause),
+        scoreLine,
         again,
-      );
+      ];
+      if ((recap.outcome === 'won' || recap.outcome === 'lost') && recap.score > 0) {
+        const input = h('input', {
+          class: 'board-input',
+          type: 'text',
+          maxlength: '16',
+          value: this.#playerName,
+          placeholder: t('board.name'),
+          'aria-label': t('board.name'),
+        }) as HTMLInputElement;
+        input.addEventListener('input', () => {
+          this.#playerName = input.value;
+        });
+        const send = h('button', { type: 'button', class: 'px-btn' }, t('board.submit'));
+        send.addEventListener('click', () => {
+          void this.#submit(input);
+        });
+        const note = h('p', { class: 'board-note' }, this.#submitNote);
+        kids.splice(3, 0, h('div', { class: 'board-form' }, input, send), note);
+      }
+      els.recap.append(...kids);
       els.recap.hidden = false;
     } else els.recap.hidden = true;
     if (!els.help.hidden) this.#renderHelp();
@@ -447,6 +479,8 @@ export class GameView {
         h('h3', {}, t('help.title')),
         h('h4', {}, t('help.goal')),
         h('p', {}, l === 'zh' ? this.entry.goal : this.entry.goalEn),
+        h('h4', {}, t('help.score')),
+        h('p', {}, l === 'zh' ? this.entry.scoreZh : this.entry.scoreEn),
         h('h4', {}, t('help.keys')),
         h('p', {}, t('help.keysBody')),
         ...(status.sections.length ? [h('h4', {}, t('help.details'))] : []),
@@ -468,6 +502,41 @@ export class GameView {
         h('p', {}, t('help.agentBody')),
       ),
     );
+  }
+
+  async #submit(input: HTMLInputElement): Promise<void> {
+    const name = normalizePlayerName(input.value);
+    if (!name) {
+      this.#submitNote = t('board.needName');
+      this.render();
+      return;
+    }
+    const recap = this.host.recap();
+    if ((recap.outcome !== 'won' && recap.outcome !== 'lost') || recap.score < 1) {
+      this.#submitNote = t('board.unfinished');
+      this.render();
+      return;
+    }
+    const turn = this.host.status().turn;
+    const posted = await submitScore({
+      name,
+      game: this.host.id,
+      score: recap.score,
+      outcome: recap.outcome,
+      turn,
+      run: `${this.host.id}:${this.host.seed}:${this.host.session.snapshot.createdAt}:${turn}:${recap.score}`,
+    });
+    if (!posted.ok) {
+      this.#submitNote = posted.error;
+      sfx('bad');
+    } else if (posted.accepted) {
+      this.#submitNote = t('board.posted', { n: posted.best });
+      sfx('coin');
+    } else {
+      this.#submitNote = t('board.best', { n: posted.best });
+      sfx('press');
+    }
+    this.render();
   }
 
   #flashError(text: string): void {

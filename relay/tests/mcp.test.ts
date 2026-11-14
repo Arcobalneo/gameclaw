@@ -18,7 +18,7 @@ class FakeSocket implements SocketLike {
 }
 
 describe('tool catalog', () => {
-  it('exposes the same seven tools as WebMCP, with no hard-coded game list', () => {
+  it('exposes the WebMCP tools, with no hard-coded game list', () => {
     const tools = toolList();
     expect(tools.map((t) => t.name)).toEqual([...TOOL_NAMES]);
     const dumped = JSON.stringify(tools);
@@ -74,7 +74,7 @@ describe('handleMcp', () => {
       { version: '3.2.0', siteUrl: site, token, call: async () => ({}) },
     );
     expect(list).toBeTruthy();
-    expect((list!.result as { tools: { name: string }[] }).tools).toHaveLength(7);
+    expect((list!.result as { tools: { name: string }[] }).tools).toHaveLength(TOOL_NAMES.length);
   });
 
   it('returns a clear page-closed error when the tab is gone', async () => {

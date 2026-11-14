@@ -1,7 +1,7 @@
 /**
  * Sideways Look rules engine.
  *
- * One action = one CLI call. The engine owns case state, room movement, event
+ * One action = one turn. The engine owns case state, room movement, event
  * resolution and the three ways a run can end: escape with a verified record,
  * leave with the wrong record, or stop being able to look.
  */
@@ -22,7 +22,24 @@ import {
 import type { Ending, JournalEntry, LookState, Phenomenon } from './model';
 
 export const GAME_ID = 'shrimp-look';
-export const GAME_VERSION = '3.1.0';
+export const GAME_VERSION = '4.0.0';
+
+/**
+ * Verified escape: 640 + nerve×14 + calm×12 + evidence×15 − turns×5.
+ * Wrong record: 60 + evidence×4 (hard ceiling). Collapse: evidence×6.
+ */
+export function ladderScore(state: LookState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  if (state.ending === 'escaped') {
+    const calm = Math.max(0, MAX_DREAD - state.dread);
+    return Math.max(
+      0,
+      Math.min(999_999, 640 + state.nerve * 14 + calm * 12 + state.evidence * 15 - state.turn * 5),
+    );
+  }
+  if (state.ending === 'wrong-record') return Math.min(999_999, 60 + state.evidence * 4);
+  return Math.min(999_999, state.evidence * 6);
+}
 
 export const MAX_FOCUS = 9;
 export const MAX_NERVE = 10;
@@ -540,6 +557,9 @@ function extract(state: LookState, rng: Rng, actionId: string): ActionResult {
   }
 
   syncObjective(state);
+  if (state.objectiveQuality !== 'verified') {
+    state.dread = clamp(state.dread + 2, 0, MAX_DREAD);
+  }
   if (state.objectiveQuality === 'verified') {
     const cause = `你在证据 ${state.evidence}/${state.requiredEvidence} 时带着 verified 档案走出${state.caseName}。这份记录对得上你看见过的东西。`;
     endRun(state, 'won', 'escaped', cause);

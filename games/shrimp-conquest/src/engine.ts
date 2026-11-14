@@ -574,28 +574,41 @@ function pushNote(state: TinyState, text: string): void {
   if (state.notes.length > MAX_NOTES) state.notes.splice(0, state.notes.length - MAX_NOTES);
 }
 
+/**
+ * Mirror outranks a pact, which outranks a war. Captures are expensive.
+ * Starving, missing the year, or staying captive publishes 0.
+ */
 function scoreOf(state: TinyState): number {
   const base: Record<EndingId, number> = {
-    war: 80,
-    pact: 90,
-    mirror: 120,
+    war: 260,
+    pact: 380,
+    mirror: 500,
     deadline: 0,
     captive: 0,
     starvation: 0,
     aborted: 0,
   };
+  if (!state.ending || state.ending === 'aborted') return 0;
+  if (state.ending === 'deadline' || state.ending === 'captive' || state.ending === 'starvation') {
+    return 0;
+  }
   return Math.max(
     0,
-    (state.ending ? base[state.ending] : 0) +
-      state.control * 2 +
-      state.influence * 2 +
-      state.goodwill +
-      state.intel +
-      state.food +
-      state.coins +
-      state.rescues * 3 -
-      state.captures * 4,
+    Math.min(
+      999_999,
+      base[state.ending] +
+        state.control * 4 +
+        state.intel * 8 +
+        state.goodwill * 2 +
+        state.rescues * 40 -
+        state.captures * 30,
+    ),
   );
+}
+
+export function ladderScore(state: TinyState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  return scoreOf(state);
 }
 
 function finish(state: TinyState, ending: EndingId): void {
@@ -1225,6 +1238,7 @@ export function recapOf(state: TinyState): RecapView {
     lessons: lessonsOf(state),
     memoryPrompt:
       '把這局的目標、戰爭或外交路線、補給選擇、武器部件、暴露與關鍵判定寫進你自己的 memory。這些只是這個 seed 與這套打法的觀察；換目標、難度或種子要重新驗證，不要把一次好運寫成永遠成立的攻略。',
+    score: ladderScore(state),
   };
 }
 

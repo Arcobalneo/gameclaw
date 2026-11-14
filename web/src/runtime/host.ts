@@ -51,8 +51,7 @@ export function randomSeed(): number {
 }
 
 /**
- * One live run per game. Wraps the shared `MemorySession` (same act semantics
- * as the CLI), persists to localStorage, and broadcasts every change so the
+ * One live run per game. Wraps `MemorySession`, persists to localStorage, and broadcasts every change so the
  * window, the renderer and WebMCP all see the exact same state.
  */
 export class GameHost {

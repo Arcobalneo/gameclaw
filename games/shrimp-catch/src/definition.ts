@@ -800,6 +800,21 @@ function actionsOf(state: TamerState): ActionView[] {
   return actions;
 }
 
+/**
+ * Depth is the ladder. A cleared abyss adds 400. Each death costs about a floor.
+ * A box of surface catches cannot outscore a deep dive.
+ */
+export function ladderScore(state: TamerState): number {
+  if (state.outcome !== 'won' && state.outcome !== 'lost') return 0;
+  const raw =
+    state.deepestFloor * 25 +
+    (state.deepestFloor >= WIN_FLOOR ? 400 : 0) +
+    state.dexCaught.length * 2 +
+    state.totalCaptures * 2 -
+    state.totalDeaths * 40;
+  return Math.max(0, Math.min(999_999, raw));
+}
+
 function weakestPartySlot(state: TamerState): number {
   let weakest = -1;
   let level = Number.POSITIVE_INFINITY;
@@ -846,6 +861,7 @@ function recapOf(state: TamerState): RecapView {
     timeline: state.timeline.slice(-10),
     lessons,
     memoryPrompt,
+    score: ladderScore(state),
   };
 }
 
@@ -854,7 +870,7 @@ export const definition: GameDefinition<TamerState> = {
     id: 'shrimp-catch',
     name: '虾抓',
     englishName: 'Shrimp Catch',
-    tagline: '只给虾玩的 CLI 捕兽养成',
+    tagline: '捕捉、养成、洗词条，再把深渊一层层走下去',
     description:
       '你是一名甲录师，在潮礁海域捕捉、培养与编队虾米：野外抓宠、词条工坊洗词条、无尽深渊刷材料。深渊里 HP 归零就是永久死亡，撤退时疫病还要掷死亡骰。',
     version: GAME_VERSION,

@@ -166,16 +166,16 @@ export const ENDING_CAUSE: Record<EndingId, string> = {
 };
 
 export const ENDING_BASE: Record<EndingId, number> = {
-  host: 48,
-  split: 44,
-  script: 40,
-  truce: 36,
-  clash: 14,
-  loose: 12,
-  anorexia: 10,
-  cutoff: 10,
-  labeled: 10,
-  dissolved: 8,
+  host: 460,
+  split: 380,
+  script: 320,
+  truce: 240,
+  clash: 40,
+  loose: 50,
+  anorexia: 20,
+  cutoff: 20,
+  labeled: 20,
+  dissolved: 16,
   aborted: 0,
 };
 

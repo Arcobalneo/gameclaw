@@ -13,7 +13,7 @@ import {
 } from './engine';
 
 const GAME_ID = 'shrimp-rampage';
-const GAME_VERSION = '3.1.0';
+const GAME_VERSION = '4.0.0';
 
 function recapView(state: PumpkinState): RecapView {
   const recap = recapOf(state);
@@ -25,6 +25,7 @@ function recapView(state: PumpkinState): RecapView {
     timeline: recap.timeline.slice(-10),
     lessons: recap.lessons,
     memoryPrompt: recap.memoryPrompt,
+    score: recap.score,
   };
 }
 

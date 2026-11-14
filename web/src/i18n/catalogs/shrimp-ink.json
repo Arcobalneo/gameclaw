@@ -324,7 +324,8 @@
     "挖到笔不等于能用：到荒庙 probe 三次验明，或靠信 >= 60 / 证 >= 3 直接开笔。": "Finding the brush is not the same as using it. Probe three times at the temple, or open it directly with belief >= 60 / proof >= 3.",
     "开笔后 write:heal / write:gold / write:erase 每次加墨债；债 >= 3 起可能反噬，>= 5 每幕掉命，>= 6 墨噬终局。": "Once open, write:heal / write:gold / write:erase each add ink debt. From debt >= 3, backlash can come; at >= 5 you lose life each act; at >= 6 the ink eats you and the run ends.",
     "皇驿 post 可以 settle:sell 卖笔（25 银 + 4 名望，永久失去）或 settle:seal 封笔（+6 名望）。": "At the imperial post you can settle:sell the brush (25 silver + 4 fame, gone for good) or settle:seal it (+6 fame).",
-    "没找到笔也能收尾：信得深是「寻笔」，不信而一路劝人是「劝世」，把经历写成书稿同样计分。": "You can finish without finding the brush. Deep belief is \"seeking the brush\"; disbelief spent counseling others is \"counseling the world.\" Writing the journey into a manuscript also scores."
+    "没找到笔也能收尾：信得深是「寻笔」，不信而一路劝人是「劝世」，把经历写成书稿同样计分。": "You can finish without finding the brush. Deep belief is \"seeking the brush\"; disbelief spent counseling others is \"counseling the world.\" Writing the journey into a manuscript also scores.",
+    "验明之后卖掉，是把笔换成银子的退路，天梯分远低于封笔或带着验明的笔走。": "Selling after you verify it cashes the pen out. The ladder score is far below sealing it, or walking on with a verified pen."
   },
   "patterns": [
     {

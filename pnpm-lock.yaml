@@ -90,6 +90,10 @@ importers:
   packages/gamekit: {}
 
   relay:
+    dependencies:
+      '@gameclaw/gamekit':
+        specifier: workspace:*
+        version: link:../packages/gamekit
     devDependencies:
       typescript:
         specifier: ^5.9.0

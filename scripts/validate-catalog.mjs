@@ -1,28 +1,33 @@
 #!/usr/bin/env node
 /**
- * Validate that the catalog, game packages, README and SKILL agree.
+ * Catalog, packages, README and SKILL agree on the web product.
  *
  * Fails when:
- * - a catalog entry points at a missing game or package
- * - a shipped game is missing from the catalog
- * - a platform / asset name does not follow the naming contract
- * - README.md no longer mentions a shipped game id
- * - SKILL.md hardcodes a shipped game id (the skill must look the list up)
+ * - a catalog game has no package, or a package is missing from the catalog
+ * - package versions drift from the root
+ * - a score rule is missing, or its English text contains CJK
+ * - README.md does not mention a shipped game id
+ * - SKILL.md hardcodes a shipped game id
+ * - a relative markdown link does not resolve
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PLATFORMS = ['darwin-arm64', 'darwin-x64', 'linux-x64', 'linux-arm64', 'windows-x64'];
+const CJK = /[\u3400-\u9fff]/;
 const errors = [];
 
 const rootVersion = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
-
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'catalog', 'games.json'), 'utf8'));
-if (catalog.schema !== 1) errors.push(`catalog: unsupported schema ${catalog.schema}`);
-if (JSON.stringify(catalog.platforms) !== JSON.stringify(PLATFORMS)) {
-  errors.push('catalog: platform list must match the five supported platforms');
+
+if (catalog.schema !== 2) errors.push(`catalog: unsupported schema ${catalog.schema}`);
+if (catalog.product !== 'web') errors.push('catalog: product must be "web"');
+for (const key of ['site', 'skill', 'catalog']) {
+  if (!catalog.repo?.[key]) errors.push(`catalog: repo.${key} is missing`);
+}
+if (catalog.platforms || catalog.games?.some((game) => game.release_assets || game.binary)) {
+  errors.push('catalog: CLI platforms, binaries and release assets are not part of v4');
 }
 
 const gamesDir = path.join(ROOT, 'games');
@@ -40,29 +45,52 @@ for (const id of onDisk) {
   if (!shipped.has(id)) errors.push(`games/${id}: package exists but is missing from the catalog`);
 }
 
-const assetFor = (id, platform) =>
-  `${id}-${platform}.${platform === 'windows-x64' ? 'zip' : 'tar.gz'}`;
+const versionFiles = [
+  'package.json',
+  'packages/gamekit/package.json',
+  'web/package.json',
+  'relay/package.json',
+  ...onDisk.map((id) => `games/${id}/package.json`),
+];
+for (const rel of versionFiles) {
+  const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
+  if (pkg.version !== rootVersion) {
+    errors.push(`${rel}: version ${pkg.version} != ${rootVersion}`);
+  }
+}
 
 for (const game of catalog.games) {
   const dir = path.join(ROOT, game.source_dir ?? `games/${game.id}`);
   if (!fs.existsSync(dir)) errors.push(`${game.id}: missing source_dir ${game.source_dir}`);
-  const pkgFile = path.join(dir, 'package.json');
-  if (!fs.existsSync(pkgFile)) {
-    errors.push(`${game.id}: missing package.json`);
-  } else {
-    const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf8'));
-    if (pkg.version !== rootVersion) {
-      errors.push(`${game.id}: package version ${pkg.version} != ${rootVersion} (root package.json)`);
-    }
+  if (fs.existsSync(path.join(dir, 'src', 'main.ts'))) {
+    errors.push(`${game.id}: src/main.ts is a CLI entrypoint and must not ship`);
   }
-  if (game.binary !== game.id) errors.push(`${game.id}: binary must equal the game id`);
-  for (const platform of PLATFORMS) {
-    const expected = assetFor(game.id, platform);
-    const actual = game.release_assets?.[platform];
-    if (actual !== expected) {
-      errors.push(`${game.id}: asset for ${platform} is ${actual ?? 'missing'}, expected ${expected}`);
-    }
+  const zh = game.score?.zh ?? '';
+  const en = game.score?.en ?? '';
+  if (!zh || !en) errors.push(`${game.id}: score.zh and score.en are required`);
+  if (CJK.test(en)) errors.push(`${game.id}: score.en contains CJK`);
+  const readme = path.join(dir, 'README.md');
+  if (!fs.existsSync(readme)) errors.push(`${game.id}: missing README.md`);
+  else if (!fs.readFileSync(readme, 'utf8').includes(game.id)) {
+    errors.push(`${game.id}: README.md does not mention the id`);
   }
+}
+
+const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+const skill = fs.readFileSync(path.join(ROOT, 'SKILL.md'), 'utf8');
+for (const id of shipped) {
+  if (!readme.includes(id)) errors.push(`README.md does not mention ${id}`);
+  if (skill.includes(id)) errors.push(`SKILL.md must not hardcode shipped game id ${id}`);
+}
+for (const needle of [
+  'https://arcobalneo.github.io/gameclaw/',
+  'catalog/games.json',
+  'https://github.com/Arcobalneo/gameclaw/blob/main/SKILL.md',
+]) {
+  if (!skill.includes(needle)) errors.push(`SKILL.md does not mention ${needle}`);
+}
+if (/darwin-arm64|windows-x64|bun build|single-file/.test(skill)) {
+  errors.push('SKILL.md still describes CLI binaries or platform assets');
 }
 
 function walk(dir) {
@@ -73,23 +101,6 @@ function walk(dir) {
   });
 }
 
-const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
-const skill = fs.readFileSync(path.join(ROOT, 'SKILL.md'), 'utf8');
-for (const id of shipped) {
-  if (!readme.includes(id)) errors.push(`README.md does not mention ${id}`);
-  if (skill.includes(id)) errors.push(`SKILL.md must not hardcode shipped game id ${id}`);
-}
-for (const needle of [
-  'https://github.com/Arcobalneo/gameclaw/releases/latest',
-  'catalog/games.json',
-]) {
-  if (!skill.includes(needle)) errors.push(`SKILL.md does not mention ${needle}`);
-}
-for (const platform of PLATFORMS) {
-  if (!skill.includes(platform)) errors.push(`SKILL.md does not mention platform ${platform}`);
-}
-
-// Relative markdown links must resolve, including archived docs.
 const markdownFiles = [
   'README.md',
   'README.zh-CN.md',
@@ -116,4 +127,4 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`  - ${error}`);
   process.exit(1);
 }
-console.log(`catalog ok: ${catalog.games.length} games × ${PLATFORMS.length} platforms`);
+console.log(`catalog ok: ${catalog.games.length} web games, schema ${catalog.schema}`);

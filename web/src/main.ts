@@ -4,6 +4,7 @@ import { loadPixelFont } from './gfx/text';
 import { lang, onLang, t } from './i18n';
 import { createApi, registerWebMcp, toolDescriptors } from './runtime/agent-api';
 import { mcpUrl, relayBaseUrl, roomLookupUrl } from './runtime/config';
+import { startLeaderboard } from './runtime/leaderboard';
 import { connectRelay } from './runtime/relay';
 import {
   adoptSession,
@@ -34,7 +35,7 @@ declare global {
   }
 }
 
-const VERSION = '3.3.0';
+const VERSION = '4.0.0';
 
 function boot(): void {
   const app = document.getElementById('app');
@@ -57,6 +58,7 @@ function boot(): void {
   document.body.prepend(topbar(() => portal.closeAll(), chip.root));
   document.body.append(siteCountChip());
   startStats();
+  startLeaderboard();
   onLang(syncDoc);
   syncDoc();
   const home = new Home((id) => {

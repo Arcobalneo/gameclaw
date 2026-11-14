@@ -21,7 +21,7 @@ import {
 } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { BUN_TOP, buildSprite, CAT, PIGEON, RACCOON, type SpriteDef } from '../gfx/sprites';
-import { drawText, fitText } from '../gfx/text';
+import { drawBlock, drawText } from '../gfx/text';
 import { tiny } from '../gfx/tiny';
 import { blit, plate, shadow } from '../gfx/world';
 
@@ -249,9 +249,10 @@ function createScene(): GameScene<BurgerState> {
           blit(g, layer(id, 20), cx, y, { anchor: 'c', scale: 2 });
           const nm = say(f, item.name);
           if (nm)
-            drawText(g, fitText(nm, 50), cx, y + 9, {
+            drawBlock(g, nm, cx, y + 9, 68, {
               color: unstable ? '#ff9ae0' : onRecipe ? '#fff4d6' : '#ff9a9a',
               align: 'center',
+              maxLines: 2,
             });
         }
       });
@@ -330,7 +331,12 @@ function createScene(): GameScene<BurgerState> {
         scale: 2,
       });
       const gn = say(f, state.guest.name);
-      if (gn) drawText(g, fitText(gn, 40), gx + 2, gy - 16, { color: '#fff4d6', outline: null });
+      if (gn)
+        drawBlock(g, gn, gx + 2, gy - 28, 72, {
+          color: '#fff4d6',
+          outline: null,
+          maxLines: 2,
+        });
       bar(g, gx + 2, gy + 2, 34, 3, mood / 100, face);
       if (mood <= 30)
         tiny(g, '!', gx - 4, gy - 18 + Math.round(Math.sin(t * 12)), {
@@ -338,38 +344,48 @@ function createScene(): GameScene<BurgerState> {
           scale: 2,
         });
       // Recipe ticket.
+      const ticketW = 132;
+      const titleLines = 2;
+      const rowH = 14;
       panel(
         g,
-        8,
-        22,
-        92,
-        22 + state.recipe.required.length * 12 + 20,
+        4,
+        18,
+        ticketW,
+        16 + titleLines * 13 + state.recipe.required.length * rowH + 16,
         '#d8c8a0',
         '#c8a070',
         '#3a2214',
       );
       const rn = say(f, state.recipe.name);
-      if (rn) drawText(g, fitText(rn, 84), 12, 25, { color: '#3a2214', outline: null });
+      if (rn)
+        drawBlock(g, rn, 8, 22, ticketW - 12, {
+          color: '#3a2214',
+          outline: null,
+          maxLines: 2,
+        });
+      const listY = 22 + titleLines * 13;
       state.recipe.required.forEach((id, i) => {
         const have = state.stack.some((s) => s.id === id);
-        blit(g, layer(id, 14), 12, 40 + i * 12);
+        blit(g, layer(id, 14), 8, listY + 4 + i * rowH);
         const mn =
           say(f, MATERIALS[id]?.name ?? String(id)) || (f.quiet ? '' : String(id).toUpperCase());
-        drawText(g, fitText(mn, 56), 30, 38 + i * 12, {
+        drawBlock(g, mn, 26, listY + i * rowH, ticketW - 34, {
           color: have ? '#2a8a2a' : '#5a3a24',
           outline: null,
+          maxLines: 2,
         });
         if (have) {
-          rect(g, 90, 43 + i * 12, 2, 2, '#2a8a2a');
-          rect(g, 92, 44 + i * 12, 2, 2, '#2a8a2a');
-          rect(g, 94, 40 + i * 12, 2, 4, '#2a8a2a');
+          rect(g, ticketW - 14, listY + 4 + i * rowH, 2, 2, '#2a8a2a');
+          rect(g, ticketW - 12, listY + 5 + i * rowH, 2, 2, '#2a8a2a');
+          rect(g, ticketW - 10, listY + 2 + i * rowH, 2, 4, '#2a8a2a');
         }
       });
       drawText(
         g,
         `${state.recipe.heatMin}-${state.recipe.heatMax}°`,
-        96,
-        38 + state.recipe.required.length * 12 + 1,
+        ticketW - 4,
+        listY + state.recipe.required.length * rowH,
         { color: '#c8402a', outline: null, align: 'right' },
       );
       if (lastVerdict && f.since < 2) {

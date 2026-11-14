@@ -83,6 +83,7 @@ export const counterGame: GameDefinition<CounterState> = {
       timeline: state.log,
       lessons: ['small steps are still steps'],
       memoryPrompt: 'Write one observation into memory.',
+      score: state.outcome === 'won' ? state.count : 0,
     };
   },
 };
