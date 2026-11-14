@@ -79,7 +79,7 @@ function createScene(): GameScene<CountState> {
       if (state.outcome !== 'ongoing') return [];
       const regions: HitRegion[] = [];
       const step = actions.find((action) => action.id === 'step');
-      if (step) regions.push({ x: 250, y: 150, w: 110, h: 48, actionId: 'step' });
+      if (step) regions.push({ x: 142, y: 184, w: 100, h: 28, actionId: 'step' });
       const magnet = actions.find((action) => action.id === 'magnet');
       if (magnet) regions.push({ x: 8, y: 148, w: 56, h: 48, actionId: 'magnet' });
       actions
@@ -147,9 +147,9 @@ function createScene(): GameScene<CountState> {
       const step = say(f, '迈步');
       if (step && f.actions.some((action) => action.id === 'step')) {
         const on = f.focus?.id === 'step';
-        rect(g, 262, 164, 100, 34, on ? '#3a3020' : '#1a140c');
-        rect(g, 262, 164, 100, 3, '#ffc24a');
-        drawText(g, step, 312, 174, { color: '#fff4d6', align: 'center' });
+        rect(g, 142, 188, 100, 22, on ? '#3a3020' : '#1a140c');
+        rect(g, 142, 188, 100, 2, '#ffc24a');
+        drawText(g, step, 192, 192, { color: '#fff4d6', align: 'center' });
       }
       drawText(g, String(state.magnets), 44, 150, { color: '#ff5d73', align: 'left' });
     },
