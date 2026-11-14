@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `虾罩` inverts two cells until the last corridor, which inverts three,
+  so the finish asks for one more slide. `虾印` waves the pennants on the pier.
 - `虾数` puts the step button in the water, under the planks. `虾罩` shows
   the flood before it reaches you. `虾钟` sweeps the hand across the slot it
   just turned. `虾拨` crosses a gorge with walls, a fall, and mist.

@@ -44,6 +44,19 @@ describe('claw-mask engine', () => {
     expect(state.pos).toBe(-1);
   });
 
+  it('opens more inverted cells in later corridors', () => {
+    const opened = createRun({ seed: 4 });
+    expect(opened.ink.filter((cell) => cell === 'gap')).toHaveLength(2);
+    const later = createRun({ seed: 4 });
+    let guard = 0;
+    while (later.corridor < later.corridors && later.outcome === 'ongoing' && guard < 120) {
+      act(later, suggest(later));
+      guard += 1;
+    }
+    expect(later.corridor).toBe(later.corridors);
+    expect(later.ink.filter((cell) => cell === 'gap').length).toBeGreaterThanOrEqual(3);
+  });
+
   it('lets the careful line win more seeds than stepping blind', () => {
     let careful = 0;
     let blind = 0;
@@ -51,7 +64,7 @@ describe('claw-mask engine', () => {
       if (play(seed, suggest).outcome === 'won') careful += 1;
       if (play(seed, () => 'step').outcome === 'won') blind += 1;
     }
-    expect(careful).toBeGreaterThanOrEqual(6);
+    expect(careful).toBeGreaterThanOrEqual(5);
     expect(blind).toBeLessThan(careful);
   }, 20_000);
 
