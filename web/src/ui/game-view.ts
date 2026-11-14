@@ -1,18 +1,20 @@
-import type { ActionView } from '@gameclaw/gamekit';
-import type { GameEntry } from '../catalog';
+import type { ActionView, Metric } from '@gameclaw/gamekit';
+import { type GameEntry, gameName } from '../catalog';
 import { metricNumber } from '../gfx/pixel';
-import { type GameHost, type HostEvent, outcomeLabel } from '../runtime/host';
-import { buildPrompt, TOOL_NAMES } from '../runtime/prompt';
+import { lang, type MsgKey, onLang, t } from '../i18n';
+import { term } from '../i18n/terms';
+import type { GameHost, HostEvent } from '../runtime/host';
+import { buildPrompt } from '../runtime/prompt';
 import { clear, copyText, h } from './dom';
 import { sfx } from './sfx';
 import { Stage } from './stage';
 
-const RISK_LABEL: Record<string, string> = { low: '稳', medium: '险', high: '危' };
+const CJK = /[\u3400-\u9fff]/;
 
 /**
- * The inside of a game window: stage canvas, live log, side panel with the
- * action list, and the copyable agent prompt. Keyboard is routed here by the
- * portal while this view is focused.
+ * Inside of a game window: stage canvas, compact HUD, action list with a
+ * preview of the selected action, collapsible log and agent prompt. Keyboard
+ * is routed here by the portal while this view is focused.
  */
 export class GameView {
   readonly root: HTMLElement;
@@ -21,51 +23,71 @@ export class GameView {
   readonly stage: Stage;
   #selected = 0;
   #actions: ActionView[] = [];
+  #prevMetrics: Metric[] = [];
   readonly #els: {
-    headline: HTMLElement;
+    status: HTMLElement;
+    turn: HTMLElement;
     metrics: HTMLElement;
     actions: HTMLElement;
-    sections: HTMLElement;
-    log: HTMLElement;
+    abort: HTMLElement;
+    preview: HTMLElement;
     recap: HTMLElement;
-    seed: HTMLElement;
+    log: HTMLElement;
+    help: HTMLElement;
+    prompt: HTMLElement;
+    statics: [HTMLElement, MsgKey][];
+    copy: HTMLButtonElement;
   };
-  readonly #unsub: () => void;
+  readonly #unsubs: (() => void)[] = [];
   onRequestNew: (() => void) | null = null;
 
-  constructor(entry: GameEntry, host: GameHost, webmcpMode: string) {
+  constructor(entry: GameEntry, host: GameHost) {
     this.entry = entry;
     this.host = host;
     const stageBox = h('div', { class: 'gv-stage' });
-    const headline = h('p', { class: 'gv-headline' });
-    const metrics = h('dl', { class: 'gv-metrics' });
-    const actions = h('div', {
-      class: 'gv-actions',
-      role: 'listbox',
-      'aria-label': '可选动作',
-      tabindex: '-1',
-    });
-    const sections = h('div', { class: 'gv-sections' });
-    const log = h('ol', { class: 'gv-log', 'aria-live': 'polite', 'aria-label': '战报' });
+    const statics: [HTMLElement, MsgKey][] = [];
+    const label = (tag: 'h3' | 'span' | 'summary', key: MsgKey, cls = '') => {
+      const el = h(tag, cls ? { class: cls } : {});
+      statics.push([el, key]);
+      return el;
+    };
+    const status = h('p', { class: 'gv-status' });
+    const turn = h('span', { class: 'gv-turn' });
+    const metrics = h('dl', { class: 'gv-hud' });
+    const actions = h('div', { class: 'gv-actions', role: 'listbox', tabindex: '-1' });
+    const abort = h('div', { class: 'gv-abort' });
+    const preview = h('div', { class: 'gv-preview', 'aria-live': 'polite' });
     const recap = h('div', { class: 'gv-recap', hidden: true });
-    const seed = h('span', { class: 'gv-seed' });
-    this.#els = { headline, metrics, actions, sections, log, recap, seed };
-
-    const prompt = buildPrompt(entry, host.module.definition.meta.guide);
-    const promptPre = h('pre', { class: 'gv-prompt-text', tabindex: '0' }, prompt);
-    const copyBtn = h(
-      'button',
-      { class: 'px-btn px-btn-accent', type: 'button' },
-      '复制 Prompt · Copy',
-    );
-    copyBtn.addEventListener('click', async () => {
-      const ok = await copyText(prompt);
-      copyBtn.textContent = ok ? '已复制 ✓ Copied' : '复制失败，请手动选择';
-      sfx('confirm');
+    const log = h('ol', { class: 'gv-log', 'aria-live': 'polite' });
+    const help = h('div', { class: 'gv-help', hidden: true, role: 'dialog' });
+    const prompt = h('pre', { class: 'gv-prompt-text', tabindex: '0' });
+    const copy = h('button', { class: 'px-btn px-btn-accent gv-copy', type: 'button' });
+    copy.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const ok = await copyText(this.#promptText());
+      sfx(ok ? 'coin' : 'bad');
+      copy.textContent = t(ok ? 'gv.copied' : 'gv.copyFail');
+      copy.classList.add('is-done');
       setTimeout(() => {
-        copyBtn.textContent = '复制 Prompt · Copy';
-      }, 1800);
+        copy.textContent = t('gv.copy');
+        copy.classList.remove('is-done');
+      }, 1600);
     });
+    this.#els = {
+      status,
+      turn,
+      metrics,
+      actions,
+      abort,
+      preview,
+      recap,
+      log,
+      help,
+      prompt,
+      statics,
+      copy,
+    };
 
     this.root = h(
       'div',
@@ -77,54 +99,53 @@ export class GameView {
           'div',
           { class: 'gv-main' },
           stageBox,
+          h('div', { class: 'gv-statusbar' }, status, turn),
           h(
-            'div',
-            { class: 'gv-under' },
-            h('div', { class: 'gv-panel gv-log-panel' }, h('h3', {}, '战报 · Log'), log),
+            'details',
+            { class: 'gv-fold gv-promptbox' },
+            h(
+              'summary',
+              {},
+              h('span', { class: 'gv-fold-title' }, label('span', 'gv.prompt')),
+              copy,
+            ),
+            label('span', 'gv.promptHint', 'gv-prompt-hint'),
+            prompt,
           ),
         ),
         h(
           'aside',
           { class: 'gv-side' },
-          h('div', { class: 'gv-panel' }, headline, metrics, h('div', { class: 'gv-meta' }, seed)),
+          metrics,
           h(
-            'div',
+            'section',
             { class: 'gv-panel gv-actions-panel' },
-            h('h3', {}, '行动 · Actions ', h('small', {}, '1-9 / ↑↓ / WASD · Enter')),
+            label('h3', 'gv.actions'),
             actions,
+            preview,
             recap,
+            abort,
           ),
-          h(
-            'details',
-            { class: 'gv-panel gv-details' },
-            h('summary', {}, '局面详情 · Details'),
-            sections,
-          ),
+          h('details', { class: 'gv-fold gv-logbox' }, label('summary', 'gv.log'), log),
         ),
       ),
-      h(
-        'section',
-        { class: 'gv-panel gv-prompt', 'aria-label': 'Agent Prompt' },
-        h(
-          'header',
-          {},
-          h('h3', {}, '让你的 Agent 来玩 · Agent Prompt'),
-          h('span', { class: 'gv-webmcp' }, `WebMCP: ${webmcpMode}`),
-          copyBtn,
-        ),
-        promptPre,
-        h('div', { class: 'gv-tools' }, ...TOOL_NAMES.map((n) => h('code', {}, n))),
-      ),
+      help,
     );
 
     this.stage = new Stage(stageBox, host);
     this.stage.onHitAction = (id) => this.perform(id);
-    this.#unsub = host.subscribe((e) => this.#onHost(e));
+    this.#unsubs.push(host.subscribe((e) => this.#onHost(e)));
+    this.#unsubs.push(onLang(() => this.render()));
+    this.#prevMetrics = host.status().metrics;
     this.render();
   }
 
+  #promptText(): string {
+    return buildPrompt(this.entry, this.host.module.definition.meta.guide, lang());
+  }
+
   destroy(): void {
-    this.#unsub();
+    for (const u of this.#unsubs) u();
     this.stage.destroy();
     this.root.remove();
   }
@@ -136,6 +157,19 @@ export class GameView {
 
   deactivate(): void {
     this.stage.stop();
+  }
+
+  toggleHelp(): void {
+    const help = this.#els.help;
+    if (help.hidden) this.#renderHelp();
+    help.hidden = !help.hidden;
+  }
+
+  /** Closes help if open; returns true when it consumed the action. */
+  closeHelp(): boolean {
+    if (this.#els.help.hidden) return false;
+    this.#els.help.hidden = true;
+    return true;
   }
 
   perform(actionId: string): void {
@@ -154,6 +188,7 @@ export class GameView {
       const i = Number(key) - 1;
       if (i < n) {
         this.#select(i);
+        this.#pressFx(i);
         this.perform(this.#actions[i]!.id);
       }
       return true;
@@ -174,22 +209,47 @@ export class GameView {
     }
     if (key === 'Enter' || key === ' ') {
       const a = this.#actions[this.#selected];
-      if (a) this.perform(a.id);
-      else if (this.host.status().outcome !== 'ongoing') this.onRequestNew?.();
+      if (a) {
+        this.#pressFx(this.#selected);
+        this.perform(a.id);
+      } else if (this.host.status().outcome !== 'ongoing') this.onRequestNew?.();
       return true;
     }
     return false;
   }
 
+  #pressFx(i: number): void {
+    const btn = this.#els.actions.querySelectorAll<HTMLElement>('.gv-action')[i];
+    if (!btn) return;
+    btn.classList.remove('is-pressed');
+    void btn.offsetWidth;
+    btn.classList.add('is-pressed');
+  }
+
   #select(i: number): void {
     this.#selected = i;
-    this.stage.focus = this.#actions[i] ?? null;
-    const buttons = this.#els.actions.querySelectorAll<HTMLButtonElement>('button');
+    const a = this.#actions[i] ?? null;
+    this.stage.focus = a;
+    const buttons = this.#els.actions.querySelectorAll<HTMLButtonElement>('.gv-action');
     buttons.forEach((b, j) => {
       b.classList.toggle('is-selected', j === i);
       b.setAttribute('aria-selected', j === i ? 'true' : 'false');
     });
     buttons[i]?.scrollIntoView({ block: 'nearest' });
+    this.#renderPreview(a);
+  }
+
+  #renderPreview(a: ActionView | null): void {
+    const p = this.#els.preview;
+    clear(p);
+    if (!a?.detail) {
+      p.hidden = true;
+      return;
+    }
+    p.hidden = false;
+    const detail = h('p', {}, a.detail);
+    if (CJK.test(a.detail)) detail.lang = 'zh-CN';
+    p.append(detail);
   }
 
   #onHost(e: HostEvent): void {
@@ -198,84 +258,123 @@ export class GameView {
       if (o.status.outcome === 'won') sfx('win');
       else if (o.status.outcome === 'lost') sfx('lose');
       else {
-        const prev = this.#lastMetrics;
         const delta = o.status.metrics.reduce((sum, m) => {
-          const old = prev.find((p) => p.label === m.label);
+          const old = this.#prevMetrics.find((p) => p.label === m.label);
           return sum + (old ? Math.sign(metricNumber(m.value) - metricNumber(old.value)) : 0);
         }, 0);
         sfx(delta > 0 ? 'good' : delta < 0 ? 'bad' : 'confirm');
       }
     } else sfx('open');
     this.#selected = 0;
-    this.render();
+    this.render(e.kind === 'act');
   }
 
-  #lastMetrics: { label: string; value: string | number }[] = [];
-
-  render(): void {
-    const status = this.host.status();
-    this.#lastMetrics = status.metrics;
-    this.#actions = this.host.actions();
+  render(withDeltas = false): void {
+    const l = lang();
+    const id = this.entry.id;
     const els = this.#els;
-    els.headline.textContent = status.headline;
-    els.seed.textContent = `seed ${this.host.seed} · turn ${status.turn} · ${outcomeLabel(status.outcome)}`;
+    const status = this.host.status();
+    for (const [el, key] of els.statics) el.textContent = t(key);
+    els.copy.textContent = t('gv.copy');
+    els.prompt.textContent = this.#promptText();
+    this.stage.setLabel(t('gv.canvas', { name: gameName(this.entry, l) }));
+    this.#actions = this.host.actions().filter((a) => a.id !== 'abort');
+    const abortAction = this.host.actions().find((a) => a.id === 'abort');
+
+    els.status.textContent = term(id, dedupeHeadline(status.headline, status.metrics));
+    if (CJK.test(els.status.textContent)) els.status.lang = 'zh-CN';
+    else els.status.removeAttribute('lang');
+    els.turn.textContent = t('gv.turn', { n: status.turn });
+
+    // HUD chips with animated deltas.
+    const prev = this.#prevMetrics;
     clear(els.metrics);
     for (const m of status.metrics) {
-      els.metrics.append(
-        h(
-          'div',
-          { class: 'gv-metric', title: m.hint ?? '' },
-          h('dt', {}, m.label),
-          h('dd', {}, String(m.value)),
-        ),
+      const chip = h(
+        'div',
+        { class: 'gv-chip', title: m.hint ?? '' },
+        h('dt', {}, term(id, m.label)),
+        h('dd', {}, term(id, String(m.value))),
       );
+      const old = prev.find((p) => p.label === m.label);
+      if (withDeltas && old) {
+        const d = Math.round((metricNumber(m.value) - metricNumber(old.value)) * 100) / 100;
+        if (d && Number.isFinite(d)) {
+          chip.classList.add(d > 0 ? 'is-up' : 'is-down');
+          chip.append(
+            h('span', { class: 'gv-delta', 'aria-hidden': 'true' }, `${d > 0 ? '+' : ''}${d}`),
+          );
+        }
+      }
+      els.metrics.append(chip);
     }
+    this.#prevMetrics = status.metrics;
+
+    // Actions.
     clear(els.actions);
     this.#actions.forEach((a, i) => {
+      const labelText = term(id, a.label);
       const btn = h(
         'button',
         {
           type: 'button',
-          class: `gv-action${a.risk ? ` risk-${a.risk}` : ''}${a.id === 'abort' ? ' is-abort' : ''}`,
+          class: `gv-action${a.risk ? ` risk-${a.risk}` : ''}`,
           role: 'option',
-          'aria-selected': i === this.#selected ? 'true' : 'false',
+          'aria-selected': 'false',
           title: a.id,
         },
         h('kbd', {}, i < 9 ? String(i + 1) : '·'),
         h(
           'span',
-          { class: 'gv-action-body' },
-          h('span', { class: 'gv-action-label' }, a.label),
-          a.detail ? h('span', { class: 'gv-action-detail' }, a.detail) : null,
+          {
+            class: 'gv-action-label',
+            lang: CJK.test(labelText) ? 'zh-CN' : l === 'zh' ? 'zh-CN' : 'en',
+          },
+          labelText,
         ),
         h(
           'span',
           { class: 'gv-action-tags' },
-          a.cost ? h('em', {}, a.cost) : null,
-          a.risk ? h('i', { class: `risk risk-${a.risk}` }, RISK_LABEL[a.risk] ?? a.risk) : null,
+          a.cost ? h('em', {}, term(id, a.cost)) : null,
+          a.risk ? h('i', { class: `risk risk-${a.risk}` }, t(`risk.${a.risk}` as MsgKey)) : null,
         ),
       );
       btn.addEventListener('click', () => {
         this.#select(i);
+        this.#pressFx(i);
         this.perform(a.id);
       });
       btn.addEventListener('mouseenter', () => {
         this.stage.focus = a;
+        this.#renderPreview(a);
       });
       btn.addEventListener('mouseleave', () => {
-        this.stage.focus = this.#actions[this.#selected] ?? null;
+        const sel = this.#actions[this.#selected] ?? null;
+        this.stage.focus = sel;
+        this.#renderPreview(sel);
       });
       els.actions.append(btn);
     });
-    this.#select(Math.min(this.#selected, Math.max(0, this.#actions.length - 1)));
-    clear(els.sections);
-    for (const s of status.sections) {
-      els.sections.append(h('h4', {}, s.title), h('ul', {}, ...s.lines.map((l) => h('li', {}, l))));
+    if (!this.#actions.length) els.actions.append(h('p', { class: 'gv-empty' }, t('gv.noActions')));
+    clear(els.abort);
+    if (abortAction) {
+      const b = h('button', { type: 'button', class: 'gv-abort-btn' }, t('action.abort'));
+      b.addEventListener('click', () => this.perform('abort'));
+      els.abort.append(b);
     }
+    this.#select(Math.min(this.#selected, Math.max(0, this.#actions.length - 1)));
+
     // Log (newest first).
     clear(els.log);
     for (const entry of [...this.host.log].reverse().slice(0, 30)) {
-      const who = entry.source === 'agent' ? 'AGENT' : entry.source === 'human' ? 'YOU' : 'SYS';
+      const who = t(
+        entry.source === 'agent'
+          ? 'who.agent'
+          : entry.source === 'human'
+            ? 'who.human'
+            : 'who.system',
+      );
+      const act = entry.action ? this.host.actions().find((a) => a.id === entry.action) : null;
       els.log.append(
         h(
           'li',
@@ -283,12 +382,15 @@ export class GameView {
           h(
             'span',
             { class: 'log-who' },
-            `T${entry.turn} ${who}${entry.action ? ` · ${entry.action}` : ''}`,
+            `T${entry.turn} · ${who}${entry.action ? ` · ${act ? term(id, act.label) : entry.action}` : ''}`,
           ),
-          ...entry.lines.map((l) => h('span', { class: 'log-line' }, l)),
+          ...entry.lines.map((line) =>
+            h('span', { class: 'log-line', lang: CJK.test(line) ? 'zh-CN' : 'en' }, line),
+          ),
         ),
       );
     }
+
     // Recap when ended.
     if (status.outcome !== 'ongoing') {
       const recap = this.host.recap();
@@ -296,19 +398,59 @@ export class GameView {
       const again = h(
         'button',
         { type: 'button', class: 'px-btn px-btn-accent' },
-        '再来一局 · New Run (N)',
+        `${t('gv.again')}  N`,
       );
-      again.addEventListener('click', () => this.onRequestNew?.());
+      again.addEventListener('click', () => {
+        sfx('press');
+        this.onRequestNew?.();
+      });
+      const key = `outcome.${recap.outcome}` as MsgKey;
       els.recap.append(
-        h('h4', {}, `${recap.title} · ${outcomeLabel(recap.outcome)}`),
-        h('p', {}, recap.cause),
-        ...(recap.lessons.length
-          ? [h('ul', {}, ...recap.lessons.slice(0, 4).map((l) => h('li', {}, l)))]
-          : []),
+        h('h4', { class: `recap-${recap.outcome}` }, t(key)),
+        h('p', { lang: CJK.test(recap.cause) ? 'zh-CN' : 'en' }, recap.cause),
         again,
       );
       els.recap.hidden = false;
     } else els.recap.hidden = true;
+    if (!els.help.hidden) this.#renderHelp();
+  }
+
+  #renderHelp(): void {
+    const l = lang();
+    const help = this.#els.help;
+    const status = this.host.status();
+    clear(help);
+    const close = h(
+      'button',
+      { type: 'button', class: 'px-icon gv-help-x', 'aria-label': t('win.close') },
+      '✕',
+    );
+    close.addEventListener('click', () => {
+      help.hidden = true;
+    });
+    help.append(
+      h(
+        'div',
+        { class: 'gv-help-card' },
+        close,
+        h('h3', {}, t('help.title')),
+        h('h4', {}, t('help.goal')),
+        h('p', {}, l === 'zh' ? this.entry.goal : this.entry.goalEn),
+        h('h4', {}, t('help.keys')),
+        h('p', {}, t('help.keysBody')),
+        ...(status.sections.length ? [h('h4', {}, t('help.details'))] : []),
+        ...status.sections.map((sec) =>
+          h(
+            'div',
+            { class: 'gv-help-sec', lang: 'zh-CN' },
+            h('h5', {}, term(this.entry.id, sec.title)),
+            h('ul', {}, ...sec.lines.map((line) => h('li', {}, line))),
+          ),
+        ),
+        h('h4', {}, t('help.agent')),
+        h('p', {}, t('help.agentBody')),
+      ),
+    );
   }
 
   #flashError(text: string): void {
@@ -316,6 +458,16 @@ export class GameView {
     this.root.append(toast);
     setTimeout(() => toast.remove(), 2600);
   }
+}
+
+/** Drops headline segments that only repeat HUD metrics ("身体 8 家人 3"). */
+export function dedupeHeadline(headline: string, metrics: readonly Metric[]): string {
+  const parts = headline.split(/\s*·\s*/);
+  const kept = parts.filter((part) => {
+    const hits = metrics.filter((m) => part.includes(`${m.label} ${m.value}`) || part.includes(`${m.label}${m.value}`) || part.includes(`${m.label} ${String(m.value).split('/')[0]}`));
+    return hits.length === 0;
+  });
+  return (kept.length ? kept : parts).join(' · ');
 }
 
 type Dir = 'up' | 'down' | 'left' | 'right';

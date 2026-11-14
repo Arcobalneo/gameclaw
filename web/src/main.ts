@@ -1,9 +1,11 @@
 import './styles.css';
 import { findGame } from './catalog';
 import { loadPixelFont } from './gfx/text';
+import { lang, onLang, t } from './i18n';
 import { createApi, registerWebMcp } from './runtime/agent-api';
 import { Home } from './ui/home';
 import { Portal } from './ui/portal';
+import { topbar } from './ui/topbar';
 
 declare global {
   interface Window {
@@ -11,14 +13,24 @@ declare global {
   }
 }
 
-const VERSION = '3.0.0';
+const VERSION = '3.1.0';
 
 function boot(): void {
   const app = document.getElementById('app');
   if (!app) throw new Error('#app missing');
   void loadPixelFont();
 
+  document.documentElement.lang = lang() === 'zh' ? 'zh-CN' : 'en';
+  const syncDoc = () => {
+    document.documentElement.lang = lang() === 'zh' ? 'zh-CN' : 'en';
+    if (!portal.isOpen()) document.title = t('site.title');
+    const skip = document.querySelector('.skip');
+    if (skip) skip.textContent = t('site.skip');
+  };
   const portal = new Portal(document.body);
+  document.body.prepend(topbar(() => portal.closeAll()));
+  onLang(syncDoc);
+  syncDoc();
   const home = new Home((id) => {
     void portal.open(id, 'human');
   });

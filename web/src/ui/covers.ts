@@ -244,7 +244,8 @@ const painters: Record<string, Painter> = {
   },
 };
 
-export function paintCover(g: Ctx, id: string, t: number): void {
+export function paintCover(g: Ctx, id: string, t: number, hover = false): void {
+  t = hover ? t * 1.6 : t * 0.6;
   g.imageSmoothingEnabled = false;
   const p = painters[id];
   if (p) p(g, t);
