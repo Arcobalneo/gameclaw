@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import legacyIds from '../../catalog/legacy-ids.json';
 import { handleRequest, RELAY_VERSION } from '../src/app';
 import { generateSessionId } from '../src/ids';
 import { extractSession, handleMcp, toolList } from '../src/mcp';
@@ -22,7 +23,9 @@ describe('tool catalog', () => {
     const tools = toolList();
     expect(tools.map((t) => t.name)).toEqual([...TOOL_NAMES]);
     const dumped = JSON.stringify(tools);
-    expect(dumped).not.toMatch(/shrimp-[a-z]+/);
+    for (const id of [...Object.keys(legacyIds), ...Object.values(legacyIds)]) {
+      expect(dumped).not.toContain(id);
+    }
   });
 });
 

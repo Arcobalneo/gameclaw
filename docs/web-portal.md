@@ -18,6 +18,11 @@ Tool results include `watch_url` (`#/watch/<room code>`, not the bearer token).
 Opening that URL joins the session and shows the game in progress. Later moves
 appear in that tab.
 
+`#/play/<id>` accepts a former id from `catalog/legacy-ids.json` and replaces
+the address with the current id. A watch page restores a run stored under a
+former id into that same current id. The room code in `#/watch/<room code>`
+does not change.
+
 ## Layout
 
 ```

@@ -11,7 +11,7 @@ export type Outcome = 'ongoing' | 'won' | 'lost' | 'aborted';
 export type Risk = 'low' | 'medium' | 'high';
 
 export interface GameMeta {
-  /** Stable machine id, e.g. `shrimp-heist`. */
+  /** Stable machine id, e.g. `claw-heist`. */
   id: string;
   /** Chinese display name (虾×). */
   name: string;

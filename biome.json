@@ -12,7 +12,7 @@
       "!**/pnpm-lock.yaml",
       "!.venv",
       "!**/.venv",
-      "!games/shrimp-catch/data",
+      "!games/claw-catch/data",
       "!games/*/content",
       "!catalog",
       "!**/.venv-build",

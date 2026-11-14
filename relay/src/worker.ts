@@ -106,7 +106,9 @@ export class SessionRoom implements DurableObject {
     const storedDesk = await this.state.storage.get<StoredDesk>('desk');
     await this.state.storage.put('sessionId', sessionId);
     const room = new SessionRoomCore(sessionId, site, storedCode ?? null);
-    if (storedDesk) room.loadDesk(storedDesk);
+    if (storedDesk && room.loadDesk(storedDesk)) {
+      await this.state.storage.put('desk', structuredClone(room.currentDesk()));
+    }
     room.onDesk((desk) => {
       void this.state.storage.put('desk', structuredClone(desk));
     });

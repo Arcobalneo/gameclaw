@@ -1,3 +1,4 @@
+import { canonicalGameId } from '../../../relay/src/games';
 import { statsHelloUrl, statsUrl, statsWsUrl } from './config';
 import { loadOrCreatePlayer } from './player';
 
@@ -13,6 +14,17 @@ function empty(): PlayCounts {
   return { site: 0, games: {} };
 }
 
+/** Sum counts stored under a former id into the current id. */
+export function foldCounts(counts: PlayCounts): PlayCounts {
+  const games: Record<string, number> = {};
+  for (const [id, n] of Object.entries(counts.games)) {
+    if (!Number.isFinite(n)) continue;
+    const canon = canonicalGameId(id);
+    games[canon] = (games[canon] ?? 0) + n;
+  }
+  return { site: counts.site, games };
+}
+
 function readCache(): PlayCounts {
   try {
     const raw = globalThis.localStorage?.getItem(CACHE_KEY);
@@ -20,7 +32,10 @@ function readCache(): PlayCounts {
     const parsed = JSON.parse(raw) as PlayCounts;
     if (typeof parsed?.site !== 'number' || typeof parsed.games !== 'object' || !parsed.games)
       return empty();
-    return { site: Math.max(0, Math.floor(parsed.site)), games: { ...parsed.games } };
+    return foldCounts({
+      site: Math.max(0, Math.floor(parsed.site)),
+      games: { ...parsed.games },
+    });
   } catch {
     return empty();
   }
@@ -49,7 +64,7 @@ export function onCounts(fn: (counts: PlayCounts) => void): () => void {
 }
 
 function apply(next: PlayCounts): void {
-  counts = { site: next.site, games: { ...next.games } };
+  counts = foldCounts(next);
   writeCache(counts);
   for (const fn of listeners) fn(counts);
 }

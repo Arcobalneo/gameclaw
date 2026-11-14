@@ -1,4 +1,5 @@
 import { type ActionView, normalizePlayerName, type StatusView } from '@gameclaw/gamekit';
+import { canonicalGameId, LEGACY_GAME_IDS } from '../../../relay/src/games';
 import { watchUrl } from '../../../relay/src/protocol';
 import { GAMES, gameName } from '../catalog';
 import { lang, setLang } from '../i18n';
@@ -196,12 +197,13 @@ export function createApi(portal: PortalController, version: string): GameclawAp
     },
     async getLeaderboard(args = {}) {
       await refreshBoard();
-      const id = args.game_id?.trim();
-      if (!id || id === 'total') {
+      const raw = args.game_id?.trim();
+      if (!raw || raw === 'total') {
         return { ok: true, scope: 'total', rule: 'best-per-game', entries: rowsFor('total') };
       }
+      const id = canonicalGameId(raw);
       if (!hasGame(id)) {
-        return { ok: false, error: `Unknown game_id: ${id}` };
+        return { ok: false, error: `Unknown game_id: ${raw}` };
       }
       return { ok: true, scope: id, rule: 'best-per-game', entries: rowsFor(id) };
     },
@@ -271,7 +273,8 @@ interface ModelContextLike {
 
 const gameIdProp = {
   type: 'string',
-  description: 'Game id such as shrimp-trek. Defaults to the game focused in the page.',
+  description:
+    'Game id from list_games, such as claw-trek. A former id is accepted; the result uses the current id. Defaults to the game focused in the page.',
 };
 
 function withWatch(data: unknown): unknown {
@@ -303,7 +306,13 @@ function describeTools(api: GameclawApi): ToolDescriptor[] {
         'Open a game so the human can watch. Resumes its saved run. If no browser is connected, the run still starts. Tell the human to open watch_url from the result.',
       inputSchema: {
         type: 'object',
-        properties: { game_id: { type: 'string', enum: ids } },
+        properties: {
+          game_id: {
+            type: 'string',
+            enum: [...ids, ...LEGACY_GAME_IDS],
+            description: 'Current id, or a former id which resolves to the current one.',
+          },
+        },
         required: ['game_id'],
       },
       execute: (i) => api.openGame({ game_id: String(i.game_id ?? '') }),

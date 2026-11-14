@@ -6,20 +6,20 @@ import {
   normalizePlayerName,
 } from '@gameclaw/gamekit';
 import { definition as clawBeat } from '../../games/claw-beat/src/definition';
+import { definition as clawBurger } from '../../games/claw-burger/src/definition';
+import { definition as clawCatch } from '../../games/claw-catch/src/definition';
+import { definition as clawConquest } from '../../games/claw-conquest/src/definition';
+import { definition as clawGreens } from '../../games/claw-greens/src/definition';
+import { definition as clawGuard } from '../../games/claw-guard/src/definition';
+import { definition as clawHeist } from '../../games/claw-heist/src/definition';
+import { definition as clawInk } from '../../games/claw-ink/src/definition';
+import { definition as clawLeap } from '../../games/claw-leap/src/definition';
+import { definition as clawLook } from '../../games/claw-look/src/definition';
 import { definition as clawMelt } from '../../games/claw-melt/src/definition';
 import { definition as clawNet } from '../../games/claw-net/src/definition';
+import { definition as clawRampage } from '../../games/claw-rampage/src/definition';
 import { definition as clawStamp } from '../../games/claw-stamp/src/definition';
-import { definition as shrimpBurger } from '../../games/shrimp-burger/src/definition';
-import { definition as shrimpCatch } from '../../games/shrimp-catch/src/definition';
-import { definition as shrimpConquest } from '../../games/shrimp-conquest/src/definition';
-import { definition as shrimpGreens } from '../../games/shrimp-greens/src/definition';
-import { definition as shrimpGuard } from '../../games/shrimp-guard/src/definition';
-import { definition as shrimpHeist } from '../../games/shrimp-heist/src/definition';
-import { definition as shrimpInk } from '../../games/shrimp-ink/src/definition';
-import { definition as shrimpLeap } from '../../games/shrimp-leap/src/definition';
-import { definition as shrimpLook } from '../../games/shrimp-look/src/definition';
-import { definition as shrimpRampage } from '../../games/shrimp-rampage/src/definition';
-import { definition as shrimpTrek } from '../../games/shrimp-trek/src/definition';
+import { definition as clawTrek } from '../../games/claw-trek/src/definition';
 import { GAMES } from '../../web/src/catalog';
 import type { Lang } from '../../web/src/i18n';
 import {
@@ -28,6 +28,7 @@ import {
   localizeRecap,
   localizeStatus,
 } from '../../web/src/i18n/localize';
+import { resolveGameId, retagSnapshot } from './games';
 import type { SubmitInput } from './leaderboard';
 import type { Json, StoredDesk, StoredSlot, ToolName } from './protocol';
 
@@ -60,17 +61,17 @@ const MAX_LOG = 60;
 // biome-ignore lint/suspicious/noExplicitAny: each game has its own state type
 const DEFINITIONS = new Map<string, GameDefinition<any>>(
   [
-    shrimpTrek,
-    shrimpGuard,
-    shrimpHeist,
-    shrimpCatch,
-    shrimpLook,
-    shrimpRampage,
-    shrimpInk,
-    shrimpGreens,
-    shrimpConquest,
-    shrimpLeap,
-    shrimpBurger,
+    clawTrek,
+    clawGuard,
+    clawHeist,
+    clawCatch,
+    clawLook,
+    clawRampage,
+    clawInk,
+    clawGreens,
+    clawConquest,
+    clawLeap,
+    clawBurger,
     clawStamp,
     clawMelt,
     clawNet,
@@ -147,31 +148,60 @@ export class HeadlessDesk {
     return { focused: this.focused, lang: this.lang, games };
   }
 
-  load(desk: StoredDesk): void {
-    this.focused = desk.focused;
+  /**
+   * Restore a stored desk. Former ids are rewritten to the current id.
+   * Returns true when the stored desk still used a former id.
+   */
+  load(desk: StoredDesk): boolean {
+    const focused = desk.focused ? resolveGameId(desk.focused) : null;
+    let migrated = Boolean(desk.focused) && focused !== desk.focused;
+    this.focused = focused;
     this.lang = desk.lang;
     this.#slots.clear();
     for (const [id, slot] of Object.entries(desk.games)) {
-      const definition = DEFINITIONS.get(id);
-      if (!definition || !slot) continue;
-      const session = MemorySession.restore(definition, slot.snapshot);
-      if (!session) continue;
-      this.#slots.set(id, { session, log: normalizeLog(slot.log) });
+      const restored = this.#restore(id, slot);
+      if (!restored) continue;
+      if (restored.migrated) migrated = true;
+      const current = this.#slots.get(restored.id);
+      if (current && !newer(restored.session.snapshot, current.session.snapshot)) continue;
+      this.#slots.set(restored.id, { session: restored.session, log: restored.log });
     }
+    return migrated;
   }
 
   merge(desk: StoredDesk): void {
-    if (desk.focused) this.focused = desk.focused;
+    if (desk.focused) {
+      const focused = resolveGameId(desk.focused);
+      if (focused) this.focused = focused;
+    }
     if (desk.lang) this.lang = desk.lang;
     for (const [id, slot] of Object.entries(desk.games)) {
-      const definition = DEFINITIONS.get(id);
-      if (!definition || !slot) continue;
-      const session = MemorySession.restore(definition, slot.snapshot);
-      if (!session) continue;
-      const current = this.#slots.get(id);
-      if (current && !newer(session.snapshot, current.session.snapshot)) continue;
-      this.#slots.set(id, { session, log: normalizeLog(slot.log) });
+      const restored = this.#restore(id, slot);
+      if (!restored) continue;
+      const current = this.#slots.get(restored.id);
+      if (current && !newer(restored.session.snapshot, current.session.snapshot)) continue;
+      this.#slots.set(restored.id, { session: restored.session, log: restored.log });
     }
+  }
+
+  #restore(
+    id: string,
+    slot: StoredSlot | undefined,
+  ): { id: string; session: MemorySession<unknown>; log: RunLog[]; migrated: boolean } | null {
+    if (!slot) return null;
+    const canon = resolveGameId(id);
+    if (!canon) return null;
+    const definition = DEFINITIONS.get(canon);
+    if (!definition) return null;
+    const snapshot = retagSnapshot(slot.snapshot, canon);
+    const session = MemorySession.restore(definition, snapshot);
+    if (!session) return null;
+    return {
+      id: canon,
+      session,
+      log: normalizeLog(slot.log),
+      migrated: canon !== id || snapshot !== slot.snapshot,
+    };
   }
 
   call(tool: ToolName, args: Json): Json | Failure {
@@ -325,16 +355,17 @@ export class HeadlessDesk {
 
   /** Resume a stored run, or start one when `create` is set (open_game). */
   #ensure(id: string, create: boolean): Ready | Failure {
-    const definition = DEFINITIONS.get(id);
-    if (!definition) {
+    const canon = resolveGameId(id);
+    const definition = canon ? DEFINITIONS.get(canon) : undefined;
+    if (!canon || !definition) {
       return {
         ok: false,
         error: `Unknown game_id: ${id}`,
         hint: `Valid ids: ${[...DEFINITIONS.keys()].join(', ')}`,
       };
     }
-    const existing = this.#slots.get(id);
-    if (existing) return { id, ...existing };
+    const existing = this.#slots.get(canon);
+    if (existing) return { id: canon, ...existing };
     if (!create) {
       return {
         ok: false,
@@ -342,12 +373,13 @@ export class HeadlessDesk {
         hint: 'Call open_game or new_game with a game_id from list_games.',
       };
     }
-    return this.#create(id, {});
+    return this.#create(canon, {});
   }
 
   #create(id: string, args: Json): Ready | Failure {
-    const definition = DEFINITIONS.get(id);
-    if (!definition) {
+    const canon = resolveGameId(id);
+    const definition = canon ? DEFINITIONS.get(canon) : undefined;
+    if (!canon || !definition) {
       return {
         ok: false,
         error: `Unknown game_id: ${id}`,
@@ -377,8 +409,8 @@ export class HeadlessDesk {
           },
         ],
       };
-      this.#slots.set(id, slot);
-      return { id, ...slot };
+      this.#slots.set(canon, slot);
+      return { id: canon, ...slot };
     } catch (error) {
       return {
         ok: false,

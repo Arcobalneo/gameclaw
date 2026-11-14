@@ -65,12 +65,12 @@ describe('agent api', () => {
   });
 
   it('rejects unknown ids without throwing', async () => {
-    const res = await api.openGame({ game_id: 'shrimp-nope' });
+    const res = await api.openGame({ game_id: 'not-a-game' });
     expect(res.ok).toBe(false);
   });
 
   it('opens, starts, acts and recaps', async () => {
-    await api.openGame({ game_id: 'shrimp-leap' });
+    await api.openGame({ game_id: 'claw-leap' });
     const fresh = await api.newGame({ seed: 7 });
     expect(fresh.ok).not.toBe(false);
     const listed = (await api.listActions()) as { actions: { id: string; index: number }[] };
@@ -83,7 +83,7 @@ describe('agent api', () => {
     expect(bad.ok).toBe(false);
     const recap = await api.recap();
     expect(recap).toBeTruthy();
-    expect(opened).toContain('shrimp-leap');
+    expect(opened).toContain('claw-leap');
   });
 
   it('exposes exactly the documented WebMCP tools', () => {

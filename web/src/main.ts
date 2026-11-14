@@ -143,7 +143,12 @@ function boot(): void {
     const room = watch ?? roomHash?.[1] ?? roomQuery;
     if (room) void joinByCode(room);
     const play = /^#\/play\/([a-z0-9-]+)/.exec(location.hash);
-    if (play && findGame(play[1]!)) void portal.open(play[1]!, 'human');
+    const entry = play ? findGame(play[1]!) : undefined;
+    if (entry) {
+      const hash = `#/play/${entry.id}`;
+      if (location.hash !== hash) history.replaceState(null, '', hash);
+      void portal.open(entry.id, 'human');
+    }
   };
   window.addEventListener('hashchange', route);
   route();

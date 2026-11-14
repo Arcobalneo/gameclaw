@@ -53,12 +53,16 @@ Cloudflare Worker + Durable Objects:
 `POST /mcp` is Streamable HTTP. `get_leaderboard` is answered by the worker.
 When a tab is open, `submit_score` is forwarded to that page, which posts
 `recap.score`. When no tab is open, the room posts the score itself. A stored
-run is what `#/watch/<room code>` shows.
+run is what `#/watch/<room code>` shows. Headless play uses the definitions in
+`relay/src/headless.ts`. Play counts and the leaderboard accept only the ids in
+`relay/src/games.ts`, and fold a former id from `catalog/legacy-ids.json` into
+the current id when they read stored rows.
 
 ### 5. Catalog — `catalog/games.json`
 
 Schema 2. Ids, names, summaries, and `score.zh` / `score.en`. No platforms and
-no release assets. `SKILL.md` does not list games.
+no release assets. `SKILL.md` does not list games. Former ids, when a shipped
+game was renamed, live in `catalog/legacy-ids.json`.
 
 ## Dependency direction
 

@@ -1,3 +1,4 @@
+import { canonicalGameId } from '../../../relay/src/games';
 import { leaderboardUrl, leaderboardWsUrl } from './config';
 
 export interface BoardRow {
@@ -40,17 +41,45 @@ function empty(): BoardSnapshot {
   return { rule: 'best-per-game', games: {}, total: [] };
 }
 
+function mergeRows(left: BoardRow[], right: BoardRow[]): BoardRow[] {
+  const byName = new Map<string, BoardRow>();
+  for (const row of [...left, ...right]) {
+    const prev = byName.get(row.name);
+    if (
+      !prev ||
+      row.score > prev.score ||
+      (row.score === prev.score && row.updatedAt > prev.updatedAt)
+    ) {
+      byName.set(row.name, row);
+    }
+  }
+  return [...byName.values()].sort(
+    (a, b) => b.score - a.score || a.updatedAt - b.updatedAt || a.name.localeCompare(b.name),
+  );
+}
+
+/** Move boards stored under a former id onto the current id. */
+export function foldBoards(snap: BoardSnapshot): BoardSnapshot {
+  const games: Record<string, BoardRow[]> = {};
+  for (const [id, rows] of Object.entries(snap.games)) {
+    if (!Array.isArray(rows)) continue;
+    const canon = canonicalGameId(id);
+    games[canon] = mergeRows(games[canon] ?? [], rows);
+  }
+  return { rule: snap.rule, games, total: snap.total };
+}
+
 function readCache(): BoardSnapshot {
   try {
     const raw = globalThis.localStorage?.getItem(CACHE_KEY);
     if (!raw) return empty();
     const parsed = JSON.parse(raw) as BoardSnapshot;
     if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.total)) return empty();
-    return {
+    return foldBoards({
       rule: typeof parsed.rule === 'string' ? parsed.rule : 'best-per-game',
       games: parsed.games ?? {},
       total: parsed.total,
-    };
+    });
   } catch {
     return empty();
   }
@@ -75,10 +104,11 @@ export function onBoard(fn: (snap: BoardSnapshot) => void): () => void {
 }
 
 function apply(next: BoardSnapshot): void {
+  const folded = foldBoards(next);
   snap = {
-    rule: next.rule,
-    games: { ...next.games },
-    total: [...next.total],
+    rule: folded.rule,
+    games: { ...folded.games },
+    total: [...folded.total],
   };
   try {
     globalThis.localStorage?.setItem(CACHE_KEY, JSON.stringify(snap));

@@ -139,7 +139,7 @@ describe('engine localization smoke', () => {
   );
 
   it('translate is a no-op for Chinese and already-English text', () => {
-    expect(translate('shrimp-guard', '潮令', 'zh')).toBe('潮令');
-    expect(translate('shrimp-guard', 'Orders', 'en')).toBe('Orders');
+    expect(translate('claw-guard', '潮令', 'zh')).toBe('潮令');
+    expect(translate('claw-guard', 'Orders', 'en')).toBe('Orders');
   });
 });

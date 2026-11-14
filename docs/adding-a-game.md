@@ -17,9 +17,6 @@ Choose together, in one step:
 - a Title Case English title `Claw <Word>`
 - a machine id `claw-<word>`
 
-The eleven games already shipped still use `Shrimp` / `shrimp-` until the
-rename that is landing separately. New games use `Claw` / `claw-`.
-
 Use that same id for the catalog row, `games/<id>/`, the package
 `@gameclaw/<id>`, `GameDefinition.meta`, and `web/src/games/<id>.ts`.
 
@@ -33,7 +30,7 @@ games/<id>/
 ├── package.json          name: @gameclaw/<id>, scripts: check / test
 ├── src/                  engine, content, definition (export `definition`)
 ├── tests/                engine tests + ladder tests
-└── README.md             title `虾× (Shrimp <Word>)`, mechanics, score, how to test
+└── README.md             title `虾× (Claw <Word>)`, mechanics, score, how to test
 ```
 
 The game implements `GameDefinition<S>` from `@gameclaw/gamekit`. It may import

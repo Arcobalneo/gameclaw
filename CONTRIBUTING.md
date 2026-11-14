@@ -41,7 +41,7 @@ The order is mandatory:
 ## Adding a game
 
 Follow the full checklist in [`docs/adding-a-game.md`](docs/adding-a-game.md).
-Every game uses the Shrimp-series names in [`docs/NAMING.md`](docs/NAMING.md).
+Every game uses the Claw-series names in [`docs/NAMING.md`](docs/NAMING.md).
 Do not add a CLI entrypoint, and do not add the game to `SKILL.md`.
 
 ## PR checklist
@@ -64,4 +64,4 @@ Include:
 
 ## Code of conduct
 
-Be direct about code, generous about people. Shrimp are involved.
+Be direct about code, generous about people.

@@ -1,5 +1,5 @@
 {
-  "shrimp-trek": {
+  "claw-trek": {
     "壳": "Shell",
     "能": "Energy",
     "盐": "Salt",
@@ -56,7 +56,7 @@
     "海压": "Sea Pressure",
     "遭遇": "Encounter"
   },
-  "shrimp-guard": {
+  "claw-guard": {
     "潮令": "Orders",
     "完整度": "Integrity",
     "漏": "Leaks",
@@ -84,7 +84,7 @@
     "甲": "Armored",
     "快": "Runner"
   },
-  "shrimp-heist": {
+  "claw-heist": {
     "种子": "Seed",
     "曝光上限": "Max Exposure",
     "回合": "Turn",
@@ -114,7 +114,7 @@
     "摸侧缓存": "Grab Side Cache",
     "开货格": "Open Cargo Slot"
   },
-  "shrimp-catch": {
+  "claw-catch": {
     "存活": "Alive",
     "队伍HP": "Party HP",
     "甲核": "Cores",
@@ -224,7 +224,7 @@
     "电脉": "Shock Pulse ",
     "灵涌": "Spirit Surge "
   },
-  "shrimp-look": {
+  "claw-look": {
     "专注": "Focus",
     "神经": "Nerve",
     "恐惧": "Dread",
@@ -243,7 +243,7 @@
     "取得目标档案": "Take the file",
     "尝试撤离": "Try to leave"
   },
-  "shrimp-rampage": {
+  "claw-rampage": {
     "收成": "Harvest",
     "安抚": "Soothed",
     "糖果": "Candy",
@@ -256,7 +256,7 @@
     "南瓜": "Pumpkin",
     "动作": "action"
   },
-  "shrimp-ink": {
+  "claw-ink": {
     "银": "Silver",
     "粮": "Food",
     "命": "Life",
@@ -292,7 +292,7 @@
     "递名帖": "Present your card",
     "打点驿丞": "Bribe the postmaster"
   },
-  "shrimp-greens": {
+  "claw-greens": {
     "断席": "Left the table",
     "没收束": "Unresolved",
     "身体": "Body",
@@ -321,7 +321,7 @@
     "外席": "Eat Out",
     "同桌": "Same Table"
   },
-  "shrimp-conquest": {
+  "claw-conquest": {
     "糧草": "Rations",
     "銀幣": "Silver",
     "部件": "Parts",
@@ -379,7 +379,7 @@
     "伏低躲過": "Duck",
     "逃跑拍數": "Beats left"
   },
-  "shrimp-leap": {
+  "claw-leap": {
     "坠落": "Fallen",
     "进度": "Level",
     "体型": "Size",
@@ -430,7 +430,7 @@
     "软丘": "Soft Mound",
     "灯团": "Lamp Blob"
   },
-  "shrimp-burger": {
+  "claw-burger": {
     "已收摊": "Closed",
     "进度": "Served",
     "剩余拍": "Beats",

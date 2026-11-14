@@ -6,6 +6,7 @@ import {
   type RecapView,
   type StatusView,
 } from '@gameclaw/gamekit';
+import { canonicalGameId, legacyGameId, retagSnapshot } from '../../../relay/src/games';
 import type { AnyGameModule } from '../gfx/scene';
 import { loadGame } from './registry';
 
@@ -71,13 +72,23 @@ export class GameHost {
 
   static fromModule(module: AnyGameModule, opts: { persist?: boolean } = {}): GameHost {
     const id = module.definition.meta.id;
-    const raw = opts.persist === false ? null : storage()?.getItem(STORAGE_PREFIX + id);
-    if (raw) {
+    const store = opts.persist === false ? null : storage();
+    const loaded = readSavedRun(store, id);
+    if (loaded) {
       try {
-        const parsed = JSON.parse(raw) as { snapshot: unknown; log?: LogEntry[] };
-        const session = MemorySession.restore(module.definition, parsed.snapshot);
-        if (session)
-          return new GameHost(module, session, Array.isArray(parsed.log) ? parsed.log : []);
+        const session = MemorySession.restore(module.definition, loaded.snapshot);
+        if (session) {
+          const host = new GameHost(
+            module,
+            session,
+            Array.isArray(loaded.log) ? loaded.log : [],
+          );
+          if (loaded.migratedFrom) {
+            host.#persist();
+            store?.removeItem(STORAGE_PREFIX + loaded.migratedFrom);
+          }
+          return host;
+        }
       } catch {
         /* corrupt save: start fresh */
       }
@@ -122,7 +133,7 @@ export class GameHost {
    * closed). A newer local turn of the same run is kept.
    */
   adopt(raw: unknown, log: LogEntry[]): boolean {
-    const session = MemorySession.restore(this.module.definition, raw);
+    const session = MemorySession.restore(this.module.definition, retagSnapshot(raw, this.id));
     if (!session) return false;
     const local = this.session.snapshot;
     const next = session.snapshot;
@@ -243,14 +254,45 @@ export function outcomeLabel(outcome: string): string {
   );
 }
 
+function readSavedRun(
+  store: Storage | null,
+  id: string,
+): { snapshot: unknown; log?: LogEntry[]; migratedFrom: string | null } | null {
+  if (!store) return null;
+  const current = store.getItem(STORAGE_PREFIX + id);
+  if (current) {
+    try {
+      const parsed = JSON.parse(current) as { snapshot: unknown; log?: LogEntry[] };
+      return { ...parsed, migratedFrom: null };
+    } catch {
+      return null;
+    }
+  }
+  const legacy = legacyGameId(id);
+  if (!legacy) return null;
+  const old = store.getItem(STORAGE_PREFIX + legacy);
+  if (!old) return null;
+  try {
+    const parsed = JSON.parse(old) as { snapshot: unknown; log?: LogEntry[] };
+    return {
+      snapshot: retagSnapshot(parsed.snapshot, id),
+      ...(parsed.log ? { log: parsed.log } : {}),
+      migratedFrom: legacy,
+    };
+  } catch {
+    return null;
+  }
+}
+
 const hosts = new Map<string, Promise<GameHost>>();
 
 export function getHost(id: string): Promise<GameHost> {
-  let p = hosts.get(id);
+  const canon = canonicalGameId(id);
+  let p = hosts.get(canon);
   if (!p) {
-    p = loadGame(id).then((module) => GameHost.fromModule(module));
-    p.catch(() => hosts.delete(id));
-    hosts.set(id, p);
+    p = loadGame(canon).then((module) => GameHost.fromModule(module));
+    p.catch(() => hosts.delete(canon));
+    hosts.set(canon, p);
   }
   return p;
 }

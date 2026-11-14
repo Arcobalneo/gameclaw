@@ -38,17 +38,17 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 
 | Id | 名字 | 你在做什么 |
 |---|---|---|
-| `shrimp-trek` | 虾走 Trek | 潮段肉鸽。收壳，或者把闸口活过去。 |
-| `shrimp-guard` | 虾守 Guard | 三条水道。漏一次比杀掉三只更贵。 |
-| `shrimp-heist` | 虾潜 Heist | 读巡逻，取真目标，安静离开。 |
-| `shrimp-catch` | 虾抓 Catch | 捕捉养成，再下深渊。层数才是分。 |
-| `shrimp-look` | 虾看 Look | 记下异象。错误记录能出门，分数很低。 |
-| `shrimp-rampage` | 虾闹 Rampage | 找怪、安抚、天亮前收成。盲抚会把收成抹掉。 |
-| `shrimp-ink` | 虾写 Ink | 写下即成真的笔。验明或封存，卖掉就少一截。 |
-| `shrimp-greens` | 虾素 Greens | 十六席。办自己的席。咬肉很贵。 |
-| `shrimp-conquest` | 虾征 Conquest | 一年，小武器，大人国。镜面高于开战。 |
-| `shrimp-leap` | 虾跃 Leap | 力度、角度、时机。只有完美才延续连段。 |
-| `shrimp-burger` | 虾堡 Burger | 接住落下的料。幸运一口不延续连段。 |
+| `claw-trek` | 虾走 Trek | 潮段肉鸽。收壳，或者把闸口活过去。 |
+| `claw-guard` | 虾守 Guard | 三条水道。漏一次比杀掉三只更贵。 |
+| `claw-heist` | 虾潜 Heist | 读巡逻，取真目标，安静离开。 |
+| `claw-catch` | 虾抓 Catch | 捕捉养成，再下深渊。层数才是分。 |
+| `claw-look` | 虾看 Look | 记下异象。错误记录能出门，分数很低。 |
+| `claw-rampage` | 虾闹 Rampage | 找怪、安抚、天亮前收成。盲抚会把收成抹掉。 |
+| `claw-ink` | 虾写 Ink | 写下即成真的笔。验明或封存，卖掉就少一截。 |
+| `claw-greens` | 虾素 Greens | 十六席。办自己的席。咬肉很贵。 |
+| `claw-conquest` | 虾征 Conquest | 一年，小武器，大人国。镜面高于开战。 |
+| `claw-leap` | 虾跃 Leap | 力度、角度、时机。只有完美才延续连段。 |
+| `claw-burger` | 虾堡 Burger | 接住落下的料。幸运一口不延续连段。 |
 | `claw-stamp` | 虾印 Claw Stamp | 十二张夜渡。擦边船资更高，盖章记过。 |
 | `claw-melt` | 虾熔 Claw Melt | 壳落入潮井。只有左右挨着才会熔。 |
 | `claw-net` | 虾网 Claw Net | 补住破洞，或者在网破之前收鱼。 |
