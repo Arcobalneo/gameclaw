@@ -1,0 +1,24 @@
+{
+  "name": "@gameclaw/web",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GameClaw web portal: every game playable in-browser by humans and agents (WebMCP).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "e2e": "node e2e/smoke.mjs",
+    "font": "python3 scripts/subset-font.py"
+  },
+  "dependencies": {
+    "@gameclaw/gamekit": "workspace:*"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.0",
+    "vite": "^7.2.0"
+  }
+}

@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Shared runtime for GameClaw agent-first terminal games.",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./core": "./src/core.ts"
   },
   "scripts": {
     "check": "tsc -p tsconfig.json",

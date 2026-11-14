@@ -4,6 +4,7 @@ export * from './cli/run';
 export * from './color';
 export * from './errors';
 export * from './journal';
+export * from './memory-session';
 export { ensureObserver, runForegroundObserver, stopObserver } from './observer';
 export * from './paths';
 export * from './report';
