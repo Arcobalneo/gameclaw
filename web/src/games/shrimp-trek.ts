@@ -6,7 +6,6 @@ import {
   type Ctx,
   easeOutBack,
   easeOutCubic,
-  hash01,
   hashString,
   line,
   mix,
@@ -14,7 +13,8 @@ import {
   VH,
   VW,
 } from '../gfx/pixel';
-import type { GameModule, GameScene } from '../gfx/scene';
+import type { Grade } from '../gfx/art';
+import { type GameModule, type GameScene, say } from '../gfx/scene';
 import {
   buildSprite,
   CRAB,
@@ -26,8 +26,9 @@ import {
   SHRIMP,
   SHRIMP_WALK,
 } from '../gfx/sprites';
-import { drawText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, kelp, orb, pips, plate, shadow } from '../gfx/world';
+import { ellipse, withAlpha } from '../gfx/pixel';
 
 const FLOOR = 172;
 const LINEAGE_PAL: Record<string, Palette> = {
@@ -64,21 +65,99 @@ function enemySprite(key: string | null): HTMLCanvasElement {
   }
 }
 
+/** A drifting gill net: catenary floats line, knotted diamond mesh, snagged debris. */
 function drawNet(g: Ctx, x: number, y: number, t: number): void {
-  for (let i = 0; i < 9; i += 1) {
-    const sway = Math.sin(t * 2 + i * 0.5) * 3;
-    line(g, x + i * 8, y, x + i * 8 + sway, y + 60, '#9aa6c8');
-    line(g, x, y + i * 7, x + 64 + sway, y + i * 7, '#6a7698');
+  const w = 96;
+  const h = 96;
+  const sway = (yy: number) => Math.sin(t * 1.6 + yy * 0.06) * (yy / h) * 6;
+  const cols = 9;
+  const rows = 9;
+  const px = (c: number, r: number) => x + (c / (cols - 1)) * w + sway(r * (h / rows)) + Math.sin(c * 0.8) * (r / rows) * 4;
+  const py = (c: number, r: number) => y + 6 + Math.sin((c / (cols - 1)) * Math.PI) * 8 + r * (h / rows);
+  for (let r = 0; r < rows; r += 1)
+    for (let c = 0; c < cols; c += 1) {
+      if (c < cols - 1) line(g, Math.round(px(c, r)), Math.round(py(c, r)), Math.round(px(c + 1, r + (r % 2 ? -0.5 : 0.5))), Math.round(py(c + 1, r + (r % 2 ? -0.5 : 0.5))), '#7a8aa8');
+      if (r < rows - 1) line(g, Math.round(px(c, r)), Math.round(py(c, r)), Math.round(px(c, r + 1)), Math.round(py(c, r + 1)), '#5a6a88');
+      rect(g, Math.round(px(c, r)), Math.round(py(c, r)), 1, 1, '#c8d4e8');
+    }
+  // Head rope with orange floats.
+  for (let c = 0; c < cols - 1; c += 1) line(g, Math.round(px(c, 0)), Math.round(py(c, 0)), Math.round(px(c + 1, 0)), Math.round(py(c + 1, 0)), '#d8c8a0');
+  for (let c = 0; c < cols; c += 2) {
+    const fx = Math.round(px(c, 0));
+    const fy = Math.round(py(c, 0)) - 4 + Math.round(Math.sin(t * 2 + c) * 1);
+    ellipse(g, fx, fy, 5, 3, '#c84a1a');
+    ellipse(g, fx, fy - 1, 4, 2, '#ff8a3a');
+    rect(g, fx - 2, fy - 2, 2, 1, '#ffd0a0');
   }
+  // Snagged fish skeleton + weed.
+  const sx = Math.round(px(5, 5));
+  const sy = Math.round(py(5, 5));
+  line(g, sx - 6, sy, sx + 6, sy, '#e8e0d0');
+  for (let i = -4; i <= 4; i += 2) line(g, sx + i, sy - 2, sx + i, sy + 2, '#c8c0b0');
+  rect(g, sx + 6, sy - 2, 3, 4, '#e8e0d0');
+  for (let i = 0; i < 10; i += 1) rect(g, Math.round(px(2, 6)) + Math.round(Math.sin(t + i * 0.6) * 2), Math.round(py(2, 6)) + i * 2, 1, 2, '#3a9a5a');
 }
 
+/** Drifting plastic: a billowing bag, a bottle and six-pack rings. */
 function drawPlastic(g: Ctx, x: number, y: number, t: number): void {
-  const colors = ['#ff5d73', '#4fd1ff', '#f0f0ff', '#ffd23f'];
-  for (let i = 0; i < 9; i += 1) {
-    const px = x + hash01(i, 4) * 60 + Math.sin(t + i) * 4;
-    const py = y + hash01(i, 5) * 50 + Math.cos(t * 1.3 + i) * 3;
-    rect(g, px, py, 6 + (i % 3) * 2, 3 + (i % 2) * 2, colors[i % 4]!);
-    rect(g, px, py, 6 + (i % 3) * 2, 1, '#ffffff66');
+  // Bag: translucent body that breathes with the current.
+  const breath = Math.sin(t * 1.8);
+  const bx = x + 30 + Math.round(Math.sin(t * 0.7) * 6);
+  const by = y + 14 + Math.round(Math.cos(t * 0.9) * 4);
+  g.globalAlpha = 0.55;
+  for (let r = 0; r < 34; r += 1) {
+    const wv = 12 + Math.sin((r / 34) * Math.PI) * (8 + breath * 3) + Math.sin(r * 0.5 + t * 4) * 1.5;
+    rect(g, Math.round(bx - wv), by + r, Math.round(wv * 2), 1, r < 4 ? '#f8f8ff' : '#d8e4f0');
+  }
+  g.globalAlpha = 1;
+  for (const hx of [-11, 5]) {
+    const top = Math.round(by - 9 - breath);
+    line(g, bx + hx, by + 1, bx + hx + 1, top + 2, '#e8eef8');
+    line(g, bx + hx + 1, top + 2, bx + hx + 4, top, '#e8eef8');
+    line(g, bx + hx + 4, top, bx + hx + 6, by + 1, '#c8d4e4');
+  }
+  rect(g, bx - 6, by + 10, 3, 14, withAlpha('#ffffff', 0.6));
+  for (let i = 0; i < 4; i += 1) rect(g, bx - 10 + i * 6, by + 22 + (i % 2) * 3, 4, 1, withAlpha('#a8b8c8', 0.7));
+  // Bottle tumbling slowly.
+  const bt = x - 4;
+  const btY = y + 60 + Math.round(Math.sin(t * 1.2) * 3);
+  rect(g, bt, btY, 22, 9, withAlpha('#7ad0ff', 0.55));
+  rect(g, bt, btY, 22, 2, withAlpha('#e8f8ff', 0.8));
+  rect(g, bt + 6, btY + 2, 8, 5, '#ff5d73');
+  rect(g, bt + 22, btY + 2, 5, 5, withAlpha('#7ad0ff', 0.55));
+  rect(g, bt + 27, btY + 2, 3, 5, '#3ab0ff');
+  // Six-pack rings.
+  const rx = x + 52;
+  const ry = y + 68 + Math.round(Math.cos(t * 1.4) * 2);
+  for (let i = 0; i < 3; i += 1)
+    for (let j = 0; j < 2; j += 1) {
+      ellipse(g, rx + i * 9, ry + j * 7, 5, 4, '#e8e8f0');
+      ellipse(g, rx + i * 9, ry + j * 7, 3, 2, '#0a2a4a');
+    }
+}
+
+/** Dark near-camera silhouettes that sell depth. */
+function foreground(g: Ctx, scroll: number, t: number, color: string): void {
+  const span = VW + 120;
+  for (let i = 0; i < 5; i += 1) {
+    const x = ((((i * 97 - scroll * 1.35) % span) + span) % span) - 60;
+    const h = 34 + (i % 3) * 6;
+    // Coral fan / rock.
+    if (i % 2) {
+      ellipse(g, x, VH + 6, 46, h * 0.45, color);
+      ellipse(g, x + 18, VH + 2, 26, h * 0.6, color);
+      for (let k = 0; k < 6; k += 1) {
+        const bx = x - 30 + k * 11;
+        const bh = 14 + ((k * 7) % 12);
+        rect(g, bx, VH - h * 0.45 - bh + 8, 3, bh, color);
+        rect(g, bx - 3, VH - h * 0.45 - bh + 8, 9, 3, color);
+      }
+    } else {
+      for (let k = 0; k < 4; k += 1) {
+        const sway = Math.sin(t * 1.4 + i + k) * 4;
+        for (let yy = 0; yy < h; yy += 2) rect(g, Math.round(x + k * 9 + sway * (yy / h) ** 1.5), VH - yy, 5 - Math.floor((yy / h) * 3), 2, color);
+      }
+    }
   }
 }
 
@@ -139,7 +218,7 @@ function createScene(): GameScene<RoguelikeState> {
         },
         scroll * 0.15,
       );
-      fog(g, t, 104, 26, '#3a8ac0', 0.22, 3);
+      fog(g, t, 104, 26, '#3a8ac0', 0.1, 3);
       ridge(
         g,
         {
@@ -196,17 +275,12 @@ function createScene(): GameScene<RoguelikeState> {
           });
           plate(
             g,
-            f.actions[i]?.label.split('：')[0] ?? id,
+            say(f, f.actions[i]?.label.split('：')[0] ?? '') || id.toUpperCase(),
             x,
             FLOOR - 62,
             focus ? '#ffe066' : '#d8ccff',
             100,
           );
-        });
-        drawText(g, '选择你的龙虾谱系', VW / 2, 30, {
-          color: '#ffe8d0',
-          align: 'center',
-          scale: 2,
         });
         return;
       }
@@ -239,9 +313,9 @@ function createScene(): GameScene<RoguelikeState> {
           const y = FLOOR - 70 + Math.round(Math.sin(t * 2 + i * 2) * 5);
           const focus = f.focus?.id === `mutation:${key}`;
           orb(g, x, y, focus ? 9 : 7, MUTATION_COLOR[key] ?? '#ffffff', t + i);
-          if (focus) plate(g, f.focus!.label, x, y - 30, '#ffe066', 140);
+          const lb = focus ? say(f, f.focus!.label) : '';
+          if (lb) plate(g, lb, x, y - 30, '#ffe066', 140);
         });
-        drawText(g, '突变潮 · 三选一', 280, 40, { color: '#ffe066', align: 'center' });
       } else if (state.phase === 'encounter' || state.phase === 'ended') {
         const key = state.encounterKey;
         const ex = 286 + (moving ? (target - scroll) * 0.6 : 0);
@@ -252,52 +326,40 @@ function createScene(): GameScene<RoguelikeState> {
           const s = enemySprite(key);
           const hitFlash = lunge >= 0 && f.since > 0.12 && f.since < 0.3 && success;
           const bob = Math.round(Math.sin(t * 2.5) * 3);
-          glow(g, ex, FLOOR - 24, 34, key === 'eel' ? '#fff36b' : '#ff7ad9', 0.18);
+          glow(g, ex, FLOOR - 34, 48, key === 'eel' ? '#fff36b' : '#ff7ad9', 0.18);
           shadow(g, ex, FLOOR + 1, 30);
           blit(g, s, ex, FLOOR - 4 + bob, {
-            scale: 2,
+            scale: 3,
             anchor: 'bc',
             tint: '#ffffff',
             tintAlpha: hitFlash ? 0.85 : 0,
           });
         }
-        const name = f.status.headline.split('·').pop()?.trim() ?? '';
-        if (name && state.phase === 'encounter') plate(g, name, ex, FLOOR - 112, '#ffd0b0', 140);
+        const name = say(f, f.status.headline.split('·').pop()?.trim() ?? '');
+        if (name && state.phase === 'encounter') plate(g, name, ex, FLOOR - 118, '#ffd0b0', 140);
       }
 
-      // Vital bars beside the hero.
-      const bars: [number, number, string][] = [
-        [state.stats.shell, 12, '#ff8a5c'],
-        [state.stats.energy, 10, '#ffe066'],
-        [state.stats.salinity, 10, '#5ad1ff'],
-      ];
-      bars.forEach(([v, max, c], i) => {
-        rect(g, 92, FLOOR + 10 + i * 4, 42, 3, '#05030c');
-        rect(
-          g,
-          93,
-          FLOOR + 11 + i * 4,
-          Math.round((40 * Math.max(0, Math.min(max, v))) / max),
-          1,
-          c,
-        );
-      });
+      // Ground detail + foreground parallax.
+      for (let i = 0; i < 14; i += 1) {
+        const span = VW + 20;
+        const gx = ((((i * 41 - scroll) % span) + span) % span) - 10;
+        const gy = FLOOR + 6 + (i % 4) * 9;
+        if (i % 3 === 0) {
+          ellipse(g, gx, gy, 4, 2, '#e8c8a8');
+          rect(g, gx - 1, gy - 1, 2, 1, '#fff0e0');
+        } else rect(g, gx, gy, 3, 2, i % 2 ? '#2a4a62' : '#4a7090');
+      }
+      foreground(g, scroll, t, mix('#04101e', '#010610', deep));
+    },
+    grade(state): Grade {
+      const deep = Math.min(1, (state.cycle - 1) * 0.25 + state.localDepth * 0.03);
+      return { top: mix('#9fe4ff', '#5a7aff', deep), bottom: '#020818', strength: 0.3, bloom: 0.55 + deep * 0.2 };
     },
     hud(f) {
       const { g, t, state } = f;
       if (state.phase === 'lineage') return;
-      drawText(g, `潮段 ${state.cycle}`, 10, VH - 32, { color: '#9fe4ff' });
-      pips(
-        g,
-        60,
-        VH - 29,
-        10,
-        Math.min(10, state.localDepth),
-        '#5ad1ff',
-        Math.min(9, state.localDepth),
-        t,
-      );
-      drawText(g, `名声 ${state.score}`, VW - 10, VH - 32, { color: '#ffe066', align: 'right' });
+      tiny(g, `C${state.cycle}`, 10, 10, { color: '#9fe4ff' });
+      pips(g, 26, 9, 10, Math.min(10, state.localDepth), '#5ad1ff', Math.min(9, state.localDepth), t);
     },
     react(f, o) {
       const ev = o.events[0];
@@ -312,18 +374,24 @@ function createScene(): GameScene<RoguelikeState> {
             speed: 140,
             shape: 'spark',
           });
-          f.fx.shake(3, 0.2);
-          f.fx.freeze(0.06);
-          f.fx.float(286, FLOOR - 70, '成功!', '#9dffb0');
+          f.fx.hit(282, FLOOR - 26, 'medium', 0, ['#ffffff', '#ffe066', '#ff8a5c']);
+          f.fx.splash(282, FLOOR - 20, '#9fe4ff', 12);
+          f.fx.float(286, FLOOR - 60, '★', '#9dffb0');
+          f.cue('hit');
         } else {
           hurt = 0;
           f.fx.burst(112, FLOOR - 14, { count: 22, colors: ['#ff4d6d', '#ffffff'], speed: 90 });
-          f.fx.shake(5, 0.35);
+          f.fx.hit(112, FLOOR - 14, 'heavy', Math.PI, ['#ff4d6d', '#ffffff']);
           f.fx.flash('#ff2040', 0.25);
-          f.fx.float(112, FLOOR - 50, '失手', '#ff8a8a');
+          const prev = o.previous as RoguelikeState;
+          const loss = prev.stats.shell - o.state.stats.shell;
+          if (loss > 0) f.fx.float(112, FLOOR - 50, `-${loss}`, '#ff8a8a');
+          f.cue('heavy');
         }
       } else if (ev.type === 'mutation') {
         mutateT = 0;
+        f.fx.ring(112, FLOOR - 14, MUTATION_COLOR[String(ev.key)] ?? '#ffe066', 30);
+        f.cue('good');
         f.fx.burst(112, FLOOR - 14, {
           count: 40,
           colors: [MUTATION_COLOR[String(ev.key)] ?? '#ffe066', '#ffffff'],

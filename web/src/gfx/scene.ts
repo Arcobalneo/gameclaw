@@ -61,3 +61,10 @@ export interface GameModule<S = unknown> {
 /** Erases the state type at the registry boundary. */
 // biome-ignore lint/suspicious/noExplicitAny: registry stores heterogeneous game modules
 export type AnyGameModule = GameModule<any>;
+
+const CJK_RE = /[\u3400-\u9fff]/;
+/** Engine text in the UI language, or '' when it cannot be shown without mixing languages. */
+export function say(f: { lang: 'zh' | 'en'; term(text: string): string }, text: string): string {
+  const out = f.term(text);
+  return f.lang === 'zh' || !CJK_RE.test(out) ? out : '';
+}

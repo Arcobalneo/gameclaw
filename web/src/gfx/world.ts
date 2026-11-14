@@ -1,5 +1,5 @@
 import { glow } from './fx';
-import { type Ctx, ellipse, mix, rect, withAlpha } from './pixel';
+import { type Ctx, ellipse, mix, rect, VW, withAlpha } from './pixel';
 import { drawText, fitText, textWidth } from './text';
 
 /** Shared actor helpers used by the per-game scenes. */
@@ -89,6 +89,7 @@ export function plate(
 ): void {
   const t = fitText(text, max);
   const w = textWidth(t) + 8;
+  x = Math.max(w / 2 + 3, Math.min(VW - w / 2 - 3, x));
   rect(g, Math.round(x - w / 2), y - 1, w, 14, withAlpha('#05030c', 0.78));
   rect(g, Math.round(x - w / 2), y + 13, w, 1, withAlpha(color, 0.5));
   drawText(g, t, x, y, { color, align: 'center', outline: null });

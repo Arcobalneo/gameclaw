@@ -31,7 +31,7 @@ const GROUND = 186;
 const ZH_NAMES: Record<string, string> = { bastion: '鐵壁國', harvest: '豐穗國', mirror: '鏡面國' };
 const KINGDOM: Record<string, { wall: string; roof: string; sky: [string, string, string] }> = {
   bastion: { wall: '#6a6a80', roof: '#3a3a52', sky: ['#5a4a7a', '#a87a8a', '#e8b08a'] },
-  harvest: { wall: '#c8a060', roof: '#8a4a2a', sky: ['#4a6a9a', '#e8b070', '#ffd890'] },
+  harvest: { wall: '#a87a40', roof: '#6a3020', sky: ['#3a5a8a', '#8aa0c0', '#f0c890'] },
   mirror: { wall: '#7ab8d0', roof: '#3a6a8a', sky: ['#2a3a6a', '#6aa0c0', '#c8f0ff'] },
 };
 
@@ -86,7 +86,7 @@ function paintRoom(target: string): HTMLCanvasElement {
     castleSilhouette(g, wx + 14, wy + wh - 10, 1, KINGDOM.bastion!);
     castleSilhouette(g, wx + 82, wy + wh - 12, 1, KINGDOM.harvest!);
     castleSilhouette(g, wx + 150, wy + wh - 10, 1, KINGDOM.mirror!);
-  } else castleSilhouette(g, wx + 64, wy + wh - 10, 2, k);
+  } else castleSilhouette(g, wx + 73, wy + wh - 10, 1.5, k);
   // Mullions.
   rect(g, wx + ww / 2 - 2, wy, 4, wh, '#2a160e');
   rect(g, wx, wy + wh / 2 - 2, ww, 4, '#2a160e');
@@ -138,14 +138,16 @@ function paintRoom(target: string): HTMLCanvasElement {
 /* ---------- the giant eye ---------- */
 
 function drawEye(g: Ctx, cx: number, cy: number, t: number, lookX: number, open: number): void {
-  const rx = 50;
-  const ry = 24;
-  // Face skin + brow around the eye.
-  ellipse(g, cx, cy + 6, rx + 22, ry + 30, '#c8885a');
-  ellipse(g, cx - 4, cy + 2, rx + 18, ry + 24, '#e0a070');
-  dither(g, cx + 20, cy - 30, 50, 70, '#b07048', 0.3);
-  rect(g, cx - rx - 6, cy - ry - 18, rx * 2 + 4, 7, '#4a2a1a');
-  rect(g, cx - rx - 2, cy - ry - 18, rx * 2 - 6, 2, '#6a3a22');
+  const rx = 38;
+  const ry = 19;
+  // Socket shadow + brow.
+  ellipse(g, cx, cy, rx + 8, ry + 9, '#b86a44');
+  ellipse(g, cx, cy - 2, rx + 4, ry + 5, '#c87a50');
+  for (let x = -rx - 4; x <= rx + 4; x += 1) {
+    const by = Math.round(cy - ry - 13 + (x * x) / (rx * 9));
+    rect(g, cx + x, by, 1, 5, '#4a2414');
+    rect(g, cx + x, by, 1, 1, '#7a4026');
+  }
   // Almond opening.
   const lid = Math.max(0.05, open);
   for (let dy = -ry; dy <= ry; dy += 1) {
@@ -163,15 +165,15 @@ function drawEye(g: Ctx, cx: number, cy: number, t: number, lookX: number, open:
       for (let k = 0; k < 6; k += 1) rect(g, vx + k, cy + Math.round(Math.sin(i + k) * 2), 1, 1, '#e08080');
     }
     // Iris tracks the hero.
-    const ix = Math.round(cx + clamp(lookX, -1, 1) * 20);
-    const ir = Math.min(18, Math.round(ry * lid));
+    const ix = Math.round(cx + clamp(lookX, -1, 1) * 16);
+    const ir = Math.min(14, Math.round(ry * lid));
     const rings = ['#4a1a1a', '#8a2a2a', '#c84a3a', '#e8803a', '#ffb050'];
     rings.forEach((col, i) => ellipse(g, ix, cy, ir - i * 2.4, Math.min(ir - i * 2.4, ry * lid - 1), col));
     for (let a = 0; a < 16; a += 1) {
       const ang = (a / 16) * Math.PI * 2;
       rect(g, ix + Math.round(Math.cos(ang) * ir * 0.7), cy + Math.round(Math.sin(ang) * ir * 0.6 * lid), 1, 1, '#5a1a10');
     }
-    const pr = 6 + Math.round(Math.sin(t * 1.3) * 1.5);
+    const pr = 5 + Math.round(Math.sin(t * 1.3) * 1.5);
     ellipse(g, ix, cy, pr, Math.min(pr, ry * lid - 2), '#0a0408');
     rect(g, ix - 6, cy - 6, 4, 3, '#ffffff');
     rect(g, ix + 4, cy + 3, 2, 1, '#ffd8c8');
@@ -186,6 +188,95 @@ function drawEye(g: Ctx, cx: number, cy: number, t: number, lookX: number, open:
   }
   const lowY = Math.round(cy + ry * lid);
   for (let x = -rx + 6; x <= rx - 6; x += 1) rect(g, cx + x, lowY - Math.round((x * x) / (rx * 6)), 1, 2, '#a85a3a');
+}
+
+const WIN = { x: 130, y: 8, w: 200, h: 110 };
+
+/** A giant face pressed against the window, eyes tracking the hero. */
+function drawFace(g: Ctx, t: number, look: number, open: number, drop: number): void {
+  g.save();
+  g.beginPath();
+  g.rect(WIN.x, WIN.y, WIN.w, WIN.h);
+  g.clip();
+  const oy = drop;
+  for (let y = 0; y < WIN.h; y += 1) {
+    g.fillStyle = mix('#e8a878', '#a8603a', y / WIN.h);
+    g.fillRect(WIN.x, WIN.y + y + oy, WIN.w, 1);
+  }
+  // Nose bridge + cheek shading.
+  for (let y = 40; y < WIN.h; y += 1) rect(g, 228 - (y - 40) * 0.15, WIN.y + y + oy, 6 + (y - 40) * 0.3, 1, '#c87a50');
+  rect(g, 236, WIN.y + 40 + oy, 2, WIN.h - 40, '#f0b890');
+  dither(g, WIN.x, WIN.y + 80 + oy, WIN.w, 30, '#d0705a', 0.25);
+  drawEye(g, 182, WIN.y + 58 + oy, t, look, open);
+  drawEye(g, 284, WIN.y + 58 + oy, t + 0.2, look, open);
+  g.restore();
+  // Mullions + glass glare over the face.
+  rect(g, WIN.x + WIN.w / 2 - 2, WIN.y, 4, WIN.h, '#2a160e');
+  rect(g, WIN.x, WIN.y + WIN.h / 2 - 2, WIN.w, 4, '#2a160e');
+  g.globalAlpha = 0.18;
+  for (let i = 0; i < 18; i += 1) rect(g, WIN.x + 20 + i, WIN.y + 4 + i * 3, 3, 3, '#ffffff');
+  g.globalAlpha = 1;
+}
+
+let redEdge: HTMLCanvasElement | null = null;
+function suspicionEdge(): HTMLCanvasElement {
+  if (redEdge) return redEdge;
+  redEdge = makeCanvas(VW, VH);
+  const g = ctx2d(redEdge);
+  for (let y = 0; y < VH; y += 1)
+    for (let x = 0; x < VW; x += 1) {
+      const d = Math.min(x, VW - 1 - x, y * 1.5, (VH - 1 - y) * 1.5) / 36;
+      if (d < 1 && bayer(x, y) > d) rect(g, x, y, 1, 1, '#c00a28');
+    }
+  return redEdge;
+}
+
+/** Giant work boot in side view; (x, y) = toe-left, sole bottom. */
+function drawBoot(g: Ctx, x: number, y: number): void {
+  const leather = '#6a3a24';
+  // Shaft rising out of frame.
+  rect(g, x + 48, y - 200, 52, 176, shift(leather, -0.4));
+  for (let r = 0; r < 12; r += 1) rect(g, x + 36 + r, y - 36 - r * 2, 12, 2, shift(leather, -0.2));
+  rect(g, x + 48, y - 200, 5, 176, shift(leather, 0.8));
+  rect(g, x + 92, y - 200, 8, 176, shift(leather, -1.4));
+  // Laces criss-cross on the front edge.
+  for (let ly = y - 190; ly < y - 34; ly += 10) {
+    rect(g, x + 50, ly, 3, 3, '#c8c0a8');
+    rect(g, x + 53, ly + 1, 10, 1, '#e8e0c8');
+    rect(g, x + 53, ly + 5, 10, 1, '#a89878');
+  }
+  // Foot: rounded toe cap.
+  for (let row = 0; row < 26; row += 1) {
+    const yy = y - 34 + row;
+    const inset = row < 16 ? Math.round((16 - Math.sqrt(256 - (16 - row) ** 2)) * 2.2) : 0;
+    g.fillStyle = row < 3 ? shift(leather, 0.9) : row > 20 ? shift(leather, -1) : leather;
+    g.fillRect(x + inset, yy, 102 - inset, 1);
+  }
+  rect(g, x + 10, y - 30, 14, 2, shift(leather, 1.4));
+  // Welt stitching + sole + tread.
+  rect(g, x - 2, y - 10, 106, 3, '#2a160e');
+  for (let i = 0; i < 104; i += 4) rect(g, x + i, y - 9, 2, 1, '#c8a070');
+  rect(g, x - 2, y - 7, 106, 7, '#1a1214');
+  rect(g, x + 66, y - 7, 36, 7, '#120c0e');
+  for (let i = 0; i < 104; i += 7) rect(g, x + i, y - 1, 4, 1, '#3a3036');
+}
+
+/** Giant hand reaching down from above (escape). */
+function drawHand(g: Ctx, x: number, y: number): void {
+  const skin = '#d89068';
+  rect(g, x - 26, y - 90, 52, 60, shift(skin, -0.3));
+  rect(g, x + 18, y - 90, 8, 60, shift(skin, -1.2));
+  const fingers = [-24, -11, 2, 15];
+  fingers.forEach((fx, i) => {
+    const len = 28 + (i === 1 || i === 2 ? 6 : 0);
+    rect(g, x + fx, y - 32, 11, len, skin);
+    rect(g, x + fx, y - 32, 2, len, shift(skin, 0.9));
+    rect(g, x + fx + 9, y - 32, 2, len, shift(skin, -1.2));
+    rect(g, x + fx + 2, y - 34 + len, 7, 3, '#f0c0a0');
+    rect(g, x + fx, y - 14 + (len - 28) / 2, 11, 1, shift(skin, -1));
+  });
+  rect(g, x - 34, y - 70, 10, 26, skin);
+  rect(g, x - 34, y - 70, 2, 26, shift(skin, 0.9));
 }
 
 /* ---------- scene ---------- */
@@ -277,15 +368,9 @@ function createScene(): GameScene<TinyState> {
           f.fx.addTrauma(0.12);
         }
         lastStomp = cyc;
-        const by = GROUND - 8 - h;
-        ellipse(g, 250, GROUND + 2, 40 - h * 0.3, 6 - h * 0.04, withAlpha('#000000', 0.5));
-        rect(g, 214, by - 120, 54, 110, '#3a2a3a');
-        rect(g, 214, by - 120, 6, 110, '#5a4a5a');
-        for (let y = by - 110; y < by - 20; y += 10) rect(g, 226, y, 30, 2, '#e8e0d0');
-        rect(g, 200, by - 24, 96, 18, '#2a1a20');
-        rect(g, 200, by - 24, 96, 3, '#5a4048');
-        rect(g, 196, by - 8, 104, 8, '#141014');
-        for (let x = 200; x < 296; x += 8) rect(g, x, by - 2, 4, 2, '#3a3038');
+        const by = Math.round(GROUND - h);
+        ellipse(g, 244, GROUND + 2, 52 - h * 0.3, 6 - h * 0.04, withAlpha('#000000', 0.5));
+        drawBoot(g, 196, by);
         // Combo + round track.
         const c = state.combat;
         for (let i = 0; i < c.maxRounds; i += 1) {
@@ -325,18 +410,19 @@ function createScene(): GameScene<TinyState> {
       }
 
       if (phase === 'discovery') {
-        const open = 1 - Math.max(0, Math.sin(t * 0.9 + 1) > 0.97 ? 1 : 0) * 0.95;
-        const peek = easeOutBack(Math.min(1, (f.t - spotT) / 0.6));
-        const ey = Math.round(70 - (1 - peek) * 80);
-        drawEye(g, 270, ey, t, (heroX - 270) / 140, open);
+        const blink = Math.sin(t * 0.9 + 1) > 0.97 ? 0.08 : 1;
+        const peek = easeOutBack(Math.min(1, (f.t - spotT) / 0.7));
+        drawFace(g, t, (heroX - 230) / 140, blink, Math.round((1 - peek) * 110));
       }
 
       if (phase === 'escape' && state.escape) {
         // A giant hand's shadow sweeps in.
         const e = state.escape;
         const reach = 1 - e.beatsLeft / Math.max(1, e.beatsLeft + e.progress + 1);
-        const sx = 300 - reach * 120 + Math.sin(t * 2) * 8;
-        ellipse(g, sx, GROUND + 2, 50, 8, withAlpha('#000000', 0.35 + 0.15 * Math.sin(t * 4)));
+        const sx = Math.round(300 - reach * 110 + Math.sin(t * 2) * 8);
+        const hy = Math.round(60 + reach * 40 + Math.sin(t * 3) * 6);
+        ellipse(g, sx, GROUND + 2, 44, 7, withAlpha('#000000', 0.3 + reach * 0.25));
+        drawHand(g, sx, hy);
         for (let i = 0; i < e.need; i += 1) {
           const done = i < e.progress;
           rect(g, 150 + i * 12, 34, 10, 5, done ? '#7cf0a0' : '#2a3a3a');
@@ -379,14 +465,11 @@ function createScene(): GameScene<TinyState> {
         rect(g, 230 - w / 2, 140, w, 1, '#ff5d73');
         drawText(g, name, 230, 127, { color: '#ffe0e8', align: 'center', outline: null });
       }
-      // Exposure creeps in as a red edge.
+      // Exposure creeps in as a red dithered edge.
       if (state.suspicion >= 5) {
-        const a = (state.suspicion - 4) / 6;
-        for (let y = 0; y < VH; y += 2)
-          for (let x = 0; x < VW; x += 2) {
-            const edge = Math.min(x, VW - x, y * 1.6, (VH - y) * 1.6) / 40;
-            if (edge < 1 && bayer(x >> 1, y >> 1) > edge + 0.4 - a * 0.4) rect(g, x, y, 2, 2, withAlpha('#ff1030', 0.25));
-          }
+        g.globalAlpha = Math.min(0.55, (state.suspicion - 4) * 0.09) * (0.85 + 0.15 * Math.sin(t * 3));
+        g.drawImage(suspicionEdge(), 0, 0);
+        g.globalAlpha = 1;
       }
     },
     react(f, o) {
