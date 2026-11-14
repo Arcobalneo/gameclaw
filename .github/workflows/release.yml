@@ -38,14 +38,11 @@ jobs:
         run: GAMECLAW_BASE=/gameclaw/ pnpm --filter @gameclaw/web build
 
       - name: Publish notes-only GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "${GITHUB_REF_NAME}" --generate-notes --notes "$(cat <<'MD'
-Play at https://arcobalneo.github.io/gameclaw/
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            Play at https://arcobalneo.github.io/gameclaw/
 
-This tag records a web release. There are no CLI binaries. The site (`gh-pages`)
-and the relay (`wrangler deploy`) are published separately; see
-`docs/release-flow.md`.
-MD
-)"
+            This tag records a web release. There are no CLI binaries.
+            The site and the relay are published separately; see `docs/release-flow.md`.
