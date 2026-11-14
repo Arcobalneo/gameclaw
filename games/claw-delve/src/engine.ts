@@ -168,19 +168,23 @@ export function statusOf(state: DelveState): StatusView {
 export function actionsOf(state: DelveState): ActionView[] {
   if (state.outcome !== 'ongoing') return [];
   const actions: ActionView[] = [];
+  const ore = state.oreCol[state.layer] ?? -1;
+  const oreLeft = ore >= 0 && !state.mined[state.layer];
   if (state.col > 0) {
+    const hits = oreLeft && ore === state.col - 1;
     actions.push({
       id: 'shift:-1',
       label: '向左',
-      detail: '在这一层向左挖开一格。横挖不会塌。',
+      detail: hits ? '向左一格有矿。横挖不会塌。' : '在这一层向左挖开一格。横挖不会塌。',
       risk: 'low',
     });
   }
   if (state.col < 2) {
+    const hits = oreLeft && ore === state.col + 1;
     actions.push({
       id: 'shift:1',
       label: '向右',
-      detail: '在这一层向右挖开一格。横挖不会塌。',
+      detail: hits ? '向右一格有矿。横挖不会塌。' : '在这一层向右挖开一格。横挖不会塌。',
       risk: 'low',
     });
   }

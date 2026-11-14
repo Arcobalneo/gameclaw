@@ -16,7 +16,7 @@ Ore×20 + depth×15 − falls×50. Filling the quota adds 300. One fall costs mo
 
 ## 动作
 
-`shift:-1` 向左。`shift:1` 向右。横挖只在这一层。`brace` 给这一层撑。`cut` 下挖。离开没撑的层会塌一次。
+`shift:-1` 向左。`shift:1` 向右。横挖只在这一层，旁边那格有矿时动作说明会写出来。`brace` 给这一层撑。`cut` 下挖。离开没撑的层会塌一次。
 
 ## 状态
 

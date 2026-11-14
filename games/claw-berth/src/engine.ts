@@ -74,7 +74,7 @@ function rules(difficulty: Difficulty): {
 function drawShip(rng: Rng): Ship {
   return {
     draft: rng.int(1, 3),
-    hazard: rng.int(1, 100) <= 30,
+    hazard: rng.int(1, 100) <= 50,
     value: rng.int(2, 5),
     patience: rng.int(3, 5),
   };
@@ -262,7 +262,7 @@ export function act(state: BerthState, actionId: string): ActionResult {
   if (actionId.startsWith('dock:') || actionId.startsWith('tug:')) {
     const index = Number(actionId.slice(actionId.indexOf(':') + 1));
     if (actionId.startsWith('tug:')) state.tugs -= 1;
-    state.berths[index] = { left: 2, value: state.current.value, hazard: state.current.hazard };
+    state.berths[index] = { left: 4, value: state.current.value, hazard: state.current.hazard };
     if (hazardTouch(state, index)) state.incidents += 1;
     log.push(`船靠上 ${index + 1} 号泊位。`);
     arrive(state, rng);

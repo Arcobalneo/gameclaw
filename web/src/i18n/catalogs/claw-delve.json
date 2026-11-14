@@ -16,6 +16,8 @@
     "下挖": "Dig down",
     "支撑": "Brace",
     "在这一层向左挖开一格。横挖不会塌。": "Dig one cell left on this layer. Sideways digging does not collapse.",
+    "向左一格有矿。横挖不会塌。": "The cell to the left has ore. Sideways digging does not collapse.",
+    "向右一格有矿。横挖不会塌。": "The cell to the right has ore. Sideways digging does not collapse.",
     "在这一层向右挖开一格。横挖不会塌。": "Dig one cell right on this layer. Sideways digging does not collapse.",
     "离开这一层。没有支撑，井会塌一次。": "Leave this layer. With no brace, the shaft falls once.",
     "这一层有支撑，下挖不会塌。": "This layer is braced. Digging down does not collapse it.",
