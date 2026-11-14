@@ -161,11 +161,7 @@ export class GameHost {
   }
 
   /** Never throws: converts engine errors into an agent-readable payload. */
-  // biome-ignore lint/suspicious/noExplicitAny: game-specific state
-  tryAct(
-    actionId: string,
-    source: ActSource,
-  ): { ok: true; outcome: MemoryActOutcome<any> } | ActError {
+  tryAct(actionId: string, source: ActSource): { ok: true; outcome: AnyOutcome } | ActError {
     try {
       return { ok: true, outcome: this.act(actionId, source) };
     } catch (error) {

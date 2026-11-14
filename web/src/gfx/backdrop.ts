@@ -184,19 +184,20 @@ export function godRays(g: Ctx, t: number, color: string, count = 4, alpha = 0.0
 
 let vignetteCanvas: HTMLCanvasElement | null = null;
 
-/** Dithered dark vignette, cached once. */
+/** Soft, posterised edge darkening (cached). Never dithers over UI. */
 export function vignette(g: Ctx, strength = 1): void {
   if (!vignetteCanvas) {
     vignetteCanvas = makeCanvas(VW, VH);
     const vg = ctx2d(vignetteCanvas);
-    vg.fillStyle = '#04020a';
-    for (let y = 0; y < VH; y += 1)
-      for (let x = 0; x < VW; x += 1) {
+    for (let y = 0; y < VH; y += 2)
+      for (let x = 0; x < VW; x += 2) {
         const dx = (x - VW / 2) / (VW / 2);
         const dy = (y - VH / 2) / (VH / 2);
-        const d = Math.sqrt(dx * dx * 0.8 + dy * dy * 1.1);
-        const a = Math.max(0, d - 0.62) * 1.4;
-        if (bayer(x, y) < a) vg.fillRect(x, y, 1, 1);
+        const d = Math.sqrt(dx * dx * 0.7 + dy * dy * 0.9);
+        const a = Math.max(0, d - 0.7) * 1.1;
+        if (a <= 0) continue;
+        vg.fillStyle = `rgba(4,2,10,${(Math.round(Math.min(0.42, a) * 12) / 12).toFixed(3)})`;
+        vg.fillRect(x, y, 2, 2);
       }
   }
   g.globalAlpha = strength;

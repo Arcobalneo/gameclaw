@@ -1,17 +1,7 @@
 import type { ActionView, Metric, StatusView } from '@gameclaw/gamekit';
 import { vignette } from '../gfx/backdrop';
 import { Fx, glow } from '../gfx/fx';
-import {
-  type Ctx,
-  ctx2d,
-  makeCanvas,
-  metricNumber,
-  panel,
-  rect,
-  VH,
-  VW,
-  withAlpha,
-} from '../gfx/pixel';
+import { type Ctx, ctx2d, makeCanvas, metricNumber, rect, VH, VW, withAlpha } from '../gfx/pixel';
 import type { Frame, GameScene, HitRegion } from '../gfx/scene';
 import { drawText, fitText, isFontReady, textWidth } from '../gfx/text';
 import type { GameHost, HostEvent } from '../runtime/host';
@@ -283,9 +273,13 @@ export class Stage {
     });
     if (this.#agentPulse > 0) {
       const a = Math.min(1, this.#agentPulse);
-      panel(g, VW - 64, 19, 60, 15, '#2a0f3f', '#b28dff');
-      glow(g, VW - 34, 26, 20, '#b28dff', 0.3 * a);
-      drawText(g, 'AGENT ▶', VW - 34, 21, { color: '#f0e0ff', align: 'center', alpha: a });
+      rect(g, VW - 74, VH - 14, 74, 14, withAlpha('#2a0f3f', 0.95));
+      glow(g, VW - 37, VH - 7, 24, '#b28dff', 0.35 * a);
+      drawText(g, 'AGENT 操作中', VW - 37, VH - 13, {
+        color: '#f0e0ff',
+        align: 'center',
+        outline: null,
+      });
     }
   }
 
