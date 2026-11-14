@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Played `虾印`, `虾熔`, `虾网`, `虾节`, `虾数`, `虾罩`, `虾钟`, and `虾拨`.
+  Clock looks two plies further. Mask shows a moving visor and a pulsing
+  flood. Count and flip shake when you fall.
 - Added four games: `虾灯 (Claw Lamp)`, `虾筏 (Claw Raft)`, `虾仓 (Claw Stow)`,
   and `虾镜 (Claw Glass)`. Lamp lights pools that must not see each other.
   Raft balances three holds against a known gust. Stow pulls the bay a slip

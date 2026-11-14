@@ -54,8 +54,19 @@ function createScene(): GameScene<FlipState> {
       });
     },
     react(f, outcome) {
-      if (outcome.events.some((event) => event.type === 'flip')) f.cue('whoosh');
-      if (outcome.result.log.some((line) => line.includes('踩伤'))) f.cue('bad');
+      if (outcome.events.some((event) => event.type === 'flip')) {
+        f.cue('whoosh');
+        f.fx.burst(192, 140, {
+          count: 8,
+          colors: ['#ffc24a', '#7ec8ff'],
+          speed: 24,
+          life: 0.3,
+        });
+      }
+      if (outcome.result.log.some((line) => line.includes('踩伤'))) {
+        f.cue('bad');
+        f.fx.addTrauma(0.3);
+      }
     },
   };
 }
