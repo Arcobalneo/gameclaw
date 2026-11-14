@@ -1,4 +1,5 @@
-import { findGame, GAMES } from '../catalog';
+import { findGame, GAMES, gameName } from '../catalog';
+import { lang, onLang, t } from '../i18n';
 import type { PortalController } from '../runtime/agent-api';
 import { type GameHost, getHost } from '../runtime/host';
 import { clear, h } from './dom';
@@ -19,47 +20,71 @@ export class Portal implements PortalController {
   readonly #body: HTMLElement;
   readonly #title: HTMLElement;
   readonly #loading: HTMLElement;
+  readonly #loadingText: HTMLElement;
+  readonly #muteBtn: HTMLButtonElement;
   #lastFocus: Element | null = null;
   webmcpMode = 'pending';
   onVisibilityChange: ((open: boolean) => void) | null = null;
 
+  readonly #btns: { label: () => string; el: HTMLButtonElement }[] = [];
+
   constructor(mount: HTMLElement) {
-    this.#tabs = h('nav', { class: 'pw-tabs', 'aria-label': '已打开的游戏' });
+    this.#tabs = h('nav', { class: 'pw-tabs' });
     this.#title = h('h2', { class: 'pw-title', id: 'pw-title' });
     this.#body = h('div', { class: 'pw-body' });
+    this.#loadingText = h('span', {});
     this.#loading = h(
       'div',
       { class: 'pw-loading', hidden: true },
       h('span', { class: 'spinner' }),
-      '载入中 · Loading',
+      this.#loadingText,
     );
-    const muteBtn = h(
-      'button',
-      { type: 'button', class: 'px-icon', title: '音效 (M)', 'aria-label': '切换音效' },
-      isMuted() ? '♪×' : '♪',
+    const tool = (icon: string, label: () => string, key: string, fn: () => void, cls = '') => {
+      const el = h('button', { type: 'button', class: `px-icon ${cls}`.trim() }, icon);
+      el.addEventListener('click', () => {
+        sfx('press');
+        fn();
+      });
+      this.#btns.push({ label: () => `${label()} (${key})`, el });
+      return el;
+    };
+    const muteBtn = tool(
+      isMuted() ? '♪̸' : '♪',
+      () => t('win.sound'),
+      'M',
+      () => {
+        setMuted(!isMuted());
+        muteBtn.textContent = isMuted() ? '♪̸' : '♪';
+        muteBtn.classList.toggle('is-off', isMuted());
+      },
     );
-    muteBtn.addEventListener('click', () => {
-      setMuted(!isMuted());
-      muteBtn.textContent = isMuted() ? '♪×' : '♪';
-    });
-    const newBtn = h(
-      'button',
-      { type: 'button', class: 'px-icon', title: '新局 (N)', 'aria-label': '开始新局' },
+    muteBtn.classList.toggle('is-off', isMuted());
+    this.#muteBtn = muteBtn;
+    const newBtn = tool(
       '↻',
+      () => t('win.new'),
+      'N',
+      () => this.#newRun(),
     );
-    newBtn.addEventListener('click', () => this.#newRun());
-    const fsBtn = h(
-      'button',
-      { type: 'button', class: 'px-icon', title: '全屏 (F)', 'aria-label': '全屏' },
+    const helpBtn = tool(
+      '?',
+      () => t('win.help'),
+      'H',
+      () => this.#toggleHelp(),
+    );
+    const fsBtn = tool(
       '⛶',
+      () => t('win.fullscreen'),
+      'F',
+      () => this.#toggleFullscreen(),
     );
-    fsBtn.addEventListener('click', () => this.#toggleFullscreen());
-    const closeBtn = h(
-      'button',
-      { type: 'button', class: 'px-icon px-close', title: '关闭 (Esc)', 'aria-label': '关闭窗口' },
+    const closeBtn = tool(
       '✕',
+      () => t('win.close'),
+      'Esc',
+      () => this.close(),
+      'px-close',
     );
-    closeBtn.addEventListener('click', () => this.close());
     this.#frame = h(
       'div',
       { class: 'pw-backdrop', hidden: true },
@@ -69,16 +94,9 @@ export class Portal implements PortalController {
         h(
           'header',
           { class: 'pw-bar' },
-          h(
-            'span',
-            { class: 'pw-dots', 'aria-hidden': 'true' },
-            h('i', {}),
-            h('i', {}),
-            h('i', {}),
-          ),
           this.#title,
           this.#tabs,
-          h('div', { class: 'pw-tools' }, newBtn, muteBtn, fsBtn, closeBtn),
+          h('div', { class: 'pw-tools' }, newBtn, helpBtn, muteBtn, fsBtn, closeBtn),
         ),
         this.#body,
         this.#loading,
@@ -89,6 +107,23 @@ export class Portal implements PortalController {
     });
     mount.append(this.#frame);
     document.addEventListener('keydown', (e) => this.#onKey(e));
+    this.#applyLang();
+    onLang(() => this.#applyLang());
+  }
+
+  #applyLang(): void {
+    for (const b of this.#btns) {
+      b.el.title = b.label();
+      b.el.setAttribute('aria-label', b.label());
+    }
+    this.#tabs.setAttribute('aria-label', t('win.tabs'));
+    this.#loadingText.textContent = t('win.loading');
+    if (this.#focused) this.#focus(this.#focused);
+  }
+
+  #toggleHelp(): void {
+    const view = this.#focused ? this.#views.get(this.#focused) : null;
+    view?.toggleHelp();
   }
 
   focused(): string | null {
@@ -113,7 +148,7 @@ export class Portal implements PortalController {
       this.#show();
       this.#loading.hidden = false;
       p = getHost(id).then((host) => {
-        const view = new GameView(entry, host, this.webmcpMode);
+        const view = new GameView(entry, host);
         view.onRequestNew = () => this.#newRun();
         this.#views.set(id, view);
         this.#body.append(view.root);
@@ -144,6 +179,10 @@ export class Portal implements PortalController {
     } else this.#renderTabs();
   }
 
+  closeAll(): void {
+    for (const id of [...this.#views.keys()]) this.close(id);
+  }
+
   #focus(id: string): void {
     for (const [vid, view] of this.#views) {
       const active = vid === id;
@@ -153,12 +192,12 @@ export class Portal implements PortalController {
     }
     this.#focused = id;
     const entry = findGame(id)!;
-    this.#title.textContent = `${entry.name} · ${entry.englishName}`;
+    this.#title.textContent = gameName(entry, lang());
     this.#frame.style.setProperty('--accent', entry.accent);
     this.#renderTabs();
     const hash = `#/play/${id}`;
     if (location.hash !== hash) history.replaceState(null, '', hash);
-    document.title = `${entry.name} ${entry.englishName} · GameClaw`;
+    document.title = `${gameName(entry, lang())} · GameClaw`;
   }
 
   #renderTabs(): void {
@@ -172,12 +211,16 @@ export class Portal implements PortalController {
           class: `pw-tab${id === this.#focused ? ' is-active' : ''}`,
           style: `--accent:${entry.accent}`,
         },
-        entry.name,
+        gameName(entry, lang()),
       );
       tab.addEventListener('click', () => this.#focus(id));
       const x = h(
         'span',
-        { class: 'pw-tab-x', role: 'button', 'aria-label': `关闭 ${entry.name}` },
+        {
+          class: 'pw-tab-x',
+          role: 'button',
+          'aria-label': t('win.closeGame', { name: gameName(entry, lang()) }),
+        },
         '×',
       );
       x.addEventListener('click', (e) => {
@@ -201,7 +244,7 @@ export class Portal implements PortalController {
     this.#focused = null;
     document.body.classList.remove('has-window');
     history.replaceState(null, '', '#/');
-    document.title = 'GameClaw · 虾系游戏厅 — 人与 Agent 同玩';
+    document.title = t('site.title');
     this.onVisibilityChange?.(false);
     if (this.#lastFocus instanceof HTMLElement) this.#lastFocus.focus();
   }
@@ -233,6 +276,10 @@ export class Portal implements PortalController {
     if (!view) return;
     if (e.key === 'Escape') {
       if (document.fullscreenElement) return;
+      if (view.closeHelp()) {
+        e.preventDefault();
+        return;
+      }
       this.close();
       e.preventDefault();
       return;
@@ -247,8 +294,15 @@ export class Portal implements PortalController {
       e.preventDefault();
       return;
     }
+    if (e.key === 'h' || e.key === 'H' || e.key === '?') {
+      this.#toggleHelp();
+      e.preventDefault();
+      return;
+    }
     if (e.key === 'm' || e.key === 'M') {
       setMuted(!isMuted());
+      this.#muteBtn.textContent = isMuted() ? '♪̸' : '♪';
+      this.#muteBtn.classList.toggle('is-off', isMuted());
       e.preventDefault();
       return;
     }

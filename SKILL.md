@@ -1,7 +1,7 @@
 ---
 name: gameclaw
 description: "Install, update, and launch GameClaw terminal games. Use when a user asks which GameClaw games exist, wants to download or update a GameClaw game binary, needs the correct macOS/Linux/Windows asset, or hits a GitHub network failure while fetching game bundles. Look up the live game list from the latest GitHub Release and catalog/games.json; this skill does not contain that list."
-version: 3.0.0
+version: 3.1.0
 ---
 
 # GameClaw

@@ -51,7 +51,7 @@ describe('agent api', () => {
     },
     focused: () => focused,
   };
-  const api = createApi(portal, '3.0.0');
+  const api = createApi(portal, '3.1.0');
 
   it('lists all games', async () => {
     const res = (await api.listGames()) as { games: { id: string }[] };
@@ -102,13 +102,18 @@ describe('agent api', () => {
 });
 
 describe('prompt', () => {
-  it('is bilingual and points at the game url and tools', () => {
+  it('is single-language and points at the game url and tools', () => {
     const game = GAMES[0]!;
-    const text = buildPrompt(game, ['先看状态']);
-    expect(text).toContain(`#/play/${game.id}`);
-    expect(text).toContain('list_actions');
-    expect(text).toMatch(/[\u4e00-\u9fff]/);
-    expect(text).toMatch(/Play|play/);
-    expect(text).toContain('window.gameclaw');
+    const zh = buildPrompt(game, ['先看状态'], 'zh');
+    const en = buildPrompt(game, [], 'en');
+    for (const text of [zh, en]) {
+      expect(text).toContain(`#/play/${game.id}`);
+      expect(text).toContain('list_actions');
+      expect(text).toContain('gameclaw.newGame');
+    }
+    expect(zh).toMatch(/[\u4e00-\u9fff]/);
+    expect(zh).not.toMatch(/\bPlay\b/);
+    expect(en).not.toMatch(/[\u3400-\u9fff]/);
+    expect(en).toMatch(/^Play /);
   });
 });

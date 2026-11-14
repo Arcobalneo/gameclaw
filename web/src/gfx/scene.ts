@@ -1,4 +1,5 @@
 import type { ActionView, GameDefinition, MemoryActOutcome, StatusView } from '@gameclaw/gamekit';
+import type { Grade } from './art';
 import type { Fx } from './fx';
 import type { Ctx } from './pixel';
 
@@ -17,6 +18,14 @@ export interface Frame<S> {
   /** Seconds since the last act / new game. Handy for tween timing. */
   since: number;
   turn: number;
+  /** UI language; in-canvas copy must follow it. */
+  lang: 'zh' | 'en';
+  /** Cover capture: suppress every language-specific in-canvas string. */
+  quiet?: boolean;
+  /** Translate a short engine string (names, labels) into `lang`. */
+  term(text: string): string;
+  /** Play a sound cue in sync with an impact. */
+  cue(name: 'hit' | 'heavy' | 'whoosh' | 'coin' | 'splash' | 'land' | 'good' | 'bad'): void;
 }
 
 /** Clickable region inside the 384×216 buffer that triggers an action. */
@@ -29,6 +38,8 @@ export interface HitRegion {
 }
 
 export interface GameScene<S> {
+  /** Colour grade + bloom for this frame (art bible post pass). */
+  grade?(state: S): Grade;
   /** Paint the world (backdrop, actors, in-world HUD). Called every frame. */
   draw(f: Frame<S>): void;
   /** In-world HUD text drawn after the vignette so it stays readable. */
@@ -52,3 +63,14 @@ export interface GameModule<S = unknown> {
 /** Erases the state type at the registry boundary. */
 // biome-ignore lint/suspicious/noExplicitAny: registry stores heterogeneous game modules
 export type AnyGameModule = GameModule<any>;
+
+const CJK_RE = /[\u3400-\u9fff]/;
+/** Engine text in the UI language, or '' when it cannot be shown without mixing languages. */
+export function say(
+  f: { lang: 'zh' | 'en'; quiet?: boolean; term(text: string): string },
+  text: string,
+): string {
+  if (f.quiet) return '';
+  const out = f.term(text);
+  return f.lang === 'zh' || !CJK_RE.test(out) ? out : '';
+}

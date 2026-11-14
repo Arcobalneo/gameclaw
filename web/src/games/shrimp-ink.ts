@@ -1,12 +1,26 @@
 import { SITES, type SiteId } from '@games/shrimp-ink/src/content';
 import { definition } from '@games/shrimp-ink/src/definition';
 import type { InkState } from '@games/shrimp-ink/src/engine';
-import { fog, ridge, sky } from '../gfx/backdrop';
+import type { Grade } from '../gfx/art';
+import { ridge, sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { bar, type Ctx, disc, easeInOut, mix, rect, VH, VW, withAlpha } from '../gfx/pixel';
-import type { GameModule, GameScene, HitRegion } from '../gfx/scene';
-import { buildSprite, HERO, SCROLL } from '../gfx/sprites';
+import {
+  type Ctx,
+  ctx2d,
+  disc,
+  dither,
+  easeInOut,
+  hash01,
+  makeCanvas,
+  rect,
+  VH,
+  VW,
+  withAlpha,
+} from '../gfx/pixel';
+import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
+import { buildSprite, HERO } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, shadow } from '../gfx/world';
 
 const POS: Record<SiteId, { x: number; y: number }> = {
@@ -69,6 +83,67 @@ function drawSiteIcon(g: Ctx, id: SiteId, x: number, y: number, t: number): void
   }
 }
 
+let paper: HTMLCanvasElement | null = null;
+
+/** Ink-wash landscape on rice paper, painted once: layered mountains fading into mist, a river. */
+function paperMap(): HTMLCanvasElement {
+  if (paper) return paper;
+  const c = makeCanvas(VW, VH);
+  const g = ctx2d(c);
+  sky(g, ['#f2e8cc', '#ebdfbe', '#dfd0a8'], 0, VH, 6);
+  // Paper fibres.
+  for (let i = 0; i < 900; i += 1)
+    rect(
+      g,
+      hash01(i, 1) * VW,
+      hash01(i, 2) * VH,
+      1 + (i % 3),
+      1,
+      withAlpha('#b8a478', 0.12 + hash01(i, 3) * 0.1),
+    );
+  // Mountain layers: light far wash → dark near strokes, with mist bands between.
+  const layers: [number, number, number, string, string][] = [
+    [3, 64, 48, '#cbbd9a', 'hills'],
+    [8, 92, 44, '#a89a7a', 'hills'],
+    [13, 122, 30, '#7a6e56', 'hills'],
+  ];
+  for (const [seed, base, amp, color, kind] of layers) {
+    ridge(g, { seed, base, amp, color, kind: kind as 'hills' }, 0);
+    for (let y = base - 6; y < base + 14; y += 1) {
+      g.fillStyle = withAlpha('#f2e8cc', Math.min(0.85, (y - base + 6) / 20));
+      g.fillRect(0, y, VW, 1);
+    }
+  }
+  // Pines on the near ridge (dry-brush dots).
+  for (let i = 0; i < 18; i += 1) {
+    const x = 10 + i * 21 + hash01(i, 5) * 8;
+    const y = 128 + hash01(i, 6) * 18;
+    for (let k = 0; k < 5; k += 1)
+      rect(g, x - k, y + k * 2, k * 2 + 1, 1, withAlpha('#2a2418', 0.55));
+    rect(g, x, y + 10, 1, 4, withAlpha('#2a2418', 0.6));
+  }
+  // River winding across the lower map.
+  for (let x = 0; x < VW; x += 1) {
+    const y = 186 + Math.sin(x * 0.03) * 8 + Math.sin(x * 0.011 + 1) * 6;
+    rect(g, x, y, 1, 7, withAlpha('#5a6a72', 0.35));
+    rect(g, x, y, 1, 1, withAlpha('#3a4a52', 0.5));
+  }
+  dither(g, 0, 150, VW, VH - 150, '#8a7a5a', 0.08);
+  paper = c;
+  return c;
+}
+
+function seal(g: Ctx, x: number, y: number, zh: boolean): void {
+  rect(g, x, y, 22, 22, '#b02a1e');
+  rect(g, x + 1, y + 1, 20, 1, '#d04a3a');
+  dither(g, x, y, 22, 22, '#e8d8b0', 0.12);
+  if (zh) return;
+  // Abstract carved glyph for EN.
+  rect(g, x + 5, y + 5, 12, 2, '#f4e0c0');
+  rect(g, x + 10, y + 5, 2, 12, '#f4e0c0');
+  rect(g, x + 5, y + 15, 12, 2, '#f4e0c0');
+}
+
 function createScene(): GameScene<InkState> {
   let from: SiteId | null = null;
   let travelT = -10;
@@ -88,16 +163,10 @@ function createScene(): GameScene<InkState> {
     },
     draw(f) {
       const { g, t, state } = f;
-      sky(g, ['#efe4c8', '#e2d4b0', '#cdbb92'], 0, VH, 8);
-      ridge(g, { seed: 3, base: 70, amp: 46, color: '#b8a888', kind: 'hills' }, t * 0.8);
-      fog(g, t, 54, 24, '#f4ecd6', 0.4, 2);
-      ridge(g, { seed: 8, base: 104, amp: 40, color: '#8a7c62', kind: 'hills' }, t * 1.4);
-      fog(g, t, 92, 22, '#efe4c8', 0.35, 3);
-      ridge(g, { seed: 13, base: 150, amp: 30, color: '#5e5440', kind: 'trees', scale: 10 }, t * 2);
-      rect(g, 0, 150, VW, VH - 150, '#4a4232');
-      // Paper grain + red seal.
-      rect(g, VW - 40, 22, 22, 22, '#b02a1e');
-      drawText(g, '墨', VW - 29, 26, { color: '#f4e0c0', outline: null, align: 'center' });
+      g.drawImage(paperMap(), 0, 0);
+      seal(g, VW - 40, 12, f.lang === 'zh');
+      if (f.lang === 'zh')
+        drawText(g, '墨', VW - 29, 16, { color: '#f4e0c0', outline: null, align: 'center' });
       // Roads.
       g.strokeStyle = withAlpha('#2a2014', 0.6);
       g.setLineDash([3, 3]);
@@ -115,14 +184,20 @@ function createScene(): GameScene<InkState> {
         const visited = state.visited.includes(id);
         if (focus) glow(g, p.x, p.y - 8, 26, '#ffe9a0', 0.5);
         drawSiteIcon(g, id, p.x, p.y, t);
-        drawText(g, SITES[id].name, p.x, p.y + 4, {
-          color: focus ? '#8a2a1a' : visited ? '#2a2014' : '#6a5a44',
-          outline: '#efe4c8',
-          align: 'center',
-        });
+        const nm = say(f, SITES[id].name);
+        if (nm)
+          drawText(g, nm, p.x, p.y + 4, {
+            color: focus ? '#8a2a1a' : visited ? '#2a2014' : '#6a5a44',
+            outline: '#efe4c8',
+            align: 'center',
+          });
         if (state.lead?.site === id) {
           const bob = Math.round(Math.sin(t * 4) * 2);
-          drawText(g, '?', p.x + 14, p.y - 28 + bob, { color: '#b02a1e', outline: '#efe4c8' });
+          tiny(g, '?', p.x + 14, p.y - 28 + bob, {
+            color: '#b02a1e',
+            outline: '#efe4c8',
+            scale: 2,
+          });
         }
       }
       // Scholar travelling.
@@ -131,6 +206,7 @@ function createScene(): GameScene<InkState> {
       const k = easeInOut(Math.min(1, (t - travelT) / 0.8));
       const hx = src.x + (to.x - src.x) * k;
       const hy = src.y + (to.y - src.y) * k - 10;
+      if (k < 1 && Math.floor(t * 10) % 2 === 0) f.fx.ink(hx, hy + 10, '#2a2014', 1);
       shadow(g, hx, hy + 10, 12);
       const digging = t - digT < 0.8;
       blit(
@@ -141,48 +217,41 @@ function createScene(): GameScene<InkState> {
           10 -
           (k < 1 ? Math.abs(Math.sin(t * 14)) * 2 : 0) -
           (digging ? Math.abs(Math.sin(t * 20)) * 2 : 0),
-        { anchor: 'bc' },
+        { anchor: 'bc', scale: 2 },
       );
       // Ink drops drifting.
       if (Math.random() < 0.08)
         f.fx.mote(Math.random() * VW, -2, 0, 10 + Math.random() * 6, '#2a2014', 8, 1, false);
     },
-    hud(f) {
-      const { g, state } = f;
-      blit(g, buildSprite(SCROLL), 8, 22, { scale: 2 });
-      drawText(g, `书稿 ${state.manuscript}`, 32, 24, { color: '#2a2014', outline: '#efe4c8' });
-      drawText(g, `第 ${state.turn + 1}/${state.maxTurns} 幕`, VW / 2, 20, {
-        color: '#2a2014',
-        outline: '#efe4c8',
-        align: 'center',
-      });
-      const stats: [string, number, number, string][] = [
-        ['信', state.belief, 100, '#8a2a1a'],
-        ['命', state.life, 6, '#b02a1e'],
-        ['粮', state.food, 8, '#6a5a2a'],
-      ];
-      stats.forEach(([label, v, max, color], i) => {
-        drawText(g, label, 8, 44 + i * 12, { color, outline: '#efe4c8' });
-        bar(g, 22, 49 + i * 12, 50, 3, v / max, color, mix('#cdbb92', '#000000', 0.2));
-      });
-    },
+    grade: (): Grade => ({
+      top: '#fff4d8',
+      bottom: '#5a4a30',
+      strength: 0.14,
+      bloom: 0.2,
+      vignette: 0.35,
+    }),
     react(f, o) {
       const prev = o.previous as InkState;
       if (prev.location !== o.state.location) {
         from = prev.location;
         travelT = f.t;
+        f.cue('whoosh');
       }
       if (o.action.id === 'dig' || o.action.id === 'investigate') {
         digT = f.t;
         const p = POS[o.state.location];
-        f.fx.burst(p.x, p.y, { count: 18, colors: ['#2a2014', '#5e5440'], speed: 60, glow: false });
+        f.fx.ink(p.x, p.y, '#2a2014', 16);
+        f.fx.dust(p.x, p.y, '#8a7a5a', 8);
+        f.cue('land');
       }
       if (o.state.manuscript > prev.manuscript) {
-        f.fx.burst(40, 40, { count: 30, colors: ['#b02a1e', '#2a2014'], speed: 80, glow: false });
-        f.fx.float(60, 60, '落笔!', '#b02a1e');
+        f.fx.ink(VW - 29, 34, '#b02a1e', 24);
+        f.fx.impact(1);
+        f.fx.float(VW - 29, 52, '+1', '#b02a1e', 1.1, true);
+        f.cue('heavy');
       }
       if (o.state.proof > prev.proof)
-        f.fx.float(POS[o.state.location].x, POS[o.state.location].y - 30, '证 +', '#8a2a1a');
+        f.fx.float(POS[o.state.location].x, POS[o.state.location].y - 30, '+', '#8a2a1a', 1, true);
     },
   };
 }

@@ -1,21 +1,24 @@
 import { definition } from '@games/shrimp-look/src/definition';
 import type { LookState } from '@games/shrimp-look/src/model';
+import { type Grade, LightMask } from '../gfx/art';
 import { glow } from '../gfx/fx';
 import {
-  bar,
   type Ctx,
+  ctx2d,
   dither,
   hash01,
   hashString,
+  makeCanvas,
   mix,
   rect,
   VH,
   VW,
   withAlpha,
 } from '../gfx/pixel';
-import type { GameModule, GameScene, HitRegion } from '../gfx/scene';
+import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, GHOST } from '../gfx/sprites';
 import { drawText, fitText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, plate } from '../gfx/world';
 
 const WALL_TOP = 30;
@@ -44,41 +47,88 @@ function propsOf(actions: readonly { id: string; label: string }[]): Prop[] {
   return props;
 }
 
-function drawRoom(g: Ctx, seed: number, dread: number, t: number): void {
-  const wall = mix('#1a1a34', '#2a0a14', Math.min(1, dread / 10));
+const L = 64;
+const R = VW - 64;
+const roomCache = new Map<string, HTMLCanvasElement>();
+
+function poly(g: Ctx, pts: number[], color: string): void {
+  g.fillStyle = color;
+  g.beginPath();
+  g.moveTo(pts[0]!, pts[1]!);
+  for (let i = 2; i < pts.length; i += 2) g.lineTo(pts[i]!, pts[i + 1]!);
+  g.closePath();
+  g.fill();
+}
+
+/** One-point-perspective room, cached per room seed and dread band. */
+function roomCanvas(seed: number, dread: number): HTMLCanvasElement {
+  const band = Math.min(3, Math.floor(dread / 3));
+  const key = `${seed}:${band}`;
+  const hit = roomCache.get(key);
+  if (hit) return hit;
+  const c = makeCanvas(VW, VH);
+  const g = ctx2d(c);
+  const wall = mix(['#2a2a44', '#2e2440', '#32203a', '#381a2a'][band]!, '#1a1a2a', 0.2);
   rect(g, 0, 0, VW, VH, '#05050c');
-  rect(g, 60, WALL_TOP, VW - 120, HORIZON - WALL_TOP, wall);
-  // Wallpaper stripes.
-  for (let x = 64; x < VW - 60; x += 10)
-    rect(g, x, WALL_TOP, 1, HORIZON - WALL_TOP, mix(wall, '#000000', 0.25));
-  // Side walls in perspective.
-  for (let y = 0; y < VH; y += 1) {
-    const k =
-      y < WALL_TOP ? (WALL_TOP - y) / WALL_TOP : y > HORIZON ? (y - HORIZON) / (VH - HORIZON) : 0;
-    const w = 60 * k;
-    rect(g, 0, y, 60 - w + w, 1, mix(wall, '#000000', 0.45));
-    rect(g, VW - 60, y, 60, 1, mix(wall, '#000000', 0.45));
+  // Ceiling, floor, side walls.
+  poly(g, [0, 0, VW, 0, R, WALL_TOP, L, WALL_TOP], mix(wall, '#000000', 0.6));
+  poly(g, [L, HORIZON, R, HORIZON, VW, VH, 0, VH], '#2a1c14');
+  poly(g, [0, 0, L, WALL_TOP, L, HORIZON, 0, VH], mix(wall, '#000000', 0.35));
+  poly(g, [VW, 0, R, WALL_TOP, R, HORIZON, VW, VH], mix(wall, '#000000', 0.5));
+  // Back wall with damask wallpaper + wainscot.
+  rect(g, L, WALL_TOP, R - L, HORIZON - WALL_TOP, wall);
+  for (let y = WALL_TOP + 4; y < HORIZON - 26; y += 12)
+    for (let x = L + 6 + ((y / 12) % 2) * 8; x < R - 4; x += 16) {
+      rect(g, x, y, 3, 1, mix(wall, '#ffffff', 0.08));
+      rect(g, x + 1, y - 1, 1, 3, mix(wall, '#ffffff', 0.08));
+    }
+  rect(g, L, HORIZON - 26, R - L, 26, mix(wall, '#3a2010', 0.6));
+  rect(g, L, HORIZON - 26, R - L, 2, mix(wall, '#c8a070', 0.25));
+  for (let x = L + 8; x < R; x += 24) rect(g, x, HORIZON - 20, 16, 14, mix(wall, '#2a1408', 0.7));
+  // Stains + peeling paper grow with dread.
+  for (let i = 0; i < band * 5; i += 1) {
+    const x = L + hash01(i, seed) * (R - L - 20);
+    const y = WALL_TOP + hash01(i, seed + 1) * 50;
+    dither(g, x, y, 10 + (i % 3) * 6, 8 + (i % 2) * 8, '#120608', 0.4);
   }
-  // Floor boards in perspective.
+  // Floor boards converging to the vanishing point.
   for (let y = HORIZON; y < VH; y += 1) {
     const k = (y - HORIZON) / (VH - HORIZON);
-    rect(g, 60 - 60 * k, y, VW - 120 + 120 * k, 1, mix('#1a120e', '#2a1c14', k));
+    rect(g, L - L * k, y, R - L + (VW - R + L) * k, 1, mix('#20140e', '#3a2618', k));
   }
-  for (let i = -6; i <= 6; i += 1) {
-    const x0 = VW / 2 + i * 22;
-    const x1 = VW / 2 + i * 60;
-    g.strokeStyle = '#120c08';
+  g.strokeStyle = '#140c08';
+  for (let i = -8; i <= 8; i += 1) {
     g.beginPath();
-    g.moveTo(x0, HORIZON);
-    g.lineTo(x1, VH);
+    g.moveTo(VW / 2 + i * ((R - L) / 16), HORIZON);
+    g.lineTo(VW / 2 + i * (VW / 10), VH);
     g.stroke();
   }
-  // Ceiling + flickering bulb.
-  rect(g, 60, 0, VW - 120, WALL_TOP, '#0a0a16');
+  for (const yy of [132, 150, 178]) rect(g, 0, yy, VW, 1, withAlpha('#140c08', 0.6));
+  // Edges of the box.
+  g.strokeStyle = withAlpha('#000000', 0.6);
+  g.beginPath();
+  g.moveTo(0, 0);
+  g.lineTo(L, WALL_TOP);
+  g.lineTo(L, HORIZON);
+  g.lineTo(0, VH);
+  g.moveTo(VW, 0);
+  g.lineTo(R, WALL_TOP);
+  g.lineTo(R, HORIZON);
+  g.lineTo(VW, VH);
+  g.stroke();
+  // Rug.
+  poly(g, [150, 140, 234, 140, 262, 196, 122, 196], '#4a1a22');
+  poly(g, [154, 143, 230, 143, 256, 193, 128, 193], '#6a2a2e');
+  roomCache.set(key, c);
+  return c;
+}
+
+function drawRoom(g: Ctx, seed: number, dread: number, t: number): void {
+  g.drawImage(roomCanvas(seed, dread), 0, 0);
   const flick = hash01(seed, Math.floor(t * 10)) > 0.92 ? 0.1 : 1;
-  rect(g, VW / 2 - 1, 0, 2, 12, '#3a3a4a');
-  rect(g, VW / 2 - 3, 12, 6, 4, flick > 0.5 ? '#fff4c0' : '#4a4a3a');
-  glow(g, VW / 2, 16, 60, '#ffe9a0', 0.14 * flick);
+  rect(g, VW / 2 - 1, 0, 1, 14, '#3a3a4a');
+  rect(g, VW / 2 - 3, 14, 6, 4, flick > 0.5 ? '#fff4c0' : '#4a4a3a');
+  glow(g, VW / 2, 18, 40, '#ffe9a0', 0.2 * flick);
 }
 
 function drawProp(g: Ctx, p: Prop, t: number, focus: boolean): void {
@@ -91,10 +141,10 @@ function drawProp(g: Ctx, p: Prop, t: number, focus: boolean): void {
     rect(g, x + 2, 52, 28, 88, '#2a1a10');
     rect(g, left ? x + 24 : x + 4, 96, 3, 3, '#c8a050');
     if (focus) glow(g, x + 16, 96, 30, '#ffe9a0', 0.35);
-    drawText(g, left ? '◀' : '▶', x + 16, 36, {
-      color: focus ? '#ffe066' : '#6a6a8a',
-      align: 'center',
-    });
+    for (let k = 0; k < 4; k += 1) {
+      const ax = x + 16 + (left ? 3 - k : k - 3) * 1;
+      rect(g, ax, 38 - k, 1, k * 2 + 1, focus ? '#ffe066' : '#6a6a8a');
+    }
     return;
   }
   const kind = seed % 4;
@@ -141,6 +191,7 @@ function drawProp(g: Ctx, p: Prop, t: number, focus: boolean): void {
 function createScene(): GameScene<LookState> {
   let beam = VW / 2;
   let scareT = -10;
+  const lights = new LightMask();
 
   return {
     anchor: () => ({ x: VW / 2, y: 90 }),
@@ -157,17 +208,28 @@ function createScene(): GameScene<LookState> {
       const seed = hashString(state.roomId ?? state.caseId ?? 'x');
       drawRoom(g, seed, state.dread, t);
       if (state.phase === 'case-select') {
-        drawText(g, '选择要调查的怪谈', VW / 2, 40, {
-          color: '#cfe8ff',
-          align: 'center',
-          scale: 2,
+        const cases = f.actions.filter((a) => a.id !== 'abort');
+        cases.forEach((a, i) => {
+          const focus = f.focus?.id === a.id;
+          const x = VW / 2 - ((cases.length - 1) * 76) / 2 + i * 76;
+          const y = 150 - (focus ? 6 : 0) + Math.round(Math.sin(t * 2 + i) * 1);
+          // Case folder on the rug.
+          rect(g, x - 24, y - 30, 48, 34, withAlpha('#000000', 0.4));
+          rect(g, x - 26, y - 34, 18, 5, '#b8904a');
+          rect(g, x - 26, y - 30, 52, 32, focus ? '#e8c070' : '#9a7a44');
+          rect(g, x - 26, y - 30, 52, 1, '#ffe0a0');
+          rect(g, x - 20, y - 22, 26, 2, '#6a4a20');
+          rect(g, x - 20, y - 16, 34, 1, '#8a6a30');
+          rect(g, x - 20, y - 12, 30, 1, '#8a6a30');
+          rect(g, x + 10, y - 26, 12, 14, '#2a2a3a');
+          rect(g, x + 12, y - 24, 8, 6, '#6a7a9a');
+          tiny(g, `${i + 1}`, x - 20, y - 7, { color: '#4a2a10' });
+          if (focus) {
+            glow(g, x, y - 14, 40, '#ffe9a0', 0.35);
+            const lb = say(f, a.label);
+            if (lb) plate(g, fitText(lb, 240), VW / 2, 60, '#ffe066', 260);
+          }
         });
-        f.actions
-          .filter((a) => a.id !== 'abort')
-          .forEach((a, i) => {
-            const focus = f.focus?.id === a.id;
-            plate(g, a.label, VW / 2, 80 + i * 22, focus ? '#ffe066' : '#9fc4ff', 260);
-          });
         return;
       }
       const props = propsOf(f.actions);
@@ -187,20 +249,15 @@ function createScene(): GameScene<LookState> {
         });
         for (const [i, line] of ph.ascii.slice(0, 4).entries())
           drawText(g, line, 92, 40 + i * 12, { color: '#9fc4ff', outline: null, alpha: 0.65 });
-        plate(g, fitText(ph.title, 160), VW / 2, 22, '#cfe8ff', 220);
+        const title = say(f, ph.title);
+        if (title) plate(g, fitText(title, 160), VW / 2, 22, '#cfe8ff', 220);
       }
-      // Darkness with flashlight cone.
-      const dark = 0.55 + Math.min(0.3, state.dread * 0.04);
-      g.fillStyle = withAlpha('#020208', dark);
-      g.beginPath();
-      g.rect(0, 0, VW, VH);
-      g.moveTo(VW / 2 + 16, VH);
-      g.lineTo(beam + 50, HORIZON - 70);
-      g.lineTo(beam - 50, HORIZON - 70);
-      g.lineTo(VW / 2 - 16, VH);
-      g.closePath();
-      g.fill('evenodd');
-      glow(g, beam, HORIZON - 30, 50, '#cfe8ff', 0.14);
+      // Darkness: flashlight cone from the viewer + the bulb pool.
+      lights.begin('#020208', 0.5 + Math.min(0.3, state.dread * 0.035));
+      lights.cone(VW / 2, VH + 10, Math.atan2(HORIZON - 40 - VH - 10, beam - VW / 2), 0.32, 210, 1);
+      lights.light(VW / 2, 20, 70, 0.55);
+      lights.light(beam, HORIZON - 30, 40, 0.5);
+      lights.end(g);
       // Dread static.
       if (state.dread >= 4)
         dither(g, 0, Math.floor(hash01(Math.floor(t * 20), 9) * VH), VW, 3, '#ffffff', 0.15);
@@ -209,31 +266,32 @@ function createScene(): GameScene<LookState> {
         g.fillRect(0, 0, VW, VH);
       }
     },
+    grade: (s): Grade => ({
+      top: s.dread >= 6 ? '#ff90a0' : '#b0c8ff',
+      bottom: '#020208',
+      strength: 0.3,
+      bloom: 0.55,
+    }),
     hud(f) {
       const { g, state } = f;
       if (state.phase === 'case-select') return;
-      const rows: [string, number, number, string][] = [
-        ['专注', state.focus, 8, '#9fc4ff'],
-        ['神经', state.nerve, 10, '#7cf0a0'],
-        ['恐惧', state.dread, 10, '#ff4d6d'],
-        ['证据', state.evidence, Math.max(1, state.requiredEvidence), '#ffe066'],
-      ];
-      rows.forEach(([label, v, max, color], i) => {
-        drawText(g, label, 8, 150 + i * 12, { color });
-        bar(g, 36, 155 + i * 12, 60, 3, v / max, color);
-      });
-      if (state.latestWitness && f.since < 4)
-        plate(g, fitText(state.latestWitness, 300), VW / 2, 190, '#cfe8ff', 320);
+      if (state.latestWitness && f.since < 4) {
+        const w = say(f, state.latestWitness);
+        if (w) plate(g, fitText(w, 300), VW / 2, 194, '#cfe8ff', 320);
+      }
     },
     react(f, o) {
       const ev = o.events[0];
       if (!ev) return;
       if (ev.type === 'inspect' && Number(ev.severity) >= 3) {
         scareT = 0;
-        f.fx.shake(3 + Number(ev.severity), 0.3);
+        f.fx.addTrauma(0.2 + Number(ev.severity) * 0.08);
+        f.fx.impact(1);
+        f.cue('heavy');
       } else if (ev.type === 'record') {
         f.fx.burst(VW / 2, 90, { count: 28, colors: ['#ffe066', '#ffffff'], speed: 90 });
-        f.fx.float(VW / 2, 70, '证据 +1', '#ffe066');
+        f.fx.float(VW / 2, 70, '+1', '#ffe066', 1.1, true);
+        f.cue('coin');
       } else if (ev.type === 'move') f.fx.flash('#000000', 0.8);
       else if (ev.type === 'brace')
         f.fx.burst(VW / 2, 120, { count: 16, colors: ['#7cf0a0'], speed: 50, gravity: -20 });

@@ -1,11 +1,24 @@
 import { definition } from '@games/shrimp-leap/src/definition';
 import type { LeapState } from '@games/shrimp-leap/src/engine';
-import { fog, moon, ridge, sky, stars } from '../gfx/backdrop';
+import type { Grade } from '../gfx/art';
+import { moon, sky, stars } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { type Ctx, easeInOut, hash01, mix, rect, VH, VW } from '../gfx/pixel';
-import type { GameModule, GameScene, HitRegion } from '../gfx/scene';
+import {
+  type Ctx,
+  ctx2d,
+  easeInOut,
+  hash01,
+  makeCanvas,
+  mix,
+  rect,
+  VH,
+  VW,
+  withAlpha,
+} from '../gfx/pixel';
+import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
 import { buildSprite, SLIME } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
+import { tiny } from '../gfx/tiny';
 import { blit, pips, plate, shadow } from '../gfx/world';
 
 const PX_PER_M = 15;
@@ -24,6 +37,62 @@ function slimeSprite(color: string | null) {
     { b: c, h: mix(c, '#ffffff', 0.6), d: mix(c, '#000000', 0.4) },
     { rim: '#ffffff' },
   );
+}
+
+/* Clean skyline: two cached, tileable layers with sparse warm windows and soft haze. */
+const SKY_W = 768;
+const skyline = new Map<string, HTMLCanvasElement>();
+function skylineLayer(zone: number, far: boolean): HTMLCanvasElement {
+  const key = `${zone}:${far}`;
+  const hit = skyline.get(key);
+  if (hit) return hit;
+  const c = makeCanvas(SKY_W, VH);
+  const g = ctx2d(c);
+  const body = far
+    ? ['#1c2050', '#2a1a48', '#12304a'][zone]!
+    : ['#0c0e26', '#140a22', '#081624'][zone]!;
+  const lit = far ? '#3a3a6a' : '#b08850';
+  const base = far ? 160 : 190;
+  let x = 0;
+  let i = 0;
+  while (x < SKY_W) {
+    const w = (far ? 18 : 26) + Math.floor(hash01(i, far ? 3 : 9) * (far ? 22 : 30));
+    const h = (far ? 30 : 34) + Math.floor(hash01(i, far ? 5 : 11) * (far ? 60 : 62));
+    const top = base - h;
+    rect(g, x, top, w, VH - top, body);
+    // Lit edge toward the moon (top-right) and rooftop details.
+    rect(g, x + w - 1, top, 1, base - top, mix(body, '#8a7ac8', far ? 0.25 : 0.18));
+    rect(g, x, top, w, 1, mix(body, '#8a7ac8', 0.3));
+    if (hash01(i, 21) > 0.6) rect(g, x + 4, top - 6, 2, 6, body);
+    if (!far && hash01(i, 23) > 0.7) {
+      rect(g, x + w / 2 - 4, top - 5, 8, 5, body);
+      rect(g, x + w / 2, top - 12, 1, 7, body);
+      rect(g, x + w / 2, top - 13, 1, 1, '#ff5d73');
+    }
+    // Sparse windows in a regular grid; most are dark.
+    for (let wy = top + 6; wy < base - 6; wy += far ? 6 : 8)
+      for (let wx = x + 3; wx < x + w - 4; wx += far ? 5 : 6)
+        if (hash01(wx * 7 + wy, i) > (far ? 0.9 : 0.9))
+          rect(g, wx, wy, far ? 1 : 2, far ? 2 : 3, lit);
+    x += w + (far ? 1 : 2 + Math.floor(hash01(i, 13) * 6));
+    i += 1;
+  }
+  // Haze toward the base so layers separate.
+  for (let y = base - 40; y < VH; y += 1) {
+    g.fillStyle = withAlpha(
+      far ? '#5a4a98' : '#1a1a3a',
+      Math.min(0.55, ((y - base + 40) / 80) * (far ? 0.8 : 0.6)),
+    );
+    g.fillRect(0, y, SKY_W, 1);
+  }
+  skyline.set(key, c);
+  return c;
+}
+
+function tileLayer(g: Ctx, layer: HTMLCanvasElement, offset: number): void {
+  const o = ((Math.round(offset) % SKY_W) + SKY_W) % SKY_W;
+  g.drawImage(layer, -o, 0);
+  g.drawImage(layer, SKY_W - o, 0);
 }
 
 function lampTop(height: number): number {
@@ -79,7 +148,7 @@ function createScene(): GameScene<LeapState> {
       return actions
         .filter((a) => a.id !== 'abort')
         .map((a, i, arr) => ({
-          x: VW / 2 - (arr.length * 70) / 2 + i * 70,
+          x: VW / 2 - (arr.length * 84) / 2 + i * 84,
           y: 60,
           w: 64,
           h: 90,
@@ -101,48 +170,18 @@ function createScene(): GameScene<LeapState> {
       sky(g, skies, 0, VH, 12);
       stars(g, t, 5 + zone, 70, 110);
       moon(g, 320, 34, 9, '#fff6dc', '#c8b4ff');
-      ridge(
-        g,
-        {
-          seed: 4 + zone,
-          base: 150,
-          amp: 70,
-          color: '#151a3a',
-          kind: 'city',
-          scale: 18,
-          windows: '#3a3a6a',
-        },
-        -ox * 0.2,
-      );
-      fog(g, t, 120, 30, '#6a5aa8', 0.2, 2);
-      ridge(
-        g,
-        {
-          seed: 9 + zone,
-          base: 182,
-          amp: 50,
-          color: '#0a0d22',
-          kind: 'city',
-          scale: 16,
-          windows: '#a08a4a',
-          edge: '#262c54',
-        },
-        -ox * 0.5,
-      );
+      tileLayer(g, skylineLayer(Math.min(2, zone), true), -ox * 0.15);
+      tileLayer(g, skylineLayer(Math.min(2, zone), false), -ox * 0.4);
       rect(g, 0, STREET_Y, VW, VH - STREET_Y, '#0a0c1c');
       rect(g, 0, STREET_Y, VW, 1, '#3a4270');
       for (let x = (ox % 24) - 24; x < VW; x += 24) rect(g, x, STREET_Y + 8, 12, 1, '#2a3058');
+      rect(g, 0, STREET_Y + 1, VW, 2, '#151a34');
 
       if (state.phase === 'nature' || state.phase === 'color') {
         const opts = f.actions.filter((a) => a.id !== 'abort');
         const col = state.phase === 'color';
-        drawText(g, col ? '选一个颜色' : '选一种性格', VW / 2, 32, {
-          color: '#ffe8d0',
-          align: 'center',
-          scale: 2,
-        });
         opts.forEach((a, i) => {
-          const x = VW / 2 - (opts.length * 70) / 2 + i * 70 + 32;
+          const x = VW / 2 - (opts.length * 84) / 2 + i * 84 + 32;
           const focus = f.focus?.id === a.id;
           const color = col
             ? (COLORS[a.id.split(':')[1] ?? ''] ?? '#7cf0a0')
@@ -156,7 +195,7 @@ function createScene(): GameScene<LeapState> {
           shadow(g, x, 128, 24);
           plate(
             g,
-            a.label.split(/[：:（(]/)[0] ?? a.label,
+            say(f, a.label.split(/[：:（(]/)[0] ?? a.label) || a.id.split(':')[1]!.toUpperCase(),
             x,
             140,
             focus ? '#ffe066' : '#d8ccff',
@@ -175,11 +214,15 @@ function createScene(): GameScene<LeapState> {
         drawLamp(g, x, state.street[i]!.height, t, i, i === state.level);
         if (i === state.level) {
           const w = state.street[i]!;
-          if (w.wind)
-            drawText(g, w.wind > 0 ? '风 →' : '← 风', x, lampTop(w.height) - 26, {
-              color: '#9fe4ff',
-              align: 'center',
-            });
+          if (w.wind) {
+            const dir = w.wind > 0 ? 1 : -1;
+            const wy = lampTop(w.height) - 26;
+            for (let k = 0; k < 3; k += 1) {
+              const ph = (t * 1.6 + k / 3) % 1;
+              const lx = Math.round(x - 20 + ph * 40 * dir + (dir < 0 ? 40 : 0));
+              rect(g, lx, wy + k * 5, 10, 1, withAlpha('#9fe4ff', Math.sin(ph * Math.PI) * 0.9));
+            }
+          }
         }
       }
 
@@ -189,7 +232,11 @@ function createScene(): GameScene<LeapState> {
       let sx = lampX(state, cur) + ox;
       let sy = lampTop(base?.height ?? 4);
       let rot = 0;
-      if (hop) {
+      if (hop && t < hop.start) {
+        squash = 0.65;
+        sx = hop.fromX + ox;
+        sy = hop.fromY;
+      } else if (hop) {
         const k = Math.min(1, (t - hop.start) / 0.75);
         const e = easeInOut(k);
         sx = hop.fromX + (hop.toX - hop.fromX) * e + ox;
@@ -199,9 +246,14 @@ function createScene(): GameScene<LeapState> {
         rot = k;
         if (k < 1 && Math.random() < 0.6)
           f.fx.mote(sx, sy - 6, -10, 4, COLORS[state.color ?? 'mint'] ?? '#7cf0a0', 0.4, 1);
+        if (k < 0.15) squash = 1.35;
         if (t - hop.start > (hop.fall ? 1.3 : 0.75)) {
+          if (!hop.fall) {
+            f.fx.dust(sx, sy, '#8a7ac8', 8);
+            f.cue('land');
+          }
           hop = null;
-          squash = 1.5;
+          squash = 0.6;
         }
       }
       squash += (1 - squash) * Math.min(1, f.dt * 10);
@@ -224,39 +276,39 @@ function createScene(): GameScene<LeapState> {
         });
         for (let i = 0; i < 5; i += 1)
           rect(g, sx + 6 + i * 5, sy - 6 + Math.round(Math.sin(t * 4 + i) * 2), 3, 2, '#c8ffda');
-        plate(g, `黏连救援 · ${state.rescue.partner}`, (sx + px) / 2, sy - 44, '#ffe066', 160);
+        glow(g, (sx + px) / 2, sy - 8, 26, '#c8ffda', 0.3 + 0.1 * Math.sin(t * 5));
       }
+    },
+    grade(state): Grade {
+      const zone = Math.min(2, Math.floor((state.level - 1) / 15));
+      return {
+        top: ['#c8a0ff', '#ff90c0', '#80d0ff'][zone]!,
+        bottom: '#05030c',
+        strength: 0.28,
+        bloom: 0.7,
+      };
     },
     hud(f) {
       const { g, t, state } = f;
       if (state.phase === 'nature' || state.phase === 'color') return;
-      drawText(g, `第 ${state.level}/45 关`, 8, 20, { color: '#ffe066' });
-      pips(
-        g,
-        8,
-        36,
-        15,
-        ((state.cleared - 1) % 15) + 1 > 0 ? state.cleared % 15 : 0,
-        '#7cf0a0',
-        state.cleared % 15,
-        t,
-      );
+      tiny(g, `${state.level}/45`, 8, 9, { color: '#ffe066' });
+      pips(g, 36, 8, 15, state.cleared % 15, '#7cf0a0', state.cleared % 15, t);
       const lj = state.lastJump;
-      if (lj && f.since < 2.2) {
-        const names: Record<string, [string, string]> = {
-          perfect: ['完美落地!', '#ffe066'],
-          clean: ['稳稳落地', '#9dffb0'],
-          edge: ['擦边!', '#ffb347'],
-          short: ['跳短了…', '#ff8a8a'],
-          long: ['跳过头…', '#ff8a8a'],
+      if (lj && f.since < 1.8) {
+        const names: Record<string, [string, string, string]> = {
+          perfect: ['完美落地!', 'PERFECT!', '#ffe066'],
+          clean: ['稳稳落地', 'CLEAN', '#9dffb0'],
+          edge: ['擦边!', 'EDGE!', '#ffb347'],
+          short: ['跳短了…', 'SHORT', '#ff8a8a'],
+          long: ['跳过头…', 'TOO FAR', '#ff8a8a'],
         };
-        const [txt, col] = names[lj.result] ?? ['', '#fff'];
-        drawText(g, txt, VW / 2, 52, {
-          color: col,
-          align: 'center',
-          scale: 2,
-          alpha: Math.min(1, 2.2 - f.since),
-        });
+        const [zh, en, col] = names[lj.result] ?? ['', '', '#fff'];
+        const k = Math.min(1, f.since / 0.18);
+        const alpha = Math.min(1, 1.8 - f.since);
+        const y = Math.round(58 - (1 - k) * 8);
+        if (f.lang === 'zh')
+          drawText(g, zh, VW / 2, y, { color: col, align: 'center', scale: 2, alpha });
+        else tiny(g, en, VW / 2, y, { color: col, align: 'center', scale: 3, alpha });
       }
     },
     react(f, o) {
@@ -270,7 +322,8 @@ function createScene(): GameScene<LeapState> {
         const toX = fromX + Number(jump.landing) * PX_PER_M;
         const target = state.street[level];
         const fall = jump.result === 'short' || jump.result === 'long';
-        hop = { fromX, fromY, toX, toY: lampTop(target?.height ?? 4), fall, start: f.t };
+        hop = { fromX, fromY, toX, toY: lampTop(target?.height ?? 4), fall, start: f.t + 0.12 };
+        f.cue('whoosh');
         if (jump.result === 'perfect') {
           f.fx.burst(toX - cam + VW * 0.32 + 40, lampTop(target?.height ?? 4), {
             count: 30,
@@ -281,9 +334,10 @@ function createScene(): GameScene<LeapState> {
           f.fx.freeze(0.05);
         }
         if (fall) {
-          f.fx.shake(4, 0.4);
+          f.fx.addTrauma(0.4);
           f.fx.flash('#ff2040', 0.2);
-        } else f.fx.shake(1.5, 0.15);
+          f.cue('bad');
+        } else f.fx.kick(0, 1.5);
       } else if (o.events.some((e) => e.type === 'rescue' || e.type === 'rescue-success')) {
         f.fx.burst(VW * 0.4, 120, { count: 24, colors: ['#c8ffda', '#ffffff'], speed: 70 });
       }

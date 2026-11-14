@@ -1,3 +1,4 @@
+import { INK, shift } from './art';
 import { ctx2d, hash01, makeCanvas, mix } from './pixel';
 
 /**
@@ -17,6 +18,12 @@ export interface BuildOptions {
   outline?: string | null;
   rim?: string | null;
   flip?: boolean;
+  /**
+   * Art-bible shading (default on): key light from the upper left lifts top/left
+   * edge pixels, bottom/right edge pixels fall into a violet shadow, and the
+   * outline uses selective colour (selout) instead of flat black.
+   */
+  shade?: boolean;
 }
 
 const cache = new Map<string, HTMLCanvasElement>();
@@ -27,8 +34,9 @@ export function buildSprite(
   opts: BuildOptions = {},
 ): HTMLCanvasElement {
   const palette = { ...def.pal, ...pal };
-  const outline = opts.outline === undefined ? '#07040f' : opts.outline;
-  const key = `${def.rows.join('/')}|${JSON.stringify(palette)}|${outline}|${opts.rim ?? ''}|${opts.flip ? 1 : 0}`;
+  const outline = opts.outline === undefined ? INK : opts.outline;
+  const shade = opts.shade ?? true;
+  const key = `${def.rows.join('/')}|${JSON.stringify(palette)}|${outline}|${opts.rim ?? ''}|${opts.flip ? 1 : 0}|${shade ? 1 : 0}`;
   const hit = cache.get(key);
   if (hit) return hit;
   const h = def.rows.length;
@@ -40,23 +48,37 @@ export function buildSprite(
     return ch && ch !== '.' && ch !== ' ' ? palette[ch] : undefined;
   };
   if (outline) {
-    g.fillStyle = outline;
     for (let y = -1; y <= h; y += 1)
       for (let x = -1; x <= w; x += 1) {
         if (at(x, y)) continue;
-        if (at(x - 1, y) || at(x + 1, y) || at(x, y - 1) || at(x, y + 1))
-          g.fillRect(x + 1, y + 1, 1, 1);
+        const up = at(x, y + 1); // pixel below this outline cell → we are on its top edge
+        const left = at(x + 1, y);
+        const down = at(x, y - 1);
+        const right = at(x - 1, y);
+        const n = up ?? left ?? down ?? right;
+        if (!n) continue;
+        if (!shade) g.fillStyle = outline;
+        else if (down || right)
+          g.fillStyle = outline; // bottom / right silhouette: full ink
+        else g.fillStyle = mix(shift(n, -3), outline, 0.55); // lit side: selout
+        g.fillRect(x + 1, y + 1, 1, 1);
       }
   }
   for (let y = 0; y < h; y += 1)
     for (let x = 0; x < w; x += 1) {
-      const color = at(x, y);
+      let color = at(x, y);
       if (!color) continue;
-      const rim = opts.rim && (!at(x, y - 1) || !at(x - 1, y)) ? mix(color, opts.rim, 0.45) : color;
+      if (shade) {
+        const litEdge = !at(x, y - 1) || !at(x - 1, y);
+        const shadowEdge = !at(x, y + 1) || !at(x + 1, y);
+        if (litEdge && !shadowEdge) color = shift(color, 0.7);
+        else if (shadowEdge && !litEdge) color = shift(color, -0.9);
+      }
+      const rim = opts.rim && (!at(x, y - 1) || !at(x - 1, y)) ? mix(color, opts.rim, 0.35) : color;
       g.fillStyle = rim;
       g.fillRect(x + 1, y + 1, 1, 1);
     }
-  if (cache.size > 400) cache.clear();
+  if (cache.size > 600) cache.clear();
   cache.set(key, c);
   return c;
 }

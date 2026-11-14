@@ -10,7 +10,7 @@ bun src/main.ts act catch:0 --json
 bun src/main.ts recap --json
 ```
 
-版本：`3.0.0` · id / binary：`shrimp-burger`
+版本：`3.1.0` · id / binary：`shrimp-burger`
 
 ## 动作
 

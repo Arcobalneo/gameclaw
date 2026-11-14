@@ -1,5 +1,40 @@
 # Changelog
 
+## v3.1.0 — 2026-11-14
+
+### Changed — web portal polish
+
+- **Art**: shared art bible in code (hue-shifted ramps, auto top-left shading
+  and selective outlines on every sprite, per-scene colour grade, bloom,
+  light masks, vignette). New layered humanoid sprites with blink / talk /
+  squash. Scenes rebuilt: 虾素 (lit dining rooms, readable diners and a real
+  player seat), 虾征 (giant's room, a giant face with tracking eyes at the
+  window, stomping boot, glass jar, reaching hand), 虾走 (foreground
+  parallax, drifting gill net, plastic bag / bottle / six-pack rings),
+  虾跃 (clean two-layer skyline), 虾守 (seabed trenches, stone sea gate,
+  bigger units), 虾潜 (building cross-section with lamp / torch / camera
+  lighting), 虾抓 (crustacean species looks, travelling attack bolts),
+  虾看 (perspective room, case folders, flashlight light mask), 虾闹
+  (raised beds, farmhouse, scarecrow, night lighting), 虾写 (ink-wash map
+  on rice paper), 虾堡 (diner kitchen, guest with moods).
+- **Feel**: pooled particles (sparks, dust, rings, splashes, ink, steam,
+  embers), trauma shake with directional kick, per-impact hit-stop, impact
+  frames, anticipation on attacks and jumps, landing squash, sound cues
+  aligned with hits. `prefers-reduced-motion` respected.
+- **UI**: minimal home (logo, one-line tagline, cover grid with name and a
+  short tagline, GitHub link). Covers are clean frames captured from the real
+  scenes. Game window: canvas, compact HUD chips with animated deltas,
+  action list with risk marks and a preview of the focused action,
+  collapsible log and agent prompt with Copy, help behind `?`. Removed the
+  in-canvas metric bar and duplicated status text; floats never overlap the HUD.
+- **Language switch** (中 / EN) in the top-right corner, persisted, default
+  from the browser. Typed dictionary; engine labels, metrics and phases
+  translated through per-game glossaries. The agent prompt is now a single
+  language. Engine narrative text stays Chinese.
+- Version `3.1.0` across root, gamekit, games and skill metadata. Game rules
+  and CLI behaviour are unchanged; WebMCP tools and `window.gameclaw` are
+  unchanged.
+
 ## v3.0.0 — 2026-11-14
 
 ### Added
