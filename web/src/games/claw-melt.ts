@@ -174,6 +174,16 @@ function createScene(): GameScene<MeltState> {
         });
       }
       pips(g, 16, 16, state.winSize, state.maxSize, '#ffb08a', -1, t);
+      const sinceTide = state.drops % state.tiltEvery;
+      const tideSoon = sinceTide === state.tiltEvery - 1;
+      const tideY = OY + WELL_H * CH + 12;
+      const tideColor = tideSoon ? '#fff6dc' : '#7ec8ff';
+      for (let i = 0; i < 4; i += 1) {
+        const x = state.tiltDir < 0 ? OX + 120 - i * 16 : OX + 40 + i * 16;
+        rect(g, x, tideY, 10, 3, tideColor);
+        rect(g, state.tiltDir < 0 ? x - 3 : x + 8, tideY - 2, 3, 7, tideColor);
+      }
+      pips(g, OX + 8, tideY + 8, state.tiltEvery, sinceTide, '#7ec8ff', -1, t);
       drawText(g, String(state.points), 300, 120, { color: '#ffc24a', align: 'left', scale: 2 });
     },
     react(f, outcome) {
