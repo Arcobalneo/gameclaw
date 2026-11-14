@@ -32,21 +32,31 @@ describe('claw-berth engine', () => {
     expect(state.incidents).toBe(1);
   });
 
-  it('lets the harbor line win more often than waiting or the first berth', () => {
-    const firstFit = (state: ReturnType<typeof createRun>) =>
-      actionsOf(state).find(
-        (action) => action.id.startsWith('dock:') || action.id.startsWith('tug:'),
-      )?.id ?? 'wait';
+  it('lets the harbor line win more often than waiting or the leftmost berth', () => {
+    const leftmost = (state: ReturnType<typeof createRun>) => {
+      let best = 'wait';
+      let index = 99;
+      for (const action of actionsOf(state)) {
+        if (!action.id.startsWith('dock:') && !action.id.startsWith('tug:')) continue;
+        const at = Number(action.id.slice(action.id.indexOf(':') + 1));
+        if (at < index) {
+          index = at;
+          best = action.id;
+        }
+      }
+      return best;
+    };
     let careful = 0;
     let waited = 0;
     let greedy = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
       if (play(seed, suggest).outcome === 'won') careful += 1;
       if (play(seed, () => 'wait').outcome === 'won') waited += 1;
-      if (play(seed, firstFit).outcome === 'won') greedy += 1;
+      if (play(seed, leftmost).outcome === 'won') greedy += 1;
     }
     expect(careful).toBeGreaterThanOrEqual(8);
     expect(waited).toBeLessThan(careful);
+    expect(greedy).toBeLessThanOrEqual(6);
     expect(greedy).toBeLessThan(careful);
   });
 

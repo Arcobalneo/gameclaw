@@ -13,8 +13,8 @@ export const definition: GameDefinition<DelveState> = {
     repo: 'https://github.com/Arcobalneo/gameclaw',
     license: 'MIT',
     guide: [
-      'shift:-1 向左，shift:1 向右。横挖只在这一层，不会塌。',
-      'brace 给这一层撑。cut 下挖。离开没撑的层会塌一次。',
+      'step:w 向左，step:e 向右，step:s 下挖。横挖只在这一层，不会塌。',
+      'brace 给这一层撑。离开没撑的层会塌一次。',
       '矿在哪一格写在井壁上。踩到那一格才算挖到。',
       '矿够定额就赢。塌过了上限，或到井底还不够，就输。',
       '分数：矿×20 + 层×15 − 塌×50。挖够 +300。一次塌比方比两车矿更贵。中止为 0。',

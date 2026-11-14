@@ -91,16 +91,16 @@ function settle(state: DelveState, log: string[]): void {
 export function suggest(state: DelveState): string {
   const here = state.oreCol[state.layer] ?? -1;
   if (here >= 0 && !state.mined[state.layer] && here !== state.col) {
-    return here > state.col ? 'shift:1' : 'shift:-1';
+    return here > state.col ? 'step:e' : 'step:w';
   }
   const below = state.layer + 1;
   if (below < state.layers) {
     const want = state.oreCol[below] ?? state.col;
-    if (want !== state.col) return want > state.col ? 'shift:1' : 'shift:-1';
+    if (want !== state.col) return want > state.col ? 'step:e' : 'step:w';
     if (!state.braced[state.layer] && state.braces > 0) return 'brace';
-    return 'cut';
+    return 'step:s';
   }
-  return 'shift:1';
+  return 'step:e';
 }
 
 export function createRun(options: { seed: number; difficulty?: string }): DelveState {
@@ -173,7 +173,7 @@ export function actionsOf(state: DelveState): ActionView[] {
   if (state.col > 0) {
     const hits = oreLeft && ore === state.col - 1;
     actions.push({
-      id: 'shift:-1',
+      id: 'step:w',
       label: '向左',
       detail: hits ? '向左一格有矿。横挖不会塌。' : '在这一层向左挖开一格。横挖不会塌。',
       risk: 'low',
@@ -182,7 +182,7 @@ export function actionsOf(state: DelveState): ActionView[] {
   if (state.col < 2) {
     const hits = oreLeft && ore === state.col + 1;
     actions.push({
-      id: 'shift:1',
+      id: 'step:e',
       label: '向右',
       detail: hits ? '向右一格有矿。横挖不会塌。' : '在这一层向右挖开一格。横挖不会塌。',
       risk: 'low',
@@ -191,7 +191,7 @@ export function actionsOf(state: DelveState): ActionView[] {
   if (state.layer + 1 < state.layers) {
     const bare = !state.braced[state.layer];
     actions.push({
-      id: 'cut',
+      id: 'step:s',
       label: '下挖',
       detail: bare ? '离开这一层。没有支撑，井会塌一次。' : '这一层有支撑，下挖不会塌。',
       risk: bare ? 'high' : 'low',
@@ -224,18 +224,26 @@ function mine(state: DelveState, log: string[]): void {
 
 export function act(state: DelveState, actionId: string): ActionResult {
   if (state.outcome !== 'ongoing') throw illegalAction('这一局已经收尾。', '用 recap 看结算。');
-  if (!actionsOf(state).some((action) => action.id === actionId)) {
+  const listed =
+    actionId === 'shift:-1'
+      ? 'step:w'
+      : actionId === 'shift:1'
+        ? 'step:e'
+        : actionId === 'cut'
+          ? 'step:s'
+          : actionId;
+  if (!actionsOf(state).some((action) => action.id === listed)) {
     throw illegalAction('现在不能这么做。', '只使用列出的动作。');
   }
   const rng = Rng.restore(state.rng);
   const log: string[] = [];
   state.turn += 1;
-  if (actionId === 'brace') {
+  if (listed === 'brace') {
     state.braced[state.layer] = true;
     state.braces -= 1;
     log.push(`第 ${state.layer + 1} 层撑住了。`);
-  } else if (actionId.startsWith('shift:')) {
-    const dir = Number(actionId.slice('shift:'.length));
+  } else if (listed === 'step:w' || listed === 'step:e') {
+    const dir = listed === 'step:w' ? -1 : 1;
     state.col += dir;
     state.open[state.layer]![state.col] = true;
     log.push(`移到第 ${state.col + 1} 格。`);
