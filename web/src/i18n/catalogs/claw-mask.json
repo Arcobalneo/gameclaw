@@ -1,0 +1,77 @@
+{
+  "terms": {},
+  "exact": {
+    "虾罩 · 面罩结算": "Claw Mask · mask recap",
+    "面罩进行中": "The mask is still on",
+    "廊走完了": "The corridors are crossed",
+    "坠落过多": "Too many falls",
+    "已中止": "Aborted",
+    "胜利": "Won",
+    "失败": "Lost",
+    "进行中": "In progress",
+    "收尾": "Done",
+    "面罩": "Mask",
+    "廊": "Hall",
+    "位置": "Place",
+    "潮": "Tide",
+    "滑移": "Slides",
+    "坠落": "Falls",
+    "下一格": "Next cell",
+    "两层": "Layers",
+    "记录": "Notes",
+    "结局": "Result",
+    "这廊已经走完": "This hall is finished",
+    "面罩还在廊口": "The mask is still at the mouth",
+    "还没有走完一廊": "No hall cleared yet",
+    "迈步": "Step",
+    "罩右移": "Mask right",
+    "罩左移": "Mask left",
+    "走": "Walk",
+    "空": "Gap",
+    "可走": "open",
+    "下一格现在可走。": "The next cell is open.",
+    "下一格现在是空的，迈步会掉回去。": "The next cell is a gap. Stepping falls back.",
+    "这一局已经收尾。": "This run is already over.",
+    "用 recap 看结算。": "Use recap for the settlement.",
+    "现在不能这么做。": "You cannot do that now.",
+    "只使用列出的动作。": "Use only the listed actions.",
+    "面罩盖住的三格看墨层，其余看潮层。要走的那格必须是可走的那一层。": "The three covered cells show the ink layer. The rest show the tide. The cell you step on has to be open in the layer you see.",
+    "每两步潮往前一格。在廊口磨蹭，潮会先到。": "The tide advances one cell every two actions. Lingering at the mouth lets it arrive first.",
+    "把本局面罩该往哪边滑、哪一格必须露在罩外写进你自己的 memory。只把这些当作这个 seed 的观察，换种子后重新验证。": "Write which way the mask should slide, and which cell must stay outside it, into your own memory. Treat that as an observation of this seed and check it again on the next seed."
+  },
+  "patterns": [
+    { "zh": "面罩结束 · {0}", "en": "Mask closed · {0}", "slots": ["text"] },
+    { "zh": "面罩结束：{0}", "en": "Mask over: {0}", "slots": ["text"] },
+    {
+      "zh": "第 {0}/{1} 廊 · 面罩 {2} · 潮 {3}",
+      "en": "Hall {0}/{1} · mask {2} · tide {3}",
+      "slots": ["n", "n", "n", "n"]
+    },
+    { "zh": "第 {0} 格现在是{1}", "en": "Cell {0} is {1}", "slots": ["n", "text"] },
+    { "zh": "墨 {0}", "en": "Ink {0}", "slots": ["text"] },
+    { "zh": "潮 {0}", "en": "Tide {0}", "slots": ["text"] },
+    {
+      "zh": "面罩盖住第 {0} 到 {1} 格。盖住的地方看墨层。",
+      "en": "The mask covers cells {0} to {1}. Covered cells show the ink layer.",
+      "slots": ["n", "n"]
+    },
+    { "zh": "面罩移到 {0}。", "en": "Mask moved to {0}.", "slots": ["n"] },
+    { "zh": "迈到第 {0} 格。", "en": "Stepped to cell {0}.", "slots": ["n"] },
+    {
+      "zh": "踩空，回到廊口。坠落 {0}。",
+      "en": "Stepped into a gap and returned to the mouth. Falls {0}.",
+      "slots": ["n"]
+    },
+    {
+      "zh": "潮水追上了。回到廊口。坠落 {0}。",
+      "en": "The tide caught you. Back to the mouth. Falls {0}.",
+      "slots": ["n"]
+    },
+    { "zh": "第 {0} 廊走完。", "en": "Hall {0} cleared.", "slots": ["n"] },
+    {
+      "zh": "本局走完 {0} 廊，滑了 {1} 次，坠落 {2}。",
+      "en": "This run cleared {0} halls, slid {1} times, and fell {2}.",
+      "slots": ["n", "n", "n"]
+    }
+  ]
+}

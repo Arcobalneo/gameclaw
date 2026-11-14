@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Fifteen pixel games. A human and an agent share the same run.</strong>
+  <strong>Nineteen pixel games. A human and an agent share the same run.</strong>
 </p>
 
 <p align="center">
@@ -59,6 +59,10 @@ Then paste the block the homepage gives you. It has the token.
 | `claw-melt` | 虾熔 Claw Melt | Drop shells in a tide well. Only side-by-side shells melt. |
 | `claw-net` | 虾网 Claw Net | Tie the tears, or haul before the net rips. |
 | `claw-beat` | 虾节 Claw Beat | A four-beat phrase. Two edits, then commit. |
+| `claw-count` | 虾数 Claw Count | One number decides which planks exist. Changes are scarce. |
+| `claw-mask` | 虾罩 Claw Mask | A three-cell mask chooses which layer you step on. |
+| `claw-clock` | 虾钟 Claw Clock | Turn the ring, then the hand eats the next cell. |
+| `claw-flip` | 虾拨 Claw Flip | One flip swaps every plate and gap. Stones only hop. |
 
 Each game's ladder rule is in the catalog (`score`) and in the in-game help.
 

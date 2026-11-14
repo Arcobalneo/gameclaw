@@ -262,6 +262,62 @@
         "zh": "命中×12 + 拆招×30 + 格挡×10 + 剩余气息×8 − 受击×28。击倒 +420。受击比两次命中更贵。没击倒只留命中和拆招的三分之一。中止为 0。",
         "en": "Hits×12 + ripostes×30 + blocks×10 + breath left×8 − damage taken×28. A knockout adds 420. Damage taken costs more than two hits. A loss keeps one third of the hit and riposte points. Abort is 0."
       }
+    },
+    {
+      "id": "claw-count",
+      "name": "虾数",
+      "englishName": "Claw Count",
+      "tagline": "一个数字决定哪块板还在",
+      "summary": "桥面每格只在两个数字下存在。改数字的次数很少，所以要选一个能连着走最远的数字。磁铁可以硬走过一块对不上的板。",
+      "genres": ["puzzle", "timing", "turn-based"],
+      "source_dir": "games/claw-count",
+      "status": "stable",
+      "score": {
+        "zh": "走完的段×90 + 剩余磁铁×35 − 坠落×70 − 改数×4。全部走完 +380。一次坠落比半段更贵。中止为 0。",
+        "en": "Stages×90 + magnets left×35 − falls×70 − changes×4. Clearing every stage adds 380. One fall costs more than half a stage. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-mask",
+      "name": "虾罩",
+      "englishName": "Claw Mask",
+      "tagline": "三格面罩，两层礁路",
+      "summary": "同一条廊有墨层和潮层。面罩盖住的三格看墨层，其余看潮层。迈上可走的那一层。有的格子必须露在罩外。潮每两步前进，磨蹭会被追上。",
+      "genres": ["puzzle", "timing", "turn-based"],
+      "source_dir": "games/claw-mask",
+      "status": "stable",
+      "score": {
+        "zh": "走完的廊×90 − 滑移×4 − 坠落×75。全部走完 +360。一次坠落比很多次滑动更贵。中止为 0。",
+        "en": "Halls×90 − slides×4 − falls×75. Clearing every hall adds 360. One fall costs more than many slides. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-clock",
+      "name": "虾钟",
+      "englishName": "Claw Clock",
+      "tagline": "先转环，指针再吃下一格",
+      "summary": "八格环上有你、两只敌和两颗珠。先转环或和对面交换，然后指针吃掉下一格。敌被吃掉才算数。珠被吃掉要扣分。指针吃到你自己会受伤。",
+      "genres": ["puzzle", "duel", "turn-based"],
+      "source_dir": "games/claw-clock",
+      "status": "stable",
+      "score": {
+        "zh": "清空的圈×100 + 击破×12 − 碎珠×28 − 伤×80。全部清空 +340。一次受伤比两次击破更贵。中止为 0。",
+        "en": "Rings×100 + kills×12 − gems lost×28 − wounds×80. Clearing every ring adds 340. One wound costs more than two kills. Abort is 0."
+      }
+    },
+    {
+      "id": "claw-flip",
+      "name": "虾拨",
+      "englishName": "Claw Flip",
+      "tagline": "一拨，板和空对调",
+      "summary": "一条八格的桥。拨动一次，所有板变成空，所有空变成板。石头永远不可走，只能用很少的簧跳过去。迈上不可走的格子会受伤并停住。",
+      "genres": ["puzzle", "timing", "turn-based"],
+      "source_dir": "games/claw-flip",
+      "status": "stable",
+      "score": {
+        "zh": "走完的段×100 + 剩余簧×20 − 伤×80 − 拨动×6。全部走完 +320。一次受伤比一段里的拨动更贵。中止为 0。",
+        "en": "Stages×100 + springs left×20 − wounds×80 − flips×6. Clearing every stage adds 320. One wound costs more than a stage of flips. Abort is 0."
+      }
     }
   ]
 }

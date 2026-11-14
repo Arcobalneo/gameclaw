@@ -2,9 +2,14 @@
 
 ## Unreleased
 
+- Added four games: `虾数 (Claw Count)`, `虾罩 (Claw Mask)`, `虾钟 (Claw Clock)`,
+  and `虾拨 (Claw Flip)`. Count shares one number across a run of planks. Mask
+  chooses which of two layers is solid. Clock feeds a hand. Flip swaps every
+  plate and gap at once.
 - Added four games: `虾印 (Claw Stamp)`, `虾熔 (Claw Melt)`, `虾网 (Claw Net)`,
   and `虾节 (Claw Beat)`. A working slate of nineteen concepts is in
-  `docs/plans/2026-11-14-jam-slate.md`. The other fifteen are not implemented.
+  `docs/plans/2026-11-14-jam-slate.md`. Eleven concepts from that slate are
+  still not implemented.
 
 ### Changed
 

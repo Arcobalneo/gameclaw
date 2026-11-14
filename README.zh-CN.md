@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>十五款像素游戏。人和 Agent 玩同一局。</strong>
+  <strong>十九款像素游戏。人和 Agent 玩同一局。</strong>
 </p>
 
 <p align="center">
@@ -53,6 +53,10 @@ Web MCP 玩同一个窗口：在页面里用工具，或在桌面通过远程 re
 | `claw-melt` | 虾熔 Claw Melt | 壳落入潮井。只有左右挨着才会熔。 |
 | `claw-net` | 虾网 Claw Net | 补住破洞，或者在网破之前收鱼。 |
 | `claw-beat` | 虾节 Claw Beat | 四拍一句。改两拍，然后交锋。 |
+| `claw-count` | 虾数 Claw Count | 一个数字决定哪块板还在。改数很少。 |
+| `claw-mask` | 虾罩 Claw Mask | 三格面罩，决定你踩的是哪一层。 |
+| `claw-clock` | 虾钟 Claw Clock | 先转环，指针再吃下一格。 |
+| `claw-flip` | 虾拨 Claw Flip | 一拨，板和空对调。石头只能跳。 |
 
 每款的计分写在目录的 `score` 里，也写在游戏内的帮助里。
 

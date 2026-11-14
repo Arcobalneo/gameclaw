@@ -12,7 +12,8 @@ machine id, source path, and package are one coordinated identity.
 - The machine id is `claw-<english-keyword>`: lowercase kebab-case, with the
   final keyword matching the English title's second word. Current keywords are
   `trek`, `guard`, `heist`, `catch`, `look`, `ink`, `rampage`, `greens`,
-  `conquest`, `leap`, `burger`, `stamp`, `melt`, `net`, and `beat`.
+  `conquest`, `leap`, `burger`, `stamp`, `melt`, `net`, `beat`, `count`,
+  `mask`, `clock`, and `flip`.
 - Whenever both display names appear, use **`虾× (English Name)`**, for example
   `虾走 (Claw Trek)` or `虾印 (Claw Stamp)`. This is the required per-game
   README title and the preferred paired form in user-facing documentation.
