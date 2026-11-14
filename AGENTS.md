@@ -197,7 +197,7 @@ packages/gamekit/       shared runtime
 games/<game-id>/        one game
 catalog/                machine-readable manifest
 scripts/                catalog validation and per-game test entrypoints
-docs/plans/             new plans; archive/ holds shipped history
+docs/plans/             in-progress plans only; delete after the change ships
 docs/references/        single design-rules canon
 .github/workflows/      ci.yml (quality gate) + release.yml (notes-only tag)
 SKILL.md                distributable skill (no game list)

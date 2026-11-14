@@ -9,8 +9,8 @@ Documentation and CI cleanup. No gameplay change. Game `GAME_VERSION` stays 4.0.
   Tagging `v*` publishes GitHub Release notes only; it does not attach binaries
   or deploy the site.
 - Removed `scripts/release-matrix.mjs`.
-- Moved shipped design plans, including the CLI-era plans, into
-  `docs/plans/archive/`.
+- Deleted obsolete shipped plans and the old `docs/archive/` notes. Current
+  maintainer docs and `docs/references/ai-native-game-design-rules.md` stay.
 - Rewrote `docs/README.md`, `AGENTS.md`, and `docs/release-flow.md` so they
   describe the web product. Added `docs/adding-a-game.md`.
 

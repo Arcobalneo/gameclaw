@@ -44,22 +44,6 @@ Breaking machine-id renames are allowed when the series identity is
 intentionally refreshed. Coordinate the directory, package, and catalog in the
 same change. Document the old-to-new mapping in `CHANGELOG.md`.
 
-### v2.5.0 migration
-
-| Old id | New display name | New id |
-| --- | --- | --- |
-| `lobster-cli-roguelike` | `虾走 (Shrimp Trek)` | `shrimp-trek` |
-| `lobster-cli-tower-defense` | `虾守 (Shrimp Guard)` | `shrimp-guard` |
-| `lobster-cli-heist` | `虾潜 (Shrimp Heist)` | `shrimp-heist` |
-| `lobster-cli-tamer` | `虾抓 (Shrimp Catch)` | `shrimp-catch` |
-| `lobster-cli-sideways-look` | `虾看 (Shrimp Look)` | `shrimp-look` |
-| `lobster-cli-ink` | `虾写 (Shrimp Ink)` | `shrimp-ink` |
-| `pumpkin-rampage` | `虾闹 (Shrimp Rampage)` | `shrimp-rampage` |
-| `vege-life` | `虾素 (Shrimp Greens)` | `shrimp-greens` |
-| `tiny-conquest` | `虾征 (Shrimp Conquest)` | `shrimp-conquest` |
-| — | `虾跃 (Shrimp Leap)` | `shrimp-leap` |
-| — | `虾堡 (Shrimp Burger)` | `shrimp-burger` |
-
 ## Onboarding check
 
 1. Choose a `虾×` Chinese title, a Title Case `Shrimp <Word>` English title, and

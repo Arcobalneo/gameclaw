@@ -13,7 +13,7 @@ distributable [`SKILL.md`](../SKILL.md).
 | [`agent-coding-standards.md`](agent-coding-standards.md) | You are writing code, content, or tests |
 | [`NAMING.md`](NAMING.md) | You are choosing an id or changing display metadata |
 | [`references/ai-native-game-design-rules.md`](references/ai-native-game-design-rules.md) | You are designing or changing gameplay |
-| [`plans/`](plans/) | You are writing a new plan, or reading shipped history in `plans/archive/` |
+| [`plans/`](plans/) | You are writing a plan for a change that has not shipped yet |
 
 ## The one-paragraph version
 
@@ -33,11 +33,7 @@ CLI and no downloadable binary.
 - Machine-readable catalog → `catalog/games.json`
 - One game's mechanics and score rule → `games/<id>/README.md`
 - Architecture, portal, onboarding, release, standards → `docs/`
-- Design history → `docs/plans/archive/`
+- Game design methodology → `docs/references/`
 
 Do not duplicate a fact across layers. Link to the owning layer instead.
-
-## Archived material
-
-`docs/archive/` and `docs/plans/archive/` are historical. They are not
-maintained. When they disagree with the code, the code wins.
+Do not keep shipped or obsolete plans in the tree.
