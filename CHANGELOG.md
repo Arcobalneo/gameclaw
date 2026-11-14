@@ -10,9 +10,10 @@
 - Rebuilt the scenes for `虾印`, `虾熔`, `虾网`, and `虾节`: a night ferry,
   a tide well of shells, a harbor net, and a ring. Each has its own props,
   idle motion, and hit feedback.
-- Rebuilt the scenes for `虾数`, `虾罩`, `虾钟`, and `虾拨`: a number bridge,
-  a two-layer canyon, a clock chamber, and a spike gorge. Each has its own
-  props, idle motion, and hit feedback.
+- Rebuilt the scenes for `虾数`, `虾罩`, `虾钟`, and `虾拨`: a counted pier
+  with sinking planks and a magnet, a two-stratum canyon with a brass visor,
+  a geared clock chamber, and a spike gorge with a lever. Idle motion, HUD
+  pips, and hit or fall effects are in each scene.
 - Played `虾印`, `虾熔`, `虾网`, `虾节`, `虾数`, `虾罩`, `虾钟`, and `虾拨`.
   Clock looks two plies further. Mask shows a moving visor and a pulsing
   flood. Count and flip shake when you fall.

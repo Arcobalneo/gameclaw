@@ -10,8 +10,8 @@ net, and ring rebuild is a separate pull request.
 
 ## Each world
 
-- Count: a night number bridge. Planks sink when the count does not match.
-  A magnet sits on the near end. Dials show 0–3.
+- Count: a night pier with posts and a far hull. Planks and sunken gaps are
+  sprites. Dials show 0–3. The magnet glows while any remain. A fall splashes.
 - Mask: a canyon with an ink stratum and a tide stratum. A brass visor slides.
   The flood is a red lip.
 - Clock: a brass chamber. Gems, foes, and you sit on the ring. The hand is a

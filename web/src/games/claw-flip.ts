@@ -3,20 +3,35 @@ import { type FlipState, isSafe } from '@games/claw-flip/src/engine';
 import type { Grade } from '../gfx/art';
 import { sky } from '../gfx/backdrop';
 import { glow } from '../gfx/fx';
-import { ctx2d, makeCanvas, rect, VH, VW } from '../gfx/pixel';
+import { ctx2d, hash01, makeCanvas, rect, VH, VW, withAlpha } from '../gfx/pixel';
 import { type GameModule, type GameScene, type HitRegion, say } from '../gfx/scene';
-import { buildSprite, SHRIMP, type SpriteDef } from '../gfx/sprites';
+import { buildSprite, SHRIMP, SHRIMP_WALK, type SpriteDef } from '../gfx/sprites';
 import { drawText } from '../gfx/text';
 import { blit, pips, shadow } from '../gfx/world';
 
+const PLATE: SpriteDef = {
+  rows: ['wwwwwwwwwwwwww', 'wddddddddddddw', 'wddwddddwddddw', 'bbbbbbbbbbbbbb'],
+  pal: { w: '#fff6dc', d: '#e0b060', b: '#6a4a2a' },
+};
+
+const GAP: SpriteDef = {
+  rows: ['ww..ww..ww..ww', '.wwwwwwwwwwww.', 'bbbbbbbbbbbbbb'],
+  pal: { w: '#9ec8ff', b: '#1a4060' },
+};
+
 const STONE: SpriteDef = {
-  rows: ['..ssss..', '.ssddss.', 'ssddddss', 'ssddddss', '.ssddss.', '..ssss..'],
-  pal: { s: '#8a8078', d: '#4a4440' },
+  rows: ['...ssss...', '..sddddss.', '.ssdddddss', 'ssddddddss', '.ssddddss.', '..ssssss..'],
+  pal: { s: '#a09890', d: '#4a4440' },
 };
 
 const SPIKE: SpriteDef = {
-  rows: ['..r..', '.rrr.', 'rrrrr', '..s..'],
+  rows: ['..r....r..', '.rrr..rrr.', 'rrrrrrrrrr', '...ssss...'],
   pal: { r: '#ff5d73', s: '#3a2414' },
+};
+
+const COIL: SpriteDef = {
+  rows: ['c.c.c.c', '.c.c.c.', 'c.c.c.c'],
+  pal: { c: '#7ee0a0' },
 };
 
 let gorge: HTMLCanvasElement | null = null;
@@ -25,10 +40,15 @@ function cliffs(): HTMLCanvasElement {
   if (gorge) return gorge;
   const c = makeCanvas(VW, VH);
   const g = ctx2d(c);
-  sky(g, ['#143028', '#0c1c16', '#081410'], 0, VH, 8);
-  rect(g, 0, 150, VW, 66, '#0c2018');
-  rect(g, 0, 40, 18, 176, '#1a3024');
-  rect(g, VW - 18, 40, 18, 176, '#1a3024');
+  sky(g, ['#1a3830', '#0c2018', '#081410'], 0, VH, 8);
+  for (let y = 30; y < 150; y += 10) {
+    rect(g, 0, y, 16 + (y % 20), 8, '#1a3028');
+    rect(g, VW - 20 - (y % 16), y + 4, 24, 8, '#143028');
+  }
+  rect(g, 0, 168, VW, 48, '#0a1814');
+  for (let i = 0; i < 20; i += 1) {
+    rect(g, hash01(i, 3) * VW, 176 + hash01(i, 4) * 24, 8, 1, withAlpha('#7ec8ff', 0.25));
+  }
   gorge = c;
   return c;
 }
@@ -36,55 +56,63 @@ function cliffs(): HTMLCanvasElement {
 function createScene(): GameScene<FlipState> {
   return {
     grade(): Grade {
-      return { top: '#102818', bottom: '#081410', bloom: 0.45, vignette: 0.82 };
+      return { top: '#102818', bottom: '#081410', bloom: 0.48, vignette: 0.84 };
     },
     anchor: () => ({ x: 180, y: 120 }),
     hits(_state, actions): HitRegion[] {
       return actions.map((action, index) => ({
-        x: 16 + index * 124,
-        y: 168,
+        x: 12 + index * 124,
+        y: 170,
         w: 112,
-        h: 40,
+        h: 38,
         actionId: action.id,
       }));
     },
     draw(f) {
       const { g, t, state } = f;
       g.drawImage(cliffs(), 0, 0);
+      for (let x = 0; x < VW; x += 16) {
+        const y = 166 + Math.round(Math.sin(t * 1.6 + x * 0.05) * 2);
+        rect(g, x, y, 10, 2, withAlpha('#7ec8ff', 0.35));
+      }
+      const plate = buildSprite(PLATE);
+      const gap = buildSprite(GAP);
       const stone = buildSprite(STONE);
       const spike = buildSprite(SPIKE);
       state.tiles.forEach((tile, index) => {
-        const x = 28 + index * 44;
+        const x = 24 + index * 44;
         const open = isSafe(tile, state.flipped);
         const bob = Math.round(Math.sin(t * 2 + index) * 1);
-        if (tile === 'stone') {
-          blit(g, stone, x + 18, 140 + bob, { scale: 2, anchor: 'c' });
-        } else if (open) {
-          const plate = state.flipped ? tile !== 'plate' : tile === 'plate';
-          rect(g, x, 148, 36, 8, plate ? '#c4a060' : '#7ec8ff');
-          rect(g, x, 148, 36, 2, '#fff6dc');
-        } else {
-          blit(g, spike, x + 18, 146, { scale: 2, anchor: 'c' });
-        }
-        if (index === state.pos) glow(g, x + 18, 124, 12, '#7ee0a0', 0.4);
+        if (tile === 'stone') blit(g, stone, x + 16, 138 + bob, { scale: 2, anchor: 'c' });
+        else if (open) {
+          const water = state.flipped === (tile === 'gap');
+          blit(g, water ? gap : plate, x + 16, 152, { scale: 2, anchor: 'c' });
+        } else blit(g, spike, x + 16, 146, { scale: 2, anchor: 'c' });
+        if (index === state.pos) glow(g, x + 16, 120, 14, '#7ee0a0', 0.45);
       });
-      const shrimp = buildSprite(SHRIMP);
-      const x = state.pos < 0 ? 16 : 46 + state.pos * 44;
-      shadow(g, x, 160, 12);
-      blit(g, shrimp, x, 144 + Math.round(Math.sin(t * 3)), { scale: 2, anchor: 'bc' });
-      const lever = state.flipped ? 48 : 20;
-      rect(g, 348, 36, 12, 48, '#3a3028');
-      rect(g, 344, lever + Math.round(Math.sin(t * 2)), 20, 8, '#ffc24a');
-      glow(g, 354, lever + 4, 8, '#ffc24a', 0.3);
-      pips(g, 16, 16, state.springMax, state.springs, '#7ee0a0', -1, t);
-      pips(g, 16, 28, state.woundLimit, state.wounds, '#ff5d73', -1, t);
+      const walking = Math.floor(t * 4) % 2 === 0;
+      const shrimp = buildSprite(walking ? SHRIMP_WALK : SHRIMP);
+      const sx = state.pos < 0 ? 16 : 40 + state.pos * 44;
+      shadow(g, sx, 164, 14);
+      blit(g, shrimp, sx, 146 + Math.round(Math.sin(t * 3)), { scale: 2, anchor: 'bc' });
+      const lever = state.flipped ? 56 : 24;
+      const kick = f.since < 0.2 ? 4 : 0;
+      rect(g, 352, 28, 10, 64, '#3a3028');
+      rect(g, 346, lever + kick, 22, 8, '#ffc24a');
+      rect(g, 354, lever + kick, 6, 4, '#fff6dc');
+      glow(g, 356, lever + 4, 10, '#ffc24a', 0.35);
+      const coil = buildSprite(COIL);
+      for (let i = 0; i < state.springs; i += 1) {
+        blit(g, coil, 20 + i * 16, 22, { scale: 2, anchor: 'c' });
+      }
+      pips(g, 16, 32, state.woundLimit, state.wounds, '#ff5d73', -1, t);
       f.actions.forEach((action, index) => {
         const label = say(f, action.label);
-        const bx = 16 + index * 124;
+        const bx = 12 + index * 124;
         const on = f.focus?.id === action.id;
-        rect(g, bx, 170, 108, 32, on ? '#243828' : '#101810');
-        rect(g, bx, 170, 108, 2, on ? '#ffc24a' : '#3a6848');
-        if (label) drawText(g, label, bx + 54, 178, { color: '#fff4d6', align: 'center' });
+        rect(g, bx, 174, 110, 32, on ? '#243828' : '#101810');
+        rect(g, bx, 174, 110, 3, on ? '#ffc24a' : '#3a6848');
+        if (label) drawText(g, label, bx + 55, 182, { color: '#fff4d6', align: 'center' });
       });
     },
     react(f, outcome) {
@@ -92,12 +120,27 @@ function createScene(): GameScene<FlipState> {
       const wound = outcome.result.log.some((line) => line.includes('踩伤'));
       if (id === 'flip') {
         f.cue('whoosh');
-        f.fx.burst(200, 140, { count: 12, colors: ['#ffc24a', '#7ec8ff'], speed: 28, life: 0.35 });
-        f.fx.kick(0, 2);
+        f.fx.burst(200, 140, {
+          count: 16,
+          colors: ['#ffc24a', '#7ec8ff', '#fff6dc'],
+          speed: 34,
+          life: 0.4,
+        });
+        f.fx.kick(0, 3);
+        f.fx.impact(2);
+      } else if (id.startsWith('hop')) {
+        f.cue('whoosh');
+        f.fx.burst(180, 120, {
+          count: 8,
+          colors: ['#7ee0a0'],
+          speed: 24,
+          life: 0.3,
+          shape: 'spark',
+        });
       } else if (wound) {
         f.cue('bad');
-        f.fx.addTrauma(0.4);
-        f.fx.flash('#ff5d73', 0.25);
+        f.fx.addTrauma(0.5);
+        f.fx.flash('#ff5d73', 0.3);
       } else f.cue('land');
     },
   };
