@@ -35,6 +35,22 @@ describe('claw-round engine', () => {
     expect(state.loop).toBe(2);
   });
 
+  it('ends the tide when a wrong item is pocketed', () => {
+    const state = createRun({ seed: 2 });
+    state.spots = ['ticket', 'lamp', 'coin', 'rope', 'bell'];
+    state.need = ['bell', 'rope'];
+    state.pos = 0;
+    state.beat = 0;
+    state.beats = 6;
+    act(state, 'grab');
+    act(state, 'pocket');
+    expect(state.wrong).toBe(1);
+    expect(state.pocket).toEqual(['ticket']);
+    expect(state.loop).toBe(2);
+    expect(state.pos).toBe(0);
+    expect(state.beat).toBe(0);
+  });
+
   it('lets the careful line win more often than walking only', () => {
     let careful = 0;
     let walk = 0;

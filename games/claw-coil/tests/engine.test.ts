@@ -29,7 +29,6 @@ describe('claw-coil engine', () => {
       state.snake = level.snake.map((cell) => [cell[0], cell[1]]);
       state.crate = [level.crate[0], level.crate[1]];
       state.dock = [level.dock[0], level.dock[1]];
-      state.plan = [...level.moves];
       for (const move of level.moves) act(state, move);
       expect(state.outcome).toBe('won');
     }
