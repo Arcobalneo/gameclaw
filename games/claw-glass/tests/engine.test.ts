@@ -72,6 +72,18 @@ describe('claw-glass engine', () => {
     }
   });
 
+  it('gives a later court fewer beats than the first', () => {
+    const state = createRun({ seed: 2 });
+    const first = state.beatMax;
+    let guard = 0;
+    while (state.outcome === 'ongoing' && state.stage === 1 && guard < 20) {
+      act(state, suggest(state));
+      guard += 1;
+    }
+    expect(state.stage).toBeGreaterThan(1);
+    expect(state.beatMax).toBeLessThan(first);
+  });
+
   it('lets the careful line light more courts than spinning the first mirror', () => {
     let careful = 0;
     let blind = 0;

@@ -340,7 +340,12 @@ export function act(state: RaftState, actionId: string): ActionResult {
     } else {
       state.index += 1;
       state.gust = Math.max(-3, Math.min(3, state.nextGust + leanOf(side, crate)));
-      state.nextGust = rng.int(-2, 2);
+      let rolled = rng.int(-2, 2);
+      if (state.index >= 4) {
+        const sign = rolled === 0 ? (rng.int(0, 1) === 0 ? -1 : 1) : Math.sign(rolled);
+        rolled = sign * Math.min(3, Math.abs(rolled) + 1);
+      }
+      state.nextGust = rolled;
       finish(state, log);
     }
   }

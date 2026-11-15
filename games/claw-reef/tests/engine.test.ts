@@ -96,6 +96,18 @@ describe('claw-reef engine', () => {
     expect(state.anchors).toBe(anchors - 1);
   });
 
+  it('pushes two cells once half the tides have passed', () => {
+    const state = createRun({ seed: 1 });
+    state.tide = Math.floor(state.tideCap / 2);
+    state.tide += (4 - (state.tide % 4)) % 4;
+    state.x = 1;
+    state.y = 1;
+    state.urchins = [];
+    act(state, 'step:e');
+    expect(state.x).toBe(4);
+    expect(state.y).toBe(1);
+  });
+
   it('lets the careful line win more seeds than always stepping east', () => {
     let careful = 0;
     let east = 0;
