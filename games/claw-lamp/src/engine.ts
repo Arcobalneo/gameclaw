@@ -283,7 +283,9 @@ function load(state: LampState, rng: Rng): void {
   state.pools = def.pools;
   state.placed = def.posts.map(() => false);
   state.stock = Math.max(1, def.stock + rule.stock);
-  state.tide = Math.max(1, def.tide + rule.tide);
+  const late = state.stage >= 3 ? 1 : 0;
+  const floor = state.stage >= 3 ? 2 : 1;
+  state.tide = Math.max(floor, def.tide + rule.tide - late);
 }
 
 export function createRun(options: { seed: number; difficulty?: string }): LampState {
