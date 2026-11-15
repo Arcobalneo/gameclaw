@@ -87,6 +87,9 @@ function createScene(): GameScene<ClockState> {
       blit(g, gear, 48, 48 + spin, { scale: 2, anchor: 'c' });
       blit(g, gear, 336, 160 - spin, { scale: 2, anchor: 'c' });
       const slide = spun * Math.max(0, 1 - f.since / 0.45) * ((Math.PI * 2) / 8);
+      const youAt = state.ring.indexOf('you');
+      const swap = youAt >= 0 && f.actions.some((action) => action.id === 'cross');
+      const opposite = (youAt + 4) % 8;
       state.ring.forEach((token, index) => {
         const angle = (index / 8) * Math.PI * 2 - Math.PI / 2 - slide;
         const x = 192 + Math.round(Math.cos(angle) * 52);
@@ -94,15 +97,20 @@ function createScene(): GameScene<ClockState> {
         const bob = Math.round(Math.sin(t * 3 + index) * 1);
         disc(g, x, y, 14, index === state.hand ? '#3a2418' : '#1a1014');
         if (index === state.hand) glow(g, x, y, 18, '#ffc24a', 0.55);
+        if (swap && index === opposite) glow(g, x, y, 16, '#7ec8ff', 0.55);
         const sprite = tokenSprite(token);
-        if (sprite) blit(g, sprite, x, y + bob, { scale: token === 'you' ? 1 : 2, anchor: 'c' });
+        if (sprite) blit(g, sprite, x, y + bob, { scale: 2, anchor: 'c' });
         else disc(g, x, y, 4, '#2a2430');
       });
       state.ring.forEach((_token, index) => {
         const angle = (index / 8) * Math.PI * 2 - Math.PI / 2 - slide;
         const x = 192 + Math.round(Math.cos(angle) * 74);
         const y = 100 + Math.round(Math.sin(angle) * 74);
-        drawText(g, String(index + 1), x, y - 4, { color: '#e8d0a0', align: 'center' });
+        const marked = swap && index === opposite;
+        drawText(g, String(index + 1), x, y - 4, {
+          color: marked ? '#7ec8ff' : '#e8d0a0',
+          align: 'center',
+        });
       });
       const hand = (state.hand / 8) * Math.PI * 2 - Math.PI / 2;
       const slot = (Math.PI * 2) / 8;

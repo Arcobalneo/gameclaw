@@ -100,6 +100,15 @@ function shoalLayer(): HTMLCanvasElement {
     const y = 64 + hash01(i, 3) * 100;
     rect(g, x, y, 2 + (i % 3), 1, hash01(i, 4) > 0.55 ? '#6a5040' : '#1a2834');
   }
+  for (let i = 0; i < 9; i += 1) {
+    const x = 40 + hash01(i, 11) * 300;
+    const y = 70 + hash01(i, 12) * 90;
+    ellipse(g, x, y, 7 + (i % 3) * 2, 4, '#3a4450');
+    ellipse(g, x - 1, y - 1, 4, 2, '#6a7888');
+  }
+  rect(g, 300, 168, 28, 6, '#6a4428');
+  rect(g, 304, 164, 18, 4, '#8a5a32');
+  rect(g, 312, 158, 2, 8, '#c48a52');
   rect(g, 0, 176, 384, 40, '#081820');
   shoal = c;
   return c;

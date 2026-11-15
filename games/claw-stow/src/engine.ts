@@ -139,8 +139,14 @@ function ageAll(state: StowState): void {
   }
 }
 
+function liveSpoil(state: StowState): number {
+  const late = state.index >= Math.floor(state.events.length / 2);
+  return late ? Math.max(2, state.spoil - 1) : state.spoil;
+}
+
 function spoilLimit(state: StowState, bay: Bay): number {
-  return bay.labeled ? state.spoil + 3 : state.spoil;
+  const spoil = liveSpoil(state);
+  return bay.labeled ? spoil + 3 : spoil;
 }
 
 function spoilNow(state: StowState, log: string[]): void {
@@ -191,7 +197,7 @@ export function orderDelay(state: StowState, glyph: number): number {
 
 function needsMark(state: StowState, glyph: number): boolean {
   const delay = orderDelay(state, glyph);
-  return delay >= state.spoil;
+  return delay >= liveSpoil(state);
 }
 
 export function suggest(state: StowState): string {

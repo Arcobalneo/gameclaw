@@ -87,6 +87,20 @@ describe('claw-lamp engine', () => {
     expect(state.saved).toBe(stock);
   });
 
+  it('still reaches stage 3 after the late tide cut', () => {
+    let reached = 0;
+    for (let seed = 1; seed <= 8; seed += 1) {
+      const state = createRun({ seed });
+      let guard = 0;
+      while (state.outcome === 'ongoing' && state.stage < 3 && guard < 40) {
+        act(state, suggest(state));
+        guard += 1;
+      }
+      if (state.stage >= 3 && state.outcome === 'ongoing') reached += 1;
+    }
+    expect(reached).toBeGreaterThanOrEqual(6);
+  });
+
   it('lets the careful line win more seeds than planting the first post', () => {
     let careful = 0;
     let blind = 0;
