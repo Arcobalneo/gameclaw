@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- `虾熔` shows which way the next tide pushes, and how many drops are left
+  before it. `虾网` draws a tear as a hole and a wet knot as a drip. `虾钟`
+  draws you at the same size as a foe, and marks the opposite slot of a swap.
 - `虾数` puts the step button in the water, under the planks. `虾罩` shows
   the flood before it reaches you. `虾钟` sweeps the hand across the slot it
   just turned. `虾拨` crosses a gorge with walls, a fall, and mist.
