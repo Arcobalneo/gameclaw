@@ -64,10 +64,17 @@ function seaLayer(): HTMLCanvasElement {
   const g = ctx2d(c);
   sky(g, ['#ffb07a', '#c45a48', '#3a2048', '#14243a'], 0, 150, 12);
   for (let i = 0; i < 7; i += 1) {
-    const x = 20 + i * 54;
-    const h = 16 + (i % 3) * 10;
-    rect(g, x, 78 - h, 30, h, '#1a1020');
-    rect(g, x + 6, 74 - h, 4, 5, i % 2 ? '#ffd27a' : '#2a1840');
+    const x = 14 + i * 54;
+    const h = 20 + (i % 3) * 14;
+    const w = 28 + (i % 2) * 10;
+    rect(g, x, 84 - h, w, h, i % 2 ? '#2a1840' : '#1a1028');
+    rect(g, x - 3, 82 - h, w + 6, 5, '#4a2848');
+    rect(g, x + w / 2 - 1, 74 - h, 2, 10, '#1a1020');
+    for (let wy = 88 - h; wy < 80; wy += 8) {
+      rect(g, x + 4, wy, 3, 3, '#ffd27a');
+      if (w > 30) rect(g, x + w - 8, wy, 3, 3, i % 3 ? '#ffe0a0' : '#6a3048');
+    }
+    rect(g, x, 80, w, 4, '#120818');
   }
   rect(g, 0, 86, 384, 130, '#12344a');
   for (let i = 0; i < 30; i += 1) {
@@ -143,7 +150,16 @@ function createScene(): GameScene<RaftState> {
       rect(g, raftX - 96, 128 + bob + roll, 192, 10, '#6a4020');
       rect(g, raftX - 90, 118 + bob, 180, 14, '#8a5a32');
       rect(g, raftX - 90, 118 + bob, 180, 2, '#c48a52');
+      rect(g, raftX - 2, 78 + bob, 3, 42, '#5a3418');
+      line(g, raftX, 80 + bob, raftX - 46, 120 + bob, '#e8d0a0');
+      line(g, raftX, 80 + bob, raftX + 42, 120 + bob, '#e8d0a0');
       line(g, raftX - 70, 118 + bob, raftX + 70, 118 + bob + roll, '#e8d0a0');
+      for (let i = 0; i < 3; i += 1) {
+        const gx = (30 + i * 110 + Math.round(t * 14)) % 370;
+        const gy = 36 + Math.round(Math.sin(t * 1.4 + i) * 3);
+        line(g, gx, gy, gx + 5, gy - 2, '#fff6dc');
+        line(g, gx + 5, gy - 2, gx + 10, gy, '#fff6dc');
+      }
       const focus = f.focus?.id;
       for (const hold of HOLDS) {
         const weight = state.holds[hold[0]];
