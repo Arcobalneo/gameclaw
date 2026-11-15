@@ -333,7 +333,7 @@ function load(state: GlassState, rng: Rng): void {
   state.clouds = def.clouds.map((cloud) => ({ ...cloud }));
   state.cloud = rng.int(0, 1);
   if (swallowed(state)) state.cloud = 0;
-  state.beatMax = Math.max(3, def.beats + rule.beats);
+  state.beatMax = Math.max(3, def.beats + rule.beats - (state.stage - 1));
   state.beats = state.beatMax;
 }
 
