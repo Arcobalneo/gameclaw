@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- `虾罩` drips from the ceiling and glints its crystals. `虾拨` drops
+  pebbles through the fall and hangs lanterns on the cliffs. `虾节` fills
+  the ring with a crowd and swinging lanterns, and the fighter cycles the
+  phrase. `虾数` flickers the pier lanterns and puts a boat on the channel.
 - `虾熔` shows which way the next tide pushes, and how many drops are left
   before it. `虾网` draws a tear as a hole and a wet knot as a drip. `虾钟`
   draws you at the same size as a foe, and marks the opposite slot of a swap.

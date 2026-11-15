@@ -92,6 +92,16 @@ function createScene(): GameScene<FlipState> {
       const { g, t, state } = f;
       g.drawImage(cliffs(), 0, 0);
       godRays(g, t, '#c8ffd8', 3, 0.05);
+      for (let i = 0; i < 7; i += 1) {
+        const y = (Math.floor(t * 28 + i * 19) % 130) + 12;
+        rect(g, 176 + (i % 3) * 5, y, 2, 2, i % 2 ? '#9ec8ff' : '#c4a888');
+      }
+      for (const lx of [40, 344]) {
+        const swing = Math.round(Math.sin(t * 2 + lx) * 2);
+        rect(g, lx, 48, 1, 14, '#3a2414');
+        rect(g, lx - 4 + swing, 62, 8, 6, '#ffc24a');
+        glow(g, lx + swing, 64, 8, '#ffc24a', 0.35);
+      }
       fog(g, t, 128, 22, '#9ec8ff', 0.22, 8);
       for (let x = 0; x < VW; x += 16) {
         const y = 166 + Math.round(Math.sin(t * 1.6 + x * 0.05) * 2);
