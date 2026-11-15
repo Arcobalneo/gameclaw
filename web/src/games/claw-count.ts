@@ -94,6 +94,14 @@ function createScene(): GameScene<CountState> {
       g.drawImage(bridge(), 0, 0);
       stars(g, t, 2, 6, 52);
       moon(g, 330, 22, 9, '#fff6dc', '#9eb4ff');
+      for (let x = 18; x < VW; x += 26) {
+        glow(g, x, 46, 7, '#ffc24a', 0.2 + 0.25 * Math.sin(t * 7 + x));
+      }
+      const boatX = 268 + Math.round(Math.sin(t * 0.6) * 12);
+      const boatY = 186 + Math.round(Math.sin(t * 1.4) * 1);
+      rect(g, boatX, boatY, 36, 6, '#6a4a2a');
+      rect(g, boatX + 4, boatY - 8, 16, 8, '#e8d0a0');
+      rect(g, boatX + 18, boatY - 14, 2, 10, '#3a2414');
       for (let i = 0; i < 7; i += 1) {
         rect(g, 322, 180 + i * 4, 16 - i, 2, withAlpha('#fff6dc', 0.28));
       }
