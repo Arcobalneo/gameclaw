@@ -52,10 +52,19 @@ function rules(difficulty: Difficulty): { corridors: number; fallLimit: number }
   return { corridors: 4, fallLimit: 3 };
 }
 
-function makeCorridor(rng: Rng): { ink: Cell[]; tide: Cell[] } {
+/** Later corridors invert more cells, so the mask has to keep moving. */
+function gapsFor(corridor: number, corridors: number): number {
+  return corridor >= corridors ? 3 : 2;
+}
+
+function makeCorridor(
+  rng: Rng,
+  corridor: number,
+  corridors: number,
+): { ink: Cell[]; tide: Cell[] } {
   const ink: Cell[] = [];
   const tide: Cell[] = [];
-  const inverted = new Set(rng.sample([2, 3, 4, 5, 6], 2));
+  const inverted = new Set(rng.sample([2, 3, 4, 5, 6], gapsFor(corridor, corridors)));
   for (let i = 0; i < LENGTH; i += 1) {
     if (inverted.has(i)) {
       ink.push('gap');
@@ -114,7 +123,7 @@ function clearCorridor(state: MaskState, rng: Rng, log: string[]): void {
     return;
   }
   state.corridor += 1;
-  const next = makeCorridor(rng);
+  const next = makeCorridor(rng, state.corridor, state.corridors);
   state.ink = next.ink;
   state.tide = next.tide;
   state.pos = -1;
@@ -211,7 +220,7 @@ export function createRun(options: { seed: number; difficulty?: string }): MaskS
   const difficulty = difficultyOf(options.difficulty);
   const rng = Rng.fromSeed(options.seed);
   const rule = rules(difficulty);
-  const first = makeCorridor(rng);
+  const first = makeCorridor(rng, 1, rule.corridors);
   return {
     seed: options.seed >>> 0,
     difficulty,

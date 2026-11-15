@@ -3,7 +3,8 @@
 Write a new plan here before a large change: a new game, an engine rewrite, an
 MCP or leaderboard change, or a docs restructure.
 
-Current working plans: [`2026-11-15-art-pass.md`](2026-11-15-art-pass.md),
+Current working plans: [`2026-11-15-mask-pressure.md`](2026-11-15-mask-pressure.md),
+[`2026-11-15-art-pass.md`](2026-11-15-art-pass.md),
 [`2026-11-15-tide-knot-you.md`](2026-11-15-tide-knot-you.md),
 [`2026-11-15-path-read.md`](2026-11-15-path-read.md),
 [`2026-11-15-window-ring.md`](2026-11-15-window-ring.md),

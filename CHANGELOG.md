@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `虾罩` inverts two cells until the last corridor, which inverts three,
+  so the finish asks for one more slide. `虾印` waves the pennants on the pier.
 - `虾罩` drips from the ceiling and glints its crystals. `虾拨` drops
   pebbles through the fall and hangs lanterns on the cliffs. `虾节` fills
   the ring with a crowd and swinging lanterns, and the fighter cycles the
